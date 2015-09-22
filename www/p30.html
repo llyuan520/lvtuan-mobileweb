@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title></title>
+
+		<link href="lib/ionic/css/ionic.css" rel="stylesheet">
+		<!--<link href="css/login.css" rel="stylesheet">-->
+		<link href="css/p30.css" rel="stylesheet">
+		<link href="css/common.css" rel="stylesheet">
+
+		<!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+		<!-- ionic/angularjs js -->
+		<script src="lib/ionic/js/ionic.bundle.js"></script>
+
+		<!-- cordova script (this will be a 404 during development) -->
+		<script src="cordova.js"></script>
+
+		<!-- your app's js -->
+		<!--<script src="js/ask_lawyer_server.js"></script>-->
+		<script src="js/p30_controller.js"></script>
+		
+	</head>
+
+	<body ng-app="p30">
+		<ion-pane>
+			<ion-header-bar class="bar bar-header">
+				<a class="button icon-left ion-chevron-left button-clear button-positive button-small"></a>
+				<h1 class="title">律团联盟</h1>
+				<!--<a class="button icon-right button-clear">深圳<i class="icon ion-arrow-down-b"></i></a>-->
+			</ion-header-bar>
+			<ion-content>
+				<div class="list bb" ng-controller="p30Ctr">
+					<div class="item item-divider"></div>
+					<div class="item item-thumbnail-left" ng-repeat="p30Item in p30Items">
+						<img src="{{p30Item.imgUrl}}" alt="" />
+						<div class="p30-title">{{p30Item.p30Title}}</div>
+					</div>
+				</div>
+			</ion-content>
+			
+		</ion-pane>
+	</body>
+
+</html>

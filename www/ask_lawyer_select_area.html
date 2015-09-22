@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title></title>
+
+		<link href="lib/ionic/css/ionic.css" rel="stylesheet">
+		<link href="css/common.css" rel="stylesheet">
+			<link href="css/ask_lawyer_select_area.css" rel="stylesheet">
+
+		<!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+		<!-- ionic/angularjs js -->
+		<script src="lib/ionic/js/ionic.bundle.js"></script>
+
+		<!-- cordova script (this will be a 404 during development) -->
+		<script src="cordova.js"></script>
+
+		<!-- your app's js -->
+		<!--<script src="js/ask_lawyer_server.js"></script>-->
+		<script src="js/ask_lawyer_controller.js"></script>
+		
+	</head>
+
+	<body ng-app="askLawyer">
+		<ion-pane>
+			<ion-header-bar class="bar bar-header bar-light">
+				<a class="button icon-left ion-chevron-left button-clear button-positive button-small"></a>
+				<h1 class="title">问律师（这是公共部分，后期替换）</h1>
+			</ion-header-bar>
+
+				<div class="rletter-menus" ng-controller="letterItemCtr">
+					<ul>
+						<li ng-repeat="letterItem in letterItems">{{letterItem}}</li>
+					</ul>
+				</div>				
+
+
+			<ion-content>
+				<!--搜索你想要的内容-->
+				<div class="item-input-inset">
+					<label class="item-input-wrapper">
+				    	<i class="icon ion-search placeholder-icon"></i>
+				    	<input type="search" placeholder="请输入地址名称或者字母查询">
+					</label>
+					<!--<button class="button button-icon ion-funnel button-clear"></button>-->
+				</div>
+				
+				<div class="list">
+					<div class="item title-bg1 item-borderless">
+						定位地址
+					</div>
+					<div class="item">
+						深圳
+					</div>
+				</div>
+				<div ng-controller="areaItemCtr">
+					<!--热门地址-->
+					<div class="list">
+						<div class="item {{areaItem.areaStyle}}" ng-repeat="areaItem in areaItems">
+							{{areaItem.areaName}}
+						</div>
+					</div>					
+				</div>
+							
+			</ion-content>
+			
+		</ion-pane>
+	</body>
+
+</html>

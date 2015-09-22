@@ -1,0 +1,75 @@
+body,
+.ionic-body{
+	font-family: "微软雅黑";
+	color: #333333;
+}
+.fc-33{
+	color: #333333;
+}
+.fc-ee{
+	color: #999999;
+}
+.fc-red{
+	color: #FF0000;
+}
+.txt-center{
+	text-align: center;
+}
+.fc-nan{
+	color:#32a9f2;
+}
+.txt-fw{
+	font-weight: bold;
+}
+.border-none{
+	border: none;
+}
+.noboxshadow{
+	box-shadow:none
+}
+hr{
+	text-align: center;
+	width:95%;
+	color: #EEEEEE;
+	border:none;
+	border-top: 1px solid #EEEEEE;
+}
+.clear{
+	clear:both;
+}
+.txt-left{
+	text-align: left;
+}
+.txt-center{
+	text-align: center;
+}
+.txt-right{
+	text-align: right;
+}
+.bt{
+	border-top: 1px solid #DDDDDD;
+}
+.br{
+	border-right: 1px solid #DDDDDD;
+}
+.bb{
+	border-bottom: 1px solid #DDDDDD;
+}
+.bl{
+	border-left: 1px solid #DDDDDD;
+}
+.btb{
+	border-top: 1px solid #DDDDDD;
+	border-bottom: 1px solid #DDDDDD;
+}
+
+.wpb100{
+	display: block;
+	width:100%;
+}
+.sp-l{
+	float:left;
+}
+.sp-r{
+	float: right;
+}

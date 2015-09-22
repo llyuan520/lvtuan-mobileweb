@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title></title>
+
+		<link href="lib/ionic/css/ionic.css" rel="stylesheet">
+		<!--<link href="css/login.css" rel="stylesheet">-->
+		<link href="css/p34.css" rel="stylesheet">
+		<link href="css/common.css" rel="stylesheet">
+
+		<!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+		<!-- ionic/angularjs js -->
+		<script src="lib/ionic/js/ionic.bundle.js"></script>
+
+		<!-- cordova script (this will be a 404 during development) -->
+		<script src="cordova.js"></script>
+
+		<!-- your app's js -->
+		<!--<script src="js/ask_lawyer_server.js"></script>-->
+		<script src="js/p34_controller.js"></script>
+	</head>
+
+	<body ng-app="p34">
+		<ion-pane>
+			
+		<ion-header-bar align-title="center" class="bar-light">
+		  
+		    <a class="button icon-left ion-chevron-left button-clear button-positive button-small"></a>
+		  
+		  <h1 class="title">详情</h1>
+		  <div class="buttons" ng-controller="p34ModelCtr">
+		    <a class="button buttonton-icon icon-right button-clear"><i class="icon ion-ios-star-outline"></i></a>
+		    <a class="button buttonton-icon icon-right button-clear"><i class="icon ion-chatbubble"></i></a>
+		    <a class="button buttonton-icon icon-right button-clear" ng-click="showConfirm()"><i class="icon ion-share"></i></a>
+		  </div>
+		</ion-header-bar>
+
+		
+			<ion-content>
+				<div class="list" ng-controller="p34Ctr">
+					<div class="item item-body" ng-repeat="p34Item in p34Items">
+						<h2>{{p34Item.p34Title}}</h2>
+						<p>
+					      <a href="#" class="subdued sp-l">{{p34Item.p34Name}}</a>
+					      <a href="#" class="subdued sp-r">{{p34Item.p34Time}}</a>
+					    </p>
+					    <img class="full-image" src="{{p34Item.p34ImgUrl}}">
+					    <p>
+					      <a href="#" class="subdued">[{{p34Item.p34Src}}]</a>
+					    </p>
+					    <p class="fc-33">
+					    	{{p34Item.p34Content}}
+					    </p>
+					</div>
+				</div>
+				
+			</ion-content>
+			
+		</ion-pane>
+
+	</body>
+
+</html>

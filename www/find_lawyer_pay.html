@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title></title>
+
+		<link href="lib/ionic/css/ionic.css" rel="stylesheet">
+		<!--<link href="css/login.css" rel="stylesheet">-->
+		<link href="css/find_lawyer_pay.css" rel="stylesheet">
+		<link href="css/common.css" rel="stylesheet">
+
+		<!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+		<!-- ionic/angularjs js -->
+		<script src="lib/ionic/js/ionic.bundle.js"></script>
+
+		<!-- cordova script (this will be a 404 during development) -->
+		<script src="cordova.js"></script>
+
+		<!-- your app's js -->
+		<!--<script src="js/ask_lawyer_server.js"></script>-->
+		<script src="js/find_lawyer_pay_controller.js"></script>
+		
+	</head>
+
+	<body ng-app="mpay">
+		<ion-pane>
+			<ion-header-bar class="bar bar-header">
+				<a class="button icon-left ion-chevron-left button-clear button-small"></a>
+				<h1 class="title">购买服务</h1>
+				<!--<a class="button icon-right ion-chevron-right button-clear button-small"></a>-->
+			</ion-header-bar>
+			
+			<ion-content>
+				<div class="list list-borderless" ng-controller="listInfoCtr">
+					<div class="item item-divider"></div>
+					<div class="row find-lawyer-item" ng-repeat="list in lists">
+						<div class="find-lawyer-item-a">
+							<input type="radio" value="" checked="{{list.isChecked}}"/>
+						</div>
+						<div class="find-lawyer-item-b">
+							<img src="{{list.imgUrl}}"/>
+						</div>
+						<div class="find-lawyer-item-c">
+							<div class="item-title">
+									<div class="item-title-a">{{list.listTitle}}</div>
+									<div class="item-title-b">{{list.listPrice}}</div>
+									<div class="clear"></div>
+							</div>
+							<div>{{list.listDiscription}}</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+				</div>
+				
+				<div class="list list-borderless" ng-controller="payListCtr">
+					<div class="item item-divider d-2em">选择支付方式</div>
+					<div class="item find-lawyer-item" ng-repeat="payList in payLists">
+						<div class="find-lawyer-item-a">
+							<input type="radio" value="" checked="{{payList.isChecked}}"/>
+						</div>
+						<div class="find-lawyer-item-b">
+							<img src="{{payList.imgUrl}}"/>
+						</div>
+						<div class="find-lawyer-item-c">
+							<div class="item-title">
+									<div class="item-title-a">{{payList.payTitle}}</div>
+									<!--<div class="item-title-b"></div>-->
+									<div class="clear"></div>
+							</div>
+							<div>{{payList.payContent}}</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+				</div>
+				<div>
+					<button class="button button-positive button-block">购买</button>
+				</div>
+				
+			</ion-content>
+			<!--<ion-footer-bar align-title="left" class="bar-default">
+
+			</ion-footer-bar>-->
+		</ion-pane>
+	</body>
+
+</html>

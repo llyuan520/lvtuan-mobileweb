@@ -1,0 +1,104 @@
+/* Empty. Add your own CSS if you like */
+/*
+ 页面上所用的蓝色：#32a9f2
+ 页面所用的黑色字体：#333333
+ 页面上所用灰色字体是：#999999
+ 页面衬托用灰色底板：#eeeeee
+ 字体统一是：微软雅黑
+ 蓝色按钮上的字体为白色：#FFFFFF
+ 以像素分割线或者边框描边 #DDDDDD
+ 页面底色为纯白色 FFFFFF
+ * */
+body,
+.ionic-body{
+	font-family: "微软雅黑";
+}
+a{
+	text-decoration: none;
+	color: #32a9f2;
+}
+a:link{
+	text-decoration: none;
+	color: #32a9f2;
+}
+a:visited{
+	text-decoration: none;
+	color: #32a9f2;
+}
+a:active{
+	text-decoration: none;
+	color: #32a9f2;
+}
+a:hover{
+	text-decoration: none;
+	color: #32a9f2;
+}
+.a-left{
+	text-align: left;
+}
+.a-right{
+	text-align: right;
+}
+.txt-align-c{
+	text-align: center;
+}
+.bg-c-white{
+	background-color: #FFFFFF;
+}
+.txt-c-99{
+	color: #999999;
+}
+.fc-33{
+	color: #333333;
+}
+.fc-ee{
+	color: #999999;
+}
+
+.list-margin-top{
+	margin-top: 19px;
+}
+.login-lbl-pl{
+	text-indent: 25px;
+}
+
+.login-lbl-fc{
+	color: #999999;
+}
+
+.bg-man{
+	background-image: url(../img/man.png);
+	background-repeat: no-repeat;
+	background-position: left;
+}
+.bg-mobel{
+	background-image: url(../img/mobel.png);
+	background-repeat: no-repeat;
+	background-position: left;
+}
+.bg-clock{
+	background-image: url(../img/clock.png);
+	background-repeat: no-repeat;
+	background-position: left;
+}
+.login{
+	margin: 0;
+	margin-top: 19px;
+}
+.login .placeholder-icon:last-child {
+    padding-left: 25px;
+}
+.login .placeholder-icon:first-child {
+    padding-right: 25px;
+}
+.login .input-label{
+	width:25px !important;
+}
+
+.login .btn-login-submit{
+	margin-top: 41px;
+	margin-bottom: 30px;
+}
+.list-noborder .item{
+	border: none;
+}

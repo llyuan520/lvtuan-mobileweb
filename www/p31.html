@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title></title>
+
+		<link href="lib/ionic/css/ionic.css" rel="stylesheet">
+		<!--<link href="css/login.css" rel="stylesheet">-->
+		<link href="css/p31.css" rel="stylesheet">
+		<link href="css/common.css" rel="stylesheet">
+
+		<!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+		<!-- ionic/angularjs js -->
+		<script src="lib/ionic/js/ionic.bundle.js"></script>
+
+		<!-- cordova script (this will be a 404 during development) -->
+		<script src="cordova.js"></script>
+
+		<!-- your app's js -->
+		<!--<script src="js/ask_lawyer_server.js"></script>-->
+		<script src="js/p31_controller.js"></script>
+		
+	</head>
+
+	<body ng-app="p31">
+		<ion-pane>
+			<ion-header-bar class="bar bar-header bar-light">
+				<a class="button icon-left ion-chevron-left button-clear button-positive button-small"></a>
+				<h1 class="title">伙伴详情</h1>
+				<!--<a class="buttonton-icon icon-right button-clear">深圳<i class="icon ion-arrow-down-b"></i></a>-->
+			</ion-header-bar>
+			<ion-content>
+				<div ng-controller="p31Ctr">
+					<div class="list list-borderless noborder-title" ng-repeat="p31Item in p31Items">
+						<div class="item item-divider lh-1em"></div>
+						<div class="item item-thumbnail-left">
+							<img src="{{p31Item.p31Url}}" alt="" />
+							<div class="p31-title">{{p31Item.p31Title}}</div>
+						</div>
+						<div class="item item-divider"></div>
+						<div class="item p31-item-t">
+							<span class="fc-ee">{{p31Item.p31IntroTitle}}</span>
+						</div>
+						<div class="item">
+							<div class="content-mh100">{{p31Item.p31Intro}}</div>
+						</div>
+						<div class="item p31-item-t">
+							<span class="fc-ee">{{p31Item.p31BuessTitle}}</span>
+						</div>
+						<div class="item">
+							<div class="content-mh100">
+								{{p31Item.p31BuessContent}}
+							</div>
+						</div>
+						<div class="item p31-item-t">
+							<span class="fc-ee">{{p31Item.p31ContactMe}}</span>
+						</div>
+						<div class="item">
+							<span class="sp-l fc-ee">{{p31Item.p31AddressTitle}}</span>
+							<span class="sp-r fc-33">{{p31Item.p31AddressContent}}</span>
+						</div>
+						<div class="item">
+							<span class="sp-l fc-ee">{{p31Item.p31TelTitle}}</span>
+							<span class="sp-r fc-nan">{{p31Item.p31Tel}}</span>
+						</div>
+						<div class="item">
+							<span class="sp-l fc-ee">{{p31Item.p31FaxTitle}}</span>
+							<span class="sp-r fc-nan">{{p31Item.p31Fax}}</span>
+						</div>
+						<div class="item">
+							<span class="sp-l fc-ee">{{p31Item.p31CodeTitle}}</span>
+							<span class="sp-r fc-33">{{p31Item.p31Code}}</span>
+						</div>
+						<div class="item">
+							<span class="sp-l fc-ee">{{p31Item.p31EmailTitle}}</span>
+							<span class="sp-r fc-nan">{{p31Item.p31Email}}</span>
+						</div>
+					</div>
+				</div>
+				
+			</ion-content>
+			
+		</ion-pane>
+	</body>
+
+</html>

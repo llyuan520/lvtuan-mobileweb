@@ -1,0 +1,16 @@
+.content-mh100{
+	margin: 0px;
+	padding: 0px;
+	min-height: 7em;
+	border-bottom: 1px solid #DDDDDD;
+}
+.p31-item-t{
+	margin: 0.2em;
+	padding: 0px 1em;
+}
+.noborder-title .item{
+	white-space:normal
+}
+.p31-title{
+	margin-top: 1.8em;
+}

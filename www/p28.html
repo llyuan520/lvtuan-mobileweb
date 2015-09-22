@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title></title>
+
+		<link href="lib/ionic/css/ionic.css" rel="stylesheet">
+		<!--<link href="css/login.css" rel="stylesheet">-->
+		<link href="css/p28.css" rel="stylesheet">
+		<link href="css/common.css" rel="stylesheet">
+
+		<!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+		<!-- ionic/angularjs js -->
+		<script src="lib/ionic/js/ionic.bundle.js"></script>
+
+		<!-- cordova script (this will be a 404 during development) -->
+		<script src="cordova.js"></script>
+
+		<!-- your app's js -->
+		<!--<script src="js/ask_lawyer_server.js"></script>-->
+		<script src="js/p28_controller.js"></script>
+		
+	</head>
+
+	<body ng-app="p28">
+		<ion-pane>
+			<ion-header-bar class="bar bar-header">
+				<a class="button icon-left ion-chevron-left button-clear button-positive button-small"></a>
+				<h1 class="title">人才交流</h1>
+				<a class="button icon-right button-clear">深圳<i class="icon ion-arrow-down-b"></i></a>
+			</ion-header-bar>
+			<ion-content>
+				<div ng-controller="p28Ctr">
+					<div class="list list-borderless" ng-repeat="p28Item in p28Items">
+						<div class="item item-divider"></div>
+						<div class="item">
+							
+								<span class="sp-l">{{p28Item.p28Level}}</span>
+								<span class="sp-r">{{p28Item.p28Date}}</span>
+								<span class="clear"></span>
+
+						</div>
+						<div class="item item-button-right">
+							
+								<span class="fc-ee">地址</span>
+								<span>{{p28Item.p28Address}}</span>
+								<button class="button button-positive button-clear"><i class="icon ion-location"></i></button>
+							
+							
+						</div>
+						<div class="item">
+							<h3>{{p28Item.p28CompanyName}}</h3>
+						</div>
+						<div class="item">
+							<span class="fc-ee">规模</span>
+							<span>{{p28Item.p28Scope}}</span>
+						</div>
+						<div class="item">
+							<span class="fc-ee">人数</span>
+							<span>{{p28Item.p28Sum}}人</span>
+						</div>
+						<div class="item">
+							<span class="fc-ee">学历</span>
+							<span>{{p28Item.p28Cadimic}}</span>
+						</div>
+						
+						<div class="item item-divider lh-2em">职位描述</div>
+						<div class="item">岗位职责</div>
+						<div class="item">
+							{{p28Item.p28Response}}
+						</div>
+						<div class="item">任职要求</div>
+						<div class="item">
+							{{p28Item.p28JobResponse}}
+						</div>
+						
+					</div>	
+				</div>
+				
+			</ion-content>
+			
+		</ion-pane>
+	</body>
+
+</html>

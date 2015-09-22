@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title></title>
+
+		<link href="lib/ionic/css/ionic.css" rel="stylesheet">
+		<!--<link href="css/login.css" rel="stylesheet">-->
+		<link href="css/find_lawyer_down_book.css" rel="stylesheet">
+		<link href="css/common.css" rel="stylesheet">
+
+		<!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+		<!-- ionic/angularjs js -->
+		<script src="lib/ionic/js/ionic.bundle.js"></script>
+
+		<!-- cordova script (this will be a 404 during development) -->
+		<script src="cordova.js"></script>
+
+		<!-- your app's js -->
+		<!--<script src="js/ask_lawyer_server.js"></script>-->
+		<script src="js/find_lawyer_book_down_controller.js"></script>
+		
+	</head>
+
+	<body ng-app="bookDown">
+		<ion-pane>
+			<ion-header-bar class="bar bar-header">
+				<a class="button icon-left ion-chevron-left button-clear button-small"></a>
+				<h1 class="title">找律师</h1>
+				<a class="button button-icon icon-right button-clear">深圳 <i class="icon ion-arrow-down-b"></i></a>
+			</ion-header-bar>
+			
+			<ion-content>
+				<div class="row">
+					<div class="col txt-right">法律文书下载</div>
+					<div class="col txt-left">文书审核</div>
+				</div>
+				<div class="list">
+					<div class="item item-divider"></div>
+					
+					<div class="item item-button-right">
+						法律领域<button class="button button-icon icon-right">全部<i class="icon ion-arrow-down-b"></i></button>
+					</div>
+					<div class="item item-button-right">
+						选择范围<button class="button button-icon icon-right">不限<i class="icon ion-arrow-down-b"></i></button>
+					</div>
+				</div>
+				<div class="list list-borderless">
+					<div class="item item-divider">金牌律师推荐</div>
+				</div>
+				
+				<div class="bd-list">
+					这个区域不能按照设计图上的实现，研究中。
+				</div>
+				
+				<!--文书审核区域-->
+				<div class="lh-2em">服务流程</div>
+				<div class="list list-borderless bt">
+					<div class="item item-icon-left"><i></i><span class="bb wpb100 lh-2em">填写审核文书需求</span></div>	
+					<div class="item item-icon-left"><i></i><span class="bb wpb100">等待律师联系</span></div>
+					<div class="item item-icon-left"><i></i><span class="bb wpb100">审核</span></div>
+					<div class="item item-icon-left"><i></i><span class="wpb100">确认服务</span></div>
+				</div>
+				
+				<div class="list">
+					<div class="item item-divider"></div>
+					<div class="item item-button-right">
+						服务热线：0755-1234567
+						<button class="button button-positive button-clear"><i class="icon ion-ios-telephone"></i></button>
+					</div>
+					<div class="item item-input">
+						<textarea name="" rows="5" placeholder="需求阐述"></textarea>
+					</div>
+					<div class="item item-divider"></div>
+					<div class="item item-icon-right">
+						请选择法律领域 <i class="icon ion-chevron-down"></i>
+					</div>
+					<div class="item item-divider"></div>
+					<div class="item">
+						<button class="button button-positive button-block">提交</button>
+					</div>
+				</div>
+				
+				
+			</ion-content>
+			<!--<ion-footer-bar align-title="left" class="bar-default">
+
+			</ion-footer-bar>-->
+		</ion-pane>
+	</body>
+
+</html>
