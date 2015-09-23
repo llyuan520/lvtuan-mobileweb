@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title></title>
+
+		<link href="lib/ionic/css/ionic.css" rel="stylesheet">
+		<!--<link href="css/login.css" rel="stylesheet">-->
+		<link href="css/p52.css" rel="stylesheet">
+		<link href="css/common.css" rel="stylesheet">
+
+		<!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+		<!-- ionic/angularjs js -->
+		<script src="lib/ionic/js/ionic.bundle.js"></script>
+
+		<!-- cordova script (this will be a 404 during development) -->
+		<script src="cordova.js"></script>
+
+		<!-- your app's js -->
+		<!--<script src="js/ask_lawyer_server.js"></script>-->
+		<script src="js/p52_controller.js"></script>
+	</head>
+
+	<body ng-app="p52">
+		<ion-pane>	
+			<ion-header-bar align-title="center" class="bar-light">		  
+				<a class="button icon-left ion-chevron-left button-clear button-positive button-small"></a>		  
+				<h1 class="title">我的订单</h1>		  
+			</ion-header-bar>
+			
+			<ion-content>
+				<div class="list" ng-controller="p52Ctr">
+					<div class="item item-divider"></div>
+					<div class="item">
+						<div class="tabs">
+							<a class="tab-item">全部</a>
+							<a class="tab-item">待付款</a>
+							<a class="tab-item">待评价</a>
+							<a class="tab-item">已完成</a>
+						</div>							
+					</div>
+					
+					<div ng-repeat="items in p52Items">
+						<div class="item item-divider"></div>
+						<div class="item item-button-right">
+							<span class="fc-ee">订单号</span>
+							<span class="fc-33">{{items.p52OrderID}}</span>
+							<button class="button button-icon ion-share button-positive button-clear"></button>
+						</div>
+						<a href="" class="item">
+							<span class="fc-ee sp-l">{{items.p52OrderCardName}}</span>
+							<i class="icon ion-chevron-right sp-l"></i>
+							<span class="fc-red sp-r">{{items.p52OrderStatu}}</span>
+						</a>
+						<div class="item item-avatar item-avatar-left">
+							<img src="{{items.p52OrderCardUrl}}"/>
+							<p>
+								<span class="sp-l fc-33">{{items.p52OrderCardTitle}}</span>
+								<span class="sp-r fc-red">￥{{items.p52OrderPrice}}</span>							
+							</p>
+							<p><span class="sp-r">*{{items.p52OrderCardSum}}</span></p>
+						</div>
+						<div class="item">
+							<h2 class="fc-ee">下单时间</h2>
+							<p class="fc-33">
+								{{items.p52OrderTime1}}
+							</p>
+						</div>
+						<div class="item">
+							<h2 class="fc-ee">成交时间</h2>
+							<p class="fc-33">
+								{{items.p52OrderTime2}}
+							</p>
+						</div>
+						<div class="item">
+							<button class="button button-outline sp-r">查看评价</button>
+							&nbsp;&nbsp;
+							<button class="button button-outline sp-r">删除订单</button>
+						</div>						
+					</div>
+					
+					
+
+					
+				</div>
+
+			</ion-content>
+			
+		</ion-pane>
+
+	</body>
+
+</html>

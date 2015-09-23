@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title></title>
+
+		<link href="lib/ionic/css/ionic.css" rel="stylesheet">
+		<!--<link href="css/login.css" rel="stylesheet">-->
+		<link href="css/p42.css" rel="stylesheet">
+		<link href="css/common.css" rel="stylesheet">
+
+		<!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+		<!-- ionic/angularjs js -->
+		<script src="lib/ionic/js/ionic.bundle.js"></script>
+
+		<!-- cordova script (this will be a 404 during development) -->
+		<script src="cordova.js"></script>
+
+		<!-- your app's js -->
+		<!--<script src="js/ask_lawyer_server.js"></script>-->
+		<script src="js/p42_controller.js"></script>
+	</head>
+
+	<body ng-app="p42">
+		<ion-pane>	
+			<ion-content>
+				<div class="tabs tabs-striped tabs-top">
+					<div class="tab-item">咨询详情</div>
+					<div class="tab-item">在线交互</div>
+					<div class="tab-item">过程记录</div>
+				</div>
+			</ion-content>
+			
+			<div class="list" ng-controller="p42Ctr">
+				<div ng-repeat="items in p42Items">
+					<div class="item item-divider"></div>
+					<div class="item item-icon-left">
+						<i class="icon ion-clipboard"></i>
+						订单已提交，请等待受理！
+					</div>
+					<div class="item item-divider"></div>
+					<div class="item item-text-wrap">
+						<h2 class="fc-ee">免费咨询</h2>
+						<p class="fc-33">
+							{{items.p42FreeConsult}}
+						</p>
+					</div>
+					<div class="item item-text-wrap">
+						<h2 class="fc-ee">受理律师所</h2>
+						<p class="fc-33">
+							{{items.p42Name}}
+						</p>
+					</div>
+					<a class="item item-button-right item-text-wrap">
+						<h2 class="fc-ee">受理律师</h2>
+						<p class="fc-33">
+							{{items.p42LawyerName}}
+						</p>
+						<button class="button button-icon ion-chevron-right"></button>
+					</a>
+					<div class="item item-text-wrap">
+						<h2 class="fc-ee">受理时间</h2>
+						<p class="fc-33">
+							{{items.p42AcceptTime}}
+						</p>
+					</div>
+					<div class="item item-text-wrap">
+						<h2 class="fc-ee">问题描述</h2>
+						<p class="fc-33">
+							{{items.p42Intr}}
+						</p>
+					</div>
+					
+					<!--p46待确认中的按钮-->
+					<div class="item">
+						<button class="button button-block button-positive">确认完成</button>
+					</div>
+				</div>
+
+			</div>
+			
+		</ion-pane>
+
+	</body>
+
+</html>

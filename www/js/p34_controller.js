@@ -52,16 +52,12 @@ angular.module('p34', ["ionic"])
 })
 
 .controller("p34ModelCtr",function($scope,$ionicModal){
-	   // 一个确认对话框
-   $scope.showConfirm = function() {
-      	$ionicModal.fromTemplateUrl('sharemodel.html', {
-	    	scope: $scope,
-	    	animation: 'slide-in-up'
-  		}).then(function(modal) {
-		    $scope.modal = modal;
-		});
-
-  	}
+  $ionicModal.fromTemplateUrl('sharemodel.html', function (modal) {
+    $scope.modal = modal;
+  }, {
+    animation: 'slide-in-up',
+    focusFirstInput: true
+  });
 
 
 })

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title></title>
+
+		<link href="lib/ionic/css/ionic.css" rel="stylesheet">
+		<!--<link href="css/login.css" rel="stylesheet">-->
+		<link href="css/p40_1.css" rel="stylesheet">
+		<link href="css/common.css" rel="stylesheet">
+
+		<!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+		<!-- ionic/angularjs js -->
+		<script src="lib/ionic/js/ionic.bundle.js"></script>
+
+		<!-- cordova script (this will be a 404 during development) -->
+		<script src="cordova.js"></script>
+
+		<!-- your app's js -->
+		<!--<script src="js/ask_lawyer_server.js"></script>-->
+		<script src="js/p40_1_controller.js"></script>
+	</head>
+
+	<body ng-app="p40_1">
+		<ion-pane>	
+			<ion-content>
+				<div class="tabs tabs-striped tabs-top">
+					<div class="tab-item">咨询详情</div>
+					<div class="tab-item">在线交互</div>
+					<div class="tab-item">过程记录</div>
+				</div>
+			</ion-content>
+			
+			<div class="list" ng-controller="p40_1_Ctr">
+				<div class="item item-divider"></div>
+				<div class="item item-icon-left">
+					<i class="icon ion-clipboard"></i>
+					订单已提交，请等待受理！
+				</div>
+				<div class="item item-divider"></div>
+				<div class="item item-text-wrap" ng-repeat="items in p40_1_Items">
+					<h2 class="fc-ee">{{items.p40_1_title}}</h2>
+					<p class="fc-33">
+						{{items.p40_1_content}}
+					</p>
+				</div>
+				
+			</div>
+			
+		</ion-pane>
+
+	</body>
+
+</html>

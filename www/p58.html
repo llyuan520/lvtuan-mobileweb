@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title></title>
+
+		<link href="lib/ionic/css/ionic.css" rel="stylesheet">
+		<!--<link href="css/login.css" rel="stylesheet">-->
+		<link href="css/p58.css" rel="stylesheet">
+		<link href="css/common.css" rel="stylesheet">
+
+		<!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+		<!-- ionic/angularjs js -->
+		<script src="lib/ionic/js/ionic.bundle.js"></script>
+
+		<!-- cordova script (this will be a 404 during development) -->
+		<script src="cordova.js"></script>
+
+		<!-- your app's js -->
+		<!--<script src="js/ask_lawyer_server.js"></script>-->
+		<script src="js/p58_controller.js"></script>
+	</head>
+
+	<body ng-app="p58">
+		<ion-pane>
+			<ion-content>
+				<div class="list" ng-controller="p58Ctr">
+					<div ng-repeat="item in p58Items">
+						<div class="item item-divider"></div>
+						<div class="item item-button-right">
+							<h2>
+								{{item.p58Statue}}
+							</h2>
+							<p class="fc-33">{{item.p58Time1}}</p>
+							<button class="button button-outline button-stable">接单</button>
+						</div>
+						<div class="item">
+							
+							<p class="fc-33">{{item.p58FreeConsult}}</p>
+						</div>
+						<div class="item item-text-wrap">
+							<h2 class="fc-ee">问题描述</h2>
+							<p class="fc-33">{{item.p58Question}}</p>
+						</div>						
+					</div>
+
+				</div>
+			</ion-content>	
+		</ion-pane>
+
+	</body>
+
+</html>
