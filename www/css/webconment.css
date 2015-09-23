@@ -1,0 +1,279 @@
+body,
+.ionic-body{
+	font-family: "微软雅黑";
+	color: #333333;
+}
+.scroll-content{
+	background-color: #EEEEEE;
+}
+.fc-33{
+	color: #333333;
+}
+.fc-ee{
+	color: #999999;
+}
+.fc-red{
+	color: #FF0000;
+}
+.item .web-fts13{
+	font-size:13px;
+}
+.web-borderbottom1{
+	border-bottom:1px solid #cccccc;
+}
+.button-clear.web-borderbottom2{
+	border-bottom:2px solid #24A3F1;
+}
+.web-bodywhite{
+	background-color:#ffffff;
+}
+.web-fts15{
+	font-size:15px;
+}
+.web-iright{
+	float: right;
+}
+.web-ileft{
+	float: left;
+}
+.web-padd-right16{
+	padding-right:16px;
+}
+.web-padding0{
+	padding:0px;
+}
+.web-paddinglr5{
+	padding:0px 5px 0px 5px;
+}
+.web-paddingtb14-5{
+	padding-top:14px;
+	padding-bottom:5px;
+}
+.web-font12{
+	font-size:12px;
+}
+.button-clear.web-fintc37,.web-fintc37{
+	color:#373737;
+}
+.item-avatar .web-ibh30{
+	height:25px;
+	line-height:24px;
+	min-height:25px;
+}
+.item-avatar .web-ibh30::before{
+	line-height:26px;
+}
+.item .web-ibh30{
+	height:30px;
+	line-height:24px;
+	min-height:30px;
+}
+.item .web-ibh30::before{
+	line-height:26px;
+}
+
+.web-clearb{
+	clear:both;
+}
+.button-border-left{
+	border-top: none;
+	border-right: none;
+	border-bottom: none;
+	border-left: 1px solid #DDDDDD!important;
+}
+.list-margin-top{
+	margin-top: 19px;
+}
+.login-lbl-pl{
+	text-indent: 25px;
+}
+
+.login-lbl-fc{
+	color: #999999;
+}
+
+/*.login2 {
+	margin: 0px 0px 41px 0px;
+}*/
+.login2 .item{
+	border: none;
+}
+
+.bg-man{
+	background-image: url(../img/man.png);
+	background-repeat: no-repeat;
+	background-position: left;
+}
+.bg-mobel{
+	background-image: url(../img/mobel.png);
+	background-repeat: no-repeat;
+	background-position: left;
+}
+.bg-clock{
+	background-image: url(../img/clock.png);
+	background-repeat: no-repeat;
+	background-position: left;
+}
+.web-fc000{
+	color:#000000;
+}
+.web-fc666{
+	color:#666666;
+}
+.item .web-fc000{
+	color:#000000;
+}
+.web-list-nav0{
+	margin-top: 1em;
+}
+.web-list-nav0 .web-tab-item-border{
+	border-bottom: 2px solid #32a9f2;
+	max-width: 40%;
+}
+.web-list-nav0 .web-tab-item-noborder{
+	border-bottom: 2px solid #FFFFFF;
+	max-width: 40%;
+	
+}
+.webtop5{
+	margin-top:5px;
+}
+.webtop10{
+	margin-top:10px;
+}
+.webtop0{
+	margin-top:0px;
+}
+.web-margin0{
+	margin:0px;
+}
+.web-body{
+	background-color:#F0EEF9;
+}
+.web-top10{
+	margin-top:10px;
+}
+.web-top30{
+	margin-top:30px;
+}
+.web-top40{
+	margin-top:40px;
+	max-width: 40px;
+}
+.item .web-top5{
+	margin-top:5px;
+}
+.item .web-top10{
+	margin-top:10px;
+}
+.button.web-top30{
+	margin-top:30px;
+}
+.web-bottom0{
+	margin-bottom:0px;
+}
+.web-ftcred{
+	color:#FF0000;
+}
+.web-ftc000{
+	color:#000000;
+}
+.web-item{
+	padding:10px 16px;
+}
+.web-itemheight45{
+	padding-top:10px;
+	padding-bottom:10px;
+	height:45px;
+	min-height:45px;
+}
+.web-itemheight45>.web-listimg:first-child{
+	top:8px;
+	max-width:30px;
+	max-height:30px;
+	border-radius: initial;
+}
+.web-itemheight45>.web-listtext{
+	margin-top:2px;
+	font-size:16px;
+}
+.web-wid20{
+	width:20px;
+}
+.web-item-botb0{
+	border-bottom:0px;
+}
+.web-item-topb0{
+	border-top:0px;
+}
+.web-wid8c{
+	width:80%;
+	border-radius:5px;
+	max-width:80%;
+	margin:0px auto;
+}
+.web-font14{
+	font-size:14px;
+}
+.web-font16{
+	font-size:16px;
+}
+.web-padd-right40{
+	padding-right:40px;
+}
+.web-paddingtb5,.webpaddingtb5,.item .webpaddingtb5{
+	padding-top:5px;
+	padding-bottom:5px;
+}
+.web-paddingtb10{
+	padding-top:10px;
+	padding-bottom:10px;
+}
+.web-paddingtb0{
+	padding-top:0px;
+	padding-bottom:0px;
+}
+.web-paddingleft16{
+	padding-left:16px;
+}
+.web-paddingleft55{
+	padding-left:55px;
+}
+.web-paddingright55{
+	padding-right:55px;
+}
+.web_height200{
+	height:200px;
+}
+.web-height200{
+	height:200px;
+}
+.item-checkbox .web-margintop-13{
+	margin-top:-13px;
+}
+.web-button-largelineh30{
+	line-height:30px;
+	min-height:30px;
+}
+.web-button-clearlineh30{
+	line-height:30px;
+	min-height:30px;
+}
+.web-title{
+	padding:5px 10px;
+	height:40px;
+	line-height:32px;
+	margin:0px;
+	font-size:16px;
+}
+.item .web-breakall,.web-breakall{
+	word-break: break-all;
+	word-wrap: break-word;
+	white-space: normal;
+}
+.web-ptit{
+	height:30px;
+	line-height:30px;
+	text-align:center;
+	font-size:14px;
+}

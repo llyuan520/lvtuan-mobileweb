@@ -1,0 +1,1847 @@
+.xm-product-box .hd {
+	background-color: #f5f5f5
+}
+
+.xm-product-box .hd .separator {
+	margin: 0 5px
+}
+
+.xm-product-box .ft {
+	border-top: 1px solid #e0e0e0
+}
+
+.xm-product-box .nav-bar {
+	margin-top: 15px;
+	position: relative;
+	height: 50px;
+	color: #616161
+}
+
+.xm-product-box .nav-bar .title {
+	float: left;
+	_display: inline;
+	_display: inline;
+	margin: 10px 0 0 0
+}
+
+.xm-product-box .nav-bar .title h2 {
+	margin: 0;
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 30px;
+	color: #424242
+}
+
+.xm-product-box .nav-bar .title small {
+	font-size: 12px
+}
+
+.xm-product-box .nav-bar .title .separator {
+	margin: 0 5px
+}
+
+.xm-product-box .nav-bar .nav {
+	float: right;
+	_display: inline;
+	_display: inline;
+	margin: 10px 0 0 0
+}
+
+.xm-product-box .nav-bar .nav .nav-switch {
+	margin-right: 10px;
+	line-height: 30px
+}
+
+.xm-product-box .nav-switch .separator {
+	margin: 0 5px;
+	color: #eee
+}
+
+.xm-product-box .nav-switch .tab,.xm-product-box .nav-switch .link {
+	color: #616161
+}
+
+.xm-product-box .nav-switch .tab:hover,.xm-product-box .nav-switch .link:hover {
+	color: #616161
+}
+
+.xm-product-box .nav-switch .tab-active {
+	color: #ff6700;
+	cursor: default
+}
+
+.xm-product-box .nav-switch .tab-active:hover {
+	color: #ff6700
+}
+
+.xm-product-box .separator {
+	font-family: sans-serif
+}
+
+.xm-product-box .btn-disable {
+	cursor: default
+}
+
+.xm-product-box .btn-disable:hover {
+	background: #616161
+}
+
+.xm-product-box .btn-disable:active {
+	background: #616161;
+	-webkit-box-shadow: none;
+	box-shadow: none
+}
+
+.xm-product-box .bd {
+	width: 100%;
+	overflow: hidden;
+	*zoom: 1
+}
+
+.xm-product-box .ft {
+	margin-top: 0
+}
+
+.xm-product-box .nav-bar .title .sep {
+	margin: 0 5px
+}
+
+.xm-product-box .section-version {
+	height: 800px;
+	color: #424242
+}
+
+.xm-product-box .section-version .btn-buy {
+	border-width: 2px;
+	border-radius: 2px;
+	font-size: 16px;
+	border-color: #ff6700;
+	color: #ff6700
+}
+
+.xm-product-box .section-version .container {
+	position: relative;
+	height: 100%
+}
+
+.xm-product-box .section-version .content {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 960px;
+	height: 580px;
+	margin: -290px 0 0 -480px;
+	text-align: center
+}
+
+.xm-product-box .section-version .content .title {
+	margin: 0 0 5px;
+	font-size: 26px;
+	font-weight: 400;
+	line-height: 1.25;
+	color: #333
+}
+
+.xm-product-box .section-version .content .text {
+	margin: 0 0 10px;
+	font-size: 16px;
+	line-height: 1.5;
+	color: #757575
+}
+
+.xm-product-box .section-version .content .price {
+	color: #ff6700
+}
+
+.xm-product-box .section-version .content .num {
+	font-size: 28px;
+	display: none
+}
+
+.xm-product-box .section-version .content .num.active {
+	display: inline-block;
+	*zoom: 1;
+	*display: inline
+}
+
+.xm-product-box .section-version .tip {
+	margin: 0;
+	font-size: 16px;
+	color: red
+}
+
+.xm-product-box .section-version .version-list {
+	margin: 50px auto 0;
+	padding: 0;
+	list-style-type: none
+}
+
+.xm-product-box .section-version .version-list h3 {
+	margin: 0 0 5px;
+	font-size: 22px;
+	font-weight: 400
+}
+
+.xm-product-box .section-version .color-switch-list {
+	margin: 0;
+	padding: 0;
+	list-style-type: none
+}
+
+.xm-product-box .section-version .color-switch-list li {
+	display: inline-block;
+	*zoom: 1;
+	*display: inline
+}
+
+.xm-product-box .section-version .color-switch-list li.active .btn-color-green {
+	background-position: 0 -20px
+}
+
+.xm-product-box .section-version .color-switch-list li.active .btn-color-white {
+	background-position: -20px -20px
+}
+
+.xm-product-box .section-version .color-switch-list .btn-color {
+	display: inline-block;
+	*zoom: 1;
+	*display: inline;
+	width: 20px;
+	height: 20px;
+	background: url(http://c1.mifile.cn/f/i/2014/cn/yicamera/icons-color.png) no-repeat 0 0
+}
+
+.xm-product-box .section-version .color-switch-list .btn-color-green {
+	background-position: 0 0
+}
+
+.xm-product-box .section-version .color-switch-list .btn-color-white {
+	background-position: -20px 0
+}
+
+.xm-product-box .section-version .color-preview-list {
+	margin: 0;
+	padding: 0;
+	list-style-type: none
+}
+
+.xm-product-box .section-version .color-preview-list li {
+	display: none
+}
+
+.xm-product-box .section-version .color-preview-list li.active {
+	display: block
+}
+
+.xm-product-box .section-version .version-1 {
+	position: relative;
+	float: left;
+	width: 200px;
+	height: 365px;
+	padding: 120px 280px 0 0;
+	text-align: right
+}
+
+.xm-product-box .section-version .version-1 .stage {
+	position: absolute;
+	right: 69px;
+	top: 0
+}
+
+.xm-product-box .section-version .version-2 {
+	position: relative;
+	float: left;
+	width: 199px;
+	height: 365px;
+	padding: 120px 0 0 280px;
+	border-left: 1px solid #b0b0b0;
+	text-align: left
+}
+
+.xm-product-box .section-version .version-2 .stage {
+	position: absolute;
+	left: 35px;
+	top: 145px
+}
+
+.xm-product-box .section-version .version-slides {
+	width: 205px;
+	height: 145px
+}
+
+.xm-product-box .section-version .version-slides .xm-slider-pagination {
+	display: block;
+	left: 50%;
+	right: auto;
+	bottom: -30px;
+	margin-left: -18px
+}
+
+.xm-product-box .section-version .version-slides .xm-slider-pagination .xm-slider-pagination-item a {
+	width: 8px;
+	height: 8px;
+	border-radius: 4px;
+	border: 0;
+	font-size: 1px;
+	text-indent: -9999em;
+	overflow: hidden;
+	_zoom: 1;
+	background: #e0e0e0
+}
+
+.xm-product-box .section-version .version-slides .xm-slider-pagination .xm-slider-pagination-item .active {
+	background: #d2d31d
+}
+
+.modal-choose-product .modal-body {
+	padding: 40px
+}
+
+.modal-choose-product .product-thumb {
+	float: left;
+	width: 220px
+}
+
+.modal-choose-product .product-info {
+	float: right;
+	width: 330px;
+	padding-top: 40px
+}
+
+.modal-choose-product .product-info h4 {
+	margin: 0 0 20px;
+	font-size: 18px;
+	font-weight: 400;
+	color: #424242
+}
+
+.modal-choose-product .product-info .choose-list {
+	margin: 0;
+	padding: 0;
+	list-style-type: none
+}
+
+.modal-choose-product .product-info .choose-list li {
+	position: relative;
+	float: left;
+	width: 18px;
+	height: 18px;
+	padding: 4px;
+	margin-right: 28px;
+	border: 1px solid #e0e0e0
+}
+
+.modal-choose-product .product-info .choose-list li.active {
+	border-color: #ff6700
+}
+
+.modal-choose-product .product-info .choose-list li.active:before {
+	position: absolute;
+	left: -5px;
+	top: -5px;
+	z-index: 1;
+	width: 10px;
+	height: 10px;
+	content: '';
+	background: url(http://c1.mifile.cn/f/i/2014/cn/yicamera/icon-select.png) no-repeat 50% 50%
+}
+
+.modal-choose-product .product-info .choose-list .color {
+	display: block;
+	width: 18px;
+	height: 18px
+}
+
+.modal-choose-product .product-info .product-price {
+	margin-bottom: 5px
+}
+
+.modal-choose-product .product-info .tip {
+	margin: 0
+}
+
+.modal-choose-product .modal-footer {
+	text-align: right
+}
+
+.modal-choose-product .modal-footer .product-checkout-tip {
+	margin-right: 10px;
+	color: #ff6700
+}
+
+.modal-choose-product .modal-footer .btn {
+	margin-left: 20px
+}
+
+.mi1scroll-pagination {
+	position: fixed;
+	top: 50%;
+	right: 20px;
+	z-index: 99;
+	width: 20px;
+	margin: 0;
+	*margin-top: -50px;
+	padding: 0;
+	list-style-type: none;
+	-webkit-transform: translate3d(0, -50%, 0);
+	transform: translate3d(0, -50%, 0)
+}
+
+.mi1scroll-pagination li {
+	position: relative;
+	width: 14px;
+	height: 14px;
+	margin: 7px 0
+}
+
+.mi1scroll-pagination a {
+	display: block;
+	width: 100%;
+	height: 100%
+}
+
+.mi1scroll-pagination a .dot {
+	position: absolute;
+	left: 5px;
+	top: 5px;
+	width: 4px;
+	height: 4px;
+	border-radius: 50%;
+	text-indent: -9999em;
+	background: #757575
+}
+
+.mi1scroll-pagination a .title {
+	position: absolute;
+	top: 0;
+	right: 20px;
+	text-align: right;
+	font-size: 12px;
+	white-space: nowrap;
+	color: #6ec9fd;
+	opacity: 0;
+	filter: alpha(opacity=0)\9;
+	-webkit-transition: opacity 0.3s linear;
+	transition: opacity 0.3s linear
+}
+
+.mi1scroll-pagination a:hover .title {
+	opacity: 1;
+	filter: alpha(opacity=100)\9
+}
+
+.mi1scroll-pagination .active a .dot {
+	top: 1px;
+	left: 1px;
+	width: 8px;
+	height: 8px;
+	border: 2px solid #95d7fd;
+	background: none
+}
+
+@-webkit-keyframes breathe {
+	0% {
+		opacity: 1;
+		filter: alpha(opacity=100)\9
+	}
+
+	100% {
+		opacity: 0;
+		filter: alpha(opacity=0)\9
+	}
+}
+
+@keyframes breathe {
+	0% {
+		opacity: 1;
+		filter: alpha(opacity=100)\9
+	}
+
+	100% {
+		opacity: 0;
+		filter: alpha(opacity=0)\9
+	}
+}
+
+@-webkit-keyframes dot1 {
+	0%,14.99% {
+		opacity: 0;
+		filter: alpha(opacity=0)\9
+	}
+
+	15% {
+		opacity: 1;
+		filter: alpha(opacity=100)\9
+	}
+}
+
+@keyframes dot1 {
+	0%,14.99% {
+		opacity: 0;
+		filter: alpha(opacity=0)\9
+	}
+
+	15% {
+		opacity: 1;
+		filter: alpha(opacity=100)\9
+	}
+}
+
+@-webkit-keyframes dot2 {
+	0%,29.99% {
+		opacity: 0;
+		filter: alpha(opacity=0)\9
+	}
+
+	30% {
+		opacity: 1;
+		filter: alpha(opacity=100)\9
+	}
+}
+
+@keyframes dot2 {
+	0%,29.99% {
+		opacity: 0;
+		filter: alpha(opacity=0)\9
+	}
+
+	30% {
+		opacity: 1;
+		filter: alpha(opacity=100)\9
+	}
+}
+
+@-webkit-keyframes dot3 {
+	0%,44.99% {
+		opacity: 0;
+		filter: alpha(opacity=0)\9
+	}
+
+	45% {
+		opacity: 1;
+		filter: alpha(opacity=100)\9
+	}
+}
+
+@keyframes dot3 {
+	0%,44.99% {
+		opacity: 0;
+		filter: alpha(opacity=0)\9
+	}
+
+	45% {
+		opacity: 1;
+		filter: alpha(opacity=100)\9
+	}
+}
+
+@-webkit-keyframes arrow {
+	0%,59.99% {
+		opacity: 0;
+		filter: alpha(opacity=0)\9
+	}
+
+	60% {
+		opacity: 1;
+		filter: alpha(opacity=100)\9
+	}
+}
+
+@keyframes arrow {
+	0%,59.99% {
+		opacity: 0;
+		filter: alpha(opacity=0)\9
+	}
+
+	60% {
+		opacity: 1;
+		filter: alpha(opacity=100)\9
+	}
+}
+
+.xm-product-box .nav-bar-hidden {
+	_display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 99;
+	width: 100%;
+	margin-top: -52px;
+	border-bottom: 1px solid #e0e0e0;
+	background: #eee;
+	background: rgba(255,255,255,0.9);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#e5ffffff", endColorstr="#e5ffffff")\9;
+	-webkit-transition: margin-top 0.5s ease-out;
+	transition: margin-top 0.5s ease-out;
+	-webkit-box-shadow: 0 0 3px #b0b0b0;
+	box-shadow: 0 0 3px #b0b0b0
+}
+
+.xm-product-box .nav-bar-fixed {
+	margin-top: 0
+}
+
+.yicamera-overall .section {
+	position: relative;
+	width: 100%;
+	height: 800px;
+	overflow: hidden;
+	_zoom: 1;
+	color: #424242;
+	-webkit-font-smoothing: antialiased;
+	
+}
+
+.yicamera-overall .section .title {
+	font-size: 26px;
+	font-weight: 600;
+	line-height: 1.25;
+	color: #333
+}
+
+.yicamera-overall .section .subtitle {
+	margin: -10px 0 15px;
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 1.25;
+	color: #333
+}
+
+.yicamera-overall .section .text {
+	margin: 0 0 20px;
+	line-height: 1.8
+}
+
+.yicamera-overall .section .link {
+	text-decoration: none;
+	color: #62c5fd
+}
+
+.yicamera-overall .section .link:hover {
+	text-decoration: underline
+}
+
+.yicamera-overall .section .feature-list {
+	margin: 0;
+	padding: 0;
+	list-style-type: none
+}
+
+.yicamera-overall .section-start {
+	z-index: 2;
+	overflow: visible;
+	background: url(/wdlst/img/banner/banner-01.jpg) no-repeat 50% 50%
+}
+
+.yicamera-overall .section-start .container {
+	position: relative;
+	height: 100%
+}
+
+.yicamera-overall .section-start .content {
+	position: absolute;
+	left: 0;
+	top: 50%;
+	z-index: 6;
+	width: 100%;
+	height: 580px;
+	margin-top: -290px;
+	text-align: center
+}
+
+.yicamera-overall .section-start .content .lvtuan{
+	margin-top: 250px;
+	height: 177px;
+	background: url(/wdlst/img/banner/banner-wz-01.png) no-repeat 50% 50%;
+}
+.yicamera-overall .section-start .content .link-btn{
+	margin-top: 50px;
+}
+.yicamera-overall .section-start .content .link-btn a,.qz-right .addtoCircle,.chenggang .iwanttotry,.index5 .seemore,.index5 .learnmore{
+	width: 150px;
+	margin-right: 30px;
+	display: inline-block;
+	height: 45px;
+  	line-height: 45px;
+    font-size: 16px;
+}
+.yicamera-overall .section-start .content .link-btn a:hover,.yicamera-overall .section-intro .container .link-btn a:hover,.qz-right a:hover,.chenggang a:hover,.index5 .seemore:hover,.index5 .learnmore:hover{
+	color: #fff;
+}
+
+.yicamera-overall .section-start .title {
+	margin-bottom: 15px;
+	font-size: 50px
+}
+
+.yicamera-overall .section-start .subtitle {
+	margin-bottom: 25px;
+	font-size: 22px;
+	color: #757575
+}
+
+.yicamera-overall .section-start .price {
+	margin: 0;
+	font-size: 16px;
+	color: #ff6700
+}
+
+.yicamera-overall .section-start .num {
+	margin: 0 2px;
+	font-size: 40px;
+	line-height: 1.25
+}
+
+.yicamera-overall .section-start .versions {
+	margin: -5px 0 0;
+	color: #757575
+}
+
+.yicamera-overall .section-start .stage {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 600px;
+	height: 338px;
+	margin-left: -300px;
+	margin-top: -48px
+}
+
+.yicamera-overall .section-start .video-container {
+	position: relative;
+	z-index: 9;
+	width: 600px;
+	height: 338px;
+	overflow: hidden;
+	_zoom: 1
+}
+
+.yicamera-overall .section-start .video-container-safari {
+	-webkit-transition: margin-top 0.5s linear;
+	transition: margin-top 0.5s linear
+}
+
+.yicamera-overall .section-start .video {
+	position: absolute;
+	top: -1px;
+	left: 0;
+	z-index: 1;
+	width: 600px;
+	height: 338px
+}
+
+.yicamera-overall .section-start .poster {
+	width: 600px;
+	height: 338px;
+	margin-top: -1px
+}
+
+.yicamera-overall .section-start .arrow {
+	position: absolute;
+	left: 50%;
+	top: 95%;
+	z-index: 1;
+	width: 10px;
+	height: 16px;
+	margin-left: -5px;
+	*background: url(http://c1.mifile.cn/f/i/2014/cn/yicamera/icon-scroll-static-arrow.png) no-repeat 50% 50%
+}
+
+.yicamera-overall .section-start .arrow:after {
+	position: absolute;
+	left: 50%;
+	bottom: 0;
+	content: '';
+	width: 10px;
+	height: 6px;
+	margin-left: -5px;
+	background: url(http://c1.mifile.cn/f/i/2014/cn/yicamera/icon-scroll-arrow.png) no-repeat 50% 100%;
+	-webkit-animation: arrow 1.5s cubic-bezier(0, 0.5, 0, 1) infinite;
+	animation: arrow 1.5s cubic-bezier(0, 0.5, 0, 1) infinite
+}
+
+.yicamera-overall .section-start .arrow .dot {
+	display: block;
+	width: 2px;
+	height: 2px;
+	margin: 0 auto;
+	background: #959595;
+	-webkit-animation: dot1 1.5s cubic-bezier(0, 0.5, 0, 1) infinite;
+	animation: dot1 1.5s cubic-bezier(0, 0.5, 0, 1) infinite
+}
+
+.yicamera-overall .section-start .arrow .dot:before,.yicamera-overall .section-start .arrow .dot:after {
+	position: absolute;
+	left: 50%;
+	width: 2px;
+	height: 2px;
+	margin-left: -1px;
+	content: '';
+	background: #959595
+}
+
+.yicamera-overall .section-start .arrow .dot:before {
+	top: 4px;
+	-webkit-animation: dot2 1.5s cubic-bezier(0, 0.5, 0, 1) infinite;
+	animation: dot2 1.5s cubic-bezier(0, 0.5, 0, 1) infinite
+}
+
+.yicamera-overall .section-start .arrow .dot:after {
+	top: 8px;
+	-webkit-animation: dot3 1.5s cubic-bezier(0, 0.5, 0, 1) infinite;
+	animation: dot3 1.5s cubic-bezier(0, 0.5, 0, 1) infinite
+}
+
+.yicamera-overall .section-intro {
+	z-index: 1;
+}
+.yicamera-overall .section-intro .container .bannerimg02{
+	margin-top:220px;
+}
+.yicamera-overall .section-intro .container .weasking,.yicamera-overall .section-intro .container .onlookers{
+	width: 150px;
+  margin-right: 30px;
+  display: inline-block;
+  height: 45px;
+  line-height: 45px;
+  font-size: 16px;
+  margin-left: 130px;
+}
+.yicamera-overall .section-intro .container .onlookers{
+	margin-left: 250px;
+}
+
+.yicamera-overall .section-intro .container {
+	position: relative;
+	height: 100%
+}
+
+.yicamera-overall .section-intro .content {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: 600px;
+	height: 600px;
+	margin-top: -300px;
+	margin-left: -130px
+}
+
+.yicamera-overall .section-intro .text {
+	margin-bottom: 10px
+}
+
+.yicamera-overall .section-intro .link {
+	font-size: 16px
+}
+
+.yicamera-overall .section-wide-angle.section-transition .wide-l,.yicamera-overall .section-wide-angle.section-transition .wide-r {
+	display: block
+}
+
+.yicamera-overall .section-wide-angle .content {
+	position: absolute;
+	left: 0;
+	top: 50%;
+	width: 100%;
+	height: 560px;
+	margin-top: -280px;
+	text-align: center
+}
+
+.yicamera-overall .section-wide-angle .stage {
+	position: relative;
+	width: 750px;
+	height: 350px;
+	margin: 0 auto 50px;
+	-webkit-perspective: 200px;
+	perspective: 200px
+}
+
+.yicamera-overall .section-wide-angle .stage:before,.yicamera-overall .section-wide-angle .stage:after {
+	position: absolute;
+	top: -20px;
+	z-index: 3;
+	width: 425px;
+	height: 390px;
+	background: rgba(255,255,255,0.2);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#33ffffff", endColorstr="#33ffffff")\9;
+	content: ''
+}
+
+.yicamera-overall .section-wide-angle .stage:before {
+	left: -426px;
+	border-right: 1px dashed #e0e0e0
+}
+
+.yicamera-overall .section-wide-angle .stage:after {
+	right: -426px;
+	border-left: 1px dashed #e0e0e0
+}
+
+.yicamera-overall .section-wide-angle .wide-c {
+	position: relative;
+	z-index: 2
+}
+
+.yicamera-overall .section-wide-angle .wide-l,.yicamera-overall .section-wide-angle .wide-r {
+	display: none;
+	position: absolute;
+	top: 0;
+	z-index: 1;
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+	-webkit-transition: -webkit-transform 1s ease-out;
+	transition: transform 1s ease-out
+}
+
+.yicamera-overall .section-wide-angle .wide-l {
+	left: -425px;
+	-webkit-transform: rotateY(-90deg);
+	transform: rotateY(-90deg);
+	-webkit-transform-origin: 100% 0;
+	-ms-transform-origin: 100% 0;
+	transform-origin: 100% 0
+}
+
+.yicamera-overall .section-wide-angle .wide-r {
+	right: -425px;
+	-webkit-transform: rotateY(90deg);
+	transform: rotateY(90deg);
+	-webkit-transform-origin: 0 0;
+	-ms-transform-origin: 0 0;
+	transform-origin: 0 0
+}
+
+.yicamera-overall .section-wide-angle .title,.yicamera-overall .section-wide-angle .subtitle {
+	font-size: 22px
+}
+
+.yicamera-overall .section-wide-angle .text {
+	width: 800px;
+	margin: 0 auto 40px;
+	color: #757575
+}
+
+.yicamera-overall .section-wide-angle .feature-list {
+	width: 960px;
+	margin: 0 auto
+}
+
+.yicamera-overall .section-wide-angle .feature-list li {
+	float: left;
+	width: 240px
+}
+
+.yicamera-overall .section-wide-angle.section-done .wide-l,.yicamera-overall .section-wide-angle.section-done .wide-r {
+	display: block;
+	-webkit-transform: rotateY(0deg);
+	transform: rotateY(0deg)
+}
+
+.yicamera-overall .section-connect .content {
+	position: absolute;
+	left: 0;
+	top: 50%;
+	width: 100%;
+	height: 630px;
+	margin-top: -315px;
+	text-align: center
+}
+
+/*.yicamera-overall .section-connect .stage {
+	width: 960px;
+	height: 315px;
+	margin: 0 auto 50px
+}
+
+.yicamera-overall .section-connect .stage .connect {
+	height: 315px
+}
+
+.yicamera-overall .section-connect .stage .connect-01 {
+	position: relative;
+	float: left
+}
+
+.yicamera-overall .section-connect .stage .record {
+	position: absolute;
+	right: 10px;
+	bottom: 10px;
+	padding-left: 18px;
+	color: #fff;
+	background: url(http://c1.mifile.cn/f/i/2014/cn/yicamera/icon-record.png) no-repeat 0 50%
+}
+
+.yicamera-overall .section-connect .stage .connect-02 {
+	float: right
+}*/
+
+.yicamera-overall .section-connect .title {
+	font-size: 16px
+}
+
+.yicamera-overall .section-connect .text {
+	width: 930px;
+	margin: 0 auto 40px;
+	color: #757575
+}
+
+.yicamera-overall .section-connect .feature-list {
+	width: 510px;
+	margin: 0 auto;
+	padding: 0;
+	color: #757575
+}
+
+.yicamera-overall .section-connect .feature-list li {
+	float: left;
+	width: 170px;
+	text-align: center
+}
+
+.yicamera-overall .section-connect .icon-connect {
+	display: block;
+	width: 70px;
+	height: 70px;
+	margin: 0 auto 5px;
+	background-image: url(http://c1.mifile.cn/f/i/2014/cn/yicamera/icons-connect.png);
+	background-repeat: no-repeat
+}
+
+.yicamera-overall .section-connect .icon-connect-app {
+	background-position: 0 0
+}
+
+.yicamera-overall .section-connect .icon-connect-bluetooth {
+	background-position: -70px 0
+}
+
+.yicamera-overall .section-connect .icon-connect-pole {
+	background-position: -140px 0
+}
+
+.yicamera-overall .section-camera .frame {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%
+}
+
+/*.yicamera-overall .section-camera .frame-01 {
+	background: url(http://c1.mifile.cn/f/i/2014/cn/yicamera/video-camera-static-bg.jpg) \9
+}*/
+
+.yicamera-overall .section-camera .frame-01 .content {
+	position: absolute;
+	left: 0;
+	top: 50%;
+	z-index: 5;
+	width: 100%;
+	height: 400px;
+	margin-top: -200px;
+	text-align: center;
+	color: #fff
+}
+
+.yicamera-overall .section-camera .frame-01 .title,.yicamera-overall .section-camera .frame-01 .subtitle {
+	font-size: 25px;
+	color: #fff
+}
+
+.yicamera-overall .section-camera .frame-01 .text {
+	width: 910px;
+	margin: 0 auto 15px
+}
+
+.yicamera-overall .section-camera .frame-01 .feature-list {
+	width: 660px;
+	margin: 60px auto 0
+}
+
+.yicamera-overall .section-camera .frame-01 .feature-list li {
+	float: left;
+	width: 220px;
+	font-size: 14px;
+	text-align: center
+}
+
+.yicamera-overall .section-camera .frame-01 .icon-performance {
+	display: block;
+	width: 114px;
+	height: 100px;
+	padding: 7px 0;
+	margin: 0 auto;
+	border: 1px solid #fff;
+	border-color: rgba(255,255,255,0.5);
+	border-radius: 10px;
+	line-height: 1.25;
+	text-align: center
+}
+
+.yicamera-overall .section-camera .frame-01 .icon-performance .data {
+	display: block;
+	margin: 0 10px
+}
+
+.yicamera-overall .section-camera .frame-01 .icon-performance .r {
+	display: block;
+	padding: 8px 0
+}
+
+.yicamera-overall .section-camera .frame-01 .icon-performance .r1 {
+	border-bottom: 1px solid #fff;
+	border-bottom-color: rgba(255,255,255,0.2)
+}
+
+.yicamera-overall .section-camera .frame-01 .icon-performance b {
+	font-size: 20px;
+	font-weight: 400;
+	line-height: 1.1
+}
+
+.yicamera-overall .section-camera .frame-01 .stage {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	width: 100%;
+	height: 100%
+}
+
+.yicamera-overall .section-camera .frame-01 .stage:before {
+	display: none \9;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 2;
+	width: 100%;
+	height: 100%;
+	content: '';
+
+}
+
+.yicamera-overall .section-camera .frame-01 .stage .video-bg {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	z-index: 1
+}
+
+.yicamera-overall .section-camera .frame-01 .media-info {
+	position: absolute;
+	right: 10px;
+	bottom: 10px;
+	z-index: 5;
+	margin: 0;
+	color: #fff;
+	color: rgba(255,255,255,0.75)
+}
+
+.yicamera-overall .section-camera .frame-02 {
+	color: #fff;
+	background: #333
+}
+
+.yicamera-overall .section-camera .frame-02 .stage {
+	position: absolute;
+	left: 0;
+	top: 50%;
+	width: 100%;
+	height: 800px;
+	margin-top: -400px
+}
+
+.yicamera-overall .section-camera .frame-02 .videobox {
+	position: absolute;
+	height: 50%;
+	overflow: hidden;
+	_zoom: 1
+}
+
+.yicamera-overall .section-camera .frame-02 .mask {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 2;
+	width: 110%;
+	height: 110%;
+	background: #000;
+	opacity: .5;
+	filter: alpha(opacity=50)\9;
+	-webkit-transition: opacity 0.5s;
+	transition: opacity 0.5s
+}
+
+.yicamera-overall .section-camera .frame-02 .active .mask {
+	opacity: 0;
+	filter: alpha(opacity=0)\9
+}
+
+.yicamera-overall .section-camera .frame-02 .col-3-1 {
+	width: 33.33%
+}
+
+.yicamera-overall .section-camera .frame-02 .col-2-1 {
+	width: 50%
+}
+
+.yicamera-overall .section-camera .frame-02 .videobox-01 {
+	left: 0;
+	top: 0;
+	z-index: 1
+}
+
+.yicamera-overall .section-camera .frame-02 .videobox-02 {
+	left: 50%;
+	top: 0;
+	width: 35%;
+	z-index: 2
+}
+
+.yicamera-overall .section-camera .frame-02 .videobox-03 {
+	right: 0;
+	top: 0;
+	z-index: 1
+}
+
+.yicamera-overall .section-camera .frame-02 .videobox-04 {
+	left: 0;
+	bottom: 0;
+	z-index: 3
+}
+
+.yicamera-overall .section-camera .frame-02 .videobox-05 {
+	right: 0;
+	bottom: 0;
+	z-index: 3
+}
+
+.yicamera-overall .section-camera .frame-02 .video {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1
+}
+
+/*.yicamera-overall .section-accessories {
+	background: url(http://c1.mifile.cn/f/i/2014/cn/yicamera/accessories-bg.jpg) no-repeat 50% 50%;
+	background-size: cover
+}
+*/
+.yicamera-overall .section-accessories .container {
+	position: relative;
+	height: 100%;
+	z-index: 2
+}
+
+.yicamera-overall .section-accessories .content {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: 490px;
+	height: 630px;
+	margin: -200px 0 0
+}
+
+.yicamera-overall .section-accessories .title {
+	font-size: 24px
+}
+
+.yicamera-overall .section-accessories .text {
+	margin-bottom: 10px
+}
+
+.yicamera-overall .section-accessories .link {
+	color: #00a0e9
+}
+
+.yicamera-overall .section-accessories .light {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	width: 100%;
+	height: 100%;
+/*	background: url(http://c1.mifile.cn/f/i/2014/cn/yicamera/accessories-light-bg.png) no-repeat 50% 50%;*/
+	background-size: cover;
+	-webkit-animation: breathe 2s linear infinite alternate-reverse;
+	animation: breathe 2s linear infinite alternate-reverse
+}
+
+.yicamera-overall .section-performance .frame {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%
+}
+
+.yicamera-overall .section-performance .frame-01 .stage {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	width: 100%;
+	height: 100%
+}
+
+.yicamera-overall .section-performance .frame-01 .stage:before {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 2;
+	width: 100%;
+	height: 100%;
+	content: '';
+	/*background: #333;*/
+	opacity: .45;
+	filter: alpha(opacity=45)\9
+}
+
+.yicamera-overall .section-performance .frame-01 .stage .video-bg {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	z-index: 1
+}
+
+.yicamera-overall .section-performance .frame-01 .btn-continue {
+	position: absolute;
+	left: 50%;
+	top: 80%;
+	z-index: 2;
+	width: 62px;
+	height: 62px;
+	margin: -31px 0 0 -31px;
+	line-height: 62px;
+	text-align: center;
+	color: #fff;
+	background: url(http://c1.mifile.cn/f/i/2014/cn/yicamera/btn-circle.png) no-repeat 50% 0
+}
+
+.yicamera-overall .section-performance .frame-01 .btn-continue:hover {
+	color: #424242;
+	background-position: 50% 100%
+}
+
+.yicamera-overall .section-performance .frame-01 .media-info {
+	position: absolute;
+	right: 10px;
+	bottom: 10px;
+	z-index: 5;
+	margin: 0;
+	color: #fff;
+	color: rgba(255,255,255,0.75)
+}
+
+.yicamera-overall .section-performance .frame-02 .content {
+	position: absolute;
+	left: 0;
+	top: 50%;
+	width: 100%;
+	height: 350px;
+/*	padding-top: 210px;*/
+	margin: -280px 0 0
+}
+
+.yicamera-overall .section-performance .frame-02 .stage {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	width: 2052px;
+	margin: 0 0 0 -1026px
+}
+
+.yicamera-overall .section-performance .frame-02 .camera-roll-list {
+	width: 2052px;
+	height: 162px;
+	margin: 0;
+	padding: 0;
+	list-style-type: none
+}
+
+.yicamera-overall .section-performance .frame-02 .camera-roll-list li {
+	float: left;
+	width: 293px;
+	height: 162px
+}
+
+.yicamera-overall .section-performance .frame-02 .main-feature {
+	width: 1000px;
+	margin: 0 auto 10px
+}
+
+.yicamera-overall .section-performance .frame-02 .feature-01,.yicamera-overall .section-performance .frame-02 .feature-02 {
+	float: left;
+	width: 419px;
+	padding: 0 40px
+}
+
+.yicamera-overall .section-performance .frame-02 .feature-02 {
+	border-left: 1px solid #b0b0b0
+}
+
+.yicamera-overall .section-performance .frame-02 .title {
+	font-size: 20px;
+	color: #424242
+}
+
+.yicamera-overall .section-performance .frame-02 .text {
+	color: #757575
+}
+
+.yicamera-overall .section-performance .frame-02 .feature-list {
+	width: 760px;
+	margin: 0 auto
+}
+
+.yicamera-overall .section-performance .frame-02 .feature-list li {
+	float: left;
+	width: 190px
+}
+
+.yicamera-overall .section-performance .frame-02 .feature-icon {
+	width: 130px;
+	height: 70px;
+	padding: 30px 0;
+	margin: 0 auto;
+	border: 1px solid #b0b0b0;
+	border-color: rgba(210,210,210,0.5);
+	border-radius: 10px;
+	font-size: 14px;
+	line-height: 1.25;
+	text-align: center;
+	color: #757575
+}
+
+.yicamera-overall .section-performance .frame-02 .feature-icon .data {
+	display: block;
+	margin-bottom: 5px;
+	font-size: 30px;
+	color: #424242
+}
+
+.yicamera-overall .section-app {
+	background: url(http://c1.mifile.cn/f/i/2014/cn/yicamera/app-bg.jpg) no-repeat 50% 50%
+}
+
+.yicamera-overall .section-app .container {
+	position: relative;
+	height: 100%
+}
+
+.yicamera-overall .section-app .content {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	z-index: 5;
+	width: 800px;
+	height: 300px;
+	margin: -300px 0 0 -430px
+}
+
+.yicamera-overall .section-app .text {
+	margin-bottom: 10px
+}
+
+.yicamera-overall .section-app .link {
+	font-size: 16px;
+	color: #4db9fd
+}
+
+.yicamera-overall .section-app .feature-list {
+	width: 360px;
+	margin-top: 30px
+}
+
+.yicamera-overall .section-app .feature-list li {
+	float: left;
+	width: 50px;
+	margin-right: 30px;
+	text-align: center;
+	color: #fff
+}
+
+.yicamera-overall .section-app .icon-app {
+	display: block;
+	width: 52px;
+	height: 52px;
+	margin-bottom: 10px;
+	border-radius: 25px;
+	background-image: url(http://c1.mifile.cn/f/i/2014/cn/yicamera/icons-app.png);
+	background-repeat: no-repeat;
+	cursor: pointer
+}
+
+.yicamera-overall .section-app .icon-app-video {
+	background-position: 0 0
+}
+
+.yicamera-overall .section-app .icon-app-video:hover {
+	background-position: 0 -52px
+}
+
+.yicamera-overall .section-app .icon-app-share {
+	background-position: -52px 0
+}
+
+.yicamera-overall .section-app .icon-app-share:hover {
+	background-position: -52px -52px
+}
+
+.yicamera-overall .section-app .icon-app-edit {
+	background-position: -104px 0
+}
+
+.yicamera-overall .section-app .icon-app-edit:hover {
+	background-position: -104px -52px
+}
+
+.yicamera-overall .section-app .icon-app-photo {
+	background-position: -156px 0
+}
+
+.yicamera-overall .section-app .icon-app-photo:hover {
+	background-position: -156px -52px
+}
+
+.yicamera-overall .section-app .stage {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	z-index: 1;
+	width: 2560px;
+	height: 1440px;
+	margin: -720px 0 0 -1280px
+}
+
+.yicamera-overall .section-app .screen-slides {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: 306px;
+	height: 542px;
+	margin: 34px 0 0 21px;
+	padding: 0;
+	list-style-type: none
+}
+
+.yicamera-overall .section-app .screen-slides img {
+	border-radius: 2px
+}
+
+.yicamera-overall .section-design .container {
+	position: relative;
+	height: 100%
+}
+
+.yicamera-overall .section-design .content {
+	position: absolute;
+	top: 50%;
+	left: 0;
+	width: 100%;
+	height: 600px;
+	margin: -300px 0 0;
+	text-align: center
+}
+
+.yicamera-overall .section-design .text {
+	width: 680px;
+	margin: 0 auto
+}
+
+.yicamera-overall .section-design .stage {
+	position: relative;
+	width: 730px;
+	height: 240px;
+	padding: 160px 0 45px;
+	margin: 0 auto
+}
+
+.yicamera-overall .section-design .product {
+	position: relative;
+	width: 730px;
+	height: 240px
+}
+
+.yicamera-overall .section-design .front,.yicamera-overall .section-design .middle,.yicamera-overall .section-design .back {
+	position: absolute;
+	top: 0;
+	-webkit-transition: -webkit-transform 0.5s;
+	transition: transform 0.5s
+}
+
+.yicamera-overall .section-design .front {
+	left: 0;
+	z-index: 2;
+	-webkit-transform: translate3d(270px, 0, 0);
+	transform: translate3d(270px, 0, 0)
+}
+
+.yicamera-overall .section-design .middle {
+	left: 50%;
+	z-index: 1;
+	margin-left: -80px
+}
+
+.yicamera-overall .section-design .back {
+	right: 0;
+	z-index: 0;
+	-webkit-transform: translate3d(-125px, 0, 0);
+	transform: translate3d(-125px, 0, 0)
+}
+
+.yicamera-overall .section-design .text-list {
+	margin: 0;
+	padding: 0;
+	list-style-type: none
+}
+
+.yicamera-overall .section-design .text-list li {
+	position: absolute;
+	z-index: 9;
+	overflow: visible;
+	_zoom: 1;
+	font-size: 16px;
+	color: #70c9fd;
+	opacity: 0;
+	filter: alpha(opacity=0)\9;
+	-webkit-transition: opacity 0.5s 0.5s;
+	transition: opacity 0.5s 0.5s
+}
+
+.yicamera-overall .section-design .text-list li:before {
+	position: absolute;
+	width: 1px;
+	height: 160px;
+	content: '';
+	background: #a7d8fd
+}
+
+.yicamera-overall .section-design .text-list li:after {
+	position: absolute;
+	width: 5px;
+	height: 5px;
+	border-radius: 5px;
+	content: '';
+	background: #a7d8fd
+}
+
+.yicamera-overall .section-design .text-list .lens,.yicamera-overall .section-design .text-list .chip,.yicamera-overall .section-design .text-list .cmos {
+	top: 85px;
+	padding-bottom: 200px
+}
+
+.yicamera-overall .section-design .text-list .lens {
+	right: 488px;
+	padding-right: 10px
+}
+
+.yicamera-overall .section-design .text-list .lens:before {
+	right: 2px;
+	top: 11px;
+	height: 160px
+}
+
+.yicamera-overall .section-design .text-list .lens:after {
+	right: 0;
+	top: 9px
+}
+
+.yicamera-overall .section-design .text-list .chip {
+	right: 297px;
+	padding-right: 10px
+}
+
+.yicamera-overall .section-design .text-list .chip:before {
+	right: 2px;
+	top: 11px;
+	height: 130px
+}
+
+.yicamera-overall .section-design .text-list .chip:after {
+	right: 0;
+	top: 9px
+}
+
+.yicamera-overall .section-design .text-list .cmos {
+	left: 513px;
+	padding-left: 10px
+}
+
+.yicamera-overall .section-design .text-list .cmos:before {
+	left: 2px;
+	top: 11px;
+	height: 160px
+}
+
+.yicamera-overall .section-design .text-list .cmos:after {
+	left: 0;
+	top: 9px
+}
+
+.yicamera-overall .section-design .text-list .led,.yicamera-overall .section-design .text-list .gpu {
+	bottom: 0;
+	padding-top: 200px
+}
+
+.yicamera-overall .section-design .text-list .led {
+	left: 80px;
+	padding-left: 10px
+}
+
+.yicamera-overall .section-design .text-list .led:before {
+	left: 2px;
+	bottom: 11px;
+	height: 133px
+}
+
+.yicamera-overall .section-design .text-list .led:after {
+	left: 0;
+	bottom: 9px
+}
+
+.yicamera-overall .section-design .text-list .gpu {
+	left: 358px;
+	padding-left: 10px
+}
+
+.yicamera-overall .section-design .text-list .gpu:before {
+	left: 2px;
+	bottom: 11px;
+	height: 133px
+}
+
+.yicamera-overall .section-design .text-list .gpu:after {
+	left: 0;
+	bottom: 9px
+}
+
+.yicamera-overall .section-design.section-done .front,.yicamera-overall .section-design.section-done .middle,.yicamera-overall .section-design.section-done .back {
+	-webkit-transform: translate3d(0, 0, 0);
+	transform: translate3d(0, 0, 0)
+}
+
+.yicamera-overall .section-design.section-done .text-list li {
+	opacity: 1;
+	filter: alpha(opacity=100)\9
+}
+
+@media (max-width: 1260px) {
+	.yicamera-overall .section-intro .content {
+		margin-left: -150px
+	}
+
+	.yicamera-overall .section-accessories .content {
+		margin-left: -30px
+	}
+
+	.yicamera-overall .section-performance .main-feature {
+		width: 930px
+	}
+
+	.yicamera-overall .section-performance .frame-02 .feature-01,.yicamera-overall .section-performance .frame-02 .feature-02 {
+		float: left;
+		width: 424px;
+		padding: 0 20px
+	}
+}
+
+@media (max-height: 730px) {
+	.yicamera-overall .section-start .content {
+		height: 540px;
+		margin-top: -250px
+	}
+
+	.yicamera-overall .section-intro .content {
+		margin-top: -260px
+	}
+
+	.yicamera-overall .section-app .content {
+		margin-top: -260px
+	}
+
+	.yicamera-overall .section-design .content {
+		height: 560px;
+		margin-top: -250px
+	}
+
+	.yicamera-overall .section-design .stage {
+		margin-top: -50px
+	}
+
+	.yicamera-overall .section-version .content {
+		height: 560px;
+		margin-top: -250px
+	}
+
+	.yicamera-overall .section-version .version-list {
+		margin-top: 20px
+	}
+}
+
+
+.yicamera-overall .section.bannerbg{background: #f4f6f8;}
+.yicamera-overall .section.banner5{  z-index: 2;overflow: visible; background: url(/wdlst/img/banner/banner-05.jpg) no-repeat 50% 50%;}
+.qz-left,.qz-right{width: 50%;float: left;margin-top:50px;}
+.qz-left .bannerimg03{margin-left: 90px;}
+.qz-left .qz-img li{float: left;width: 100px; height: 100px;padding: 10px;}
+.qz-right .intruduction{width: 320px;border: 1px solid #c9c9c9;background-color: #fff;margin-top: 100px;margin-left: 100px;padding: 20px;overflow: hidden;}
+.qz-right .bannerimg04{margin-left: 100px;margin-top: 100px;}
+.qz-right .intruduction h3{font-size: 18px;font-weight: normal;}
+.qz-right .intruduction .texts{color: #757575;  margin-top: 50px;}
+.qz-right .intruduction .texts li{background: url(/wdlst/img/shou.png) no-repeat  0px 3px;  padding-left: 25px;height: 25px;line-height: 25px;}
+.qz-right .intruduction .texts li a, .qz-right .intruduction .texts li a:hover{margin-left: 20px;color: #757575; }
+.qz-right .addtoCircle{margin-left: 200px;margin-top: 50px;}
+
+.banner5 .bannerimg06{margin-top:50px;}
+.banner5 .graphic{width: 700px; float: left;overflow: hidden;}
+.banner5 .chenggang{ margin-top: 50px;background-color: rgba(255,255,255,0.5); width: 230px;height: 450px;float: right;margin-right: 50px;text-align: center;}
+@media \0screen\,screen\9 {/* 只支持IE6、7、8 */
+  .banner5 .chenggang{
+    background-color:#ffffff;
+    filter:Alpha(opacity=50);
+    position:static; /* IE6、7、8只能设置position:static(默认属性) ，否则会导致子元素继承Alpha值 */
+    *zoom:1; /* 激活IE6、7的haslayout属性，让它读懂Alpha */
+  }255
+}
+
+.banner5 .graphic{margin-top:70px;}
+.banner5 .graphic li{width: 700px;overflow: hidden;clear: both;margin-bottom: 10px;}
+.banner5 .graphic .newsimg{display: inline-block; float: left;width: 198px; height: 129px;}
+.banner5 .graphic .newstxt{float: left;  width: 350px;  margin: 0 20px;}
+.banner5 .graphic .newstxt .right{float: right;}
+.banner5 .graphic .wbtxt,.banner5 .graphic .newstxt a,.banner5 .graphic .newstxt label{color: #7e7d7c;}
+.banner5 .graphic .wbtxt{margin-top: 5px;height: 70px;overflow: hidden;}
+.chenggang .lvsename{width: 160px; margin: 20px auto;}
+.chenggang .lvsename li.center{text-align: center;  line-height: 30px;font-size: 16px;}
+.chenggang .lvsename li.gyd{line-height: 40px;height:40px;}
+.chenggang .lvsename li.gyd label{float: left;}
+.chenggang .lvsename li font{float: right;color: red}
+.chenggang .iwanttotry{color: #fff; margin: 40px auto 0 auto;}
+
+
+.index5 .margintop{margin-top:180px;}
+.index5 .bannerimg07{margin-top: 0px;margin-bottom: 20px;}
+.index5 .titlename{color: #666;width: 257px;margin: 0 auto;line-height: 25px;padding: 10px 0;}
+.index5 .left,.index5 .right{width: 410px;text-align: center;}
+.index5 .left{float: left;}
+.index5 .right{float: left;margin-left: 110px;}
+.index5 .left .xiangmore,.index5 .right .xiangmore{background: #c9c9c9;border-radius: 6px;  padding: 20px;  color: #666;width: 370px;height: 243px;}
+.index5 .seemore,.index5 .learnmore{margin: 20px auto;}
+
+.yzbt,.mtbd{text-align: center;margin-top: 60px;}
+.yzbt .bannerimg09{margin: 150px auto 50px auto;}
+.yzbt .yzbtimgtxt{  width: 866px;overflow: hidden;margin: 0 auto;}
+.yzbt .yzbtimgtxt li{float: left;width: 200px;margin-right: 133px;}
+.yzbt .yzbtimgtxt li.last{margin-right: 0px;}
+
+.mtbd p{font-size: 16px;}
+.mtbd ul li{text-align: center;}
+.qqlianx{clear: both;padding-left: 70px;}
+.qqlianx img,.qqlianx .detail{float: left;display: block;}
+.qqlianx .detail{  padding-left: 10px;}
+.qqlianx .detail label{display: block;}

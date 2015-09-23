@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title></title>
+		<link href="lib/ionic/css/ionic.css" rel="stylesheet">
+		<link href="css/webconment.css" rel="stylesheet">
+		<script src="lib/ionic/js/ionic.bundle.js"></script>
+		<script src="cordova.js"></script>
+		<script src="js/web137.js"></script>
+	</head>
+
+	<body ng-app="web137">
+		<ion-pane>
+			<ion-header-bar class="bar bar-header bar-light">
+				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back"></a>
+				<h1 class="title">我的收藏(3)</h1>
+			</ion-header-bar>
+			<ion-content class="web-body">
+				<div class="list list-inset border-none web-margin0" ng-controller="usermsgs">
+					<div class="item web-paddinglr5 card item-borderless noboxshadow" ng-repeat="item in items">
+						<div class="item item-button-right web-paddingtb14-5">
+						    {{item.lcTitle}}
+						 <i class="button button-clear icon-right ion-ios-star-outline web-ibh30 web-fts12">&nbsp;12</i>
+						</div>
+						<div class="item item-avatar item-divider item-borderless">
+						    <img src="{{item.lcImgSrc}}">
+						    <h2 class="fc-nan txt-fw">{{item.lcName}}</h2>
+						    <p>{{item.lcContent}}<br />
+						    	<span class="web-font12">{{item.lcTime}}</span>
+						    </p>
+						</div>
+						<a class="item web-item item-icon-right web-padd-right40" href="#">
+						          点击查看全部
+						    <i class="icon icon-right ion-ios-arrow-right"></i>
+						</a>
+					</div>
+				</div>
+			</ion-content>
+			
+		</ion-pane>
+	</body>
+
+</html>

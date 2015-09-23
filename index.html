@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>律团网</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<link rel="stylesheet" type="text/css" href="../wdlst/css/comm.css">
+	<link rel="stylesheet" href="../wdlst/js/jsscroll/base.min.css" /> 
+  	<link rel="stylesheet" type="text/css" href="../wdlst/js/jsscroll/overall.min.css" /> 
+  	<link rel="stylesheet" type="text/css" href="../wdlst/css/comm.css">
+ </head> 
+ <body> 
+  <div class="site-header header"> 
+       <div class="container"> 
+            <!-- lv-header start -->
+            <div class="lv-header">
+                <div class="logo">
+                    <a rel="nofollow" class="logo" href="#" title="律团网" ><img src="../wdlst/img/logo.png"></a>
+                </div>
+                <ul class="nav">
+                    <li><a rel="nofollow" class="" href="#" title="律团网" >首页</a></li>
+                    <li><a rel="nofollow" class="" href="#" title="问律师" >问律师</a></li>
+                    <li><a rel="nofollow" class="" href="#" title="找律师" >找律师</a></li>
+                    <li><a rel="nofollow" class="" href="#" title="看新闻" >看新闻</a></li>
+                    <li><a rel="nofollow" class="" href="#" title="搜案例" >搜案例</a></li>
+                    <li><a rel="nofollow" class="" href="#" title="学知识" >学知识</a></li>
+                    <li><a rel="nofollow" class="" href="#" title="做公益" >做公益</a></li>
+                </ul>
+                <div id="Jq-user" class="lv-user">
+                    <a rel="nofollow" href="#" title="用户登录" class="user-icon" ><img src="../wdlst/img/user-icon.png">用户</a><i class="top-iocn"></i>
+                    <ul id="Jq-lgoregi" class="lgoregi">
+                        <li><a id="Jq-logo" href="javascript:;">登录</a></li>
+                        <li><a id="Jq-register" href="javascript:;">注册</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- lv-header end -->
+            <script type="text/html" id="tmpl-Jq-userLogo">
+                <div id="Jq-login-wrap" class="login-wrap">
+                    <h3>用户登录</h3>
+                    <p class="error_tip"></p>
+                    <div class="item">
+                        <label class="login-label name-label"></label>
+                        <label class="txt">邮箱/手机号</label>
+                        <input id="loginname" type="text" class="itxt" name="loginname" >
+                    </div>
+                    <div class="item">
+                        <label class="login-label pwd-label"></label>
+                        <i class="userPwd-icon"></i><label class="txt">密码</label><input type="password" id="nloginpwd" name="nloginpwd" class="itxt itxt-error" >
+                        <input type="text" id="mwshow"  class="itxt itxt-error" >
+                        <i class="isShowHideIcon"></i>
+                    </div>
+                    <div class="lg-login clearfix">
+                        <input id="sublogo" type="botton" value="立即登录" class="inpbg sub">
+                        <label><input id="isSeve" type="checkbox" value="0" name="remember" class="check" ><span> 保存登录信息</span></label>
+                    </div>
+                    <div class="lg-reg-a">
+                        <a href="">注册</a> | <a class="colorred" href="">忘记密码？</a>
+                    </div>
+                    <div class="other-logo">
+                        <a href="">其它登录方式</a>
+                    </div>
+                </div>
+            </script>
+            <script type="text/html" id="tmpl-Jq-userRegister">
+                <div id="Jq-register-wrap" class="login-wrap register-wrap">
+                    <h3>新用户注册</h3>
+                    <p id="rerror_tip" class="error_tip"></p>
+                    <div class="item">
+                        <label class="login-label name-label"></label>
+                        <label class="txt">邮箱/手机号</label>
+                        <input id="rloginname" type="text" class="itxt" name="loginname" >
+                    </div>
+                    <div class="securityCode">
+                        <label class="txt">验证码</label>
+                        <input type="text" id="rnlogincode" name="nlogincode" class="itxtcode" >
+                        <input  type="botton" class="inpbg chekeCode" value="点击获取验证码">
+                    </div>
+                    <div class="item">
+                        <label class="login-label pwd-label"></label>
+                        <i class="userPwd-icon"></i><label class="txt">密码</label><input type="password" id="rnloginpwd" name="nloginpwd" class="itxt itxt-error" >
+                        <input type="text" id="mwshow"  class="itxt itxt-error" >
+                        <i class="isShowHideIcon"></i>
+                    </div>
+                    <div class="lg-login clearfix">
+                        <input id="subRegister" type="botton" value="立即注册" class="inpbg goregi">
+                    </div>
+                    <div class="other-logo">
+                        <a class="colorccc" href=""><<返回登录</a>
+                    </div>
+                </div>
+            </script>
+            <!-- lv-center start -->
+       </div> 
+  </div> 
+
+
+
+  <div class="xm-product-box"> 
+   <div class="bd"> 
+    <div id="overall" class="yicamera-overall J_miOneScroller mi1scroller"> 
+     <div class="section section-start section-transition section-done section-active section-finish" data-title="首页" data-index="1" style="height: 320px;"> 
+      <div class="container"> 
+       <div class="content">
+            <h1 class="lvtuan"></h1>
+            <p class="link-btn">
+                <a href="" class="inpbg" rel="nofollow" target="_blank">我要问法律</a>
+                <a href="" class="inpbg" rel="nofollow" target="_blank">我要打官司</a>
+            </p>
+       </div> 
+      </div> 
+     </div> 
+     <div class="section section-intro section-transition section-done" data-title="问律师" data-index="2" style="height: 320px;"> 
+      <div class="container"> 
+            <img class="bannerimg02" src="../wdlst/img/banner/banner-02.jpg " width="1017" height="368" alt="" /> 
+            <p class="link-btn">
+                <a href="" class="weasking inpbg" rel="nofollow" target="_blank">大家都在问什么</a>
+                <a href="" class="onlookers inpbg" rel="nofollow" target="_blank">围观资深律师</a>
+            </p>
+      </div> 
+     </div> 
+     <div class="section section-wide-angle section-transition section-done bannerbg" data-title="找律师" data-index="3" style="height: 320px;"> 
+      <div class="content"> 
+       <div class="container"> 
+        <div class="qz-left">
+             <img class="bannerimg03" src="../wdlst/img/banner/banner-03.png " width="301" height="83" alt="" /> 
+             <ul class="qz-img">
+                 <li><a href="" rel="nofollow"><img src="../wdlst/img/circle/01.png" width="100" height="100" alt="" /></a></li>
+                 <li><a href="" rel="nofollow"><img src="../wdlst/img/circle/02.png" width="100" height="100" alt="" /></a></li>
+                 <li><a href="" rel="nofollow"><img src="../wdlst/img/circle/03.png" width="100" height="100" alt="" /></a></li>
+                 <li><a href="" rel="nofollow"><img src="../wdlst/img/circle/04.png" width="100" height="100" alt="" /></a></li>
+                 <li><a href="" rel="nofollow"><img src="../wdlst/img/circle/05.png" width="100" height="100" alt="" /></a></li>
+                 <li><a href="" rel="nofollow"><img src="../wdlst/img/circle/06.png" width="100" height="100" alt="" /></a></li>
+                 <li><a href="" rel="nofollow"><img src="../wdlst/img/circle/07.png" width="100" height="100" alt="" /></a></li>
+                 <li><a href="" rel="nofollow"><img src="../wdlst/img/circle/08.png" width="100" height="100" alt="" /></a></li>
+                 <li><a href="" rel="nofollow"><img src="../wdlst/img/circle/09.png" width="100" height="100" alt="" /></a></li>
+                 <li><a href="" rel="nofollow"><img src="../wdlst/img/circle/010.png" width="100" height="100" alt="" /></a></li>
+                 <li><a href="" rel="nofollow"><img src="../wdlst/img/circle/011.png" width="100" height="100" alt="" /></a></li>
+                 <li><a href="" rel="nofollow"><img src="../wdlst/img/circle/012.png" width="100" height="100" alt="" /></a></li>
+                 <li><a href="" rel="nofollow"><img src="../wdlst/img/circle/013.png" width="100" height="100" alt="" /></a></li>
+                 <li><a href="" rel="nofollow"><img src="../wdlst/img/circle/014.png" width="100" height="100" alt="" /></a></li>
+                 <li><a href="" rel="nofollow"><img src="../wdlst/img/circle/015.png" width="100" height="100" alt="" /></a></li>
+                 <li><a href="" rel="nofollow"><img src="../wdlst/img/circle/016.png" width="100" height="100" alt="" /></a></li>
+             </ul>
+        </div>
+        <div class="qz-right">
+            <div class="intruduction">
+                <h3>陈刚   律师</h3>
+                <p class="shareit">在律团分享了273篇文章， 7200人关注他</p>
+                <ul class="texts">
+                    <li>877  <a href="">天津爆炸案政府回购房屋的法理阐述</a></li>
+                    <li>1.254  <a href="">相爱相杀--浅析苹果与三星的专利之争</a></li>
+                </ul>
+            </div>
+            <img class="bannerimg04" src="../wdlst/img/banner/banner-04.png " width="387" height="39" alt="" />
+            <a href="" class="addtoCircle inpbg" rel="nofollow" target="_blank">加入圈子</a>
+        </div>
+       </div> 
+      </div> 
+     </div> 
+     <div class="section section-connect section-transition section-done banner5" data-title="看新闻" data-index="4" style="height: 320px;"> 
+      <div class="content"> 
+       <div class="stage clearfix"> 
+        <div class="connect connect-01"> 
+         <video class="video" poster="img/banner/banner-05.jpg" width="0" height="0" preload="" loop=""> 
+         </video> 
+        </div> 
+       </div> 
+       <div class="container"> 
+            <img class="bannerimg06" src="../wdlst/img/banner/banner-06.png " width="915" height="67" alt="" />
+            <ul class="graphic clearfix">
+                <li>
+                    <div class="newsimg"><img class="" src="../wdlst/img/banner/newsimg.png " width="198" height="129" alt="" /></div>
+                    <div class="newstxt">
+                        <h4 class="title">百种玩法，摄人心魄的精彩瞬间</h4>
+                        <p class="wbtxt">给爱玩的你心仪的伙伴，小蚁运动相机将陪你上天入地，下海登山，全面支持你每一种个性化玩法。给爱玩的你心仪的伙伴，小蚁运动相机将陪你上天入地</p>
+                        <a class="left" href="">百种玩法</a>
+                        <label class="right">8/17</label>
+                    </div>
+                </li>
+                <li>
+                    <div class="newsimg"><img class="" src="../wdlst/img/banner/newsimg.png " width="198" height="129" alt="" /></div>
+                    <div class="newstxt">
+                        <h4 class="title">百种玩法，摄人心魄的精彩瞬间</h4>
+                        <p class="wbtxt">给爱玩的你心仪的伙伴，小蚁运动相机将陪你上天入地，下海登山，全面支持你每一种个性化玩法。</p>
+                        <a class="left" href="">百种玩法</a>
+                        <label class="right">8/17</label>
+                    </div>
+                </li>
+                <li>
+                    <div class="newsimg"><img class="" src="../wdlst/img/banner/newsimg.png " width="198" height="129" alt="" /></div>
+                    <div class="newstxt">
+                        <h4 class="title">百种玩法，摄人心魄的精彩瞬间</h4>
+                        <p class="wbtxt">给爱玩的你心仪的伙伴，小蚁运动相机将陪你上天入地，下海登山，全面支持你每一种个性化玩法。</p>
+                        <a class="left" href="">百种玩法</a>
+                        <label class="right">8/17</label>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="chenggang">
+                <ul class="lvsename">
+                    <li class="center"><img src="../wdlst/img/circle/04.png" width="100" height="100" alt=""></li>
+                    <li class="center">陈刚 律师</li>
+                    <li class="gyd"><label>关注</label> <font>13021</font></li>
+                    <li class="gyd"><label>阅读</label> <font>53670</font></li>
+                    <li class="gyd"><label>点赞</label> <font>8640</font></li>
+                </ul>
+                <a href="" class="iwanttotry inpbg" rel="nofollow" target="_blank">我要试试</a>
+            </div> 
+
+       </div> 
+      </div> 
+     </div> 
+     <div class="section section-camera section-transition section-done index5" data-title="搜案例" data-index="5" style="height: 320px;"> 
+        <div class="content"> 
+            <div class="container">
+                <div class="margintop">
+                    <img class="bannerimg07" src="../wdlst/img/banner/banner-07.png " width="890" height="52" alt="" />
+                    <div class="left">
+                        <p class="titlename">他山之石，可以攻玉，看看相 近案例，你会更懂法律</p>
+                        <div class="xiangmore">
+                            <h3>民间借贷纠纷保全案案例分析</h3>
+                            <p>原告王小红与被告赵志强、被告吴耀君民间借贷 纠纷一案，本院于2015年1月29日立案受理 后，依法...</p><br>
+                            <h3>胡某某犯销售假药罪案例分析</h3>
+                            <p>上海闵行区人民检察院以沪闵检金融刑诉【2015】 126号起诉被告人胡某某犯销售假药罪，于...</p>
+                        </div>
+                        <a href="" class="seemore inpbg" rel="nofollow" target="_blank">想看更多</a>
+                    </div>
+                    <div class="right">
+                        <p class="titlename">你确定你真的知道《中华人民共和国 物权法》第7章第88条说的是什么？</p>
+                        <div class="xiangmore">
+                            <h3>2015-07-07更新</h3>
+                            <p>国务院关于印发全国海洋主体功能区规 划的通知</p>
+                            <p>最高人民法院关于印发《人民法院落实 《机关内部人员...</p>
+                            <p>人社部关于2015年9月3日放假期 间安排劳动者...</p>
+                        </div>
+                        <a href="" class="learnmore inpbg" rel="nofollow" target="_blank">想学更多</a>
+                    </div>
+                </div>
+            </div>
+       </div> 
+      <div class="frame frame-01" style="display: block;"> 
+       <div class="stage"> 
+        <video class="video video-bg" poster="" preload="" loop="" > </video> 
+       </div> 
+      </div> 
+     </div> 
+     <div class="section section-accessories section-transition" data-title="学知识" data-index="6" style="height: 320px;"> 
+      <div class="container"> 
+        <div class="yzbt">
+            <img class="bannerimg09" src="../wdlst/img/banner/banner-09.png " width="557" height="66" alt="" />
+            <ul class="yzbtimgtxt">
+                <li>
+                    <img src="../wdlst/img/banner/banner-010.png " width="163" height="163" alt="">
+                    <h4>国内最大的法律社交平台</h4>
+                    <p>入住律师3,783名，覆盖全国272个 城市，在这里，总能找到适合自己的 法律人士。</p>
+                </li>
+                <li>
+                    <img src="../wdlst/img/banner/banner-011.png " width="163" height="163" alt="">
+                    <h4>因为专心，所以专业</h4>
+                    <p>律团网律师擅长领域已覆盖98%的 法律领域，每一个细分领域都能找 到对应的擅长律师。律团网独有的 大数据分析系统，可精准的匹配</p>
+                </li>
+                <li class="last">
+                    <img src="../wdlst/img/banner/banner-012.png " width="163" height="163" alt="">
+                    <h4> 随时随地问案办案</h4>
+                    <p>律团网首家打造三屏合一法律圈概 念，微信、APP、网站覆盖PC端 和移动端。让您随时问案，随时办 案。</p>
+                </li>
+            </ul>
+        </div>
+      </div> 
+      <div class="light"></div> 
+     </div> 
+     <div class="section section-performance section-transition" data-title="做公益" data-index="7" style="height: 320px;"> 
+      <div class="frame frame-01"> 
+       <div class="stage"> 
+        <video class="video video-bg" poster="" preload=""></video> 
+       </div> 
+       <!-- <a class="btn-continue J_moveDown" href="javascript: void(0);" >跳过</a>  -->
+      </div> 
+      <div class="frame frame-02"> 
+       <div class="content"> 
+        <div class="container"> 
+            <div class="mtbd">
+                <img class="bannerimg013" src="../wdlst/img/banner/banner-013.png " width="163" height="163" alt="" />
+                <p>媒体是这么报道我们的</p>
+                <ul>
+                    <li>
+                        <a rel="nofollow" href="" target="_blank" >
+                            <img class="bannerimg013" src="../wdlst/img/link/01.png " width="206" height="95" alt="" />
+                        </a>
+                        <a rel="nofollow" href="" target="_blank" >
+                            <img class="bannerimg013" src="../wdlst/img/link/02.png " width="206" height="95" alt="" />
+                        </a>
+                        <a rel="nofollow" href="" target="_blank" >
+                            <img class="bannerimg013" src="../wdlst/img/link/03.png " width="206" height="95" alt="" />
+                        </a>
+                        <a rel="nofollow" href="" target="_blank" >
+                            <img class="bannerimg013" src="../wdlst/img/link/04.png " width="206" height="95" alt="" />
+                        </a>
+                    </li>
+                    <li>
+                        <a rel="nofollow" href="" target="_blank" >
+                            <img class="bannerimg013" src="../wdlst/img/link/05.png " width="206" height="95" alt="" />
+                        </a>
+                        <a rel="nofollow" href="" target="_blank" >
+                            <img class="bannerimg013" src="../wdlst/img/link/06.png " width="206" height="95" alt="" />
+                        </a>
+                        <a rel="nofollow" href="" target="_blank" >
+                            <img class="bannerimg013" src="../wdlst/img/link/07.png " width="206" height="95" alt="" />
+                        </a>
+                        <a rel="nofollow" href="" target="_blank" >
+                            <img class="bannerimg013" src="../wdlst/img/link/08.png " width="206" height="95" alt="" />
+                        </a>
+                    </li>
+                    <li>
+                        <a rel="nofollow" href="" target="_blank" >
+                            <img class="bannerimg013" src="../wdlst/img/link/09.png " width="206" height="95" alt="" />
+                        </a>
+                        <a rel="nofollow" href="" target="_blank" >
+                            <img class="bannerimg013" src="../wdlst/img/link/010.png " width="206" height="95" alt="" />
+                        </a>
+                        <a rel="nofollow" href="" target="_blank" >
+                            <img class="bannerimg013" src="../wdlst/img/link/011.png " width="206" height="95" alt="" />
+                        </a>
+                        <a rel="nofollow" href="" target="_blank" >
+                            <img class="bannerimg013" src="../wdlst/img/link/012.png " width="206" height="95" alt="" />
+                        </a>
+                    </li>
+                </ul>
+            </div>
+          
+        </div> 
+       </div> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <div class="site-footer"> 
+   <div class="container">  
+    <div class="footer-links clearfix"> 
+     <dl class="col-links col-links-first"> 
+      <dt>
+            <img class="" src="../wdlst/img/footer/novice.png " width="28" height="28" alt="" />新手上路
+      </dt> 
+      <dd>
+       <a rel="nofollow" href="" target="_blank" >用户注册</a>
+      </dd> 
+      <dd>
+        <a rel="nofollow" href="" target="_blank" >找回密码</a>
+      </dd> 
+      <dd>
+        <a rel="nofollow" href="" target="_blank" >律师认证</a>
+      </dd> 
+     </dl> 
+     <dl class="col-links "> 
+      <dt>
+       <img class="" src="../wdlst/img/footer/lawyerservice.png " width="28" height="28" alt="" />律师服务
+      </dt> 
+      <dd>
+       <a rel="nofollow" href="" target="_blank" >求报导</a>
+      </dd> 
+      <dd>
+       <a rel="nofollow" href="" target="_blank" >投稿</a>
+      </dd> 
+      <dd>
+       <a rel="nofollow" href="" target="_blank" >排名攻略</a>
+      </dd> 
+     </dl> 
+     <dl class="col-links "> 
+      <dt>
+       <img class="" src="../wdlst/img/footer/helpcenter.png " width="28" height="28" alt="" />帮助中心
+      </dt> 
+      <dd>
+       <a rel="nofollow" href="" target="_blank" >会员积分</a>
+      </dd> 
+      <dd>
+       <a rel="nofollow" href="" target="_blank" >常见问题</a>
+      </dd> 
+      <dd>
+       <a rel="nofollow" href="" target="_blank" >问题反馈</a>
+      </dd> 
+     </dl> 
+     <dl class="col-links marginbot0text"> 
+      <dt>
+       <img class="" src="../wdlst/img/footer/weixin.png " width="98" height="99" alt="" />
+      </dt> 
+      <dd>
+        <label>扫一扫关注微信</label>
+      </dd> 
+     </dl> 
+     <dl class="col-links marginbot0text"> 
+      <dt>
+      <img class="" src="../wdlst/img/footer/weibo.png " width="98" height="99" alt="" />
+      </dt> 
+      <dd>
+        <label>扫一扫关注微博</label>
+      </dd> 
+     </dl> 
+         <div class="col-contact"> 
+              <p class="phone">律团官方QQ群</p> 
+              <div class="qqlianx">
+                  <img class="" src="../wdlst/img/footer/qq.png " width="16" height="18" alt="" />
+                  <p class="detail">
+                      <label>471572622</label>
+                      <label>[中国律政群英会] </label>
+                  </p>
+              </div>
+               <div class="qqlianx">
+                  <img class="" src="../wdlst/img/footer/qq.png " width="16" height="18" alt="" />
+                  <p class="detail">
+                      <label>470483807 </label>
+                      <label>[免费 法律咨询] </label>
+                  </p>
+              </div>
+         </div> 
+        
+    </div>
+
+     <div class="col-link clearfix">
+             <a rel="nofollow" href="" target="_blank" >关于律团</a>
+             <a rel="nofollow" href="" target="_blank" >加入律团</a>
+             <a rel="nofollow" href="" target="_blank" >网站地图</a>
+             <a rel="nofollow" href="" target="_blank" >法律声明</a>
+             <a rel="nofollow" href="" target="_blank" >联系律团</a>
+             <a rel="nofollow" href="" target="_blank" >友情链接</a>
+         </div>
+         <div class="col-copIcp clearfix">
+             粤ICP备15014326号-1  2006-2015 handu.com All Rights Reserved. 深圳律团
+         </div>
+         <div class="col-ylink clearfix">
+             <p>
+                友情链接：
+                <a rel="nofollow" href="" target="_blank" >法务网</a>
+                <a rel="nofollow" href="" target="_blank" >法律在线</a>
+                <a rel="nofollow" href="" target="_blank" >中国大学生创业联盟</a>
+                <a rel="nofollow" href="" target="_blank" >华律网</a>
+                <a rel="nofollow" href="" target="_blank" >快法务</a>
+                <a rel="nofollow" href="" target="_blank" >律商会</a>                         
+             </p>
+         </div>
+
+   </div> 
+  </div> 
+ 
+
+    <script type="text/javascript" src="../wdlst/js/jquery-1.9.1.min.js"></script>
+    <script src="../wdlst/js/jsscroll/base.min.js"></script> 
+    <script type="text/javascript" src="../wdlst/js/layer-v1.9.3/layer/layer.js"></script>
+    <script type="text/javascript" src="../wdlst/js/index.js"></script>
+    <script type="text/javascript" src="../wdlst/js/jsscroll/overall.min.js"></script> 
+
+    <script type="text/javascript" src="../wdlst/js/validate.js"></script>
+	<script type="text/javascript" src="../wdlst/js/logo.js"></script>
+
+    <script>
+
+(function() {
+    MI.namespace('GLOBAL_CONFIG');
+})();
+
+</script>
+</body>
+
+</html>
