@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title></title>
+		<link href="lib/ionic/css/ionic.css" rel="stylesheet">
+		<link href="css/webconment.css" rel="stylesheet">
+		<script src="lib/ionic/js/ionic.bundle.js"></script>
+		<script src="cordova.js"></script>
+		<script src="js/web76.js"></script>
+	</head>
+	<body ng-app="web76" class="web-body">
+		<ion-pane  class="web-body">
+			<ion-header-bar class="bar bar-header bar-light">
+				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back"></a>
+				<h1 class="title">我的工作</h1>
+			</ion-header-bar>
+			<ion-content class="web-body web-top10 ">
+				<ul class="list">
+				  <li class="item item-toggle" style="height:100px;min-height:100px;">
+				     <a class="item item-thumbnail-left" style="border:0px;">
+				      <img src="img/icon-header.png" style="width:60px;height:60px;border-radius:5px;">
+				      <h2>王律师&nbsp;&nbsp;<span class="web-fc666">高级律师</span></h2>
+				      <p class="web-fc000 web-top5">13755*****54655</p>
+				    </a>
+				     <label class="toggle toggle-positive">
+				       <input type="checkbox">
+				       <div class="track">
+				         <div class="handle"></div>
+				       </div>
+				     </label>
+				  </li>
+				</ul>
+				
+				<div class="button-bar web-bodywhite web-borderbottom1">
+				   <a class="button button-clear web-padding0 web-fintc37 web-font14">我的订单</a>
+				   <a class="button button-clear web-padding0 web-fintc37 web-font14">咨询参考</a>
+				   <a class="button button-clear web-padding0 web-fintc37 web-font14 web-borderbottom2">免费咨询</a>
+				</div>
+				<div class="bar bar-header item-input-inset web-top10" style="background:none;border:0px;">
+				  <label class="item-input-wrapper" style="background-color:#ffffff;border:1px solid #cccccc;padding:2px 3px">
+				    <button class="button button-clear ion-ios-search" style="min-height:20px;line-height:20px;"></button>
+				    <input type="search" placeholder="Search" style="height:20px;line-height:20px;">
+				  </label>
+				  <button class="button button-clear ion-funnel" style="min-height:20px;line-height:20px;"></button>
+				</div>
+				<div class="list list-inset web-top10 border-none web-margin0 web-body" ng-controller="usermsgs">
+					<div class="item web-paddinglr5 card item-borderless noboxshadow" style="margin-top:0px;margin-bottom:10px;" ng-repeat="item in items">
+						<div class="item item-button-right web-paddingtb14-5" style="border-bottom:0px;">
+						    {{item.lcTitle}}
+						</div>
+						<div class="item item-avatar item-divider item-borderless" style="border-radius:10px;border:0px;">
+						    <img src="{{item.lcImgSrc}}">
+						    <h2 class="fc-nan" style="color:#32A9F2;">{{item.lcName}}</h2>
+						    <p>{{item.lcContent}}<br />
+						    	<span class="web-font12">{{item.lcTime}}</span>
+						    </p>
+						</div>
+						<a class="item item-icon-right web-padd-right40" style="border-top:0px;box-shadow: none;" href="#">
+						          点击查看全部
+						    <i class="icon ion-ios-arrow-right"></i>
+						</a>
+					</div>
+				</div>
+			</ion-content>
+		</ion-pane>
+	</body>
+</html>

@@ -39,7 +39,7 @@ body,
 .web-padd-right16{
 	padding-right:16px;
 }
-.web-padding0{
+.web-padding0,.button-bar >.web-padding0{
 	padding:0px;
 }
 .web-paddinglr5{
@@ -52,7 +52,7 @@ body,
 .web-font12{
 	font-size:12px;
 }
-.button-clear.web-fintc37,.web-fintc37{
+.item .web-fintc37,.button-clear.web-fintc37,.web-fintc37{
 	color:#373737;
 }
 .item-avatar .web-ibh30{
@@ -276,4 +276,47 @@ body,
 	line-height:30px;
 	text-align:center;
 	font-size:14px;
+}
+.item .web-spant{
+	width:40px;
+	height:25px;
+	line-height:25px; 
+	display: block;
+	float:left;font-size:25px;
+	position: absolute;
+	left:10px;
+	top:1px;
+}
+.web-ion-img0-7:before{
+	transform:scale(0.7);
+}
+.web-ion-img0-8:before{
+	transform:scale(0.8);
+}
+.web-ion-img1-2:before{
+	transform:scale(1.2);
+}
+.web-ion-img1-5:before{
+	transform:scale(1.5);
+}
+.web-ion-img2:before{
+	transform:scale(2);
+}
+.web-ion-compose:before{
+	margin-right:-7px;
+}
+.noboxshadow{
+	box-shadow:none;
+}
+.noboxshadow:after{
+	box-shadow:none;
+}
+.button .web-icon15::before{
+	line-height:15px;
+}
+.button.web-icon15::before{
+	line-height:15px;
+}
+.col-center{
+	text-center:center;
 }
