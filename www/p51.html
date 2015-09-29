@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title></title>
+
+		<link href="lib/ionic/css/ionic.css" rel="stylesheet">
+		<!--<link href="css/login.css" rel="stylesheet">-->
+		<link href="css/p51.css" rel="stylesheet">
+		<link href="css/common.css" rel="stylesheet">
+
+		<!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+		<!-- ionic/angularjs js -->
+		<script src="lib/ionic/js/ionic.bundle.js"></script>
+
+		<!-- cordova script (this will be a 404 during development) -->
+		<script src="cordova.js"></script>
+
+		<!-- your app's js -->
+		<!--<script src="js/ask_lawyer_server.js"></script>-->
+		<script src="js/p51_controller.js"></script>
+	</head>
+
+	<body ng-app="p51">
+		<ion-pane>	
+
+			<ion-content>
+								
+				<div class="list" ng-controller="p51Ctr">
+					<div class="item">
+						<div class="tabs tabs-secondary">
+							<div class="tab-item">咨询详情</div>
+							<div class="tab-item">在线交互</div>
+							<div class="tab-item">过程记录</div>
+						</div>						
+					</div>		
+					<div class="item item-divider"></div>
+					<div ng-repeat="items in p51Items">
+						<div class="item">
+							<span class="fc-33">{{items.p51SbmtTitle}}</span>
+							<span class="fc-ee">{{items.p51SbmtDateTime}}</span>
+						</div>
+					</div>
+	
+				</div>				
+			</ion-content>
+			
+		</ion-pane>
+
+	</body>
+
+</html>

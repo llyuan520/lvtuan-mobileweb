@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title></title>
+
+		<link href="lib/ionic/css/ionic.css" rel="stylesheet">
+		<!--<link href="css/login.css" rel="stylesheet">-->
+		<link href="css/p48.css" rel="stylesheet">
+		<link href="css/common.css" rel="stylesheet">
+
+		<!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+		<!-- ionic/angularjs js -->
+		<script src="lib/ionic/js/ionic.bundle.js"></script>
+
+		<!-- cordova script (this will be a 404 during development) -->
+		<script src="cordova.js"></script>
+
+		<!-- your app's js -->
+		<!--<script src="js/ask_lawyer_server.js"></script>-->
+		<script src="js/p48_controller.js"></script>
+	</head>
+
+	<body ng-app="p48">
+		<ion-pane>	
+			<ion-content>
+				<div class="tabs tabs-striped tabs-top">
+					<div class="tab-item">咨询详情</div>
+					<div class="tab-item">在线交互</div>
+					<div class="tab-item">过程记录</div>
+				</div>
+			</ion-content>
+			
+			<div class="list" ng-controller="p48Ctr">
+				<!--<div ng-repeat="items in p48Items">-->
+					<div class="item item-divider"></div>
+					<div class="item item-icon-left">
+						<i class="icon ion-clipboard"></i>
+						<h2>确认完成</h2>
+						<p>确认完成后，订单将关闭！</p>
+					</div>
+					<div class="item item-divider"></div>
+					<div class="item item-text-wrap">
+						<h2 class="fc-ee">请对本次服务进行评价</h2>
+						<p class="fc-33">
+							<input type="range"  min="0" max="5" step="0.5" value="4.5">
+						</p>
+					</div>
+					<div class="item item-divider"></div>
+					<div class="item item-text-wrap">
+						<textarea name="" placeholder="我要说两句"></textarea>
+					</div>
+					<div class="item item-divider"></div>
+					<div class="button-bar">
+						<button class="button button-block button-positive button-clear">取消</button>
+						<button class="button button-block button-positive button-clear">完成</button>
+					</div>
+					<div class="item item-divider"></div>
+					
+				<!--</div>-->
+
+			</div>
+			
+		</ion-pane>
+
+	</body>
+
+</html>

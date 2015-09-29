@@ -27,27 +27,44 @@
 
     <ion-pane>
       <ion-header-bar class="bar bar-header bar-light">
-      	<a class="button icon-left ion-chevron-left button-clear button-positive button-small"></a>
+      	<a class="button button-icon  button-clear button-positive">
+      		<img class="v-align" src="img/smallback.png"/>
+      	</a>
         <h1 class="title">注册</h1>
       </ion-header-bar>
       <ion-content>
-		<form ng-submit="doLogin()">
+		<form name="lawyerLogin">
 			<div class="list login">
 				<label class="item item-input">
 					<span class="bg-man login-lbl-pl login-lbl-fc">&nbsp;</span>
-					<input type="text" ng-model="loginData.tel" required="required" ng-pattern="/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/" placeholder="手机号码">
+					<input type="text" name="tel" ng-model="loginData.tel1" required="required" ng-pattern="/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/" placeholder="手机号码">
 					<button class="button button-positive button-outline button-small button-border-left">
 						获取验证码
 					</button>
 				</label>
+				<p class="item fc-red" ng-show="lawyerLogin.tel.$invalid && !lawyerLogin.tel.$pristine">请输入合法的手机号码</p>
+				<p class="item fc-red" ng-show="lawyerLogin.tel.$required">手机号码不能为空</p>
 				<label class="item item-input">
 					<span class="bg-mobel login-lbl-pl login-lbl-fc">&nbsp;</span>
-					<input type="password" placeholder="验证码" ng-model="loginData.validcode">
+					<input type="password" name="validCode" placeholder="验证码" ng-model="loginData.validcode">
 				</label>
+				<p class="item fc-red" ng-show="lawyerLogin.validCode.$required">手机号码不能为空</p>
 				<label class="item item-input">
 					<span class="bg-clock login-lbl-pl login-lbl-fc">&nbsp;</span>
-					<input type="password" placeholder="登录密码(6-20位字符)" ng-model="loginData.password">
+					<input type="password" name="pwd" placeholder="登录密码(6-20位字符)" ng-minlength="6" ng-maxlength="20" ng-pattern="/^[\@A-Za-z0-9\!\#\$\%\^\&\*\.\~]{6,20}$/" required="required" ng-model="loginData.password">
 				</label>
+				<p class="item" ng-show="lawyerLogin.pwd.$error.minlength">
+					<span class="fc-red">字符不能小于6个字符</span>
+				</p>
+				<p class="item" ng-show="lawyerLogin.pwd.$error.maxlength">
+					<span class="fc-red">字符的长度不能超过20个</span>
+				</p>
+				<p class="item" ng-show="(lawyerLogin.pwd.$invalid && !lawyerLogin.pwd.$pristine)">
+					<span class="fc-red">请输入6-20位字符</span>
+				</p>
+				<p class="item" ng-show="lawyerLogin.pwd.$required ">
+					<span class="fc-red">密码不能为空</span>
+				</p>
 			</div>
 			
 			<div class="list">

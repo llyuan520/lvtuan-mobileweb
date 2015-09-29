@@ -17,16 +17,16 @@ angular.module('p30', ["ionic"])
 	//所在区域 获得API
 	var arrayAPI=new Array();
 	arrayAPI=[{
-		imgUrl:"img/ionic.png",
+		imgUrl:"img/21.png",
 		p30Title:"xxx律师事务所"
 	},{
-		imgUrl:"img/ionic.png",
+		imgUrl:"img/22.png",
 		p30Title:"xxx律师事务所"
 	},{
-		imgUrl:"img/ionic.png",
+		imgUrl:"img/23.png",
 		p30Title:"xxx律师事务所"
 	},{
-		imgUrl:"img/ionic.png",
+		imgUrl:"img/24.png",
 		p30Title:"xxx律师事务所"
 	}];
 	

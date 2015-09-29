@@ -73,3 +73,23 @@ hr{
 .sp-r{
 	float: right;
 }
+.lh-1em{
+	line-height: 1em;
+}
+.lh-dot5em{
+	line-height: 0.5em;
+}
+.v-align{
+	vertical-align: middle;
+}
+.smback-bg{
+	vertical-align:center;
+	background-image: url(../img/smallback.png);
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.iwh{
+	width:10px;
+	height:10px;
+}

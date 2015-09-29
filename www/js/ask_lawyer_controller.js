@@ -30,25 +30,25 @@ angular.module('askLawyer', ["ionic"])
 	var arrayAPI=new Array();
 	arrayAPI=[{
 		lcTitle:"欠钱不还，怎么起诉，怎么讨要。",
-		lcImgSrc:"img/ionic.png",
+		lcImgSrc:"img/woman.png",
 		lcName:"某某律师",
 		lcContent:"你好，这里是是律师说的内容，这里是是律师说的内容。",
 		lcTime:"2015年09月16日 16:33:00"
 	},{
 		lcTitle:"欠钱不还，怎么起诉，怎么讨要。",
-		lcImgSrc:"img/ionic.png",
+		lcImgSrc:"img/T01.png",
 		lcName:"某某律师",
 		lcContent:"你好，这里是是律师说的内容，这里是是律师说的内容。",
 		lcTime:"2015年09月16日 16:33:00"
 	},{
 		lcTitle:"欠钱不还，怎么起诉，怎么讨要。",
-		lcImgSrc:"img/ionic.png",
+		lcImgSrc:"img/T02.png",
 		lcName:"某某律师",
 		lcContent:"你好，这里是是律师说的内容，这里是是律师说的内容。",
 		lcTime:"2015年09月16日 16:33:00"
 	},{
 		lcTitle:"欠钱不还，怎么起诉，怎么讨要。",
-		lcImgSrc:"img/ionic.png",
+		lcImgSrc:"img/T03.png",
 		lcName:"某某律师",
 		lcContent:"你好，这里是是律师说的内容，这里是是律师说的内容。",
 		lcTime:"2015年09月16日 16:33:00"

@@ -17,7 +17,7 @@ angular.module('p31', ["ionic"])
 	//所在区域 获得API
 	var arrayAPI=new Array();
 	arrayAPI=[{
-		p31Url:"img/ionic.png",
+		p31Url:"img/21.png",
 		p31Title:"深圳律师事务所",
 		p31IntroTitle:"公司简介",
 		p31Intro:"公司简介内容，公司简介内容，公司简介内容，公司简介内容，公司简介内容，公司简介内容，公司简介内容，公司简介内容。",

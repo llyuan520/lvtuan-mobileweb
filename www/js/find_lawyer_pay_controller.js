@@ -45,17 +45,17 @@ angular.module('mpay', ["ionic"])
 	var arrayAPI=new Array();
 	arrayAPI=[{
 		isChecked:true,
-		imgUrl:"img/ionic.png",
+		imgUrl:"img/pay.png",
 		payTitle:"支付宝支付",
 		payContent:"推荐安装支付宝钱包用户使用"
 	},{
 		isChecked:true,
-		imgUrl:"img/ionic.png",
+		imgUrl:"img/weixin.png",
 		payTitle:"微信支付",
 		payContent:"推荐安装微信用户使用"		
 	},{
 		isChecked:true,
-		imgUrl:"img/ionic.png",
+		imgUrl:"img/yinlian.png",
 		payTitle:"银联",
 		payContent:""		
 	}];

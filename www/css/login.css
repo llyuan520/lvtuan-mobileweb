@@ -54,7 +54,9 @@ a:hover{
 .fc-ee{
 	color: #999999;
 }
-
+.fc-red{
+	color:#FF0000;
+}
 .list-margin-top{
 	margin-top: 19px;
 }
@@ -101,4 +103,13 @@ a:hover{
 }
 .list-noborder .item{
 	border: none;
+}
+.v-align{
+	vertical-align: middle;
+}
+.smback-bg{
+	vertical-align:center;
+	background-image: url(../img/smallback.png);
+	background-repeat: no-repeat;
+	background-position: center;
 }

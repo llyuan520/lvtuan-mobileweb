@@ -1,19 +1,35 @@
 <!DOCTYPE html>
-<html style="width:100%;height:100%; display:block;">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-		<title></title>
-		<link href="lib/ionic/css/ionic.css" rel="stylesheet">
-		<link href="css/webconment.css" rel="stylesheet">
-		<script src="lib/ionic/js/ionic.bundle.js"></script>
-		<script src="cordova.js"></script>
-		<script src="js/index.js"></script>
-	</head>
-	<body style="width:100%;height:100%; display:block;">
-		    <a style="width:100%;height:100%;display:block;" href="web2.html">
-		    	<img src="img/index.png"  style="width:100%;height:100%; display: block;" >
-		    </a>
-	</body>
-	</body>
+<html ng-app="indexApp">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
+    <!-- your app's js -->
+    <script src="js/index.js"></script>
+  </head>
+  <body ng-controller="indexCtr">
+  	<ion-nav-bar>
+  		<ion-nav-back-button>
+  			
+  		</ion-nav-back-button>
+  	</ion-nav-bar>
+  	<ion-nav-view>
+  		
+  	</ion-nav-view>
+  	
+  </body>
 </html>

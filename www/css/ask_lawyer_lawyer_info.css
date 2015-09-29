@@ -40,14 +40,31 @@
 	padding: 0.3em 0;
 }
 .item-star .item-star-a{
-	width:5em;
-	height:2em;
+	padding: 0 10px;
+	width:auto;
+	height:50px;
 	border: 3px solid #FFFFFF;
+	border-radius: 15px;
 	margin-right: 3em;
 	float: left;
+	line-height: 40px;
 }
 .item-star .item-star-b{
+	width: 50px;
+	height: 50px;
+	line-height: 50px;	
 	float: left;
+}
+.item-star .item-star-b img{
+	margin: 0px;
+	padding: 0px;
+	vertical-align: middle;
+	margin: 0px;
+	padding: 5px;
+	width:30px;
+	height:30px;
+	border-radius: 15px;
+	 background:rgba(255,255,255,.8)
 }
 .bg-left{
 	border-left: 1px solid #DDDDDD;
@@ -99,7 +116,9 @@
 	display: inline-block;
 	float: right;
 }
-
+.hbg{
+	background-color: #32a9f2;
+}
 
 
 

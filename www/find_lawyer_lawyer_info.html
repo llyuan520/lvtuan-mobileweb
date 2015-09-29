@@ -29,10 +29,15 @@
 
 	<body ng-app="LawyerInfoCenter">
 		<ion-pane>
-			<ion-header-bar class="bar bar-header">
-				<a class="button icon-left ion-chevron-left button-clear button-small"></a>
+			<ion-header-bar class="bar bar-header hbg">
+				<button class="button button-clear button-light icon-left ion-ios-arrow-left"></button>
+				<!--<a class="button button-icon  button-clear button-positive">
+      				<img class="v-align" src="img/smallback.png"/>
+      			</a>-->
 				<!--<h1 class="title">律师个人页</h1>-->
-				<a class="button icon-right ion-chevron-right button-clear button-small"></a>
+				<!--<a class="button button-icon  button-clear button-positive">
+      				<img class="v-align" src="img/smallback.png"/>
+      			</a>-->
 			</ion-header-bar>
 			<ion-content>
 				<div class="list-lawyerinfo" ng-controller="LawyerIntroductionCtr">
@@ -43,8 +48,18 @@
 							<p>
 								<div>{{intrItem.lawyerSignature}}</div>
 								<div class="item-star">
-									<div class="item-star-a"><!--<img src="img/clock.png"/>-->{{intrItem.lawyerStarNum}}</div>
-									<div class="item-star-b">{{intrItem.lawyerLove}}</div>
+									<div class="item-star-a">
+										<i class="icon ion-ios-star"></i>
+										<i class="icon ion-ios-star"></i>
+										<i class="icon ion-ios-star"></i>
+										<i class="icon ion-ios-star"></i>
+										<i class="icon ion-ios-star-outline"></i>
+										<!--{{intrItem.lawyerStarNum}}-->
+									</div>
+									<div class="item-star-b">
+										<img src="img/xin.png"/>
+										{{intrItem.lawyerLove}}
+									</div>
 									<div class="clear"></div>
 								</div>
 							</p>

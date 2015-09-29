@@ -52,6 +52,7 @@
 	height:3em;
 	border: none;
 	text-align: center;
+	float: left;
 }
 .slct-title select option{
 	text-align: center;

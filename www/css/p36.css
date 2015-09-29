@@ -1,0 +1,10 @@
+.item-txtarea{
+	/*margin: 0px;*/
+	padding: 0px;
+}
+.item-txtarea textarea{
+	margin: 0.5em 1em;
+	width:95%;
+	height:10em;
+	border: 1px solid #DDDDDD;
+}

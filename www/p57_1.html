@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title></title>
+
+		<link href="lib/ionic/css/ionic.css" rel="stylesheet">
+		<!--<link href="css/login.css" rel="stylesheet">-->
+		<link href="css/p57_1.css" rel="stylesheet">
+		<link href="css/common.css" rel="stylesheet">
+
+		<!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+		<!-- ionic/angularjs js -->
+		<script src="lib/ionic/js/ionic.bundle.js"></script>
+
+		<!-- cordova script (this will be a 404 during development) -->
+		<script src="cordova.js"></script>
+
+		<!-- your app's js -->
+		<!--<script src="js/ask_lawyer_server.js"></script>-->
+		<script src="js/p57_1_controller.js"></script>
+	</head>
+
+	<body ng-app="p57_1">
+		<ion-pane>	
+			<ion-content>
+				<div class="list" ng-controller="p57_1Ctr">
+					<div class="item">
+						<div class="tabs">
+							<div class="tab-item">全部</div>
+							<div class="tab-item">处理中</div>
+							<div class="tab-item">已完成</div>
+							<div class="tab-item">已超时</div>
+						</div>
+					</div>
+					<div ng-repeat="item in p57_1Items">
+						<div class="item item-divider"></div>
+						<div class="item">
+							<span class="sp-l fc-33">
+								{{item.p57Statue}}
+							</span>
+							<span class="sp-r fc-33">{{item.p57Time1}}</span>
+						</div>
+						<div class="item">
+							<h2 class="fc-ee">免费咨询</h2>
+							<p class="fc-33">{{item.p57FreeConsult}}</p>
+						</div>
+						<div class="item item-text-wrap">
+							<h2 class="fc-ee">问题描述</h2>
+							<p class="fc-33">{{item.p57Question}}</p>
+						</div>						
+					</div>
+
+				</div>
+			</ion-content>
+		</ion-pane>
+	</body>
+
+</html>
