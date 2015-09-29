@@ -14,18 +14,18 @@
 	<body ng-app="web138">
 		<ion-pane>
 			<ion-header-bar class="bar bar-header bar-light">
-				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back"></a>
+				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" onclick="history.go(-1);"></a>
 				<h1 class="title">站内信</h1>
 			</ion-header-bar>
 			<ion-content>
 				<div class="list web-list-nav0">
 					<div class="item tabs">
-					    <span class="tab-item web-tab-item-border">
+					    <a class="tab-item web-tab-item-border" href="web138.html">
 							用户消息
-					    </span>
-					    <span class="tab-item web-tab-item-noborder">
+					    </a>
+					    <a class="tab-item web-tab-item-noborder" href="web139.html">
 						 	系统消息
-					    </span>
+					    </a>
 					</div>		
 				</div>
 				<ion-list ng-controller="usermsgs">

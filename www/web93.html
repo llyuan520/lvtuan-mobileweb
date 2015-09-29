@@ -13,14 +13,14 @@
 	<body ng-app="web93">
 		<ion-pane class="web-body">
 			<ion-header-bar class="bar bar-header bar-light">
-				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back"></a>
+				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" onclick="history.go(-1);"></a>
 				<h1 class="title">知识</h1>
 			</ion-header-bar>
 			<ion-content class="web-body web-top10">
 				<div class="button-bar web-bodywhite" style="border-top:1px solid #cccccc;border-bottom:1px solid #cccccc;">
-				   <a class="button button-clear web-padding0 web-fintc37 web-font15">法规</a>
-				   <a class="button button-clear web-padding0 web-fintc37 web-font15">文库</a>
-				   <a class="button button-clear web-padding0 web-fintc37 web-font15 web-borderbottom2">案例</a>
+				   <a class="button button-clear web-padding0 web-fintc37 web-font15" href="web87.html">法规</a>
+				   <a class="button button-clear web-padding0 web-fintc37 web-font15" href="web94.html">文库</a>
+				   <a class="button button-clear web-padding0 web-fintc37 web-font15 web-borderbottom2" href="web93.html">案例</a>
 				</div>
 				<div class="item item-input-inset web-body">
 				    <label class="item-input-wrapper" style="background-color:#ffffff;color:#0050EF">
@@ -53,24 +53,24 @@
 				  </p>
 			    </div>
 			</ion-content>
-			<div class="tabs tabs-icon-top">
-				  <a class="tab-item">
+			<div class="tabs tabs-icon-top tabs-color-positive">
+				  <a class="tab-item" href="web2.html">
 				    <i class="icon ion-home"></i>
 				    首页
 				  </a>
-				  <a class="tab-item">
+				  <a class="tab-item" href="web81.html">
 				    <i class="icon ion-android-contacts"></i>
-				    律团
+				    律圈
 				  </a>
-				  <a class="tab-item">
+				  <a class="tab-item active" href="web87.html">
 				    <i class="icon ion-social-buffer"></i>
 				    知识
 				  </a>
-				  <a class="tab-item">
+				  <a class="tab-item" href="web117.html">
 				    <i class="icon ion-android-contact"></i>
 				    我的
 				  </a>
-				</div>
+			</div>
 		</ion-pane>
 	</body>
 

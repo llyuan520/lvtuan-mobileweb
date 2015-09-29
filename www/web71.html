@@ -8,26 +8,38 @@
 		<link href="css/webconment.css" rel="stylesheet">
 		<script src="lib/ionic/js/ionic.bundle.js"></script>
 		<script src="cordova.js"></script>
-		<script src="js/web71.js"></script>
+		<script src="js/web51.js"></script>
 	</head>
-	<body ng-app="web71" class="web-body">
+	<body ng-app="web51" class="web-body">
 		<ion-pane  class="web-body">
 			<ion-header-bar class="bar bar-header bar-light">
-				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back"></a>
-				<h1 class="title">我的律团</h1>
+				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" onclick="history.go(-1);"></a>
+				<h1 class="title">免费咨询</h1>
 			</ion-header-bar>
 			<ion-content class="web-body web-top10">
-				<div class="list">
-				    <a class="item web-itemheight45 web-paddingleft55 item-avatar" href="#">
-				      <img src="img/icon-header.png" class="web-listimg">
-				      <p class="web-listtext">我的咨询</p>
-				      <i class="icon ion-ios-arrow-right" style="float:right;margin-top:-20px;"></i>
-				    </a>
-				    <a class="item web-itemheight45 web-paddingleft55 item-avatar" href="#">
-				      <img src="img/icon-header.png" class="web-listimg">
-				      <p class="web-listtext">我的订单</p>
-				      <i class="icon icon-right ion-ios-arrow-right" style="float:right;margin-top:-20px;"></i>
-				    </a>
+				<div class="button-bar web-bodywhite web-borderbottom1">
+				   <a class="button button-clear web-padding0 web-fintc37 web-font14" href="web59.html">待受理</a>
+				   <a class="button button-clear web-padding0 web-fintc37 web-font14" href="web62.html">已受理</a>
+				   <a class="button button-clear web-padding0 web-fintc37 web-font14" href="web64.html">处理中</a>
+				   <a class="button button-clear web-padding0 web-fintc37 web-font14" href="web66.html">待确认</a>
+				   <a class="button button-clear web-padding0 web-fintc37 web-font14 web-borderbottom2" href="web69.html">已完成</a>
+				</div>
+				<div class="button-bar web-bodywhite web-borderbottom1">
+				   <a class="button button-clear web-button-clearlineh30 web-font14 web-fintc37" href="web69.html">咨询详情</a>
+				   <a class="button button-clear web-button-clearlineh30 web-font14 web-fintc37" href="web70.html">在线交互</a>
+				   <a class="button button-clear web-button-clearlineh30 web-font14 web-fintc37 web-borderbottom2" href="web51.html" href="web71.html">过程记录</a>
+				</div>
+				<div class="list web-top10">
+				  <a class="item item-icon-left">
+				    <i class="icon ion-android-radio-button-on web-ion-img0-8" style="color:#24A3F1;"></i>
+				    <span class="item-note">2015/07/19 11:39</span>
+				    成功提交订单
+				  </a>
+				  <a class="item item-icon-left">
+				    <i class="icon ion-android-radio-button-on web-ion-img0-8"></i>
+				    <span class="item-note">2015/07/19 11:39</span>
+				    订单已完成
+				  </a>
 				</div>
 			</ion-content>
 		</ion-pane>

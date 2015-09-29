@@ -13,7 +13,7 @@
 	<body ng-app="web133" class="web-body">
 		<ion-pane>
 			<ion-header-bar class="bar bar-header bar-light">
-				<a class="button icon-left ion-chevron-left button-clear button-positive button-small"></a>
+				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" onclick="history.go(-1);"></a>
 				<h1 class="title">设置</h1>
 			</ion-header-bar>
 			<ion-content class="web-body">
@@ -47,12 +47,12 @@
 				     </label>
 				  </li>
 				</ul>
-				<div class="item item-button-right">
+				<a class="item item-button-right" href="web134.html">
 			            修改密码
 			    <button class="button button-clear">
 			      <i class="icon ion-ios-arrow-right"></i>
 			    </button>
-			  </div>
+			  </a>
                 <button class="button button-full button-positive web-wid8c web-top30">退出帐号</button>
 			</ion-content>
 			

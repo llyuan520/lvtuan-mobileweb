@@ -30,7 +30,7 @@
 	<body ng-app="findLawyer">
 		<ion-pane>
 			<ion-header-bar class="bar bar-header bar-light">
-				<a class="button icon-left ion-chevron-left button-clear button-positive button-small"></a>
+				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" onclick="history.go(-1);"></a>
 				<h1 class="title">问律师参考（这是公共部分，后期替换）</h1>
 			</ion-header-bar>
 			<ion-content>
@@ -63,7 +63,7 @@
 				<div class="item-divider dvd-title">你查找的律师类型：<span class="sp-blue">律师辩护</span>，共找到<span class="sp-blue">421</span>位律师。</div>
 
 				<div class="list" ng-controller="lawyerInfoCtr">
-				    <a class="item item-thumbnail-left" href="#" ng-repeat="lawyerInfoItem in lawyerInfoItems">
+				    <a class="item item-thumbnail-left" href="web18.html" ng-repeat="lawyerInfoItem in lawyerInfoItems">
 				      <img class="img-header" src="{{lawyerInfoItem.iconHeader}}" />
 				      	<!--<img src="img/icon-header.png"/>-->
 				      <h2><span class="sp-name fc-nan">{{lawyerInfoItem.name}}</span><span class="sp-level fc-nan">{{lawyerInfoItem.level}}</span><img ng-show="{{lawyerInfoItem.isDispVipImg}}" class="img-v" src="img/vip.png"/></h2>

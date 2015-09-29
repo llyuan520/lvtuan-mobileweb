@@ -24,7 +24,7 @@
 	<body ng-app="web96" class="web-body">
 		<ion-pane  class="web-body">
 			<ion-header-bar class="bar bar-header bar-light">
-				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back"></a>
+				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" onclick="history.go(-1);"></a>
 				<h1 class="title">我的资料</h1>
 			</ion-header-bar>
 			<ion-content class="web-body web-top10" ng-controller="actionsheetCtl">
@@ -34,13 +34,13 @@
 				      <p style="height:80px;line-height:80px;font-size:16px;color:#373737;">个人头像</p>
 				    </li>
 				    <li class="item">联系方式</li>
-				    <li class="item">电子邮箱</li>
-				    <li class="item">昵称</li>
+				    <li class="item" onclick="location.href='web98.html'">电子邮箱</li>
+				    <li class="item" onclick="location.href='web99.html'">昵称</li>
 				</ul>
 				<ul class="list">
-				    <li class="item">姓名</li>
+				    <li class="item" onclick="location.href='web100.html'">姓名</li>
 				    <li class="item" ng-click="show2();">性别</li>
-				    <li class="item">地区</li>
+				    <li class="item" onclick="location.href='web102.html'">地区</li>
 				    <li class="item"><span class="item-note">
 				    <input type="text" id="appDate" style="width:100px;height:20px;padding:0px;" placeholder="选择日期" /></span>
 				        出生年月</li>

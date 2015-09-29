@@ -30,7 +30,7 @@
 	<body ng-app="askLawyer">
 		<ion-pane>
 			<ion-header-bar class="bar bar-header bar-light">
-				<a class="button icon-left ion-chevron-left button-clear button-positive button-small"></a>
+				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" onclick="history.go(-1);"></a>
 				<h1 class="title">问律师（这是公共部分，后期替换）</h1>
 			</ion-header-bar>
 			<ion-content>
@@ -65,7 +65,7 @@
 				<hr />
 				<!--评论-->
 				<div class="list list-inset" ng-controller="lawyerComment">
-					<div class="item card item-borderless noboxshadow" ng-repeat="item in lawyerCommentItems">
+					<div onclick="location.href='ask_lawyer_referenc.html'" class="item card item-borderless noboxshadow" ng-repeat="item in lawyerCommentItems">
 						<div class="item item-button-right">
 						    {{item.lcTitle}}
 						 <i class="button button-clear icon-right ion-star"></i>
