@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title></title>
+
+		<link href="lib/ionic/css/ionic.css" rel="stylesheet">
+		<!--<link href="css/login.css" rel="stylesheet">-->
+		<link href="css/find_lawyer.css" rel="stylesheet">
+		<link href="css/common.css" rel="stylesheet">
+
+		<!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+		<!-- ionic/angularjs js -->
+		<script src="lib/ionic/js/ionic.bundle.js"></script>
+
+		<!-- cordova script (this will be a 404 during development) -->
+		<script src="cordova.js"></script>
+
+		<!-- your app's js -->
+		<!--<script src="js/ask_lawyer_server.js"></script>-->
+		<script src="js/find_lawyer_controller.js"></script>
+		
+	</head>
+
+	<body ng-app="findLawyer">
+		<ion-pane>
+			<ion-header-bar class="bar bar-header bar-light">
+				<a class="button button-icon  button-clear button-positive" onclick="history.go(-1);">
+      				<img class="v-align" src="img/smallback.png"/>
+      			</a>
+				<h1 class="title">找律师</h1>
+				<button class="button icon-right button-clear">
+					深圳
+					<i class="icon"><img src="img/arrow-down.png" class="iwh" /></i>
+				</button>
+			</ion-header-bar>
+			<ion-content>
+				<div class="item-divider divider-h"></div>
+				<!--搜索你想要的内容-->
+				<div class="item-input-inset bg-ff top-search">
+					
+					<label class="item-input-wrapper">
+				    	<!--<i class="icon ion-search placeholder-icon"></i>-->
+				    	<input type="search" placeholder="搜索你想要的内容">
+					</label>
+					<button class="button button-icon ion-search button-clear"></button>
+				</div>
+				
+				<div class="slct-title">
+				    <select ng-controller="inAreaOfCityCtr">
+				      <option value="{{area.value}}" ng-repeat="area in areaItems">{{area.name}}</option>
+				    </select>
+				    <select class="opt-bl" ng-controller="LegalExpertiseCtr">
+				      <option ng-repeat="LEItem in LEItems" value="{{LEItem.value}}" selected>{{LEItem.name}}</option>
+				    </select>
+				    <select class="opt-bl" ng-controller="ProfesionalLifeCtr">
+				      <option value="{{plItem.value}}" ng-repeat="plItem in PLItems">{{plItem.name}}</option>
+				    </select>
+				    <select class="opt-bl" ng-controller="lawyerTypeDefaultCtr">
+				      <option ng-repeat="typeDefaultItem in typeDefaultItems" value="{{typeDefaultItem.value}}">{{typeDefaultItem.name}}</option>
+				    </select>
+				</div>
+				
+				<div class="item-divider dvd-title">你查找的律师类型：<span class="sp-blue">律师辩护</span>，共找到<span class="sp-blue">421</span>位律师。</div>
+
+				<div class="list" ng-controller="lawyerInfoCtr">
+				    <a class="item item-thumbnail-left" href="web18.html" ng-repeat="lawyerInfoItem in lawyerInfoItems">
+				      <img class="img-header" src="{{lawyerInfoItem.iconHeader}}" />
+				      	<!--<img src="img/icon-header.png"/>-->
+				      <h2><span class="sp-name fc-nan">{{lawyerInfoItem.name}}</span><span class="sp-level fc-nan">{{lawyerInfoItem.level}}</span><img ng-show="{{lawyerInfoItem.isDispVipImg}}" class="img-v" src="img/vip.png"/></h2>
+				      <p>
+				      	擅长领域：{{lawyerInfoItem.beGoodAtField}}<br />
+				      	所在区域：{{lawyerInfoItem.address}}<br />
+				      	执业时间：{{lawyerInfoItem.jobYear}}<span class="sp-bgset sp-tip">{{lawyerInfoItem.commented}}</span><span class="sp-bgset sp-thumb">{{lawyerInfoItem.praised}}</span><span class="sp-bgset sp-man">{{lawyerInfoItem.haveUsers}}</span>
+				      </p>
+				    </a>
+				</div>
+ 
+
+			</ion-content>
+			
+		</ion-pane>
+	</body>
+
+</html>

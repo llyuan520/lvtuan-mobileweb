@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title></title>
+
+		<link href="lib/ionic/css/ionic.css" rel="stylesheet">
+		<!--<link href="css/login.css" rel="stylesheet">-->
+		<link href="css/ask_lawyer_referenc.css" rel="stylesheet">
+		<link href="css/common.css" rel="stylesheet">
+
+		<!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+		<!-- ionic/angularjs js -->
+		<script src="lib/ionic/js/ionic.bundle.js"></script>
+
+		<!-- cordova script (this will be a 404 during development) -->
+		<script src="cordova.js"></script>
+
+		<!-- your app's js -->
+		<!--<script src="js/ask_lawyer_server.js"></script>-->
+		<script src="js/ask_lawyer_controller.js"></script>
+		
+	</head>
+
+	<body ng-app="askLawyer">
+		<ion-pane>
+			<ion-header-bar class="bar bar-header bar-light">
+				<a class="button button-icon  button-clear button-positive">
+      				<img class="v-align" src="img/smallback.png"/>
+      			</a>
+				<h1 class="title">问律师参考</h1>
+			</ion-header-bar>
+			<ion-content>				
+				<!--搜索你想要的内容-->
+				<div class="item-input-inset">
+					<label class="item-input-wrapper">
+				    	<i class="icon ion-search placeholder-icon"></i>
+				    	<input type="search" placeholder="搜索你想要的内容">
+					</label>
+					<button class="button button-icon ion-funnel button-clear"></button>
+				</div>
+				
+				<!--评论-->
+				<div class="list list-inset" ng-controller="lawyerComment">
+					<div class="item card item-borderless noboxshadow" ng-repeat="item in lawyerCommentItems">
+						<div class="item item-button-right">
+						    {{item.lcTitle}}
+						 <i class="button button-clear icon-right ion-ios-star-outline"></i>
+						</div>
+						<div class="item item-text-wrap item-avatar item-divider item-borderless item-mb">
+						    <img src="{{item.lcImgSrc}}">
+						    <h2 class="fc-nan txt-fw">{{item.lcName}}</h2>
+						    <p>{{item.lcContent}}<br />
+						    	{{item.lcTime}}
+						    </p>
+						</div>
+					</div>
+				</div>
+
+			</ion-content>
+			
+		</ion-pane>
+	</body>
+
+</html>
