@@ -33,6 +33,14 @@ var lvtuanApp = angular.module('lvtuanApp.Ctrl', ['ionic'])
 	return IndexAPIServer;
 })
 
+//hone 
+lvtuanApp.controller("ionicNavBarDelegateCtrl",function($state,$timeout,$http){
+	//$ionicNavBarDelegate.showBar(false); //是否显示返回按钮
+	$timeout(function(){ //2秒钟后跳转到index页面
+		$state.go("index");
+	}, 2000, [false]);
+})
+
 
 /*首页*/
 lvtuanApp.controller("indexCtrl",function($scope,$state,$ionicSlideBoxDelegate,IndexAPI){
@@ -50,6 +58,11 @@ lvtuanApp.controller("indexCtrl",function($scope,$state,$ionicSlideBoxDelegate,I
 	//返回
 	$scope.goBackToIndex=function(){
 		$state.go("index");
+	}
+
+	$scope.mylvteam = function(){
+		debugger
+		$state.go("mylvteam");
 	}
 })
 

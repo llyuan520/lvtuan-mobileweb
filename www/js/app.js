@@ -24,10 +24,21 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 
+    .state('home', { //引导页
+      url: "/home",
+      templateUrl: "views/home.html",
+      controller:'ionicNavBarDelegateCtrl'
+    })
+
     .state('index', { //首页
       url: "/index",
       templateUrl: "template/index_tpl.html",
       controller: 'indexCtrl'
+    })
+
+    .state('mylvteam', { //首页
+      url: "/mylvteam",
+      templateUrl: "template/mylvteam.html"
     })
 
     .state('login', { //登录

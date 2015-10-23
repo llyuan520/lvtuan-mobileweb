@@ -138,6 +138,7 @@ body,
 	margin: 23px auto;
 	padding: 0px;
 	background-color: #FFFFFF;
+	overflow: hidden;
 }
 .subtitle .subtitle-a{
 	min-width: 180px;
@@ -176,7 +177,6 @@ body,
 }
 .nav-swap .n-swapmain{
 	margin: 0px auto;
-	padding: 1em;
 }
 .nav-swap .n-main-item{
 	float: left;
@@ -189,11 +189,44 @@ body,
 }
 
 .st2-swap{
-	margin: 0px;
-	padding: 0px;
+	margin: 0;
+	padding: 0 1em;
 	width:100%;
 	background-color: #EEEEEE;
+	overflow: hidden;
+	margin-top: 25px;
+	  height: 184px;
 }
+.st2-swap .listimg{
+	width: 50%;  
+	float: left;
+	overflow: hidden;
+	height: 184px;
+}
+.st2-swap .listimg a{display: inline-block;}
+
+.st2-swap .listimg .top,.st2-swap .listimg .left,.st2-swap .listimg .right{
+	height: 92px;
+  overflow: hidden;
+}
+.st2-swap .listimg .left,.st2-swap .listimg .right{
+	width: 50%;float: left;
+}
+.st2-swap .listimg .top{
+	width: 100%;float: left;
+}
+.st2-swap .listimg .leftimg{
+	width: 100%;height: 184px;float: left;
+}
+.st2-swap .listimg .leftimg img{
+	width: 100%;
+	height: 184px;
+}
+.st2-swap .listimg .top img,.st2-swap .listimg .left img,.st2-swap .listimg .right img{
+	width: 100%;
+	height: 92px;
+}
+
 .st2-swap .st2-main{
 	margin: 0 auto;
 	padding: 0px;
