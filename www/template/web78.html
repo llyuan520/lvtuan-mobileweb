@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title></title>
+		<link href="lib/ionic/css/ionic.css" rel="stylesheet">
+		<link href="css/webconment.css" rel="stylesheet">
+		<script src="lib/ionic/js/ionic.bundle.js"></script>
+		<script src="cordova.js"></script>
+		<script src="js/web78.js"></script>
+	</head>
+	<body ng-app="web78" class="web-body">
+		<ion-pane  class="web-body">
+			<ion-header-bar class="bar bar-header bar-light">
+				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" onclick="history.go(-1);"></a>
+				<h1 class="title">咨询收费</h1>
+				<button class="button button-clear button-small icon button-positive">保存</button>
+			</ion-header-bar>
+			<ion-content class="web-body web-top10 ">
+				<div class="list web-top10">
+				    <a class="item web-itemheight45 web-paddingleft55 item-avatar" href="#">
+				      <img src="img/icon-header.png" class="web-listimg">
+				      <p class="web-listtext">咨询服务费允许设置的价格区间1-1000元
+				      </p>
+				    </a>
+				</div>
+				<ul class="list">
+				    <li class="item">
+				    <span class="item-note" style="width:100px;">
+					      <input style="height:20px;padding:0px;width:55px;float:left;border:1px solid #cccccc;" type="text" value="1" placeholder="1">&nbsp;元/次
+                    </span>
+				        专业图文咨询收费
+				    </li>
+				    <li class="item">
+				    <span class="item-note" style="width:110px;">
+					      <input style="height:20px;padding:0px;width:55px;float:left;border:1px solid #cccccc;" type="text" value="1000.00" placeholder="1000.00">&nbsp;元/分钟
+                    </span>
+				        专业图文咨询收费
+				    </li>
+				</ul>
+				
+			</ion-content>
+		</ion-pane>
+	</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title></title>
+		<link href="lib/ionic/css/ionic.css" rel="stylesheet">
+		<link href="css/webconment.css" rel="stylesheet">
+		<script src="lib/ionic/js/ionic.bundle.js"></script>
+		<script src="cordova.js"></script>
+		<script src="js/web100.js"></script>
+	</head>
+	<body ng-app="web100" class="web-body">
+		<ion-pane  class="web-body">
+			<ion-header-bar class="bar bar-header bar-light">
+				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" onclick="history.go(-1);"></a>
+				<h1 class="title">设置</h1>
+			</ion-header-bar>
+			<ion-content class="web-body web-top10">
+				<ul class="list web-bottom0">
+				  <li class="item item-toggle">
+				     客户消息推送
+				     <label class="toggle toggle-positive">
+				       <input type="checkbox">
+				       <div class="track">
+				         <div class="handle"></div>
+				       </div>
+				     </label>
+				  </li>
+				  <li class="item item-toggle">
+				     系统通知
+				     <label class="toggle toggle-positive">
+				       <input type="checkbox">
+				       <div class="track">
+				         <div class="handle"></div>
+				       </div>
+				     </label>
+				  </li>
+				</ul>
+				<div class="item item-button-right" onclick="location.href='web111.html'">
+			            修改密码
+			    <button class="button button-clear">
+			      <i class="icon ion-ios-arrow-right"></i>
+			    </button>
+			  </div>
+			</ion-content>
+		</ion-pane>
+	</body>
+</html>

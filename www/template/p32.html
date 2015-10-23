@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title></title>
+
+		<link href="lib/ionic/css/ionic.css" rel="stylesheet">
+		<!--<link href="css/login.css" rel="stylesheet">-->
+		<link href="css/p32.css" rel="stylesheet">
+		<link href="css/common.css" rel="stylesheet">
+
+		<!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+		<!-- ionic/angularjs js -->
+		<script src="lib/ionic/js/ionic.bundle.js"></script>
+
+		<!-- cordova script (this will be a 404 during development) -->
+		<script src="cordova.js"></script>
+
+		<!-- your app's js -->
+		<!--<script src="js/ask_lawyer_server.js"></script>-->
+		<script src="js/p32_controller.js"></script>
+		
+	</head>
+
+	<body ng-app="p32">
+		<ion-pane>
+			<ion-header-bar class="bar bar-header bar-light">
+				<a class="button button-icon  button-clear button-positive" onclick="history.go(-1);">
+      				<img class="v-align" src="img/smallback.png"/>
+      			</a>
+				<h1 class="title">法律资讯</h1>
+				<!--<a class="buttonton-icon icon-right button-clear">深圳<i class="icon ion-arrow-down-b"></i></a>-->
+			</ion-header-bar>
+			<ion-content>
+
+				<div class="search-bg">
+					<label class="item item-input">
+					    <i class="icon ion-search placeholder-icon"></i>
+					    <input type="text" placeholder="输入您感兴趣的内容">
+					</label>
+				</div>
+				
+				<div class="list" ng-controller="p32Ctr">
+					<div class="item item-body" ng-repeat="p32Item in p32Items">
+					    <img class="full-image" src="{{p32Item.p32ImgUrl}}">
+					    <h2>{{p32Item.p32Title}}</h2>
+					    <p>
+					      {{p32Item.p32Content}}
+					    </p>
+					    <p>
+					      <a href="#" class="subdued">{{p32Item.p32DateTime}}</a>
+					      <a href="#" class="subdued icon icon-left ion-star">{{p32Item.p32Ok}}</a>
+					    </p>
+					</div>
+				</div>
+				
+			</ion-content>
+			
+		</ion-pane>
+	</body>
+
+</html>
