@@ -1,20 +1,8 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-		<title></title>
-		<link href="lib/ionic/css/ionic.css" rel="stylesheet">
-		<link href="css/webconment.css" rel="stylesheet">
-		<script src="lib/ionic/js/ionic.bundle.js"></script>
-		<script src="cordova.js"></script>
-		<script src="js/web81.js"></script>
-	</head>
-	<body ng-app="web81" class="web-body">
+<ion-view view-title="圈子">
 		<ion-pane  class="web-body">
 			<ion-header-bar class="bar bar-header bar-light">
 				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" onclick="history.go(-1);"></a>
-				<h1 class="title">律圏</h1>
+				<h1 class="title">圈子</h1>
 			</ion-header-bar>
 			<ion-content class="web-body web-top10 ">
 				<div class="button-bar web-bodywhite web-borderbottom1">
@@ -34,23 +22,22 @@
 				</div>
 			</ion-content>
 			<div class="tabs tabs-icon-top tabs-color-positive">
-				  <a class="tab-item" href="web2.html">
+				  <a class="tab-item" href="#/index">
 				    <i class="icon ion-home"></i>
 				    首页
 				  </a>
-				  <a class="tab-item active" href="web81.html">
+				  <a class="tab-item active" href="#/group">
 				    <i class="icon ion-android-contacts"></i>
-				    律圈
+				    圈子
 				  </a>
-				  <a class="tab-item" href="web87.html">
+				  <a class="tab-item" href="#/knowledge">
 				    <i class="icon ion-social-buffer"></i>
 				    知识
 				  </a>
-				  <a class="tab-item" href="web117.html">
+				  <a class="tab-item" href="#/center">
 				    <i class="icon ion-android-contact"></i>
 				    我的
 				  </a>
 			</div>
 		</ion-pane>
-	</body>
-</html>
+</ion-view>

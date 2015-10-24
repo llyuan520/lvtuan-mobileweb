@@ -2,9 +2,7 @@
 	<ion-nav-bar>
   		<ion-nav-back-button></ion-nav-back-button>
   	</ion-nav-bar>
-	<ion-nav-title>
-		<img class="idx-titleimg" src="../img/logo01.png"/>律团
-	</ion-nav-title>
+	<ion-nav-title>律团</ion-nav-title>
 	<ion-nav-buttons side="left">
 		<button class="button button-icon" ng-click="mylvteam()">
 			<img src="../img/20.png"/>深圳
@@ -44,7 +42,7 @@
 				<div class="row" style="background-color:#ffffff;">
 				  <div class="col" style="text-align:center;" onclick="location.href='web23.html'">
 				  	 <img src="img/web_person114.png" style="width:50px;height:50px;border-radius:50px;" /><br/>
-				  	    法律文书
+				  	    法律咨询
 				  </div>
 				  <div class="col" style="text-align:center;" onclick="location.href='web79.html'">
 				  	 <img src="img/web_person115.png" style="width:50px;height:50px;border-radius:50px;" /><br/>
@@ -52,7 +50,7 @@
 				  </div>
 				  <div class="col" style="text-align:center;" onclick="location.href='p32.html'">
 				  	 <img src="img/web_person116.png" style="width:50px;height:50px;border-radius:50px;" /><br/>
-				  	    法律资讯
+				  	    律团联盟
 				  </div>
 				  <div class="col" style="text-align:center;" onclick="location.href='p36.html'">
 				  	 <img src="img/web_person117.png" style="width:50px;height:50px;border-radius:50px;" /><br/>
@@ -70,7 +68,7 @@
 					  </div>
 					  <div class="col" style="text-align:center;" onclick="location.href='p30.html'">
 					  	 <img src="img/web_person120.png" style="width:50px;height:50px;border-radius:50px;" /><br/>
-					  	    律团联盟
+					  	    法律文书
 					  </div>
 					  <div class="col" style="text-align:center;" onclick="location.href='web27.html'">
 					  	 <img src="img/web_person121.png" style="width:50px;height:50px;border-radius:50px;" /><br/>
@@ -89,36 +87,48 @@
 				<a class="right" href="#"><img src="img/04.png"></a>
 			</div>
 		</div>
-		
-		<div class="content has-header">
+
+		<div class="content">
 			<div class="bar-header">
 		      <div class="h3 title">金牌律师推荐</div>
 		    </div>
 	      <ul class="list">
-	        <li class="item item-thumbnail-left item-text-wrap" ng-repeat="item in items">
-	          	<img src="{{item.itemUrl}}"/>
-				<h2>{{item.itemTitle}}</h2>
-				<p>{{item.itemContent}}</p>
-				<p>{{item.itemTime}}</p>
-	        </li>
+	      	<!-- <ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher> -->
+            <ion-list>
+		       <li class="item item-thumbnail-left" ng-repeat="item in items">
+		          	<img src="{{item.avatar}}"/>
+					<h2>{{item.realname}}</h2>
+					<p>执业{{item.practice_period}}/{{item.city}}</p>
+					<p>
+						<label ng-repeat="val in item.work_scope track by $index">{{val}}</label>
+					</p>
+					<p>
+					    <i class="icon ion-compose web-ion-img1-2" style="float:right;margin-right:10px;font-size:12px;">&nbsp;{{item.likes_count}}</i>
+					    <i class="icon ion-chatbubble web-ion-img1-2" style="float:right;margin-right:10px;font-size:12px;">&nbsp;{{item.collects_count}}</i>
+					    <i class="icon ion-heart web-ion-img1-2" style="float:right;margin-right:10px;font-size:12px;color:#f00;">&nbsp;<span style="color:#666666;">{{item.follows_count}}</span></i>
+					  </p>
+		        </li>
+	         </ion-list>
+	         <ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
+			<!-- ion-infinite-scroll 上拉加载数据指令 distance默认1% nf-if的值为false时，就禁止执行on-infinite  -->
 	      </ul>
 	    </div>
 	</ion-content>
 
 	<div class="tabs tabs-icon-top tabs-color-positive">
-		  <a class="tab-item active" href="web2.html">
+		  <a class="tab-item active" href="#/index">
 		    <i class="icon ion-home"></i>
 		    首页
 		  </a>
-		  <a class="tab-item" href="web81.html">
+		  <a class="tab-item" href="#/group">
 		    <i class="icon ion-android-contacts"></i>
-		    律圈
+		    圈子
 		  </a>
-		  <a class="tab-item" href="web87.html">
+		  <a class="tab-item" href="#/knowledge">
 		    <i class="icon ion-social-buffer"></i>
 		    知识
 		  </a>
-		  <a class="tab-item" href="web117.html">
+		  <a class="tab-item" href="#/center">
 		    <i class="icon ion-android-contact"></i>
 		    我的
 		  </a>

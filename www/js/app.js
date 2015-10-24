@@ -59,11 +59,29 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
       controller: 'resetpwdCtrl'*/
     })
 
+    .state('group', { //圈子
+      url: "/group",
+      templateUrl: "template/group.html",
+      controller: 'groupCtrl'
+    })
+
+    .state('knowledge', { //知识
+      url: "/knowledge",
+      templateUrl: "template/knowledge.html",
+      controller: 'knowledgeCtrl'
+    })
+
+    .state('center', { //我的
+      url: "/center",
+      templateUrl: "template/center.html",
+      controller: 'centerCtrl'
+    })
+
     .state('error', { //error
       url: "/error",
       templateUrl: "views/error.html"
     });
 
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/error');
+    $urlRouterProvider.otherwise('/');
 });

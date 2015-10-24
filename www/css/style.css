@@ -16,6 +16,7 @@ body,
 }
 .scroll-content{
 	background-color: #EEEEEE;
+	margin-bottom: 50px;
 }
 .fc-33{
 	color: #333333;
@@ -95,7 +96,6 @@ body,
 	vertical-align: middle;
 }
 .nav-bar-title{
-	font-weight: bold;
 	line-height: 2em;
 	vertical-align: middle;
 	font-size: x-large;
@@ -195,7 +195,8 @@ body,
 	background-color: #EEEEEE;
 	overflow: hidden;
 	margin-top: 25px;
-	  height: 184px;
+	margin-bottom: 20px;
+	height: 184px;
 }
 .st2-swap .listimg{
 	width: 50%;  
@@ -313,3 +314,5 @@ a:hover{
 	background-repeat: no-repeat;
 	background-position: center;
 }
+
+.item p label{margin-right: 5px;}
