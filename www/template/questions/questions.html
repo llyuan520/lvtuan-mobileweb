@@ -1,0 +1,70 @@
+<ion-view view-title="问律师">
+		<ion-pane>
+			<ion-header-bar class="bar bar-header bar-light">
+				<a class="button button-icon  button-clear button-positive" onclick="history.go(-1);">
+      				<img class="v-align" src="img/smallback.png"/>
+      			</a>
+				<h1 class="title">问律师</h1>
+			</ion-header-bar>
+			<ion-content>
+				<form id="questions_form">
+					<div>	
+						<div class="ist-case-searchtype">
+							<div class="item item-input" ng-click="toggleMenu()">
+								<input name="cat_id" ng-value="cat_id" type="text" placeholder="请选择案例类型" id="workscopes" />
+								<span class="button button-positive button-clear button-icon ion-chevron-up"></span>
+							</div>
+						</div>
+						<div class="list-case-type" ng-show="isShowObj.show">
+							<div class="item item-button-right" ng-repeat="(key, value) in workscopes" ng-click="toggleMenu()" data-value="{{key}}">	{{value}}
+								<i class="button button-clear icon-right ion-arrow-up-c icon-r-wn"></i>
+							</div>
+						</div>	
+					</div>
+					
+					<div class="list mato20">
+						<label class="item item-input">
+						  <input name="title" type="text" placeholder="请输入标题">
+						</label>
+						<label class="item item-input">
+				          <textarea name="content" rows="10" placeholder="请输入问题"></textarea>
+				        </label>
+					</div>
+					<div class="padding">
+						<button class="button button-block button-positive" ng-click="submit()">提交</button>
+					</div>
+				</form>
+
+				<div class="item-divider txt-center fc-ee">看看其他人问了什么</div>
+				
+				<!--搜索你想要的内容-->
+				<div class="item-input-inset">
+					<div class="item-input-wrapper">
+				    	<input type="search" placeholder="搜索你想要的内容" class="search">
+				    	<i class="icon ion-search placeholder-icon" ng-click="search()"></i>
+					</div>
+					<button class="button button-icon ion-funnel button-clear"></button>
+				</div>
+				<hr />
+				<!--评论-->
+				<div class="list list-inset">
+					<div onclick="location.href=''" class="item card item-borderless noboxshadow" ng-repeat="item in list_questions">
+						<div class="item item-button-right">
+						    {{item.title}}
+						 <i class="button button-clear icon-right ion-ios-star-outline"></i>
+						</div>
+						<div ng-repeat="comment in item.comments" class="item item-text-wrap item-avatar item-divider item-borderless">
+						    <img src="{{comment.lcImgSrc}}">
+						    <h2 class="fc-nan txt-fw">某某律师</h2>
+						    <p>{{comment.content}}<br />
+						    	{{comment.created_at}}
+						    </p>
+						</div>
+					</div>
+				</div>
+				<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
+
+			</ion-content>
+			
+		</ion-pane>
+</ion-view>

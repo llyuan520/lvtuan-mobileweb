@@ -305,7 +305,7 @@ var layer = (function(){
         return true;
       }else{
         name = $(this).attr("name");
-        value = $(this).val();
+        value = $.trim($(this).val());
       }
       if(name){
         params[name] = value;
@@ -325,11 +325,11 @@ var layer = (function(){
       params[name] = value;
     }); 
    $(form).find("textarea").each(function(obj){
-      if($(this).attr('data-disabled')=='disabled'){
+      if($.trim($(this).attr('data-disabled'))=='disabled'){
         return true;
       }
       var name = $(this).attr("name");
-      var value = $(this).val();
+      var value = $.trim($(this).val());
       params[name] = value;
     }); 
 
@@ -406,6 +406,16 @@ var layer = (function(){
       return temp;
   }
   
+  //阻止默认事件
+  this.stopDefault = function(e)
+  { 
+     if (e && e.preventDefault) {//如果是FF下执行这个
+        e.preventDefault();
+    }else{ 
+        window.event.returnValue = false;//如果是IE下执行这个
+    }
+    return false;
+  }
   
   //获取错误信息
   this.msg = function(data) {

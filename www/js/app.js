@@ -24,6 +24,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 
+/********************************** 引导页 **********************************/
     .state('home', { //引导页
       url: "/home",
       templateUrl: "views/home.html",
@@ -32,24 +33,27 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
 
     .state('index', { //首页
       url: "/index",
+      cache:'true', 
       templateUrl: "template/index_tpl.html",
       controller: 'indexCtrl'
     })
 
-    .state('mylvteam', { //首页
+    .state('mylvteam', { //我的律师团
       url: "/mylvteam",
+      cache:'true', 
       templateUrl: "template/mylvteam.html"
     })
 
+/********************************** 用户登录 **********************************/
     .state('login', { //登录
       url: "/login",
-      templateUrl: "template/login.html",
+      templateUrl: "template/home/login.html",
       controller: 'loginCtrl'
     })
 
     .state('register', { //注册
       url: "/register",
-      templateUrl: "template/register.html",
+      templateUrl: "template/home/register.html",
       controller: 'registerCtrl'
     })
 
@@ -59,24 +63,57 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
       controller: 'resetpwdCtrl'*/
     })
 
+/********************************** 圈子 **********************************/
     .state('group', { //圈子
       url: "/group",
-      templateUrl: "template/group.html",
+      templateUrl: "template/group/group.html",
       controller: 'groupCtrl'
     })
 
+/********************************** 知识 **********************************/
     .state('knowledge', { //知识
       url: "/knowledge",
-      templateUrl: "template/knowledge.html",
+      templateUrl: "template/knowledge/knowledge.html",
       controller: 'knowledgeCtrl'
     })
 
+/********************************** 我的 **********************************/
     .state('center', { //我的
       url: "/center",
-      templateUrl: "template/center.html",
+      templateUrl: "template/center/center.html",
       controller: 'centerCtrl'
     })
 
+/********************************** 找律师 **********************************/
+    .state('findlawyer', { //找律师
+      url: "/findlawyer",
+      templateUrl: "template/lawyer/findlawyer.html",
+      controller: 'findlawyerCtrl'
+    })
+
+    .state('lawyerlist', { //找律师列表
+      url: "/lawyerlist",
+      templateUrl: "template/lawyer/lawyer_list.html",
+      controller: 'lawyerlistCtrl'
+    })
+    
+    
+/********************************** 问律师 **********************************/
+    .state('questions', { //问律师
+      url: "/questions",
+      cache:'true', 
+      templateUrl: "template/questions/questions.html",
+      controller: 'questionsCtrl'
+    })
+
+    .state('questionslist', { //问律师列表
+      cache:'true', 
+      url: "/questionslist",
+      templateUrl: "template/questions/questions_list.html",
+      controller: 'questionslistCtrl'
+    })
+
+/********************************** error **********************************/
     .state('error', { //error
       url: "/error",
       templateUrl: "views/error.html"

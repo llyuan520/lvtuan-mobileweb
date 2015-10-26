@@ -316,3 +316,6 @@ a:hover{
 }
 
 .item p label{margin-right: 5px;}
+
+.list.mato20{margin-top: 20px;}
+.item-input-inset .item-input-wrapper input{width: 100%;}
