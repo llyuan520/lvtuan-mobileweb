@@ -1,0 +1,27 @@
+<ion-view view-title="我的评论">
+		<ion-pane>
+			<ion-header-bar class="bar bar-header bar-light">
+				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" onclick="history.go(-1);"></a>
+				<h1 class="title">我的评论</h1>
+			</ion-header-bar>
+			<ion-content>
+				<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+				<ion-list>
+					<ion-item class="item-thumbnail-left">
+						<img src="{{item.avatar}}"/>
+						<h2>文章列表</h2>
+						<p>文章列表文章列表文章列表</p>
+						<p>2015-10-26 16:22:24</p>
+						<div class="reply ion-arrow-up-b">
+							<p>
+								文章列表文章列表文章列表文章列表文章列表文章列表文章列表文章列表文章列表
+							</p>
+						</div>
+						
+					</ion-item>
+				</ion-list>
+				<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
+			</ion-content>
+			
+		</ion-pane>
+</ion-view>
