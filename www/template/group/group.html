@@ -4,40 +4,141 @@
 				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" onclick="history.go(-1);"></a>
 				<h1 class="title">圈子</h1>
 			</ion-header-bar>
-			<ion-content class="web-body web-top10 ">
-				<div class="button-bar web-bodywhite web-borderbottom1">
-				   <a class="button button-clear web-padding0 web-fintc37 web-borderbottom2" href="web81.html">圈子</a>
-				   <a class="button button-clear web-padding0 web-fintc37" href="web82.html">广播</a>
-				   <a class="button button-clear web-padding0 web-fintc37" href="web83.html">关注</a>
-				</div>
-				<div style="width:100%;height:10px;clear:both;"></div>
-				<div class="list">
-				    <a class="item item-thumbnail-left" style="padding-left:95px;" href="web85.html">
-				      <img src="img/icon-header.png" style="left:6px;border-radius:5px;">
-				      <span style="width:15px;height:15px;border-radius:10px;background-color:#f00;display:block;position:absolute;top:5px;left:75px;z-index:99;">&nbsp;</span>
-				      <h2 style="line-height:30px;"><span class="item-note">9:25</span>Pretty Hate Machine</h2>
-				      <p>【98条新消息】</p>
-				      <p>Nine Inch NailsNailsNailsNailsNailsNailsNailsNailsNailsNails</p>
-				    </a>
-				</div>
-			</ion-content>
-			<div class="tabs tabs-icon-top tabs-color-positive">
-				  <a class="tab-item" href="#/index">
-				    <i class="icon ion-home"></i>
-				    首页
-				  </a>
-				  <a class="tab-item active" href="#/group">
-				    <i class="icon ion-android-contacts"></i>
-				    圈子
-				  </a>
-				  <a class="tab-item" href="#/knowledge">
-				    <i class="icon ion-social-buffer"></i>
-				    知识
-				  </a>
-				  <a class="tab-item" href="#/center">
-				    <i class="icon ion-android-contact"></i>
-				    我的
-				  </a>
-			</div>
+			<ion-tabs class="tabs-positive tabs-striped tabs-top">
+				<ion-tab title="圈子">
+					<ion-view>
+						<ion-content class="calm-bg">
+							<div class="list">
+							    <a class="item item-thumbnail-left" style="padding-left:95px;" ng-href="#/groupview">
+							      <img src="img/icon-header.png" style="left:6px;border-radius:5px;">
+							      <span style="width:15px;height:15px;border-radius:10px;background-color:#f00;display:block;position:absolute;top:5px;left:75px;z-index:99;">&nbsp;</span>
+							      <h2 style="line-height:30px;"><span class="item-note">9:25</span>Pretty Hate Machine</h2>
+							      <p>【98条新消息】</p>
+							      <p>Nine Inch NailsNailsNailsNailsNailsNailsNailsNailsNailsNails</p>
+							    </a>
+							</div>
+						</ion-content>
+					</ion-view>
+				</ion-tab>
+				<ion-tab title="广播">
+					<ion-view>
+						<ion-content class="balanced-bg">
+							<div class="list">
+							  <div class="item web-paddingtb0" style="padding-left:55px;height:30px;line-height:30px;border-bottom:0px;" >
+							  	<a href="#/broadcastview">
+							    <span class="web-spant">08</span>
+							    广播广播广播广播广播广播广播广播广播广播广播广播广播广播广播广播
+								</a>
+							  </div>
+							  <div class="item web-paddingtb0" style="padding-left:55px;height:30px;line-height:30px;border-top:0px;">
+							    <span class="web-spant" style="font-size:16px;border-top:0px;">7月</span>
+							    12:18
+							  </div>
+							  <div class="item web-paddingtb0" style="padding-left:55px;height:30px;line-height:30px;border-top:0px;color:#767676;">
+							    <i class="icon ion-compose web-ion-img1-2" style="float:right;margin-right:5px;font-size:12px;">&nbsp;</i>
+							    <i class="icon ion-heart web-ion-img1-2" style="float:right;margin-right:5px;font-size:12px;">&nbsp;17</i>
+							    <i class="icon ion-chatbubble web-ion-img1-2" style="float:right;margin-right:5px;font-size:12px;">&nbsp;32</i>
+							  </div>
+							  <div class="item web-item web-paddingtb5 web-font14 web-item-topb0 web-item-botb0" style="color:#f00;">
+							    <i class="icon ion-heart"></i>
+							    <span style="color:#35A9F2;">广播广播广播广播广播广播</span>
+							  </div>
+							  <div class="item web-item web-paddingtb5 web-font14 web-item-topb0 web-item-botb0">
+							    全部评论
+							  </div>
+							  <div class="item web-item web-paddingtb5 web-font14 web-item-topb0 web-item-botb0">
+							    <span style="color:#35A9F2;">广播广&nbsp;:&nbsp;</span>广播广广播广
+							  </div>
+							</div>
+							
+							<div class="list">
+							  <a class="item item-icon-right"  style="background:none;border:0px;background-color:#24A3F1;min-width:40px;padding:0px; width:40px;height:40px;float:right;margin-right:10px;border-radius:25px;" href="#">
+							    <span class="item-note" style="color:#ffffff;margin-left:20px;"><i class="icon ion-compose web-ion-compose"></i></span>
+							  </a>
+							</div>
+						</ion-content>
+					</ion-view>
+				</ion-tab>
+				<ion-tab title="关注">
+					<ion-view>
+						<ion-content class="energized-bg">
+							<div class="slideBox">
+								<div class="button-bar web-bodywhite web-borderbottom1 hd">
+								   <a class="button button-clear web-padding0 web-fintc37 web-borderbottom2" ng-click="slideBox(0)">已关注</a>
+								   <a class="button button-clear web-padding0 web-fintc37" ng-click="slideBox(1)">推荐关注</a>
+								</div>
+
+								<div class="bd">
+									<ul class="list">
+									  	<div class="list">
+										    <a class="item item-thumbnail-left" style="padding-left:95px;" href="web85.html">
+										      <img src="img/icon-header.png" style="left:6px;border-radius:5px;">
+										      <h2 style="line-height:30px;"><span class="item-note">
+										      	<button class="button button-small button-outline button-stable" style="color:#373737;">取消关注</button>
+										      </span>Pretty Hate Machine</h2>
+										      <p>【98条新消息】</p>
+										      <p>Nine Inch NailsNailsNailsNailsNailsNailsNailsNailsNailsNails</p>
+										    </a>
+										    <div class="item web-paddingtb0" style="padding-left:55px;height:30px;line-height:30px;border-top:0px;color:#767676;margin-top:-10px;">
+										    <i class="icon web-ion-img1-2" style="float:right;margin-right:5px;font-size:14px;"><span style="color:#aeaeae;">粉丝</span>&nbsp;32</i>
+										    <i class="icon web-ion-img1-2" style="float:right;margin-right:5px;font-size:14px;"><span style="color:#aeaeae;">关注</span>&nbsp;32</i>
+										  </div>
+										</div>
+									</ul>
+									<ul class="list">
+									  	<div class="list">
+											<div class="item item-input-inset web-body" style="border:0px;">
+										    <label class="item-input-wrapper" style="background-color:#ffffff;">
+										    	<i class="icon ion-android-search"></i>&nbsp;
+										        <input type="text" placeholder="请输入你感兴趣的内容">
+										    </label>
+										  </div>
+										    <a class="item item-thumbnail-left" style="padding-left:95px;" href="web85.html">
+										      <img src="img/icon-header.png" style="left:6px;border-radius:5px;">
+										      <h2 style="line-height:30px;"><span class="item-note">
+										      	<button class="button button-small button-outline button-stable" style="color:#373737;">关注</button>
+										      </span>Pretty Hate Machine</h2>
+										      <p>【98条新消息】</p>
+										      <p>Nine Inch NailsNailsNailsNailsNailsNailsNailsNailsNailsNails</p>
+										    </a>
+										    <div class="item web-paddingtb0" style="padding-left:55px;height:30px;line-height:30px;border-top:0px;color:#767676;margin-top:-10px;">
+										    <i class="icon web-ion-img1-2" style="float:right;margin-right:5px;font-size:14px;"><span style="color:#aeaeae;">粉丝</span>&nbsp;32</i>
+										    <i class="icon web-ion-img1-2" style="float:right;margin-right:5px;font-size:14px;"><span style="color:#aeaeae;">关注</span>&nbsp;32</i>
+										  </div>
+										</div>
+									</ul>
+								</div>
+							</div>
+						</ion-content>
+					</ion-view>
+				</ion-tab>
+			</ion-tabs>
+
+			<div class="tabs tabs-icon-top tabs-color-positive" ng-model="is_lawyer">
+			  <a class="tab-item" href="#/">
+			    <i class="icon ion-home"></i>
+			    首页
+			  </a>
+			  <a class="tab-item active" href="#/group">
+			    <i class="icon ion-android-contacts"></i>
+			    圈子
+			  </a>
+			  <a class="tab-item" href="#/knowledge">
+			    <i class="icon ion-social-buffer"></i>
+			    知识
+			  </a>
+			  <a class="tab-item" ng-if="is_lawyer == undefined || is_lawyer == null || is_lawyer == ''" ng-click="jumplogin()">
+			    <i class="icon ion-android-contact"></i>
+			    我的
+			  </a>
+			  <a class="tab-item" ng-if="is_lawyer == false" href="#/center">
+			    <i class="icon ion-android-contact"></i>
+			    我的
+			  </a>
+			  <a class="tab-item" ng-if="is_lawyer == true" href="#/center_lawyer">
+			    <i class="icon ion-android-contact"></i>
+			    我的
+			  </a>
+		</div>
 		</ion-pane>
 </ion-view>

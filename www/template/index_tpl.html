@@ -40,37 +40,37 @@
 		<div class="nav-swap">
 			<div class="n-swapmain">
 				<div class="row" style="background-color:#ffffff;">
-				  <div class="col" style="text-align:center;" onclick="location.href='#/findlawyer'">
+				  <div class="col" style="text-align:center;" onclick="location.href='#/legaladvice'">
 				  	 <img src="img/web_person114.png" style="width:50px;height:50px;border-radius:50px;" /><br/>
-				  	    法律咨询
+				  	    法律咨讯
 				  </div>
-				  <div class="col" style="text-align:center;" onclick="location.href='web79.html'">
+				  <div class="col" style="text-align:center;" onclick="location.href='#/lawlecture'">
 				  	 <img src="img/web_person115.png" style="width:50px;height:50px;border-radius:50px;" /><br/>
 				  	    法律讲堂
 				  </div>
-				  <div class="col" style="text-align:center;" onclick="location.href='p32.html'">
+				  <div class="col" style="text-align:center;" onclick="location.href='#/lvtuanalliance'">
 				  	 <img src="img/web_person116.png" style="width:50px;height:50px;border-radius:50px;" /><br/>
 				  	    律团联盟
 				  </div>
-				  <div class="col" style="text-align:center;" onclick="location.href='p36.html'">
+				  <div class="col" style="text-align:center;" onclick="location.href='#/casescomm'">
 				  	 <img src="img/web_person117.png" style="width:50px;height:50px;border-radius:50px;" /><br/>
 				  	    案件委托
 				  </div>
 				</div>
 				<div class="row" style="background-color:#ffffff;">
-					  <div class="col" style="text-align:center;">
+					  <div class="col" style="text-align:center;" onclick="location.href='#/lawlecture'">
 					  	 <img src="img/web_person118.png" style="width:50px;height:50px;border-radius:50px;" /><br/>
 					  	    我的律团
 					  </div>
-					  <div class="col" style="text-align:center;" onclick="location.href='web79.html'">
+					  <div class="col" style="text-align:center;" onclick="location.href='#/lawlecture'">
 					  	 <img src="img/web_person119.png" style="width:50px;height:50px;border-radius:50px;" /><br/>
 					  	    法律助手
 					  </div>
-					  <div class="col" style="text-align:center;" onclick="location.href='p30.html'">
+					  <div class="col" style="text-align:center;" onclick="location.href='#/lawlecture'">
 					  	 <img src="img/web_person120.png" style="width:50px;height:50px;border-radius:50px;" /><br/>
 					  	    法律文书
 					  </div>
-					  <div class="col" style="text-align:center;" onclick="location.href='web27.html'">
+					  <div class="col" style="text-align:center;" onclick="location.href='#/talent'">
 					  	 <img src="img/web_person121.png" style="width:50px;height:50px;border-radius:50px;" /><br/>
 					  	    人才交流
 					  </div>
@@ -95,19 +95,20 @@
 	      <ul class="list">
 	      	<!-- <ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher> -->
             <ion-list>
-		       <li class="item item-thumbnail-left" ng-repeat="item in items">
+            	<ion-item class="item item-thumbnail-left" ng-repeat="item in items" ng-href="#/lawyer/{{item.id}}">
 		          	<img src="{{item.avatar}}"/>
 					<h2>{{item.realname}}</h2>
 					<p>执业{{item.practice_period}}/{{item.city}}</p>
 					<p>
-						<label ng-repeat="val in item.work_scope track by $index">{{val}}</label>
+						<label ng-repeat="item in item.work_scope">{{item.value}}</label>
 					</p>
 					<p>
 					    <i class="icon ion-compose web-ion-img1-2" style="float:right;margin-right:10px;font-size:12px;">&nbsp;{{item.likes_count}}</i>
 					    <i class="icon ion-chatbubble web-ion-img1-2" style="float:right;margin-right:10px;font-size:12px;">&nbsp;{{item.collects_count}}</i>
 					    <i class="icon ion-heart web-ion-img1-2" style="float:right;margin-right:10px;font-size:12px;color:#f00;">&nbsp;<span style="color:#666666;">{{item.follows_count}}</span></i>
-					  </p>
-		        </li>
+					</p>
+		       
+		        </ion-item>
 	         </ion-list>
 	         <ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
 			<!-- ion-infinite-scroll 上拉加载数据指令 distance默认1% nf-if的值为false时，就禁止执行on-infinite  -->
@@ -115,8 +116,8 @@
 	    </div>
 	</ion-content>
 
-	<div class="tabs tabs-icon-top tabs-color-positive" ng-model="is_verified">
-		  <a class="tab-item active" href="#/index">
+	<div class="tabs tabs-icon-top tabs-color-positive" ng-model="is_lawyer">
+		  <a class="tab-item active" href="#/">
 		    <i class="icon ion-home"></i>
 		    首页
 		  </a>
@@ -128,11 +129,15 @@
 		    <i class="icon ion-social-buffer"></i>
 		    知识
 		  </a>
-		  <a class="tab-item" ng-if="is_verified == 0" href="#/center">
+		  <a class="tab-item" ng-if="is_lawyer == undefined || is_lawyer == null || is_lawyer == ''" ng-click="jumplogin()">
 		    <i class="icon ion-android-contact"></i>
 		    我的
 		  </a>
-		  <a class="tab-item" ng-if="is_verified == 1" href="#/center_lawyer">
+		  <a class="tab-item" ng-if="is_lawyer == false" href="#/center">
+		    <i class="icon ion-android-contact"></i>
+		    我的
+		  </a>
+		  <a class="tab-item" ng-if="is_lawyer == true" href="#/center_lawyer">
 		    <i class="icon ion-android-contact"></i>
 		    我的
 		  </a>

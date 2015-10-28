@@ -1,0 +1,136 @@
+<ion-view view-title="律师的个人主页">
+		<ion-pane  class="web-body">
+			<ion-header-bar class="bar bar-header bar-light" style="background-color:#2BA1E8;border-bottom:0px;">
+				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" style="color:#ffffff;" onclick="history.go(-1);"></a>
+				<button class="button button-clear button-small ion-android-open web-ion-img1-2" style="color:#ffffff;"></button>
+			</ion-header-bar>
+			<ion-content class="web-body">
+				<div class="list" style="width:100%;height:161px;border-top:0px;background:url({{items.bg_img}});background-size:100% 100%;">
+				    <a class="item item-thumbnail-left" style="background:none;border:0px;padding-left:100px;padding-top:50px;background:rgba(43,159,230,0.5);">
+				      <img class="avatar" src="{{items.avatar}}" style="left:10px;top:50px;">
+				      <h2 class="web-top10" style="color:#ffffff;">{{items.realname}}  <span class="web-font14">律师</span></h2>
+				      <h2 class="web-top10" style="color:#ffffff;">您的专属律师</h2>
+				      <div style="width:100%;height:2px;clear:both;"></div>
+				      <p class="web-listtext web-fc666" style="float:left;font-size:14px;margin-top:5px;border:2px solid #ffffff;width:103px;border-radius:15px;padding:0px 10px 3px 10px;">
+				      	<i class="icon ion-star" style="color:#f00;"></i>
+				      	<i class="icon ion-star" style="color:#fff;"></i>
+				      	<i class="icon ion-star" style="color:#fff;"></i>
+				      	<i class="icon ion-star" style="color:#fff;"></i>
+				      	<i class="icon ion-star" style="color:#fff;"></i>
+				      </p>
+				      <div style="font-size:14px;width:50px;height:30px;float:right;line-height:30px;color:#ffffff;">
+				      	<p style="font-size:14px;width:30px;border-radius:30px;height:30px;float:left;background-color:#ffffff;text-align:center;"><i class="icon ion-android-favorite web-ion-img1-5" style="color:#f00;"></i></p>
+				      	&nbsp;12
+				      </div>
+				    </a>
+				</div>
+				<div class="button-bar">
+				  <a class="button button-clear" style="line-height:20px;"><span style="color:#26A3F1;">{{items.question_count}}</span><br/>服务次数</a>
+				  <a class="button button-clear" style="line-height:20px;"><span style="color:#26A3F1;">{{items.score}}</span><br/>评分</a>
+				  <a class="button button-clear" style="line-height:20px;"><span style="color:#26A3F1;">{{items.task_count}}</span><br/>粉丝数</a>
+				</div>
+
+				<div class="slideBox">
+					<div class="button-bar web-bodywhite web-borderbottom1 hd">
+					   <a class="button button-clear web-padding0 web-fintc37 web-borderbottom2">个人介绍</a>
+					   <a class="button button-clear web-padding0 web-fintc37">评价</a>
+					   <a class="button button-clear web-padding0 web-fintc37">文章</a>
+					   <a class="button button-clear web-padding0 web-fintc37">动态</a>
+					</div>
+
+					<div class="bd">
+						<ul class="list">
+						  	<li class="item">
+							    <p class="web-fc666 web-font14">擅长领域</p>
+							    <p><label ng-repeat="item in items.work_scope">{{item.value}} &nbsp;</label></p>
+						  	</li>
+							<li class="item">
+							    执业时间<span style="color:#37A9F2;">{{items.practice_period}}年</span>
+							      <p class="web-fc666 web-font14">专业咨询服务单价</p>
+							      <p class="web-fc000">图文资讯5元/次;电话咨询3元/分钟</p>
+							  </li>
+							 <li class="item item-icon-right white-space-normal">
+							      <p class="web-fc666 web-font14">个人简历</p>
+							      <p class="web-fc000">{{ items.introduce == '' ? '未填写' : items.introduce }}</p>
+							  </li>
+							  <li class="item item-icon-right white-space-normal">
+							      <p class="web-fc666 web-font14">成功案例</p>
+							      <p class="web-fc000 web-breakall">未填写</p>
+							  </li>
+						</ul>
+						<ul class="list">
+						  	<div class="list web-top10">
+							  <a style="height:auto;padding-left:16px;" class="item web-itemheight45 item-avatar">
+							      <p class="web-listtext web-fc000">请对本&nbsp;&nbsp;214-22-22 22:22:22</p>
+							      <p class="web-listtext web-fc666" style="font-size:14px;margin-top:5px;">
+							      	&nbsp;<i class="icon ion-star web-ion-img1-5" style="color:#f00;"></i>&nbsp;
+							      	<i class="icon ion-star web-ion-img1-5"></i>&nbsp;
+							      	<i class="icon ion-star web-ion-img1-5"></i>&nbsp;
+							      	<i class="icon ion-star web-ion-img1-5"></i>&nbsp;
+							      	<i class="icon ion-star web-ion-img1-5"></i>
+							      </p>
+							      <p class="web-listtext web-fc000">感谢您的评价</p>
+							    </a>
+							</div>
+						</ul>
+						<ul class="list">
+						  	<ion-list>
+								<ion-item class="item-thumbnail-left">
+									<img src="{{item.avatar}}"/>
+									<h2>文章列表</h2>
+									<p>文章列表文章列表文章列表</p>
+									<p>2015-10-26 16:22:24</p>
+								</ion-item>
+							</ion-list>
+						</ul>
+						<ul class="list">
+						  	<!--动态列表-->
+							<div class="list list-comment">
+								<div class="item">
+									<div class="item-main">
+										<div class="item-a">
+											<span class="sp-date txt-fw">动态列表</span><br />
+											<span class="sp-month">动态列表</span>
+										</div>
+										<div class="item-b">
+											<div class="item-b-t fc-ee">
+												动态列表<br />动态列表
+											</div>
+											<div class="item-b-b">	
+												<span>动态列表</span>
+												<span>&nbsp;</span>
+												<span>动态列表</span>
+												<span class="clear"></span>
+											</div>
+										</div>
+										<div class="clear"></div>							
+									</div>
+									<div class="item-who fc-nan lh-2em"><span>动态列表</span>等动态列表位赞过</div>
+									<div class="item-who-title fc-ee">全部评论</div>
+									<div>
+										<div class="list list-other-cmt">
+											<div class="item lh-2em" ng-repeat="allCmt in items.dynamicAllCmt">
+												<span class="fc-nan">动态列表:</span>
+												<span class="fc-ee">动态列表</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</ul>
+					</div>
+				</div>
+
+				
+
+				<div style="width:100%;height:50px;clear:both;"></div>
+			</ion-content>
+
+			<div class="tabs tabs-color-positive">
+			  <a class="tab-item active" ng-click="showConfirm2();">电话咨询</a>
+			  <a class="tab-item active" ng-href="#/graphic">图文资询</a>
+			  <a class="tab-item active" ng-href="#/special">专业咨询</a>
+			</div>
+
+		</ion-pane>
+</ion-view>

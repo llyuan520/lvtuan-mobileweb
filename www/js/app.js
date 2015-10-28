@@ -15,11 +15,16 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
 })
 
 //声明全局的方法和变量
-.run(['$rootScope',function($rootScope){
+.run(['$rootScope','$timeout',function($rootScope,$timeout){
   /*让浏览器记住token*/
-  localStorage.setItem("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXUyJ9.eyJzdWIiOjE0ODgsImlzcyI6Imh0dHA6XC9cL2Rldi53ZGxzdC5sYXctcGMtbmV3XC9sb2dpbiIsImlhdCI6IjE0NDU5MzAxNDciLCJleHAiOiIxNDQ1OTMzNzQ3IiwibmJmIjoiMTQ0NTkzMDE0NyIsImp0aSI6Ijg4ODM3MTcwNGViMjE1MzliMTEzMzM5ZGYxZTZhMTJkIn0.ZTQ3MjBiZmE0MDkyMjU4MjQ0NzdhYTQwNzg2MzVmZjNhMDg4NDY2YWQ4OWI4NWZmNTY2MjhmY2VhZTlmNmI2ZQ");
-  //localStorage.setItem("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXUyJ9.eyJzdWIiOjE0ODksImlzcyI6Imh0dHA6XC9cL2Rldi53ZGxzdC5sYXctcGMtbmV3XC9sb2dpbiIsImlhdCI6IjE0NDU1MDA3MzIiLCJleHAiOiIxNDQ1NTA0MzMyIiwibmJmIjoiMTQ0NTUwMDczMiIsImp0aSI6IjIzYjAxZWIyY2JjY2Q3ZmVmNjhjOGEwZTAwN2M4OGY2In0.OTU5YWQ0ZjI5ZWJmMzA2MDZiZGJmOTZiMTY4MTAxMzhiNzMxMmJiNTE2NmIyMmQ3MTRhZWIxM2I1ZTdkZmRhZg");
-  $rootScope.token = localStorage.getItem("token");
+  localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXUyJ9.eyJzdWIiOjE0ODgsImlzcyI6Imh0dHA6XC9cL2Rldi53ZGxzdC5sYXctcGMtbmV3XC9sb2dpbiIsImlhdCI6IjE0NDU5NTA0MzUiLCJleHAiOiIxNDQ1OTU0MDM1IiwibmJmIjoiMTQ0NTk1MDQzNSIsImp0aSI6IjMzZmRlYmY0YjEwOWRkOWMyYzhmZmUyNjVkNGUxNjQyIn0.YjgwNDljNjVmZmQ3MDVhODE4ZmI4ZTE2Yzg3OGQzMjk1ZWUwYzZmYzllZjc5MTA1ZTZiZDdhYTg5MDE3MzgzYQ');
+  $rootScope.token = localStorage.getItem('token');
+  $timeout(function() {
+      localStorage.removeItem('is_lawyer');
+  }, 600);
+  $rootScope.is_lawyer = JSON.parse(localStorage.getItem('is_lawyer'));
+  //localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXUyJ9.eyJzdWIiOjE0ODksImlzcyI6Imh0dHA6XC9cL2Rldi53ZGxzdC5sYXctcGMtbmV3XC9sb2dpbiIsImlhdCI6IjE0NDU1MDA3MzIiLCJleHAiOiIxNDQ1NTA0MzMyIiwibmJmIjoiMTQ0NTUwMDczMiIsImp0aSI6IjIzYjAxZWIyY2JjY2Q3ZmVmNjhjOGEwZTAwN2M4OGY2In0.OTU5YWQ0ZjI5ZWJmMzA2MDZiZGJmOTZiMTY4MTAxMzhiNzMxMmJiNTE2NmIyMmQ3MTRhZWIxM2I1ZTdkZmRhZg');
+  
 }])
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -27,200 +32,257 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
 
 /********************************** 引导页 **********************************/
     .state('home', { //引导页
-      url: "/home",
-      templateUrl: "views/home.html",
+      url: '/home',
+      cache:'true', 
+      templateUrl: 'views/home.html',
       controller:'ionicNavBarDelegateCtrl'
     })
 
     .state('index', { //首页
-      url: "/index",
+      url: '/index',
       cache:'true', 
-      templateUrl: "template/index_tpl.html",
+      templateUrl: 'template/index_tpl.html',
       controller: 'indexCtrl'
     })
 
     .state('mylvteam', { //我的律师团
-      url: "/mylvteam",
+      url: '/mylvteam',
       cache:'true', 
-      templateUrl: "template/mylvteam.html"
+      templateUrl: 'template/mylvteam.html'
     })
 
 /********************************** 用户登录 **********************************/
     .state('login', { //登录
-      url: "/login",
+      url: '/login',
       cache:'false',
-      templateUrl: "template/home/login.html",
+      templateUrl: 'template/home/login.html',
       controller: 'loginCtrl'
     })
 
     .state('register', { //注册
-      url: "/register",
+      url: '/register',
       cache:'false',
-      templateUrl: "template/home/register.html",
+      templateUrl: 'template/home/register.html',
       controller: 'registerCtrl'
     })
 
     .state('resetpwd', { //密码重置
-      url: "/resetpwd",
-      templateUrl: "template/home/resetpwd.html"/*,
+      url: '/resetpwd',
+      templateUrl: 'template/home/resetpwd.html'/*,
       controller: 'resetpwdCtrl'*/
     })
 
 /********************************** 圈子 **********************************/
     .state('group', { //圈子
-      url: "/group",
-      templateUrl: "template/group/group.html",
+      url: '/group',
+      templateUrl: 'template/group/group.html',
       controller: 'groupCtrl'
     })
+    .state('groupview', { //圈子详情
+      url: '/groupview',
+      templateUrl: 'template/group/group_view.html',
+      controller: 'groupviewCtrl'
+    })
+    .state('broadcastview', { //广播详情
+      url: '/broadcastview',
+      templateUrl: 'template/group/broadcast_view.html',
+      controller: 'broadcastviewCtrl'
+    })
+    
 
 /********************************** 知识 **********************************/
     .state('knowledge', { //知识
-      url: "/knowledge",
-      templateUrl: "template/knowledge/knowledge.html",
+      url: '/knowledge',
+      templateUrl: 'template/knowledge/knowledge.html',
       controller: 'knowledgeCtrl'
     })
 
 /********************************** 我的 **********************************/
 /*———————————————————————————— 用户的个人中心 ————————————————————————————*/
     .state('center', { //用户-我的
-      url: "/center",
+      url: '/center',
       cache:'true',
-      templateUrl: "template/center/center.html",
+      templateUrl: 'template/center/center.html',
       controller: 'centerCtrl'
     })
-    .state('listscores', { //用户-我的积分
-      url: "/listscores",
+    .state('info', { //用户-个人资料
+      url: '/info',
       cache:'true',
-      templateUrl: "template/center/list_scores.html",
+      templateUrl: 'template/center/info.html',
+      controller: 'infoCtrl'
+    })
+    .state('listscores', { //用户-我的积分
+      url: '/listscores',
+      cache:'true',
+      templateUrl: 'template/center/list_scores.html',
       controller: 'listscoresCtrl'
     })
     .state('collect', { //用户-我的收藏
-      url: "/collect",
+      url: '/collect',
       cache:'true',
-      templateUrl: "template/center/collect.html",
+      templateUrl: 'template/center/collect.html',
       controller: 'collectCtrl'
     })
     .state('comment', { //用户-我的评论
-      url: "/comment",
+      url: '/comment',
       cache:'true',
-      templateUrl: "template/center/comment.html",
+      templateUrl: 'template/center/comment.html',
       controller: 'commentCtrl'
     })
     .state('messages', { //用户-我的消息
-      url: "/messages",
+      url: '/messages',
       cache:'true',
-      templateUrl: "template/center/messages.html",
+      templateUrl: 'template/center/messages.html',
       controller: 'messagesCtrl'
     })
     .state('followed', { //用户-我的关注
-      url: "/followed",
+      url: '/followed',
       cache:'true',
-      templateUrl: "template/center/followed.html",
+      templateUrl: 'template/center/followed.html',
       controller: 'followedCtrl'
     })
     .state('becomelawyer', { //用户-认证为律师
-      url: "/becomelawyer",
+      url: '/becomelawyer',
       cache:'true',
-      templateUrl: "template/center/become_lawyer.html",
+      templateUrl: 'template/center/become_lawyer.html',
       controller: 'becomelawyerCtrl'
     })
     
 /*———————————————————————————— 律师的个人中心 ————————————————————————————*/
     .state('center_lawyer', { //律师-我的
-      url: "/center_lawyer",
+      url: '/center_lawyer',
       cache:'true',
-      templateUrl: "template/center/lawyer/center.html",
+      templateUrl: 'template/center/lawyer/center.html',
       controller: 'centerlaywerCtrl'
     })
     .state('infolawyer', { //律师-个人资料
-      url: "/infolawyer",
+      url: '/infolawyer',
       cache:'true',
-      templateUrl: "template/center/info.html",
+      templateUrl: 'template/center/info.html',
       controller: 'infolawyerCtrl'
     })
     .state('followed_lawyer', { //律师-我的关注
-      url: "/followed_lawyer",
+      url: '/followed_lawyer',
       cache:'true',
-      templateUrl: "template/center/lawyer/followed.html",
+      templateUrl: 'template/center/lawyer/followed.html',
       controller: 'followedlaywerCtrl'
     })
     .state('listscores_lawyer', { //律师-我的积分
-      url: "/listscores_lawyer",
+      url: '/listscores_lawyer',
       cache:'true',
-      templateUrl: "template/center/lawyer/list_scores.html",
+      templateUrl: 'template/center/lawyer/list_scores.html',
       controller: 'listscoreslaywerCtrl'
     })
     .state('comment_lawyer', { //律师-我的评论
-      url: "/comment_lawyer",
+      url: '/comment_lawyer',
       cache:'true',
-      templateUrl: "template/center/lawyer/comment.html",
+      templateUrl: 'template/center/lawyer/comment.html',
       controller: 'commentlaywerCtrl'
     })
     .state('article_lawyer', { //律师-我的文章
-      url: "/article_lawyer",
+      url: '/article_lawyer',
       cache:'true',
-      templateUrl: "template/center/lawyer/article.html",
+      templateUrl: 'template/center/lawyer/article.html',
       controller: 'articlelaywerCtrl'
     })
     .state('messages_lawyer', { //律师-我的消息
-      url: "/messages_lawyer",
+      url: '/messages_lawyer',
       cache:'true',
-      templateUrl: "template/center/lawyer/messages.html",
+      templateUrl: 'template/center/lawyer/messages.html',
       controller: 'messageslaywerCtrl'
     })
 
 /*———————————————————————————— 个人中心公用 ————————————————————————————*/
     .state('about', { //关于律团
-      url: "/about",
+      url: '/about',
       cache:'true',
-      templateUrl: "template/center/about.html",
+      templateUrl: 'template/center/about.html',
       controller: 'aboutCtrl'
     })
     .state('site', { //设置
-      url: "/site",
+      url: '/site',
       cache:'true',
-      templateUrl: "template/center/site.html",
+      templateUrl: 'template/center/site.html',
       controller: 'siteCtrl'
     })
 
     
 
 /********************************** 找律师 **********************************/
-    .state('findlawyer', { //找律师-法律文书
-      url: "/findlawyer",
-      templateUrl: "template/lawyer/findlawyer.html",
-      controller: 'findlawyerCtrl'
-    })
-
     .state('lawyerlist', { //找律师列表
-      url: "/lawyerlist",
+      url: '/lawyerlist',
       cache:'true',
-      templateUrl: "template/lawyer/lawyer_list.html",
+      templateUrl: 'template/lawyer/lawyer_list.html',
       controller: 'lawyerlistCtrl'
     })
-    
+    .state('view', { //律师个人主页
+      url: '/lawyer/:id',
+      cache:'true',
+      templateUrl: 'template/lawyer/view.html',
+      controller: 'viewCtrl'
+    })
+    .state('graphic', { //图文咨询
+      url: '/graphic',
+      cache:'true',
+      templateUrl: 'template/lawyer/graphic.html',
+      controller: 'graphicCtrl'
+    })
+    .state('special', { //专业咨询
+      url: '/special',
+      cache:'true',
+      templateUrl: 'template/lawyer/special.html',
+      controller: 'specialCtrl'
+    })
     
 /********************************** 问律师 **********************************/
     .state('questions', { //问律师
-      url: "/questions",
+      url: '/questions',
       cache:'true', 
-      templateUrl: "template/questions/questions.html",
+      templateUrl: 'template/questions/questions.html',
       controller: 'questionsCtrl'
     })
-
     .state('questionslist', { //问律师列表
       cache:'true', 
-      url: "/questionslist",
-      templateUrl: "template/questions/questions_list.html",
+      url: '/questionslist',
+      templateUrl: 'template/questions/questions_list.html',
       controller: 'questionslistCtrl'
+    })
+
+/********************************** 法律咨询 **********************************/
+    .state('legaladvice', { //首页-法律咨询
+      url: '/legaladvice',
+      templateUrl: 'template/legaladvice.html',
+      controller: 'legaladviceCtrl'
+    })
+
+/********************************** 法律讲堂 **********************************/
+    .state('lawlecture', { //首页-法律讲堂
+      url: '/lawlecture',
+      templateUrl: 'template/lawlecture.html',
+      controller: 'lawlectureCtrl'
+    })
+    .state('casescomm', { //首页-案件委托
+      url: '/casescomm',
+      templateUrl: 'template/casescomm.html',
+      controller: 'casescommCtrl'
+    })
+    .state('lvtuanalliance', { //首页-律团联盟
+      url: '/lvtuanalliance',
+      templateUrl: 'template/lvtuanalliance.html',
+      controller: 'lvtuanallianceCtrl'
+    })
+    .state('talent', { //首页-人才交流
+      url: '/talent',
+      templateUrl: 'template/talent.html',
+      controller: 'talentCtrl'
     })
 
 /********************************** error **********************************/
     .state('error', { //error
-      url: "/error",
-      templateUrl: "views/error.html"
+      url: '/error',
+      templateUrl: 'views/error.html'
     });
 
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/index');
 });

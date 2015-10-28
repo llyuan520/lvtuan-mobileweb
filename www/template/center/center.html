@@ -8,11 +8,10 @@
 			</ion-header-bar>
 			<ion-content class="web-body web-top10 ">
 				<div class="list">
-				    <a class="item item-thumbnail-left item-icon-right">
-				      <img src="img/web_header.png" onclick="location.href='web118.html'">
-				      <h2 class="web-top10" onclick="location.href='web118.html'"><span class="badge badge-assertive icon-left">证</span>{{items.user.realname}}  <span class="web-font14">律师</span></h2>
-				      <p  class="web-top5" onclick="location.href='web118.html'">{{items.user.phone}}</p>
-				      <img onclick="location.href='web138.html'" src="img/web_person002.png" style="width:20px;height:18px;float:right;margin-right:-18px;" />
+				    <a class="item item-thumbnail-left item-icon-right" ng-href="#/info">
+				      <img src="img/web_header.png">
+				      <h2 class="web-top10">{{items.user.realname}}  <span class="web-font14">律师</span></h2>
+				      <p  class="web-top5" >{{items.user.phone}}</p>
 				    </a>
 				</div>
 				
@@ -67,8 +66,8 @@
 				</div>
 				<div style="width:100%;height:50px;clear:both;"></div>
 			</ion-content>
-			<div class="tabs tabs-icon-top tabs-color-positive">
-				  <a class="tab-item" href="#/index">
+			<div class="tabs tabs-icon-top tabs-color-positive" ng-model="is_lawyer">
+				  <a class="tab-item active" href="#/index">
 				    <i class="icon ion-home"></i>
 				    首页
 				  </a>
@@ -80,7 +79,15 @@
 				    <i class="icon ion-social-buffer"></i>
 				    知识
 				  </a>
-				  <a class="tab-item active" href="#/center">
+				  <a class="tab-item" ng-if="is_lawyer == undefined || is_lawyer == null || is_lawyer == ''" ng-click="jumplogin()">
+				    <i class="icon ion-android-contact"></i>
+				    我的
+				  </a>
+				  <a class="tab-item" ng-if="is_lawyer == false" href="#/center">
+				    <i class="icon ion-android-contact"></i>
+				    我的
+				  </a>
+				  <a class="tab-item" ng-if="is_lawyer == true" href="#/center_lawyer">
 				    <i class="icon ion-android-contact"></i>
 				    我的
 				  </a>
