@@ -30,107 +30,118 @@
 				  <a class="button button-clear" style="line-height:20px;"><span style="color:#26A3F1;">{{items.task_count}}</span><br/>粉丝数</a>
 				</div>
 
-				<div class="slideBox">
-					<div class="button-bar web-bodywhite web-borderbottom1 hd">
-					   <a class="button button-clear web-padding0 web-fintc37 web-borderbottom2">个人介绍</a>
-					   <a class="button button-clear web-padding0 web-fintc37">评价</a>
-					   <a class="button button-clear web-padding0 web-fintc37">文章</a>
-					   <a class="button button-clear web-padding0 web-fintc37">动态</a>
-					</div>
 
+				<div class="slideBox">
+					<div class="hd tabs">
+					  <a ng-repeat="tab in tabs"  ng-class="{active:isActiveTab(tab.url)}"  ng-click="onClickTab(tab)" class="tab-item" >{{tab.title}}</a></li>
+					</div>
 					<div class="bd">
-						<ul class="list">
-						  	<li class="item">
-							    <p class="web-fc666 web-font14">擅长领域</p>
-							    <p><label ng-repeat="item in items.work_scope">{{item.value}} &nbsp;</label></p>
-						  	</li>
-							<li class="item">
-							    执业时间<span style="color:#37A9F2;">{{items.practice_period}}年</span>
-							      <p class="web-fc666 web-font14">专业咨询服务单价</p>
-							      <p class="web-fc000">图文资讯5元/次;电话咨询3元/分钟</p>
-							  </li>
-							 <li class="item item-icon-right white-space-normal">
-							      <p class="web-fc666 web-font14">个人简历</p>
-							      <p class="web-fc000">{{ items.introduce == '' ? '未填写' : items.introduce }}</p>
-							  </li>
-							  <li class="item item-icon-right white-space-normal">
-							      <p class="web-fc666 web-font14">成功案例</p>
-							      <p class="web-fc000 web-breakall">未填写</p>
-							  </li>
-						</ul>
-						<ul class="list">
-						  	<div class="list web-top10">
-							  <a style="height:auto;padding-left:16px;" class="item web-itemheight45 item-avatar">
-							      <p class="web-listtext web-fc000">请对本&nbsp;&nbsp;214-22-22 22:22:22</p>
-							      <p class="web-listtext web-fc666" style="font-size:14px;margin-top:5px;">
-							      	&nbsp;<i class="icon ion-star web-ion-img1-5" style="color:#f00;"></i>&nbsp;
-							      	<i class="icon ion-star web-ion-img1-5"></i>&nbsp;
-							      	<i class="icon ion-star web-ion-img1-5"></i>&nbsp;
-							      	<i class="icon ion-star web-ion-img1-5"></i>&nbsp;
-							      	<i class="icon ion-star web-ion-img1-5"></i>
-							      </p>
-							      <p class="web-listtext web-fc000">感谢您的评价</p>
-							    </a>
-							</div>
-						</ul>
-						<ul class="list">
-						  	<ion-list>
-								<ion-item class="item-thumbnail-left">
-									<img src="{{item.avatar}}"/>
-									<h2>文章列表</h2>
-									<p>文章列表文章列表文章列表</p>
-									<p>2015-10-26 16:22:24</p>
-								</ion-item>
-							</ion-list>
-						</ul>
-						<ul class="list">
-						  	<!--动态列表-->
-							<div class="list list-comment">
-								<div class="item">
-									<div class="item-main">
-										<div class="item-a">
-											<span class="sp-date txt-fw">动态列表</span><br />
-											<span class="sp-month">动态列表</span>
-										</div>
-										<div class="item-b">
-											<div class="item-b-t fc-ee">
-												动态列表<br />动态列表
-											</div>
-											<div class="item-b-b">	
-												<span>动态列表</span>
-												<span>&nbsp;</span>
-												<span>动态列表</span>
-												<span class="clear"></span>
-											</div>
-										</div>
-										<div class="clear"></div>							
-									</div>
-									<div class="item-who fc-nan lh-2em"><span>动态列表</span>等动态列表位赞过</div>
-									<div class="item-who-title fc-ee">全部评论</div>
-									<div>
-										<div class="list list-other-cmt">
-											<div class="item lh-2em" ng-repeat="allCmt in items.dynamicAllCmt">
-												<span class="fc-nan">动态列表:</span>
-												<span class="fc-ee">动态列表</span>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</ul>
+						<div ng-include="currentTab"></div>
 					</div>
 				</div>
-
-				
-
-				<div style="width:100%;height:50px;clear:both;"></div>
 			</ion-content>
 
 			<div class="tabs tabs-color-positive">
-			  <a class="tab-item active" ng-click="showConfirm2();">电话咨询</a>
 			  <a class="tab-item active" ng-href="#/graphic">图文资询</a>
 			  <a class="tab-item active" ng-href="#/special">专业咨询</a>
 			</div>
 
 		</ion-pane>
 </ion-view>
+
+<!-- 律师个人主页 - 个人介绍 -->
+<script type="text/ng-template" id="selfintro.tpl.html">
+    <ul class="list">
+	  	<li class="item">
+		    <p class="web-fc666 web-font14">擅长领域</p>
+		    <p><label ng-repeat="item in items.work_scope">{{item.value}} &nbsp;</label></p>
+	  	</li>
+		<li class="item">
+		    执业时间<span style="color:#37A9F2;">{{items.practice_period}}年</span>
+		      <p class="web-fc666 web-font14">专业咨询服务单价</p>
+		      <p class="web-fc000">图文资讯5元/次;电话咨询3元/分钟</p>
+		  </li>
+		 <li class="item item-icon-right white-space-normal">
+		      <p class="web-fc666 web-font14">个人简历</p>
+		      <p class="web-fc000">{{ items.introduce == '' ? '未填写' : items.introduce }}</p>
+		  </li>
+		  <li class="item item-icon-right white-space-normal">
+		      <p class="web-fc666 web-font14">成功案例</p>
+		      <p class="web-fc000 web-breakall">未填写</p>
+		  </li>
+	</ul>
+</script>
+
+<!-- 律师个人主页 - 评价 -->
+<script type="text/ng-template" id="evaluate.tpl.html">
+    <ul class="list">
+	  	<div class="list web-top10" ng-repeat="evaluation in evaluations">
+		  <a style="height:auto;padding-left:16px;" class="item web-itemheight45 item-avatar">
+		      <p class="web-listtext web-fc000">{{evaluation.creator_realname}}&nbsp;&nbsp;{{evaluation.creator_realname}}</p>
+		      <p class="web-listtext web-fc666" style="font-size:14px;margin-top:5px;">
+		      	{{evaluation.evaluate_score}}
+		      	&nbsp;<i class="icon ion-star web-ion-img1-5" style="color:#f00;"></i>&nbsp;
+		      	<i class="icon ion-star web-ion-img1-5"></i>&nbsp;
+		      	<i class="icon ion-star web-ion-img1-5"></i>&nbsp;
+		      	<i class="icon ion-star web-ion-img1-5"></i>&nbsp;
+		      	<i class="icon ion-star web-ion-img1-5"></i>
+		      </p>
+		      <p class="web-listtext web-fc000">{{evaluation.evaluate_comment}}</p>
+		    </a>
+		</div>
+		<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMoreEvaluation()" distance="1%"> </ion-infinite-scroll>
+	</ul>
+</script>
+
+<!-- 律师个人主页 - 文章 -->
+<script type="text/ng-template" id="article.tpl.html">
+    <ul class="list">
+	  	<ion-list ng-repeat="article in articles">
+			<ion-item class="item-thumbnail-left">
+				<img src="{{article.avatar}}"/>
+				<h2>{{article.title}}</h2>
+				<p>{{article.content}}</p>
+				<p>{{article.created_at}}</p>
+			</ion-item>
+		</ion-list>
+		<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMoreArticles()" distance="1%"> </ion-infinite-scroll>
+	</ul>
+</script>
+
+<!-- 律师个人主页 - 广播 -->
+<script type="text/ng-template" id="televise.tpl.html">
+    <ul class="list">
+		<div class="list list-comment">
+			<div class="item">
+				<div class="item-main">
+					<div class="item-a">
+						<span class="sp-date txt-fw">动态列表</span><br />
+						<span class="sp-month">动态列表</span>
+					</div>
+					<div class="item-b">
+						<div class="item-b-t fc-ee">
+							动态列表<br />动态列表
+						</div>
+						<div class="item-b-b">	
+							<span>动态列表</span>
+							<span>&nbsp;</span>
+							<span>动态列表</span>
+							<span class="clear"></span>
+						</div>
+					</div>
+					<div class="clear"></div>							
+				</div>
+				<div class="item-who fc-nan lh-2em"><span>动态列表</span>等动态列表位赞过</div>
+				<div class="item-who-title fc-ee">全部评论</div>
+				<div>
+					<div class="list list-other-cmt">
+						<div class="item lh-2em">
+							<span class="fc-nan">动态列表:</span>
+							<span class="fc-ee">动态列表</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</ul> 
+</script>

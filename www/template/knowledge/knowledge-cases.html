@@ -1,0 +1,15 @@
+<ion-view view-title="knowledge-documents">
+    <ion-content>
+
+    	<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+		<ion-list>
+        	<ion-item class="item item-thumbnail-left"  ng-repeat="case in cases" ng-href="#/knowcasesview/{{case.id}}">
+	          	<img src="{{case.img}}" style="left:6px;border-radius:5px;">
+		      	<h2 style="height:30px;margin-top:5px;">{{case.title}}</h2>
+	      		<p>{{case.created_at.date}}</p>
+	        </ion-item>
+         </ion-list>
+		<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
+
+    </ion-content>
+</ion-view>

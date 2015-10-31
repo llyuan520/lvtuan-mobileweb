@@ -11,11 +11,9 @@
 			<div class="list login">
 				<label class="item item-input item-text-wrap">
 					<span class="bg-man login-lbl-pl login-lbl-fc">&nbsp;</span>
-					<input type="text" name="username" ng-model="loginData.username" required="required" ng-pattern="/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/" placeholder="手机号码" ng-messages-multiple />
+					<input type="text" name="username" ng-model="loginData.username" required="required" placeholder="手机号码或者邮箱" ng-messages-multiple />
 						
 				</label>
-				<p class="item fc-red" ng-show="loginForm.username.$invalid && !loginForm.username.$pristine">请输入合法的手机号码</p>
-				<p class="item fc-red" ng-show="loginForm.username.$required">手机号码不能为空</p>
 				<label class="item item-input">
 					<span class="bg-clock login-lbl-pl login-lbl-fc">&nbsp;</span>
 					<input type="password" name="password" placeholder="登录密码(6-20位字符)" ng-model="loginData.password" ng-minlength="6" ng-maxlength="20" ng-pattern="/^[\@A-Za-z0-9\!\#\$\%\^\&\*\.\~]{6,20}$/" required="required">

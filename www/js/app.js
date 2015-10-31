@@ -15,16 +15,24 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
 })
 
 //声明全局的方法和变量
-.run(['$rootScope','$timeout',function($rootScope,$timeout){
+.run(['$rootScope','$timeout','$location',function($rootScope,$timeout,$location){
   /*让浏览器记住token*/
-  localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXUyJ9.eyJzdWIiOjE0ODgsImlzcyI6Imh0dHA6XC9cL2Rldi53ZGxzdC5sYXctcGMtbmV3XC9sb2dpbiIsImlhdCI6IjE0NDU5NTA0MzUiLCJleHAiOiIxNDQ1OTU0MDM1IiwibmJmIjoiMTQ0NTk1MDQzNSIsImp0aSI6IjMzZmRlYmY0YjEwOWRkOWMyYzhmZmUyNjVkNGUxNjQyIn0.YjgwNDljNjVmZmQ3MDVhODE4ZmI4ZTE2Yzg3OGQzMjk1ZWUwYzZmYzllZjc5MTA1ZTZiZDdhYTg5MDE3MzgzYQ');
+  localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXUyJ9.eyJzdWIiOjE0OTcsImlzcyI6Imh0dHA6XC9cLzE5Mi4xNjguMS40M1wvbG9naW4iLCJpYXQiOiIxNDQ2Mjg0Njk3IiwiZXhwIjoiMTQ0NjI4ODI5NyIsIm5iZiI6IjE0NDYyODQ2OTciLCJqdGkiOiI3MTY2NDBkNTRkOGQ1MzUxNTllODVkNGM1OWY2OWFhMiJ9.NWQwMzBhNDdmNGY4MzY2ZWNkOGY2MmM4ZWE5ZGRlZDI0MDdiOGU4MGFhMjA2YTY4MjU3MDk5NGE1NTQxN2E4MQ');
+  //localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXUyJ9.eyJzdWIiOjE0ODgsImlzcyI6Imh0dHA6XC9cL2Rldi53ZGxzdC5sYXctcGMtbmV3XC9sb2dpbiIsImlhdCI6IjE0NDU5NTA0MzUiLCJleHAiOiIxNDQ1OTU0MDM1IiwibmJmIjoiMTQ0NTk1MDQzNSIsImp0aSI6IjMzZmRlYmY0YjEwOWRkOWMyYzhmZmUyNjVkNGUxNjQyIn0.YjgwNDljNjVmZmQ3MDVhODE4ZmI4ZTE2Yzg3OGQzMjk1ZWUwYzZmYzllZjc5MTA1ZTZiZDdhYTg5MDE3MzgzYQ');
   $rootScope.token = localStorage.getItem('token');
   $timeout(function() {
       localStorage.removeItem('is_lawyer');
   }, 600);
   $rootScope.is_lawyer = JSON.parse(localStorage.getItem('is_lawyer'));
   //localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXUyJ9.eyJzdWIiOjE0ODksImlzcyI6Imh0dHA6XC9cL2Rldi53ZGxzdC5sYXctcGMtbmV3XC9sb2dpbiIsImlhdCI6IjE0NDU1MDA3MzIiLCJleHAiOiIxNDQ1NTA0MzMyIiwibmJmIjoiMTQ0NTUwMDczMiIsImp0aSI6IjIzYjAxZWIyY2JjY2Q3ZmVmNjhjOGEwZTAwN2M4OGY2In0.OTU5YWQ0ZjI5ZWJmMzA2MDZiZGJmOTZiMTY4MTAxMzhiNzMxMmJiNTE2NmIyMmQ3MTRhZWIxM2I1ZTdkZmRhZg');
-  
+  var hostName = $location.host();
+  if (hostName == '192.168.1.116') {
+    hostName = hostName + ":81";
+  } else {
+    hostName = '192.168.1.43';
+  }
+  localStorage.setItem("hostName", JSON.stringify(hostName));
+  $rootScope.hostName = JSON.parse(localStorage.getItem('hostName'));
 }])
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -75,9 +83,42 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
 /********************************** 圈子 **********************************/
     .state('group', { //圈子
       url: '/group',
+      cache:'true',
+      /*abstract:true,*/
       templateUrl: 'template/group/group.html',
       controller: 'groupCtrl'
     })
+    .state('group.list', { //圈子 - 列表
+      url: '/list',
+      cache:'true',
+      views: {
+          'group-list': {
+              templateUrl: 'template/group/group-list.html',
+              controller: 'groupListCtrl'
+          }
+      }
+    })
+    .state('group.televise', { //圈子 - 广播
+      url: '/televise',
+      cache:'true',
+      views: {
+          'group-televise': {
+              templateUrl: 'template/group/group-televise.html',
+              controller: 'groupTeleviseCtrl'
+          }
+      }
+    })
+    .state('group.attention', { //圈子 - 关注
+      url: '/attention',
+      cache:'true',
+      views: {
+          'group-attention': {
+              templateUrl: 'template/group/group-attention.html',
+              controller: 'groupAttentionCtrl'
+          }
+      }
+    })
+
     .state('groupview', { //圈子详情
       url: '/groupview',
       templateUrl: 'template/group/group_view.html',
@@ -93,8 +134,56 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
 /********************************** 知识 **********************************/
     .state('knowledge', { //知识
       url: '/knowledge',
-      templateUrl: 'template/knowledge/knowledge.html',
-      controller: 'knowledgeCtrl'
+     /* abstract:true,*/
+      templateUrl: 'template/knowledge/knowledge.html'
+    }) 
+   .state('knowledge.knowledges', { //法规
+      url: '/knowledges',
+      cache:'true',
+      views: {
+          'knowledge-knowledges': {
+              templateUrl: 'template/knowledge/knowledge-knowledges.html',
+              controller: 'knowledgesCtrl'
+          }
+      }
+    })
+   .state('knowledge.documents', { //文库
+      url: '/documents',
+      cache:'true',
+      views: {
+          'knowledge-documents': {
+              templateUrl: 'template/knowledge/knowledge-documents.html',
+              controller: 'documentsCtrl'
+          }
+      }
+    })
+   .state('knowledge.cases', { //案列
+      url: '/cases',
+      cache:'true',
+      views: {
+          'knowledge-cases': {
+              templateUrl: 'template/knowledge/knowledge-cases.html',
+              controller: 'casesCtrl'
+          }
+      }
+    })
+    .state('knowknowledgesview', { //法规-详情
+        url: '/knowknowledgesview/:id',
+        cache:'true',
+        templateUrl: 'template/knowledge/knowledges-view.html',
+        controller: 'knowKnowledgesCtrl'
+    })
+    .state('knowdocumentsview', { //文库-详情
+        url: '/knowdocumentsview/:id',
+        cache:'true',
+        templateUrl: 'template/knowledge/documents-view.html',
+        controller: 'knowDocumentsCtrl'
+    })
+    .state('knowcasesview', { //案列-详情
+        url: '/knowcasesview/:id',
+        cache:'true',
+        templateUrl: 'template/knowledge/cases-view.html',
+        controller: 'knowCasesCtrl'
     })
 
 /********************************** 我的 **********************************/
@@ -215,12 +304,13 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
       templateUrl: 'template/lawyer/lawyer_list.html',
       controller: 'lawyerlistCtrl'
     })
-    .state('view', { //律师个人主页
+    .state('lawyer', { //律师个人主页
       url: '/lawyer/:id',
       cache:'true',
       templateUrl: 'template/lawyer/view.html',
       controller: 'viewCtrl'
     })
+
     .state('graphic', { //图文咨询
       url: '/graphic',
       cache:'true',
@@ -247,6 +337,12 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
       templateUrl: 'template/questions/questions_list.html',
       controller: 'questionslistCtrl'
     })
+    .state('questionsview', { //问律师详情
+      cache:'true', 
+      url: '/questionsview/:id',
+      templateUrl: 'template/questions/view.html',
+      controller: 'questionsviewsCtrl'
+    })
 
 /********************************** 法律咨询 **********************************/
     .state('legaladvice', { //首页-法律咨询
@@ -271,6 +367,12 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
       templateUrl: 'template/lvtuanalliance.html',
       controller: 'lvtuanallianceCtrl'
     })
+    .state('lvtuanallianceview', { //首页-律团联盟-联盟详情
+      url: '/lvtuanallianceview/:id',
+      templateUrl: 'template/lvtuanalliance_view.html',
+      controller: 'lvtuanallianceCtrl'
+    })
+    
     .state('talent', { //首页-人才交流
       url: '/talent',
       templateUrl: 'template/talent.html',

@@ -1,0 +1,23 @@
+<ion-view view-title="knowledge-cases">
+    <ion-content>
+    
+		<form id="search_form">
+			<div class="item item-input-inset web-body">
+				<div class="item-input-wrapper">
+			    	<input name="q" type="search" placeholder="请输入法官，律师，案由，关健词..." class="search">
+			    	<i class="icon ion-search placeholder-icon" ng-click="search()"></i>
+				</div>
+			</div>
+		</form>
+		<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+		<ion-list>
+        	<ion-item class="item item-thumbnail-left"  ng-repeat="document in documents" ng-href="#/knowdocumentsview/{{document.id}}">
+	          	<img src="{{document.img}}" style="left:6px;border-radius:5px;">
+				<h2 style="height:30px;margin-top:5px;">{{document.title}}</h2>
+			    <p>{{document.created_at.date}}</p>
+	        </ion-item>
+         </ion-list>
+		<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
+
+    </ion-content>
+</ion-view>

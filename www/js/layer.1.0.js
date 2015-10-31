@@ -154,6 +154,7 @@ var layer = (function(){
     $(change_screen_ul).width($(document).width()*2);
     
     function index(obj, current){ // 取得元素在同辈中的索引值
+      debugger
       for (var i = 0, length = current.length; i<length; i++) { 
         if (current[i] == obj ) { 
           return i; 
@@ -336,6 +337,16 @@ var layer = (function(){
     return params;
   }
 
+//阻止默认事件
+this.stopDefault = function(e)
+{ 
+   if (e && e.preventDefault) {//如果是FF下执行这个
+      e.preventDefault();
+  }else{ 
+      window.event.returnValue = false;//如果是IE下执行这个
+  }
+  return false;
+}
   //base64编码
   this.base64code = function(input) {
     var keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
@@ -405,18 +416,7 @@ var layer = (function(){
       }
       return temp;
   }
-  
-  //阻止默认事件
-  this.stopDefault = function(e)
-  { 
-     if (e && e.preventDefault) {//如果是FF下执行这个
-        e.preventDefault();
-    }else{ 
-        window.event.returnValue = false;//如果是IE下执行这个
-    }
-    return false;
-  }
-  
+
   //获取错误信息
   this.msg = function(data) {
     if(angular.isUndefined(data)) {
@@ -451,6 +451,3 @@ var layer = (function(){
   }
   return this;
 }());
-  
-
-

@@ -1,0 +1,58 @@
+<ion-view view-title="group-attention">
+    <ion-content>
+   		
+   		<div class="slideBox">
+			<div class="hd tabs">
+			  <a ng-repeat="tab in tabs"  ng-class="{active:isActiveTab(tab.url)}"  ng-click="onClickTab(tab)" class="tab-item" >{{tab.title}}</a></li>
+			</div>
+			<div class="bd">
+				<div ng-include="currentTab"></div>
+			</div>
+		</div>
+
+    </ion-content>
+</ion-view>
+
+<!-- 圈子 - 关注 - 已关注 -->
+<script type="text/ng-template" id="alreadyAtten.tpl.html">
+	<ul class="list">
+	  	<div class="list">
+		    <a class="item item-thumbnail-left" style="padding-left:95px;" href="web85.html">
+		      <img src="img/icon-header.png" style="left:6px;border-radius:5px;">
+		      <h2 style="line-height:30px;"><span class="item-note">
+		      	<button class="button button-small button-outline button-stable" style="color:#373737;">取消关注</button>
+		      </span>Pretty Hate Machine</h2>
+		      <p>【98条新消息】</p>
+		      <p>Nine Inch NailsNailsNailsNailsNailsNailsNailsNailsNailsNails</p>
+		    </a>
+		    <div class="item web-paddingtb0" style="padding-left:55px;height:30px;line-height:30px;border-top:0px;color:#767676;margin-top:-10px;">
+		    <i class="icon web-ion-img1-2" style="float:right;margin-right:5px;font-size:14px;"><span style="color:#aeaeae;">粉丝</span>&nbsp;32</i>
+		    <i class="icon web-ion-img1-2" style="float:right;margin-right:5px;font-size:14px;"><span style="color:#aeaeae;">关注</span>&nbsp;32</i>
+		  </div>
+		</div>
+	</ul>
+</script>
+
+<!-- 圈子 - 关注 - 推荐关注 -->
+<script type="text/ng-template" id="recommAtten.tpl.html">
+	<div class="list">
+		<div class="item item-input-inset web-body" style="border:0px;">
+	    <label class="item-input-wrapper" style="background-color:#ffffff;">
+	    	<i class="icon ion-android-search"></i>&nbsp;
+	        <input type="text" placeholder="请输入你感兴趣的内容">
+	    </label>
+	  </div>
+	    <a class="item item-thumbnail-left" style="padding-left:95px;" href="web85.html">
+	      <img src="img/icon-header.png" style="left:6px;border-radius:5px;">
+	      <h2 style="line-height:30px;"><span class="item-note">
+	      	<button class="button button-small button-outline button-stable" style="color:#373737;">关注</button>
+	      </span>Pretty Hate Machine</h2>
+	      <p>【98条新消息】</p>
+	      <p>Nine Inch NailsNailsNailsNailsNailsNailsNailsNailsNailsNails</p>
+	    </a>
+	    <div class="item web-paddingtb0" style="padding-left:55px;height:30px;line-height:30px;border-top:0px;color:#767676;margin-top:-10px;">
+	    <i class="icon web-ion-img1-2" style="float:right;margin-right:5px;font-size:14px;"><span style="color:#aeaeae;">粉丝</span>&nbsp;32</i>
+	    <i class="icon web-ion-img1-2" style="float:right;margin-right:5px;font-size:14px;"><span style="color:#aeaeae;">关注</span>&nbsp;32</i>
+	  </div>
+	</div>
+</script>

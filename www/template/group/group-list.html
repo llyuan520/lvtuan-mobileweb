@@ -1,0 +1,19 @@
+<ion-view view-title="group-list">
+    <ion-content>
+
+		<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+		<ion-list>
+
+        	<ion-item class="item item-thumbnail-left" ng-repeat="item in items" ng-href="#/groupview">
+        		<img src="{{item.group_avatar}}" style="left:6px;border-radius:5px;">
+				<span style="width:15px;height:15px;border-radius:10px;background-color:#f00;display:block;position:absolute;top:5px;left:75px;z-index:99;">&nbsp;</span>
+				<h2 style="line-height:30px;"><span class="item-note">{{item.created_at}}</span>{{item.group_name}}</h2>
+				<p>【{{item.member_cnt}}条新消息】</p>
+				<p>{{item.group_intro}}</p>
+	        </ion-item> 
+
+         </ion-list>
+		<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
+
+    </ion-content>
+</ion-view>
