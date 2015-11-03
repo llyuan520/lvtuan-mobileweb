@@ -15,44 +15,52 @@
 
 <!-- 圈子 - 关注 - 已关注 -->
 <script type="text/ng-template" id="alreadyAtten.tpl.html">
-	<ul class="list">
+
+	<ul class="list" ng-controller="followedController">
 	  	<div class="list">
-		    <a class="item item-thumbnail-left" style="padding-left:95px;" href="web85.html">
-		      <img src="img/icon-header.png" style="left:6px;border-radius:5px;">
+	  		<ion-refresher pulling-text="下拉刷新" on-refresh="doRefreshfollowed()"></ion-refresher>
+		    <a class="item item-thumbnail-left" style="padding-left:95px;" ng-repeat="mine in mines">
+		      <img src="{{mine.group_avatar}}" style="left:6px;border-radius:5px;">
 		      <h2 style="line-height:30px;"><span class="item-note">
-		      	<button class="button button-small button-outline button-stable" style="color:#373737;">取消关注</button>
-		      </span>Pretty Hate Machine</h2>
-		      <p>【98条新消息】</p>
-		      <p>Nine Inch NailsNailsNailsNailsNailsNailsNailsNailsNailsNails</p>
+		      	<button class="button button-small button-outline button-stable bar-positive" style="color:#373737;">取消关注</button>
+		      </span>{{mine.group_name}}</h2>
+		      <p>【{{mine.post_count}}条新消息】</p>
+		      <p>{{mine.group_intro}}</p>
+		      <p>
+		      	<label>关注:&nbsp;{{mine.member_cnt}}</label>
+			  </p>
 		    </a>
-		    <div class="item web-paddingtb0" style="padding-left:55px;height:30px;line-height:30px;border-top:0px;color:#767676;margin-top:-10px;">
-		    <i class="icon web-ion-img1-2" style="float:right;margin-right:5px;font-size:14px;"><span style="color:#aeaeae;">粉丝</span>&nbsp;32</i>
-		    <i class="icon web-ion-img1-2" style="float:right;margin-right:5px;font-size:14px;"><span style="color:#aeaeae;">关注</span>&nbsp;32</i>
-		  </div>
+		    <ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMorefollowed()" distance="1%" immediate-check="true" > </ion-infinite-scroll>
 		</div>
 	</ul>
+	
 </script>
 
 <!-- 圈子 - 关注 - 推荐关注 -->
 <script type="text/ng-template" id="recommAtten.tpl.html">
-	<div class="list">
-		<div class="item item-input-inset web-body" style="border:0px;">
-	    <label class="item-input-wrapper" style="background-color:#ffffff;">
-	    	<i class="icon ion-android-search"></i>&nbsp;
-	        <input type="text" placeholder="请输入你感兴趣的内容">
-	    </label>
-	  </div>
-	    <a class="item item-thumbnail-left" style="padding-left:95px;" href="web85.html">
-	      <img src="img/icon-header.png" style="left:6px;border-radius:5px;">
-	      <h2 style="line-height:30px;"><span class="item-note">
-	      	<button class="button button-small button-outline button-stable" style="color:#373737;">关注</button>
-	      </span>Pretty Hate Machine</h2>
-	      <p>【98条新消息】</p>
-	      <p>Nine Inch NailsNailsNailsNailsNailsNailsNailsNailsNailsNails</p>
-	    </a>
-	    <div class="item web-paddingtb0" style="padding-left:55px;height:30px;line-height:30px;border-top:0px;color:#767676;margin-top:-10px;">
-	    <i class="icon web-ion-img1-2" style="float:right;margin-right:5px;font-size:14px;"><span style="color:#aeaeae;">粉丝</span>&nbsp;32</i>
-	    <i class="icon web-ion-img1-2" style="float:right;margin-right:5px;font-size:14px;"><span style="color:#aeaeae;">关注</span>&nbsp;32</i>
-	  </div>
-	</div>
+	<ul class="list" ng-controller="recommController">
+		<form id="search_form">
+			<div class="item item-input-inset web-body">
+				<div class="item-input-wrapper">
+			    	<input name="q" type="search" placeholder="请输入你感兴趣的内容" class="search">
+			    	<i class="icon ion-search placeholder-icon" ng-click="search()"></i>
+				</div>
+			</div>
+		</form>
+	  	<div class="list">
+	  		<ion-refresher pulling-text="下拉刷新" on-refresh="doRefreshrecommended()"></ion-refresher>
+		    <a class="item item-thumbnail-left" style="padding-left:95px;" ng-repeat="recommended in recommendeds">
+		      <img src="{{recommended.group_avatar}}" style="left:6px;border-radius:5px;">
+		      <h2 style="line-height:30px;"><span class="item-note">
+		      	<button class="button button-small button-outline button-stable bar-positive" style="color:#373737;">关注</button>
+		      </span>{{recommended.group_name}}</h2>
+		      <p>【{{recommended.post_count}}条新消息】</p>
+		      <p>{{recommended.group_intro}}</p>
+		      <p>
+		      	<label>关注:&nbsp;{{recommended.member_cnt}}</label>
+			  </p>
+		    </a>
+		    <ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMorerecommended()" distance="1%"  immediate-check="true"> </ion-infinite-scroll>
+		</div>
+	</ul>
 </script>

@@ -1,19 +1,25 @@
+<a class="item item-icon-right" href="#/groupcreate" style="background: none;border: 0px;width: 40px;height: 40px;float: right;margin-right: 10px;border-radius: 25px;position: absolute;z-index: 10000;bottom: 60px;right:0px;" href="#">
+	<span class="item-note" style="color:#387ef5;margin-left:20px;"><i class="icon ion-ios-plus"></i></span>
+</a>
 <ion-view view-title="group-list">
     <ion-content>
 
 		<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 		<ion-list>
-
         	<ion-item class="item item-thumbnail-left" ng-repeat="item in items" ng-href="#/groupview">
         		<img src="{{item.group_avatar}}" style="left:6px;border-radius:5px;">
-				<span style="width:15px;height:15px;border-radius:10px;background-color:#f00;display:block;position:absolute;top:5px;left:75px;z-index:99;">&nbsp;</span>
-				<h2 style="line-height:30px;"><span class="item-note">{{item.created_at}}</span>{{item.group_name}}</h2>
+				<h2 style="line-height:30px;">
+					<span class="item-note">{{item.created_at}}</span>{{item.group_name}}
+				</h2>
 				<p>【{{item.member_cnt}}条新消息】</p>
-				<p>{{item.group_intro}}</p>
+				<p>
+					<span class="item-note"><span style="width:10%;height:15px;border-radius:10px;background-color:#f00;color:#fff;">100&nbsp;</span></span>
+					{{item.group_intro}}
+				</p>
+				
 	        </ion-item> 
 
          </ion-list>
 		<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
-
     </ion-content>
 </ion-view>

@@ -17,7 +17,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
 //声明全局的方法和变量
 .run(['$rootScope','$timeout','$location',function($rootScope,$timeout,$location){
   /*让浏览器记住token*/
-  localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXUyJ9.eyJzdWIiOjE0OTcsImlzcyI6Imh0dHA6XC9cLzE5Mi4xNjguMS40M1wvbG9naW4iLCJpYXQiOiIxNDQ2Mjg0Njk3IiwiZXhwIjoiMTQ0NjI4ODI5NyIsIm5iZiI6IjE0NDYyODQ2OTciLCJqdGkiOiI3MTY2NDBkNTRkOGQ1MzUxNTllODVkNGM1OWY2OWFhMiJ9.NWQwMzBhNDdmNGY4MzY2ZWNkOGY2MmM4ZWE5ZGRlZDI0MDdiOGU4MGFhMjA2YTY4MjU3MDk5NGE1NTQxN2E4MQ');
+  localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXUyJ9.eyJzdWIiOjE0OTcsImlzcyI6Imh0dHA6XC9cLzE5Mi4xNjguMS40M1wvbG9naW4iLCJpYXQiOiIxNDQ2NTE4MTExIiwiZXhwIjoiMTQ0NjUyMTcxMSIsIm5iZiI6IjE0NDY1MTgxMTEiLCJqdGkiOiJhNzAxNzBjYjZjNjZhYjA1YzgzYjU2ZWFhOGRhNmFmYSJ9.MGUwMjBkMmRlMjBiNWRkY2QwNWIxZDhjMGJjNDc2ZTcxMjJkOWIwZWZiNmM5ZWM4YzJhYTA2NjNmZjE3MmY2Mg');
   //localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXUyJ9.eyJzdWIiOjE0ODgsImlzcyI6Imh0dHA6XC9cL2Rldi53ZGxzdC5sYXctcGMtbmV3XC9sb2dpbiIsImlhdCI6IjE0NDU5NTA0MzUiLCJleHAiOiIxNDQ1OTU0MDM1IiwibmJmIjoiMTQ0NTk1MDQzNSIsImp0aSI6IjMzZmRlYmY0YjEwOWRkOWMyYzhmZmUyNjVkNGUxNjQyIn0.YjgwNDljNjVmZmQ3MDVhODE4ZmI4ZTE2Yzg3OGQzMjk1ZWUwYzZmYzllZjc5MTA1ZTZiZDdhYTg5MDE3MzgzYQ');
   $rootScope.token = localStorage.getItem('token');
   $timeout(function() {
@@ -26,11 +26,11 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
   $rootScope.is_lawyer = JSON.parse(localStorage.getItem('is_lawyer'));
   //localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXUyJ9.eyJzdWIiOjE0ODksImlzcyI6Imh0dHA6XC9cL2Rldi53ZGxzdC5sYXctcGMtbmV3XC9sb2dpbiIsImlhdCI6IjE0NDU1MDA3MzIiLCJleHAiOiIxNDQ1NTA0MzMyIiwibmJmIjoiMTQ0NTUwMDczMiIsImp0aSI6IjIzYjAxZWIyY2JjY2Q3ZmVmNjhjOGEwZTAwN2M4OGY2In0.OTU5YWQ0ZjI5ZWJmMzA2MDZiZGJmOTZiMTY4MTAxMzhiNzMxMmJiNTE2NmIyMmQ3MTRhZWIxM2I1ZTdkZmRhZg');
   var hostName = $location.host();
-  if (hostName == '192.168.1.116') {
-    hostName = hostName + ":81";
-  } else {
+  // if (hostName == '192.168.1.116') {
+  //   hostName = hostName + ":81";
+  // } else {
     hostName = '192.168.1.43';
-  }
+  // }
   localStorage.setItem("hostName", JSON.stringify(hostName));
   $rootScope.hostName = JSON.parse(localStorage.getItem('hostName'));
 }])
@@ -88,6 +88,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
       templateUrl: 'template/group/group.html',
       controller: 'groupCtrl'
     })
+
     .state('group.list', { //圈子 - 列表
       url: '/list',
       cache:'true',
@@ -98,7 +99,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
           }
       }
     })
-    .state('group.televise', { //圈子 - 广播
+   .state('group.televise', { //圈子 - 广播
       url: '/televise',
       cache:'true',
       views: {
@@ -129,6 +130,13 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
       templateUrl: 'template/group/broadcast_view.html',
       controller: 'broadcastviewCtrl'
     })
+
+    .state('groupcreate', { //创建圈子
+      url: '/groupcreate',
+      templateUrl: 'template/group/create.html',
+      controller: 'groupcreateCtrl'
+    })
+
     
 
 /********************************** 知识 **********************************/
@@ -351,7 +359,82 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
       controller: 'legaladviceCtrl'
     })
 
+/********************************** 我的律团 **********************************/
+/*———————————————————————————— 我的律团- 律师 -公用 ————————————————————————————*/
+    .state('mylvtuan', { //首页 - 我的律团 - 律师的工作台
+      url: '/mylvtuan',
+      cache:'true', 
+      templateUrl: 'template/mylvtuan/lawyer/mylvtuan.html',
+      controller: 'mylvtuanCtrl'
+    })
+    .state('workbenchlawyer', { //首页 - 我的律团 - 律师的工作台
+      url: '/workbenchlawyer',
+      templateUrl: 'template/mylvtuan/lawyer/workbench-lawyer.html',
+      controller: 'workbenchLawyerCtrl'
+    })
+/*———————————————————————————— 我的律团- 律师订单 -公用 ————————————————————————————*/
+    .state('orderlawyer', { //首页 - 我的律团 - 律师的工作
+      url: '/orderlawyer',
+      templateUrl: 'template/mylvtuan/lawyer/order/order-lawyer.html'
+    })
+   .state('orderlawyer.all', { //律师的工作 - 全部
+      url: '/all',
+      cache:'true',
+      views: {
+          'order-all': {
+              templateUrl: 'template/mylvtuan/lawyer/order/order-all.html',
+              controller: 'orderAllCtrl'
+          }
+      }
+    })
+   .state('orderlawyer.pending', { //律师的工作 - 待处理
+      url: '/pending',
+      cache:'true',
+      views: {
+          'order-pending': {
+              templateUrl: 'template/mylvtuan/lawyer/order/order-pending.html',
+              controller: 'orderPendingCtrl'
+          }
+      }
+    })
+   .state('orderlawyer.replied', { //律师的工作 - 处理中
+      url: '/replied',
+      cache:'true',
+      views: {
+          'order-replied': {
+              templateUrl: 'template/mylvtuan/lawyer/order/order-replied.html',
+              controller: 'orderRepliedCtrl'
+          }
+      }
+    })
+   .state('orderlawyer.completed', { //律师的工作 - 已完成
+      url: '/completed',
+      cache:'true',
+      views: {
+          'order-completed': {
+              templateUrl: 'template/mylvtuan/lawyer/order/order-completed.html',
+              controller: 'orderCompletedCtrl'
+          }
+      }
+    })
+   .state('orderlawyer.timeout', { //律师的工作 - 已超时
+      url: '/timeout',
+      cache:'true',
+      views: {
+          'order-timeout': {
+              templateUrl: 'template/mylvtuan/lawyer/order/order-timeout.html',
+              controller: 'orderTimeoutCtrl'
+          }
+      }
+    })
+
+/*———————————————————————————— 我的律团- 用户 -公用 ————————————————————————————*/
+
+
+
 /********************************** 法律讲堂 **********************************/
+/*workbench-lawyer.html*/
+
     .state('lawlecture', { //首页-法律讲堂
       url: '/lawlecture',
       templateUrl: 'template/lawlecture.html',
@@ -377,6 +460,11 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
       url: '/talent',
       templateUrl: 'template/talent.html',
       controller: 'talentCtrl'
+    })
+    .state('talentview', { //首页-人才交流
+      url: '/talentview/:id',
+      templateUrl: 'template/talentview.html',
+      controller: 'talentviewCtrl'
     })
 
 /********************************** error **********************************/

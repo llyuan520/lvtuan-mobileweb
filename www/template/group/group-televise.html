@@ -1,51 +1,34 @@
+<a class="item item-icon-right"  style="background: none;border: 0px;width: 40px;height: 40px;float: right;margin-right: 10px;border-radius: 25px;position: absolute;z-index: 10000;bottom: 60px;right:0px;" href="#">
+	<span class="item-note" style="color:#387ef5;margin-left:20px;"><i class="icon ion-compose web-ion-compose"></i></span>
+</a>
 <ion-view view-title="group-televise">
     <ion-content>
-
 		<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 		<ion-list>
-			<div class="item web-paddingtb0" style="padding-left:55px;height:30px;line-height:30px;border-bottom:0px;" >
+			<div class="item">
 			  	<a href="#/broadcastview">
-			    <span class="web-spant">08</span>
-			    广播广播广播广播广播广播广播广播广播广播广播广播广播广播广播广播
+			    	广播广播广播广播广播广播广播广播广播广播广播广播广播广播广播广播
 				</a>
-			  </div>
-			  <div class="item web-paddingtb0" style="padding-left:55px;height:30px;line-height:30px;border-top:0px;">
-			    <span class="web-spant" style="font-size:16px;border-top:0px;">7月</span>
-			    12:18
-			  </div>
-			  <div class="item web-paddingtb0" style="padding-left:55px;height:30px;line-height:30px;border-top:0px;color:#767676;">
-			    <i class="icon ion-compose web-ion-img1-2" style="float:right;margin-right:5px;font-size:12px;">&nbsp;</i>
-			    <i class="icon ion-heart web-ion-img1-2" style="float:right;margin-right:5px;font-size:12px;">&nbsp;17</i>
-			    <i class="icon ion-chatbubble web-ion-img1-2" style="float:right;margin-right:5px;font-size:12px;">&nbsp;32</i>
-			  </div>
-			  <div class="item web-item web-paddingtb5 web-font14 web-item-topb0 web-item-botb0" style="color:#f00;">
-			    <i class="icon ion-heart"></i>
-			    <span style="color:#35A9F2;">广播广播广播广播广播广播</span>
-			  </div>
-			  <div class="item web-item web-paddingtb5 web-font14 web-item-topb0 web-item-botb0">
-			    全部评论
-			  </div>
-			  <div class="item web-item web-paddingtb5 web-font14 web-item-topb0 web-item-botb0">
-			    <span style="color:#35A9F2;">广播广&nbsp;:&nbsp;</span>广播广广播广
+				<p>12:18</p>
+				<div class="web-paddingtb0" style="padding-left:55px;height:30px;line-height:30px;border-top:0px;color:#767676;">
+				    <i class="icon ion-compose web-ion-img1-2" style="float:right;margin-right:5px;font-size:12px;">&nbsp;20</i>
+				    <i class="icon ion-heart web-ion-img1-2" style="float:right;margin-right:5px;font-size:12px;">&nbsp;17</i>
+				    <i class="icon ion-chatbubble web-ion-img1-2" style="float:right;margin-right:5px;font-size:12px;">&nbsp;32</i>
+				  </div>
+				<div class="web-paddingtb5 web-font14 web-item-topb0 web-item-botb0" style="color:#f00;">
+				    <i class="icon ion-heart"></i>
+				    <span style="color:#35A9F2;">广播广播广播广播广播广播</span>
+				</div>
+				<div class="web-paddingtb5 web-font14 web-item-topb0 web-item-botb0">
+				    全部评论
+				  </div>
+				  <div class="web-paddingtb5 web-font14 web-item-topb0 web-item-botb0">
+				    <span style="color:#35A9F2;">广播广&nbsp;:&nbsp;</span>广播广广播广
+				</div>
 			</div>
-        	<!-- <ion-item class="item" ng-repeat="knowledge in knowledges" ng-href="#/knowknowledgesview/{{knowledge.id}}">
-	          	<img class="full-image" src="{{knowledge.img}}" style="max-height:150px;">
-				<h2> {{knowledge.title}}</h2>
-			    <p class="web-paddingtb5" style="margin:0px;">
-			      律团
-			    </p>
-			    <p class="item web-paddingtb5" style="margin:0px;padding:0px;border:0px;">
-			       <span class="item-note"><i class="icon ion-ios-star-outline web-ion-img1-2">&nbsp;{{knowledge.views_count}}</i></span>
-			      {{knowledge.created_at.date}}
-			    </p>
-	        </ion-item> -->
+
          </ion-list>
-         <div class="list">
-			  <a class="item item-icon-right"  style="background:none;border:0px;background-color:#24A3F1;min-width:40px;padding:0px; width:40px;height:40px;float:right;margin-right:10px;border-radius:25px;" href="#">
-			    <span class="item-note" style="color:#ffffff;margin-left:20px;"><i class="icon ion-compose web-ion-compose"></i></span>
-			  </a>
-			</div>
-							
+			
 		<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
 
     </ion-content>

@@ -7,14 +7,14 @@
 		</ion-header-bar>
 		<ion-content class="web-body">
 			<ion-list>
-	        	<ion-item class="item">
-	        		<h2 style="text-align:center"> {{items.title}}</h2>
+	        	<ion-item class="item" ng-repeat="document in documents | filter:{'id':id}">
+	        		<h2 style="text-align:center"> {{document.title}}</h2>
 	        		<p class="web-paddingtb5" style="margin:0px;">
 				      <label class="lef">律团</label>
-				      <label class="rig">{{items.created_at.date}}</label>
+				      <label class="rig">{{document.created_at.date}}</label>
 				    </p>
-		          	<img class="full-image" src="{{items.img}}" style="max-height:150px;">
-				    <p class="contents" ng-bind-html="items.content"></p>
+		          	<img class="full-image" src="{{document.img}}" style="max-height:150px;">
+				    <p class="contents" ng-bind-html="document.content"></p>
 		        </ion-item>
 	         </ion-list>
 	    </ion-content>

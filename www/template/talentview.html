@@ -1,0 +1,71 @@
+<ion-view view-title="人才交流">
+		<ion-pane>
+			<ion-header-bar class="bar bar-header">
+				<a class="button button-icon  button-clear button-positive" onclick="history.go(-1);">
+      				<img class="v-align" src="img/smallback.png"/>
+      			</a>
+				<h1 class="title">人才交流</h1>
+				<a class="button icon-right button-clear">深圳<i class="icon ion-arrow-down-b"></i></a>
+			</ion-header-bar>
+			<ion-content>
+				<div class="list list-borderless">
+					<div class="item item-divider"></div>
+					<div class="item">
+						
+							<span class="sp-l">{{positions.title}}</span>
+							<span class="sp-r">{{positions.created_at}}</span>
+							<span class="clear"></span>
+
+					</div>
+					<div class="item item-button-right">
+						
+							<span class="fc-ee">地址</span>
+							<span>{{positions.company_address}}</span>
+							<button class="button button-positive button-clear"><i class="icon ion-location"></i></button>
+						
+						
+					</div>
+					<div class="item">
+						<h3>{{positions.company_name}}</h3>
+					</div>
+					<div class="item">
+						<span class="fc-ee">规模</span>
+						<span>{{positions.company_size}}</span>
+					</div>
+					<div class="item">
+						<span class="fc-ee">人数</span>
+						<span>{{positions.position_count}}人</span>
+					</div>
+					<div class="item">
+						<span class="fc-ee">学历</span>
+						<span>{{positions.education}}</span>
+					</div>
+					
+					<div class="item item-divider lh-2em">职位描述</div>
+					<div class="item">岗位职责</div>
+					<div class="item">
+						{{positions.position_requirements}}
+					</div>
+					<div class="item">任职要求</div>
+					<div class="item">
+						{{positions.position_responsibilities}}
+					</div>
+					
+				</div>
+			</ion-content>
+				<div class="tabs tabs-icon-top tabs-color-positive">
+					  <a class="tab-item" href="#">
+					    <i class="icon ion-home"></i>
+					    收藏
+					  </a>
+					  <a class="tab-item" href="#">
+					    <i class="icon ion-android-contacts"></i>
+					   	分享
+					  </a>
+					  <a class="tab-item" href="#">
+					    <i class="icon ion-social-buffer"></i>
+					    申请职位
+					  </a>
+				</div>
+		</ion-pane>
+</ion-view>

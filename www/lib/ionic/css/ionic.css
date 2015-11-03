@@ -7140,6 +7140,15 @@ a.button {
   flex: 0 0 10%;
   max-width: 10%; }
 
+.col-15 {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 15%;
+  -moz-box-flex: 0;
+  -moz-flex: 0 0 15%;
+  -ms-flex: 0 0 15%
+  flex: 0 0 15%;
+  max-width: 15%; }
+
 .col-20 {
   -webkit-box-flex: 0;
   -webkit-flex: 0 0 20%;
@@ -7202,6 +7211,15 @@ a.button {
   -ms-flex: 0 0 80%;
   flex: 0 0 80%;
   max-width: 80%; }
+
+.col-85 {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 85%;
+  -moz-box-flex: 0;
+  -moz-flex: 0 0 85%;
+  -ms-flex: 0 0 85%;
+  flex: 0 0 85%;
+  max-width: 85%; }
 
 .col-90 {
   -webkit-box-flex: 0;

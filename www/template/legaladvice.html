@@ -8,27 +8,31 @@
 		</ion-header-bar>
 		
 		<ion-content>
-			<div class="item item-input-inset web-body">
-			    <label class="item-input-wrapper" style="background-color:#ffffff;">
-			    	<i class="icon ion-android-search"></i>&nbsp;
-			        <input type="text" placeholder="请输入你感兴趣的内容">
-			    </label>
-			</div>
-			
+	   		<form id="search_form">
+				<div class="item item-input-inset web-body">
+					<div class="item-input-wrapper">
+				    	<input name="q" type="search" placeholder="搜索你想要的内容" class="search">
+				    	<i class="icon ion-search placeholder-icon" ng-click="search()"></i>
+					</div>
+				</div>
+			</form>
+			<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 			<ion-list>
-            	<ion-item><!-- ng-href="#/lawyer" -->
-		          	<img class="full-image" height="200" src="img/smallback.png"/>
-					<h2>法律资讯</h2>
-				    <p class="content">
-				      图文咨询：￥30.00/次(24小时内有效，不限条数)图文咨询：￥30.00/次(24小时内有效，不限条数)次(24小时内有效，不限条数)
+	        	<ion-item class="item" ng-repeat="knowledge in knowledges" ng-href="#/knowknowledgesview/{{knowledge.id}}">
+		          	<img class="full-image" src="{{knowledge.img}}" style="max-height:150px;">
+					<h2> {{knowledge.title}}</h2>
+				    <p class="web-paddingtb5" style="margin:0px;">
+				      律团
 				    </p>
-				    <p>律团</p>
-				    <p>
-				      <a href="#" class="subdued">2015-10-14 18:45:47</a>
-				      <a href="#" class="subdued icon icon-left ion-star rig">法律资讯</a>
+				    <p class="item web-paddingtb5" style="margin:0px;padding:0px;border:0px;">
+				       <span class="item-note"><i class="icon ion-ios-star-outline web-ion-img1-2">&nbsp;{{knowledge.views_count}}</i></span>
+				      {{knowledge.created_at.date}}
 				    </p>
+		       
 		        </ion-item>
 	         </ion-list>
-		</ion-content>
+			<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
+
+	    </ion-content>
 	</ion-pane>
 </ion-view>

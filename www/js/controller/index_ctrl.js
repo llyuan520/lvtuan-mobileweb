@@ -26,8 +26,8 @@ lvtuanApp.controller("indexCtrl",function($scope,$state,$http,$rootScope,$ionicL
 	$scope.jumplogin = function(){
 		console.info($rootScope.is_lawyer);
 		$state.go("login", {reload: true});
-		
 	}
+
     //上拉加载
     var page = 1; //页数
     $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
@@ -312,11 +312,153 @@ lvtuanApp.controller("groupAttentionCtrl",function($scope,$http,$state,$rootScop
 
     $scope.onClickTab = function (tab) { //点击tab赋值url
         $scope.currentTab = tab.url;
+        
+        console.info(tab.url);
     }
     
     $scope.isActiveTab = function(tabUrl) {  //给选中的url的a 标签样式
         return tabUrl == $scope.currentTab;
     }
+
+    
+})
+
+
+//已关注
+lvtuanApp.controller("followedController",function($scope,$http,$state,$rootScope){
+
+
+ 	var page = 1; //页数
+    $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
+    $scope.mines = [];	//创建一个数组接收后台的数据
+
+	 //下拉刷新
+	$scope.doRefreshfollowed = function() {
+		page = 1;
+		$scope.mines = [];
+        $scope.loadMorefollowed();
+    };
+
+    //上拉加载
+	$scope.loadMorefollowed = function() {
+		console.info('http://'+$rootScope.hostName+'/group/list/mine?page='+page++)
+		$http.get('http://'+$rootScope.hostName+'/group/list/mine?page='+page++,
+	        {
+	        cache: true,
+	        headers: {
+	            'Content-Type': 'application/json' , 
+	            'Authorization': 'bearer ' + $rootScope.token
+	       		}
+	        }).success(function(data) {
+
+				console.info('已关注',data.data)
+				if(data.data.length > 0){
+					if(data.data.length > 9){
+						$scope.moredata = true;
+					}else{
+						$scope.moredata = false;
+					}
+					//用于连接两个或多个数组并返回一个新的数组
+					$scope.mines = $scope.mines.concat(data.data); 
+				}else{
+					layer.show("暂无数据！")
+					$scope.moredata = false;
+					return false;
+				}
+
+			}).error(function (data, status) {
+		        console.info(JSON.stringify(data));
+		        console.info(JSON.stringify(status));
+		    })
+		    .finally(function() {
+	            $scope.$broadcast('scroll.refreshComplete');
+	            $scope.$broadcast('scroll.infiniteScrollComplete');
+	        });
+	};
+
+	$scope.$on('$stateChangeSuccess', function() {
+	    $scope.loadMorefollowed();
+	});
+
+})
+
+//推荐关注
+lvtuanApp.controller("recommController",function($scope,$http,$state,$rootScope){
+
+	var page = 1; //页数
+    $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
+    $scope.recommendeds = [];	//创建一个数组接收后台的数据
+
+    $scope.search = function(){
+    	page = 1; //页数
+    	$scope.recommendeds = [];	//创建一个数组接收后台的数据
+    	getparamq();
+    }
+
+    function getparamq(){
+    	var param = layer.getParams("#search_form");
+    	getUrlq(param)
+    }
+
+    function getUrlq(param){
+
+    	var url = "";
+    	if(param.q){
+    		url +='http://'+$rootScope.hostName+'/group/recommend?q='+param.q+'&page='+page++;
+    	}else{
+    		url +='http://'+$rootScope.hostName+'/group/recommend?page='+page++;
+    	}
+
+    	$http.get(url,
+	        {
+	        cache: true,
+	        headers: {
+	            'Content-Type': 'application/json' , 
+	            'Authorization': 'bearer ' + $rootScope.token
+	       		}
+	        }).success(function(data) {
+
+				console.info('推荐关注',data.data)
+				if(data.data.length > 0){
+					if(data.data.length > 9){
+						$scope.moredata = true;
+					}else{
+						$scope.moredata = false;
+					}
+					//用于连接两个或多个数组并返回一个新的数组
+					$scope.recommendeds = $scope.recommendeds.concat(data.data); 
+				}else{
+					layer.show("暂无数据！")
+					$scope.moredata = false;
+					return false;
+				}
+
+			}).error(function (data, status) {
+		        console.info(JSON.stringify(data));
+		        console.info(JSON.stringify(status));
+		    })
+		    .finally(function() {
+	            $scope.$broadcast('scroll.refreshComplete');
+	            $scope.$broadcast('scroll.infiniteScrollComplete');
+	        });
+
+    }
+
+	 //下拉刷新
+	$scope.doRefreshrecommended = function() {
+		page = 1;
+		$scope.recommendeds = [];
+        getparamq();
+    };
+
+    //上拉加载 - 法规
+	$scope.loadMorerecommended = function() {
+		getparamq();
+	};
+
+	$scope.$on('$stateChangeSuccess', function() {
+	    getparamq();
+	});
 
 })
 
@@ -330,6 +472,12 @@ lvtuanApp.controller("broadcastviewCtrl",function($scope,$http,$state,$rootScope
 	console.info("广播详情");
 
 })
+//创建圈子
+lvtuanApp.controller("groupcreateCtrl",function($scope,$http,$state,$rootScope){
+	console.info("创建圈子");
+
+})
+
 
 /****************************************************** 知识 ******************************************************/
 //知识
@@ -554,10 +702,11 @@ lvtuanApp.controller("knowKnowledgesCtrl",function($scope,$http,$rootScope,$stat
 
 //文库-详情
 lvtuanApp.controller("knowDocumentsCtrl",function($scope,$http,$rootScope,$interval,$stateParams){
+
 	init();
 	//获取律师的个人信息
 	function init(){ 
-		var url = 'http://'+$rootScope.hostName+'/knowledge/article/'+$stateParams.id+'/view';
+		var url ='http://'+$rootScope.hostName+'/knowledge/document/list_documents';
 		$http.get(url,
 	        {
 	        cache: true,
@@ -567,13 +716,14 @@ lvtuanApp.controller("knowDocumentsCtrl",function($scope,$http,$rootScope,$inter
 	       		}
 	        }).success(function(data) {
 	        	console.info(data.data)
-	        	$scope.items = data.data;
-
+	        	$scope.documents = data.data;
 			}).error(function (data, status) {
 		        console.info(JSON.stringify(data));
 		        console.info(JSON.stringify(status));
 		    })
 	}
+
+	$scope.id = $stateParams.id;
 })
 //案列-详情
 lvtuanApp.controller("knowCasesCtrl",function($scope,$http,$rootScope,$interval,$stateParams){
@@ -837,8 +987,43 @@ lvtuanApp.controller("infolawyerCtrl",function($scope,$http,$rootScope){
 })
 //我的关注
 lvtuanApp.controller("followedlaywerCtrl",function($scope,$http,$rootScope){
-	console.info("我的关注");
-
+	var page = 1; //页数
+    $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
+    $scope.items = [];	//创建一个数组接收后台的数据
+    //下拉刷新
+	$scope.doRefresh = function() {
+		page = 1;
+		$scope.items = [];
+        $scope.loadMore();
+    };
+	//上拉加载
+	$scope.loadMore = function() {
+	$http.get('http://'+$rootScope.hostName+'/center/lawyer/customer/followed?page='+page++,
+        {
+        cache: true,
+        headers: {
+            'Content-Type': 'application/json' , 
+            'Authorization': 'bearer ' + $rootScope.token
+       		}
+        }).success(function(data) {
+			if(data.data.length > 0){
+				if(data.data.length > 9){
+					$scope.moredata = true;
+				}else{
+					$scope.moredata = false;
+				}
+				$scope.items = data.data; 
+				console.info($scope.items );
+				return true;
+			}else{
+				layer.show('暂无数据！');
+				return false;
+			}
+		}).error(function (data, status) {
+	        console.info(JSON.stringify(data));
+	        console.info(JSON.stringify(status));
+	    })
+	};
 })
 //律师的积分
 lvtuanApp.controller("listscoreslaywerCtrl",function($scope,$http,$rootScope){
@@ -873,6 +1058,26 @@ lvtuanApp.controller("commentlaywerCtrl",function($scope,$http,$rootScope){
 //律师的文章
 lvtuanApp.controller("articlelaywerCtrl",function($scope,$http,$rootScope){
 	console.info("律师的文章");
+	$http.get('http://'+$rootScope.hostName+'/lawyer/blog/list',
+        {
+        cache: true,
+        headers: {
+            'Content-Type': 'application/json' , 
+            'Authorization': 'bearer ' + $rootScope.token
+       		}
+        }).success(function(data) {
+			if(data.data){
+				//用于连接两个或多个数组并返回一个新的数组
+				$scope.items = data.data; 
+				console.info($scope.items)
+			}else{
+				layer.show('暂无数据！');
+				return false;
+			}
+		}).error(function (data, status) {
+	        console.info(JSON.stringify(data));
+	        console.info(JSON.stringify(status));
+	    })
 
 })
 
@@ -1573,9 +1778,77 @@ lvtuanApp.controller("questionsviewsCtrl",function($http,$scope,$state,$rootScop
 
 })
 
+/*———————————————————————————— 首页八模块 ————————————————————————————*/
+
 //法律咨询
-lvtuanApp.controller("legaladviceCtrl",function($http,$scope,$state,$rootScope){
-	console.info("法律咨询");
+lvtuanApp.controller("legaladviceCtrl",function($http,$scope,$rootScope){
+	var page = 1; //页数
+    $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
+    $scope.knowledges = [];	//创建一个数组接收后台的数据
+
+    $scope.search = function(){
+    	page = 1; //页数
+    	$scope.knowledges = [];	//创建一个数组接收后台的数据
+    	getparamq();
+    }
+
+    function getparamq(){
+    	var param = layer.getParams("#search_form");
+    	getUrlq(param)
+    }
+
+    function getUrlq(param){
+    	var url = "";
+    	if(param.q){
+    		url +='http://'+$rootScope.hostName+'/knowledge/article/list_articles?q='+param.q+'&page='+page++;
+    	}else{
+    		url +='http://'+$rootScope.hostName+'/knowledge/article/list_articles?page='+page++;
+    	}
+    	$http.get(url,
+	        {
+	        cache: true,
+	        headers: {
+	            'Content-Type': 'application/json' , 
+	            'Authorization': 'bearer ' + $rootScope.token
+	       		}
+	        }).success(function(data) {
+				console.info('法规',data.data)
+				if(data.data.length > 0){
+					if(data.data.length > 9){
+						$scope.moredata = true;
+					}else{
+						$scope.moredata = false;
+					}
+					//用于连接两个或多个数组并返回一个新的数组
+					$scope.knowledges = $scope.knowledges.concat(data.data); 
+				}else{
+					layer.show("暂无数据！")
+					$scope.moredata = false;
+					return false;
+				}
+
+			}).error(function (data, status) {
+		        console.info(JSON.stringify(data));
+		        console.info(JSON.stringify(status));
+		    })
+		    .finally(function() {
+	            $scope.$broadcast('scroll.refreshComplete');
+	            $scope.$broadcast('scroll.infiniteScrollComplete');
+	        });
+
+    }
+
+	 //下拉刷新
+	$scope.doRefresh = function() {
+		page = 1;
+		$scope.knowledges = [];
+        getparamq();
+    };
+
+    //上拉加载 - 法规
+	$scope.loadMore = function() {
+		getparamq();
+	};
 })
 
 //法律讲堂
@@ -1625,5 +1898,80 @@ lvtuanApp.controller("lvtuanallianceCtrl",function($http,$scope,$state,$rootScop
 
 //人才交流
 lvtuanApp.controller("talentCtrl",function($http,$scope,$state,$rootScope){
-	console.info("人才交流");
+	init()
+	//人才交流
+	function init(){ 
+		var url = 'http://'+$rootScope.hostName+'/hr/list_positions';
+		$http.get(url,
+	        {
+	        cache: true,
+	        headers: {
+	            'Content-Type': 'application/json' , 
+	            'Authorization': 'bearer ' + $rootScope.token
+	       		}
+	        }).success(function(data) {
+	        	$scope.positions = data.data;
+	        	console.info($scope.positions)
+			}).error(function (data, status) {
+		        console.info(JSON.stringify(data));
+		        console.info(JSON.stringify(status));
+		    })
+	}
 })
+//人才交流详情
+lvtuanApp.controller("talentviewCtrl",function($http,$scope,$state,$rootScope,$stateParams){
+	init()
+	//人才交流详情
+	function init(){ 
+		var url = 'http://'+$rootScope.hostName+'/hr/'+$stateParams.id+'/view';
+		$http.get(url,
+	        {
+	        cache: true,
+	        headers: {
+	            'Content-Type': 'application/json' , 
+	            'Authorization': 'bearer ' + $rootScope.token
+	       		}
+	        }).success(function(data) {
+	        	$scope.positions = data.data;
+	        	console.info($scope.positions)
+			}).error(function (data, status) {
+		        console.info(JSON.stringify(data));
+		        console.info(JSON.stringify(status));
+		    })
+	}
+})
+
+
+
+/*———————————————————————————— 我的律团 - 律师的律团 ————————————————————————————*/
+//首页 - 我的律团 - 律师的工作台
+lvtuanApp.controller("mylvtuanCtrl",function($http,$scope,$state,$rootScope){
+	console.info("律师的律团");
+})
+//律师的工作 - 律师的订单
+lvtuanApp.controller("workbenchLawyerCtrl",function($http,$scope,$state,$rootScope){
+	console.info("律师的订单");
+})
+//律师的工作 - 全部
+lvtuanApp.controller("orderAllCtrl",function($http,$scope,$state,$rootScope){
+	console.info("全部");
+})
+//律师的工作 - 待处理
+lvtuanApp.controller("orderPendingCtrl",function($http,$scope,$state,$rootScope){
+	console.info("待处理");
+})
+//律师的工作 - 处理中
+lvtuanApp.controller("orderRepliedCtrl",function($http,$scope,$state,$rootScope){
+	console.info("处理中");
+})
+//律师的工作 - 已完成
+lvtuanApp.controller("orderCompletedCtrl",function($http,$scope,$state,$rootScope){
+	console.info("已完成");
+})
+//律师的工作 - 已超时
+lvtuanApp.controller("orderTimeoutCtrl",function($http,$scope,$state,$rootScope){
+	console.info("已超时");
+})
+
+
+/*———————————————————————————— 我的律团 - 用户的律团 ————————————————————————————*/

@@ -8,31 +8,38 @@
 				<a class="button icon-right button-clear">深圳<i class="icon ion-arrow-down-b"></i></a>
 			</ion-header-bar>
 			<ion-content>
+
 				<div class="list">
-					<div class="item row">
-						<div class="col-10"><input type="checkbox" value="" /></div>
-						<div class="col-90">
-							<h2>律师助理</h2>
+					<div class="item row" ng-repeat="position in positions" style="padding:10px 5px;">
+						<div class="col-15">
+							<label class="checkbox"> <!-- checked="" -->
+				             	<input type="checkbox">
+				            </label>
+				        </div>
+						<div class="col-85">
+							<h2><a ng-href="#/talentview/{{position.id}}">{{position.title}}</a></h2>
 							<p>
-								<label>2015/08/04</label>
-								<label>深圳福田区</label>
-								<label>27</label>
-							</p>
-						</div>
-					</div>
-					<div class="item row">
-						<div class="col-10"><input type="checkbox" value="" /></div>
-						<div class="col-90">
-							<h2>律师助理</h2>
-							<p>
-								<label>2015/08/04</label>
-								<label>深圳福田区</label>
-								<label>27</label>
+								<label>{{position.created_at}}</label>
+								<label>{{position.company_address}}</label>
+								<label>人数：{{position.position_count}}人</label>
 							</p>
 						</div>
 					</div>
 				</div>
 			</ion-content>
-			
+			<div class="tabs tabs-icon-top tabs-color-positive">
+				  <a class="tab-item" href="#">
+				    <i class="icon ion-home"></i>
+				    收藏
+				  </a>
+				  <a class="tab-item" href="#">
+				    <i class="icon ion-android-contacts"></i>
+				   	分享
+				  </a>
+				  <a class="tab-item" href="#">
+				    <i class="icon ion-social-buffer"></i>
+				    申请职位
+				  </a>
+			</div>
 		</ion-pane>
 </ion-view>
