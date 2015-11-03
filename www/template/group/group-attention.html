@@ -1,15 +1,15 @@
 <ion-view view-title="group-attention">
     <ion-content>
-   		
    		<div class="slideBox">
 			<div class="hd tabs">
 			  <a ng-repeat="tab in tabs"  ng-class="{active:isActiveTab(tab.url)}"  ng-click="onClickTab(tab)" class="tab-item" >{{tab.title}}</a></li>
 			</div>
 			<div class="bd">
+				
 				<div ng-include="currentTab"></div>
+
 			</div>
 		</div>
-
     </ion-content>
 </ion-view>
 
@@ -22,7 +22,7 @@
 		    <a class="item item-thumbnail-left" style="padding-left:95px;" ng-repeat="mine in mines">
 		      <img src="{{mine.group_avatar}}" style="left:6px;border-radius:5px;">
 		      <h2 style="line-height:30px;"><span class="item-note">
-		      	<button class="button button-small button-outline button-stable bar-positive" style="color:#373737;">取消关注</button>
+		      	<button class="button button-small button-outline button-stable bar-positive" style="color:#373737;" ng-click="groupquit({{mine.group_id}})">取消关注</button>
 		      </span>{{mine.group_name}}</h2>
 		      <p>【{{mine.post_count}}条新消息】</p>
 		      <p>{{mine.group_intro}}</p>
@@ -30,14 +30,15 @@
 		      	<label>关注:&nbsp;{{mine.member_cnt}}</label>
 			  </p>
 		    </a>
-		    <ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMorefollowed()" distance="1%" immediate-check="true" > </ion-infinite-scroll>
+		    <ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMorefollowed()" distance="1%" immediate-check="false" > </ion-infinite-scroll>
 		</div>
 	</ul>
-	
+
 </script>
 
 <!-- 圈子 - 关注 - 推荐关注 -->
 <script type="text/ng-template" id="recommAtten.tpl.html">
+
 	<ul class="list" ng-controller="recommController">
 		<form id="search_form">
 			<div class="item item-input-inset web-body">
@@ -52,7 +53,7 @@
 		    <a class="item item-thumbnail-left" style="padding-left:95px;" ng-repeat="recommended in recommendeds">
 		      <img src="{{recommended.group_avatar}}" style="left:6px;border-radius:5px;">
 		      <h2 style="line-height:30px;"><span class="item-note">
-		      	<button class="button button-small button-outline button-stable bar-positive" style="color:#373737;">关注</button>
+		      	<button class="button button-small button-outline button-stable bar-positive" style="color:#373737;" ng-click="groupjoin({{recommended.group_id}})">关注</button>
 		      </span>{{recommended.group_name}}</h2>
 		      <p>【{{recommended.post_count}}条新消息】</p>
 		      <p>{{recommended.group_intro}}</p>
@@ -60,7 +61,8 @@
 		      	<label>关注:&nbsp;{{recommended.member_cnt}}</label>
 			  </p>
 		    </a>
-		    <ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMorerecommended()" distance="1%"  immediate-check="true"> </ion-infinite-scroll>
+		    <ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMorerecommended()" distance="1%"  immediate-check="false"> </ion-infinite-scroll>
 		</div>
 	</ul>
+
 </script>

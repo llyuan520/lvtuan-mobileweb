@@ -1,4 +1,7 @@
-<a class="item item-icon-right" href="#/groupcreate" style="background: none;border: 0px;width: 40px;height: 40px;float: right;margin-right: 10px;border-radius: 25px;position: absolute;z-index: 10000;bottom: 60px;right:0px;" href="#">
+<a ng-if="is_lawyer == undefined || is_lawyer == null || is_lawyer == ''" ng-click="jumplogin()" class="item item-icon-right"  style="background: none;border: 0px;width: 40px;height: 40px;float: right;margin-right: 10px;border-radius: 25px;position: absolute;z-index: 10000;bottom: 60px;right:0px;" href="#">
+	<span class="item-note" style="color:#387ef5;margin-left:20px;"><i class="icon ion-ios-plus"></i></span>
+</a>
+<a ng-model="is_lawyer" ng-if="is_lawyer == true" class="item item-icon-right" href="#/groupcreate" style="background: none;border: 0px;width: 40px;height: 40px;float: right;margin-right: 10px;border-radius: 25px;position: absolute;z-index: 10000;bottom: 60px;right:0px;" href="#">
 	<span class="item-note" style="color:#387ef5;margin-left:20px;"><i class="icon ion-ios-plus"></i></span>
 </a>
 <ion-view view-title="group-list">
@@ -13,7 +16,7 @@
 				</h2>
 				<p>【{{item.member_cnt}}条新消息】</p>
 				<p>
-					<span class="item-note"><span style="width:10%;height:15px;border-radius:10px;background-color:#f00;color:#fff;">100&nbsp;</span></span>
+					<span class="badge badge-assertive">100</span>
 					{{item.group_intro}}
 				</p>
 				

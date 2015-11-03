@@ -5,7 +5,7 @@
     <ion-content>
 		<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 		<ion-list>
-			<div class="item">
+			<div class="item" > <!-- ng-repead="televis in televise" -->
 			  	<a href="#/broadcastview">
 			    	广播广播广播广播广播广播广播广播广播广播广播广播广播广播广播广播
 				</a>
@@ -30,6 +30,5 @@
          </ion-list>
 			
 		<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
-
     </ion-content>
 </ion-view>

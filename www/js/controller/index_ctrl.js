@@ -243,8 +243,7 @@ lvtuanApp.controller("groupCtrl",function($scope,$http,$state,$rootScope){
 
 })
 //圈子 - 列表
-lvtuanApp.controller("groupListCtrl",function($scope,$http,$rootScope){
-	
+lvtuanApp.controller("groupListCtrl",function($scope,$http,$rootScope,$state){
 	var page = 1; //页数
     $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
 	$scope.items = [];	//创建一个数组接收后台的数据
@@ -291,58 +290,44 @@ lvtuanApp.controller("groupListCtrl",function($scope,$http,$rootScope){
 	        });
 	};
 
+/*	$scope.is_lawyer = JSON.parse(localStorage.getItem('is_lawyer'));
+	console.info($scope.is_lawyer)
+	//跳转到登陆页面
+	$scope.groupcreate = function(){
+		debugger
+		$scope.is_lawyer = JSON.parse(localStorage.getItem('is_lawyer'));
+		if($scope.is_lawye == undefined || $scope.is_lawyer == null || $scope.is_lawyer == ''){
+			$state.go("login", {reload: true});
+		}
+		if($scope.is_lawyer == true){
+			$state.go("groupcreate", {reload: true});
+		}else{
+			layer.show("只有律师才能创建圈子！")
+		}
+		
+	}*/
+	
+	
+
+
 })
 //圈子 - 广播
 lvtuanApp.controller("groupTeleviseCtrl",function($scope,$http,$state,$rootScope){
 	console.info("广播");
-
-})
-//圈子 - 关注
-lvtuanApp.controller("groupAttentionCtrl",function($scope,$http,$state,$rootScope){
-	//创建tabs列表
-	$scope.tabs = [{
-            title: '已关注',
-            url: 'alreadyAtten.tpl.html'
-        }, {
-            title: '推荐关注',
-            url: 'recommAtten.tpl.html'
-    }];
-
-    $scope.currentTab = 'alreadyAtten.tpl.html'; //默认第一次显示的tpl
-
-    $scope.onClickTab = function (tab) { //点击tab赋值url
-        $scope.currentTab = tab.url;
-        
-        console.info(tab.url);
-    }
-    
-    $scope.isActiveTab = function(tabUrl) {  //给选中的url的a 标签样式
-        return tabUrl == $scope.currentTab;
-    }
-
-    
-})
-
-
-//已关注
-lvtuanApp.controller("followedController",function($scope,$http,$state,$rootScope){
-
-
- 	var page = 1; //页数
+	var page = 1; //页数
     $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
-    $scope.mines = [];	//创建一个数组接收后台的数据
+	$scope.televise = [];	//创建一个数组接收后台的数据
 
-	 //下拉刷新
-	$scope.doRefreshfollowed = function() {
+    //下拉刷新
+	$scope.doRefresh = function() {
 		page = 1;
-		$scope.mines = [];
-        $scope.loadMorefollowed();
+		$scope.televise = [];
+        $scope.loadMore();
     };
 
-    //上拉加载
-	$scope.loadMorefollowed = function() {
-		console.info('http://'+$rootScope.hostName+'/group/list/mine?page='+page++)
-		$http.get('http://'+$rootScope.hostName+'/group/list/mine?page='+page++,
+    //上拉加载 - 广播
+	$scope.loadMore = function() {
+		$http.get('http://'+$rootScope.hostName+'/microblog/list/all?page='+page++,
 	        {
 	        cache: true,
 	        headers: {
@@ -350,8 +335,8 @@ lvtuanApp.controller("followedController",function($scope,$http,$state,$rootScop
 	            'Authorization': 'bearer ' + $rootScope.token
 	       		}
 	        }).success(function(data) {
-
-				console.info('已关注',data.data)
+	        	//debugger
+	        	console.info('广播',data.data)
 				if(data.data.length > 0){
 					if(data.data.length > 9){
 						$scope.moredata = true;
@@ -359,7 +344,7 @@ lvtuanApp.controller("followedController",function($scope,$http,$state,$rootScop
 						$scope.moredata = false;
 					}
 					//用于连接两个或多个数组并返回一个新的数组
-					$scope.mines = $scope.mines.concat(data.data); 
+					$scope.televise = $scope.televise.concat(data.data); 
 				}else{
 					layer.show("暂无数据！")
 					$scope.moredata = false;
@@ -375,43 +360,167 @@ lvtuanApp.controller("followedController",function($scope,$http,$state,$rootScop
 	            $scope.$broadcast('scroll.infiniteScrollComplete');
 	        });
 	};
+})
+
+//圈子 - 关注
+lvtuanApp.controller("groupAttentionCtrl",function($scope,$http,$state,$rootScope){
+	//创建tabs列表
+	$scope.tabs = [{
+            title: '已关注',
+            url: 'alreadyAtten.tpl.html'
+        }, {
+            title: '推荐关注',
+            url: 'recommAtten.tpl.html'
+    }];
+
+    $scope.currentTab = 'alreadyAtten.tpl.html'; //默认第一次显示的tpl
+
+
+    $scope.onClickTab = function (tab) { //点击tab赋值url
+    	$scope.moredata = true;
+		$scope.currentTab = tab.url;
+    }
+    
+    $scope.isActiveTab = function(tabUrl) {  //给选中的url的a 标签样式
+        return tabUrl == $scope.currentTab;
+    }
+
+})
+
+
+//已关注
+lvtuanApp.controller("followedController",function($scope,$http,$state,$rootScope,$ionicLoading){
+	$scope.show = function() {
+	    $ionicLoading.show({
+	      template: 'Loading...'
+	    });
+	};
+	$scope.hide = function(){
+	    $ionicLoading.hide();
+	};
+
+ 	var page = 1; //页数
+    $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
+    $scope.mines = [];	//创建一个数组接收后台的数据
+	 //下拉刷新
+	$scope.doRefreshfollowed = function() {
+		page = 1;
+		$scope.mines = [];
+        $scope.loadMorefollowed();
+    };
+    //上拉加载
+	$scope.loadMorefollowed = function() {
+		$scope.show();
+		$http.get('http://'+$rootScope.hostName+'/group/list/mine?page='+page++,
+	        {
+	        cache: true,
+	        headers: {
+	            'Content-Type': 'application/json' , 
+	            'Authorization': 'bearer ' + $rootScope.token
+	       		}
+	        }).success(function(data) {
+				console.info('已关注',data.data)
+				if(data.data.length > 0){
+					if(data.data.length > 9){
+						$scope.moredata = true;
+					}else{
+						$scope.moredata = false;
+					}
+					//用于连接两个或多个数组并返回一个新的数组
+					$scope.mines = $scope.mines.concat(data.data); 
+				}else{
+					layer.show("暂无数据！")
+					$scope.moredata = false;
+					$scope.hide();
+					return false;
+				}
+				$scope.hide();
+			}).error(function (data, status) {
+		        console.info(JSON.stringify(data));
+		        console.info(JSON.stringify(status));
+		    })
+		    .finally(function() {
+	            $scope.$broadcast('scroll.refreshComplete');
+	            $scope.$broadcast('scroll.infiniteScrollComplete');
+	        });
+	};
 
 	$scope.$on('$stateChangeSuccess', function() {
 	    $scope.loadMorefollowed();
-	});
+	})
 
+	$scope.loadMorefollowed();
+
+
+	$scope.groupquit = function(id){
+		page = 1; //页数
+    	$scope.mines = [];	//创建一个数组接收后台的数据
+		var id = id;
+		$http.post('http://'+$rootScope.hostName+'/group/'+id+'/quit?page='+page++,
+			{},
+	        {
+		        cache: true,
+		        headers: {
+		            'Accept': 'application/json' , 
+		            'Authorization': 'bearer ' + $rootScope.token
+		       	}
+	        }).success(function(data) {
+				console.info('已关注',data.data)
+				if(data.data.length > 0){
+					if(data.data.length > 9){
+						$scope.moredata = true;
+					}else{
+						$scope.moredata = false;
+					}
+					//用于连接两个或多个数组并返回一个新的数组
+					$scope.mines = $scope.mines.concat(data.data); 
+					layer.show("已关注 退出成功！");
+				}else{
+					layer.show("暂无数据！")
+					$scope.moredata = false;
+					return false;
+				}
+			}).error(function (data, status) {
+		        console.info(JSON.stringify(data));
+		        console.info(JSON.stringify(status));
+		    })
+		    .finally(function() {
+	            $scope.$broadcast('scroll.refreshComplete');
+	            $scope.$broadcast('scroll.infiniteScrollComplete');
+	        });
+	}
 })
 
 //推荐关注
 lvtuanApp.controller("recommController",function($scope,$http,$state,$rootScope){
-
 	var page = 1; //页数
     $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
     $scope.recommendeds = [];	//创建一个数组接收后台的数据
-
     $scope.search = function(){
     	page = 1; //页数
     	$scope.recommendeds = [];	//创建一个数组接收后台的数据
     	getparamq();
     }
-
     function getparamq(){
     	var param = layer.getParams("#search_form");
     	getUrlq(param)
     }
-
+     //下拉刷新
+	$scope.doRefreshrecommended = function() {
+		page = 1;
+		$scope.recommendeds = [];
+        getparamq();
+    };
     function getUrlq(param){
-
     	var url = "";
     	if(param.q){
     		url +='http://'+$rootScope.hostName+'/group/recommend?q='+param.q+'&page='+page++;
     	}else{
     		url +='http://'+$rootScope.hostName+'/group/recommend?page='+page++;
     	}
-
     	$http.get(url,
 	        {
-	        cache: true,
+	        /*cache: true,*/
 	        headers: {
 	            'Content-Type': 'application/json' , 
 	            'Authorization': 'bearer ' + $rootScope.token
@@ -441,25 +550,59 @@ lvtuanApp.controller("recommController",function($scope,$http,$state,$rootScope)
 	            $scope.$broadcast('scroll.refreshComplete');
 	            $scope.$broadcast('scroll.infiniteScrollComplete');
 	        });
-
     }
-
-	 //下拉刷新
-	$scope.doRefreshrecommended = function() {
-		page = 1;
-		$scope.recommendeds = [];
-        getparamq();
-    };
-
+   
+	
     //上拉加载 - 法规
 	$scope.loadMorerecommended = function() {
 		getparamq();
 	};
 
 	$scope.$on('$stateChangeSuccess', function() {
-	    getparamq();
-	});
+	    $scope.loadMorerecommended();
+	})
 
+	$scope.groupjoin = function(id){
+		page = 1; //页数
+    	$scope.recommendeds = [];	//创建一个数组接收后台的数据
+		var id = id; 
+		$http.post('http://'+$rootScope.hostName+'/group/'+id+'/join?page='+page++,
+			{},
+	        {
+		        cache: true,
+		        headers: {
+		            'Accept': 'application/json' , 
+		            'Authorization': 'bearer ' + $rootScope.token
+		       	}
+	        }).success(function(data) {
+				console.info('已关注',data.data)
+				if(data.data.length > 0){
+					if(data.data.length > 9){
+						$scope.moredata = true;
+					}else{
+						$scope.moredata = false;
+					}
+					//用于连接两个或多个数组并返回一个新的数组
+					$scope.recommendeds = $scope.recommendeds.concat(data.data); 
+					layer.show("已关注 加入成功！");
+				}else{
+					layer.show("暂无数据！");
+					$scope.moredata = false;
+					return false;
+				}
+			}).error(function (data, status) {
+				var datacode = JSON.stringify(data);
+				if(datacode.status_code == 400){
+					layer.show("你已经是该圈子的成员了!")
+				}
+		        console.info(JSON.stringify(data));
+		        console.info(JSON.stringify(status));
+		    })
+		    .finally(function() {
+	            $scope.$broadcast('scroll.refreshComplete');
+	            $scope.$broadcast('scroll.infiniteScrollComplete');
+	        });
+	}
 })
 
 //圈子详情
@@ -475,8 +618,123 @@ lvtuanApp.controller("broadcastviewCtrl",function($scope,$http,$state,$rootScope
 //创建圈子
 lvtuanApp.controller("groupcreateCtrl",function($scope,$http,$state,$rootScope){
 	console.info("创建圈子");
+	var page = 1; //页数
+    $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
+	$scope.items = [];	//创建一个数组接收后台的数据
+
+    //下拉刷新
+	$scope.doRefresh = function() {
+		page = 1;
+		$scope.items = [];
+        $scope.loadMore();
+    };
+
+    //上拉加载 - 广播
+	$scope.loadMore = function() {
+		$http.get('http://'+$rootScope.hostName+'/lawyer/list_lawyers?page='+page++,
+	        {
+	        cache: true,
+	        headers: {
+	            'Content-Type': 'application/json' , 
+	            'Authorization': 'bearer ' + $rootScope.token
+	       		}
+	        }).success(function(data) {
+	        	//debugger
+	        	console.info('创建圈子',data.data)
+				if(data.data.length > 0){
+					if(data.data.length > 9){
+						$scope.moredata = true;
+					}else{
+						$scope.moredata = false;
+					}
+					//用于连接两个或多个数组并返回一个新的数组
+					$scope.items = $scope.items.concat(data.data); 
+				}else{
+					layer.show("暂无数据！")
+					$scope.moredata = false;
+					return false;
+				}
+
+			}).error(function (data, status) {
+		        console.info(JSON.stringify(data));
+		        console.info(JSON.stringify(status));
+		    })
+		    .finally(function() {
+	            $scope.$broadcast('scroll.refreshComplete');
+	            $scope.$broadcast('scroll.infiniteScrollComplete');
+	        });
+	};
+
+
+	//数组删除的方法
+	Array.prototype.remove = function(index){
+	    if(isNaN(index) || index > this.length){
+	        return false;
+	    }
+	    for(var i=0,n=0;i<this.length;i++){
+	        if(this[i] != this[index]){
+	            this[n++] = this[i];
+	        }
+	    }
+	    this.length -= 1;
+	}
+
+	//判断用户是否选中
+	$scope.selIds = [];
+	$scope.checkItem = function(obj,id){
+		if(obj == false){
+			var index;
+			angular.forEach($scope.selIds,function(val,key){
+				if(val == id){
+					index = key;
+				}
+			});
+			$scope.selIds.remove(index, index);
+		}else{
+			$scope.selIds.push(id);
+		}
+	}
+	
+
+
+	// /group//{groupId}/uploadImage/{field?}  group_avatar
+
+	//创建圈子
+	$scope.createSubmit = function(){
+		var group_id =  $scope.selIds;
+		var params = getParams("#createGroup_form");
+		console.info(params);
+  		if(params.group_name == ""){
+  			layer.show("请输入圈子名称!");
+  			return false;
+  		}else if(params.group_avatar == ""){
+  			layer.show("请上传圈子头像!");
+  			return false;
+  		}else{
+  			/*$http.post('http://'+$rootScope.hostName+'/group/create',{
+  					'group_name'	: params.group_name,
+	            	'group_avatar'	: params.group_avatar,
+	            	'group_id'		: params.group_id
+	            },
+	            {
+	            headers: {
+	                'Content-Type': 'application/json' , 
+	            	'Authorization': 'bearer ' + $rootScope.token,
+	            }
+	        }).success(function(data) {
+	           layer.show("提交成功！");
+	           $(':input','#questions_form').not('textarea :submit, :reset, :hidden').val('');
+
+	        }).error(function (data, status) {
+	        	var errMsg = JSON.stringify(data.error_messages);
+	        	layer.show(errMsg);
+            });
+            return true;*/
+  		}    
+	}
 
 })
+
 
 
 /****************************************************** 知识 ******************************************************/

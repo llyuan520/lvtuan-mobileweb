@@ -17,7 +17,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
 //声明全局的方法和变量
 .run(['$rootScope','$timeout','$location',function($rootScope,$timeout,$location){
   /*让浏览器记住token*/
-  localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXUyJ9.eyJzdWIiOjE0OTcsImlzcyI6Imh0dHA6XC9cLzE5Mi4xNjguMS40M1wvbG9naW4iLCJpYXQiOiIxNDQ2NTE4MTExIiwiZXhwIjoiMTQ0NjUyMTcxMSIsIm5iZiI6IjE0NDY1MTgxMTEiLCJqdGkiOiJhNzAxNzBjYjZjNjZhYjA1YzgzYjU2ZWFhOGRhNmFmYSJ9.MGUwMjBkMmRlMjBiNWRkY2QwNWIxZDhjMGJjNDc2ZTcxMjJkOWIwZWZiNmM5ZWM4YzJhYTA2NjNmZjE3MmY2Mg');
+  localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXUyJ9.eyJzdWIiOjE0NjYsImlzcyI6Imh0dHA6XC9cLzE5Mi4xNjguMS40M1wvbG9naW4iLCJpYXQiOiIxNDQ2NTUzODk1IiwiZXhwIjoiMTQ0NjU1NzQ5NSIsIm5iZiI6IjE0NDY1NTM4OTUiLCJqdGkiOiJmODk3NmM3MjQ5MmFhYjFjMDNmNmUzMmE5ZDBjMWRjYiJ9.Zjk4NjJmZTdhMjAxMDVlOTE2NTI3N2RkMmViMTI3ZTdiMWE0MTY1NjYxMWQ2YzJkMWNiOGEzMGYxMTgyODJjNg');
   //localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXUyJ9.eyJzdWIiOjE0ODgsImlzcyI6Imh0dHA6XC9cL2Rldi53ZGxzdC5sYXctcGMtbmV3XC9sb2dpbiIsImlhdCI6IjE0NDU5NTA0MzUiLCJleHAiOiIxNDQ1OTU0MDM1IiwibmJmIjoiMTQ0NTk1MDQzNSIsImp0aSI6IjMzZmRlYmY0YjEwOWRkOWMyYzhmZmUyNjVkNGUxNjQyIn0.YjgwNDljNjVmZmQ3MDVhODE4ZmI4ZTE2Yzg3OGQzMjk1ZWUwYzZmYzllZjc5MTA1ZTZiZDdhYTg5MDE3MzgzYQ');
   $rootScope.token = localStorage.getItem('token');
   $timeout(function() {
