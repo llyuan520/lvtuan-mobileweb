@@ -1,0 +1,58 @@
+
+<ion-view view-title="我的订单">
+		<ion-pane  class="web-body">
+			<ion-header-bar class="bar bar-header bar-light">
+				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" onclick="history.go(-1);"></a>
+				<h1 class="title">我的订单</h1>
+			</ion-header-bar>
+
+			<ion-tabs class="tabs-top">
+			    <ion-tab title="全部" ng-href="#/orderuser/all">
+			        <ion-nav-view name="order-all">全部</ion-nav-view>
+			    </ion-tab>
+
+			    <ion-tab title="待处理" ng-href="#/orderuser/pending">
+			        <ion-nav-view name="order-pending">待处理</ion-nav-view>
+			    </ion-tab>
+
+			    <ion-tab title="处理中" ng-href="#/orderuser/replied">
+			        <ion-nav-view name="order-replied">处理中</ion-nav-view>
+			    </ion-tab>
+
+			    <ion-tab title="已完成" ng-href="#/orderuser/completed">
+			        <ion-nav-view name="order-completed">已完成</ion-nav-view>
+			    </ion-tab>
+
+			    <ion-tab title="已超时" ng-href="#/orderuser/timeout">
+			        <ion-nav-view name="order-timeout">已超时</ion-nav-view>
+			    </ion-tab>
+			</ion-tabs>
+			
+			<div class="tabs tabs-icon-top tabs-color-positive" ng-model="is_lawyer">
+				  <a class="tab-item" onclick='layer.goHome()'>
+				    <i class="icon ion-home"></i>
+				    首页
+				  </a>
+				  <a class="tab-item" ng-href="#/group">
+				    <i class="icon ion-android-contacts"></i>
+				    圈子
+				  </a>
+				  <a class="tab-item" ng-href="#/knowledge">
+				    <i class="icon ion-social-buffer"></i>
+				    知识
+				  </a>
+				  <a ng-if="is_lawyer == null" ng-href="#/login" class="tab-item">
+				    <i class="icon ion-android-contact"></i>
+				    我的
+				  </a>
+				  <a ng-if="is_lawyer == false" ng-href="#/center" class="tab-item">
+				    <i class="icon ion-android-contact"></i>
+				    我的
+				  </a>
+				  <a ng-if="is_lawyer == true" ng-href="#/center_lawyer" class="tab-item">
+				    <i class="icon ion-android-contact"></i>
+				    我的
+				  </a>
+			</div>
+		</ion-pane>
+</ion-view>

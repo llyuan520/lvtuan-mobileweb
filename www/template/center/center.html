@@ -10,7 +10,7 @@
 				<div class="list">
 				    <a class="item item-thumbnail-left item-icon-right" ng-href="#/info">
 				      <img src="img/web_header.png">
-				      <h2 class="web-top10">{{items.user.realname}}  <span class="web-font14">律师</span></h2>
+				      <h2 class="web-top10">{{items.user.realname}}</h2>
 				      <p  class="web-top5" >{{items.user.phone}}</p>
 				    </a>
 				</div>
@@ -67,27 +67,27 @@
 				<div style="width:100%;height:50px;clear:both;"></div>
 			</ion-content>
 			<div class="tabs tabs-icon-top tabs-color-positive" ng-model="is_lawyer">
-				  <a class="tab-item active" href="#/index">
+				  <a class="tab-item" onclick='layer.goHome()'>
 				    <i class="icon ion-home"></i>
 				    首页
 				  </a>
-				  <a class="tab-item" href="#/group">
+				  <a class="tab-item" g-href="#/group">
 				    <i class="icon ion-android-contacts"></i>
 				    圈子
 				  </a>
-				  <a class="tab-item" href="#/knowledge">
+				  <a class="tab-item" g-href="#/knowledge">
 				    <i class="icon ion-social-buffer"></i>
 				    知识
 				  </a>
-				  <a class="tab-item" ng-if="is_lawyer == undefined || is_lawyer == null || is_lawyer == ''" ng-click="jumplogin()">
+				  <a ng-if="is_lawyer == null" ng-href="#/login" class="tab-item active">
 				    <i class="icon ion-android-contact"></i>
 				    我的
 				  </a>
-				  <a class="tab-item" ng-if="is_lawyer == false" href="#/center">
+				  <a ng-if="is_lawyer == false" ng-href="#/center" class="tab-item active">
 				    <i class="icon ion-android-contact"></i>
 				    我的
 				  </a>
-				  <a class="tab-item" ng-if="is_lawyer == true" href="#/center_lawyer">
+				  <a ng-if="is_lawyer == true" ng-href="#/center_lawyer" class="tab-item active">
 				    <i class="icon ion-android-contact"></i>
 				    我的
 				  </a>

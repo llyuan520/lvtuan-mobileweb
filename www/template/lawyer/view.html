@@ -36,7 +36,9 @@
 					  <a ng-repeat="tab in tabs"  ng-class="{active:isActiveTab(tab.url)}"  ng-click="onClickTab(tab)" class="tab-item" >{{tab.title}}</a></li>
 					</div>
 					<div class="bd">
-						<div ng-include="currentTab"></div>
+						
+							<div ng-include="currentTab"></div>
+						
 					</div>
 				</div>
 			</ion-content>
@@ -74,7 +76,8 @@
 
 <!-- 律师个人主页 - 评价 -->
 <script type="text/ng-template" id="evaluate.tpl.html">
-    <ul class="list">
+    <ul class="list" ng-controller="viewevaluateCtrl">
+    	<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 	  	<div class="list web-top10" ng-repeat="evaluation in evaluations">
 		  <a style="height:auto;padding-left:16px;" class="item web-itemheight45 item-avatar">
 		      <p class="web-listtext web-fc000">{{evaluation.creator_realname}}&nbsp;&nbsp;{{evaluation.creator_realname}}</p>
@@ -89,13 +92,14 @@
 		      <p class="web-listtext web-fc000">{{evaluation.evaluate_comment}}</p>
 		    </a>
 		</div>
-		<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMoreEvaluation()" distance="1%"> </ion-infinite-scroll>
+		<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%" > </ion-infinite-scroll>
 	</ul>
 </script>
 
 <!-- 律师个人主页 - 文章 -->
 <script type="text/ng-template" id="article.tpl.html">
-    <ul class="list">
+    <ul class="list" ng-controller="viewarticleCtrl">
+    	<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 	  	<ion-list ng-repeat="article in articles">
 			<ion-item class="item-thumbnail-left">
 				<img src="{{article.avatar}}"/>
@@ -104,13 +108,14 @@
 				<p>{{article.created_at}}</p>
 			</ion-item>
 		</ion-list>
-		<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMoreArticles()" distance="1%"> </ion-infinite-scroll>
+		<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%" > </ion-infinite-scroll>
 	</ul>
 </script>
 
 <!-- 律师个人主页 - 广播 -->
 <script type="text/ng-template" id="televise.tpl.html">
-    <ul class="list">
+    <ul class="list" ng-controller="viewteleviseCtrl">
+    	<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 		<div class="list list-comment">
 			<div class="item">
 				<div class="item-main">
@@ -143,5 +148,6 @@
 				</div>
 			</div>
 		</div>
+		<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%" > </ion-infinite-scroll>
 	</ul> 
 </script>

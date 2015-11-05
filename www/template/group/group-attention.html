@@ -1,68 +1,29 @@
 <ion-view view-title="group-attention">
     <ion-content>
-   		<div class="slideBox">
-			<div class="hd tabs">
-			  <a ng-repeat="tab in tabs"  ng-class="{active:isActiveTab(tab.url)}"  ng-click="onClickTab(tab)" class="tab-item" >{{tab.title}}</a></li>
+   		<ul class="list">
+			<form id="search_form">
+				<div class="item item-input-inset web-body">
+					<div class="item-input-wrapper">
+				    	<input name="q" type="search" placeholder="请输入你感兴趣的内容" class="search">
+				    	<i class="icon ion-search placeholder-icon" ng-click="search()"></i>
+					</div>
+				</div>
+			</form>
+		  	<div class="list">
+		  		<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+			    <a class="item item-thumbnail-left" style="padding-left:95px;" ng-repeat="recommended in recommendeds">
+			      <img src="{{recommended.group_avatar}}" style="left:6px;border-radius:5px;">
+			      <h2 style="line-height:30px;"><span class="item-note">
+			      	<button class="button button-small button-outline button-stable bar-positive" style="color:#373737;padding: 0 20px;" ng-click="groupjoin({{recommended.group_id}})">关注</button>
+			      </span>{{recommended.group_name}}</h2>
+			      <p>【{{recommended.post_count}}条新消息】</p>
+			      <p>{{recommended.group_intro}}</p>
+			      <p>
+			      	<label>关注:&nbsp;{{recommended.member_cnt}}</label>
+				  </p>
+			    </a>
+			    <ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%" > </ion-infinite-scroll>
 			</div>
-			<div class="bd">
-				
-				<div ng-include="currentTab"></div>
-
-			</div>
-		</div>
+		</ul>
     </ion-content>
 </ion-view>
-
-<!-- 圈子 - 关注 - 已关注 -->
-<script type="text/ng-template" id="alreadyAtten.tpl.html">
-
-	<ul class="list" ng-controller="followedController">
-	  	<div class="list">
-	  		<ion-refresher pulling-text="下拉刷新" on-refresh="doRefreshfollowed()"></ion-refresher>
-		    <a class="item item-thumbnail-left" style="padding-left:95px;" ng-repeat="mine in mines">
-		      <img src="{{mine.group_avatar}}" style="left:6px;border-radius:5px;">
-		      <h2 style="line-height:30px;"><span class="item-note">
-		      	<button class="button button-small button-outline button-stable bar-positive" style="color:#373737;" ng-click="groupquit({{mine.group_id}})">取消关注</button>
-		      </span>{{mine.group_name}}</h2>
-		      <p>【{{mine.post_count}}条新消息】</p>
-		      <p>{{mine.group_intro}}</p>
-		      <p>
-		      	<label>关注:&nbsp;{{mine.member_cnt}}</label>
-			  </p>
-		    </a>
-		    <ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMorefollowed()" distance="1%" immediate-check="false" > </ion-infinite-scroll>
-		</div>
-	</ul>
-
-</script>
-
-<!-- 圈子 - 关注 - 推荐关注 -->
-<script type="text/ng-template" id="recommAtten.tpl.html">
-
-	<ul class="list" ng-controller="recommController">
-		<form id="search_form">
-			<div class="item item-input-inset web-body">
-				<div class="item-input-wrapper">
-			    	<input name="q" type="search" placeholder="请输入你感兴趣的内容" class="search">
-			    	<i class="icon ion-search placeholder-icon" ng-click="search()"></i>
-				</div>
-			</div>
-		</form>
-	  	<div class="list">
-	  		<ion-refresher pulling-text="下拉刷新" on-refresh="doRefreshrecommended()"></ion-refresher>
-		    <a class="item item-thumbnail-left" style="padding-left:95px;" ng-repeat="recommended in recommendeds">
-		      <img src="{{recommended.group_avatar}}" style="left:6px;border-radius:5px;">
-		      <h2 style="line-height:30px;"><span class="item-note">
-		      	<button class="button button-small button-outline button-stable bar-positive" style="color:#373737;" ng-click="groupjoin({{recommended.group_id}})">关注</button>
-		      </span>{{recommended.group_name}}</h2>
-		      <p>【{{recommended.post_count}}条新消息】</p>
-		      <p>{{recommended.group_intro}}</p>
-		      <p>
-		      	<label>关注:&nbsp;{{recommended.member_cnt}}</label>
-			  </p>
-		    </a>
-		    <ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMorerecommended()" distance="1%"  immediate-check="false"> </ion-infinite-scroll>
-		</div>
-	</ul>
-
-</script>

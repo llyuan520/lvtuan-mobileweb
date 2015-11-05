@@ -417,6 +417,20 @@ this.stopDefault = function(e)
       return temp;
   }
 
+  //菜单返回按钮
+  this.goBack = function() {
+    window.history.back();
+  }
+  //菜单刷新按钮
+  this.refresh = function() {
+     window.location.reload();
+  }
+  //菜单首页按钮
+  this.goHome = function() {
+    window.location.reload();
+    window.location.href = '#/';
+  }
+
   //获取错误信息
   this.msg = function(data) {
     if(angular.isUndefined(data)) {

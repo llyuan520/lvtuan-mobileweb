@@ -1,20 +1,19 @@
-<ion-view view-title="我的工作">
+<ion-view view-title="我的订单">
 		<ion-pane>
 		
 			<ion-header-bar class="bar bar-header bar-light">
 				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" onclick="history.go(-1);"></a>
-				<h1 class="title">我的工作</h1>
+				<h1 class="title">我的订单</h1>
 			</ion-header-bar>
 			<ion-content>
 				<div class="list">
 					<div class="item item-divider"></div>
 					<div class="item item-thumbnail-left">
-						<img src="img/ionic.png" alt="" />
+						<img src="{{items.avatar}}" alt="" />
 						
 						<div class="row">
 							<div class="col col-75">
-								<span class="sp-l">王律师</span><!-- 
-								<span class="sp-r">137****5127</span> -->
+								<span class="sp-l">{{items.user.realname}}</span>
 							</div>
 							<div class="col col-25">								
 								<label class="toggle toggle-positive">
@@ -28,7 +27,7 @@
 						<div class="row">
 							<div class="col">
 								<p>
-									<span class="sp-l">137****5127</span>
+									<span class="sp-l">{{items.user.phone}}</span>
 									<span class="sp-r">在线接单</span>
 								</p>
 							</div>
@@ -43,14 +42,14 @@
 						      <i class="icon ion-ios-arrow-right"></i>
 						    </button>
 						</a>
-						<a class="item item-button-right" ng-href="#/resetpwd">
+						<a class="item item-button-right" ng-href="#/queryrefer">
 							<img src="img/web_person006.png" style="width:20px;height:20px;float:left;margin-top:1px;margin-right:5px;" />
 				            咨询参考
 						    <button class="button button-clear">
 						      <i class="icon ion-ios-arrow-right"></i>
 						    </button>
 						</a>
-				        <a class="item item-button-right" ng-href="#/resetpwd">
+				        <a class="item item-button-right" ng-href="#/lawyerquestion">
 				        	<img src="img/web_person006.png" style="width:20px;height:20px;float:left;margin-top:1px;margin-right:5px;" />
 				            免费咨询
 						    <button class="button button-clear">
@@ -61,5 +60,31 @@
 				</div>
 			</ion-content>
 			
+			<div class="tabs tabs-icon-top tabs-color-positive" ng-model="is_lawyer">
+				  <a class="tab-item" onclick='layer.goHome()'>
+				    <i class="icon ion-home"></i>
+				    首页
+				  </a>
+				  <a class="tab-item" ng-href="#/group">
+				    <i class="icon ion-android-contacts"></i>
+				    圈子
+				  </a>
+				  <a class="tab-item" ng-href="#/knowledge">
+				    <i class="icon ion-social-buffer"></i>
+				    知识
+				  </a>
+				  <a ng-if="is_lawyer == null" ng-href="#/login" class="tab-item">
+				    <i class="icon ion-android-contact"></i>
+				    我的
+				  </a>
+				  <a ng-if="is_lawyer == false" ng-href="#/center" class="tab-item">
+				    <i class="icon ion-android-contact"></i>
+				    我的
+				  </a>
+				  <a ng-if="is_lawyer == true" ng-href="#/center_lawyer" class="tab-item">
+				    <i class="icon ion-android-contact"></i>
+				    我的
+				  </a>
+			</div>
 		</ion-pane>
 </ion-view>

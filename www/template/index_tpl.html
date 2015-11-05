@@ -9,7 +9,7 @@
 		</button>
 	</ion-nav-buttons>
 	<ion-nav-buttons side="right">
-		<a href="#/login" class="button button-icon">
+		<a ng-href="#/login" class="button button-icon">
 			<img src="../img/13.png"/>
 		</a>
 	</ion-nav-buttons>
@@ -24,15 +24,19 @@
 		</ion-slide-box>
 		<div class="subtitle">
 			<div class="list web-bottom0" style="width:50%;padding:10px 0px;padding-left:5%;float:left;background-color:#ffffff;">
-				  <div ng-href="#/questions'" class="item item-icon-left" style="border:0px;border-right:1px solid #cccccc;padding-top:14px;padding-bottom:0px;">
-				    <i class="icon ion-chatbox-working web-ion-img0-8" style="color:#24A3F1;margin-top:-5px;"></i>
-				    问律师<br/>资深律师解答
+				  <div class="item item-icon-left" style="border:0px;border-right:1px solid #cccccc;padding-top:14px;padding-bottom:0px;">
+				  	<a ng-href="#/questions">
+				    	<i class="icon ion-chatbox-working web-ion-img0-8" style="color:#24A3F1;margin-top:-5px;"></i>
+				    	问律师<br/>资深律师解答
+					</a>
 				  </div>
 			</div>
 			<div class="list web-bottom0" style="width:50%;padding-left:5%;float:left;background-color:#ffffff;">
-				  <div ng-href="#/lawyerlist'" class="item item-icon-left" style="border:0px;">
-				    <i class="icon ion-android-search web-ion-img0-8" style="color:#24A3F1;margin-top:-5px;"></i>
-				    找律师<br/>6万位律师为您服务
+				  <div class="item item-icon-left" style="border:0px;">
+				  	<a ng-href="#/lawyerlist">
+					    <i class="icon ion-android-search web-ion-img0-8" style="color:#24A3F1;margin-top:-5px;"></i>
+					    找律师<br/>6万位律师为您服务
+					</a>
 				  </div>
 			</div>
 		</div>
@@ -57,16 +61,16 @@
 				  	    案件委托
 				  </a>
 				</div>
-				<div class="row" style="background-color:#ffffff;">
-					  <a class="col" style="text-align:center;" ng-if="is_lawyer == undefined || is_lawyer == null || is_lawyer == ''" ng-click="jumplogin()">
+				<div class="row" style="background-color:#ffffff;" ng-model="is_lawyer">
+					  <a ng-if="is_lawyer == null" ng-href="#/login" class="col" style="text-align:center;">
 					  	 <img src="img/web_person118.png" style="width:50px;height:50px;border-radius:50px;" /><br/>
 					  	    我的律团
 					  </a>
-					  <a class="col" style="text-align:center;" ng-if="is_lawyer == false" href="#/center">
+					  <a ng-if="is_lawyer == true" ng-href="#/workbenchlawyer" class="col" style="text-align:center;">
 					  	 <img src="img/web_person118.png" style="width:50px;height:50px;border-radius:50px;" /><br/>
 					  	    我的律团
 					  </a>
-					  <a class="col" style="text-align:center;" ng-if="is_lawyer == true" href="#/mylvtuan">
+					  <a ng-if="is_lawyer == false" ng-href="#/userlvtuan" class="col" style="text-align:center;">
 					  	 <img src="img/web_person118.png" style="width:50px;height:50px;border-radius:50px;" /><br/>
 					  	    我的律团
 					  </a>
@@ -88,12 +92,12 @@
 		</div>
 		<div class="st2-swap">
 			<div class="listimg">
-				<a class="leftimg" href="#"><img src="img/01.png"></a>
+				<a class="leftimg" ng-href="#"><img src="img/01.png"></a>
 			</div>
 			<div class="listimg">
-				<a class="top" href="#"><img src="img/02.png"></a>
-				<a class="left" href="#"><img src="img/03.png"></a>
-				<a class="right" href="#"><img src="img/04.png"></a>
+				<a class="top" ng-href="#"><img src="img/02.png"></a>
+				<a class="left" ng-href="#"><img src="img/03.png"></a>
+				<a class="right" ng-href="#"><img src="img/04.png"></a>
 			</div>
 		</div>
 
@@ -127,27 +131,27 @@
 	</ion-content>
 
 	<div class="tabs tabs-icon-top tabs-color-positive" ng-model="is_lawyer">
-		  <a class="tab-item active" href="#/">
+		  <a class="tab-item active" onclick='layer.goHome()'>
 		    <i class="icon ion-home"></i>
 		    首页
 		  </a>
-		  <a class="tab-item" href="#/group">
+		  <a class="tab-item" ng-href="#/group">
 		    <i class="icon ion-android-contacts"></i>
 		    圈子
 		  </a>
-		  <a class="tab-item" href="#/knowledge">
+		  <a class="tab-item" ng-href="#/knowledge">
 		    <i class="icon ion-social-buffer"></i>
 		    知识
 		  </a>
-		  <a class="tab-item" ng-if="is_lawyer == undefined || is_lawyer == null || is_lawyer == ''" ng-click="jumplogin()">
+		  <a ng-if="is_lawyer == null" ng-href="#/login" class="tab-item">
 		    <i class="icon ion-android-contact"></i>
 		    我的
 		  </a>
-		  <a class="tab-item" ng-if="is_lawyer == false" href="#/center">
+		  <a ng-if="is_lawyer == false" ng-href="#/center" class="tab-item">
 		    <i class="icon ion-android-contact"></i>
 		    我的
 		  </a>
-		  <a class="tab-item" ng-if="is_lawyer == true" href="#/center_lawyer">
+		  <a ng-if="is_lawyer == true" ng-href="#/center_lawyer" class="tab-item">
 		    <i class="icon ion-android-contact"></i>
 		    我的
 		  </a>

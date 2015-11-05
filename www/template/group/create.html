@@ -1,3 +1,10 @@
+<script src="js/jQuery-File-Upload-9.7.1/js/vendor/jquery.ui.widget.js"></script>
+<script src="js/jQuery-File-Upload-9.7.1/js/jquery.iframe-transport.js"></script>
+<script src="js/jQuery-File-Upload-9.7.1/js/jquery.fileupload.js"></script>
+<!--[if (gte IE 8)&(lt IE 10)]>
+<script src="js/jQuery-File-Upload-9.7.1/js/cors/jquery.xdr-transport.js"></script>
+<![endif]-->
+<script src="js/jweixin-1.0.0.js"></script>
 <ion-view view-title="创建圈子">
 	<ion-pane  class="web-body">
 		<ion-header-bar class="bar bar-header bar-light">
@@ -14,9 +21,26 @@
 							<input type="text" name="group_name" ng-model="group_name" required="required" placeholder="圈子名称" ng-messages-multiple />
 						</div>
 						<div class="item item-input ">
-							<label style="width: 100%;">上传群头像</label>
+							<div class="fl">
+								<div class="upload_wrap">
+									<span class="btn btn-success fileinput-button">
+					                    <span>请选择图片</span>
+					                    <input id="group_avatar" type="file" name="upload_file" multiple 
+										    data-sequential-uploads="true" data-disabled="disabled">
+					                    <input type="hidden" name="group_avatar" id="group_avatar">
+					                </span>
+					               
+									    <div class="upload_img_show" >              
+						                  <p class="avatar_js_cover upload_preview" style="display:none;">
+						                  	<img id='avatar_peituImg'  src="" />
+						                  </p>
+						                  <p class="js_cover_tip tips">（图片建议尺寸：250像素 * 200像素,尺寸不得超过1M）</p>
+						                </div>
+					            </div>
+							</div>
+							<!-- <label style="width: 100%;">上传群头像</label>
 							<input type="hidden" name="group_avatar" ng-model="group_avatar" required="required" placeholder="圈子名称" ng-messages-multiple />
-							<a class="icon-right" style="font-size:40px;padding:0 20px;color:#ccc;float:right"><i class="icon ion-ios-plus-outline"></i></a>
+							<a ng-click="show();" class="icon-right" style="font-size:40px;padding:0 20px;color:#ccc;float:right"><i class="icon ion-ios-plus-outline"></i></a> -->
 						</div>
 					</div>	
 				</form>	

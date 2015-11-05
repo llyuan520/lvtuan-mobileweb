@@ -8,8 +8,8 @@
 			</ion-header-bar>
 			<ion-content class="web-body web-top10 ">
 				<div class="list">
-				    <a class="item item-thumbnail-left item-icon-right">
-				      <img src="img/web_header.png">
+				    <a class="item item-thumbnail-left item-icon-right" ng-href="#/infolawyer">
+				      <img src="{{items.user.avatar}}">
 				      <h2 class="web-top10"><span class="badge badge-assertive icon-left">证</span>{{items.user.realname}}  <span class="web-font14">律师</span></h2>
 				      <p  class="web-top5">{{items.user.phone}}</p>
 				    </a>
@@ -62,20 +62,28 @@
 				</div>
 				<div style="width:100%;height:50px;clear:both;"></div>
 			</ion-content>
-			<div class="tabs tabs-icon-top tabs-color-positive">
-				  <a class="tab-item" href="#/index">
+			<div class="tabs tabs-icon-top tabs-color-positive" ng-model="is_lawyer">
+				  <a class="tab-item" onclick='layer.goHome()'>
 				    <i class="icon ion-home"></i>
 				    首页
 				  </a>
-				  <a class="tab-item" href="#/group">
+				  <a class="tab-item" ng-href="#/group">
 				    <i class="icon ion-android-contacts"></i>
 				    圈子
 				  </a>
-				  <a class="tab-item" href="#/knowledge">
+				  <a class="tab-item" ng-href="#/knowledge">
 				    <i class="icon ion-social-buffer"></i>
 				    知识
 				  </a>
-				  <a class="tab-item active" href="#/center">
+				  <a ng-if="is_lawyer == null" ng-href="#/login" class="tab-item active">
+				    <i class="icon ion-android-contact"></i>
+				    我的
+				  </a>
+				  <a ng-if="is_lawyer == false" ng-href="#/center" class="tab-item active">
+				    <i class="icon ion-android-contact"></i>
+				    我的
+				  </a>
+				  <a ng-if="is_lawyer == true" ng-href="#/center_lawyer" class="tab-item active">
 				    <i class="icon ion-android-contact"></i>
 				    我的
 				  </a>
@@ -91,15 +99,15 @@
   		分享您的邀请码<span class="fc-red">2wk4</span>给你的朋友，只需等待您的好友注册后，优惠码（积分）肌肤即可向您发出。
   	</div>
   	<div class="item tabs tabs-icon-top">
-  		<a href="#" class="tab-item">
+  		<a ng-href="#" class="tab-item">
 	  		<i class="icon ion-thumbsup"></i>
 	  		微信好友		  			
   		</a>
-  		<a href="#" class="tab-item">
+  		<a ng-href="#" class="tab-item">
 	  		<i class="icon ion-thumbsup"></i>
 	  		微信好友		  			
   		</a>
-  		<a href="#" class="tab-item">
+  		<a ng-href="#" class="tab-item">
 	  		<i class="icon ion-thumbsup"></i>
 	  		微信好友		  			
   		</a>
