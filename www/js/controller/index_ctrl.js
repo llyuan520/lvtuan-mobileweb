@@ -1202,6 +1202,7 @@ lvtuanApp.controller("followedlaywerCtrl",function($scope,$http,$rootScope){
 				return true;
 			}else{
 				layer.show('暂无数据！');
+				$scope.moredata = false;
 				return false;
 			}
 		}).error(function (data, status) {
@@ -1235,8 +1236,47 @@ lvtuanApp.controller("listscoreslaywerCtrl",function($scope,$http,$rootScope){
 })
 
 //律师的评论
-lvtuanApp.controller("commentlaywerCtrl",function($scope,$http,$rootScope){
+lvtuanApp.controller("commentlaywerCtrl",function($scope,$http,$rootScope,$stateParams){
 	console.info("律师的评论");
+
+	var page = 1; //页数
+    $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
+    $scope.items = [];	//创建一个数组接收后台的数据
+    //下拉刷新
+	$scope.doRefresh = function() {
+		page = 1;
+		$scope.items = [];
+        $scope.loadMore();
+    };
+	//上拉加载
+	$scope.loadMore = function() {
+	$http.get('http://'+$rootScope.hostName+'/lawyer/'+$stateParams.id+'/evaluations?page='+page++,
+        {
+        cache: true,
+        headers: {
+            'Content-Type': 'application/json' , 
+            'Authorization': 'bearer ' + $rootScope.token
+       		}
+        }).success(function(data) {
+			if(data.data.length > 0){
+				if(data.data.length > 9){
+					$scope.moredata = true;
+				}else{
+					$scope.moredata = false;
+				}
+				$scope.items = data.data; 
+				console.info($scope.items );
+				return true;
+			}else{
+				layer.show('暂无数据！');
+				$scope.moredata = false;
+				return false;
+			}
+		}).error(function (data, status) {
+	        console.info(JSON.stringify(data));
+	        console.info(JSON.stringify(status));
+	    })
+	};
 
 })
 

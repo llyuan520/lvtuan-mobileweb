@@ -10,51 +10,43 @@
 				<div class="list">
 				    <a class="item item-thumbnail-left item-icon-right" ng-href="#/infolawyer">
 				      <img src="{{items.user.avatar}}">
-				      <h2 class="web-top10"><span class="badge badge-assertive icon-left">证</span>{{items.user.realname}}  <span class="web-font14">律师</span></h2>
+				      <h2 class="web-top10">{{items.user.realname}}  <span class="web-font14">律师</span></h2>
 				      <p  class="web-top5">{{items.user.phone}}</p>
 				    </a>
 				</div>
 				
 				<div class="list">
 					  <a class="item" ng-href="#/followed_lawyer"> 
-					    <img src="img/web_person006.png" style="width:20px;height:20px;float:left;margin-top:1px;margin-right:5px;" />
 					    我的关注
 					    <i class="icon ion-chevron-right"></i>
 					  </a>
 					  <a class="item" ng-href="#/listscores_lawyer">
-					    <img src="img/web_person008.png" style="width:20px;height:20px;float:left;margin-top:1px;margin-right:5px;" />
 					    我的积分
 					    <span class="badge badge-assertive icon-left">{{items.user.score}}</span>
 					    <i class="icon ion-chevron-right"></i>
 					  </a>
-					  <a class="item" ng-href="#/comment_lawyer"> 
-					    <img src="img/web_person003.png" style="width:20px;height:20px;float:left;margin-top:1px;margin-right:5px;" />
+					  <a class="item" ng-href="#/comment_lawyer/{{items.user.id}}"> 
 					    我的评论
 					    <i class="icon ion-chevron-right"></i>
 					  </a>
 					  <a class="item" ng-href="#/article_lawyer"> 
-					    <img src="img/web_person003.png" style="width:20px;height:20px;float:left;margin-top:1px;margin-right:5px;" />
 					    我的文章
 					    <i class="icon ion-chevron-right"></i>
 					  </a>
 					  <a class="item" ng-href="#/messages_lawyer"> 
-					    <img src="img/web_person004.png" style="width:20px;height:20px;float:left;margin-top:1px;margin-right:5px;" />
 					    我的消息
 					    <span class="badge badge-assertive icon-left">10</span>
 					    <i class="icon ion-chevron-right"></i>
 					  </a>
 					  <a class="item" ng-click="invitefriend()">
-					    <img src="img/web_person006.png" style="width:20px;height:20px;float:left;margin-top:1px;margin-right:5px;" />
 					    邀请好友
 					    <i class="icon ion-chevron-right"></i>
 					  </a>
 					  <a class="item" ng-href="#/about">
-					    <img src="img/web_person006.png" style="width:20px;height:20px;float:left;margin-top:1px;margin-right:5px;" />
 					    关于律团
 					    <i class="icon ion-chevron-right"></i>
 					  </a>
 					  <a class="item" ng-href="#/site">
-					    <img src="img/web_person007.png" style="width:20px;height:20px;float:left;margin-top:1px;margin-right:5px;" />
 					    设置
 					    <i class="icon ion-chevron-right"></i>
 					  </a>

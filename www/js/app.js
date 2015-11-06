@@ -17,7 +17,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
 //声明全局的方法和变量
 .run(['$rootScope','$timeout','$location',function($rootScope,$timeout,$location){
   /*让浏览器记住token*/
-  localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXUyJ9.eyJzdWIiOjE0NjYsImlzcyI6Imh0dHA6XC9cLzE5Mi4xNjguMS40M1wvbG9naW4iLCJpYXQiOiIxNDQ2NzE2MjA3IiwiZXhwIjoiMTQ0NjcxOTgwNyIsIm5iZiI6IjE0NDY3MTYyMDciLCJqdGkiOiI1ZmE2MjgwYmY1OTVlMzVlMzdkNGNlMTU5ZGRjYjhjOCJ9.YzBlNTY3NGZhNzUzYThhYTY5MDhmNDZiZDJkOTFhYjViOTgxNTY2MGE4NWM1ODNhOWE2NDdkMzk5YTZmZDMyNg');
+  localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXUyJ9.eyJzdWIiOjE0NjYsImlzcyI6Imh0dHA6XC9cLzE5Mi4xNjguMS40M1wvbG9naW4iLCJpYXQiOiIxNDQ2Nzc1NjEzIiwiZXhwIjoiMTQ0Njc3OTIxMyIsIm5iZiI6IjE0NDY3NzU2MTMiLCJqdGkiOiI3NGY4ZDZmZWYwMjUyZjJjYzliZDhiNjc3OTFkYzg1ZSJ9.ZmUwMWJjMTU3NmQ4NjIyOTdiYzI0NDhmZWQxOTYzOGE4OTgwNTBmZTMwYzg5NGY0NTc2MzM1NTZjNzU2MmY2ZA');
   //localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXUyJ9.eyJzdWIiOjE0ODgsImlzcyI6Imh0dHA6XC9cL2Rldi53ZGxzdC5sYXctcGMtbmV3XC9sb2dpbiIsImlhdCI6IjE0NDU5NTA0MzUiLCJleHAiOiIxNDQ1OTU0MDM1IiwibmJmIjoiMTQ0NTk1MDQzNSIsImp0aSI6IjMzZmRlYmY0YjEwOWRkOWMyYzhmZmUyNjVkNGUxNjQyIn0.YjgwNDljNjVmZmQ3MDVhODE4ZmI4ZTE2Yzg3OGQzMjk1ZWUwYzZmYzllZjc5MTA1ZTZiZDdhYTg5MDE3MzgzYQ');
   $rootScope.token = localStorage.getItem('token');
   /*$timeout(function() {
@@ -275,7 +275,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
       controller: 'listscoreslaywerCtrl'
     })
     .state('comment_lawyer', { //律师-我的评论
-      url: '/comment_lawyer',
+      url: '/comment_lawyer/:id',
       cache:'false',
       templateUrl: 'template/center/lawyer/comment.html',
       controller: 'commentlaywerCtrl'
