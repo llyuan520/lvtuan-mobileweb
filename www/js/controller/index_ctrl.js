@@ -777,6 +777,7 @@ lvtuanApp.controller("documentsCtrl",function($scope,$http,$rootScope){
 					}
 					//用于连接两个或多个数组并返回一个新的数组
 					$scope.documents = $scope.documents.concat(data.data); 
+
 				}else{
 					layer.show("暂无数据！")
 					$scope.moredata = false;
@@ -1264,8 +1265,12 @@ lvtuanApp.controller("commentlaywerCtrl",function($scope,$http,$rootScope,$state
 				}else{
 					$scope.moredata = false;
 				}
-				$scope.items = data.data; 
-				console.info($scope.items );
+				$scope.items = data.data;
+				$scope.ratingVal = [];
+				for(var i=0; i<$scope.items.length; i++){
+					$scope.ratingVal.push($scope.items[i].evaluate_score);
+				}
+				
 				return true;
 			}else{
 				layer.show('暂无数据！');
@@ -1278,7 +1283,77 @@ lvtuanApp.controller("commentlaywerCtrl",function($scope,$http,$rootScope,$state
 	    })
 	};
 
+
+	$scope.max = 10;
+	$scope.readonly = true;
+	$scope.onHover = function(val){
+		$scope.hoverVal = val;
+	};
+	$scope.onLeave = function(){
+		$scope.hoverVal = null;
+	}
+	$scope.onChange = function(val){
+		$scope.ratingVal = val;
+	}
+
 })
+
+lvtuanApp.directive('star', function () {
+  return {
+    template: '<ul class="rating" ng-mouseleave="leave()">' +
+        '<li ng-repeat="star in stars" ng-class="star" ng-click="click($index + 1)" ng-mouseover="over($index + 1)">' +
+        '\u2605' +
+        '</li>' +
+        '</ul>',
+    scope: {
+      ratingValue: '=',
+      max: '=',
+      readonly: '@',
+      onHover: '=',
+      onLeave: '='
+    },
+    controller: function($scope){
+    	
+      $scope.ratingValue = $scope.ratingValue || 0;
+      $scope.max = $scope.max || 5;
+      $scope.click = function(val){
+        if ($scope.readonly && $scope.readonly === 'true') {
+          return;
+        }
+        $scope.ratingValue = val;
+      };
+      $scope.over = function(val){
+        $scope.onHover(val);
+      };
+      $scope.leave = function(){
+        $scope.onLeave();
+      }
+    },
+    link: function (scope, elem, attrs) {
+      //elem.css("text-align", "center");
+      var updateStars = function () {
+        scope.stars = [];
+        for (var i = 0; i < scope.max; i++) {
+          scope.stars.push({
+            filled: i < scope.ratingValue
+          });
+        }
+      };
+      updateStars();
+ 
+      scope.$watch('ratingValue', function (oldVal, newVal) {
+        if (newVal) {
+          updateStars();
+        }
+      });
+      scope.$watch('max', function (oldVal, newVal) {
+        if (newVal) {
+          updateStars();
+        }
+      });
+    }
+  };
+});
 
 //律师的文章
 lvtuanApp.controller("articlelaywerCtrl",function($scope,$http,$rootScope){

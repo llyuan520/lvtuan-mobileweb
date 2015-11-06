@@ -10,11 +10,10 @@
 					<ion-item class="item-thumbnail-left" ng-repeat="item in items">
 						<img src="{{item.creator_avatar}}"/>
 						<h2>{{item.creator_realname}} <label class="rig">{{item.evaluate_created_at}}</label></h2>
-						<p ng-model="evaluate_score" data-score="{{item.evaluate_score}}">
-							<!-- <label ng-repeat="score in item.evaluate_score" ng-if="score > 0">
-								<i class="ion-ios-star-outline"></i>
-							</label> -->
-						</p>
+
+						<div star rating-value="ratingVal[$index]" max="max" on-hover="onHover" on-leave="onLeave" readonly="{{readonly}}"></div>
+						<input type="hidden" name="input" ng-model="max" min="0" max="10" required>
+
 						<p class="contents">{{item.evaluate_comment}}</p>
 					</ion-item>
 				</ion-list>

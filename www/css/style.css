@@ -533,3 +533,25 @@ img.avatar{border-radius: 50%;border:2px solid #fff;}
 @media (max-height: 736px) {
   .slider{height: 135px;}
    }
+
+
+/*星星的显示*/
+.rating {
+  color: #a9a9a9;
+  margin: 0;
+  padding: 0;
+}
+ul.rating {
+  display: inline-block;
+}
+.rating li {
+  list-style-type: none;
+  display: inline-block;
+  padding: 1px;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+}
+.rating .filled {
+  color: #ffee33;
+}
