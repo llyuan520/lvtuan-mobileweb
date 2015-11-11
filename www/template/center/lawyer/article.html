@@ -1,88 +1,23 @@
+
 <ion-view view-title="我的文章">
-		<ion-pane>
+		<ion-pane  class="web-body">
 			<ion-header-bar class="bar bar-header bar-light">
 				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" onclick="history.go(-1);"></a>
 				<h1 class="title">我的文章</h1>
 			</ion-header-bar>
-			<ion-tabs class="tabs-default  tabs-top">
-				<ion-tab title="案列分析">
-					<ion-view>
-						<ion-header-bar class="bar-positive">
-							<h1 class="title">案列分析</h1>
-						</ion-header-bar>
-						<ion-content>
-							<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
-							<ion-list>
-								<ion-item class="item-thumbnail-left">
-									<img src="{{item.avatar}}"/>
-									<h2>文章列表</h2>
-									<p class="content">文章列表文章列表文章列表文章列表文章列表文章列表文章列表文章列表文章列表文章列表文章列表文章列表</p>
-									<p>
-										2015-10-26 16:22:24
-									</p>
-								</ion-item>
-							</ion-list>
-							<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
-						</ion-content>
-					</ion-view>
-				</ion-tab>
-				<ion-tab title="咨询">
-					<ion-view>
-						<ion-header-bar  class="bar-positive">
-							<h1 class="title">咨询</h1>
-						</ion-header-bar>
-						<ion-content>
-							<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
-							<ion-list class="messages">
-								<ion-item class="ion-chevron-right icon-right">
-									<div class="item item-thumbnail-left">
-										<img src="{{item.avatar}}"/>
-										<h4>
-									      	<span class="sp-name fc-nan ng-binding">何盛</span>
-									      	<span class="sp-level fc-nan">高级律师</span>
-									      	<img ng-show="" class="img-v ng-hide" src="img/vip.png">
-									      </h4>
-										<p>咨询列表咨询列表</p>
-										<p>2015-10-26 16:22:24 </p>
-									</div>
-								</ion-item>
-								<ion-item class="ion-chevron-right icon-right">
-									<div class="item item-thumbnail-left">
-										<img src="{{item.avatar}}"/>
-										<h4>
-									      	<span class="sp-name fc-nan ng-binding">何盛</span>
-									      	<span class="sp-level fc-nan">高级律师</span>
-									      	<img ng-show="" class="img-v ng-hide" src="img/vip.png">
-									      </h4>
-										<p>咨询列表咨询列表</p>
-										<p>2015-10-26 16:22:24 </p>
-									</div>
-								</ion-item>
-							</ion-list>
-							<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
-						</ion-content>
-					</ion-view>
-				</ion-tab>
-				<ion-tab title="知识">
-					<ion-view>
-						<ion-header-bar class="bar-positive">
-							<h1 class="title">知识</h1>
-						</ion-header-bar>
-						<ion-content>
-							<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
-							<ion-list>
-								<ion-item class="item-thumbnail-left">
-									<img src="{{item.avatar}}"/>
-									<h2>文章列表</h2>
-									<p>文章列表文章列表文章列表</p>
-									<p>2015-10-26 16:22:24</p>
-								</ion-item>
-							</ion-list>
-							<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
-						</ion-content>
-					</ion-view>
-				</ion-tab>
+
+			<ion-tabs class="tabs-top">
+			    <ion-tab title="案列分析" href="#/article_lawyer/case/370">
+			        <ion-nav-view name="article-case">案列分析</ion-nav-view>
+			    </ion-tab>
+
+			    <ion-tab title="资讯" href="#/article_lawyer/advisory/368">
+			        <ion-nav-view name="article-advisory">资讯</ion-nav-view>
+			    </ion-tab>
+
+			    <ion-tab title="知识" href="#/article_lawyer/lknowledge/369">
+			        <ion-nav-view name="article-lknowledge">知识</ion-nav-view>
+			    </ion-tab>
 			</ion-tabs>
-			
 		</ion-pane>
 </ion-view>

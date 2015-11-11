@@ -4,8 +4,9 @@
   	</ion-nav-bar>
 	<ion-nav-title>律团</ion-nav-title>
 	<ion-nav-buttons side="left">
-		<button class="button button-icon" ng-click="mylvteam()">
-			<img src="../img/20.png"/>深圳
+		<button class="button button-icon">  <!-- ng-click="mylvteam()" -->
+			<!-- <img style="height:30px;" src="../img/coordinate.png"/>  -->
+			<ion class="ion-ios-location-outline" style="font-size: 32px;"></ion> 深圳
 		</button>
 	</ion-nav-buttons>
 	<ion-nav-buttons side="right">
@@ -14,113 +15,93 @@
 		</a>
 	</ion-nav-buttons>
 	<ion-content>
-		<ion-slide-box does-continue="true" show-pager="true" slide-interval="3000" auto-play="true"  active-slide="index" pager-click="go(index)">
-	        <ion-slide>
-	            <img src="../img/tupian.png">
-	        </ion-slide>
-	        <ion-slide>
-	            <img src="../img/tupian.png">
-	        </ion-slide>
-		</ion-slide-box>
-		<div class="subtitle">
-			<div class="list web-bottom0" style="width:50%;padding:10px 0px;padding-left:5%;float:left;background-color:#ffffff;">
-				  <div class="item item-icon-left" style="border:0px;border-right:1px solid #cccccc;padding-top:14px;padding-bottom:0px;">
-				  	<a ng-href="#/questions">
-				    	<i class="icon ion-chatbox-working web-ion-img0-8" style="color:#24A3F1;margin-top:-5px;"></i>
-				    	问律师<br/>资深律师解答
-					</a>
-				  </div>
-			</div>
-			<div class="list web-bottom0" style="width:50%;padding-left:5%;float:left;background-color:#ffffff;">
-				  <div class="item item-icon-left" style="border:0px;">
-				  	<a ng-href="#/lawyerlist">
-					    <i class="icon ion-android-search web-ion-img0-8" style="color:#24A3F1;margin-top:-5px;"></i>
-					    找律师<br/>6万位律师为您服务
-					</a>
-				  </div>
-			</div>
+		<div class="slide1">
+			<ion-slide-box active-slide="myActiveSlide1" does-continue="true" show-pager="true" slide-interval="3000" auto-play="true"  active-slide="index">
+		        <ion-slide>
+		            <img src="../img/banner1-01.png">
+		        </ion-slide>
+		        <ion-slide>
+		            <img src="../img/banner1-02.png">
+		        </ion-slide>
+		        <ion-slide>
+		            <img src="../img/banner1-03.png">
+		        </ion-slide>
+			</ion-slide-box>
+		</div>
+		<div class="row" style="background-color: #FFFFFF;margin-top:5px;padding:5px 0;">
+		  <div class="col" style="border-right: 1px solid #cccccc;padding-left:0px;">
+		  	<a ng-href="#/questions">
+			  	<span class="col col-33" style="float: left;"><i class="asklawyer"></i></span>
+	  			<span class="col col-67" style="float: left;color:#999;font-size: 12px;">
+	  				<span style="font-size:23px;color:#333">问律师</span><br/>
+	  				公益律师解惑
+	  			</span>
+  			</a>
+		  </div>
+		  <div class="col" style="padding-right:0px;">
+		  	<a ng-href="#/lawyerlist">
+			  	<span class="col col-33" style="float: left;"><i class="findlawyer"></i></span>
+	  			<span class="col col-67" style="float: left;color:#999;font-size: 12px;">
+	  				<span style="font-size:23px;color:#333">问律师</span><br/>
+	  				一对一专业咨询
+	  			</span>
+  			</a>
+		  </div>
 		</div>
 		
 		<div class="nav-swap">
 			<div class="n-swapmain">
 				<div class="row" style="background-color:#ffffff;">
-				  <a class="col" style="text-align:center;" ng-href="#/legaladvice">
-				  	 <img src="img/web_person114.png" style="width:50px;height:50px;border-radius:50px;" /><br/>
+				    <a class="col" style="text-align:center;color:#333" ng-href="#/legaladvice">
+				  	 	<img src="img/flzx.png" style="width:50px;height:50px;border-radius:50px;" /><br/>
 				  	    法律咨讯
-				  </a>
-				  <a class="col" style="text-align:center;" ng-href="#/lawlecture">
-				  	 <img src="img/web_person115.png" style="width:50px;height:50px;border-radius:50px;" /><br/>
-				  	    法律讲堂
-				  </a>
-				  <a class="col" style="text-align:center;" ng-href="#/lvtuanalliance">
-				  	 <img src="img/web_person116.png" style="width:50px;height:50px;border-radius:50px;" /><br/>
-				  	    律团联盟
-				  </a>
-				  <a class="col" style="text-align:center;" ng-href="#/casescomm">
-				  	 <img src="img/web_person117.png" style="width:50px;height:50px;border-radius:50px;" /><br/>
+				    </a>
+				    <a class="col" style="text-align:center;color:#333" ng-href="#/lawlecture">
+					  	<img src="img/flws.png" style="width:50px;height:50px;border-radius:50px;" /><br/>
+					  	法律文书
+					</a>
+				  	<a class="col" style="text-align:center;color:#333" ng-href="#/casescomm">
+				  	 	<img src="img/ajwt.png" style="width:50px;height:50px;border-radius:50px;" /><br/>
 				  	    案件委托
-				  </a>
-				</div>
-				<div class="row" style="background-color:#ffffff;" ng-model="is_lawyer">
-					  <a ng-if="is_lawyer == null" ng-href="#/login" class="col" style="text-align:center;">
-					  	 <img src="img/web_person118.png" style="width:50px;height:50px;border-radius:50px;" /><br/>
-					  	    我的律团
-					  </a>
-					  <a ng-if="is_lawyer == true" ng-href="#/workbenchlawyer" class="col" style="text-align:center;">
-					  	 <img src="img/web_person118.png" style="width:50px;height:50px;border-radius:50px;" /><br/>
-					  	    我的律团
-					  </a>
-					  <a ng-if="is_lawyer == false" ng-href="#/userlvtuan" class="col" style="text-align:center;">
-					  	 <img src="img/web_person118.png" style="width:50px;height:50px;border-radius:50px;" /><br/>
-					  	    我的律团
-					  </a>
-
-					  <a class="col" style="text-align:center;" ng-href="#/lawlecture">
-					  	 <img src="img/web_person119.png" style="width:50px;height:50px;border-radius:50px;" /><br/>
-					  	    法律助手
-					  </a>
-					  <a class="col" style="text-align:center;" ng-href="#/lawlecture">
-					  	 <img src="img/web_person120.png" style="width:50px;height:50px;border-radius:50px;" /><br/>
-					  	    法律文书
-					  </a>
-					  <a class="col" style="text-align:center;" ng-href="#/talent">
-					  	 <img src="img/web_person121.png" style="width:50px;height:50px;border-radius:50px;" /><br/>
-					  	    人才交流
-					  </a>
+				  	</a>
 				</div>
 			</div>
 		</div>
-		<div class="st2-swap">
-			<div class="listimg">
-				<a class="leftimg" ng-href="#"><img src="img/01.png"></a>
+
+		<div class="row st2-swap">
+			<div class="col col-40 listimg">
+				<div class="slide2">
+					<ion-slide-box  active-slide="myActiveSlide2" does-continue="true" show-pager="true" slide-interval="3500" auto-play="true"  active-slide="index">
+				        <ion-slide>
+				            <img src="../img/banner2-04.png">
+				        </ion-slide>
+				        <ion-slide>
+				            <img src="../img/banner2-05.png">
+				        </ion-slide>
+					</ion-slide-box>
+				</div>
 			</div>
-			<div class="listimg">
-				<a class="top" ng-href="#"><img src="img/02.png"></a>
-				<a class="left" ng-href="#"><img src="img/03.png"></a>
-				<a class="right" ng-href="#"><img src="img/04.png"></a>
+			<div class="col col-70 listimg">
+				<a class="top" ng-href="#"><img src="img/banner2-03.png"></a>
+				<a class="left" ng-href="#"><img src="img/banner2-01.png"></a>
+				<a class="right" ng-href="#"><img src="img/banner2-02.jpg"></a>
 			</div>
 		</div>
 
 		<div class="content">
 			<div class="bar-header">
-		      <div class="h3 title">金牌律师推荐</div>
+		      <div class="h4 title">金牌律师推荐</div>
 		    </div>
 	      <ul class="list">
 	      	<!-- <ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher> -->
             <ion-list>
             	<ion-item class="item item-thumbnail-left" ng-repeat="item in items" ng-href="#/lawyer/{{item.id}}">
-		          	<img src="{{item.avatar}}"/>
+		          	<img src="{{item.avatar}}" style="border-radius:50px;" />
 					<h2>{{item.realname}}</h2>
 					<p>执业{{item.practice_period}}/{{item.city}}</p>
 					<p>
 						<label ng-repeat="item in item.work_scope">{{item.value}}</label>
 					</p>
-					<p>
-					    <i class="icon ion-compose web-ion-img1-2" style="float:right;margin-right:10px;font-size:12px;">&nbsp;{{item.likes_count}}</i>
-					    <i class="icon ion-chatbubble web-ion-img1-2" style="float:right;margin-right:10px;font-size:12px;">&nbsp;{{item.collects_count}}</i>
-					    <i class="icon ion-heart web-ion-img1-2" style="float:right;margin-right:10px;font-size:12px;color:#f00;">&nbsp;<span style="color:#666666;">{{item.follows_count}}</span></i>
-					</p>
-		       
 		        </ion-item>
 	         </ion-list>
 	         <ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
@@ -135,7 +116,11 @@
 		    <i class="icon ion-home"></i>
 		    首页
 		  </a>
-		  <a class="tab-item" ng-href="#/group">
+		  <a ng-if="is_lawyer == null" ng-href="#/login" class="tab-item">
+		    <i class="icon ion-android-contacts"></i>
+		    圈子
+		  </a>
+		  <a ng-if="is_lawyer == true" ng-href="#/group" class="tab-item">
 		    <i class="icon ion-android-contacts"></i>
 		    圈子
 		  </a>

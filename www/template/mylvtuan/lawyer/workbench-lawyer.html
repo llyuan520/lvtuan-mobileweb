@@ -61,11 +61,15 @@
 			</ion-content>
 			
 			<div class="tabs tabs-icon-top tabs-color-positive" ng-model="is_lawyer">
-				  <a class="tab-item" onclick='layer.goHome()'>
+				  <a class="tab-item active" onclick='layer.goHome()'>
 				    <i class="icon ion-home"></i>
 				    首页
 				  </a>
-				  <a class="tab-item" ng-href="#/group">
+				  <a ng-if="is_lawyer == null" ng-href="#/login" class="tab-item">
+				    <i class="icon ion-android-contacts"></i>
+				    圈子
+				  </a>
+				  <a ng-if="is_lawyer == true" ng-href="#/group" class="tab-item">
 				    <i class="icon ion-android-contacts"></i>
 				    圈子
 				  </a>

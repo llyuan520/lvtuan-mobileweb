@@ -9,7 +9,7 @@
 			<ion-content class="web-body web-top10 ">
 				<div class="list">
 				    <a class="item item-thumbnail-left item-icon-right" ng-href="#/info">
-				      <img src="img/web_header.png">
+				      <img src="{{items.user.avatar}}">
 				      <h2 class="web-top10">{{items.user.realname}}</h2>
 				      <p  class="web-top5" >{{items.user.phone}}</p>
 				    </a>
@@ -17,49 +17,40 @@
 				
 				<div class="list">
 					  <a class="item" ng-href="#/listscores">
-					    <img src="img/web_person008.png" style="width:20px;height:20px;float:left;margin-top:1px;margin-right:5px;" />
 					    我的积分
-					    <span class="badge badge-assertive icon-left">{{items.user.score}}</span>
+					    <span class="badge badge-assertive icon-left" style="top:16px;">{{items.user.score}}</span>
 					    <i class="icon ion-chevron-right"></i>
 					  </a>
 					  <a class="item" ng-href="#/collect" >
-					    <img src="img/web_person009.png" style="width:20px;height:20px;float:left;margin-top:1px;margin-right:5px;" />
 					    我的收藏
 					    <i class="icon ion-chevron-right"></i>
 					  </a>
 					  <a class="item" ng-href="#/comment"> 
-					    <img src="img/web_person003.png" style="width:20px;height:20px;float:left;margin-top:1px;margin-right:5px;" />
 					    我的评论
 					    <i class="icon ion-chevron-right"></i>
 					  </a>
 					  <a class="item" ng-href="#/messages"> 
-					    <img src="img/web_person004.png" style="width:20px;height:20px;float:left;margin-top:1px;margin-right:5px;" />
 					    我的消息
-					    <span class="badge badge-assertive icon-left">10</span>
+					    <span class="badge badge-assertive icon-left" style="top:16px;">10</span>
 					    <i class="icon ion-chevron-right"></i>
 					  </a>
 					  <a class="item" ng-href="#/followed"> 
-					    <img src="img/web_person006.png" style="width:20px;height:20px;float:left;margin-top:1px;margin-right:5px;" />
 					    我的关注
 					    <i class="icon ion-chevron-right"></i>
 					  </a>
 					  <a class="item" ng-click="invitefriend()">
-					    <img src="img/web_person006.png" style="width:20px;height:20px;float:left;margin-top:1px;margin-right:5px;" />
 					    邀请好友
 					    <i class="icon ion-chevron-right"></i>
 					  </a>
 					  <a class="item" ng-href="#/about">
-					    <img src="img/web_person006.png" style="width:20px;height:20px;float:left;margin-top:1px;margin-right:5px;" />
 					    关于律团
 					    <i class="icon ion-chevron-right"></i>
 					  </a>
 					  <a class="item" ng-href="#/site">
-					    <img src="img/web_person007.png" style="width:20px;height:20px;float:left;margin-top:1px;margin-right:5px;" />
 					    设置
 					    <i class="icon ion-chevron-right"></i>
 					  </a>
 					  <a class="item" ng-href="#/becomelawyer">
-					    <img src="img/web_person007.png" style="width:20px;height:20px;float:left;margin-top:1px;margin-right:5px;" />
 					    认证为律师
 					    <i class="icon ion-chevron-right"></i>
 					  </a>
@@ -67,31 +58,35 @@
 				<div style="width:100%;height:50px;clear:both;"></div>
 			</ion-content>
 			<div class="tabs tabs-icon-top tabs-color-positive" ng-model="is_lawyer">
-				  <a class="tab-item" onclick='layer.goHome()'>
-				    <i class="icon ion-home"></i>
-				    首页
-				  </a>
-				  <a class="tab-item" g-href="#/group">
-				    <i class="icon ion-android-contacts"></i>
-				    圈子
-				  </a>
-				  <a class="tab-item" g-href="#/knowledge">
-				    <i class="icon ion-social-buffer"></i>
-				    知识
-				  </a>
-				  <a ng-if="is_lawyer == null" ng-href="#/login" class="tab-item active">
-				    <i class="icon ion-android-contact"></i>
-				    我的
-				  </a>
-				  <a ng-if="is_lawyer == false" ng-href="#/center" class="tab-item active">
-				    <i class="icon ion-android-contact"></i>
-				    我的
-				  </a>
-				  <a ng-if="is_lawyer == true" ng-href="#/center_lawyer" class="tab-item active">
-				    <i class="icon ion-android-contact"></i>
-				    我的
-				  </a>
-			</div>
+			  <a class="tab-item active" onclick='layer.goHome()'>
+			    <i class="icon ion-home"></i>
+			    首页
+			  </a>
+			  <a ng-if="is_lawyer == null" ng-href="#/login" class="tab-item">
+			    <i class="icon ion-android-contacts"></i>
+			    圈子
+			  </a>
+			  <a ng-if="is_lawyer == true" ng-href="#/group" class="tab-item">
+			    <i class="icon ion-android-contacts"></i>
+			    圈子
+			  </a>
+			  <a class="tab-item" ng-href="#/knowledge">
+			    <i class="icon ion-social-buffer"></i>
+			    知识
+			  </a>
+			  <a ng-if="is_lawyer == null" ng-href="#/login" class="tab-item">
+			    <i class="icon ion-android-contact"></i>
+			    我的
+			  </a>
+			  <a ng-if="is_lawyer == false" ng-href="#/center" class="tab-item">
+			    <i class="icon ion-android-contact"></i>
+			    我的
+			  </a>
+			  <a ng-if="is_lawyer == true" ng-href="#/center_lawyer" class="tab-item">
+			    <i class="icon ion-android-contact"></i>
+			    我的
+			  </a>
+		</div>
 		</ion-pane>
 </ion-view>
 <script id="popup-invitefriend-template.html" type="text/ng-template">

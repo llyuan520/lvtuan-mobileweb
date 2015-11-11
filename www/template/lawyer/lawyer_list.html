@@ -34,13 +34,15 @@
 						      	{{workscope.value}}
 						      </option>
 						    </select>
-						    <select name="experience" class="opt-bl" ng-model="experience">
+						    <select name="experience" class="opt-bl" ng-change="searchCat()" ng-model="experience">
 						      <option value="" selected>执业年限</option>
-						      	<option value="" ></option>
+						      	<option ng-repeat="period in periods" value="{{period.key}}">
+						      		{{period.value}}
+						      	</option>
 						    </select>
 						    <select name="order" class="opt-bl" ng-model="order">
 						      <option value="" selected>默认</option>
-						      	<option value="" ></option>
+						      	<!-- <option value="" ></option> -->
 						    </select>
 						</div>
 					</form>

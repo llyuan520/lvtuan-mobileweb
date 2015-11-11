@@ -17,7 +17,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
 //声明全局的方法和变量
 .run(['$rootScope','$timeout','$location',function($rootScope,$timeout,$location){
   /*让浏览器记住token*/
-  localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXUyJ9.eyJzdWIiOjE0NjYsImlzcyI6Imh0dHA6XC9cLzE5Mi4xNjguMS40M1wvbG9naW4iLCJpYXQiOiIxNDQ2Nzg4NzY0IiwiZXhwIjoiMTQ0Njc5MjM2NCIsIm5iZiI6IjE0NDY3ODg3NjQiLCJqdGkiOiJkOTBiZWUzNGU2NDIxYmFjNGI5Y2QxZDU2ODU1Mjk0ZCJ9.Nzc3ZmU4YWNkYmQ5NWUyMDBlMmMxM2Y0MTBhYjBjMmE3NTk2NmViNTYyYWVlZmQxZmNjMmUwOGRkNDg5MWE4Mw');
+  localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXUyJ9.eyJzdWIiOjE0NjYsImlzcyI6Imh0dHA6XC9cLzE5Mi4xNjguMS40M1wvbG9naW4iLCJpYXQiOiIxNDQ3MjExMTYxIiwiZXhwIjoiMTQ0NzIxNDc2MSIsIm5iZiI6IjE0NDcyMTExNjEiLCJqdGkiOiJlOTAyODFjNDBjYWNkOWY0NWVlZjcwZjE4MmNlMDQzZiJ9.ZWJjZjg1YTZkYzYyZTcxMWU1NmE2ZGFiYmViODEwOGMwNWVlZmU4ZjVmZTU3NDQxYjRmMzQ5NTQ3YjRmNWY5Ng');
   //localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXUyJ9.eyJzdWIiOjE0ODgsImlzcyI6Imh0dHA6XC9cL2Rldi53ZGxzdC5sYXctcGMtbmV3XC9sb2dpbiIsImlhdCI6IjE0NDU5NTA0MzUiLCJleHAiOiIxNDQ1OTU0MDM1IiwibmJmIjoiMTQ0NTk1MDQzNSIsImp0aSI6IjMzZmRlYmY0YjEwOWRkOWMyYzhmZmUyNjVkNGUxNjQyIn0.YjgwNDljNjVmZmQ3MDVhODE4ZmI4ZTE2Yzg3OGQzMjk1ZWUwYzZmYzllZjc5MTA1ZTZiZDdhYTg5MDE3MzgzYQ');
   $rootScope.token = localStorage.getItem('token');
   /*$timeout(function() {
@@ -280,12 +280,41 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
       templateUrl: 'template/center/lawyer/comment.html',
       controller: 'commentlaywerCtrl'
     })
+
     .state('article_lawyer', { //律师-我的文章
       url: '/article_lawyer',
-      cache:'false',
-      templateUrl: 'template/center/lawyer/article.html',
-      controller: 'articlelaywerCtrl'
+      templateUrl: 'template/center/lawyer/article.html'
     })
+   .state('article_lawyer.case', { //律师 - 案例分析
+      url: '/case/:id',
+      views: {
+          'article-case': {
+              templateUrl: 'template/center/lawyer/article-case.html',
+              controller: 'caselaywerCtrl'
+          }
+      }
+    })
+   .state('article_lawyer.advisory', { //律师 - 咨询
+      url: '/advisory/:id',
+      views: {
+          'article-advisory': {
+              templateUrl: 'template/center/lawyer/article-advisory.html',
+              controller: 'caselaywerCtrl'
+          }
+      }
+    })
+   .state('article_lawyer.lknowledge', { //律师 - 知识
+      url: '/lknowledge/:id',
+      views: {
+          'article-lknowledge': {
+              templateUrl: 'template/center/lawyer/article-lknowledge.html',
+              controller: 'caselaywerCtrl'
+          }
+      }
+    })
+
+
+
     .state('messages_lawyer', { //律师-我的消息
       url: '/messages_lawyer',
       cache:'false',
@@ -668,7 +697,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
 
     .state('lawlecture', { //首页-法律讲堂
       url: '/lawlecture',
-      templateUrl: 'template/lawlecture.html',
+      templateUrl: 'template/lecture/lawlecture.html',
       controller: 'lawlectureCtrl'
     })
     .state('casescomm', { //首页-案件委托

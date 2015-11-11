@@ -6,49 +6,53 @@
 			</ion-header-bar>
 
 			<ion-tabs class="tabs-top">
-			    <ion-tab title="待受理" ng-href="#/userquestion/new">
+			    <ion-tab title="待受理" href="#/userquestion/new">
 			        <ion-nav-view name="question-new">待受理</ion-nav-view>
 			    </ion-tab>
 
-			    <ion-tab title="已受理" ng-href="#/userquestion/ssigned">
+			    <ion-tab title="已受理" href="#/userquestion/ssigned">
 			        <ion-nav-view name="question-ssigned">已受理</ion-nav-view>
 			    </ion-tab>
 
-			    <ion-tab title="处理中" ng-href="#/userquestion/replied">
+			    <ion-tab title="处理中" href="#/userquestion/replied">
 			        <ion-nav-view name="question-replied">处理中</ion-nav-view>
 			    </ion-tab>
 
-			    <ion-tab title="待确认" ng-href="#/userquestion/waitforconfirmation">
+			    <ion-tab title="待确认" href="#/userquestion/waitforconfirmation">
 			        <ion-nav-view name="question-waitforconfirmation">待确认</ion-nav-view>
 			    </ion-tab>
 
-			    <ion-tab title="已完成" ng-href="#/userquestion/complete">
+			    <ion-tab title="已完成" href="#/userquestion/complete">
 			        <ion-nav-view name="question-complete">已完成</ion-nav-view>
 			    </ion-tab>
 			</ion-tabs>
 			
 			<div class="tabs tabs-icon-top tabs-color-positive" ng-model="is_lawyer">
-				  <a class="tab-item" onclick='layer.goHome()'>
+				  <a class="tab-item active" onclick='layer.goHome()'>
 				    <i class="icon ion-home"></i>
 				    首页
 				  </a>
-				  <a class="tab-item" ng-href="#/group">
+				  <a ng-if="is_lawyer == null" href="#/login" class="tab-item">
 				    <i class="icon ion-android-contacts"></i>
 				    圈子
 				  </a>
-				  <a class="tab-item" ng-href="#/knowledge">
+				  <a ng-if="is_lawyer == true" href="#/group" class="tab-item">
+				    <i class="icon ion-android-contacts"></i>
+				    圈子
+				  </a>
+				  <a class="tab-item" href="#/knowledge">
 				    <i class="icon ion-social-buffer"></i>
 				    知识
 				  </a>
-				  <a ng-if="is_lawyer == null" ng-href="#/login" class="tab-item">
+				  <a ng-if="is_lawyer == null" href="#/login" class="tab-item">
 				    <i class="icon ion-android-contact"></i>
 				    我的
 				  </a>
-				  <a ng-if="is_lawyer == false" ng-href="#/center" class="tab-item">
+				  <a ng-if="is_lawyer == false" href="#/center" class="tab-item">
 				    <i class="icon ion-android-contact"></i>
 				    我的
 				  </a>
-				  <a ng-if="is_lawyer == true" ng-href="#/center_lawyer" class="tab-item">
+				  <a ng-if="is_lawyer == true" href="#/center_lawyer" class="tab-item">
 				    <i class="icon ion-android-contact"></i>
 				    我的
 				  </a>
