@@ -40,6 +40,7 @@ lvtuanApp.controller("indexCtrl",function($scope,$state,$http,$rootScope,$ionicL
             'Authorization': 'bearer ' + $rootScope.token
        		}
         }).success(function(data) {
+        	console.info(data.data)
 			if(data.data.length > 0){
 				$scope.moredata = true;
 				//用于连接两个或多个数组并返回一个新的数组
@@ -1933,7 +1934,7 @@ lvtuanApp.controller("questionsCtrl",function($scope,$state,$http,$rootScope){
 			var val = this.workscope.value;
 			var workscopes = document.getElementById("workscopes");
 			$scope.cat_id = key;
-			angular.element(workscopes).val(val);
+			angular.element(workscopes).text(val);
 			$http.get('http://'+$rootScope.hostName+'/lawyer/workscopes',
 			        {
 			        cache: true,
@@ -1951,6 +1952,9 @@ lvtuanApp.controller("questionsCtrl",function($scope,$state,$http,$rootScope){
 			        console.info(JSON.stringify(data));
 			        console.info(JSON.stringify(status));
 			    });
+
+
+			    alert(val);
 		}
 	}
 
@@ -1980,10 +1984,26 @@ lvtuanApp.controller("questionsCtrl",function($scope,$state,$http,$rootScope){
 	            }
 	        }).success(function(data) {
 	        	console.info(data.data);
+	        	page = 1; //页数
+			    $scope.list_questions = [];
+			    if(data.data.length > 0){
+					$scope.moredata = true;
+					//用于连接两个或多个数组并返回一个新的数组
+					$scope.list_questions = $scope.list_questions.concat(data.data); 
+					$scope.$broadcast('scroll.infiniteScrollComplete');
+				}else{
+					$scope.moredata = false;
+					$scope.$broadcast('scroll.infiniteScrollComplete');
+					layer.show("暂无数据！");
+					return false;
+				}
 	           layer.show("提交成功！");
 	           $(':input','#questions_form').not('textarea :submit, :reset, :hidden').val('');
+	           var workscopes = document.getElementById("workscopes");
+				angular.element(workscopes).text("请选择案例类型");
 
 	        }).error(function (data, status) {
+	        	console.info(data.error_messages);
 	        	var errMsg = JSON.stringify(data.error_messages.content[0]);
 	        	layer.show(errMsg);
             });
@@ -2007,7 +2027,6 @@ lvtuanApp.controller("questionsCtrl",function($scope,$state,$http,$rootScope){
 
 	//获取咨询列表
 	function getQuestionList(){
-		console.info('http://'+$rootScope.hostName+'/question/list_questions?page='+page++);
 		$http.get('http://'+$rootScope.hostName+'/question/list_questions?page='+page++,
 	        {
 	        cache: true,
