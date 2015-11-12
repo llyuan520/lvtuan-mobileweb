@@ -18,20 +18,24 @@
 				      <img style="border-radius:5px;" src="{{items.user.avatar}}">
 				      <p style="height:80px;line-height:80px;font-size:16px;color:#373737;">个人头像</p>
 				    </li>
-				    <li class="item">联系方式 {{items.user.phone}}</li>
-				    <li class="item" onclick="location.href='web98.html'">电子邮箱 {{items.user.email}}</li>
-				    <li class="item" onclick="location.href='web99.html'">昵称 {{items.user.nickname}}</li>
+				    <li class="item">联系方式 <input type="text" name="phone" ng-model="phone" value="{{items.user.phone}}" /></li>
+				    <li class="item">电子邮箱 <input type="text" name="email" ng-model="email" required="required" placeholder="联系方式" ng-messages-multiple  value="{{items.user.email}}" /></li>
+				    <li class="item">昵称 {{items.user.nickname}}</li>
 				</ul>
 				<ul class="list">
-				    <li class="item" onclick="location.href='web100.html'">姓名 {{items.user.realname}}</li>
+				    <li class="item">姓名 {{items.user.realname}}</li>
 				    <li class="item" ng-click="show2();">性别 {{items.user.sex}}</li>
-				    <li class="item" onclick="location.href='web102.html'">地区 {{items.user.district}}</li>
+				    <li class="item">地区 {{items.user.district}}</li>
 				    <li class="item"><span class="item-note">
 				    <input type="text" id="appDate" style="width:100px;height:20px;padding:0px;" placeholder="选择日期" /></span>
 				        出生年月</li>
 				</ul>
+				<ul class="list">
+				    <li class="item">律师资格认证</li>
+				    <li class="item">律师个人简介</li>
+				</ul>
 				<div style="clear:both;width:100%;height:20px;"></div>
-				<button class="button button-full button-positive web-wid8c web-top30">退出账号</button>
+				<button class="button button-full button-positive web-wid8c web-top30">保存</button>
 			    <div style="clear:both;width:100%;height:20px;"></div>
 			</ion-content>
 		</ion-pane>

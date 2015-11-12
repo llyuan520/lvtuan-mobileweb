@@ -9,14 +9,14 @@
     <ion-content>
 		<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 		<ion-list>
-			<div class="item" > <!-- ng-repead="televis in televise" -->
+			<div class="item" ng-repeat="televis in televise" >
 			  	<a href="#/broadcastview">
-			    	广播广播广播广播广播广播广播广播广播广播广播广播广播广播广播广播
+			    	{{televis.content}}
 				</a>
-				<p>12:18</p>
+				<p>{{televis.created_at}}</p>
 				<div class="web-paddingtb0" style="padding-left:55px;height:30px;line-height:30px;border-top:0px;color:#767676;">
-				    <i class="icon ion-compose web-ion-img1-2" style="float:right;margin-right:5px;font-size:12px;">&nbsp;20</i>
-				    <i class="icon ion-heart web-ion-img1-2" style="float:right;margin-right:5px;font-size:12px;">&nbsp;17</i>
+				    <i class="icon ion-compose web-ion-img1-2" style="float:right;margin-right:5px;font-size:12px;">&nbsp;{{televis.comments_count}}</i>
+				    <i class="icon ion-heart web-ion-img1-2" style="float:right;margin-right:5px;font-size:12px;">&nbsp;{{televis.likes_count}}</i>
 				    <i class="icon ion-chatbubble web-ion-img1-2" style="float:right;margin-right:5px;font-size:12px;">&nbsp;32</i>
 				  </div>
 				<div class="web-paddingtb5 web-font14 web-item-topb0 web-item-botb0" style="color:#f00;">

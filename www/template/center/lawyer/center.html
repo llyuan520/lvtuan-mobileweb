@@ -55,7 +55,7 @@
 				<div style="width:100%;height:50px;clear:both;"></div>
 			</ion-content>
 			<div class="tabs tabs-icon-top tabs-color-positive" ng-model="is_lawyer">
-			  <a class="tab-item active" onclick='layer.goHome()'>
+			  <a class="tab-item" onclick='layer.goHome()'>
 			    <i class="icon ion-home"></i>
 			    首页
 			  </a>
@@ -71,15 +71,15 @@
 			    <i class="icon ion-social-buffer"></i>
 			    知识
 			  </a>
-			  <a ng-if="is_lawyer == null" ng-href="#/login" class="tab-item">
+			  <a ng-if="is_lawyer == null" ng-href="#/login" class="tab-item active">
 			    <i class="icon ion-android-contact"></i>
 			    我的
 			  </a>
-			  <a ng-if="is_lawyer == false" ng-href="#/center" class="tab-item">
+			  <a ng-if="is_lawyer == false" ng-href="#/center" class="tab-item active">
 			    <i class="icon ion-android-contact"></i>
 			    我的
 			  </a>
-			  <a ng-if="is_lawyer == true" ng-href="#/center_lawyer" class="tab-item">
+			  <a ng-if="is_lawyer == true" ng-href="#/center_lawyer" class="tab-item active">
 			    <i class="icon ion-android-contact"></i>
 			    我的
 			  </a>
