@@ -1952,9 +1952,6 @@ lvtuanApp.controller("questionsCtrl",function($scope,$state,$http,$rootScope){
 			        console.info(JSON.stringify(data));
 			        console.info(JSON.stringify(status));
 			    });
-
-
-			    alert(val);
 		}
 	}
 
