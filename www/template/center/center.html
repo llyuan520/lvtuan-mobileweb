@@ -9,13 +9,13 @@
 			<ion-content class="web-body web-top10 ">
 				<div class="list">
 				    <a class="item item-thumbnail-left item-icon-right" ng-href="#/info">
-				      <img src="{{items.user.avatar}}">
+				      <img src="http://m.wdlst.com/{{items.user.avatar}}">
 				      <h2 class="web-top10">{{items.user.realname}}</h2>
 				      <p  class="web-top5" >{{items.user.phone}}</p>
 				    </a>
 				</div>
 				
-				<div class="list">
+				<div class="list" ng-model="is_lawyer">
 					  <a class="item" ng-href="#/listscores">
 					    我的积分
 					    <span class="badge badge-assertive icon-left" style="top:16px;">{{items.user.score}}</span>
@@ -36,6 +36,10 @@
 					  </a>
 					  <a class="item" ng-href="#/followed"> 
 					    我的关注
+					    <i class="icon ion-chevron-right"></i>
+					  </a>
+					  <a class="item" ng-href="#/userlvtuan">
+					    我的律团
 					    <i class="icon ion-chevron-right"></i>
 					  </a>
 					  <a class="item" ng-click="invitefriend()">

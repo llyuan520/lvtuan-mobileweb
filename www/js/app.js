@@ -16,13 +16,11 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
 
 //声明全局的方法和变量
 .run(['$rootScope','$timeout','$location',function($rootScope,$timeout,$location){
-  /*让浏览器记住token*/
-  localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXUyJ9.eyJzdWIiOjE0NjYsImlzcyI6Imh0dHA6XC9cLzE5Mi4xNjguMS40M1wvbG9naW4iLCJpYXQiOiIxNDQ3Mjk1ODQ3IiwiZXhwIjoiMTQ0NzI5OTQ0NyIsIm5iZiI6IjE0NDcyOTU4NDciLCJqdGkiOiIzNzI4NjAzMmUzNWFmNTFlYTk1MWNlZDNlYjI0MzdhNSJ9.Zjk4NjU5OGM1YzBjODBmMjlkZGE2NmE3N2U4NDYxMzI1ZjdiNzEzNDM0ZjE3ZWNjMGY5OGM2ZmIzYjExZDgzMg');
-  //localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXUyJ9.eyJzdWIiOjE0ODgsImlzcyI6Imh0dHA6XC9cL2Rldi53ZGxzdC5sYXctcGMtbmV3XC9sb2dpbiIsImlhdCI6IjE0NDU5NTA0MzUiLCJleHAiOiIxNDQ1OTU0MDM1IiwibmJmIjoiMTQ0NTk1MDQzNSIsImp0aSI6IjMzZmRlYmY0YjEwOWRkOWMyYzhmZmUyNjVkNGUxNjQyIn0.YjgwNDljNjVmZmQ3MDVhODE4ZmI4ZTE2Yzg3OGQzMjk1ZWUwYzZmYzllZjc5MTA1ZTZiZDdhYTg5MDE3MzgzYQ');
-  $rootScope.token = localStorage.getItem('token');
-  /*$timeout(function() {
+  
+ /*$timeout(function() {
       localStorage.removeItem('is_lawyer');
   }, 600);*/
+  $rootScope.token = JSON.parse(localStorage.getItem('token'));
   $rootScope.is_lawyer = JSON.parse(localStorage.getItem('is_lawyer'));
   //localStorage.removeItem('is_lawyer');
   var hostName = $location.host();
@@ -135,7 +133,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
       controller: 'groupviewCtrl'
     })
     .state('broadcastview', { //广播详情
-      url: '/broadcastview',
+      url: '/broadcastview/:id',
       templateUrl: 'template/group/broadcast_view.html',
       controller: 'broadcastviewCtrl'
     })
@@ -144,6 +142,12 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
       url: '/groupcreate',
       templateUrl: 'template/group/create.html',
       controller: 'groupcreateCtrl'
+    })
+
+    .state('televisecreate', { //创建圈子
+      url: '/televisecreate',
+      templateUrl: 'template/group/televisecreate.html',
+      controller: 'televisecreateCtrl'
     })
 
     
@@ -425,7 +429,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
           }
       }
     })
-   .state('orderlawyer.pending', { //律师订单 - 待处理
+   .state('orderlawyer.pending', { //律师订单 - 待受理
       url: '/pending',
       cache:'false',
       views: {
@@ -435,7 +439,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
           }
       }
     })
-   .state('orderlawyer.replied', { //律师订单 - 处理中
+   .state('orderlawyer.replied', { //律师订单 - 待确认
       url: '/replied',
       cache:'false',
       views: {
@@ -455,22 +459,12 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
           }
       }
     })
-   .state('orderlawyer.timeout', { //律师订单 - 已超时
-      url: '/timeout',
-      cache:'false',
-      views: {
-          'order-timeout': {
-              templateUrl: 'template/mylvtuan/lawyer/order/order-timeout.html',
-              controller: 'orderTimeoutCtrl'
-          }
-      }
-    })
 
    .state('lawyerquestion', { //首页 - 我的律团 - 律师的咨询
       url: '/lawyerquestion',
       templateUrl: 'template/mylvtuan/lawyer/question/question.html'
     })
-  .state('lawyerquestion.new', { //律师的咨询 - 待受理
+  .state('lawyerquestion.new', { //律师的咨询 - 全部
       url: '/new',
       cache:'false',
       views: {
@@ -480,7 +474,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
           }
       }
     })
-  .state('lawyerquestion.ssigned', { //律师的咨询 - 已受理
+  .state('lawyerquestion.ssigned', { //律师的咨询 - 待受理
       url: '/ssigned',
       cache:'false',
       views: {
@@ -490,7 +484,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
           }
       }
     })
-  .state('lawyerquestion.replied', { //律师的咨询 - 处理中
+  .state('lawyerquestion.replied', { //律师的咨询 - 待确认
       url: '/replied',
       cache:'false',
       views: {
@@ -500,17 +494,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
           }
       }
     })
-  .state('lawyerquestion.waitforconfirmation', { //律师的咨询 - 待确认
-      url: '/waitforconfirmation',
-      cache:'false',
-      views: {
-          'question-waitforconfirmation': {
-              templateUrl: 'template/mylvtuan/lawyer/question/waitforconfirmation.html',
-              controller: 'lawyerquestionWaitforconfirmationCtrl'
-          }
-      }
-    })
-  .state('lawyerquestion.complete', { //律师的咨询 - 已完成
+  .state('lawyerquestion.complete', { //律师的咨询 - 待评价
       url: '/complete',
       cache:'false',
       views: {
@@ -583,16 +567,6 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
         }
     }
   })
-  .state('userquestion.complete', { //用户的咨询 - 已完成
-    url: '/complete',
-    cache:'false',
-    views: {
-        'question-complete': {
-            templateUrl: 'template/mylvtuan/user/question/complete.html',
-            controller: 'questionCompleteCtrl'
-        }
-    }
-  })
   .state('usernewview', { //用户的咨询 - 待受理 - 详情
     url: '/usernewview',
     cache:'false', 
@@ -645,7 +619,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
           }
       }
     })
-   .state('orderuser.pending', { //用户的订单 - 待处理
+   .state('orderuser.pending', { //用户的订单 - 待付款
       url: '/pending',
       cache:'false',
       views: {
@@ -655,7 +629,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
           }
       }
     })
-   .state('orderuser.replied', { //用户的订单 - 处理中
+   .state('orderuser.replied', { //用户的订单 - 待受理
       url: '/replied',
       cache:'false',
       views: {
@@ -665,7 +639,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
           }
       }
     })
-   .state('orderuser.completed', { //用户的订单 - 已完成
+   .state('orderuser.completed', { //用户的订单 - 待确认
       url: '/completed',
       cache:'false',
       views: {
@@ -675,7 +649,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
           }
       }
     })
-   .state('orderuser.timeout', { //用户的订单 - 已超时
+   .state('orderuser.timeout', { //用户的订单 - 待评价
       url: '/timeout',
       cache:'false',
       views: {

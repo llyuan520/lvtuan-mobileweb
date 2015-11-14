@@ -568,3 +568,6 @@ ul.rating {
 .rating .filled {
   color: #ffee33;
 }
+
+.itemdata .row{padding: 0;}
+.itemdata .row .col{padding:5px 0;}

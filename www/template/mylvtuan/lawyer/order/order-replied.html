@@ -2,6 +2,31 @@
     <ion-content>
 
     	<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+    		<ion-list>
+	        	<ion-item class="item" >
+		          	<span class="sp-l fc-33"> 待确认 </span>
+					<span class="sp-r fc-33">2015/09/22 11:39</span>
+		        </ion-item>
+		        <ion-item class="item" >
+		        	<div class="row">
+		        		<div class="col">
+		        			<h2 class="fc-ee">免费咨询</h2>
+			        	</div>
+		  				<div class="col" style="text-align: right;">
+		  					<h2 class="fc-ee">待确认</h2>
+		  				</div>
+		        	</div>
+		        	<div class="row">
+		        		<div class="col">
+		        			<p class="fc-33">商事</p>
+			        	</div>
+		  				<div class="col" style="text-align: right;">
+		  					<button class="button button-small button-positive">联系客户</button>
+		  				</div>
+		        	</div>
+		        </ion-item>
+	         </ion-list>
+
 			<ion-list items ng-repeat="item in items">
 	        	<ion-item class="item" >
 		          	<span class="sp-l fc-33">{{item.order_status}}</span>

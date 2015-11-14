@@ -1,7 +1,7 @@
 <a ng-model="is_lawyer" ng-if="is_lawyer == null" ng-href="#/login" class="item item-icon-right"  style="background: none;border: 0px;width: 40px;height: 40px;float: right;margin-right: 10px;border-radius: 25px;position: absolute;z-index: 10000;bottom: 60px;right:0px;">
 	<span class="item-note" style="color:#387ef5;margin-left:20px;"><i class="icon ion-ios-plus"></i></span>
 </a>
-<a ng-model="is_lawyer" ng-if="is_lawyer == true" class="item item-icon-right" href="#/groupcreate" style="background: none;border: 0px;width: 40px;height: 40px;float: right;margin-right: 10px;border-radius: 25px;position: absolute;z-index: 10000;bottom: 60px;right:0px;">
+<a ng-model="is_lawyer" ng-if="is_lawyer == true" class="item item-icon-right" href="#/televisecreate" style="background: none;border: 0px;width: 40px;height: 40px;float: right;margin-right: 10px;border-radius: 25px;position: absolute;z-index: 10000;bottom: 60px;right:0px;">
 	<span class="item-note" style="color:#387ef5;margin-left:20px;"><i class="icon ion-ios-plus"></i></span>
 </a>
 <a ng-model="is_lawyer" ng-if="is_lawyer == false" style="display: none;"></a>
@@ -10,25 +10,19 @@
 		<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 		<ion-list>
 			<div class="item" ng-repeat="televis in televise" >
-			  	<a href="#/broadcastview">
+			  	<a href="#/broadcastview/{{televis.id}}">
 			    	{{televis.content}}
 				</a>
 				<p>{{televis.created_at}}</p>
 				<div class="web-paddingtb0" style="padding-left:55px;height:30px;line-height:30px;border-top:0px;color:#767676;">
 				    <i class="icon ion-compose web-ion-img1-2" style="float:right;margin-right:5px;font-size:12px;">&nbsp;{{televis.comments_count}}</i>
-				    <i class="icon ion-heart web-ion-img1-2" style="float:right;margin-right:5px;font-size:12px;">&nbsp;{{televis.likes_count}}</i>
-				    <i class="icon ion-chatbubble web-ion-img1-2" style="float:right;margin-right:5px;font-size:12px;">&nbsp;32</i>
+
+				    <i ng-click="likes({{televis.id}},[$index+1])"  class="icon ion-heart web-ion-img1-2" style="float:right;margin-right:5px;font-size:12px;">&nbsp;
+				    	<label>{{televis.likes_count}}</label>
+				    </i>
+				    
+				    <i class="icon ion-chatbubble web-ion-img1-2" style="float:right;margin-right:5px;font-size:12px;">&nbsp;{{televis.views_count}} 10</i>
 				  </div>
-				<div class="web-paddingtb5 web-font14 web-item-topb0 web-item-botb0" style="color:#f00;">
-				    <i class="icon ion-heart"></i>
-				    <span style="color:#35A9F2;">广播广播广播广播广播广播</span>
-				</div>
-				<div class="web-paddingtb5 web-font14 web-item-topb0 web-item-botb0">
-				    全部评论
-				  </div>
-				  <div class="web-paddingtb5 web-font14 web-item-topb0 web-item-botb0">
-				    <span style="color:#35A9F2;">广播广&nbsp;:&nbsp;</span>广播广广播广
-				</div>
 			</div>
 
          </ion-list>

@@ -1,0 +1,20 @@
+<ion-view view-title="创建广播">
+	<ion-pane  class="web-body">
+		<ion-header-bar class="bar bar-header bar-light">
+			<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" onclick="history.go(-1);"></a>
+			<h1 class="title">创建广播</h1>
+			<button ng-click="createSubmit()" class="button button-clear button-positive" type="button">保存</button>
+		</ion-header-bar>
+
+
+		<ion-content style="margin-bottom: 0px;">
+				<form id="createTelevise_form">
+					<div class="list login">
+						<div class="item item-input item-text-wrap">
+							<input type="text" name="content" ng-model="content" required="required" placeholder="请输入你的广播" ng-messages-multiple />
+						</div>
+					</div>	
+				</form>
+		</ion-content>
+	</ion-pane>
+</ion-view>
