@@ -98,7 +98,7 @@ lvtuanApp.controller("loginCtrl",function($state,$scope,$rootScope,$http){
 		        }).success(function(data) {
 		        	 layer.show("登陆成功！");
 		        	/*让浏览器记住token*/
-		        	localStorage.setItem("token", JSON.stringify(data.token));
+		        	localStorage.setItem("token", data.token);
 		        	var is_lawyer = data.data.is_lawyer;
 		        	localStorage.setItem("is_lawyer", JSON.stringify(is_lawyer)); //存储在本地，判断是否是律师
 		        	if(is_lawyer == false){
