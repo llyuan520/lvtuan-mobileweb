@@ -437,7 +437,7 @@ this.stopDefault = function(e)
       return '服务器故障，请与管理员联系!';
     }
     var _msg = '';
-    switch(data) {
+    switch(data) {/*
       case 1 :
         _msg = "服务器异常";
         break;
@@ -452,9 +452,11 @@ this.stopDefault = function(e)
         break;
       case 302 :
         _msg = "登陆成功！";
-        break;
+        break;*/
       case 400 :
-        _msg = "账号或密码错误，请重新登录。";
+        _msg = "账号过期，请重新登录。";
+        window.location.reload();
+        window.location.href = '#/login';
         break;
         
         default :

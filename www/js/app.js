@@ -20,7 +20,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
  /*$timeout(function() {
       localStorage.removeItem('is_lawyer');
   }, 600);*/
-  $rootScope.token = JSON.parse(localStorage.getItem('token'));
+  $rootScope.token = localStorage.getItem('token');
   $rootScope.is_lawyer = JSON.parse(localStorage.getItem('is_lawyer'));
   //localStorage.removeItem('is_lawyer');
   var hostName = $location.host();
