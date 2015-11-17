@@ -6,12 +6,28 @@ var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
+var sprity = require('sprity');
+var gulpif = require('gulp-if');
 
 var paths = {
   sass: ['./scss/**/*.scss']
 };
 
 gulp.task('default', ['sass']);
+
+gulp.task('sprites', function () {
+  return sprity.src({
+    src: './www/image/**/*.{png,jpg}',
+    split: true,
+    name: 'icons',
+    style: './sprite.css',
+    prefix: 'img',
+    // ... other optional options 
+    // for example if you want to generate scss instead of css 
+    // processor: 'sass', // make sure you have installed sprity-sass 
+  })
+  .pipe(gulpif('*.png', gulp.dest('./www/dist/img/'), gulp.dest('./www/dist/css/')))
+});
 
 gulp.task('sass', function(done) {
   gulp.src('./scss/ionic.app.scss')
