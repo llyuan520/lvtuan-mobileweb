@@ -7,32 +7,23 @@
 				<h1 class="title">问律师</h1>
 			</ion-header-bar>
 			<ion-content>
-				<form id="questions_form">
-					<div>	
-						<div class="ist-case-searchtype">
-							<div class="item item-input" ng-click="toggleMenu()">
-								<label id="workscopes" style="display: inline-block;width:100%;">请选择案例类型</label>
-								<input type="hidden" name="cat_id" ng-value="cat_id" type="text"/>
-								<span class="button button-positive button-clear button-icon ion-chevron-up"></span>
-							</div>
-						</div>
-						<div class="list-case-type" ng-show="isShowObj.show">
-							<div class="item item-button-right" ng-repeat="workscope in workscopes" ng-click="toggleMenu()" data-value="{{workscope.key}}">	{{workscope.value}}
-								<i class="button button-clear icon-right ion-arrow-up-c icon-r-wn"></i>
-							</div>
-						</div>	
+				<form id="questions_form" name="myForm" novalidate>
+
+					<div class="ist-case-searchtype">	
+						<select required ng-model="user.cat_id" ng-options="value.key as value.value for value in workscopes" style="width:100%;height:50px;line-height:50px;border: none;">
+								<option value="">-- 请选择案例类型 --</option>
+					    </select>
 					</div>
-					
-					<div class="list mato20">
+					<div class="list">
 						<label class="item item-input">
-						  <input name="title" type="text" placeholder="请输入标题">
+						  <input ng-model="user.title" name="title" type="text" placeholder="请输入标题" required>
 						</label>
 						<label class="item item-input">
-				          <textarea name="content" rows="10" placeholder="请输入问题"></textarea>
+				          <textarea ng-model="user.content" name="content" rows="10" placeholder="请输入问题" required></textarea>
 				        </label>
 					</div>
 					<div class="padding">
-						<button class="button button-block button-positive" ng-click="submit()">提交</button>
+						<button class="button button-block button-positive" type="submit" ng-disabled="myForm.$invalid" ng-click="submit(user)" />提交</button>
 					</div>
 				</form>
 

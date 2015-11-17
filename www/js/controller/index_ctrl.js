@@ -1,4 +1,4 @@
-var lvtuanApp = angular.module('lvtuanApp.Ctrl', ['ionic','ngSanitize'])
+var lvtuanApp = angular.module('lvtuanApp.Ctrl', ['ionic','ngSanitize','ngFileUpload'])
 
 /****************************************************** 引导页 ******************************************************/
 //hone 
@@ -96,7 +96,14 @@ lvtuanApp.controller("loginCtrl",function($state,$scope,$rootScope,$http){
 		                'Content-Type': 'application/json'
 		            }
 		        }).success(function(data) {
+		        	debugger
+
 		        	 layer.show("登陆成功！");
+
+		        	 /*让浏览器记住用户id*/
+		        	var user_id = data.data.id;
+					localStorage.setItem("user_id", JSON.stringify(user_id)); 
+
 		        	/*让浏览器记住token*/
 		        	localStorage.setItem("token", data.token);
 		        	var is_lawyer = data.data.is_lawyer;
@@ -1207,35 +1214,64 @@ lvtuanApp.controller("followedCtrl",function($scope,$http,$rootScope){
 
 })
 //普通用户-认证为律师
-lvtuanApp.controller("becomelawyerCtrl",function($scope,$http,$rootScope,$ionicActionSheet,$timeout){
-	$scope.show = function() {
-        var hideSheet = $ionicActionSheet.show({
-            buttons: [
-              { text: '拍照' },
-              { text: '从相册中选择' }
-            ],
-            titleText: '请您选择',
-            buttonClicked: function(index) {
-            	if(index==0){alert("拍照");}else{
-            		alert("从相册中选择");
-            	}
-              return true;
+lvtuanApp.controller("becomelawyerCtrl",function($scope,$http,$rootScope,$ionicActionSheet,$timeout,Upload){
+	
+	//上传执业证书
+   $scope.uploadFiles = function (license_file) {
+        Upload.upload({
+        	headers: {
+	            'Content-Type': 'application/json' , 
+	            'Authorization': 'bearer ' + $rootScope.token
+       		},
+            url: 'http://'+$rootScope.hostName+'/file/upload/user',
+            data: {
+            	upload_file: license_file,
+            	'user_id': $rootScope.user_id
             }
+        }).then(function (response) {
+        	console.info(response)
+        	$scope.file = 'http://'+$rootScope.hostName+'/'+response.data.data.file_path;
+            $timeout(function () {
+                $scope.result = response.data;
+            });
+        }, function (response) {
+             if (response.status > 0) $scope.errorMsg = response.status 
+                + ': ' + response.data;
+        }, function (evt) {
+            $scope.progress = parseInt(100.0 * evt.loaded / evt.total);
         });
     };
-    $scope.lishow = function() {
-        var hideSheet = $ionicActionSheet.show({
-            buttons: [
-              { text: '律师' },
-              { text: '高级律师' },
-              { text: '合伙人' }
-            ],
-            titleText: '律师类型',
-            buttonClicked: function(index) {
-              return true;
+
+
+    /*$scope.uploadPic = function(file) {
+	    file.upload = Upload.upload({
+	      headers: {
+	            'Content-Type': 'application/json' , 
+	            'Authorization': 'bearer ' + $rootScope.token
+       		},
+            url: 'http://'+$rootScope.hostName+'/file/upload/user',
+            data: {
+            	upload_file: file,
+            	'user_id': $rootScope.user_id
             }
-        });
-    };
+	    });
+
+	    file.upload.then(function (response) {
+	    	console.log(response)
+	      $timeout(function () {
+	        file.result = response.data;
+	      });
+
+	    }, function (response) {
+	    	console.log(response)
+	      if (response.status > 0)
+	        $scope.errorMsg = response.status + ': ' + response.data;
+	    }, function (evt) {
+	    	console.log(evt)
+	      // Math.min is to fix IE which reports 200% sometimes
+	      file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+	    });
+    }*/
 
 })
 /*———————————————————————————— 律师的个人中心 ————————————————————————————*/
@@ -2013,58 +2049,12 @@ lvtuanApp.controller("questionsCtrl",function($scope,$state,$http,$rootScope){
 	        console.info(JSON.stringify(status));
 	    });
 
-
-	//选择类型单击操作-显示/隐藏
-	$scope.isShowObj={
-		show:false
-	};
-	$scope.toggleMenu=function(key){
-		$scope.isShowObj.show=!$scope.isShowObj.show;
-		if($scope.isShowObj.show == false){
-			var key = this.workscope.key;
-			var val = this.workscope.value;
-			var workscopes = document.getElementById("workscopes");
-			$scope.cat_id = key;
-			angular.element(workscopes).text(val);
-			$http.get('http://'+$rootScope.hostName+'/lawyer/workscopes',
-			        {
-			        cache: true,
-			        headers: {
-			            'Content-Type': 'application/json' , 
-			            'Authorization': 'bearer ' + $rootScope.token
-			        }
-			    }).success(function(data) {
-			      if(data.data){
-			        $scope.workscopes = data.data;
-			      }else{
-			        layer.show("暂无数据！");
-			      }
-			    }).error(function (data, status) {
-			        console.info(JSON.stringify(data));
-			        console.info(JSON.stringify(status));
-			    });
-		}
-	}
-
-	//提交问题
-	$scope.submit = function(){
-		var params = layer.getParams("#questions_form");
-  		if(params.cat_id == ""){
-  			layer.show("请选择案例类型!");
-  			return false;
-  		}else if(params.title == ""){
-  			layer.show("请输入标题!");
-  			return false;
-  		}else if(params.content == ""){
-  			layer.show("请输入问题!");
-  			return false;
-  		}else{
-  			/*var param = 'cat_id='+params.cat_id+'&title='+params.title+'&content='+params.content;*/
-  			$http.post('http://'+$rootScope.hostName+'/question/create',{
-  					'cat_id'	: params.cat_id,
-	            	'title'		: params.title,
-	            	'content'	: params.content
-	            },
+	    $scope.user = {};
+	    //提交问题
+		$scope.submit = function(user){
+			debugger
+			console.info($scope.user);
+			$http.post('http://'+$rootScope.hostName+'/question/create',$scope.user,
 	            {
 	            headers: {
 	                'Content-Type': 'application/json' , 
@@ -2086,18 +2076,15 @@ lvtuanApp.controller("questionsCtrl",function($scope,$state,$http,$rootScope){
 					return false;
 				}
 	           layer.show("提交成功！");
-	           $(':input','#questions_form').not('textarea :submit, :reset, :hidden').val('');
-	           var workscopes = document.getElementById("workscopes");
-				angular.element(workscopes).text("请选择案例类型");
+	           $scope.user = {}; //清空数据
 
 	        }).error(function (data, status) {
 	        	console.info(data.error_messages);
 	        	var errMsg = JSON.stringify(data.error_messages.content[0]);
 	        	layer.show(errMsg);
-            });
-            return true;
-  		}    
-	}
+	        });
+
+		}
 
 
 	//搜索问题

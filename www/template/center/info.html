@@ -9,7 +9,7 @@
 <ion-view view-title="我的资料">
 		<ion-pane  class="web-body">
 			<ion-header-bar class="bar bar-header bar-light">
-				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" onclick="history.go(-1);"></a>
+				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-click="history.go(-1);"></a>
 				<h1 class="title">我的资料</h1>
 			</ion-header-bar>
 			<ion-content class="web-body web-top10">
@@ -31,8 +31,8 @@
 				        出生年月</li>
 				</ul>
 				<ul class="list">
-				    <li class="item">律师资格认证</li>
-				    <li class="item">律师个人简介</li>
+				    <li class="item"><a ng-href="#/accreditation">律师资格认证</a></li>
+				    <li class="item"><a ng-href="#/briefIntro">律师个人简介</a></li>
 				</ul>
 				<div style="clear:both;width:100%;height:20px;"></div>
 				<button class="button button-full button-positive web-wid8c web-top30">保存</button>

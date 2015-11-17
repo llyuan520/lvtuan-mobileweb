@@ -22,6 +22,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
   }, 600);*/
   $rootScope.token = localStorage.getItem('token');
   $rootScope.is_lawyer = JSON.parse(localStorage.getItem('is_lawyer'));
+  $rootScope.user_id = localStorage.getItem('user_id');
   //localStorage.removeItem('is_lawyer');
   var hostName = $location.host();
   // if (hostName == '192.168.1.116') {
@@ -257,7 +258,6 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
       templateUrl: 'template/center/become_lawyer.html',
       controller: 'becomelawyerCtrl'
     })
-    
 /*———————————————————————————— 律师的个人中心 ————————————————————————————*/
     .state('center_lawyer', { //律师-我的
       url: '/center_lawyer',

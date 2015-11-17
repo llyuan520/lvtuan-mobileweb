@@ -1,71 +1,222 @@
+
+<style type="text/css">
+.css-form .row{padding: 5px 0}
+.css-form .item-input{padding: 6px 0 5px 0px}
+/*.filecss{ padding: 4px 10px;
+    height: 20px;
+    line-height: 20px;
+    position: relative;
+    cursor: pointer;
+    color: #888;
+    background: #fafafa;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1}
+.filecss input {position: absolute;font-size: 100px;right: 0;top: 0;opacity: 0;filter: alpha(opacity=0);cursor: pointer}*/
+</style>
 <ion-view view-title="我的">
 		<ion-pane  class="web-body">
 			<ion-header-bar class="bar bar-header bar-light">
 				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" onclick="history.go(-1);"></a>
 				<h1 class="title">我的资料</h1>
 			</ion-header-bar>
-			<ion-content class="web-body">
-				<h4 class="title web-title web-fc666">资格认证<span class="web-ftcred">(审核通过后，不可修改)</span></h4>
-				<div class="list web-bottom0">
-					<label class="item item-input">
-					    <span class="input-label web-ftcred">*执业人</span>
-					    <input name="realname" type="text">
-					</label>
-					<label class="item item-input item-select">
-					    <div class="input-label  web-ftcred">
-					      *性别
-					    </div>
-					    <select class="web-font16" name="sex">
-					      <option selected value="male">男</option>
-					      <option value="female">女</option>
-					    </select>
-					</label>
-					<label class="item item-input">
-					    <span class="input-label web-ftcred">*执业证号</span>
-					    <input name="license" type="text">
-					</label>
-					<label class="item item-input">
-					    <span class="input-label web-ftcred">*执业机构</span>
-					    <input name="company_name" type="text">
-					</label>
-					<label class="item item-input">
-					    <span class="input-label web-ftcred">*执业证书</span>
-					    <input type="text">
-					</label>
-				</div>
-				<h4 class="title web-title web-fc666">个人资料</h4>
-				<div class="list">
-					<label class="item item-icon-left web-paddingleft16 webpaddingtb5" ng-click="show();">
-						<span class="button item-note ion-ios-plus-empty button-light"></span>
-					    <span class="input-label web-ftcred">*个人头像<br/><span class="web-fc666 web-font14">上传免冠照片</span></span>
-					</label>
-					<a class="item item-input" href="web120.html">
-					    <span class="input-label web-ftcred">*所在地区</span>
-					</a>
-					<label class="item item-input" ng-click="lishow();">
-					    <span class="input-label web-ftcred">*律师类型</span>
-					</label>
-					<a class="item item-input" href="web122.html">
-					    <span class="input-label web-ftcred">*执业年限</span>
-					</a>
-					<a class="item item-input" href="web123.html">
-					    <span class="input-label web-ftcred">*擅长领域</span>
-					</a>
-					<label class="item item-input">
-					    <span class="input-label web-ftcred">*联系方式</span>
-					    <input type="text" placeholder="请输入号码">
-					</label>
-					<a class="item item-input" href="web124.html">
-					    <span class="input-label">个人简介</span>
-					</a>
-					<a class="item item-input" href="web125.html">
-					    <span class="input-label">工作经历</span>
-					</a>
-					<a class="item item-input" href="web126.html">
-					    <span class="input-label">成功案例</span>
-					</a>
-				</div>
-				<button class="button button-full button-positive web-wid8c web-top10">提交</button>
+			<ion-content class="web-body" style="margin-bottom:0;">
+				<h4 class="title web-title web-fc666">资格认证 <span class="web-ftcred" style="font-size:12px;">(审核通过后，不可修改)</span></h4>
+				<form name="myForm" class="css-form" novalidate>
+					<div class="list">
+						<div class="item item-input">
+							<div class="row">
+							  <div class="col col-center">执业人</div>
+							  <div class="col col-75 col-center">
+							  	<input ng-model="user.realname" name="realname" type="text" required>
+							  </div>
+							</div>
+						</div>
+						<div class="item item-input">
+							<div class="row">
+							  <div class="col col-center">性别</div>
+							  <div class="col col-75 col-center">
+							  	<select class="web-font16" ng-model="user.sex" name="sex" required>
+							      <option selected value="0">男</option>
+							      <option value="1">女</option>
+							    </select>
+							  </div>
+							</div>
+						</div>
+						<div class="item item-input">
+							<div class="row">
+							  <div class="col col-center">执业证号</div>
+							  <div class="col col-75 col-center">
+							  	<input ng-model="user.license" name="license" type="text" required>
+							  </div>
+							</div>
+						</div>
+						<div class="item item-input">
+							<div class="row">
+							  <div class="col col-center">执业机构</div>
+							  <div class="col col-75 col-center">
+							  	<input ng-model="user.company_name" name="company_name" type="text" required>
+							  </div>
+							</div>
+						</div>
+						<div class="item item-input">
+							<div class="row">
+							  <div class="col col-center">执业证书</div>
+							  <div class="col col-75 col-center">
+
+								<!-- 选择文件立即上传 -->
+								<div class="button item-note ion-ios-plus-empty button-light" ng-model="license_file" name="license_file" ngf-pattern="'image/*'"  accept="image/*" ngf-max-size="20MB" ngf-min-height="100" ngf-select="uploadFiles($file)"></div>
+
+								<img ng-src="{{file}}" ngf-thumbnail="license_file || '/thumb.jpg'" width="52" height="50">
+								<span class="progress" ng-show="progress >= 0">
+				                  <div style="width:{{progress}}%" ng-bind="progress + '%'"></div>
+				                </span>
+
+				              	 
+				              	 	<!-- <input class="" type="file" ngf-select ng-model="picFile" name="file" accept="image/*" required>
+				              	
+							             <br>
+							       <img  ngf-thumbnail="picFile" class="thumb" width="50" height="50">  
+							       <br>
+							       <button ng-click="uploadPic(picFile)">Submit</button>
+							      <br>
+							      <span class="progress" ng-show="picFile.progress >= 0">
+							        <div style="width:{{picFile.progress}}%" 
+							            ng-bind="picFile.progress + '%'"></div>
+							      </span> -->
+
+							  </div>
+							</div>
+						</div>
+					</div>
+
+					<h4 class="title web-title web-fc666">个人资料</h4>
+					<div class="list">
+						<div class="item item-input item-icon-right">
+							<div class="row">
+							  <div class="col col-center">个人头像</div>
+							  <div class="col col-75 col-center">
+							  	<img src="../img/01.png" width="52" height="47">
+							  	<input ng-model="user.avatar" name="avatar" type="hidden" required>
+							  	<span class="button item-note ion-ios-plus-empty button-light"></span>
+							  </div>
+							</div>
+						</div>
+						<div class="item item-input item-icon-right">
+							<div class="row">
+							  <div class="col col-center">背景图片</div>
+							  <div class="col col-75 col-center">
+							  	<img src="../img/01.png" width="52" height="47">
+							  	<input ng-model="user.bg_image" name="bg_image" type="hidden" required>
+							  	<span class="button item-note ion-ios-plus-empty button-light"></span>
+							  </div>
+							</div>
+						</div>
+						<div class="item item-input">
+							<div class="row">
+							  <div class="col col-center">所在地区</div>
+							  <div class="col col-75 col-center">
+							  	<!-- 省 -->
+							  	<select class="web-font16" ng-model="user.province" name="province" required>
+							      <option selected value="male">省</option>
+							    </select>
+							    <!-- 市 -->
+							    <select class="web-font16" ng-model="user.city" name="city" required>
+							      <option selected value="male">市</option>
+							    </select>
+							   <!--  地区 -->
+							    <select class="web-font16" ng-model="user.district" name="district" required>
+							      <option selected value="male">地区</option>
+							    </select>
+							  </div>
+							</div>
+						</div>
+						<div class="item item-input">
+							<div class="row">
+							  <div class="col col-center">详细地址</div>
+							  <div class="col col-75 col-center">
+							  	 <input ng-model="user.address" name="address" type="text" required>
+							  </div>
+							</div>
+						</div>
+						<div class="item item-input">
+							<div class="row">
+							  <div class="col col-center">律师类型</div>
+							  <div class="col col-75 col-center">
+							  	<select class="web-font16" ng-model="user.position" name="position" required>
+							      <option selected value="junior_lawyer">律师</option>
+							      <option selected value="senior_lawyer">高级律师</option>
+							      <option selected value="senior_lawyer">合伙人</option>
+							    </select>
+							  </div>
+							</div>
+						</div>
+						<div class="item item-input">
+							<div class="row">
+							  <div class="col col-center">执业年限</div>
+							  <div class="col col-75 col-center">
+							  	<select class="web-font16" ng-model="user.practice_period" name="practice_period" required>
+							      <option selected value="male">aaaaaaa</option>
+							    </select>
+							  </div>
+							</div>
+						</div>
+						<div class="item item-input">
+							<div class="row">
+							  <div class="col col-center">擅长领域</div>
+							  <div class="col col-75 col-center">
+							  	<select class="web-font16" ng-model="user.work_scope" name="work_scope" required>
+							      <option selected value="律师">律师</option>
+							    </select>
+							  </div>
+							</div>
+						</div>
+						<div class="item item-input"  style="margin:1px 0 0 0;">
+							<div class="row">
+							  <div class="col">个人简介</div>
+							</div>
+						</div>
+						<div class="item item-input" style="margin:0;">
+							<div class="row">
+							  <div class="col">
+							  	<textarea ng-model="user.introduce" name="introduce" required ng-minlength="" ng-maxlength="" ng-pattern="" ng-trim="">
+								</textarea>
+							  </div>
+							</div>
+						</div>
+						<div class="item item-input"  style="margin:1px 0 0 0;">
+							<div class="row">
+							  <div class="col">工作经历</div>
+							</div>
+						</div>
+						<div class="item item-input" style="margin:0;">
+							<div class="row">
+							  <div class="col">
+							  	<textarea ng-model="user.experience" name="experience" required ng-minlength="" ng-maxlength="" ng-pattern="" ng-trim="">
+								</textarea>
+							  </div>
+							</div>
+						</div>
+						<div class="item item-input"  style="margin:1px 0 0 0;">
+							<div class="row">
+							  <div class="col">成功案例</div>
+							</div>
+						</div>
+						<div class="item item-input" style="margin:0;">
+							<div class="row">
+							  <div class="col">
+							  	<textarea ng-model="user.law_cases" name="law_cases" required ng-minlength="" ng-maxlength="" ng-pattern=""  ng-trim="">
+								</textarea>
+							  </div>
+							</div>
+						</div>
+					</div>
+
+					<button class="button button-block button-positive web-wid8c web-top10" type="submit" ng-disabled="myForm.$invalid" ng-click="submit(user)" />提交</button>
+				</form>
 			</ion-content>
 			
 		</ion-pane>
