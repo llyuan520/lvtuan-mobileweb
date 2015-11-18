@@ -84,8 +84,8 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
     .state('resetpwd', { //密码重置
       url: '/resetpwd',
       cache:'false',
-      templateUrl: 'template/home/resetpwd.html'/*,
-      controller: 'resetpwdCtrl'*/
+      templateUrl: 'template/home/resetpwd.html',
+      controller: 'resetpwdCtrl'
     })
 
 /********************************** 圈子 **********************************/

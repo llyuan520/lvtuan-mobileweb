@@ -222,8 +222,38 @@ lvtuanApp.controller("registerCtrl",function($scope,$rootScope,$http){
 })
 
 //修改密码
-lvtuanApp.controller("resetpwdCtrl",function($scope,$http){
+lvtuanApp.controller("resetpwdCtrl",function($scope,$http,$rootScope){
+	$scope.user = {};
+	$scope.save = function(user){
+		if(user.old_password == user.new_password && user.old_password == user.new_password_retype && user.new_password == user.new_password_retype){
+			layer.show("修改密码不能和初始密码一样！");
+			return false;
+		}else if(user.new_password.length != user.new_password_retype.length){
+			layer.show("重置密码的长度不一致！");
+			return false;
+		}else if(user.new_password != user.new_password_retype){
+			layer.show("两次输入的密码不一致！");
+			return false;
+		}else{
+			$http.post('http://'+$rootScope.hostName+'/center/reset_pass', $scope.user,
+  			{
+	            headers: {
+	                'Content-Type': 'application/json' , 
+	            	'Authorization': 'bearer ' + $rootScope.token
+	            }
+	        }).success(function(data) {
+	           layer.show("修改成功！");
+	           $scope.user = {}; //清空数据
+	           location.href='#/login';
+		        window.location.reload();
+	        }).error(function (data, status) {
+	        	var errMsg = JSON.stringify(data.error_messages);
+	        	layer.show(errMsg);
+            });
+			return true;
+		}
 
+	}
 })
 
 /****************************************************** 圈子 ******************************************************/
@@ -1468,12 +1498,19 @@ lvtuanApp.controller("becomelawyerCtrl",function($scope,$http,$rootScope,$ionicA
 	            }
 	        }).success(function(data) {
 	        	console.info(data.data);
-	           layer.show("提交成功！");
-	           $scope.user = {}; //清空数据
+				layer.show("提交成功！");
+				$scope.user = {}; //清空数据
+				$scope.file_1 = {};
+				$scope.file_2 = {};
+				$scope.file_3 = {};
+				$scope.progress_1 = {};
+				$scope.progress_2 = {};
+				$scope.progress_3 = {};
 	        }).error(function (data, status) {
 	        	console.info(data.error_messages);
-	        	layer.show(data.error_messages);
+	        	console.info(JSON.stringify(data.message));
 	        	var errMsg = JSON.stringify(data.error_messages);
+	        	layer.show(errMsg);
 	        	console.info(errMsg);
 	        	layer.show(errMsg);
 	        	/*layer.msg(status);*/
