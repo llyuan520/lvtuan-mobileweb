@@ -3,6 +3,7 @@
  * progress, resize, thumbnail, preview, validation and CORS
  * @author  Danial  <danial.farid@gmail.com>
  * @version 10.0.2
+ * https://github.com/danialfarid/ng-file-upload
  */
 
 if (window.XMLHttpRequest && !(window.FileAPI && FileAPI.shouldLoad)) {

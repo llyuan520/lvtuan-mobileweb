@@ -321,6 +321,9 @@ var layer = (function(){
       if($(this).attr('data-disabled')=='disabled'){
         return true;
       }
+      if($(this).val()==''){
+        return true;
+      }
       var name = $(this).attr("name");
       var value = $(this).val();
       params[name] = value;

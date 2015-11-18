@@ -25,10 +25,10 @@ body,
 	color: #999999;
 	
 }
-.item h2.fc-ee{
+.item h2.fc-ee,.error{
 	font-size: 14px;
 }
-.fc-red{
+.fc-red,.error{
 	color: #FF0000;
 }
 .button-border-left{

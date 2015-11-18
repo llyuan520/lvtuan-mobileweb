@@ -2,30 +2,16 @@
 <style type="text/css">
 .css-form .row{padding: 5px 0}
 .css-form .item-input{padding: 6px 0 5px 0px}
-/*.filecss{ padding: 4px 10px;
-    height: 20px;
-    line-height: 20px;
-    position: relative;
-    cursor: pointer;
-    color: #888;
-    background: #fafafa;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    overflow: hidden;
-    display: inline-block;
-    *display: inline;
-    *zoom: 1}
-.filecss input {position: absolute;font-size: 100px;right: 0;top: 0;opacity: 0;filter: alpha(opacity=0);cursor: pointer}*/
 </style>
-<ion-view view-title="我的">
+<ion-view view-title="认证为律师">
 		<ion-pane  class="web-body">
 			<ion-header-bar class="bar bar-header bar-light">
 				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" onclick="history.go(-1);"></a>
-				<h1 class="title">我的资料</h1>
+				<h1 class="title">认证为律师</h1>
 			</ion-header-bar>
 			<ion-content class="web-body" style="margin-bottom:0;">
 				<h4 class="title web-title web-fc666">资格认证 <span class="web-ftcred" style="font-size:12px;">(审核通过后，不可修改)</span></h4>
-				<form name="myForm" class="css-form" novalidate>
+				<form name="myForm" class="css-form" id="myForm" novalidate>
 					<div class="list">
 						<div class="item item-input">
 							<div class="row">
@@ -40,8 +26,10 @@
 							  <div class="col col-center">性别</div>
 							  <div class="col col-75 col-center">
 							  	<select class="web-font16" ng-model="user.sex" name="sex" required>
-							      <option selected value="0">男</option>
-							      <option value="1">女</option>
+							      	<option value="" selected>--性别--</option>
+							      	<option ng-repeat="sex in sexs" value="{{sex.key}}">
+							      		{{sex.value}}
+							      	</option>
 							    </select>
 							  </div>
 							</div>
@@ -67,26 +55,12 @@
 							  <div class="col col-center">执业证书</div>
 							  <div class="col col-75 col-center">
 
-								<!-- 选择文件立即上传 -->
-								<div class="button item-note ion-ios-plus-empty button-light" ng-model="license_file" name="license_file" ngf-pattern="'image/*'"  accept="image/*" ngf-max-size="20MB" ngf-min-height="100" ngf-select="uploadFiles($file)"></div>
-
-								<img ng-src="{{file}}" ngf-thumbnail="license_file || '/thumb.jpg'" width="52" height="50">
-								<span class="progress" ng-show="progress >= 0">
-				                  <div style="width:{{progress}}%" ng-bind="progress + '%'"></div>
+								<div ng-model="user.license_file" class="button item-note ion-ios-plus-empty button-light" ngf-pattern="'image/*'"  accept="image/*" ngf-max-size="20MB" ngf-min-height="100" ngf-select="uploadFiles($file,1)"></div>
+								<img ng-src="{{file_1}}" ngf-thumbnail="license_file || '/thumb.jpg'" width="52" height="50">
+								<input type="hidden" name="license_file" value="{{file_1}}" />
+								<span class="progress_1" ng-show="progress_1 >= 0">
+				                  <div style="width:{{progress_1}}%" ng-bind="progress_1 + '%'"></div>
 				                </span>
-
-				              	 
-				              	 	<!-- <input class="" type="file" ngf-select ng-model="picFile" name="file" accept="image/*" required>
-				              	
-							             <br>
-							       <img  ngf-thumbnail="picFile" class="thumb" width="50" height="50">  
-							       <br>
-							       <button ng-click="uploadPic(picFile)">Submit</button>
-							      <br>
-							      <span class="progress" ng-show="picFile.progress >= 0">
-							        <div style="width:{{picFile.progress}}%" 
-							            ng-bind="picFile.progress + '%'"></div>
-							      </span> -->
 
 							  </div>
 							</div>
@@ -99,9 +73,15 @@
 							<div class="row">
 							  <div class="col col-center">个人头像</div>
 							  <div class="col col-75 col-center">
-							  	<img src="../img/01.png" width="52" height="47">
-							  	<input ng-model="user.avatar" name="avatar" type="hidden" required>
-							  	<span class="button item-note ion-ios-plus-empty button-light"></span>
+
+								<div class="button item-note ion-ios-plus-empty button-light" ng-model="user.avatar" ngf-pattern="'image/*'"  accept="image/*" ngf-max-size="20MB" ngf-min-height="100" ngf-select="uploadFiles($file,2)"></div>
+								<img ng-src="{{file_2}}" ngf-thumbnail="avatar || '/thumb.jpg'" width="52" height="50">
+								<input type="hidden" name="avatar" value="{{file_2}}" />
+								<span class="progress_2" ng-show="progress_2 >= 0">
+				                  <div style="width:{{progress_2}}%" ng-bind="progress_2 + '%'"></div>
+				                </span>
+
+
 							  </div>
 							</div>
 						</div>
@@ -109,9 +89,14 @@
 							<div class="row">
 							  <div class="col col-center">背景图片</div>
 							  <div class="col col-75 col-center">
-							  	<img src="../img/01.png" width="52" height="47">
-							  	<input ng-model="user.bg_image" name="bg_image" type="hidden" required>
-							  	<span class="button item-note ion-ios-plus-empty button-light"></span>
+
+								<div class="button item-note ion-ios-plus-empty button-light" ng-model="user.bg_image" ngf-pattern="'image/*'"  accept="image/*" ngf-max-size="20MB" ngf-min-height="100" ngf-select="uploadFiles($file,3)"></div>
+								<img ng-src="{{file_3}}" ngf-thumbnail="bg_image || '/thumb.jpg'" width="52" height="50">
+								<input type="hidden" name="bg_image" value="{{file_3}}" />
+								<span class="progress_3" ng-show="progress_3 >= 0">
+				                  <div style="width:{{progress_3}}%" ng-bind="progress_3 + '%'"></div>
+				                </span>
+
 							  </div>
 							</div>
 						</div>
@@ -119,17 +104,25 @@
 							<div class="row">
 							  <div class="col col-center">所在地区</div>
 							  <div class="col col-75 col-center">
-							  	<!-- 省 -->
-							  	<select class="web-font16" ng-model="user.province" name="province" required>
-							      <option selected value="male">省</option>
+							    <select class="web-font16" ng-model="user.province" name="province" required ng-change="getCity(user.province)">
+									<option value="" selected>--省份--</option>
+									<option ng-repeat="province in provinces" value="{{province.key}}">
+										{{province.value}}
+									</option>
 							    </select>
-							    <!-- 市 -->
-							    <select class="web-font16" ng-model="user.city" name="city" required>
-							      <option selected value="male">市</option>
+							    <br><br>
+							    <select ng-show="user.province" class="web-font16" ng-model="user.city" name="city" required ng-change="getDistrict(user.city)">
+							      	<option value="" selected>--城市--</option>
+									<option ng-repeat="city in citys" value="{{city.key}}">
+										{{city.value}}
+									</option>
 							    </select>
-							   <!--  地区 -->
-							    <select class="web-font16" ng-model="user.district" name="district" required>
-							      <option selected value="male">地区</option>
+							    <br><br>
+							    <select ng-show="user.city" class="web-font16" ng-model="user.district" name="district" required>
+							      <option value="" selected>--地区--</option>
+									<option ng-repeat="district in districts" value="{{district.key}}">
+										{{district.value}}
+									</option>
 							    </select>
 							  </div>
 							</div>
@@ -146,11 +139,14 @@
 							<div class="row">
 							  <div class="col col-center">律师类型</div>
 							  <div class="col col-75 col-center">
-							  	<select class="web-font16" ng-model="user.position" name="position" required>
-							      <option selected value="junior_lawyer">律师</option>
-							      <option selected value="senior_lawyer">高级律师</option>
-							      <option selected value="senior_lawyer">合伙人</option>
+							  	<select class="web-font16" ng-model="user.position" name="position" required >
+							  		<option value="" selected>--律师类型--</option>
+							      	<option ng-repeat="position in positions" value="{{position.key}}">
+							      		{{position.value}}
+							      	</option>
 							    </select>
+							    <br><br>
+
 							  </div>
 							</div>
 						</div>
@@ -158,8 +154,11 @@
 							<div class="row">
 							  <div class="col col-center">执业年限</div>
 							  <div class="col col-75 col-center">
-							  	<select class="web-font16" ng-model="user.practice_period" name="practice_period" required>
-							      <option selected value="male">aaaaaaa</option>
+							    <select class="web-font16" ng-model="user.practice_period" name="practice_period" required>
+							      	<option value="" selected>--执业年限--</option>
+							      	<option ng-repeat="period in periods" value="{{period.key}}">
+							      		{{period.value}}
+							      	</option>
 							    </select>
 							  </div>
 							</div>
@@ -168,12 +167,48 @@
 							<div class="row">
 							  <div class="col col-center">擅长领域</div>
 							  <div class="col col-75 col-center">
-							  	<select class="web-font16" ng-model="user.work_scope" name="work_scope" required>
-							      <option selected value="律师">律师</option>
+							  	<select class="web-font16" data-disabled="disabled" ng-model="user.workscope_one" name="workscope_one" required ng-change="getworkscopes_one(user.workscope_one)">
+								    	<option value="" selected>--擅长领域--</option>
+								      	<option ng-repeat="workscope_one in workscopes_one" value="{{workscope_one.key}}">
+								      	{{workscope_one.value}}
+								    </option>
+							    </select>
+							    <br><br>
+							    <select class="web-font16" data-disabled="disabled" ng-show="user.workscope_one"  ng-model="user.workscope_two" name="workscope_two" ng-change="getworkscopes_two(user.workscope_two)">
+								    	<option value="" selected>--擅长领域--</option>
+								      	<option ng-repeat="workscope_two in workscopes_two" value="{{workscope_two.key}}">
+								      	{{workscope_two.value}}
+								    </option>
+							    </select>
+							    <br><br>
+							    <select class="web-font16" data-disabled="disabled" ng-show="user.workscope_two" ng-model="user.workscope_three" name="workscope_three" ng-change="getworkscopes_three(user.workscope_three)">
+								    	<option value="" selected>--擅长领域--</option>
+								      	<option ng-repeat="workscope_three in workscopes_three" value="{{workscope_three.key}}">
+								      	{{workscope_three.value}}
+								    </option>
 							    </select>
 							  </div>
 							</div>
 						</div>
+						<div class="item item-input">
+							<div class="row">
+							  <div class="col col-center">语音咨询价格</div>
+							  <div class="col col-75 col-center">
+							  	<input ng-model="user.phonereplyfee" name="phone_reply_fee" type="number" required>
+							  	<span class="error" ng-show="myForm.phone_reply_fee.$error.number">您输入的不是数字!</span>
+							  </div>
+							</div>
+						</div>
+						<div class="item item-input">
+							<div class="row">
+							  <div class="col col-center">图文咨询价格</div>
+							  <div class="col col-75 col-center">
+							  	<input ng-model="user.textreplyfee" name="text_reply_fee" type="number" required>
+							  	<span class="error" ng-show="myForm.text_reply_fee.$error.number">您输入的不是数字!</span>
+							  </div>
+							</div>
+						</div>
+						
 						<div class="item item-input"  style="margin:1px 0 0 0;">
 							<div class="row">
 							  <div class="col">个人简介</div>

@@ -96,8 +96,6 @@ lvtuanApp.controller("loginCtrl",function($state,$scope,$rootScope,$http){
 		                'Content-Type': 'application/json'
 		            }
 		        }).success(function(data) {
-		        	debugger
-
 		        	 layer.show("登陆成功！");
 
 		        	 /*让浏览器记住用户id*/
@@ -1215,9 +1213,172 @@ lvtuanApp.controller("followedCtrl",function($scope,$http,$rootScope){
 })
 //普通用户-认证为律师
 lvtuanApp.controller("becomelawyerCtrl",function($scope,$http,$rootScope,$ionicActionSheet,$timeout,Upload){
+	getProvince();
+	getWorkscopes();
+	getPractisePeriods();
+	//性別的json數組
+	$scope.sexs = [
+					{
+						"key"	:"male",
+						"value" : "男"
+					},
+					{
+						"key"	:"female",
+						"value" : "女"
+					}
+				];
+	//律师类型的json數組
+	$scope.positions = [
+					{
+						"key"	:"junior_lawyer",
+						"value" : "律师"
+					},
+					{
+						"key"	:"senior_lawyer",
+						"value" : "高级律师"
+					},
+					{
+						"key"	:"partner",
+						"value" : "合伙人"
+					}
+				];
+
+	//获取所在区域 - 省
+	function getProvince(){
+		$http.get('http://'+$rootScope.hostName+'/area/province',
+	        {
+	        cache: true,
+	        headers: {
+	            'Content-Type': 'application/json' , 
+	            'Authorization': 'bearer ' + $rootScope.token
+	       		}
+	        }).success(function(data) {
+				$scope.provinces = data.data; 
+			}).error(function (data, status) {
+				layer.msg(status);
+		        console.info(JSON.stringify(data));
+		    })
+	}
+	//获取所在区域 - 市
+	$scope.getCity = function(province){
+		$http.get('http://'+$rootScope.hostName+'/area/'+province+'/city',
+	        {
+	        cache: true,
+	        headers: {
+	            'Content-Type': 'application/json' , 
+	            'Authorization': 'bearer ' + $rootScope.token
+	       		}
+	        }).success(function(data) {
+				$scope.citys = data.data; 
+			}).error(function (data, status) {
+				layer.msg(status);
+		        console.info(JSON.stringify(data));
+		    })
+	}
+	//获取所在区域 - 地區
+	$scope.getDistrict = function(city){
+		$http.get('http://'+$rootScope.hostName+'/area/'+city+'/district',
+	        {
+	        cache: true,
+	        headers: {
+	            'Content-Type': 'application/json' , 
+	            'Authorization': 'bearer ' + $rootScope.token
+	       		}
+	        }).success(function(data) {
+				$scope.districts = data.data; 
+			}).error(function (data, status) {
+				layer.msg(status);
+		        console.info(JSON.stringify(data));
+		    })
+	}
+
+	//获取法律专长
+	function getWorkscopes(){
+		$http.get('http://'+$rootScope.hostName+'/lawyer/workscopes',
+	        {
+	        cache: true,
+	        headers: {
+	            'Content-Type': 'application/json' , 
+	            'Authorization': 'bearer ' + $rootScope.token
+	       		}
+	        }).success(function(data) {
+				$scope.workscopes_one = data.data; 
+				localStorage.setItem("workscopes_one", JSON.stringify($scope.workscopes_one));
+			}).error(function (data, status) {
+				layer.msg(status);
+		        console.info(JSON.stringify(data));
+		    })
+	}
+
+	//数组删除的方法
+	 Array.prototype.remove = function(index){
+	    if(isNaN(index) || index > this.length){
+	          return false;
+	    }
+	    for(var i=0,n=0;i<this.length;i++){
+	          if(this[i] != this[index]){
+	              this[n++] = this[i];
+	          }
+	    }
+	    this.length -= 1;
+	}
+	$scope.work_scope = [];
+	//获取法律专长
+	$scope.getworkscopes_one = function(workscope){
+		$scope.work_scope.push(workscope);
+		$scope.workscopes_two = JSON.parse(localStorage.getItem('workscopes_one'));
+		if(workscope){
+			var index;
+			angular.forEach($scope.workscopes_two,function(val,key){
+				if(val.key == workscope){
+					index = key;
+				}
+			});
+			$scope.workscopes_two.remove(index);
+			$scope.workscopes_two = $scope.workscopes_two;
+			localStorage.setItem("workscopes_two", JSON.stringify($scope.workscopes_two));
+		}
+	}
 	
+	//获取法律专长
+	$scope.getworkscopes_two = function(workscope){
+		$scope.work_scope.push(workscope);
+		$scope.workscopes_three = JSON.parse(localStorage.getItem('workscopes_two'));
+		if(workscope){
+			var index;
+			angular.forEach($scope.workscopes_three,function(val,key){
+				if(val.key == workscope){
+					index = key;
+				}
+			});
+			$scope.workscopes_three.remove(index);
+			$scope.workscopes_three = $scope.workscopes_three;
+		}
+	}
+	$scope.getworkscopes_three = function(workscope){
+		$scope.work_scope.push(workscope);
+		localStorage.setItem("work_scope", JSON.stringify($scope.work_scope));
+	}
+
+	//律师的从业年限
+	function getPractisePeriods(){
+		$http.get('http://'+$rootScope.hostName+'/lawyer/practiseperiods',
+	        {
+	        cache: true,
+	        headers: {
+	            'Content-Type': 'application/json' , 
+	            'Authorization': 'bearer ' + $rootScope.token
+	       		}
+	        }).success(function(data) {
+				$scope.periods = data.data; 
+			}).error(function (data, status) {
+				layer.msg(status);
+		        console.info(JSON.stringify(data));
+		    })
+	}
+
 	//上传执业证书
-   $scope.uploadFiles = function (license_file) {
+   $scope.uploadFiles = function (license_file,index) {
         Upload.upload({
         	headers: {
 	            'Content-Type': 'application/json' , 
@@ -1229,51 +1390,100 @@ lvtuanApp.controller("becomelawyerCtrl",function($scope,$http,$rootScope,$ionicA
             	'user_id': $rootScope.user_id
             }
         }).then(function (response) {
-        	console.info(response)
-        	$scope.file = 'http://'+$rootScope.hostName+'/'+response.data.data.file_path;
+        	var file_path = 'http://'+$rootScope.hostName+'/'+response.data.data.file_path;
+        	if(index == 1){
+        		$scope.file_1 = file_path;
+        	}
+        	if(index == 2){
+        		$scope.file_2 = file_path;
+        	}
+        	if(index == 3){
+        		$scope.file_3 = file_path;
+        	}
             $timeout(function () {
                 $scope.result = response.data;
             });
         }, function (response) {
-             if (response.status > 0) $scope.errorMsg = response.status 
-                + ': ' + response.data;
+
+            if (response.status > 0) {
+             	var errorMsg = response.status + ': ' + response.data;
+	             if(index == 1){
+	        		console.info('errorMsg_1',errorMsg);
+	        		layer.show(errorMsg);
+	        	}
+	        	if(index == 2){
+	        		console.info('errorMsg_2',errorMsg);
+	        		layer.show(errorMsg);
+	        	}
+	        	if(index == 3){
+	        		console.info('errorMsg_3',errorMsg);
+	        		layer.show(errorMsg);
+	        	}
+            }
+
         }, function (evt) {
-            $scope.progress = parseInt(100.0 * evt.loaded / evt.total);
+        	var progres = parseInt(100.0 * evt.loaded / evt.total);
+        	if(index == 1){
+        		$scope.progress_1 = progres;
+        	}
+        	if(index == 2){
+        		$scope.progress_2 = progres;
+        	}
+        	if(index == 3){
+        		$scope.progress_3 = progres;
+        	}
+            
         });
     };
 
+    $scope.user = {};
+    //提交问题
+	$scope.submit = function(){
+		$scope.user = layer.getParams('#myForm');
+		if($scope.user.license_file.length < 1){
+			layer.show("请选择执业证书！");
+			return false;
+		}
+		if($scope.user.avatar.length < 1){
+			layer.show("请选择个人头像图片！");
+			return false;
+		}
+		if($scope.user.bg_image.length < 1){
+			layer.show("请选择背景图片！");
+			return false;
+		}
 
-    /*$scope.uploadPic = function(file) {
-	    file.upload = Upload.upload({
-	      headers: {
-	            'Content-Type': 'application/json' , 
-	            'Authorization': 'bearer ' + $rootScope.token
-       		},
-            url: 'http://'+$rootScope.hostName+'/file/upload/user',
-            data: {
-            	upload_file: file,
-            	'user_id': $rootScope.user_id
-            }
-	    });
+		$scope.work_scope = JSON.parse(localStorage.getItem('work_scope'));
+		if($scope.work_scope){
+			$scope.user['work_scope'] = $scope.work_scope;
+		}
 
-	    file.upload.then(function (response) {
-	    	console.log(response)
-	      $timeout(function () {
-	        file.result = response.data;
-	      });
+		console.info($scope.user);
 
-	    }, function (response) {
-	    	console.log(response)
-	      if (response.status > 0)
-	        $scope.errorMsg = response.status + ': ' + response.data;
-	    }, function (evt) {
-	    	console.log(evt)
-	      // Math.min is to fix IE which reports 200% sometimes
-	      file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
-	    });
-    }*/
+		$http.post('http://'+$rootScope.hostName+'/center/become_lawyer',$scope.user,
+	            {
+	            headers: {
+	                'Content-Type': 'application/json' , 
+	            	'Authorization': 'bearer ' + $rootScope.token,
+	            }
+	        }).success(function(data) {
+	        	console.info(data.data);
+	           layer.show("提交成功！");
+	           $scope.user = {}; //清空数据
+	        }).error(function (data, status) {
+	        	console.info(data.error_messages);
+	        	layer.show(data.error_messages);
+	        	var errMsg = JSON.stringify(data.error_messages);
+	        	console.info(errMsg);
+	        	layer.show(errMsg);
+	        	/*layer.msg(status);*/
+	        });
+	}
+
 
 })
+
+
 /*———————————————————————————— 律师的个人中心 ————————————————————————————*/
 //我的
 lvtuanApp.controller("centerlaywerCtrl",function($scope,$http,$rootScope,$timeout,$ionicPopup){
@@ -1603,18 +1813,11 @@ lvtuanApp.controller("aboutCtrl",function($scope,$timeout,$ionicPopup){
 lvtuanApp.controller("siteCtrl",function($scope,$http,$rootScope){
 	console.info("设置");
 	$scope.logout = function(){
-		$http.post('http://'+$rootScope.hostName+'/logout',
-			{},
-	        {
-	        headers: {
-		                'Content-Type': 'application/json'
-		            }
-	        }).success(function(data) {
-				$scope.items = data.data; 
-			}).error(function (data, status) {
-				layer.msg(status);
-		        console.info(JSON.stringify(data));
-		    })
+		localStorage.removeItem('token');
+		localStorage.removeItem('is_lawyer');
+		localStorage.removeItem('user_id');
+		location.href='#/login';
+		window.location.reload();
 	}
 
 })
@@ -1653,7 +1856,7 @@ lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope){
 	            'Authorization': 'bearer ' + $rootScope.token
 	       		}
 	        }).success(function(data) {
-				$scope.workscopes = data.data; 
+				$scope.workscopes = data.data;
 			}).error(function (data, status) {
 				layer.msg(status);
 		        console.info(JSON.stringify(data));
@@ -2052,7 +2255,7 @@ lvtuanApp.controller("questionsCtrl",function($scope,$state,$http,$rootScope){
 	    $scope.user = {};
 	    //提交问题
 		$scope.submit = function(user){
-			debugger
+			
 			console.info($scope.user);
 			$http.post('http://'+$rootScope.hostName+'/question/create',$scope.user,
 	            {
