@@ -21,8 +21,11 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
       localStorage.removeItem('is_lawyer');
   }, 600);*/
   $rootScope.token = localStorage.getItem('token');
-  $rootScope.is_lawyer = JSON.parse(localStorage.getItem('is_lawyer'));
   $rootScope.user_id = localStorage.getItem('user_id');
+
+  $rootScope.user_group_id = JSON.parse(localStorage.getItem('user_group_id'));
+  $rootScope.is_verified = JSON.parse(localStorage.getItem('is_verified'));
+
   //localStorage.removeItem('is_lawyer');
   var hostName = $location.host();
   // if (hostName == '192.168.1.116') {
@@ -36,10 +39,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
     layer.goHome();
   }
 
-
 }])
-
-
 
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -259,12 +259,6 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
       controller: 'becomelawyerCtrl'
     })
 /*———————————————————————————— 律师的个人中心 ————————————————————————————*/
-    .state('center_lawyer', { //律师-我的
-      url: '/center_lawyer',
-      cache:'false',
-      templateUrl: 'template/center/lawyer/center.html',
-      controller: 'centerlaywerCtrl'
-    })
     .state('infolawyer', { //律师-个人资料
       url: '/infolawyer',
       cache:'false',
@@ -705,6 +699,27 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
       templateUrl: 'template/talentview.html',
       controller: 'talentviewCtrl'
     })
+
+
+/********************************** 文书下载 **********************************/
+    .state('document/list', { //首页-文书下载
+      url: '/document/list',
+      templateUrl: 'template/document/list.html',
+      controller: 'documentlistCtrl'
+    })
+    .state('document/download_list', { //首页-文书下载 - 详情页
+      url: '/document/download_list',
+      templateUrl: 'template/document/download_list.html'/*,
+      controller: 'documentownloadlistCtrl'*/
+    })
+
+/********************************** 小微企服 **********************************/
+    .state('corporate', { //首页-人才交流
+      url: '/corporate',
+      templateUrl: 'template/corporate/corporateservices.html'/*,
+      controller: 'corporateservicesCtrl'*/
+    })
+
 
 /********************************** error **********************************/
     .state('error', { //error

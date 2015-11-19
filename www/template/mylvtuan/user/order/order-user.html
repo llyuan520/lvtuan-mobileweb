@@ -27,36 +27,5 @@
 			        <ion-nav-view name="order-timeout">待评价</ion-nav-view>
 			    </ion-tab>
 			</ion-tabs>
-			
-			<div class="tabs tabs-icon-top tabs-color-positive" ng-model="is_lawyer">
-				  <a class="tab-item active" onclick='layer.goHome()'>
-				    <i class="icon ion-home"></i>
-				    首页
-				  </a>
-				  <a ng-if="is_lawyer == null" href="#/login" class="tab-item">
-				    <i class="icon ion-android-contacts"></i>
-				    圈子
-				  </a>
-				  <a ng-if="is_lawyer == true" href="#/group" class="tab-item">
-				    <i class="icon ion-android-contacts"></i>
-				    圈子
-				  </a>
-				  <a class="tab-item" href="#/knowledge">
-				    <i class="icon ion-social-buffer"></i>
-				    知识
-				  </a>
-				  <a ng-if="is_lawyer == null" href="#/login" class="tab-item">
-				    <i class="icon ion-android-contact"></i>
-				    我的
-				  </a>
-				  <a ng-if="is_lawyer == false" href="#/center" class="tab-item">
-				    <i class="icon ion-android-contact"></i>
-				    我的
-				  </a>
-				  <a ng-if="is_lawyer == true" href="#/center_lawyer" class="tab-item">
-				    <i class="icon ion-android-contact"></i>
-				    我的
-				  </a>
-			</div>
 		</ion-pane>
 </ion-view>

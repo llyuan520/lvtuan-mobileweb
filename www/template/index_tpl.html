@@ -28,63 +28,35 @@
 		        </ion-slide>
 			</ion-slide-box>
 		</div>
-		<div class="row" style="background-color: #FFFFFF;margin-top:5px;padding:5px 0;">
-		  <div class="col" style="border-right: 1px solid #cccccc;padding-left:0px;">
-		  	<a ng-href="#/questions">
-			  	<span class="col col-33" style="float: left;"><i class="asklawyer"></i></span>
-	  			<span class="col col-67" style="float: left;color:#999;font-size: 12px;">
-	  				<span style="font-size:23px;color:#333">问律师</span><br/>
-	  				公益律师解惑
-	  			</span>
-  			</a>
-		  </div>
-		  <div class="col" style="padding-right:0px;">
-		  	<a ng-href="#/lawyerlist">
-			  	<span class="col col-33" style="float: left;"><i class="findlawyer"></i></span>
-	  			<span class="col col-67" style="float: left;color:#999;font-size: 12px;">
-	  				<span style="font-size:23px;color:#333">找律师</span><br/>
-	  				一对一专业咨询
-	  			</span>
-  			</a>
-		  </div>
-		</div>
-		
-		<div class="nav-swap">
-			<div class="n-swapmain">
-				<div class="row" style="background-color:#ffffff;">
-				    <a class="col" style="text-align:center;color:#333" ng-href="#/legaladvice">
-				  	 	<img src="img/flzx.png" style="width:50px;height:50px;border-radius:50px;" /><br/>
-				  	    法律咨讯
-				    </a>
-				    <a class="col" style="text-align:center;color:#333" ng-href="#/lawlecture">
-					  	<img src="img/flws.png" style="width:50px;height:50px;border-radius:50px;" /><br/>
-					  	法律文书
-					</a>
-				  	<a class="col" style="text-align:center;color:#333" ng-href="#/casescomm">
-				  	 	<img src="img/ajwt.png" style="width:50px;height:50px;border-radius:50px;" /><br/>
-				  	    案件委托
-				  	</a>
-				</div>
-			</div>
-		</div>
 
-		<div class="row st2-swap">
-			<div class="col col-40 listimg">
-				<div class="slide2">
-					<ion-slide-box  active-slide="myActiveSlide2" does-continue="true" show-pager="true" slide-interval="3500" auto-play="true"  active-slide="index">
-				        <ion-slide>
-				            <img src="../img/banner2-04.png">
-				        </ion-slide>
-				        <ion-slide>
-				            <img src="../img/banner2-05.png">
-				        </ion-slide>
-					</ion-slide-box>
+		<div class="list" style="text-align:center;">
+			<div class="row">
+				<div class="col">
+					<a class="col" style="padding: 10px;background-color: #FFFFFF;color:#333" ng-href="#/questions">
+				  	 	<img src="img/mfzx.png" style="width:50px;height:50px;" /><br/>
+				  	    免费咨询
+				    </a>
+				</div>
+				<div class="col">
+					<a class="col" style="padding: 10px;background-color: #FFFFFF;color:#333" ng-href="#/lawyerlist">
+				  	 	<img src="img/zyzx.png" style="width:50px;height:50px;" /><br/>
+				  	    专业咨询
+				    </a>
 				</div>
 			</div>
-			<div class="col col-70 listimg">
-				<a class="top" ng-href="#"><img src="img/banner2-03.png"></a>
-				<a class="left" ng-href="#"><img src="img/banner2-01.png"></a>
-				<a class="right" ng-href="#"><img src="img/banner2-02.jpg"></a>
+			<div class="row">
+				<div class="col">
+					<a class="col" style="padding: 10px;background-color: #FFFFFF;color:#333" ng-href="#/document/list">
+				  	 	<img src="img/flws.png" style="width:50px;height:50px;" /><br/>
+				  	    法律文书
+				    </a>
+				</div>
+				<div class="col">
+					<a class="col" style="padding: 10px;background-color: #FFFFFF;color:#333" ng-href="#/corporate">
+				  	 	<img src="img/xwqf.png" style="width:50px;height:50px;" /><br/>
+				  	    小微企服
+				    </a>
+				</div>
 			</div>
 		</div>
 
@@ -110,37 +82,5 @@
 	    </div>
 
 	</ion-content>
-
-	<div class="tabs tabs-icon-top tabs-color-positive" ng-model="is_lawyer">
-		  <a class="tab-item active" onclick='layer.goHome()'>
-		    <i class="icon ion-home"></i>
-		    首页
-		  </a>
-		  <a ng-if="is_lawyer == null" ng-href="#/login" class="tab-item">
-		    <i class="icon ion-android-contacts"></i>
-		    圈子
-		  </a>
-		  <a ng-if="is_lawyer == true" ng-href="#/group" class="tab-item">
-		    <i class="icon ion-android-contacts"></i>
-		    圈子
-		  </a>
-		  <a class="tab-item" ng-href="#/knowledge">
-		    <i class="icon ion-social-buffer"></i>
-		    知识
-		  </a>
-		  <a ng-if="is_lawyer == null" ng-href="#/login" class="tab-item">
-		    <i class="icon ion-android-contact"></i>
-		    我的
-		  </a>
-		  <a ng-if="is_lawyer == false" ng-href="#/center" class="tab-item">
-		    <i class="icon ion-android-contact"></i>
-		    我的
-		  </a>
-		  <a ng-if="is_lawyer == true" ng-href="#/center_lawyer" class="tab-item">
-		    <i class="icon ion-android-contact"></i>
-		    我的
-		  </a>
-	</div>
-
 </ion-view>
 

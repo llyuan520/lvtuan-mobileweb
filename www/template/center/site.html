@@ -5,21 +5,46 @@
 				<h1 class="title">设置</h1>
 			</ion-header-bar>
 			<ion-content class="web-body">
-				<div class="list" >
-			        <ion-toggle toggle-class="toggle-positive" ng-model="client.checked"
-			                    ng-change="clientChange()">
-			          客户消息推送
-			        </ion-toggle>
-			         <ion-toggle toggle-class="toggle-positive" ng-model="system.checked"
-			                    ng-change="systemChange()">
+				<!-- 用户设置 -->
+				<div class="list" ng-if="user_group_id == 2 && is_verified == 1">
+			         <ion-toggle toggle-class="toggle-positive" ng-model="system.checked" ng-change="systemChange()">
 			          系统通知
 			        </ion-toggle>
-			        <a class="item item-button-right" ng-href="#/resetpwd">
+			        <a class="item" ng-href="#/resetpwd">
+			        	<i class="icon ion-chevron-right"></i>
 			            修改密码
-					    <button class="button button-clear">
-					      <i class="icon ion-ios-arrow-right"></i>
-					    </button>
-					  </a>
+					</a>
+					<a class="item" ng-href="#/about">
+						<i class="icon ion-chevron-right"></i>
+					    关于律团
+					</a>
+			    </div>
+			    <!-- 律师设置 -->
+			    <div class="list" ng-if="user_group_id == 1 || user_group_id == 2 && is_verified == 0">
+			    	 <ion-toggle toggle-class="toggle-positive" ng-model="client.checked" ng-change="clientChange()">
+			          休息时间免打扰
+			          <br>
+			          <span style="color:#999">(22:00 - 08:00)</span>
+			        </ion-toggle>
+			        <ion-toggle toggle-class="toggle-positive" ng-model="client.checked" ng-change="clientChange()">
+			          休息日免打扰
+			          <br>
+			          <span style="color:#999">(周六，日)</span>
+			        </ion-toggle>
+			        <ion-toggle toggle-class="toggle-positive" ng-model="client.checked" ng-change="clientChange()">
+			          客户消息推送
+			        </ion-toggle>
+			         <ion-toggle toggle-class="toggle-positive" ng-model="system.checked" ng-change="systemChange()">
+			          系统通知
+			        </ion-toggle>
+			        <a class="item" ng-href="#/resetpwd">
+			        	<i class="icon ion-chevron-right"></i>
+			            修改密码
+					</a>
+					<a class="item" ng-href="#/about">
+						<i class="icon ion-chevron-right"></i>
+					    关于律团
+					</a>
 			    </div>
 			    <button class="button button-full button-positive web-wid8c web-top30" ng-click="logout()">退出帐号</button>
 			</ion-content>

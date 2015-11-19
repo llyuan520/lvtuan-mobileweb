@@ -40,18 +40,19 @@
 						      		{{period.value}}
 						      	</option>
 						    </select>
-						    <select name="order" class="opt-bl" ng-model="order">
-						      <option value="" selected>默认</option>
-						      	<!-- <option value="" ></option> -->
+						    <select name="order_by" class="opt-bl" ng-model="order_by">
+						      	<option value="" selected>默认</option>
+						      	<option ng-repeat="order in orders" value="{{order.key}}">
+						      		{{order.value}}
+						      	</option>
 						    </select>
 						</div>
 					</form>
-					<div class="item-divider dvd-title">你查找的律师类型：<span class="sp-blue">律师辩护</span>，共找到<span class="sp-blue">421</span>位律师。</div>
-
+					<!-- <div class="item-divider dvd-title">你查找的律师类型：<span class="sp-blue">律师辩护</span>，共找到<span class="sp-blue">421</span>位律师。</div> -->
 					<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 					<div class="list">
 					    <a class="item item-thumbnail-left" ng-href="#/lawyer/{{item.id}}" ng-repeat="item in items">
-					      <img class="img-header" src="{{item.avatar}}" />
+					      <img class="img-header" src="{{item.avatar}}" style="border-radius: 50px;" />
 					      	<!--<img src="img/icon-header.png"/>-->
 					      <h4>
 					      	<span class="sp-name fc-nan">{{item.realname}}</span>
