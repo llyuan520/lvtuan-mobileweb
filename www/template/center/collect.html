@@ -1,4 +1,4 @@
-<ion-view view-title="我的收藏">
+<ion-view hide-Tabs="true" view-title="我的收藏">
 	<ion-pane>
 		<ion-header-bar class="bar bar-header bar-light">
 			<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" onclick="history.go(-1);"></a>
@@ -6,24 +6,25 @@
 		</ion-header-bar>
 
 		<ion-content>
+
 			<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
-			<ion-list>
-				<ion-item>
-					<p>咨询列表咨询列表</p>
+			<ion-list ng-repeat="item in items">
+				<ion-item style="padding: 0;">
+					<div class="row">
+					  <div class="col col-65">
+					  	<img src="{{item.creator_avatar}}" width="40" height="40" style="border-radius: 50px;vertical-align: middle;" />
+					  	<label>{{item.creator_realname}}</label>
+					  </div>
+					  <div class="col" style="text-align: right;">
+					  	{{item.created_at}}
+					  </div>
+					</div>
 					<div class="item item-thumbnail-left">
-						<img src="{{item.avatar}}"/>
-						<h4>
-					      	<span class="sp-name fc-nan ng-binding">何盛</span>
-					      	<span class="sp-level fc-nan">高级律师</span>
-					      	<img ng-show="" class="img-v ng-hide" src="img/vip.png">
-					      </h4>
-						<p>咨询列表咨询列表</p>
-						<p>2015-10-26 16:22:24 </p>
-						<p class="ion-chevron-down icon-right item-icon-right">
-							<a href="###">
-								共98条回复，点击查看全部
-							</a>
+						<img src="{{item.img}}"/>
+						<p class="content" style="color:#333;font-size:16px">
+							<a ng-href="#/lawyer/article/view/{{item.id}}">{{item.title}}</a>
 						</p>
+						<p>{{item.collect_type}}</p>
 					</div>
 				</ion-item>
 			</ion-list>

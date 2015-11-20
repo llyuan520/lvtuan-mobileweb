@@ -1,10 +1,3 @@
-<script src="js/jQuery-File-Upload-9.11.2/js/vendor/jquery.ui.widget.js"></script>
-<script src="js/jQuery-File-Upload-9.11.2/js/jquery.iframe-transport.js"></script>
-<script src="js/jQuery-File-Upload-9.11.2/js/jquery.fileupload.js"></script>
-<!--[if (gte IE 8)&(lt IE 10)]>
-<script src="js/jQuery-File-Upload-9.11.2/js/cors/jquery.xdr-transport.js"></script>
-<![endif]-->
-<script src="js/jweixin-1.0.0.js"></script>
 <ion-view view-title="创建圈子">
 	<ion-pane  class="web-body">
 		<ion-header-bar class="bar bar-header bar-light">
@@ -18,39 +11,31 @@
 				<form id="createGroup_form">
 					<div class="list login">
 						<div class="item item-input item-text-wrap">
-							<input type="text" name="group_name" ng-model="group_name" required="required" placeholder="圈子名称" ng-messages-multiple />
+							<input type="text" name="group_name" ng-model="group_name" required="required" placeholder="圈子名称" />
 						</div>
 						<div class="item item-input ">
-							<div class="fl">
-								<div class="upload_wrap">
-									<span class="btn btn-success fileinput-button">
-					                    <span>请选择图片</span>
-					                    <input id="group_avatar" type="file" name="upload_file" multiple 
-										    data-sequential-uploads="true" data-disabled="disabled">
-					                    <input type="hidden" name="group_avatar" id="group_avatar">
-					                </span>
-					               
-									    <div class="upload_img_show" >              
-						                  <p class="avatar_js_cover upload_preview" style="display:none;">
-						                  	<img id='avatar_peituImg'  src="" />
-						                  </p>
-						                  <p class="js_cover_tip tips">（图片建议尺寸：250像素 * 200像素,尺寸不得超过1M）</p>
-						                </div>
-					            </div>
-							</div>
-							<!-- <label style="width: 100%;">上传群头像</label>
-							<input type="hidden" name="group_avatar" ng-model="group_avatar" required="required" placeholder="圈子名称" ng-messages-multiple />
-							<a ng-click="show();" class="icon-right" style="font-size:40px;padding:0 20px;color:#ccc;float:right"><i class="icon ion-ios-plus-outline"></i></a> -->
+							
+							<label ng-show="group_avatar" style="width: 100%;">
+								<img ng-src="{{file}}" ngf-thumbnail="group_avatar || '/thumb.jpg'" width="52" height="50">
+								<span class="progress" ng-show="progress >= 0">
+				                  <div style="width:{{progress}}%" ng-bind="progress + '%'"></div>
+				                </span>
+				            </label>
+							<label ng-show="!group_avatar" style="width: 100%;">上传群头像</label>
+
+							<div ng-disabled="booleans" ng-model="group_avatar" accept="image/*" ngf-pattern="'image/*'" ngf-max-size="20MB" ngf-min-height="100" ngf-select="uploadFiles($file)" class="icon-right" style="font-size:40px;padding:0 20px;color:#ccc;float:right"><i class="icon ion-ios-plus-outline"></i></div>
+							<input type="hidden" name="group_avatar" value="{{file}}" />
+							
 						</div>
 					</div>	
 				</form>	
 				<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 				<ul class="list">
 			        <li class="item item-avatar" ng-repeat="item in items">
-			        	<img src="{{item.avatar}}" style="left:6px;border-radius:50px;" width="40px" height="40px">
+			        	<img src="http://mobiledev.wdlst.law-pc-new/{{item.avatar}}" style="left:6px;border-radius:50px;" width="40px" height="40px">
 			          	<h2 style="line-height: 40px;float: left;">{{item.realname}} 律师</h2>
 			          	<label class="checkbox" style="float: right;">
-			          		<input type="checkbox" value="{{item.id}}" name="name{{$index+1}}" ng-model="isCheck[$index]" ng-true-value="{{item.id}}"  ng-false-value="false"  ng-change="checkItem(isCheck[$index],{{item.id}})" >
+			          		<input type="checkbox" value="{{item.follow_id}}" name="name{{$index+1}}" ng-model="isCheck[$index]" ng-true-value="{{item.follow_id}}"  ng-false-value="false"  ng-change="checkItem(isCheck[$index],{{item.follow_id}})" >
 			          	</label>
 			        </li>
 			    </ul>

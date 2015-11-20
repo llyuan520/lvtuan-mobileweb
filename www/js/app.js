@@ -316,7 +316,11 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
       }
     })
 
-
+    .state('/lawyer/article/view/', { //律师-我的文章 - 文章详情
+      url: '/lawyer/article/view/:id',
+      templateUrl: 'template/center/lawyer/view.html',
+      controller: 'viewarticlelawyerCtrl'
+    })
 
     .state('messages_lawyer', { //律师-我的消息
       url: '/messages_lawyer',

@@ -8,11 +8,17 @@
 
 
 		<ion-content style="margin-bottom: 0px;">
-				<form id="createTelevise_form">
+				<form id="myForm" name="myForm" novalidate>
 					<div class="list login">
 						<div class="item item-input item-text-wrap">
-							<input type="text" name="content" ng-model="content" required="required" placeholder="请输入你的广播" ng-messages-multiple />
+							<textarea ng-model="content" name="content" required ng-minlength="2" ng-maxlength="140" placeholder="请输入你的广播"></textarea>
 						</div>
+						<p class="item" ng-show="myForm.content.$error.minlength">
+							<span class="fc-red">字符不能小于2个字符</span>
+						</p>
+						<p class="item" ng-show="myForm.content.$error.maxlength">
+							<span class="fc-red">字符的长度不能超过140个</span>
+						</p>
 					</div>	
 				</form>
 		</ion-content>

@@ -6,10 +6,10 @@
 			</ion-header-bar>
 			<ion-content class="web-body">
 				<!-- 用户设置 -->
-				<div class="list" ng-if="user_group_id == 2 && is_verified == 1">
-			         <ion-toggle toggle-class="toggle-positive" ng-model="system.checked" ng-change="systemChange()">
+				<div class="list" ng-if="user_group_id == 1 || user_group_id == 2 && is_verified == 0">
+			         <!-- <ion-toggle toggle-class="toggle-positive" ng-model="system.checked" ng-change="systemChange()">
 			          系统通知
-			        </ion-toggle>
+			        </ion-toggle> -->
 			        <a class="item" ng-href="#/resetpwd">
 			        	<i class="icon ion-chevron-right"></i>
 			            修改密码
@@ -20,8 +20,8 @@
 					</a>
 			    </div>
 			    <!-- 律师设置 -->
-			    <div class="list" ng-if="user_group_id == 1 || user_group_id == 2 && is_verified == 0">
-			    	 <ion-toggle toggle-class="toggle-positive" ng-model="client.checked" ng-change="clientChange()">
+			    <div class="list" ng-if="user_group_id == 2 && is_verified == 1">
+			    	 <!-- <ion-toggle toggle-class="toggle-positive" ng-model="client.checked" ng-change="clientChange()">
 			          休息时间免打扰
 			          <br>
 			          <span style="color:#999">(22:00 - 08:00)</span>
@@ -36,7 +36,7 @@
 			        </ion-toggle>
 			         <ion-toggle toggle-class="toggle-positive" ng-model="system.checked" ng-change="systemChange()">
 			          系统通知
-			        </ion-toggle>
+			        </ion-toggle> -->
 			        <a class="item" ng-href="#/resetpwd">
 			        	<i class="icon ion-chevron-right"></i>
 			            修改密码
