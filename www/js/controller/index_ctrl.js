@@ -1025,16 +1025,16 @@ lvtuanApp.controller("centerCtrl",function($scope,$http,$rootScope,$ionicPopup,$
 		//普通用户个人信息
 		$http.get('http://'+$rootScope.hostName+'/center/customer/info',
 	        {
-	        cache: true,
-	        headers: {
-	            'Content-Type': 'application/json' , 
-	            'Authorization': 'bearer ' + $rootScope.token
+		        cache: true,
+		        headers: {
+		            'Content-Type': 'application/json' , 
+		            'Authorization': 'bearer ' + $rootScope.token
 	       		}
 	        }).success(function(data) {
 	        	console.info(data.data)
 				if(data.data){
 					//用于连接两个或多个数组并返回一个新的数组
-					$scope.items = data.data; 
+					$scope.items = data.data;
 				}else{
 					layer.show('暂无数据！');
 					return false;
