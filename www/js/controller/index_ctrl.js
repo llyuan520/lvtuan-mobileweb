@@ -7,7 +7,27 @@ lvtuanApp.controller("HeaderController",function($scope,$location){
       	return route === $location.path();
       };
 })
+//设置是否显示底部导航
+lvtuanApp.directive('hideTabs', function($rootScope) {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attributes) {
+            scope.$on('$ionicView.beforeEnter', function() {
+                scope.$watch(attributes.hideTabs, function(value){
+                    $rootScope.hideTabs = value;
+                });
+            });
 
+            scope.$on('$ionicView.beforeLeave', function() {
+                $rootScope.hideTabs = false;
+            });
+        }
+    };
+});
+//设置加载动画
+lvtuanApp.constant("$ionicLoadingConfig",{
+  content: '<ion-spinner icon="android"></ion-spinner>',animation: 'fade-in',showBackdrop: true,maxWidth: 200,showDelay: 0 
+})
 //hone 
 lvtuanApp.controller("ionicNavBarDelegateCtrl",function($state,$timeout,$http,$location){
 	//$ionicNavBarDelegate.showBar(false); //是否显示返回按钮
@@ -381,15 +401,25 @@ lvtuanApp.controller("groupTeleviseCtrl",function($scope,$http,$state,$rootScope
             	'Authorization': 'bearer ' + $rootScope.token
             }
         }).success(function(data) {
-        	/*var itmes = data.data;*/
+        	console.info(data)
+        	var itmes = data.data;
+        	$scope.televise[index].likes_count = itmes.likes_count;
            layer.show("点赞成功！");
         }).error(function (data, status) {
-        	var errMsg = JSON.stringify(data.error_messages.item_id[0]);
+        	console.info(data);
+        	var errMsg = "";
+        	if(JSON.stringify(data.error_messages.item_type)){
+        		errMsg = JSON.stringify(data.error_messages.item_type[0]);
+        	}else if(JSON.stringify(data.error_messages.item_id)){
+				errMsg = JSON.stringify(data.error_messages.item_id[0]);
+        	}
         	layer.show(errMsg);
-        }); 
+        });
 	}
 
 })
+
+
 
 //圈子 - 推荐关注
 lvtuanApp.controller("groupAttentionCtrl",function($scope,$http,$state,$rootScope){
@@ -3676,25 +3706,4 @@ lvtuanApp.controller("documentlistCtrl",function($http,$scope,$state,$rootScope,
 		getParams();
 	};
 
-})
-//设置是否显示底部导航
-lvtuanApp.directive('hideTabs', function($rootScope) {
-    return {
-        restrict: 'A',
-        link: function(scope, element, attributes) {
-            scope.$on('$ionicView.beforeEnter', function() {
-                scope.$watch(attributes.hideTabs, function(value){
-                    $rootScope.hideTabs = value;
-                });
-            });
-
-            scope.$on('$ionicView.beforeLeave', function() {
-                $rootScope.hideTabs = false;
-            });
-        }
-    };
-});
-//设置加载动画
-lvtuanApp.constant("$ionicLoadingConfig",{
-  content: '<ion-spinner icon="android"></ion-spinner>',animation: 'fade-in',showBackdrop: true,maxWidth: 200,showDelay: 0 
 })

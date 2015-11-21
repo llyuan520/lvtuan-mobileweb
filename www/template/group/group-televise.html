@@ -14,13 +14,13 @@
 				</a>
 				<p>{{televis.created_at}}</p>
 				<div class="web-paddingtb0" style="padding-left:55px;height:30px;line-height:30px;border-top:0px;color:#767676;">
-				    <i class="icon ion-compose web-ion-img1-2" style="float:right;margin-right:5px;font-size:12px;">&nbsp;{{televis.comments_count}}</i>
+				    <i class="icon ion-compose web-ion-img1-2" style="float:right;margin-right:5px;font-size:14px;">&nbsp;{{televis.comments_count}}</i>
 
-				    <i ng-click="likes({{televis.id}},[$index+1])"  class="icon ion-heart web-ion-img1-2" style="float:right;margin-right:5px;font-size:12px;">&nbsp;
+				    <i ng-click="likes({{televis.id}},[$index])"  class="icon ion-heart web-ion-img1-2" style="float:right;margin-right:5px;font-size:14px;">&nbsp;
 				    	<label>{{televis.likes_count}}</label>
 				    </i>
 				    
-				    <i class="icon ion-chatbubble web-ion-img1-2" style="float:right;margin-right:5px;font-size:12px;">&nbsp;{{televis.views_count}} 10</i>
+				    <i class="icon ion-chatbubble web-ion-img1-2" style="float:right;margin-right:5px;font-size:14px;">&nbsp;{{televis.views_count}} 10</i>
 				  </div>
 			</div>
 
