@@ -12,9 +12,9 @@
 	        		<h2 style="text-align:center"> {{items.title}}</h2>
 	        		<p class="web-paddingtb5" style="margin:0px;">
 				      <label class="lef">律团</label>
-				      <label class="rig">{{items.created_at.date}}</label>
+				      <label class="rig">{{items.created_at}}</label>
 				    </p>
-		          	<img class="full-image" src="{{items.img}}" style="max-height:150px;">
+		          	<img class="full-image" ng-src="{{items.img}}" style="max-height:150px;">
 				    <p class="contents" ng-bind-html="items.content"></p>
 		        </ion-item>
 	         </ion-list>

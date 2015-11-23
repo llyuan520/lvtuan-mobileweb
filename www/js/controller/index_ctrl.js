@@ -1996,7 +1996,7 @@ lvtuanApp.controller("caselaywerCtrl",function($scope,$http,$rootScope,$statePar
     };
 	//上拉加载
 	$scope.loadMore = function() {
-	$http.get('http://'+$rootScope.hostName+'/center/lawyer/blog/list?class='+$stateParams.id,
+	$http.get('http://'+$rootScope.hostName+'/center/lawyer/blog/list?class='+$stateParams.class,
         {
         cache: true,
         headers: {

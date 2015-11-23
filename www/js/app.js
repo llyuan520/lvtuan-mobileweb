@@ -30,7 +30,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
   // if (hostName == '192.168.1.116') {
   //   hostName = hostName + ":81";
   // } else {
-    hostName = '192.168.1.43'; //'dev.wdlst.lvtuan-pc-new';
+    hostName = '192.168.1.43';
   // }
   localStorage.setItem("hostName", JSON.stringify(hostName));
   $rootScope.hostName = JSON.parse(localStorage.getItem('hostName'));
@@ -288,7 +288,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
       templateUrl: 'template/center/lawyer/article.html'
     })
    .state('article_lawyer.case', { //律师 - 案例分析
-      url: '/case/:id',
+      url: '/case/:class',
       views: {
           'article-case': {
               templateUrl: 'template/center/lawyer/article-case.html',
@@ -297,7 +297,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
       }
     })
    .state('article_lawyer.advisory', { //律师 - 咨询
-      url: '/advisory/:id',
+      url: '/advisory/:class',
       views: {
           'article-advisory': {
               templateUrl: 'template/center/lawyer/article-advisory.html',
@@ -306,7 +306,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
       }
     })
    .state('article_lawyer.lknowledge', { //律师 - 知识
-      url: '/lknowledge/:id',
+      url: '/lknowledge/:class',
       views: {
           'article-lknowledge': {
               templateUrl: 'template/center/lawyer/article-lknowledge.html',
