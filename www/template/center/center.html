@@ -16,10 +16,7 @@
 				      		<a ng-if="user_group_id == 1 || user_group_id == 2 && is_verified == 0" ng-href="#/info">{{items.user.realname}}</a>
 				      		<a ng-if="user_group_id == 2 && is_verified == 1" ng-href="#/infolawyer">{{items.user.realname}} <span class="web-font14">律师</span></a>
 				      </h2>
-				      <a ng-if="user_group_id == 1 || user_group_id == 2 && is_verified == 0" ng-href="#/messages">
-					      <icon  class="icon ion-ios-email-outline positive" style="font-size: 42px;"></icon>
-					  </a>
-				      <a ng-if="user_group_id == 2 && is_verified == 1" ng-href="#/messages_lawyer">
+				      <a ng-href="#/messages">
 					      <icon  class="icon ion-ios-email-outline positive" style="font-size: 42px;"></icon>
 					  </a>
 

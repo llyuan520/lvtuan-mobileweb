@@ -1201,7 +1201,7 @@ lvtuanApp.controller("listscoresCtrl",function($scope,$http,$rootScope){
         }).success(function(data) {
 			if(data.data){
 				//用于连接两个或多个数组并返回一个新的数组
-				$scope.items = data.data; 
+				$scope.items = data.data;
 			}else{
 				layer.show('暂无数据！');
 				return false;
@@ -1212,10 +1212,12 @@ lvtuanApp.controller("listscoresCtrl",function($scope,$http,$rootScope){
 	    })
 
 })
-//普通用户和律师的收藏
-lvtuanApp.controller("collectCtrl",function($scope,$http,$rootScope){
+
+//普通用户和律师的系统消息
+lvtuanApp.controller("messagesCtrl",function($scope,$http,$rootScope){
 
 	var page = 1; //页数
+	var rows_per_page = 4; // 每页的数量
     $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
     $scope.items = [];	//创建一个数组接收后台的数据
     //下拉刷新
@@ -1223,41 +1225,111 @@ lvtuanApp.controller("collectCtrl",function($scope,$http,$rootScope){
 		page = 1;
 		$scope.items = [];
         $scope.loadMore();
+        $scope.$broadcast('scroll.refreshComplete');
     };
+
 	//上拉加载
 	$scope.loadMore = function() {
-		$http.get('http://'+$rootScope.hostName+'/center/collect?page='+page++,
-	        {
+		$http.get('http://'+$rootScope.hostName+'/letter/sys?rows_per_page='+rows_per_page+'&page='+page++,
+        {
 	        cache: true,
 	        headers: {
 	            'Content-Type': 'application/json' , 
 	            'Authorization': 'bearer ' + $rootScope.token
-	       		}
-	        }).success(function(data) {
-				if(data.data){
-					$scope.items = data.data; 
-					console.info($scope.items );
-					return true;
-				}else{
-					layer.show('暂无数据！');
+       		}
+        }).success(function(data) {
+			if(data.data.length){
+				$scope.items = $scope.items.concat(data.data);
+				if (data.data.length < rows_per_page) {
 					$scope.moredata = false;
-					return false;
+				} else {
+					$scope.moredata = true;
 				}
-			}).error(function (data, status) {
-		        console.info(JSON.stringify(data));
-		        console.info(JSON.stringify(status));
-		    })
+			}else{
+				if (rows_per_page == 1) {
+					layer.show('暂无数据！');
+				}
+				$scope.moredata = false;
+			}
+			$scope.$broadcast('scroll.infiniteScrollComplete');
+
+		}).error(function (data, status) {
+	        console.info(JSON.stringify(data));
+	        console.info(JSON.stringify(status));
+	    });
+	};
+
+})
+
+lvtuanApp.controller("viewMessageCtrl",function($scope,$http,$rootScope,$interval,$stateParams){
+	var id = $stateParams.id;
+	//文库 - 详情
+		var url = 'http://'+$rootScope.hostName+'/letter/sys-letters/'+id;
+		$http.get(url,
+        {
+        cache: true,
+        headers: {
+            'Content-Type': 'application/json' , 
+            'Authorization': 'bearer ' + $rootScope.token
+       		}
+        }).success(function(data) {
+        	$scope.item = data.data;
+		}).error(function (data, status) {
+			layer.msg(status);
+	        console.info(JSON.stringify(data));
+	    })
+})
+
+//普通用户和律师的收藏
+lvtuanApp.controller("collectCtrl",function($scope,$http,$rootScope){
+
+	var page = 1; //页数
+	var rows_per_page = 4; // 每页的数量
+    $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
+    $scope.items = [];	//创建一个数组接收后台的数据
+    //下拉刷新
+	$scope.doRefresh = function() {
+		page = 1;
+		$scope.items = [];
+        $scope.loadMore();
+        $scope.$broadcast('scroll.refreshComplete');
+    };
+
+	//上拉加载
+	$scope.loadMore = function() {
+		$http.get('http://'+$rootScope.hostName+'/center/collect?rows_per_page='+rows_per_page+'&page='+page++,
+        {
+	        cache: true,
+	        headers: {
+	            'Content-Type': 'application/json' , 
+	            'Authorization': 'bearer ' + $rootScope.token
+       		}
+        }).success(function(data) {
+			if(data.data.length){
+				$scope.items = $scope.items.concat(data.data);
+				if (data.data.length < rows_per_page) {
+					$scope.moredata = false;
+				} else {
+					$scope.moredata = true;
+				}
+			}else{
+				if (rows_per_page == 1) {
+					layer.show('暂无数据！');
+				}
+				$scope.moredata = false;
+			}
+			$scope.$broadcast('scroll.infiniteScrollComplete');
+
+		}).error(function (data, status) {
+	        console.info(JSON.stringify(data));
+	        console.info(JSON.stringify(status));
+	    });
 	};
 
 })
 //普通用户的评论
 lvtuanApp.controller("commentCtrl",function($scope,$http,$rootScope){
 	console.info("律师的评论");
-
-})
-//我的消息-系统消息
-lvtuanApp.controller("messagesCtrl",function($scope,$http,$rootScope){
-	console.info("我的消息");
 
 })
 //普通用户-我的关注
@@ -1866,12 +1938,6 @@ lvtuanApp.controller("viewarticlelawyerCtrl",function($scope,$http,$rootScope,$s
 		        console.info(JSON.stringify(status));
 		    })
 	}
-})
-
-//我的消息-系统消息
-lvtuanApp.controller("messageslaywerCtrl",function($scope,$http,$rootScope){
-	console.info("我的消息");
-
 })
 
 /*———————————————————————————— 个人中心公用 ————————————————————————————*/
