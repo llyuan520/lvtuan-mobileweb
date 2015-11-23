@@ -129,7 +129,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
     })
 
     .state('groupview', { //圈子详情
-      url: '/groupview',
+      url: '/group/view/:id',
       templateUrl: 'template/group/group_view.html',
       controller: 'groupviewCtrl'
     })
@@ -145,11 +145,12 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
       controller: 'groupcreateCtrl'
     })
 
-    .state('televisecreate', { //创建圈子
+    .state('televisecreate', { //创建广播
       url: '/televisecreate',
       templateUrl: 'template/group/televisecreate.html',
       controller: 'televisecreateCtrl'
     })
+    
 
     
 

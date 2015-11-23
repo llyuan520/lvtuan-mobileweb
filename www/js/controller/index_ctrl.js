@@ -531,8 +531,52 @@ lvtuanApp.controller("groupAttentionCtrl",function($scope,$http,$state,$rootScop
 })
 
 //圈子详情
-lvtuanApp.controller("groupviewCtrl",function($scope,$http,$state,$rootScope){
+lvtuanApp.controller("groupviewCtrl",function($scope,$http,$state,$rootScope,$stateParams){
 	console.info("圈子详情");
+	$scope.user_name = "";
+	$scope.user_password = "";
+	$("#user_name").val();
+	$("#user_password").val();
+	$http.get('http://'+$rootScope.hostName+'/group/'+$stateParams.id+'/chat',
+	        {
+	        cache: true,
+	        headers: {
+	            'Content-Type': 'application/json' , 
+	            'Authorization': 'bearer ' + $rootScope.token
+	       		}
+	        }).success(function(data) {
+
+	        	console.info('圈子详情',data.data)
+
+	        	var itmes = data.data;
+	        	$scope.user_name = itmes.user_id;
+	        	$scope.user_password = itmes.pwd;
+	        	localStorage.setItem("easemob_id", JSON.stringify(itmes.easemob_id));
+				var time = null;
+        		time = setInterval(function() { 
+        			if(getuserpwd(itmes) == true){
+		        		clearInterval(time);
+		        		login();
+		        	}
+				}, 2000); 
+
+
+			}).error(function (data, status) {
+				layer.msg(status);
+		        console.info(JSON.stringify(data));
+		    })
+			
+			function getuserpwd(itmes){
+				var name = $("#user_name").val();
+	        	var pwd = $("#user_password").val();
+	        	if(name != null && pwd != null){
+	        		if(name == itmes.user_id && pwd == itmes.pwd){
+	        			return true;
+	        		}
+	        	}else{
+	        		return false;
+	        	}
+			}
 
 })
 //广播详情
