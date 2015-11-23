@@ -542,7 +542,7 @@ img.avatar{border-radius: 50%;border:2px solid #fff;}
   .st2-swap .listimg .top, .st2-swap .listimg .left, .st2-swap .listimg .right,.st2-swap .listimg .top img, .st2-swap .listimg .left img, .st2-swap .listimg .right img{height: 70px;}
    }
 @media (max-height: 736px) {
-  .slide1 .slider,.slide1 .slider-slide img{height: 190px;}
+  .slide1 .slider,.slide1 .slider-slide img{height: 140px;}
   .st2-swap,.st2-swap .listimg,.slide2 .slider-slide img{height: 140px;}
   .st2-swap .listimg .top, .st2-swap .listimg .left, .st2-swap .listimg .right,.st2-swap .listimg .top img, .st2-swap .listimg .left img, .st2-swap .listimg .right img{height: 70px;}
    }
