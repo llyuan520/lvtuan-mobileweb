@@ -10,7 +10,7 @@
 		<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 		<ion-list>
         	<ion-item class="item item-thumbnail-left" ng-repeat="item in items" ng-href="#/group/view/{{item.group_id}}">
-        		<img src="{{item.group_avatar}}" style="left:6px;border-radius:5px;">
+        		<img ng-src="{{item.group_avatar}}" style="left:6px;border-radius:5px;">
 				<h2 style="line-height:30px;">
 					<span class="item-note">{{item.created_at}}</span>{{item.group_name}}
 				</h2>

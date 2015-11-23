@@ -8,7 +8,7 @@
 				<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 				<ion-list>
 					<ion-item class="item-thumbnail-left" ng-repeat="item in items">
-						<img src="{{item.creator_avatar}}"/>
+						<img ng-src="{{item.creator_avatar}}"/>
 						<h2>{{item.creator_realname}} <label class="rig">{{item.evaluate_created_at}}</label></h2>
 
 						<div star rating-value="ratingVal[$index]" max="max" on-hover="onHover" on-leave="onLeave" readonly="{{readonly}}"></div>

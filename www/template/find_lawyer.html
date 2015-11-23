@@ -36,7 +36,7 @@
 				<h1 class="title">问律师参考</h1>
 				<button class="button icon-right button-clear">
 					深圳
-					<i class="icon"><img src="img/arrow-down.png" class="iwh" /></i>
+					<i class="icon"><img ng-src="img/arrow-down.png" class="iwh" /></i>
 				</button>
 			</ion-header-bar>
 			<ion-content>
@@ -71,7 +71,7 @@
 				<div class="list" ng-controller="lawyerInfoCtr">
 				    <a class="item item-thumbnail-left" href="#" ng-repeat="lawyerInfoItem in lawyerInfoItems">
 				      <img class="img-header" src="{{lawyerInfoItem.iconHeader}}" />
-				      	<!--<img src="img/icon-header.png"/>-->
+				      	<!--<img ng-src="img/icon-header.png"/>-->
 				      <h2><span class="sp-name fc-nan">{{lawyerInfoItem.name}}</span><span class="sp-level fc-nan">{{lawyerInfoItem.level}}</span><img ng-show="{{lawyerInfoItem.isDispVipImg}}" class="img-v" src="img/vip.png"/></h2>
 				      <p>
 				      	擅长领域：{{lawyerInfoItem.beGoodAtField}}<br />

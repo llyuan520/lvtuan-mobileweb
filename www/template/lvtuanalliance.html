@@ -10,7 +10,7 @@
 		<ion-content>
 			<div class="list bb">
 				<div class="item item-thumbnail-left" ng-repeat="union in unions">
-					<img src="{{union.avatar}}" alt="{{union.name}}" />
+					<img ng-src="{{union.avatar}}" alt="{{union.name}}" />
 					<div class="p30-title"><a ng-href="#/lvtuanallianceview/{{union.id}}">{{union.name}}</a></div>
 					<p>地址：{{union.address}}</p>
 					<p>邮箱：{{union.email}}</p>

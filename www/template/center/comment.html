@@ -8,7 +8,7 @@
 				<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 				<ion-list>
 					<ion-item class="item-thumbnail-left" ng-repeat="item in items">
-						<img src="{{item.creator_avatar}}" style="border-radius: 50px;vertical-align: middle;"/>
+						<img ng-src="{{item.creator_avatar}}" style="border-radius: 50px;vertical-align: middle;"/>
 						<h2>{{item.title}}</h2>
 						<p>{{item.creator_realname}} {{item.created_at}}</p>
 						<div class="reply ion-arrow-up-b">

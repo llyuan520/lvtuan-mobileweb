@@ -12,7 +12,7 @@
 		  	<div class="list">
 		  		<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 			    <a class="item item-thumbnail-left" style="padding-left:95px;" ng-repeat="recommended in recommendeds">
-			      <img src="{{recommended.group_avatar}}" style="left:6px;border-radius:5px;">
+			      <img ng-src="{{recommended.group_avatar}}" style="left:6px;border-radius:5px;">
 			      <h2 style="line-height:30px;"><span class="item-note">
 			      	<button class="button button-small button-outline button-stable bar-positive" style="color:#373737;padding: 0 20px;" ng-click="groupjoin({{recommended.group_id}} ,$index )">关注</button>
 			      </span>{{recommended.group_name}}</h2>

@@ -5,7 +5,7 @@
     	<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 		<ion-list class="messages">
 			<ion-item class="item-thumbnail-left" ng-repeat="item in items" ng-href="#/lawyer/article/view/{{item.id}}">
-				<img src="{{item.img}}"/>
+				<img ng-src="{{item.img}}"/>
 				<h2>{{item.title}}</h2>
 				<p class="content">{{item.info}}</p>
 				<p>{{item.created_at}}</p>

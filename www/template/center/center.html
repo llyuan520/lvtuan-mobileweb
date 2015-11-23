@@ -11,7 +11,7 @@
 
 				<div class="list">
 				    <div class="item item-thumbnail-left item-icon-right" >
-				      <img src="{{items.user.avatar}}">
+				      <img ng-src="{{items.user.avatar}}">
 				      <h2 class="web-top10">
 				      		<a ng-if="user_group_id == 1 || user_group_id == 2 && is_verified == 0" ng-href="#/info">{{items.user.realname}}</a>
 				      		<a ng-if="user_group_id == 2 && is_verified == 1" ng-href="#/infolawyer">{{items.user.realname}} <span class="web-font14">律师</span></a>

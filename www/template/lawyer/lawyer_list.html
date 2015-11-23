@@ -7,7 +7,7 @@
 				<h1 class="title">找律师</h1>
 				<button class="button icon-right button-clear">
 					深圳
-					<i class="icon"><img src="img/arrow-down.png" class="iwh" /></i>
+					<i class="icon"><img ng-src="img/arrow-down.png" class="iwh" /></i>
 				</button>
 			</ion-header-bar>
 			<ion-content style="margin-bottom:0;">
@@ -53,7 +53,7 @@
 					<div class="list">
 					    <a class="item item-thumbnail-left" ng-href="#/lawyer/{{item.id}}" ng-repeat="item in items">
 					      <img class="img-header" src="{{item.avatar}}" style="border-radius: 50px;" />
-					      	<!--<img src="img/icon-header.png"/>-->
+					      	<!--<img ng-src="img/icon-header.png"/>-->
 					      <h4>
 					      	<span class="sp-name fc-nan">{{item.realname}}</span>
 					      	<span class="sp-level fc-nan">高级律师</span>

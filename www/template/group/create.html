@@ -32,7 +32,7 @@
 				<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 				<ul class="list">
 			        <li class="item item-avatar" ng-repeat="item in items">
-			        	<img src="http://mobiledev.wdlst.law-pc-new/{{item.avatar}}" style="left:6px;border-radius:50px;" width="40px" height="40px">
+			        	<img ng-src="http://mobiledev.wdlst.law-pc-new/{{item.avatar}}" style="left:6px;border-radius:50px;" width="40px" height="40px">
 			          	<h2 style="line-height: 40px;float: left;">{{item.realname}} 律师</h2>
 			          	<label class="checkbox" style="float: right;">
 			          		<input type="checkbox" value="{{item.follow_id}}" name="name{{$index+1}}" ng-model="isCheck[$index]" ng-true-value="{{item.follow_id}}"  ng-false-value="false"  ng-change="checkItem(isCheck[$index],{{item.follow_id}})" >

@@ -30,7 +30,7 @@
 
 				<ion-list ng-repeat="item in items" > <!-- ng-href="#/download_list/{{item.id}}" -->
 	            	<ion-item class="item item-thumbnail-left" ng-href="#/document/download_list">
-			          	<img src="{{item.img}}" style="border-radius:4px;" />
+			          	<img ng-src="{{item.img}}" style="border-radius:4px;" />
 						<div class="row" style="padding: 5px 0;">
 						  <div class="col col-60" style="padding: 5px 0 0 0;">
 						  	<h2>{{item.title}}</h2>

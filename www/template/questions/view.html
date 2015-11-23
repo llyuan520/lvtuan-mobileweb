@@ -21,7 +21,7 @@
 
 				<ion-list ng-repeat="comment in items.comments">
 	            	<ion-item class="item item-thumbnail-left">
-			          	<img src="{{comment.owner.avatar}}"/>
+			          	<img ng-src="{{comment.owner.avatar}}"/>
 						<h4 class="fc-nan"><span class="sp-name">{{comment.owner.realname}}</span>律师类型</h4>
 						<p class="content">{{comment.content}}</p>
 						<p>{{comment.created_at}}</p>

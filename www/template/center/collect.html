@@ -12,7 +12,7 @@
 				<ion-item style="padding: 0;" ng-repeat="item in items">
 					<div class="row">
 					  <div class="col col-65">
-					  	<img src="{{item.creator_avatar}}" width="40" height="40" style="border-radius: 50px;vertical-align: middle;" />
+					  	<img ng-src="{{item.creator_avatar}}" width="40" height="40" style="border-radius: 50px;vertical-align: middle;" />
 					  	<label>{{item.creator_realname}}</label>
 					  </div>
 					  <div class="col" style="text-align: right;">
@@ -20,7 +20,7 @@
 					  </div>
 					</div>
 					<div ng-if="item.show_img" class="item item-thumbnail-left">
-						<img src='{{item.collect_img}}'/>
+						<img ng-src='{{item.collect_img}}'/>
 						<p class="content" style="color:#333;font-size:16px">
 							<a ng-href="#/lawyer/article/view/{{item.id}}">{{item.title}}</a>
 						</p>

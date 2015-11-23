@@ -47,7 +47,7 @@
 						</div>
 						
 						<div ng-repeat="comment in item.comments" class="item item-text-wrap item-avatar item-divider item-borderless">
-						    <img src="{{comment.lcImgSrc}}">
+						    <img ng-src="{{comment.lcImgSrc}}">
 						    <h2 class="fc-nan txt-fw">某某律师</h2>
 						    <p>{{comment.content}}<br />
 						    	{{comment.created_at}}

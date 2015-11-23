@@ -11,20 +11,20 @@
 	</ion-nav-buttons>
 	<ion-nav-buttons side="right">
 		<a ng-href="#/login" class="button button-icon">
-			<img src="../img/13.png"/>
+			<img ng-src="../img/13.png"/>
 		</a>
 	</ion-nav-buttons>
 	<ion-content>
 		<div class="slide1">
 			<ion-slide-box active-slide="myActiveSlide1" does-continue="true" show-pager="true" slide-interval="3000" auto-play="true"  active-slide="index">
 		        <ion-slide>
-		            <img src="../img/banner1-01.png">
+		            <img ng-src="../img/banner1-01.png">
 		        </ion-slide>
 		        <ion-slide>
-		            <img src="../img/banner1-02.png">
+		            <img ng-src="../img/banner1-02.png">
 		        </ion-slide>
 		        <ion-slide>
-		            <img src="../img/banner1-03.png">
+		            <img ng-src="../img/banner1-03.png">
 		        </ion-slide>
 			</ion-slide-box>
 		</div>
@@ -33,13 +33,13 @@
 			<div class="row">
 				<div class="col">
 					<a class="col" style="padding: 10px;background-color: #FFFFFF;color:#333" ng-href="#/questions">
-				  	 	<img src="img/mfzx.png" style="width:50px;height:50px;" /><br/>
+				  	 	<img ng-src="img/mfzx.png" style="width:50px;height:50px;" /><br/>
 				  	    免费咨询
 				    </a>
 				</div>
 				<div class="col">
 					<a class="col" style="padding: 10px;background-color: #FFFFFF;color:#333" ng-href="#/lawyerlist">
-				  	 	<img src="img/zyzx.png" style="width:50px;height:50px;" /><br/>
+				  	 	<img ng-src="img/zyzx.png" style="width:50px;height:50px;" /><br/>
 				  	    专业咨询
 				    </a>
 				</div>
@@ -47,13 +47,13 @@
 			<div class="row">
 				<div class="col">
 					<a class="col" style="padding: 10px;background-color: #FFFFFF;color:#333" ng-href="#/document/list">
-				  	 	<img src="img/flws.png" style="width:50px;height:50px;" /><br/>
+				  	 	<img ng-src="img/flws.png" style="width:50px;height:50px;" /><br/>
 				  	    法律文书
 				    </a>
 				</div>
 				<div class="col">
 					<a class="col" style="padding: 10px;background-color: #FFFFFF;color:#333" ng-href="#/corporate">
-				  	 	<img src="img/xwqf.png" style="width:50px;height:50px;" /><br/>
+				  	 	<img ng-src="img/xwqf.png" style="width:50px;height:50px;" /><br/>
 				  	    小微企服
 				    </a>
 				</div>
@@ -68,7 +68,7 @@
 	      	<!-- <ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher> -->
             <ion-list>
             	<ion-item class="item item-thumbnail-left" ng-repeat="item in items" ng-href="#/lawyer/{{item.id}}">
-		          	<img src="{{item.avatar}}" style="border-radius:50px;" />
+		          	<img ng-src="{{item.avatar}}" style="border-radius:50px;" />
 					<h2>{{item.realname}}</h2>
 					<p>执业{{item.practice_period}}/{{item.city}}</p>
 					<p>
