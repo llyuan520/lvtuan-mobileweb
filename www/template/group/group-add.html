@@ -1,0 +1,25 @@
+<ion-view view-title="添加成员">
+	<ion-pane  class="web-body">
+		<ion-header-bar class="bar bar-header bar-light">
+			<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" onclick="history.go(-1);"></a>
+			<h1 class="title">添加成员</h1>
+			<button ng-click="createSubmit()" class="button button-clear button-positive" type="button">保存</button>
+		</ion-header-bar>
+
+
+		<ion-content style="margin-bottom: 0px;">
+				<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+				<ul class="list">
+			        <li class="item item-avatar" ng-repeat="item in items">
+			        	<img src="http://mobiledev.wdlst.law-pc-new/{{item.avatar}}" style="left:6px;border-radius:50px;" width="40px" height="40px">
+			          	<h2 style="line-height: 40px;float: left;">{{item.realname}} 律师</h2>
+			          	<label class="checkbox" style="float: right;">
+			          		<input type="checkbox" value="{{item.follow_id}}" name="name{{$index+1}}" ng-model="isCheck[$index]" ng-true-value="{{item.follow_id}}"  ng-false-value="false"  ng-change="checkItem(isCheck[$index],{{item.follow_id}})" >
+			          	</label>
+			        </li>
+			    </ul>
+				<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
+			
+		</ion-content>
+	</ion-pane>
+</ion-view>
