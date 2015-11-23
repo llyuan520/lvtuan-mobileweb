@@ -9,7 +9,7 @@
 		<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 		<ion-list>
 			<div class="item" ng-repeat="televis in televise" >
-			  	<a href="#/broadcastview/{{televis.id}}">
+			  	<a href="#/broadcast/view/{{televis.id}}">
 			    	{{televis.content}}
 				</a>
 				<p>{{televis.created_at}}</p>

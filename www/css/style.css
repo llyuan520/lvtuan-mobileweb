@@ -571,3 +571,13 @@ ul.rating {
 
 .itemdata .row{padding: 0;}
 .itemdata .row .col{padding:5px 0;}
+
+.item.group-site{padding: 5px;}
+.group-site a{width: 25%;float:left;text-align: center;position:relative;height: 84px;}
+.group-site a p{text-align:center;}
+.group-site a i.close{font-size: 2em;position: absolute;top: 0;right: 0;}
+.group-site a img{width: 60px;height: 60px;}
+.group-site a i.ion-ios-plus-outline,.group-site a i.ion-ios-minus-outline{font-size: 4em;}
+.color999{color: #999;}
+.group-site .rig img{width: 60px;height: 60px;}
+.group-site label.name{line-height: 60px;}

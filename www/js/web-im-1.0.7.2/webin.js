@@ -382,7 +382,6 @@ var handleOpen = function(conn) {
                 buildContactDiv("contractlist", bothRoster);//联系人列表页面处理
                 if (curroster)
                     var easemob_id = JSON.parse(localStorage.getItem('easemob_id'));
-                debugger
                     setCurrentContact(easemob_id);//页面处理将第一个联系人作为当前聊天div
             }
             //获取当前登录人的群组列表
