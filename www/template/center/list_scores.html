@@ -5,13 +5,15 @@
 			<h1 class="title">我的积分</h1>
 		</ion-header-bar>
 		<ion-content>				
+			<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 			<div class="list web-top10">
-			    <div class="item web-item" ng-repeat="item in items.scores">
+			    <div class="item web-item" ng-repeat="item in items">
 			      <b class="item-note web-ftcred"><font color="red">+ {{item.score}}分</font></b>
 			      <h2>{{item.title}}</h2>
 			      <p>{{item.created_at}}</p>
 			    </div>
 			</div>
+			<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
 
 		</ion-content>
 	</ion-pane>
