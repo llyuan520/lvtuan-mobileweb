@@ -1,20 +1,19 @@
 <ion-view view-title="我的关注">
-		<ion-pane>
-			<ion-header-bar class="bar bar-header bar-light">
-				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-href="#/center"></a>
-				<h1 class="title">我的关注</h1>
-			</ion-header-bar>
-			<ion-content>
-				<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
-				<ion-list>
-					<ion-item class="item-thumbnail-left" ng-repeat="item in items">
-						<img src="{{item.avatar}}"/>
-						<h2>{{item.realname}}</h2>
-						<p>{{item.created_at}}</p>
-					</ion-item>
-				</ion-list>
-				<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
-			</ion-content>
-			
-		</ion-pane>
+	<ion-pane>
+		<ion-header-bar class="bar bar-header bar-light">
+			<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-href="#/center"></a>
+			<h1 class="title">我的关注</h1>
+		</ion-header-bar>
+		<ion-content>
+			<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+			<ion-list>
+				<ion-item class="item-thumbnail-left" ng-repeat="item in items">
+					<img src="{{item.avatar}}" style="border-radius: 50px;vertical-align: middle;"/>
+					<h2>{{item.realname}}</h2>
+					<p>{{item.created_at}}</p>
+				</ion-item>
+			</ion-list>
+			<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" icon="ion-loading-c" divstance="1%"> </ion-infinite-scroll>
+		</ion-content>
+	</ion-pane>
 </ion-view>
