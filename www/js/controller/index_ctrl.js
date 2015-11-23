@@ -1329,7 +1329,49 @@ lvtuanApp.controller("collectCtrl",function($scope,$http,$rootScope){
 })
 //普通用户的评论
 lvtuanApp.controller("commentCtrl",function($scope,$http,$rootScope){
-	console.info("律师的评论");
+
+	var page = 1; //页数
+	var rows_per_page = 4; // 每页的数量
+    $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
+    $scope.items = [];	//创建一个数组接收后台的数据
+    //下拉刷新
+	$scope.doRefresh = function() {
+		page = 1;
+		$scope.items = [];
+        $scope.loadMore();
+        $scope.$broadcast('scroll.refreshComplete');
+    };
+
+	//上拉加载
+	$scope.loadMore = function() {
+		$http.get('http://'+$rootScope.hostName+'/center/customer/articles?rows_per_page='+rows_per_page+'&page='+page++,
+	    {
+	        cache: true,
+	        headers: {
+	            'Content-Type': 'application/json' , 
+	            'Authorization': 'bearer ' + $rootScope.token
+	   		}
+	    }).success(function(data) {
+			if(data.data.length){
+				$scope.items = $scope.items.concat(data.data);
+				if (data.data.length < rows_per_page) {
+					$scope.moredata = false;
+				} else {
+					$scope.moredata = true;
+				}
+			}else{
+				if (rows_per_page == 1) {
+					layer.show('暂无数据！');
+				}
+				$scope.moredata = false;
+			}
+			$scope.$broadcast('scroll.infiniteScrollComplete');
+
+		}).error(function (data, status) {
+	        console.info(JSON.stringify(data));
+	        console.info(JSON.stringify(status));
+	    });
+	}
 
 })
 //普通用户-我的关注
