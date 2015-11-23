@@ -22,16 +22,15 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
   }, 600);*/
   $rootScope.token = localStorage.getItem('token');
   $rootScope.user_id = localStorage.getItem('user_id');
-
-  $rootScope.user_group_id = JSON.parse(localStorage.getItem('user_group_id'));
-  $rootScope.is_verified = JSON.parse(localStorage.getItem('is_verified'));
+  $rootScope.user_group_id = localStorage.getItem('user_group_id');
+  $rootScope.is_verified = localStorage.getItem('is_verified');
 
   //localStorage.removeItem('is_lawyer');
   var hostName = $location.host();
   // if (hostName == '192.168.1.116') {
   //   hostName = hostName + ":81";
   // } else {
-    hostName = '192.168.1.43';
+    hostName = '192.168.1.43'; //'dev.wdlst.lvtuan-pc-new';
   // }
   localStorage.setItem("hostName", JSON.stringify(hostName));
   $rootScope.hostName = JSON.parse(localStorage.getItem('hostName'));
@@ -247,6 +246,12 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
       templateUrl: 'template/center/messages.html',
       controller: 'messagesCtrl'
     })
+    .state('message_details', { //用户-我的消息-消息详情
+      url: '/message/:id',
+      cache:'false',
+      templateUrl: 'template/center/message_view.html',
+      controller: 'viewMessageCtrl'
+    })
     .state('followed', { //用户-我的关注
       url: '/followed',
       cache:'false',
@@ -278,13 +283,6 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
       templateUrl: 'template/center/lawyer/list_scores.html',
       controller: 'listscoreslaywerCtrl'
     })
-    .state('comment_lawyer', { //律师-我的评论
-      url: '/comment_lawyer/:id',
-      cache:'false',
-      templateUrl: 'template/center/lawyer/comment.html',
-      controller: 'commentlaywerCtrl'
-    })
-
     .state('article_lawyer', { //律师-我的文章
       url: '/article_lawyer',
       templateUrl: 'template/center/lawyer/article.html'
@@ -321,13 +319,6 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
       url: '/lawyer/article/view/:id',
       templateUrl: 'template/center/lawyer/view.html',
       controller: 'viewarticlelawyerCtrl'
-    })
-
-    .state('messages_lawyer', { //律师-我的消息
-      url: '/messages_lawyer',
-      cache:'false',
-      templateUrl: 'template/center/lawyer/messages.html',
-      controller: 'messageslaywerCtrl'
     })
 
 /*———————————————————————————— 个人中心公用 ————————————————————————————*/
