@@ -1042,9 +1042,6 @@ lvtuanApp.controller("televisecreateCtrl",function($scope,$http,$state,$rootScop
 		            		$scope.srcfile.push(src);
 		            	}
 
-		            	console.info($scope.file);
-		            	console.info($scope.srcfile);
-
 		                $timeout(function () {
 		                    file.result = response.data;
 		                });
@@ -1066,8 +1063,6 @@ lvtuanApp.controller("televisecreateCtrl",function($scope,$http,$state,$rootScop
 		//广播图片
 		$scope.file.splice(index,1);
 		$scope.srcfile.splice(index,1);
-		console.info($scope.file);
-		console.info($scope.srcfile);
 	}
 
 	//提交广播
@@ -1105,7 +1100,7 @@ lvtuanApp.controller("televisecreateCtrl",function($scope,$http,$state,$rootScop
 })
 
 //广播详情
-lvtuanApp.controller("broadcastviewCtrl",function($scope,$http,$state,$rootScope,$stateParams){
+lvtuanApp.controller("broadcastviewCtrl",function($scope,$http,$state,$rootScope,$stateParams,$ionicPopup){
     //广播详情
 	$http.get('http://'+$rootScope.hostName+'/microblog/'+$stateParams.id+'/view',
     {
@@ -1148,32 +1143,63 @@ lvtuanApp.controller("broadcastviewCtrl",function($scope,$http,$state,$rootScope
 				errMsg = JSON.stringify(data.error_messages.item_id[0]);
         	}
         	layer.show(errMsg);
-        	
         });
 	}
 
 	//分享
-	$scope.share = function(id,content){
-		console.info(id,content);
-		debugger
-		$http.post('http://'+$rootScope.hostName+'/microblog/'+id+'/forward',
-			{
-				content : content
-			},
-			{
-            headers: {
-                'Content-Type': 'application/json' ,
-            	'Authorization': 'bearer ' + $rootScope.token
-            }
-        }).success(function(data) {
-        	console.info(data);
-        	/*var like = data.data;
-        	$scope.items.post_extra.likes_count = like.likes_count;*/
-           layer.show("分享成功！");
-        }).error(function (data, status) {
-        	console.info(data);
-        	
-        });
+	$scope.share = function(id){
+		$scope.id = id;
+		$scope.data = {}
+       // 自定义弹窗
+       var myPopup = $ionicPopup.show({
+       	template: '<textarea ng-model="data.content" name="content" rows="5" placeholder="想说些什么呢？..."></textarea>',
+         title: '分享',
+         scope: $scope,
+         buttons: [
+           { text: '取消' },
+           {
+             text: '<b>确认</b>',
+             type: 'button-positive',
+             onTap: function(e) {
+              /* if (!$scope.data.content) {
+                 layer.show("内容不能为空！");
+                 e.preventDefault();
+               } else {
+                 return $scope.data.content;
+               }*/
+               return $scope.data.content;
+             }
+           },
+         ]
+       });
+       myPopup.then(function(res) {
+         $scope.content = res;
+         $http.post('http://'+$rootScope.hostName+'/microblog/forward',
+				{
+					content 	: $scope.content,
+					parent_id   : $scope.id
+				},
+				{
+	            headers: {
+	                'Content-Type': 'application/json' ,
+	            	'Authorization': 'bearer ' + $rootScope.token
+	            }
+	        }).success(function(data) {
+	        	console.info(data);
+	        	//var like = data.data;
+	        	//$scope.items.post_extra.likes_count = like.likes_count;
+	           layer.show("分享成功！");
+	        }).error(function (data, status) {
+	        	console.info(data);
+	        	var errMsg = "";
+	        	if(JSON.stringify(data.error_messages.parent_id)){
+	        		errMsg = JSON.stringify(data.error_messages.parent_id[0]);
+	        	}
+	        	layer.show(errMsg);
+	        });
+
+       });
+
 	}
 
 })

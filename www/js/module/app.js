@@ -30,7 +30,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
   // if (hostName == '192.168.1.116') {
   //   hostName = hostName + ":81";
   // } else {
-    hostName = 'dev.wdlst.lvtuan-pc-new';
+    hostName = '192.168.1.43';
   // }
   localStorage.setItem("hostName", JSON.stringify(hostName));
   $rootScope.hostName = JSON.parse(localStorage.getItem('hostName'));
