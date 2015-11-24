@@ -8,12 +8,14 @@ var rename = require('gulp-rename');
 var sh = require('shelljs');
 var sprity = require('sprity');
 var gulpif = require('gulp-if');
+var uglify = require('gulp-uglify');
+var strip = require('gulp-strip-comments');
 
 var paths = {
   sass: ['./scss/**/*.scss']
 };
 
-gulp.task('default', ['sass']);
+gulp.task('default', ['minifyCss', 'minifyJs']);
 
 gulp.task('sprites', function () {
   return sprity.src({
@@ -27,6 +29,29 @@ gulp.task('sprites', function () {
     // processor: 'sass', // make sure you have installed sprity-sass 
   })
   .pipe(gulpif('*.png', gulp.dest('./www/dist/img/'), gulp.dest('./www/dist/css/')))
+});
+
+gulp.task('minifyCss', function(done) {
+  gulp.src('./www/css/*.css')
+    .pipe(minifyCss({keepBreaks: false}))
+    .pipe(concat('all.css'))
+    .pipe(rename({
+        suffix: '.min'
+    }))
+    .pipe(gulp.dest('./www/dist/css/'))
+    .on('end', done);
+});
+
+gulp.task('minifyJs', function(done) {
+  gulp.src(['./www/js/controller/index_ctrl.js', './www/js/module/*.js'])
+    // .pipe(concat('all.js'))
+    .pipe(strip())
+    .pipe(uglify())
+    .pipe(rename({
+        suffix: '.min'
+    }))
+    .pipe(gulp.dest('./www/dist/js/'))
+    .on('end', done);
 });
 
 gulp.task('sass', function(done) {

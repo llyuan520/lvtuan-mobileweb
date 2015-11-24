@@ -1,4 +1,4 @@
-iangular.module('LawyerInfoCenter', ["ionic"])
+angular.module('LawyerInfoCenter', ["ionic"])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
