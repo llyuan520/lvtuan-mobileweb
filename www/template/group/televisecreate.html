@@ -1,4 +1,4 @@
-<ion-view view-title="创建广播">
+<ion-view hide-tabs="true" view-title="创建广播">
 	<ion-pane  class="web-body">
 		<ion-header-bar class="bar bar-header bar-light">
 			<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" onclick="history.go(-1);"></a>
@@ -20,6 +20,21 @@
 							<span class="fc-red">字符的长度不能超过140个</span>
 						</p>
 					</div>	
+					<div class="item group-site">
+						<a ng-model="file" ng-repeat="file in file">
+						  <img class="avatar" ng-src="{{file}}">
+						  <i ng-show="isclose" class="icon ion-close-circled color999 close" ng-click="del($index)"></i>
+						</a>
+						<a>
+						  <div ng-model="group_avatar" ngf-select="uploadFiles($files, $invalidFiles)" multiple accept="image/*" ngf-max-height="1000" ngf-max-size="6MB" ngf-pattern="'image/*'"  ngf-min-height="100" class="icon-right" style="font-size:4em;padding:0 20px;color:#ccc;"> 
+						  	<i class="icon ion-ios-plus-outline color999" style="font-size:1em;"></i> 
+						  </div>
+						</a>
+						<a ng-show="file" ng-click="isclose = !isclose" >
+							<i class="icon ion-ios-minus-outline color999"></i>
+						</a>
+
+					</div>
 				</form>
 		</ion-content>
 	</ion-pane>

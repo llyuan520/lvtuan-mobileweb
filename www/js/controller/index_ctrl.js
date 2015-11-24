@@ -401,9 +401,9 @@ lvtuanApp.controller("groupTeleviseCtrl",function($scope,$http,$state,$rootScope
             	'Authorization': 'bearer ' + $rootScope.token
             }
         }).success(function(data) {
-        	console.info(data)
+        	console.info(data);
         	var itmes = data.data;
-        	$scope.televise[index].likes_count = itmes.likes_count;
+        	$scope.televise[index].post_extra.likes_count = itmes.likes_count;
            layer.show("点赞成功！");
         }).error(function (data, status) {
         	console.info(data);
@@ -831,7 +831,6 @@ lvtuanApp.controller("groupaddCtrl",function($scope,$http,$state,$rootScope,$sta
 	}
 
 	$scope.createSubmit = function(){
-		debugger
 		$http.post('http://'+$rootScope.hostName+'/group/'+$stateParams.id+'/addmember',{
   					'members'	: $scope.selIds
 		        },
@@ -841,8 +840,6 @@ lvtuanApp.controller("groupaddCtrl",function($scope,$http,$state,$rootScope,$sta
 		        	'Authorization': 'bearer ' + $rootScope.token,
 		        }
 		    }).success(function(data) {
-		    	console.info(data)
-		    	debugger
 		    	location.href='#/group/site/'+$stateParams.id;
 	        	window.location.reload();
 		       
@@ -853,27 +850,6 @@ lvtuanApp.controller("groupaddCtrl",function($scope,$http,$state,$rootScope,$sta
 	}
 })
 
-
-//广播详情
-lvtuanApp.controller("broadcastviewCtrl",function($scope,$http,$state,$rootScope,$stateParams){
-    //广播详情
-	$http.get('http://'+$rootScope.hostName+'/microblog/'+$stateParams.id+'/view',
-        {
-        cache: true,
-        headers: {
-            'Content-Type': 'application/json' , 
-            'Authorization': 'bearer ' + $rootScope.token
-       		}
-        }).success(function(data) {
-        	console.info('广播详情',data.data)
-        	debugger
-			$scope.items = data.data; 
-		}).error(function (data, status) {
-			layer.msg(status);
-	        console.info(JSON.stringify(data));
-	    })
-
-})
 //创建圈子
 lvtuanApp.controller("groupcreateCtrl",function($scope,$http,$state,$rootScope,$timeout,Upload){
 	console.info("创建圈子");
@@ -1034,17 +1010,76 @@ lvtuanApp.controller("groupcreateCtrl",function($scope,$http,$state,$rootScope,$
 })
 
 //创建广播
-lvtuanApp.controller("televisecreateCtrl",function($scope,$http,$state,$rootScope,$timeout){
+lvtuanApp.controller("televisecreateCtrl",function($scope,$http,$state,$rootScope,$timeout,Upload){
 	console.info("创建广播");
+	//广播上传图片 最多只能上传9张
+	$scope.file = [];
+    $scope.srcfile = [];
+    $scope.uploadFiles = function(files, errFiles) {
+    	console.info(files, errFiles);
+    	if(files){
+	        if(files.length > 9){
+	        	layer.show("最多只能上传9张照片！");
+	        	return false;
+	        }else{
+	        	$scope.files = files;
+		        $scope.errFiles = errFiles;
+		        angular.forEach(files, function(file) {
+		            file.upload = Upload.upload({
+		            	headers: {
+					            'Content-Type': 'application/json' , 
+					            'Authorization': 'bearer ' + $rootScope.token
+				       		},
+		                url: 'http://'+$rootScope.hostName+'/microblog/uploadImage',
+		                data: {microBlogImage: file}
+		            });
+
+		            file.upload.then(function (response) {
+		            	var src_url = response.data.data.src_url;
+		            	var src = response.data.data.src;
+		            	if(src){
+		            		$scope.file.push(src_url);
+		            		$scope.srcfile.push(src);
+		            	}
+
+		            	console.info($scope.file);
+		            	console.info($scope.srcfile);
+
+		                $timeout(function () {
+		                    file.result = response.data;
+		                });
+		            }, function (response) {
+		                if (response.status > 0)
+		                    $scope.errorMsg = response.status + ': ' + response.data;
+		                	layer.show($scope.errorMsg);
+
+		            }, function (evt) {
+		                file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+		            });
+		        });
+		    }
+		}
+	}
+
+	//删除广播图片
+	$scope.del = function(index){
+		//广播图片
+		$scope.file.splice(index,1);
+		$scope.srcfile.splice(index,1);
+		console.info($scope.file);
+		console.info($scope.srcfile);
+	}
+
+	//提交广播
 	$scope.createSubmit = function(){
 		var params = getParams("#myForm");
-		console.info(params);
   		if(params.content == ""){
   			layer.show("请输入你的广播!");
   			return false;
   		}else{
   			$http.post('http://'+$rootScope.hostName+'/microblog/create',{
-  					'content'	: params.content
+  					'content'	: params.content,
+  					'file_paths'	: $scope.srcfile
 	            },
 	            {
 	            headers: {
@@ -1052,9 +1087,13 @@ lvtuanApp.controller("televisecreateCtrl",function($scope,$http,$state,$rootScop
 	            	'Authorization': 'bearer ' + $rootScope.token,
 	            }
 	        }).success(function(data) {
-	           layer.show("提交成功！");
-	           $(':input','#myForm').not('textarea :submit, :reset, :hidden').val('');
-	           location.href='#/broadcast/view/'+data.data;
+	        	console.log(data.data)
+	            layer.show("提交成功！");
+	            $(':input','#myForm').not('textarea :submit, :reset, :hidden').val('');
+	            $scope.file = [];
+    			$scope.srcfile = [];
+	            location.href='#/broadcast/view/'+data.data.id;
+
 	        }).error(function (data, status) {
 	        	var errMsg = JSON.stringify(data.error_messages);
 	        	layer.show(errMsg);
@@ -1065,7 +1104,79 @@ lvtuanApp.controller("televisecreateCtrl",function($scope,$http,$state,$rootScop
 
 })
 
+//广播详情
+lvtuanApp.controller("broadcastviewCtrl",function($scope,$http,$state,$rootScope,$stateParams){
+    //广播详情
+	$http.get('http://'+$rootScope.hostName+'/microblog/'+$stateParams.id+'/view',
+    {
+    cache: true,
+    headers: {
+        'Content-Type': 'application/json' , 
+        'Authorization': 'bearer ' + $rootScope.token
+   		}
+    }).success(function(data) {
+    	console.info('广播详情',data.data)
+		$scope.items = data.data; 
+	}).error(function (data, status) {
+		layer.msg(status);
+        console.info(JSON.stringify(data));
+    })
 
+
+	//点赞
+	$scope.likes = function(id){
+		$http.post('http://'+$rootScope.hostName+'/like',
+			{
+				item_type : 'post',
+				item_id   : id
+			},
+			{
+            headers: {
+                'Content-Type': 'application/json' ,
+            	'Authorization': 'bearer ' + $rootScope.token
+            }
+        }).success(function(data) {
+        	var like = data.data;
+        	$scope.items.post_extra.likes_count = like.likes_count;
+           layer.show("点赞成功！");
+        }).error(function (data, status) {
+        	console.info(data);
+        	var errMsg = "";
+        	if(JSON.stringify(data.error_messages.item_type)){
+        		errMsg = JSON.stringify(data.error_messages.item_type[0]);
+        	}else if(JSON.stringify(data.error_messages.item_id)){
+				errMsg = JSON.stringify(data.error_messages.item_id[0]);
+        	}
+        	layer.show(errMsg);
+        	
+        });
+	}
+
+	//分享
+	$scope.share = function(id,content){
+		console.info(id,content);
+		debugger
+		$http.post('http://'+$rootScope.hostName+'/microblog/'+id+'/forward',
+			{
+				content : content
+			},
+			{
+            headers: {
+                'Content-Type': 'application/json' ,
+            	'Authorization': 'bearer ' + $rootScope.token
+            }
+        }).success(function(data) {
+        	console.info(data);
+        	/*var like = data.data;
+        	$scope.items.post_extra.likes_count = like.likes_count;*/
+           layer.show("分享成功！");
+        }).error(function (data, status) {
+        	console.info(data);
+        	
+        });
+	}
+
+})
 
 /****************************************************** 知识 ******************************************************/
 //知识
