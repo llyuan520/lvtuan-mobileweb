@@ -28,14 +28,14 @@
 				<!--评论-->
 				<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 
-				<ion-list ng-repeat="item in items" > <!-- ng-href="#/download_list/{{item.id}}" -->
-	            	<ion-item class="item item-thumbnail-left" ng-href="#/document/download_list">
+				<ion-list ng-repeat="item in items" >
+	            	<ion-item class="item item-thumbnail-left" ng-href="#/document/download_list/{{item.id}}">
 			          	<img ng-src="{{item.img}}" style="border-radius:4px;" />
 						<div class="row" style="padding: 5px 0;">
 						  <div class="col col-60" style="padding: 5px 0 0 0;">
 						  	<h2>{{item.title}}</h2>
 						  </div>
-						  <div class="col" style="text-align: right;padding-right: 0px;"><h2>下载：3533</h2></div>
+						  <div class="col" style="text-align: right;padding-right: 0px;"><h2>下载：{{item.downs}}</h2></div>
 						</div>
 						<p class="content">{{item.content}}</p>
 			        </ion-item>

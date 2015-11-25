@@ -526,26 +526,54 @@ img.avatar{border-radius: 50%;border:2px solid #fff;}
 }
 
 
-@media (max-height: 480px) {
-  .slide1 .slider,.slide1 .slider-slide img{height: 100px;}
-  .st2-swap,.st2-swap .listimg,.slide2 .slider-slide img{height: 140px;}
-  .st2-swap .listimg .top, .st2-swap .listimg .left, .st2-swap .listimg .right,.st2-swap .listimg .top img, .st2-swap .listimg .left img, .st2-swap .listimg .right img{height: 70px;}
-   }
-@media (max-height: 568px) {
-  .slide1 .slider,.slide1 .slider-slide img{height: 100px;}
-  .st2-swap,.st2-swap .listimg,.slide2 .slider-slide img{height: 140px;}
-  .st2-swap .listimg .top, .st2-swap .listimg .left, .st2-swap .listimg .right,.st2-swap .listimg .top img, .st2-swap .listimg .left img, .st2-swap .listimg .right img{height: 70px;}
-   }
-@media (max-height: 627px) {
-  .slide1 .slider,.slide1 .slider-slide img{height: 100px;}
-  .st2-swap,.st2-swap .listimg,.slide2 .slider-slide img{height: 140px;}
-  .st2-swap .listimg .top, .st2-swap .listimg .left, .st2-swap .listimg .right,.st2-swap .listimg .top img, .st2-swap .listimg .left img, .st2-swap .listimg .right img{height: 70px;}
-   }
-@media (max-height: 736px) {
-  .slide1 .slider,.slide1 .slider-slide img{height: 140px;}
-  .st2-swap,.st2-swap .listimg,.slide2 .slider-slide img{height: 140px;}
-  .st2-swap .listimg .top, .st2-swap .listimg .left, .st2-swap .listimg .right,.st2-swap .listimg .top img, .st2-swap .listimg .left img, .st2-swap .listimg .right img{height: 70px;}
-   }
+
+/* 兼容iphone4c -- */
+@media only screen and (max-device-width :480px){ 
+	.slide1 .slider,.slide1 .slider-slide img{height: 130px;}
+	.st2-swap,.st2-swap .listimg,.slide2 .slider-slide img{height: 140px;}
+	.st2-swap .listimg .top, .st2-swap .listimg .left, .st2-swap .listimg .right,.st2-swap .listimg .top img, .st2-swap .listimg .left img, .st2-swap .listimg .right img{height: 70px;}
+}
+
+/*魅族 --*/
+@media only screen and (min-device-width :481px){ 
+	.slide1 .slider,.slide1 .slider-slide img{height: 150px;}
+	.st2-swap,.st2-swap .listimg,.slide2 .slider-slide img{height: 140px;}
+	.st2-swap .listimg .top, .st2-swap .listimg .left, .st2-swap .listimg .right,.st2-swap .listimg .top img, .st2-swap .listimg .left img, .st2-swap .listimg .right img{height: 70px;}
+  
+}
+
+/*华为 --*/
+@media only screen and (min-device-width :1080px) and (-webkit-min-device-pixel-ratio : 2.5){
+	.slide1 .slider,.slide1 .slider-slide img{height: 250px;}
+	.st2-swap,.st2-swap .listimg,.slide2 .slider-slide img{height: 140px;}
+	.st2-swap .listimg .top, .st2-swap .listimg .left, .st2-swap .listimg .right,.st2-swap .listimg .top img, .st2-swap .listimg .left img, .st2-swap .listimg .right img{height: 70px;}
+  
+ }
+
+
+/* 兼容iphone5 -- */
+@media (device-height:568px) and (-webkit-min-device-pixel-ratio:2){
+	.slide1 .slider,.slide1 .slider-slide img{height: 180px;}
+}
+/*兼容iphone6 --*/
+@media (min-device-width : 375px) and (max-device-width : 667px) and (-webkit-min-device-pixel-ratio : 2){
+	.slide1 .slider,.slide1 .slider-slide img{height: 220px;}
+ }
+
+/*6+*/
+@media (min-device-width : 414px) and (max-device-width : 736px) and (-webkit-min-device-pixel-ratio : 3){ 
+	.slide1 .slider,.slide1 .slider-slide img{height: 280px;}
+}
+
+/*mate7*/
+@media only screen and (min-device-width :1080px) and (-webkit-min-device-pixel-ratio : 3){
+	.slide1 .slider,.slide1 .slider-slide img{height: 200px;}
+ }
+
+/*4 4s*/
+@media only screen and (device-height :480px) and (-webkit-device-pixel-ratio:2){ 
+	.slide1 .slider,.slide1 .slider-slide img{height: 130px;}
+}
 
 
 /*星星的显示*/

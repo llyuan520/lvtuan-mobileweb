@@ -714,9 +714,9 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl'])
       controller: 'documentlistCtrl'
     })
     .state('document/download_list', { //首页-文书下载 - 详情页
-      url: '/document/download_list',
-      templateUrl: 'template/document/download_list.html'/*,
-      controller: 'documentownloadlistCtrl'*/
+      url: '/document/download_list/:id',
+      templateUrl: 'template/document/download_list.html',
+      controller: 'documentownloadlistCtrl'
     })
 
 /********************************** 小微企服 **********************************/

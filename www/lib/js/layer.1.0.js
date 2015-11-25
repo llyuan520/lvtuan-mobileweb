@@ -452,21 +452,23 @@ this.stopDefault = function(e)
         break;
       case 4 :
         _msg = "参数缺少或者格式不正确";
-        break;
-      case 302 :
-        _msg = "登陆成功！";
         break;*/
       case 400 :
-        _msg = "账号过期，请重新登录。";
-        window.location.reload();
+         _msg = "账号过期，请重新登录。";
         window.location.href = '#/login';
+        window.location.reload();
+        break;
+      case 503 :
+        _msg = "账号过期，请重新登录。";
+        window.location.href = '#/login';
+        window.location.reload();
         break;
         
         default :
           _msg = '错误代码: ' + data;
         break;
     }
-    return _msg;
+    return layer.show(_msg);
   }
   return this;
 }());

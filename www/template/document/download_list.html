@@ -9,29 +9,30 @@
 			
 					<div style="background-color: #fff;">
 						<div class="row">
-						  <div class="col col-60" style="padding: 5px 0 0 0;">文书下载5</div>
-						  <div class="col" style="text-align: right;padding-right: 0px;">下载：3533</div>
+						  <div class="col col-60" style="padding: 5px 0 0 0;">{{itmes.title}}</div>
+						  <div class="col" style="text-align: right;padding-right: 0px;">收藏</div>
 						</div>
 						<div class="row">
 						  <div class="col col-60" style="padding: 5px 0 0 0;">
-						  	<div>文书下载5</div>
-						  	<div>文书下载5</div>
+						  	<div>已阅读：{{itmes.views_count}}</div>
+						  	<div>已下载：{{itmes.downs}}</div>
 						  </div>
 						  <div class="col" style="text-align: right;padding-right: 0px;line-height:45px;">
-						  		<div style="border-left: 1px solid #ccc;">下载：3533</div>
+						  		<div style="border-left: 1px solid #ccc;">分享</div>
 						  </div>
 						</div>
 						<div class="list">
-							<a class="item" ng-href="">
-								<i class="icon ion-chevron-right"></i>
-							使用说明
-							</a>
 							<div class="item">
-								<div class="row">
-								  <div class="col" style="padding: 5px 0 0 0;"><img style="width:100%" src="http://192.168.1.43/img/default_imgs/[]16.png"></div>
+								<i class="icon ion-chevron-down" ng-click="isclose = !isclose"></i>
+								使用说明
+								<p class="contents" ng-show="isclose">{{itmes.info}}</p>
+							</div>
+							<div class="item">
+								<!-- <div class="row">
+								  <div class="col" style="padding: 5px 0 0 0;"><img style="width:100%" ng-src="http://192.168.1.43/img/default_imgs/[]16.png"></div>
 								  <div class="col" style="text-align: right;padding-right: 0px;"><img style="width:100%" src="http://192.168.1.43/img/default_imgs/[]16.png"></div>
-								</div>
-								<button class="button button-block button-positive web-wid8c web-top10" type="submit">下载</button>
+								</div> -->
+								<a class="button button-block button-positive web-wid8c web-top10" href="{{itmes.file_path}}">下载</a>
 							</div>
 								
 						</div>

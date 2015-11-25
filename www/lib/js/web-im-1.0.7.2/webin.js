@@ -383,6 +383,7 @@ var handleOpen = function(conn) {
                 if (curroster)
                     var easemob_id = JSON.parse(localStorage.getItem('easemob_id'));
                     setCurrentContact(easemob_id);//页面处理将第一个联系人作为当前聊天div
+                    conn.setPresence();//设置用户上线状态，必须调用
             }
             //获取当前登录人的群组列表
             conn.listRooms({
@@ -714,7 +715,7 @@ var buildListRoomDiv = function(contactlistDivId, rooms) {
             chooseContactDivClick(this);
         });
         $('<img>').attr({
-            'src' : 'img/head/group_normal.png'
+            'src' : 'lib/js/web-im-1.0.7.2/img/head/group_normal.png'
         }).appendTo(lielem);
         $('<span>').html(roomsName).appendTo(lielem);
         $('#contactgrouplistUL').append(lielem);

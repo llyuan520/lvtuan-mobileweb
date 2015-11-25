@@ -221,8 +221,8 @@ a:hover {
 }
 
 .chat01_content {
-	height: 312px;
-	width: 555px;
+	height: 200px;
+	width: 300px;
 	overflow-x: none;
 	overflow-y: auto;
 }
