@@ -9,7 +9,7 @@
 				<ion-list>
 					<ion-item class="item-thumbnail-left" ng-repeat="item in items">
 						<img ng-src="{{item.avatar}}" style="border-radius: 50px;vertical-align: middle;"/>
-						<h2>{{item.realname}}</h2>
+						<h2><a ng-href="#/lawyer/{{item.id}}">{{item.realname}}</a></h2>
 						<p>{{item.created_at}}</p>
 					</ion-item>
 				</ion-list>
