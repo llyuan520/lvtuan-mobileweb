@@ -57,7 +57,7 @@ lvtuanApp.controller("indexCtrl",function($scope,$state,$http,$rootScope,$ionicL
 	$scope.loadMore = function() {
 
 		//获取推荐的律师 ?is_recommended=1&page=1&rows_per_page=10
-		$http.get('http://'+$rootScope.hostName+'/lawyer/list_lawyers?page='+page++ +'&rows_per_page=4',
+		$http.get('http://'+$rootScope.hostName+'/lawyer/list_lawyers?is_recommended=1&page='+page++ +'&rows_per_page=4',
         {
         cache: true,
         headers: {
