@@ -1674,7 +1674,7 @@ lvtuanApp.controller("collectCtrl",function($scope, listHelper) {
 
 //普通用户的评论
 lvtuanApp.controller("commentCtrl",function($scope, listHelper) {
-	listHelper.bootstrap('/center/customer/articles', $scope);
+	listHelper.bootstrap('/center/blog/reply', $scope);
 })
 
 //普通用户-我的关注
@@ -2004,65 +2004,66 @@ lvtuanApp.controller("listscoreslaywerCtrl",function($scope, listHelper) {
 
 //律师的评论
 lvtuanApp.controller("commentlaywerCtrl",function($scope,$http,$rootScope,$stateParams){
-	console.info("律师的评论");
+	listHelper.bootstrap('/center/blog/reply', $scope);
+	// console.info("律师的评论");
 
-	var page = 1; //页数
-    $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
-    $scope.items = [];	//创建一个数组接收后台的数据
-    //下拉刷新
-	$scope.doRefresh = function() {
-		page = 1;
-		$scope.items = [];
-        $scope.loadMore();
-    };
-	//上拉加载
-	$scope.loadMore = function() {
-	$http.get('http://'+$rootScope.hostName+'/lawyer/'+$stateParams.id+'/evaluations?page='+page,
-        {
-        cache: true,
-        headers: {
-            'Content-Type': 'application/json' , 
-            'Authorization': 'bearer ' + $rootScope.token
-       		}
-        }).success(function(data) {
-			if(data.data.length > 0){
-				if(data.data.length > 9){
-					$scope.moredata = true;
-				}else{
-					$scope.moredata = false;
-				}
-				$scope.items = data.data;
-				$scope.ratingVal = [];
-				for(var i=0; i<$scope.items.length; i++){
-					$scope.ratingVal.push($scope.items[i].evaluate_score);
-				}
+	// var page = 1; //页数
+ //    $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
+ //    $scope.items = [];	//创建一个数组接收后台的数据
+ //    //下拉刷新
+	// $scope.doRefresh = function() {
+	// 	page = 1;
+	// 	$scope.items = [];
+ //        $scope.loadMore();
+ //    };
+	// //上拉加载
+	// $scope.loadMore = function() {
+	// $http.get('http://'+$rootScope.hostName+'/lawyer/'+$stateParams.id+'/evaluations?page='+page,
+ //        {
+ //        cache: true,
+ //        headers: {
+ //            'Content-Type': 'application/json' , 
+ //            'Authorization': 'bearer ' + $rootScope.token
+ //       		}
+ //        }).success(function(data) {
+	// 		if(data.data.length > 0){
+	// 			if(data.data.length > 9){
+	// 				$scope.moredata = true;
+	// 			}else{
+	// 				$scope.moredata = false;
+	// 			}
+	// 			$scope.items = data.data;
+	// 			$scope.ratingVal = [];
+	// 			for(var i=0; i<$scope.items.length; i++){
+	// 				$scope.ratingVal.push($scope.items[i].evaluate_score);
+	// 			}
 				
-				return true;
-			}else{
-				layer.show('暂无数据！');
-				$scope.moredata = false;
-				return false;
-			}
-			page++;
-		}).error(function (data, status) {
-			layer.msg(status);
-	        console.info(JSON.stringify(data));
-	        console.info(JSON.stringify(status));
-	    })
-	};
+	// 			return true;
+	// 		}else{
+	// 			layer.show('暂无数据！');
+	// 			$scope.moredata = false;
+	// 			return false;
+	// 		}
+	// 		page++;
+	// 	}).error(function (data, status) {
+	// 		layer.msg(status);
+	//         console.info(JSON.stringify(data));
+	//         console.info(JSON.stringify(status));
+	//     })
+	// };
 
 
-	$scope.max = 10;
-	$scope.readonly = true;
-	$scope.onHover = function(val){
-		$scope.hoverVal = val;
-	};
-	$scope.onLeave = function(){
-		$scope.hoverVal = null;
-	}
-	$scope.onChange = function(val){
-		$scope.ratingVal = val;
-	}
+	// $scope.max = 10;
+	// $scope.readonly = true;
+	// $scope.onHover = function(val){
+	// 	$scope.hoverVal = val;
+	// };
+	// $scope.onLeave = function(){
+	// 	$scope.hoverVal = null;
+	// }
+	// $scope.onChange = function(val){
+	// 	$scope.ratingVal = val;
+	// }
 
 })
 
