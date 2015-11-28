@@ -2134,7 +2134,7 @@ lvtuanApp.controller("viewarticlelawyerCtrl",function($scope,$http,$rootScope,$s
 	init();
 	function init(){
 		$ionicLoading.show();
-		$http.get('http://'+$rootScope.hostName+'/center/lawer/blog/'+$stateParams.id+'/blogview',
+		$http.get('http://'+$rootScope.hostName+'/lawyer/article/'+$stateParams.id+'/view',
 	        {
 	        cache: true,
 	        headers: {

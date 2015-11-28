@@ -10,12 +10,20 @@ var sprity = require('sprity');
 var gulpif = require('gulp-if');
 var uglify = require('gulp-uglify');
 var strip = require('gulp-strip-comments');
+var angularTemplateCache = require('gulp-angular-templatecache')
 
 var paths = {
   sass: ['./scss/**/*.scss']
 };
 
-gulp.task('default', ['minifyCss', 'minifyJs']);
+gulp.task('default', ['templates']);
+
+gulp.task('templates', function() {
+  return gulp.src(['./www/**/*.html'])
+    .pipe(angularTemplateCache())
+    .pipe(concat('templates.js'))
+    .pipe(gulp.dest('./www/dist/js/'))
+});
 
 gulp.task('sprites', function () {
   return sprity.src({
