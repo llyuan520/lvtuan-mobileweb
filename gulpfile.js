@@ -14,6 +14,7 @@ var angularTemplateCache = require('gulp-angular-templatecache')
 var ngmin = require('gulp-ngmin');
 var runSequence = require('gulp-run-sequence');
 var preprocess = require('gulp-preprocess');
+var minifyHtml = require('gulp-minify-html');
 
 var paths = {
   sass: ['./scss/**/*.scss']
@@ -35,6 +36,7 @@ gulp.task('build', function(cb) {
 
 gulp.task('templates', function() {
   return gulp.src(['./www/template/**/*.html'])
+    .pipe(minifyHtml({empty: true}))
     .pipe(angularTemplateCache({
       'root':'template',
       'module':'templates',
