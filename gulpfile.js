@@ -11,12 +11,18 @@ var gulpif = require('gulp-if');
 var uglify = require('gulp-uglify');
 var strip = require('gulp-strip-comments');
 var angularTemplateCache = require('gulp-angular-templatecache')
+var ngmin = require('gulp-ngmin');
+var runSequence = require('gulp-run-sequence');
 
 var paths = {
   sass: ['./scss/**/*.scss']
 };
 
-gulp.task('default', ['templates']);
+gulp.task('default', ['build']);
+ 
+gulp.task('build', function(cb) {
+  runSequence('templates', 'minifyDevJs', 'minifyLibJs', 'minifyAllJs', cb);
+});
 
 gulp.task('templates', function() {
   return gulp.src(['./www/**/*.html'])
@@ -50,11 +56,41 @@ gulp.task('minifyCss', function(done) {
     .on('end', done);
 });
 
-gulp.task('minifyJs', function(done) {
-  gulp.src(['./www/js/controller/index_ctrl.js', './www/js/module/*.js'])
-    // .pipe(concat('all.js'))
-    .pipe(strip())
-    .pipe(uglify())
+gulp.task('minifyDevJs', function(done) {
+  gulp.src(['./www/js/**/*.js'])
+    .pipe(concat('dev.js'))
+    .pipe(ngmin())
+    .pipe(uglify({mangle: false}))
+    .pipe(rename({
+        suffix: '.min'
+    }))
+    .pipe(gulp.dest('./www/dist/js/'))
+    .on('end', done);
+});
+
+gulp.task('minifyLibJs', function(done) {
+  gulp.src([
+      './www/lib/ionic/js/ionic.bundle.min.js',
+      './www/lib/js/jquery-1.10.2.min.js', 
+      './www/lib/ionic/js/ngCordova/dist/ng-cordova.min.js',
+      './www/lib/js/ng-file-upload-master/dist/ng-file-upload-shim.min.js',
+      './www/lib/js/ng-file-upload-master/dist/ng-file-upload.min.js'
+    ])
+    .pipe(ngmin())
+    .pipe(concat('lib.js'))
+    .pipe(uglify({mangle: false}))
+    .pipe(rename({
+        suffix: '.min'
+    }))
+    .pipe(gulp.dest('./www/dist/js/'))
+    .on('end', done);
+});
+
+gulp.task('minifyAllJs', function(done) {
+  gulp.src(['./www/dist/js/templates.js', './www/dist/js/dev.min.js', './www/dist/js/lib.min.js'])
+    .pipe(concat('all.js'))
+    .pipe(ngmin())
+    .pipe(uglify({mangle: false}))
     .pipe(rename({
         suffix: '.min'
     }))
