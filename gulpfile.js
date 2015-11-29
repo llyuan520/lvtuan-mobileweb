@@ -13,6 +13,7 @@ var strip = require('gulp-strip-comments');
 var angularTemplateCache = require('gulp-angular-templatecache')
 var ngmin = require('gulp-ngmin');
 var runSequence = require('gulp-run-sequence');
+var preprocess = require('gulp-preprocess');
 
 var paths = {
   sass: ['./scss/**/*.scss']
@@ -20,13 +21,25 @@ var paths = {
 
 gulp.task('default', ['build']);
  
+gulp.task('build-dev', function(cb) {
+  runSequence('templates', 'minifyDevJs', 'minifyLibJs', 'minifyAllJs', 'dev', cb);
+});
+ 
+gulp.task('build-prod', function(cb) {
+  runSequence('templates', 'minifyDevJs', 'minifyLibJs', 'minifyAllJs', 'prod', cb);
+});
+
 gulp.task('build', function(cb) {
   runSequence('templates', 'minifyDevJs', 'minifyLibJs', 'minifyAllJs', cb);
 });
 
 gulp.task('templates', function() {
-  return gulp.src(['./www/**/*.html'])
-    .pipe(angularTemplateCache())
+  return gulp.src(['./www/template/**/*.html'])
+    .pipe(angularTemplateCache({
+      'root':'template',
+      'module':'templates',
+      'standalone':'true'
+    }))
     .pipe(concat('templates.js'))
     .pipe(gulp.dest('./www/dist/js/'))
 });
@@ -96,6 +109,32 @@ gulp.task('minifyAllJs', function(done) {
     }))
     .pipe(gulp.dest('./www/dist/js/'))
     .on('end', done);
+});
+
+gulp.task('minifyAllJs', function(done) {
+  gulp.src(['./www/dist/js/templates.js', './www/dist/js/dev.min.js', './www/dist/js/lib.min.js'])
+    .pipe(concat('all.js'))
+    .pipe(ngmin())
+    .pipe(uglify({mangle: false}))
+    .pipe(rename({
+        suffix: '.min'
+    }))
+    .pipe(gulp.dest('./www/dist/js/'))
+    .on('end', done);
+});
+
+gulp.task('dev', function() {
+  gulp.src('./build/index_tpl.html')
+    .pipe(preprocess({context: { NODE_ENV: 'dev'}}))
+    .pipe(rename("index.html"))
+    .pipe(gulp.dest('./www'));
+});
+
+gulp.task('prod', function() {
+  gulp.src('./build/index_tpl.html')
+    .pipe(preprocess({context: { NODE_ENV: 'prod'}}))
+    .pipe(rename("index.html"))
+    .pipe(gulp.dest('./www'));
 });
 
 gulp.task('sass', function(done) {

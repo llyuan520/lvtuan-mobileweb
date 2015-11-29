@@ -26,12 +26,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
   $rootScope.is_verified = localStorage.getItem('is_verified');
 
   //localStorage.removeItem('is_lawyer');
-  var hostName = $location.host();
-  // if (hostName == '192.168.1.116') {
-  //   hostName = hostName + ":81";
-  // } else {
-    hostName = 'dev.wdlst.lvtuan-pc-new';
-  // }
+  var hostName = AppSettings.baseApiUrl;
   localStorage.setItem("hostName", JSON.stringify(hostName));
   $rootScope.hostName = JSON.parse(localStorage.getItem('hostName'));
   $rootScope.goHome = function(){
@@ -48,7 +43,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
     .state('home', { //引导页
       url: '/home',
       cache: 'true', 
-      templateUrl: 'views/home.html',
+      templateUrl: 'template/home.html',
       controller:'ionicNavBarDelegateCtrl'
     })
 
@@ -729,7 +724,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
 /********************************** error **********************************/
     .state('error', { //error
       url: '/error',
-      templateUrl: 'views/error.html'
+      templateUrl: 'template/error.html'
     });
 
     // if none of the above states are matched, use this as the fallback
