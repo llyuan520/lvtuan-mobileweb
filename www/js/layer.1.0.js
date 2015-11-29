@@ -453,16 +453,17 @@ this.stopDefault = function(e)
       case 4 :
         _msg = "参数缺少或者格式不正确";
         break;*/
-      case 400 :
+      case 401 :
+      case 498 :
          _msg = "账号过期，请重新登录。";
         window.location.href = '#/login';
         window.location.reload();
         break;
-      case 503 :
-        _msg = "账号过期，请重新登录。";
-        window.location.href = '#/login';
-        window.location.reload();
-        break;
+      // case 503 :
+      //   _msg = "账号过期，请重新登录。";
+      //   window.location.href = '#/login';
+      //   window.location.reload();
+      //   break;
         
         default :
           _msg = '错误代码: ' + data;
