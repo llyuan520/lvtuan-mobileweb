@@ -40,15 +40,15 @@
 				<hr />
 				<!--评论-->
 				<div class="list list-inset">
-					<div  ng-repeat="item in list_questions" class="item card item-borderless noboxshadow">
+					<div ng-repeat="item in list_questions" class="item card item-borderless noboxshadow">
 						<div class="item item-button-right">
 						   <a ng-href="#/questionsview/{{item.id}}"> {{item.title}}</a>
 						 <i class="button button-clear icon-right ion-ios-star-outline"></i>
 						</div>
 						
-						<div ng-repeat="comment in item.comments" class="item item-text-wrap item-avatar item-divider item-borderless">
-						    <img ng-src="{{comment.lcImgSrc}}">
-						    <h2 class="fc-nan txt-fw">某某律师</h2>
+						<div ng-repeat="comment in item.comments|limitTo:1" class="item item-text-wrap item-avatar item-divider item-borderless">
+						    <img ng-src="{{comment.owner.avatar}}">
+						    <h2 class="fc-nan txt-fw">{{comment.owner.realname}}</h2>
 						    <p>{{comment.content}}<br />
 						    	{{comment.created_at}}
 						    </p>
