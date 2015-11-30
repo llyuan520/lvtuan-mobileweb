@@ -454,7 +454,6 @@ this.stopDefault = function(e)
         _msg = "参数缺少或者格式不正确";
         break;*/
       case 401 :
-      case 498 :
          _msg = "账号过期，请重新登录。";
         window.location.href = '#/login';
         window.location.reload();

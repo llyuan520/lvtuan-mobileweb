@@ -14,8 +14,8 @@ httpModule.factory('httpWrapper', function($http, $rootScope) {
 	    }).success(
 	    	successCallback? successCallback : function successCallback(data) {}
 	    ).error(function (data, status) {
+			layer.msg(status);
 	        console.info(JSON.stringify(data));
-	        console.info(JSON.stringify(status));
 	    });
 	}
 

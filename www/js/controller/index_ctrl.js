@@ -3255,8 +3255,51 @@ lvtuanApp.controller("orderCompletedCtrl",function($http,$scope,$state,$rootScop
 })
 
 //律师的工作 - 全部
-lvtuanApp.controller("lawyerquestionNewCtrl",function($http,$scope,$state,$rootScope){
+lvtuanApp.controller("lawyerquestionAllCtrl",function($http,$scope,$state,$rootScope){
 	console.info("全部");
+	var page = 1; //页数
+    $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
+    $scope.items = [];	//创建一个数组接收后台的数据
+    //下拉刷新
+	$scope.doRefresh = function() {
+		page = 1;
+		$scope.items = [];
+        $scope.loadMore();
+    };
+	//上拉加载
+	$scope.loadMore = function() {
+	$http.get('http://'+$rootScope.hostName+'/center/lawyer/question/all?page='+page++,
+        {
+        cache: true,
+        headers: {
+            'Content-Type': 'application/json' , 
+            'Authorization': 'bearer ' + $rootScope.token
+       		}
+        }).success(function(data) {
+        	console.info("全部",data.data);
+			if(data.data.length > 0){
+				if(data.data.length > 9){
+					$scope.moredata = true;
+				}else{
+					$scope.moredata = false;
+				}
+				$scope.items = data.data; 
+				console.info($scope.items );
+				return true;
+			}else{
+				$scope.moredata = false;
+				layer.show('暂无数据！');
+				return false;
+			}
+		}).error(function (data, status) {
+			layer.msg(status);
+	        console.info(JSON.stringify(data));
+	    })
+	};
+})
+//律师的工作 - 待受理
+lvtuanApp.controller("lawyerquestionNewCtrl",function($http,$scope,$state,$rootScope){
+	console.info("待受理");
 	var page = 1; //页数
     $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
     $scope.items = [];	//创建一个数组接收后台的数据
@@ -3433,176 +3476,28 @@ lvtuanApp.controller("userlvtuanCtrl",function($http,$scope,$state,$rootScope){
 })
 
 //用户的工作 - 全部
-lvtuanApp.controller("questionNewCtrl",function($http,$scope,$state,$rootScope){
-	var page = 1; //页数
-    $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
-    $scope.items = [];	//创建一个数组接收后台的数据
-    //下拉刷新
-	$scope.doRefresh = function() {
-		page = 1;
-		$scope.items = [];
-        $scope.loadMore();
-    };
-	//上拉加载
-	$scope.loadMore = function() {
-	$http.get('http://'+$rootScope.hostName+'/center/question/all?page='+page++,
-        {
-        cache: true,
-        headers: {
-            'Content-Type': 'application/json' , 
-            'Authorization': 'bearer ' + $rootScope.token
-       		}
-        }).success(function(data) {
-        	console.info("全部",data.data);
-			if(data.data.length > 0){
-				if(data.data.length > 9){
-					$scope.moredata = true;
-				}else{
-					$scope.moredata = false;
-				}
-				$scope.items = data.data; 
-				console.info($scope.items );
-				return true;
-			}else{
-				$scope.moredata = false;
-				layer.show('暂无数据！');
-				return false;
-			}
-		}).error(function (data, status) {
-			layer.msg(status);
-	        console.info(JSON.stringify(data));
-	    })
-	};
+lvtuanApp.controller("questionAllCtrl",function($scope,listHelper){
+	listHelper.bootstrap('/center/question/all', $scope);
+})
 
-})
 //用户的工作 - 待受理
-lvtuanApp.controller("questionSsignedCtrl",function($http,$scope,$state,$rootScope){
-	console.info("待受理");
-	var page = 1; //页数
-    $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
-    $scope.items = [];	//创建一个数组接收后台的数据
-    //下拉刷新
-	$scope.doRefresh = function() {
-		page = 1;
-		$scope.items = [];
-        $scope.loadMore();
-    };
-	//上拉加载
-	$scope.loadMore = function() {
-	$http.get('http://'+$rootScope.hostName+'/center/question/new?page='+page++,
-        {
-        cache: true,
-        headers: {
-            'Content-Type': 'application/json' , 
-            'Authorization': 'bearer ' + $rootScope.token
-       		}
-        }).success(function(data) {
-        	console.info("待受理",data.data);
-			if(data.data.length > 0){
-				if(data.data.length > 9){
-					$scope.moredata = true;
-				}else{
-					$scope.moredata = false;
-				}
-				$scope.items = data.data; 
-				console.info($scope.items );
-				return true;
-			}else{
-				$scope.moredata = false;
-				layer.show('暂无数据！');
-				return false;
-			}
-		}).error(function (data, status) {
-			layer.msg(status);
-	        console.info(JSON.stringify(data));
-	    })
-	};
+lvtuanApp.controller("questionNewCtrl",function($scope,listHelper){
+	listHelper.bootstrap('/center/question/new', $scope);
 })
+
 //用户的工作 - 待确认
-lvtuanApp.controller("questionRepliedCtrl",function($http,$scope,$state,$rootScope){
-	console.info("待确认");
-	var page = 1; //页数
-    $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
-    $scope.items = [];	//创建一个数组接收后台的数据
-    //下拉刷新
-	$scope.doRefresh = function() {
-		page = 1;
-		$scope.items = [];
-        $scope.loadMore();
-    };
-	//上拉加载
-	$scope.loadMore = function() {
-	$http.get('http://'+$rootScope.hostName+'/center/question/replied?page='+page++,
-        {
-        cache: true,
-        headers: {
-            'Content-Type': 'application/json' , 
-            'Authorization': 'bearer ' + $rootScope.token
-       		}
-        }).success(function(data) {
-        	console.info("待确认",data.data);
-			if(data.data.length > 0){
-				if(data.data.length > 9){
-					$scope.moredata = true;
-				}else{
-					$scope.moredata = false;
-				}
-				$scope.items = data.data; 
-				console.info($scope.items );
-				return true;
-			}else{
-				$scope.moredata = false;
-				layer.show('暂无数据！');
-				return false;
-			}
-		}).error(function (data, status) {
-			layer.msg(status);
-	        console.info(JSON.stringify(data));
-	    })
-	};
+lvtuanApp.controller("questionRepliedCtrl",function($scope,listHelper){
+	listHelper.bootstrap('/center/question/replied', $scope);
 })
+
+//用户的工作 - 已完成
+lvtuanApp.controller("userConfirmCompletionCtrl",function($scope,listHelper){
+	listHelper.bootstrap('/center/question/complete', $scope);
+})
+
 //用户的工作 - 待评价
-lvtuanApp.controller("questionWaitforconfirmationCtrl",function($http,$scope,$state,$rootScope){
-	console.info("待评价");
-	var page = 1; //页数
-    $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
-    $scope.items = [];	//创建一个数组接收后台的数据
-    //下拉刷新
-	$scope.doRefresh = function() {
-		page = 1;
-		$scope.items = [];
-        $scope.loadMore();
-    };
-	//上拉加载
-	$scope.loadMore = function() {
-	$http.get('http://'+$rootScope.hostName+'/center/question/waitforevaluation?page='+page++,
-        {
-        cache: true,
-        headers: {
-            'Content-Type': 'application/json' , 
-            'Authorization': 'bearer ' + $rootScope.token
-       		}
-        }).success(function(data) {
-        	console.info("待评价",data.data);
-			if(data.data.length > 0){
-				if(data.data.length > 9){
-					$scope.moredata = true;
-				}else{
-					$scope.moredata = false;
-				}
-				$scope.items = data.data; 
-				console.info($scope.items );
-				return true;
-			}else{
-				$scope.moredata = false;
-				layer.show('暂无数据！');
-				return false;
-			}
-		}).error(function (data, status) {
-			layer.msg(status);
-	        console.info(JSON.stringify(data));
-	    })
-	};
+lvtuanApp.controller("questionWaitforconfirmationCtrl",function($scope,listHelper){
+	listHelper.bootstrap('/center/question/waitforevaluation', $scope);
 })
 
 //用户的订单 - 全部
@@ -3647,6 +3542,7 @@ lvtuanApp.controller("userorderAllCtrl",function($http,$scope,$state,$rootScope)
 	    })
 	};
 })
+
 //用户的订单 - 待付款
 lvtuanApp.controller("userorderPendingCtrl",function($http,$scope,$state,$rootScope){
 	var page = 1; //页数

@@ -531,13 +531,13 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
         }
     }
   })
-  .state('userquestion.ssigned', { //用户的咨询 - 已受理
-    url: '/ssigned',
+  .state('userquestion.all', { //用户的咨询 - 全部
+    url: '/all',
     cache: 'true',
     views: {
-        'question-ssigned': {
-            templateUrl: 'template/mylvtuan/user/question/ssigned.html',
-            controller: 'questionSsignedCtrl'
+        'question-all': {
+            templateUrl: 'template/mylvtuan/user/question/all.html',
+            controller: 'questionAllCtrl'
         }
     }
   })
@@ -561,44 +561,16 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
         }
     }
   })
-  .state('usernewview', { //用户的咨询 - 待受理 - 详情
-    url: '/usernewview',
-    cache: 'true', 
-    templateUrl: 'template/mylvtuan/user/question/new-view.html'/*,
-    controller: 'userNewViewCtrl'*/
+  .state('userquestion.complete', { //用户的咨询 - 已完成
+    url: '/complete',
+    cache: 'true',
+    views: {
+        'question-complete': {
+            templateUrl: 'template/mylvtuan/user/question/complete.html',
+            controller: 'userConfirmCompletionCtrl'
+        }
+    }
   })
-  .state('userssigned', { //用户的咨询 - 已受理 - 详情
-    url: '/userssigned',
-    cache: 'true', 
-    templateUrl: 'template/mylvtuan/user/question/ssigned-view.html'/*,
-    controller: 'userSsignedviewCtrl'*/
-  })
-  .state('userrepliedview', { //用户的咨询 - 处理中 - 详情
-    url: '/userrepliedview',
-    cache: 'true', 
-    templateUrl: 'template/mylvtuan/user/question/replied-view.html'/*,
-    controller: 'userRepliedViewCtrl'*/
-  })
-  .state('userwaitforconfirmationview', { //用户的咨询 - 待确认 - 详情
-    url: '/userwaitforconfirmationview',
-    cache: 'true', 
-    templateUrl: 'template/mylvtuan/user/question/waitforconfirmation-view.html'/*,
-    controller: 'userWaitforconfirmationViewCtrl'*/
-  })
-  .state('userconfirmcompletion', { //用户的咨询 - 已完成 - 详情
-    url: '/userconfirmcompletion',
-    cache: 'true', 
-    templateUrl: 'template/mylvtuan/user/question/confirm-completion.html'/*,
-    controller: 'userConfirmCompletionCtrl'*/
-  })
-  .state('usercompleteview', { //用户的咨询 - 已完成 - 详情
-    url: '/usercompleteview',
-    cache: 'true', 
-    templateUrl: 'template/mylvtuan/user/question/complete-view.html'/*,
-    controller: 'userCompleteViewCtrl'*/
-  })
-
-
   .state('orderuser', { //首页 - 我的律团 - 用户的订单
       url: '/orderuser',
       templateUrl: 'template/mylvtuan/user/order/order-user.html'
