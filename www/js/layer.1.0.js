@@ -440,30 +440,13 @@ this.stopDefault = function(e)
       return '服务器故障，请与管理员联系!';
     }
     var _msg = '';
-    switch(data) {/*
-      case 1 :
-        _msg = "服务器异常";
-        break;
-      case 2 :
-        _msg = "访问未授权";
-        break;
-      case 3 :
-        _msg = "指定资源不存在";
-        break;
-      case 4 :
-        _msg = "参数缺少或者格式不正确";
-        break;*/
+    switch(data) {
       case 401 :
          _msg = "账号过期，请重新登录。";
         window.location.href = '#/login';
         window.location.reload();
         break;
-      // case 503 :
-      //   _msg = "账号过期，请重新登录。";
-      //   window.location.href = '#/login';
-      //   window.location.reload();
-      //   break;
-        
+
         default :
           _msg = '错误代码: ' + data;
         break;

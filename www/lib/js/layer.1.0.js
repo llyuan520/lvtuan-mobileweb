@@ -154,7 +154,6 @@ var layer = (function(){
     $(change_screen_ul).width($(document).width()*2);
     
     function index(obj, current){ // 取得元素在同辈中的索引值
-      debugger
       for (var i = 0, length = current.length; i<length; i++) { 
         if (current[i] == obj ) { 
           return i; 

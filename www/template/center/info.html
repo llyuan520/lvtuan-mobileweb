@@ -1,69 +1,69 @@
-<link href="lib/mobiscroll/css/mobiscroll.core-2.5.2.css" rel="stylesheet" type="text/css" />
-<link href="lib/mobiscroll/css/mobiscroll.animation-2.5.2.css" rel="stylesheet" type="text/css" />
-<script src="lib/mobiscroll/js/mobiscroll.core-2.5.2.js" type="text/javascript"></script>
-<script src="lib/mobiscroll/js/mobiscroll.core-2.5.2-zh.js" type="text/javascript"></script>
-<script src="lib/mobiscroll/js/mobiscroll.datetime-2.5.1.js" type="text/javascript"></script>
-<script src="lib/mobiscroll/js/mobiscroll.datetime-2.5.1-zh.js" type="text/javascript"></script>
-<script src="lib/mobiscroll/js/mobiscroll.android-ics-2.5.2.js" type="text/javascript"></script>
-	
+<style type="text/css">
+.css-form .row{padding: 5px 0}
+.css-form .item-input{padding: 6px 0 5px 0px}
+</style>
 <ion-view view-title="我的资料">
 		<ion-pane  class="web-body">
 			<ion-header-bar class="bar bar-header bar-light">
-				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back"  onclick="history.go(-1);"></a>
+				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back"  ng-href="#/center"></a>
 				<h1 class="title">我的资料</h1>
 			</ion-header-bar>
 			<ion-content class="web-body web-top10">
-				<ul class="list">
-					<li class="item item-thumbnail-right" ng-click="show();">
-				      <img style="border-radius:5px;" src="{{items.user.avatar}}">
-				      <p style="height:80px;line-height:80px;font-size:16px;color:#373737;">个人头像</p>
-				    </li>
-				    <li class="item">联系方式 {{items.user.phone}}</li>
-				    <li class="item">电子邮箱 {{items.user.email}}</li>
-				    <li class="item">昵称 {{items.user.nickname}}</li>
-				</ul>
-				<ul class="list">
-				    <li class="item">姓名 {{items.user.realname}}</li>
-				    <li class="item" ng-click="show2();">性别 {{items.user.sex}}</li>
-				    <li class="item">地区 {{items.user.district}}</li>
-				    <li class="item"><span class="item-note">
-				    <input type="text" id="appDate" style="width:100px;height:20px;padding:0px;" placeholder="选择日期" /></span>
-				        出生年月</li>
-				</ul>
-				<ul class="list">
-				    <li class="item"><a ng-href="#/accreditation">律师资格认证</a></li>
-				    <li class="item"><a ng-href="#/briefIntro">律师个人简介</a></li>
-				</ul>
-				<div style="clear:both;width:100%;height:20px;"></div>
-				<button class="button button-full button-positive web-wid8c web-top30">保存</button>
-			    <div style="clear:both;width:100%;height:20px;"></div>
-			</ion-content>
-		</ion-pane>
-	
+			<form name="myForm" class="css-form" id="myForm" novalidate>
+				<div class="list">
+					<div class="item item-input item-icon-right">
+						<div class="row">
+						  <div class="col col-center">个人头像</div>
+						  <div class="col col-75 col-center item-thumbnail-right">
+
+							<div style="float: right;" ng-model="user.avatar" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="6MB" ngf-min-height="100" ngf-select="uploadFiles($file,items.user.id)">
+								<img ng-src="{{file}}" ngf-thumbnail="user.avatar || '/thumb.jpg'" width="80" height="80">
+								<span class="progress" ng-show="progress >= 0">
+				                  <div style="width:{{progress}}%" ng-bind="progress + '%'"></div>
+				                </span>
+							</div>
+							<input type="hidden" name="avatar" value="{{file}}" />
+						  </div>
+						</div>
+					</div>
+					<div class="item item-input">
+						<div class="row">
+						  <div class="col col-center">姓名</div>
+						  <div class="col col-75 col-center">
+						  	<input ng-model="user.realname" name="realname" type="text" required >
+						  </div>
+						</div>
+					</div>
+					<div class="item item-input">
+						<div class="row">
+						  <div class="col col-center">联系方式</div>
+						  <div class="col col-75 col-center">
+						  	<input ng-model="user.phone" name="phone" type="text" required ng-pattern="/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/" >
+						  	<span class="error" ng-show="(myForm.phone.$invalid && !myForm.phone.$pristine)">
+						     请输入有效的电话号码！
+						  	</span>
+						  </div>
+						</div>
+					</div>
+					<div class="item item-input">
+						<div class="row">
+						  <div class="col col-center">电子邮箱</div>
+						  <div class="col col-75 col-center">
+						  	<input type="email" name="email" ng-model="user.email" required >
+						  	<!-- <span class="error" ng-show="myForm.email.$error.required">
+      							电子邮箱不能为空！
+      						</span> -->
+						  	<span class="error" ng-show="myForm.email.$error.email">
+						     请输入有效的电子邮件！
+						  	</span>
+						  </div>
+						</div>
+					</div>
+					<div style="clear:both;width:100%;height:20px;"></div>
+					<button class="button button-block button-positive web-wid8c web-top10" type="submit" ng-disabled="myForm.$invalid" ng-click="submit()">保存</button>
+				    <div style="clear:both;width:100%;height:20px;"></div> 
+				</div>
+			</form>
+		</ion-content>
+	</ion-pane>
 </ion-view>
-<script type="text/javascript">
-    $(function () {
-		var currYear = (new Date()).getFullYear();	
-		var opt={};
-		opt.date = {preset : 'date'};
-		opt.datetime = {preset : 'datetime'};
-		opt.time = {preset : 'time'};
-		opt.default = {
-			theme: 'jqm', //皮肤样式
-	        display: 'modal', //显示方式 
-	        mode: 'scroller', //日期选择模式
-			lang:'zh',
-	        startYear:currYear - 10, //开始年份
-	        endYear:currYear + 10 //结束年份
-		};
-		$("#appDate").val('').scroller('destroy').scroller($.extend(opt['date'], opt['default']));
-	  	var optDateTime = $.extend(opt['datetime'], opt['default']);
-	  	var optTime = $.extend(opt['time'], opt['default']);
-    });
-    $(document).bind("mobileinit", function () {
-        //覆盖的代码
-        $.mobile.ajaxEnabled = false;
-        $.mobile.hashListeningEnabled = false;
-        //$.mobile.linkBindingEnabled = false;
-    });
-</script>
