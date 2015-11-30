@@ -3,9 +3,9 @@
 
     	<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
     	<ion-list>
-        	<ion-item class="item" >
-	          	<span class="sp-l fc-33"> 待确认 </span>
-				<span class="sp-r fc-33">2015/09/22 11:39</span>
+        	<ion-item class="item" ng-repeat="item in items">
+	          	<span class="sp-l fc-33">{{item.title}}</span>
+				<span class="sp-r fc-33">{{item.created_at}}</span>
 	        </ion-item>
 	        <ion-item class="item itemdata" >
 	        	<div class="row">
