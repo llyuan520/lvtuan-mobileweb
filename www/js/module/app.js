@@ -270,15 +270,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       controller: 'becomelawyerCtrl'
     })
 /*———————————————————————————— 律师的个人中心 ————————————————————————————*/
-<<<<<<< Updated upstream
-    .state('infolawyer', { //律师-个人资料
-      url: '/infolawyer',
-      cache: 'true',
-      templateUrl: 'template/center/info.html',
-      controller: 'infolawyerCtrl'
-    })
-=======
->>>>>>> Stashed changes
+
     .state('followed_lawyer', { //律师-我的关注
       url: '/followed_lawyer',
       cache: 'true',
@@ -342,8 +334,6 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       templateUrl: 'template/center/site.html',
       controller: 'siteCtrl'
     })
-
-    
 
 /********************************** 找律师 **********************************/
     .state('lawyerlist', { //找律师列表

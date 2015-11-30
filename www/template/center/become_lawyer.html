@@ -8,7 +8,6 @@
 				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" onclick="history.go(-1);"></a>
 				<h1 ng-if="user_group_id == 1 || user_group_id == 2 && is_verified == 0" class="title">认证律师</h1>
 				<h1 ng-if="user_group_id == 2 &&  is_verified == 1" class="title">修改认证律师</h1>
-				
 			</ion-header-bar>
 			<ion-content class="web-body" style="margin-bottom:0;">
 			<form name="myForm" class="css-form" id="myForm" novalidate>
@@ -19,7 +18,7 @@
 								<div class="row">
 								  <div class="col col-center">执业人</div>
 								  <div class="col col-75 col-center">
-								  	<input ng-model="realname" name="realname" type="text" required>
+								  	<input placeholder="请输入真实姓名" ng-model="realname" name="realname" type="text" required>
 								  </div>
 								</div>
 							</div>
@@ -40,7 +39,7 @@
 								<div class="row">
 								  <div class="col col-center">执业证号</div>
 								  <div class="col col-75 col-center">
-								  	<input ng-model="license" name="license" type="text" required>
+								  	<input placeholder="请输入执业证号"  ng-model="license" name="license" type="text" required>
 								  </div>
 								</div>
 							</div>
@@ -48,7 +47,7 @@
 								<div class="row">
 								  <div class="col col-center">执业机构</div>
 								  <div class="col col-75 col-center">
-								  	<input ng-model="company_name" name="company_name" type="text" required>
+								  	<input placeholder="请输入执业机构" ng-model="company_name" name="company_name" type="text" required>
 								  </div>
 								</div>
 							</div>
@@ -62,6 +61,21 @@
 									<input type="hidden" name="license_file" value="{{file_1}}" />
 									<span class="progress_1" ng-show="progress_1 >= 0">
 					                  <div style="width:{{progress_1}}%" ng-bind="progress_1 + '%'"></div>
+					                </span>
+
+								  </div>
+								</div>
+							</div>
+							<div class="item item-input">
+								<div class="row">
+								  <div class="col col-center">身份证照</div>
+								  <div class="col col-75 col-center">
+
+									<div ng-model="ID_img" class="button item-note ion-ios-plus-empty button-light" ngf-pattern="'image/*'"  accept="image/*" ngf-max-size="20MB" ngf-min-height="100" ngf-select="uploadFiles($file,4)"></div>
+									<img ng-src="{{file_4}}" ngf-thumbnail="ID_img || '/thumb.jpg'" width="52" height="50">
+									<input type="hidden" name="ID_img" value="{{file_1}}" />
+									<span class="progress_4" ng-show="progress_4 >= 0">
+					                  <div style="width:{{progress_4}}%" ng-bind="progress_4 + '%'"></div>
 					                </span>
 
 								  </div>
@@ -128,7 +142,7 @@
 							<div class="row">
 							  <div class="col col-center">详细地址</div>
 							  <div class="col col-75 col-center">
-							  	 <input ng-model="address" name="address" type="text" required>
+							  	 <input placeholder="请输入详细地址" ng-model="address" name="address" type="text" required>
 							  </div>
 							</div>
 						</div>
@@ -176,7 +190,7 @@
 							<div class="row">
 							  <div class="col col-center">语音咨询价格</div>
 							  <div class="col col-55 col-center">
-							  	<input ng-model="phonereplyfee" name="phone_reply_fee" type="number" required>
+							  	<input placeholder="请输入语音咨询价格" ng-model="phonereplyfee" name="phone_reply_fee" type="number" required>
 							  	<span class="error" ng-show="myForm.phone_reply_fee.$error.number">您输入的不是数字!</span>
 							  </div>
 							</div>
@@ -185,7 +199,7 @@
 							<div class="row">
 							  <div class="col col-center">图文咨询价格</div>
 							  <div class="col col-55 col-center">
-							  	<input ng-model="textreplyfee" name="text_reply_fee" type="number" required>
+							  	<input placeholder="请输入图文咨询价格" ng-model="textreplyfee" name="text_reply_fee" type="number" required>
 							  	<span class="error" ng-show="myForm.text_reply_fee.$error.number">您输入的不是数字!</span>
 							  </div>
 							</div>
@@ -199,7 +213,7 @@
 						<div class="item item-input" style="margin:0;">
 							<div class="row">
 							  <div class="col">
-							  	<textarea ng-model="introduce" name="introduce" required ng-minlength="" ng-maxlength="" ng-pattern="" ng-trim="">
+							  	<textarea placeholder="请输入个人简介" ng-model="introduce" name="introduce" required ng-minlength="" ng-maxlength="" ng-pattern="" ng-trim="">
 								</textarea>
 							  </div>
 							</div>
@@ -212,7 +226,7 @@
 						<div class="item item-input" style="margin:0;">
 							<div class="row">
 							  <div class="col">
-							  	<textarea ng-model="experience" name="experience" required ng-minlength="" ng-maxlength="" ng-pattern="" ng-trim="">
+							  	<textarea placeholder="请输入工作经历" ng-model="experience" name="experience" required ng-minlength="" ng-maxlength="" ng-pattern="" ng-trim="">
 								</textarea>
 							  </div>
 							</div>
@@ -225,7 +239,7 @@
 						<div class="item item-input" style="margin:0;">
 							<div class="row">
 							  <div class="col">
-							  	<textarea ng-model="law_cases" name="law_cases" required ng-minlength="" ng-maxlength="" ng-pattern=""  ng-trim="">
+							  	<textarea placeholder="请输入成功案例" ng-model="law_cases" name="law_cases" required ng-minlength="" ng-maxlength="" ng-pattern=""  ng-trim="">
 								</textarea>
 							  </div>
 							</div>
