@@ -270,10 +270,6 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       controller: 'becomelawyerCtrl'
     })
 /*———————————————————————————— 律师的个人中心 ————————————————————————————*/
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
     .state('followed_lawyer', { //律师-我的关注
       url: '/followed_lawyer',
       cache: 'true',

@@ -1257,17 +1257,14 @@ lvtuanApp.controller("broadcastviewCtrl",function($scope,$http,$state,$rootScope
 	            	'Authorization': 'bearer ' + $rootScope.token
 	            }
 	        }).success(function(data) {
-<<<<<<< Updated upstream
 
 	        	console.info(data);
-	        	debugger
 	        	//var like = data.data;
 	        	//$scope.items.post_extra.likes_count = like.likes_count;
 	           layer.show("评论成功！");
 	        }).error(function (data, status) {
 
 	        	console.info(data);
-	        	debugger
 	        	//layer.msg(status);
 	        	
 	        	var errMsg = "";
@@ -1277,27 +1274,6 @@ lvtuanApp.controller("broadcastviewCtrl",function($scope,$http,$state,$rootScope
 	        	layer.show(errMsg);
 	        });
 
-=======
-
-	        	console.info(data);
-	        	debugger
-	        	//var like = data.data;
-	        	//$scope.items.post_extra.likes_count = like.likes_count;
-	           layer.show("评论成功！");
-	        }).error(function (data, status) {
-
-	        	console.info(data);
-	        	debugger
-	        	//layer.msg(status);
-	        	
-	        	var errMsg = "";
-	        	if(JSON.stringify(data.error_messages.parent_id)){
-	        		errMsg = JSON.stringify(data.error_messages.parent_id[0]);
-	        	}
-	        	layer.show(errMsg);
-	        });
-
->>>>>>> Stashed changes
        });
 	}
 
@@ -1727,7 +1703,6 @@ lvtuanApp.controller("infoCtrl",function($scope,$http,$rootScope,$timeout,Upload
             data: {
             	upload_file: avatar,
             	'user_id': id
-<<<<<<< Updated upstream
             }
         }).then(function (response) {
         	var file_path = 'http://'+$rootScope.hostName+'/'+response.data.data.file_path;
@@ -1741,21 +1716,6 @@ lvtuanApp.controller("infoCtrl",function($scope,$http,$rootScope,$timeout,Upload
         		console.info('errorMsg',errorMsg);
         		layer.show(errorMsg);
             }
-=======
-            }
-        }).then(function (response) {
-        	var file_path = 'http://'+$rootScope.hostName+'/'+response.data.data.file_path;
-        	$scope.file = file_path;
-            $timeout(function () {
-                $scope.result = response.data;
-            });
-        }, function (response) {
-            if (response.status > 0) {
-             	var errorMsg = response.status + ': ' + response.data;
-        		console.info('errorMsg',errorMsg);
-        		layer.show(errorMsg);
-            }
->>>>>>> Stashed changes
         }, function (evt) {
         	var progres = parseInt(100.0 * evt.loaded / evt.total);
         	$scope.progress = progres;
@@ -1833,11 +1793,7 @@ lvtuanApp.controller("followedCtrl",function($scope, listHelper) {
 
 //普通用户-认证为律师
 lvtuanApp.controller("becomelawyerCtrl",function($scope,$http,$rootScope,$ionicActionSheet,$timeout,$stateParams,Upload){
-<<<<<<< Updated upstream
 	getProvince();
-=======
-	getProvince(null);
->>>>>>> Stashed changes
 	getWorkscopes();
 	getPractisePeriods();
 	//性別的json數組
@@ -1870,8 +1826,6 @@ lvtuanApp.controller("becomelawyerCtrl",function($scope,$http,$rootScope,$ionicA
 	if($rootScope.user_group_id == 2 && $rootScope.is_verified == 1 ){
 		//律师个人信息
 		$http.get('http://'+$rootScope.hostName+'/center/lawyer/info',
-<<<<<<< Updated upstream
-=======
 	        {
 	        cache: true,
 	        headers: {
@@ -1895,7 +1849,10 @@ lvtuanApp.controller("becomelawyerCtrl",function($scope,$http,$rootScope,$ionicA
 
 				$scope.practice_period = $scope.items.user.lawyer.practice_period,
 				getPractisePeriodsParm($scope.practice_period);
-				
+
+				$scope.position = $scope.items.user.lawyer.position,
+				getpositionsParm($scope.position)
+
 				if($scope.items.user.lawyer.work_scope[0] != undefined){
 					
 					$scope.workscope_one = $scope.items.user.lawyer.work_scope[0].key
@@ -1924,83 +1881,6 @@ lvtuanApp.controller("becomelawyerCtrl",function($scope,$http,$rootScope,$ionicA
 
 		}
 
-	//获取所在区域 - 省
-	function getProvince(){
-		getProvinceParm(null);
-	}
-	function getProvinceParm(parm){
-		$http.get('http://'+$rootScope.hostName+'/area/province',
->>>>>>> Stashed changes
-	        {
-	        cache: true,
-	        headers: {
-	            'Content-Type': 'application/json' , 
-	            'Authorization': 'bearer ' + $rootScope.token
-	       		}
-	        }).success(function(data) {
-<<<<<<< Updated upstream
-	        	console.info(data.data)
-				$scope.items = data.data; 
-
-				$timeout(function() {
-
-					$scope.file_2 = $scope.items.user.avatar;
-					$scope.file_3 = $scope.items.user.lawyer.bg_image;
-					$scope.province = $scope.items.user.province;
-					$scope.city = $scope.items.user.city;
-					$scope.district = $scope.items.user.district;
-
-					getProvinceParm($scope.province);
-					getCityParm($scope.province,$scope.city);
-					getDistrictParm($scope.city,$scope.district);
-					$scope.address = $scope.items.user.address,
-
-					$scope.practice_period = $scope.items.user.lawyer.practice_period,
-					getPractisePeriodsParm($scope.practice_period);
-					
-					if($scope.items.user.lawyer.work_scope[0] != undefined){
-						$scope.workscope_one = $scope.items.user.lawyer.work_scope[0];
-					}
-					if($scope.items.user.lawyer.work_scope[1] != undefined){
-						$scope.workscope_two = $scope.items.user.lawyer.work_scope[1];
-					}
-					if($scope.items.user.lawyer.work_scope[2] != undefined){
-						$scope.workscope_three = $scope.items.user.lawyer.work_scope[2];
-					}
-					getWorkscopesParm($scope.workscope_one);
-					getworkscopes_oneParm($scope.workscope_one,$scope.workscope_two);
-					getworkscopes_twoParm($scope.workscope_two,$scope.workscope_three);
-
-					$scope.position = $scope.items.user.lawyer.position,
-					getpositionsParm($scope.position);
-
-					$scope.phonereplyfee = $scope.items.user.lawyer.phone_reply_fee,
-					$scope.textreplyfee = $scope.items.user.lawyer.text_reply_fee,
-					$scope.introduce = $scope.items.user.lawyer.introduce,
-					$scope.experience = $scope.items.user.lawyer.experience,
-					$scope.law_cases = $scope.items.user.lawyer.law_cases
-				
-				}, 3000);
-
-=======
-				$scope.provinces = data.data; 
-				//判断如果有参数就代表是编辑
-				if(parm){
-					for(var i=0;i<$scope.provinces.length; i++){
-						if(parm == JSON.stringify($scope.provinces[i].key)){
-							$scope.province = $scope.provinces[i];
-							 break;
-						}
-					}
-				}	
->>>>>>> Stashed changes
-			}).error(function (data, status) {
-				layer.msg(status);
-		        console.info(JSON.stringify(data));
-		    })
-
-		}
-
 	//律师类型
 	function getpositionsParm(parm){
 		for(var i=0;i<$scope.positions.length; i++){
@@ -2010,22 +1890,12 @@ lvtuanApp.controller("becomelawyerCtrl",function($scope,$http,$rootScope,$ionicA
 			}
 		}
 	}
-<<<<<<< Updated upstream
-
 	//获取所在区域 - 省
 	function getProvince(){
 		getProvinceParm(null);
 	}
 	function getProvinceParm(parm){
 		$http.get('http://'+$rootScope.hostName+'/area/province',
-=======
-	//获取所在区域 - 市
-	$scope.getCity = function(province){
-		getCityParm(province,null);
-	}
-	function getCityParm(province,parm){
-		$http.get('http://'+$rootScope.hostName+'/area/'+province+'/city',
->>>>>>> Stashed changes
 	        {
 	        cache: true,
 	        headers: {
@@ -2033,7 +1903,7 @@ lvtuanApp.controller("becomelawyerCtrl",function($scope,$http,$rootScope,$ionicA
 	            'Authorization': 'bearer ' + $rootScope.token
 	       		}
 	        }).success(function(data) {
-<<<<<<< Updated upstream
+	        	console.info(data.data)
 				$scope.provinces = data.data; 
 				//判断如果有参数就代表是编辑
 				if(parm){
@@ -2044,22 +1914,14 @@ lvtuanApp.controller("becomelawyerCtrl",function($scope,$http,$rootScope,$ionicA
 						}
 					}
 				}	
-=======
-	        	$scope.citys = data.data; 
-	        	if(parm){
-	        		for(var i=0;i<$scope.citys.length; i++){
-						if(parm == JSON.stringify($scope.citys[i].key)){
-							$scope.city = $scope.citys[i];
-							break;
-						}
-					}
-	        	}
->>>>>>> Stashed changes
 			}).error(function (data, status) {
 				layer.msg(status);
 		        console.info(JSON.stringify(data));
 		    })
-	}
+
+		}
+
+
 	//获取所在区域 - 市
 	$scope.getCity = function(province){
 		getCityParm(province,null);
@@ -2096,7 +1958,6 @@ lvtuanApp.controller("becomelawyerCtrl",function($scope,$http,$rootScope,$ionicA
 		getDistrictParm(city,null);
 	}
 	function getDistrictParm(city,parm){
-<<<<<<< Updated upstream
 		if(city != null || parm != null){
 			$http.get('http://'+$rootScope.hostName+'/area/'+city+'/district',
 		        {
@@ -2119,6 +1980,8 @@ lvtuanApp.controller("becomelawyerCtrl",function($scope,$http,$rootScope,$ionicA
 					layer.msg(status);
 			        console.info(JSON.stringify(data));
 			    })
+		}else{
+			return false;
 		}
 	}
 
@@ -2128,9 +1991,6 @@ lvtuanApp.controller("becomelawyerCtrl",function($scope,$http,$rootScope,$ionicA
 	}
 	function getPractisePeriodsParm(parm){
 		$http.get('http://'+$rootScope.hostName+'/lawyer/practiseperiods',
-=======
-		$http.get('http://'+$rootScope.hostName+'/area/'+city+'/district',
->>>>>>> Stashed changes
 	        {
 	        cache: true,
 	        headers: {
@@ -2138,19 +1998,11 @@ lvtuanApp.controller("becomelawyerCtrl",function($scope,$http,$rootScope,$ionicA
 	            'Authorization': 'bearer ' + $rootScope.token
 	       		}
 	        }).success(function(data) {
-<<<<<<< Updated upstream
 				$scope.periods = data.data; 
 				if(parm){
 	        		for(var i=0;i<$scope.periods.length; i++){
 						if(parm == $scope.periods[i].key){
 							$scope.practice_period = $scope.periods[i];
-=======
-				$scope.districts = data.data; 
-				if(parm){
-	        		for(var i=0;i<$scope.districts.length; i++){
-						if(parm == JSON.stringify($scope.districts[i].key)){
-							$scope.district = $scope.districts[i];
->>>>>>> Stashed changes
 							break;
 						}
 					}
@@ -2161,34 +2013,13 @@ lvtuanApp.controller("becomelawyerCtrl",function($scope,$http,$rootScope,$ionicA
 		    })
 	}
 
-<<<<<<< Updated upstream
-	//数组删除的方法
-	 Array.prototype.remove = function(index){
-	    if(isNaN(index) || index > this.length){
-	          return false;
-	    }
-	    for(var i=0,n=0;i<this.length;i++){
-	          if(this[i] != this[index]){
-	              this[n++] = this[i];
-	          }
-	    }
-	    this.length -= 1;
-	}
 
-	//获取法律专长
-	function getWorkscopes(){
-		getWorkscopesParm(null);
-	}
-	function getWorkscopesParm(parm){
-		$http.get('http://'+$rootScope.hostName+'/lawyer/workscopes',
-=======
 	//律师的从业年限
 	function getPractisePeriods(){
 		getPractisePeriodsParm(null);
 	}
 	function getPractisePeriodsParm(parm){
 		$http.get('http://'+$rootScope.hostName+'/lawyer/practiseperiods',
->>>>>>> Stashed changes
 	        {
 	        cache: true,
 	        headers: {
@@ -2196,20 +2027,11 @@ lvtuanApp.controller("becomelawyerCtrl",function($scope,$http,$rootScope,$ionicA
 	            'Authorization': 'bearer ' + $rootScope.token
 	       		}
 	        }).success(function(data) {
-<<<<<<< Updated upstream
-				$scope.workscopes_one = data.data; 
-				localStorage.setItem("workscopes_one", JSON.stringify($scope.workscopes_one));
-				if(parm){
-	        		for(var i=0;i<$scope.workscopes_one.length; i++){
-						if(parm == $scope.workscopes_one[i].key){
-							$scope.workscope_one = $scope.workscopes_one[i];
-=======
 				$scope.periods = data.data; 
 				if(parm){
 	        		for(var i=0;i<$scope.periods.length; i++){
 						if(parm == $scope.periods[i].key){
 							$scope.practice_period = $scope.periods[i];
->>>>>>> Stashed changes
 							break;
 						}
 					}
@@ -2220,8 +2042,6 @@ lvtuanApp.controller("becomelawyerCtrl",function($scope,$http,$rootScope,$ionicA
 		    })
 	}
 
-<<<<<<< Updated upstream
-=======
 	//数组删除的方法
 	 Array.prototype.remove = function(index){
 	    if(isNaN(index) || index > this.length){
@@ -2264,7 +2084,7 @@ lvtuanApp.controller("becomelawyerCtrl",function($scope,$http,$rootScope,$ionicA
 		    })
 	}
 
->>>>>>> Stashed changes
+
 	//获取法律专长
 	$scope.getworkscopes_one = function(workscope){
 		getworkscopes_oneParm(workscope,null);
@@ -2273,7 +2093,6 @@ lvtuanApp.controller("becomelawyerCtrl",function($scope,$http,$rootScope,$ionicA
 		$scope.workscopes_two = JSON.parse(localStorage.getItem('workscopes_one'));
 		if(workscope){
 			var index;
-<<<<<<< Updated upstream
 			for(var i=0;i<$scope.workscopes_two.length; i++){
 				if(workscope.key == $scope.workscopes_two[i].key){
 					index = i;
@@ -2284,29 +2103,12 @@ lvtuanApp.controller("becomelawyerCtrl",function($scope,$http,$rootScope,$ionicA
 			localStorage.setItem("workscopes_two", JSON.stringify($scope.workscopes_two));
 			if(parm){ //编辑状态
 	    		for(var i=0;i<$scope.workscopes_two.length; i++){
-=======
-			angular.forEach($scope.workscopes_two,function(val,key){ 
-				if(val.key == workscope){
-					index = key;
-				}
-			});
-			$scope.workscopes_two.remove(index); //去重复
-			$scope.workscopes_two = $scope.workscopes_two;
-			localStorage.setItem("workscopes_two", JSON.stringify($scope.workscopes_two));
-
-			if(parm){ //编辑状态
-        		for(var i=0;i<$scope.workscopes_two.length; i++){
->>>>>>> Stashed changes
 					if(parm == $scope.workscopes_two[i].key){
 						$scope.workscope_two = $scope.workscopes_two[i];
 						break;
 					}
 				}
-<<<<<<< Updated upstream
     		}
-=======
-        	}
->>>>>>> Stashed changes
 		}
 		
 	}
@@ -2326,10 +2128,7 @@ lvtuanApp.controller("becomelawyerCtrl",function($scope,$http,$rootScope,$ionicA
 				}
 			}
 			$scope.workscopes_three = $scope.workscopes_three;
-<<<<<<< Updated upstream
 			localStorage.setItem("workscopes_three", JSON.stringify($scope.workscopes_three));
-=======
->>>>>>> Stashed changes
 
 			if(parm){ //编辑状态
         		for(var i=0;i<$scope.workscopes_three.length; i++){
@@ -2411,11 +2210,7 @@ lvtuanApp.controller("becomelawyerCtrl",function($scope,$http,$rootScope,$ionicA
         });
     };
 
-<<<<<<< Updated upstream
     //修改
-=======
-
->>>>>>> Stashed changes
     $scope.sever = function(){
     	$scope.user = layer.getParams('#myForm');
     	$scope.work_scope = [$scope.workscope_one.key,$scope.workscope_two.key,$scope.workscope_three.key];
@@ -2423,11 +2218,8 @@ lvtuanApp.controller("becomelawyerCtrl",function($scope,$http,$rootScope,$ionicA
     	if($scope.work_scope){
 			$scope.user['work_scope'] = $scope.work_scope;
 		}
-<<<<<<< Updated upstream
 		console.info($scope.user);
-		debugger
-=======
->>>>>>> Stashed changes
+
     	$http.post('http://'+$rootScope.hostName+'/center/lawyer/info',$scope.user,
 	            {
 	            headers: {
@@ -2435,20 +2227,11 @@ lvtuanApp.controller("becomelawyerCtrl",function($scope,$http,$rootScope,$ionicA
 	            	'Authorization': 'bearer ' + $rootScope.token,
 	            }
 	        }).success(function(data) {
-<<<<<<< Updated upstream
 	        	console.info(data);
-	        	debugger
 	        	var obj = data.data
 				layer.show("提交成功！");
 				location.href='#/index';
 				window.location.reload();
-=======
-	        	
-	        	var obj = data.data
-				layer.show("提交成功！");
-				/*location.href='#/index';
-				window.location.reload();*/
->>>>>>> Stashed changes
 
 	        }).error(function (data, status) {
 	        	//layer.msg(status);
@@ -2485,28 +2268,7 @@ lvtuanApp.controller("becomelawyerCtrl",function($scope,$http,$rootScope,$ionicA
 
     	console.info($scope.work_scope);
 		console.info($scope.user);
-		debugger
 
-		$scope.work_scope = [];
-		var workscope_one =  angular.element("#workscope_one").val();
-		var workscope_two =  angular.element("#workscope_two").val();
-		var workscope_three =  angular.element("#workscope_three").val();
-		if(workscope_one != ""){
-			$scope.work_scope.push(workscope_one);
-		}
-		if(workscope_two != ""){
-			$scope.work_scope.push(workscope_two);
-		}
-		if(workscope_three != ""){
-			$scope.work_scope.push(workscope_three);
-		}
-    	if($scope.work_scope){
-			$scope.user['work_scope'] = $scope.work_scope;
-		}
-
-    	console.info($scope.work_scope);
-		console.info($scope.user);
-		debugger
 		if($scope.user.license_file.length < 1){
 			layer.show("请上传执业证书！");
 			return false;
@@ -2533,7 +2295,6 @@ lvtuanApp.controller("becomelawyerCtrl",function($scope,$http,$rootScope,$ionicA
 	            }
 	        }).success(function(data) {
 	        	console.info(data.data);
-	        	debugger
 	        	var obj = data.data
 	        	//当 is_verified = 1 的时候就显示律师的信息
 	        	$scope.user_group_id = obj.user.user_group_id;
@@ -2559,14 +2320,13 @@ lvtuanApp.controller("becomelawyerCtrl",function($scope,$http,$rootScope,$ionicA
 
 
 				layer.show("提交成功！");
-				/*location.href='#/index';
-				window.location.reload();*/
+				location.href='#/index';
+				window.location.reload();
 
 	        }).error(function (data, status) {
 	        	/*layer.msg(status);*/
 	        	console.info(data.error_messages);
 	        	console.info(JSON.stringify(data.message));
-	        	debugger
 	        	var errMsg = JSON.stringify(data.error_messages);
 	        	layer.show(errMsg);
 	        	console.info(errMsg);
