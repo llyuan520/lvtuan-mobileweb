@@ -1,0 +1,49 @@
+<script src="/lib/ionic/js/angular/angular-sanitize.min.js"></script>
+<ion-view hide-tabs="true" view-title="小微企服">
+		<ion-pane  class="web-body">
+			<ion-header-bar class="bar bar-header bar-light">
+				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-href="#/corporate"></a>
+				<h1 class="title">小微企服</h1>
+			</ion-header-bar>
+			<ion-content class="web-body">
+				<div class="slideBox">
+					<div class="hd tabs">
+					  <a ng-repeat="tab in tabs"  ng-class="{active:isActiveTab(tab.url)}"  ng-click="onClickTab(tab)" class="tab-item" >{{tab.title}}</a></li>
+					</div>
+					<div class="bd">
+							<div ng-include="currentTab"></div>
+					</div>
+				</div>
+			</ion-content>
+		</ion-pane>
+</ion-view>
+
+<script type="text/ng-template" id="list-detail.tpl.html">
+	<div class="ngbindhtml">
+		<ion-list>
+		    <ion-item class="item" >
+					<h2 class="fc-ee" ng-bind-html="items.attribute.introduce"></h2>
+					<br><br>
+					<a class="button button-block button-positive web-wid8c web-top10" ng-href="#/corporate/buynow/{{items.id}}" >立即购买</a>
+		    </ion-item>
+		 </ion-list>
+	</div>
+</script>
+
+	<script type="text/ng-template" id="list-evaluate.tpl.html">
+	<div ng-controller="corporatelistevaluateCtrl">
+		<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+		<ion-list> <!-- ng-repeat="item in items" -->
+			<ion-item class="item-thumbnail-left" >
+				<img ng-src="{{item.creator_avatar}}"/>
+				<h2>{{item.creator_realname}} <label class="rig">{{item.evaluate_created_at}}</label></h2>
+
+				<div star rating-value="ratingVal[$index]" max="max" on-hover="onHover" on-leave="onLeave" readonly="{{readonly}}"></div>
+				<input type="hidden" name="input" ng-model="max" min="0" max="10" required>
+
+				<p class="contents">{{item.evaluate_comment}}</p>
+			</ion-item>
+		</ion-list>
+		<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
+	</div>
+</script>

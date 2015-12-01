@@ -2351,7 +2351,7 @@ lvtuanApp.controller("listscoreslaywerCtrl",function($scope, listHelper) {
 })
 
 //律师的评论
-lvtuanApp.controller("commentlaywerCtrl",function($scope,$http,$rootScope,$stateParams){
+lvtuanApp.controller("commentlaywerCtrl",function($scope,$http,$rootScope,$stateParams,listHelper){
 	listHelper.bootstrap('/center/blog/reply', $scope);
 	// console.info("律师的评论");
 
@@ -4268,3 +4268,219 @@ lvtuanApp.controller("documentownloadlistCtrl",function($http,$scope,$state,$roo
         console.info(JSON.stringify(data));
     })
 })
+
+//小微企服
+lvtuanApp.controller("corporateservicesCtrl",function($http,$scope,$state,$rootScope,$stateParams){
+    var page = 1; //页数
+    $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
+    $scope.items = [];	//创建一个数组接收后台的数据
+    //下拉刷新
+	$scope.doRefresh = function() {
+		page = 1;
+		$scope.items = [];
+        $scope.loadMore();
+    };
+	//上拉加载
+	$scope.loadMore = function() {
+	$http.get('http://'+$rootScope.hostName+'/company/product/list?page='+page++,
+        {
+        cache: true,
+        headers: {
+            'Content-Type': 'application/json' , 
+            'Authorization': 'bearer ' + $rootScope.token
+       		}
+        }).success(function(data) {
+        	console.info("待确认",data.data);
+			if(data.data.length > 0){
+				if(data.data.length > 9){
+					$scope.moredata = true;
+				}else{
+					$scope.moredata = false;
+				}
+				$scope.items = data.data; 
+				return true;
+			}else{
+				$scope.moredata = false;
+				layer.show('暂无数据！');
+				return false;
+			}
+		}).error(function (data, status) {
+			layer.msg(status);
+	        console.info(JSON.stringify(data));
+	    })
+	};
+
+})
+
+//小微企服
+lvtuanApp.controller("corporatelistCtrl",function($scope,$state,$http,$rootScope,$stateParams,$ionicPopup, $timeout){
+	//创建tabs列表
+	$scope.tabs = [{
+            title: '产品详情',
+            url: 'list-detail.tpl.html'
+        }, {
+            title: '评价',
+            url: 'list-evaluate.tpl.html'
+    }];
+    $scope.currentTab = 'list-detail.tpl.html'; //默认第一次显示的tpl
+
+    $scope.onClickTab = function (tab) { //点击tab赋值url
+        $scope.currentTab = tab.url;
+    }
+    
+    $scope.isActiveTab = function(tabUrl) {  //给选中的url的a 标签样式
+        return tabUrl == $scope.currentTab;
+    }
+
+    //详情
+    $http.get('http://'+$rootScope.hostName+'/company/product/'+$stateParams.id+'/view',
+        {
+        cache: true,
+        headers: {
+            'Content-Type': 'application/json' , 
+            'Authorization': 'bearer ' + $rootScope.token
+       		}
+        }).success(function(data) {
+        	console.info("详情",data.data);				
+        	$scope.items = data.data; 
+		}).error(function (data, status) {
+	        console.info(JSON.stringify(data));
+	    })
+
+})
+
+//评价
+lvtuanApp.controller("corporatelistevaluateCtrl",function($scope,$http,$rootScope,$stateParams){
+	console.info("id",$stateParams.id);
+})
+
+//立即购买
+lvtuanApp.controller("corporatebuynowCtrl",function($scope,$http,$rootScope,$stateParams){
+	$http.get('http://'+$rootScope.hostName+'/company/product/'+$stateParams.id+'/view',
+        {
+        cache: true,
+        headers: {
+            'Content-Type': 'application/json' , 
+            'Authorization': 'bearer ' + $rootScope.token
+       		}
+        }).success(function(data) {
+        	console.info("详情",data.data);				
+        	$scope.items = data.data; 
+		}).error(function (data, status) {
+	        console.info(JSON.stringify(data));
+	    })
+
+	getProvince();
+	//获取所在区域 - 省
+	function getProvince(){
+		$http.get('http://'+$rootScope.hostName+'/area/province',
+        {
+        cache: true,
+        headers: {
+            'Content-Type': 'application/json' , 
+            'Authorization': 'bearer ' + $rootScope.token
+       		}
+        }).success(function(data) {
+        	console.info(data.data)
+			$scope.provinces = data.data; 	
+		}).error(function (data, status) {
+			layer.msg(status);
+	        console.info(JSON.stringify(data));
+	    })
+	}
+
+	//获取所在区域 - 市
+	$scope.getCity = function(province){
+		$http.get('http://'+$rootScope.hostName+'/area/'+province+'/city',
+        {
+        cache: true,
+        headers: {
+            'Content-Type': 'application/json' , 
+            'Authorization': 'bearer ' + $rootScope.token
+       		}
+        }).success(function(data) {
+        	$scope.citys = data.data; 
+		}).error(function (data, status) {
+			layer.msg(status);
+	        console.info(JSON.stringify(data));
+	    })
+	}
+
+	//获取所在区域 - 地區
+	$scope.getDistrict = function(city){
+		$http.get('http://'+$rootScope.hostName+'/area/'+city+'/district',
+        {
+        cache: true,
+        headers: {
+            'Content-Type': 'application/json' , 
+            'Authorization': 'bearer ' + $rootScope.token
+       		}
+        }).success(function(data) {
+			$scope.districts = data.data; 
+		}).error(function (data, status) {
+			layer.msg(status);
+	        console.info(JSON.stringify(data));
+	    })
+	}
+
+
+	$scope.submit = function(user){
+		$scope.items = {};
+		if(user.contact_phone){
+			$scope.items['contact_phone'] = user.contact_phone;
+		}
+		if(user.email){
+			$scope.items['email'] = user.email;
+		}
+		if(user.company_name){
+			$scope.items['company_name'] = user.company_name;
+		}
+		if(user.contact){
+			$scope.items['contact'] = user.contact;
+		}
+		if(user.memo){
+			$scope.items['memo'] = user.memo;
+		}
+		if(user.province.key){
+			$scope.items['province'] = user.province.key;
+		}
+		if(user.city.key){
+			$scope.items['city'] = user.city.key;
+		}
+		if(user.district.key){
+			$scope.items['district'] = user.district.key;
+		}
+		if(user.invoice == true){
+			$scope.items['invoice'] = 'Y';
+		}
+		if(user.invoice == false){
+			$scope.items['invoice'] = 'N';
+		}
+		if($stateParams.id){
+			$scope.items['product_id'] = $stateParams.id;
+		}
+
+		console.info($scope.items);
+		$http.post('http://'+$rootScope.hostName+'/company/order/submit',$scope.items,
+	            {
+	            headers: {
+	                'Content-Type': 'application/json' , 
+	            	'Authorization': 'bearer ' + $rootScope.token,
+	            }
+	        }).success(function(data) {
+	        	debugger
+	        	console.log(data.data)
+	            layer.show("提交成功！");
+	            $scope.user = {};
+	            $scope.items = {};
+	            location.href='#/corporate';
+
+	        }).error(function (data, status) {
+	        	var errMsg = JSON.stringify(data.message);
+	        	console.info(errMsg);
+	        	layer.show(errMsg);
+            });
+		
+	}
+})
+
