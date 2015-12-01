@@ -3198,16 +3198,20 @@ lvtuanApp.controller("userorderPendingCtrl",function($scope,listHelper){
 	listHelper.bootstrap('/center/pay/question/waitpay', $scope);
 })
 //用户的订单 - 待受理
-lvtuanApp.controller("userorderRepliedCtrl",function($scope,listHelper){
+lvtuanApp.controller("userorderNewCtrl",function($scope,listHelper){
 	listHelper.bootstrap('/center/pay/question/new', $scope);
 })
 //用户的订单 - 待确认
-lvtuanApp.controller("userorderCompletedCtrl",function($scope,listHelper){
+lvtuanApp.controller("userorderRepliedCtrl",function($scope,listHelper){
 	listHelper.bootstrap('/center/pay/question/replied', $scope);
 })
 //用户的订单 - 待评价
-lvtuanApp.controller("userorderTimeoutCtrl",function($scope,listHelper){
+lvtuanApp.controller("userorderWaitforevaluationCtrl",function($scope,listHelper){
 	listHelper.bootstrap('/center/pay/question/waitforevaluation', $scope);
+})
+//用户的订单 - 已完成
+lvtuanApp.controller("userorderCompleteCtrl",function($scope,listHelper){
+	listHelper.bootstrap('/center/pay/question/complete', $scope);
 })
 
 //用户的订单 - 订单详情
@@ -3221,9 +3225,9 @@ lvtuanApp.controller("userOrderDetailCtrl",function($http,$scope,$state,$rootSco
        		}
         }).success(function(data) {
         	console.info("订单详情",data.data);
-			if(data.data.length > 0){
-				$scope.items = data.data; 
-				console.info($scope.items );
+			if(data.data){
+				$scope.item = data.data; 
+				console.info($scope.item);
 				return true;
 			}else{
 				layer.show('暂无数据！');

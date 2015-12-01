@@ -595,7 +595,17 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
           }
       }
     })
-   .state('orderuser.replied', { //用户的订单 - 待受理
+   .state('orderuser.new', { //用户的订单 - 待受理
+      url: '/new',
+      cache: 'true',
+      views: {
+          'order-new': {
+              templateUrl: 'template/mylvtuan/user/order/order-new.html',
+              controller: 'userorderNewCtrl'
+          }
+      }
+    })
+   .state('orderuser.replied', { //用户的订单 - 待确认
       url: '/replied',
       cache: 'true',
       views: {
@@ -605,23 +615,23 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
           }
       }
     })
-   .state('orderuser.completed', { //用户的订单 - 待确认
-      url: '/completed',
+   .state('orderuser.waitforevaluation', { //用户的订单 - 待评价
+      url: '/waitforevaluation',
       cache: 'true',
       views: {
-          'order-completed': {
-              templateUrl: 'template/mylvtuan/user/order/order-completed.html',
-              controller: 'userorderCompletedCtrl'
+          'order-waitforevaluation': {
+              templateUrl: 'template/mylvtuan/user/order/order-waitforevaluation.html',
+              controller: 'userorderWaitforevaluationCtrl'
           }
       }
     })
-   .state('orderuser.timeout', { //用户的订单 - 待评价
-      url: '/timeout',
+   .state('orderuser.complete', { //用户的订单 - 已完成
+      url: '/complete',
       cache: 'true',
       views: {
-          'order-timeout': {
-              templateUrl: 'template/mylvtuan/user/order/order-timeout.html',
-              controller: 'userorderTimeoutCtrl'
+          'order-complete': {
+              templateUrl: 'template/mylvtuan/user/order/order-complete.html',
+              controller: 'userorderCompleteCtrl'
           }
       }
     })

@@ -1,28 +1,18 @@
-<ion-view view-title="order-all">
+<ion-view view-title="order-complete">
     <ion-content>
-    <div>
+
     	<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
     	<ion-list ng-repeat="item in items">
-        	<ion-item class="item" >
+        	<ion-item class="item">
 	          	<span class="sp-l fc-33">{{item.title}}</span>
 				<span class="sp-r fc-33">{{item.created_at}}</span>
 	        </ion-item>
-	        <ion-item class="item itemdata" >
+	        <ion-item class="item itemdata">
 	        	<div class="row">
 	        		<div class="col">
-	        			<h2 class="fc-ee">{{item.status}}</h2>
-		        	</div>
-	        	</div>
-	        	<div class="row">
-	        		<div class="col">
-        				<h2 class="fc-33">{{item.post_type}}</h2>
+	        			<h2 class="fc-ee">{{item.post_type}}</h2>
 		        	</div>
 	  				<div class="col" style="text-align: right;">
-  					<button class="button button-small button-positive">删除</button>
-  					<button class="button button-small button-positive">付款</button>
-  					<button class="button button-small button-positive">取消</button>
-  					<button class="button button-small button-positive">联系律师</button>
-			   		<button class="button button-small button-positive">评价</button>
 	  				</div>
 	        	</div>
 	        </ion-item>

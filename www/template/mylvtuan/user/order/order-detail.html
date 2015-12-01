@@ -5,30 +5,28 @@
 			<h1 class="title">订单详情</h1>
 		</ion-header-bar>
 		<ion-content class="web-body">
-			<ion-list ng-repeat="item in items">
+			<ion-list>
 				<div class="row">
 					<div class="col">
-						<span ng-if="item.order_status == 1">待付款</span>
-					  	<span ng-if="item.order_status == 2">待受理</span>
-					  	<span ng-if="item.order_status == 3">待确认</span>
-					  	<span ng-if="item.order_status == 4">待评价</span>
+						<span>{{item.status}}</span>
 					</div>
-					<div class="col">
+					<!-- <div class="col">
 						剩余<label ng-bind-html="t"></label>小时关闭 
-					</div>
+					</div> -->
 				</div>
 				<div class="item" style="padding: 10px 5px;">
 					<a class="item item-thumbnail-left">
-				      <img ng-src="http://m.wdlst.com/{{item.product_img}}">
-				      <h2 class="web-top10">图文咨询 <span style="font-size: 20px;color: #c40000;font-weight: bolder;font-family: Arial;-webkit-font-smoothing: antialiased;float:right">￥{{item.order_price}}</span></h2>
+				      <img ng-src="{{item.product_img}}">
+				      <h2 class="web-top10">{{item.post_type}} <span style="font-size: 20px;color: #c40000;font-weight: bolder;font-family: Arial;-webkit-font-smoothing: antialiased;float:right">￥{{item.price}}</span></h2>
 
-				      <p  class="web-top5" >房产纠纷</p>
+				      <p class="web-top5" >房产纠纷</p>
 				    </a>
 				</div>
 		         <ion-item class="item">
+					<p>问题标题：{{item.title}}</p>
+					<p>问题描述：{{item.content}}</p>
 		        	<p>创建时间：{{item.created_at}}</p>
 					<p>订单编号：{{item.order_no}}</p>
-					<p>问题描述：{{item.order_no}}</p>
 		        	<p style="text-align: right;">
 	  					<button ng-if="item.order_status == 3" class="button button-small button-positive">删除</button>
 	  					<button ng-if="item.order_status == 4" class="button button-small button-positive">付款</button>
