@@ -23,7 +23,7 @@ var paths = {
 gulp.task('default', ['build']);
  
 gulp.task('build-dev', function(cb) {
-  runSequence('templates', 'minifyDevJs', 'minifyLibJs', 'minifyAllJs', 'dev', cb);
+  runSequence('dev', cb);
 });
  
 gulp.task('build-prod', function(cb) {
