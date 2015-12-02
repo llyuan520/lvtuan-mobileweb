@@ -14,7 +14,7 @@
 				      <img ng-src="{{items.user.avatar}}">
 				      <h2 class="web-top10">
 				      		<a ng-if="user_group_id == 1 || user_group_id == 2 && is_verified == 0" ng-href="#/info">{{items.user.realname}}</a>
-				      		<a ng-if="user_group_id == 2 && is_verified == 1" ng-href="#/infolawyer">{{items.user.realname}} <span class="web-font14">律师</span></a>
+				      		<a ng-if="user_group_id == 2 && is_verified == 1" ng-href="#/becomelawyer">{{items.user.realname}} <span class="web-font14">律师</span></a>
 				      </h2>
 				      <a ng-href="#/messages">
 					      <icon  class="icon ion-ios-email-outline positive" style="font-size: 42px;"></icon>
@@ -42,7 +42,7 @@
 					    <i class="icon ion-chevron-right"></i>
 					  </a>
 					  <a class="item" ng-if="user_group_id == 1 &&  is_verified == 0" ng-href="#/becomelawyer">
-					    认证为律师
+					    认证律师
 					    <i class="icon ion-chevron-right"></i>
 					  </a>
 					  <a class="item" ng-if="user_group_id == 2 &&  is_verified == 0">

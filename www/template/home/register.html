@@ -23,7 +23,7 @@
 					<span class="bg-mobel login-lbl-pl login-lbl-fc">&nbsp;</span>
 					<input type="password" ng-model="registerData.phonecode" name="phonecode" placeholder="验证码">
 				</label>
-				<p class="item fc-red" ng-show="registerForm.phonecode.$required">手机号码不能为空</p>
+				<p class="item fc-red" ng-show="registerForm.phonecode.$required">验证码不能为空</p>
 				<label class="item item-input">
 					<span class="bg-clock login-lbl-pl login-lbl-fc">&nbsp;</span>
 					<input type="password" ng-model="registerData.password" name="password" placeholder="登录密码(6-20位字符)" ng-minlength="6" ng-maxlength="20" ng-pattern="/^[\@A-Za-z0-9\!\#\$\%\^\&\*\.\~]{6,20}$/" required="required">

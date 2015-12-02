@@ -25,12 +25,12 @@
 				  <div class="item web-paddingtb0" style="padding-left:55px;height:30px;line-height:30px;border-top:0px;color:#767676;">
 				  	
 				  	<i ng-click="share(items.id)" class="icon ion-android-share-alt web-ion-img1-2" style="float:right;font-size:14px;">&nbsp;
-				    	<label>10</label>
+				    	<!-- <label>10</label> -->
 					</i>
-				  	<i class="icon ion-compose web-ion-img1-2" style="float:right;margin-right:10px;font-size:14px;">&nbsp;
+				  	<i ng-click="comments(items.id)" class="icon ion-compose web-ion-img1-2" style="float:right;margin-right:10px;font-size:14px;">&nbsp;
 				    	<label>{{items.post_extra.comments_count}}</label>
 					</i>
-				    <i ng-click="likes(televis.id)"  class="icon ion-heart web-ion-img1-2" style="float:right;margin-right:10px;font-size:14px;">&nbsp;
+				    <i ng-click="likes(items.id)"  class="icon ion-heart web-ion-img1-2" style="float:right;margin-right:10px;font-size:14px;">&nbsp;
 				    	<label>{{items.post_extra.likes_count}}</label>
 				    </i>
 				    <i class="icon ion-chatbubble web-ion-img1-2" style="float:right;margin-right:10px;font-size:14px;">&nbsp;

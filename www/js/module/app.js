@@ -270,12 +270,6 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       controller: 'becomelawyerCtrl'
     })
 /*———————————————————————————— 律师的个人中心 ————————————————————————————*/
-    .state('infolawyer', { //律师-个人资料
-      url: '/infolawyer',
-      cache: 'true',
-      templateUrl: 'template/center/info.html',
-      controller: 'infolawyerCtrl'
-    })
     .state('followed_lawyer', { //律师-我的关注
       url: '/followed_lawyer',
       cache: 'true',
@@ -339,8 +333,6 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       templateUrl: 'template/center/site.html',
       controller: 'siteCtrl'
     })
-
-    
 
 /********************************** 找律师 **********************************/
     .state('lawyerlist', { //找律师列表
@@ -696,10 +688,20 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
     })
 
 /********************************** 小微企服 **********************************/
-    .state('corporate', { //首页-人才交流
+    .state('corporate', { //首页-小微企服
       url: '/corporate',
-      templateUrl: 'template/corporate/corporateservices.html'/*,
-      controller: 'corporateservicesCtrl'*/
+      templateUrl: 'template/corporate/corporateservices.html',
+      controller: 'corporateservicesCtrl'
+    })
+    .state('corporate/list', { //首页 - 小微企服
+      url: '/corporate/list/:id',
+      templateUrl: 'template/corporate/list.html',
+      controller: 'corporatelistCtrl'
+    })
+    .state('corporate/buynow', { //首页 - 小微企服 - 立即购买
+      url: '/corporate/buynow/:id',
+      templateUrl: 'template/corporate/buynow.html',
+      controller: 'corporatebuynowCtrl'
     })
 
 

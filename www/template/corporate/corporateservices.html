@@ -1,14 +1,29 @@
 <ion-view view-title="小微企服" hide-tabs="true">
 		<ion-pane  class="web-body">
 			<ion-header-bar class="bar bar-header bar-light">
-				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" onclick="history.go(-1);"></a>
+				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-href="#/index"></a>
 				<h1 class="title">小微企服</h1>
 			</ion-header-bar>
-			<ion-content class="web-body web-top10">
+			<!-- <ion-content class="web-body web-top10">
 				<div class="basekong40"></div>
 				<img src="img/icon-header.png" style="width:60px;height:60px;border-radius:60px;margin:0px auto;display: block;" />
 				<div class="basekong5"></div>
 				<p class="basetit20">正在开发中<br />敬请期待(第二期)...</p>
+			</ion-content> -->
+			<ion-content  class="web-body">
+				<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+				<ion-list>
+					<div style="margin-bottom:5px;">
+						<img src="img/xwqf-banner.jpg" style="width: 100%;">
+					</div>
+					<ion-item class="item-thumbnail-left" ng-repeat="item in items" ng-href="#/corporate/list/{{item.id}}">
+						<img ng-src="{{item.picture}}">
+						<h2 style="margin-top:10px">{{item.name}}</h2>
+						<p style="margin-top:5px">￥：{{item.price}}元/年</p>
+						<p style="margin-top:5px">{{item.life}}年起签</p>
+					</ion-item>
+				</ion-list>
+				<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
 			</ion-content>
 		</ion-pane>
 </ion-view>

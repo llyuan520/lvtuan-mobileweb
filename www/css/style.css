@@ -28,7 +28,7 @@ body,
 .item h2.fc-ee,.error{
 	font-size: 14px;
 }
-.fc-red,.error{
+.fc-red,.error,.item p.fc-red{
 	color: #FF0000;
 }
 .button-border-left{
@@ -285,12 +285,16 @@ a:hover{
 	-webkit-box-orient: vertical;
 	white-space:normal;
 }
-.item p.contents,.item p.contents p{
+.item p.contents,.item p.contents p,.ngbindhtml .item p{
 	overflow: hidden;
 	text-overflow: ellipsis;
 	display: -webkit-box;
 	-webkit-box-orient: vertical;
 	white-space:normal;
+}
+.ngbindhtml .item p{
+	line-height: 30px;
+	margin-bottom: 10px;
 }
 
 img.avatar{border-radius: 50%;border:2px solid #fff;}
