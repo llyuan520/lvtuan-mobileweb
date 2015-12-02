@@ -12,21 +12,21 @@
 			<div class="list login">
 				<div class="item item-input">
 					<span class="bg-man login-lbl-pl login-lbl-fc">&nbsp;</span>
-					<input type="text" name="username" ng-model="registerData.username" required="required" ng-pattern="/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/" placeholder="手机号码">
-					<button ng-click="phonecode()" class="button button-positive button-outline button-small button-border-left">
-						获取验证码
-					</button>
+					<input type="text" name="username" ng-model="user.username" required ng-pattern="/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/" placeholder="手机号码">
 				</div>
 				<p class="item fc-red" ng-show="registerForm.username.$invalid && !registerForm.username.$pristine">请输入合法的手机号码</p>
 				<p class="item fc-red" ng-show="registerForm.username.$required">手机号码不能为空</p>
-				<label class="item item-input">
+				<div class="item item-input">
 					<span class="bg-mobel login-lbl-pl login-lbl-fc">&nbsp;</span>
-					<input type="password" ng-model="registerData.phonecode" name="phonecode" placeholder="验证码">
-				</label>
+					<input type="password" ng-model="user.phonecode" name="phonecode" placeholder="验证码">
+					<button ng-disabled="!user.username" ng-click="phonecode(user.username)" class="button button-positive button-outline button-small button-border-left">
+						获取验证码
+					</button>
+				</div>
 				<p class="item fc-red" ng-show="registerForm.phonecode.$required">验证码不能为空</p>
 				<label class="item item-input">
 					<span class="bg-clock login-lbl-pl login-lbl-fc">&nbsp;</span>
-					<input type="password" ng-model="registerData.password" name="password" placeholder="登录密码(6-20位字符)" ng-minlength="6" ng-maxlength="20" ng-pattern="/^[\@A-Za-z0-9\!\#\$\%\^\&\*\.\~]{6,20}$/" required="required">
+					<input type="password" ng-model="user.password" name="password" placeholder="登录密码(6-20位字符)" ng-minlength="6" ng-maxlength="20" ng-pattern="/^[\@A-Za-z0-9\!\#\$\%\^\&\*\.\~]{6,20}$/" required>
 				</label>
 				<p class="item" ng-show="registerForm.password.$error.minlength">
 					<span class="fc-red">字符不能小于6个字符</span>
@@ -40,18 +40,20 @@
 				<p class="item" ng-show="registerForm.password.$required ">
 					<span class="fc-red">密码不能为空</span>
 				</p>
-				<!--<label class="item item-input">-->
-					<button ng-click="submit()" class="button button-block button-positive btn-login-button" type="button">提交</button>
-				<!--</label>-->
+				<div class="item">
+					<div class="item item-checkbox">
+			        	<div class="checkbox">
+					  		<input type="checkbox" name="isCheck" ng-model="user.isCheck"  ng-false-value="false"> 
+					  	</div>
+					  	是否认证为律师？
+			        </div>
+						
+					<!--<label class="item item-input">-->
+						<button ng-disabled="registerForm.$invalid" ng-click="submit(user)" class="button button-block button-positive btn-login-button" type="button">提交</button>
+					<!--</label>-->
+				</div>
 			</div>
 				
-			<ul class="list login2">
-			  <li class="item">
-			    <ion-checkbox ng-model="isChecke.checked" ng-change="isCheckeChange()">
-		            <em class="fc-ee">已阅读并同意</em>《律团用户端协议》
-		        </ion-checkbox>
-			  </li>
-			</ul>
 		</form>	
       </ion-content>
     </ion-pane>

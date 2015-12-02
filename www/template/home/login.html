@@ -11,12 +11,12 @@
 			<div class="list login">
 				<label class="item item-input item-text-wrap">
 					<span class="bg-man login-lbl-pl login-lbl-fc">&nbsp;</span>
-					<input type="text" name="username" ng-model="loginData.username" required="required" placeholder="手机号码或者邮箱" ng-messages-multiple />
+					<input type="text" name="username" ng-model="user.username" required="required" placeholder="手机号码或者邮箱" ng-messages-multiple />
 						
 				</label>
 				<label class="item item-input">
 					<span class="bg-clock login-lbl-pl login-lbl-fc">&nbsp;</span>
-					<input type="password" name="password" placeholder="登录密码(6-20位字符)" ng-model="loginData.password" ng-minlength="6" ng-maxlength="20" ng-pattern="/^[\@A-Za-z0-9\!\#\$\%\^\&\*\.\~]{6,20}$/" required="required">
+					<input type="password" name="password" placeholder="登录密码(6-20位字符)" ng-model="user.password" ng-minlength="6" ng-maxlength="20" ng-pattern="/^[\@A-Za-z0-9\!\#\$\%\^\&\*\.\~]{6,20}$/" required="required">
 				</label>
 				<p class="item" ng-show="loginForm.password.$error.minlength">
 					<span class="fc-red">字符不能小于6个字符</span>
@@ -30,21 +30,25 @@
 				<p class="item" ng-show="loginForm.password.$required ">
 					<span class="fc-red">密码不能为空</span>
 				</p>
-				<!--<label class="item item-input">-->
-					<button ng-click="submit()" class="button button-block button-positive btn-login-button" type="button">登录</button>
-				<!--</label>-->
+				<div class="item">
+					<!--<label class="item item-input">-->
+						<button ng-disabled="loginForm.$invalid" ng-click="submit(user)" class="button button-block button-positive btn-login-button" type="button">登录</button>
+					<!--</label>-->
+
+					<p class="item a-right" style="padding: 10px 0;">
+						<a href="#/resetpwd" >忘记密码？</a>
+					</p>
+					<p class="item" style="padding: 10px 0;">
+						还没有账号？快去注册吧。
+					</p>
+					<div class="item" style="padding: 0;">
+						<a ng-href="#/register" class="button button-block button-positive btn-login-button">注册</a>
+					</div>
+				</div>
+				
+				
 			</div>			
 		</form>
-		<div class="list list-noborder">
-			<div class="item row">
-				<div class="col-50 a-left">
-					<a ng-href="#/register">注册</a>
-				</div>
-				<div class="col-50 a-right">
-					<a href="#/resetpwd" >找回密码</a>
-				</div>
-			</div>
-		</div>
 		
       </ion-content>
     </ion-pane>

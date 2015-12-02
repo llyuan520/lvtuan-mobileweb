@@ -77,7 +77,9 @@ lvtuanApp.controller("indexCtrl",function($scope,$state,$http,$rootScope,$ionicL
 				return false;
 			}
 		}).error(function (data, status) {
-			layer.msg(status);
+			if(status == 401){
+		        		layer.msg(status);
+		        	}
 	        console.info(JSON.stringify(data));
 	    })
 
@@ -104,18 +106,17 @@ lvtuanApp.controller("loginCtrl",function($state,$scope,$rootScope,$http){
 	var format_mobile = /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/; 
 	var format_number=/^[0-9]*$/;
 
-	$scope.submit = function(){
+	$scope.submit = function(user){
 		localStorage.removeItem('user_group_id');
 		localStorage.removeItem('is_verified');
-		submintForm();
+		submintForm(user);
 	}
-  	var submintForm = function(){
-  		var params = layer.getParams("#loginForm");
-  		if(checkvaldata(params)){
+  	var submintForm = function(user){
+  		if(checkvaldata(user)){
   			$http.post('http://'+$rootScope.hostName+'/login',
 	  			{
-	  				username : params.username,
-	  				password : params.password
+	  				username : user.username,
+	  				password : user.password
 	  			},
 	  			{
 		            headers: {
@@ -135,39 +136,37 @@ lvtuanApp.controller("loginCtrl",function($state,$scope,$rootScope,$http){
 		        	localStorage.setItem("user_group_id", JSON.stringify(user_group_id)); //存储在本地，判断是否是律师
 		        	localStorage.setItem("is_verified", JSON.stringify(is_verified)); //存储在本地，判断是否是律师
 
+		        	$scope.user = {};
 		        	//判断是否是律师
 	        		location.href='#/center';
 	        		window.location.reload();
 		          
-		           $(':input','#questions_form').not('textarea :submit, :reset, :hidden').val('');
+		           
 		        }).error(function (data, status) {
-		        	console.info(data)
-		        	layer.msg(status);
-		        	/*var errMsg = JSON.stringify(data.error_messages.password);
-		        	layer.show(errMsg);*/
+		        	if(status == 401){
+		        		layer.msg(status);
+		        	}
+		        	var errMsg = JSON.stringify(data.error_messages.password);
+		        	layer.show(errMsg);
 	            }); 
   		}
 	}
-	function checkvaldata(params){
-		if(params.username == ""){
+	function checkvaldata(user){
+		if(user.username == ""){
   			layer.show("请输入手机号码或者邮箱！");
   			return false;
   		}else{
-  			if(!params.username.match(format_mobile)){
-  				if(params.username.match(format_email) == null){
+  			if(!user.username.match(format_mobile)){
+  				if(user.username.match(format_email) == null){
 					layer.show("请输入正确邮箱账号!");
 					return false;
 				}
 			}else{
-				if(params.username.match(format_mobile)==null){
+				if(user.username.match(format_mobile)==null){
 					layer.show("请输入正确的手机号码!");
 					return false;
 				}
 			}
-  		}
-  		if(params.password == ""){
-  			layer.show("请输入密码");
-  			return false;
   		}
         return true;   
 	}
@@ -176,76 +175,67 @@ lvtuanApp.controller("loginCtrl",function($state,$scope,$rootScope,$http){
 //用户注册
 lvtuanApp.controller("registerCtrl",function($scope,$rootScope,$http){
 	//获取验证码
-	$scope.phonecode = function(){
-		var params = layer.getParams("#registerForm");
-		if(params.username == ""){
-  			layer.show("请输入手机号码！");
-  			return false;
-  		}else{
-  			var param = 'phone='+params.username;
-  			$http.post('http://'+$rootScope.hostName+'/send-code?'+param,{
-	            headers: {
-	                'Content-Type': 'application/json' , 
-	            	'Authorization': 'bearer ' + $rootScope.token
-	            }
-	        }).success(function(data) {
-	           layer.show("验证码已发送到您的手机！");
-	           
-	        }).error(function (data, status) {
-	        	layer.msg(status);
-	        	var errMsg = JSON.stringify(data.error_messages.password);
-	        	layer.show(errMsg);
-            });
-            return true;
-  		}        
+	$scope.phonecode = function(phone){
+		var param = 'phone='+phone;
+		$http.post('http://'+$rootScope.hostName+'/send-code?'+param,{
+	        headers: {
+	            'Content-Type': 'application/json' , 
+	        	'Authorization': 'bearer ' + $rootScope.token
+	        }
+        }).success(function(data) {
+           layer.show("验证码已发送到您的手机！");
+        }).error(function (data, status) {
+        	if(status == 401){
+		        		layer.msg(status);
+		        	}
+        	var errMsg = JSON.stringify(data.error_messages.password);
+        	layer.show(errMsg);
+        });
 	}
 
-	//得到是否同意协议的值
-	var isChecke;
-	$scope.isCheckeChange = function() {
-	 	isChecke = $scope.isChecke.checked;
-	 	console.info(isChecke)
-    };
-    $scope.isChecke = { checked: false };
-
     //提交注册
-	$scope.submit = function(){
-		var params = layer.getParams("#registerForm");
-		if(params.username == ""){
-  			layer.show("请输入手机号码！");
-  			return false;
-  		}else if(params.phonecode == ""){
-  			layer.show("请输入验证码！");
-  			return false;
-  		}else if(params.password == ""){
-  			layer.show("请输入密码！");
-  			return false;
-  		}else if(isChecke == undefined || isChecke == false){
-  			layer.show("请阅读协议！");
-  			return false;
-  		}else{
-  			/*var param = 'username='+params.username+'&phonecode='+params.phonecode+'&password='+params.password+'&account_type=phone';*/
-  			$http.post('http://'+$rootScope.hostName+'/register',
-				{
-	  				username : params.username,
-	  				password : params.password
-	  			},
-	  			{
-		            headers: {
-		                'Content-Type': 'application/json' , 
-		            	'Authorization': 'bearer ' + $rootScope.token
-		            }
-		        }).success(function(data) {
-		           layer.show("注册成功！");
-		           $(':input','#questions_form').not('textarea :submit, :reset, :hidden').val('');
-		           $state.go("center", {reload: true});
-		        }).error(function (data, status) {
-		        	layer.msg(status);
-		        	var errMsg = JSON.stringify(data.error_messages.username);
-		        	layer.show(errMsg);
-	            });
-	        return true;
-  		}        
+	$scope.submit = function(user){
+		$scope.params = {};
+		if(user.username){
+			$scope.params["username"] = user.username;
+		}
+		if(user.phonecode){
+			$scope.params["phonecode"] = user.phonecode;
+		}
+		if(user.password){
+			$scope.params["password"] = user.password;
+		}
+
+		$http.post('http://'+$rootScope.hostName+'/register',
+		{
+				username  		: $scope.params.username,
+				password  		: $scope.params.password,
+				phonecode 		: $scope.params.phonecode,
+				account_type	: "phone"
+			},
+			{
+            headers: {
+                'Content-Type': 'application/json' , 
+            	'Authorization': 'bearer ' + $rootScope.token
+            }
+        }).success(function(data) {
+           layer.show("注册成功！");
+           $scope.user = {};
+           $scope.params = {};
+           if(isCheck == true){
+           		location.href='#/becomelawyer';
+           }else{
+           		location.href='#/center';
+           }
+           
+        }).error(function (data, status) {
+        	if(status == 401){
+		        		layer.msg(status);
+		        	}
+        	var errMsg = JSON.stringify(data.error_messages.username);
+        	layer.show(errMsg);
+        });
+     
 	}
   	
 })
@@ -276,7 +266,9 @@ lvtuanApp.controller("resetpwdCtrl",function($scope,$http,$rootScope){
 	           location.href='#/login';
 		        window.location.reload();
 	        }).error(function (data, status) {
-	        	layer.msg(status);
+	        	if(status == 401){
+		        		layer.msg(status);
+		        	}
 	        	var errMsg = JSON.stringify(data.error_messages);
 	        	layer.show(errMsg);
             });
@@ -335,7 +327,9 @@ lvtuanApp.controller("groupListCtrl",function($scope,$http,$rootScope,$state){
 				}
 
 			}).error(function (data, status) {
-				layer.msg(status);
+				if(status == 401){
+		        		layer.msg(status);
+		        	}
 		        console.info(JSON.stringify(data));
 		    })
 		    .finally(function() {
@@ -384,7 +378,9 @@ lvtuanApp.controller("groupTeleviseCtrl",function($scope,$http,$state,$rootScope
 				}
 
 			}).error(function (data, status) {
-				layer.msg(status);
+				if(status == 401){
+		        		layer.msg(status);
+		        	}
 		        console.info(JSON.stringify(data));
 		    })
 		    .finally(function() {
@@ -411,7 +407,9 @@ lvtuanApp.controller("groupTeleviseCtrl",function($scope,$http,$state,$rootScope
         	$scope.televise[index].post_extra.likes_count = itmes.likes_count;
            layer.show("点赞成功！");
         }).error(function (data, status) {
-        	layer.msg(status);
+        	if(status == 401){
+		        		layer.msg(status);
+		        	}
         	console.info(data);
         	var errMsg = "";
         	if(JSON.stringify(data.error_messages.item_type)){
@@ -479,7 +477,9 @@ lvtuanApp.controller("groupAttentionCtrl",function($scope,$http,$state,$rootScop
 				}
 
 			}).error(function (data, status) {
-				layer.msg(status);
+				if(status == 401){
+		        		layer.msg(status);
+		        	}
 		        console.info(JSON.stringify(data));
 		    })
 		    .finally(function() {
@@ -522,7 +522,9 @@ lvtuanApp.controller("groupAttentionCtrl",function($scope,$http,$state,$rootScop
 					return false;
 				}
 			}).error(function (data, status) {
-				layer.msg(status);
+				if(status == 401){
+		        		layer.msg(status);
+		        	}
 				var datacode = JSON.stringify(data);
 				if(datacode.status_code == 400){
 					layer.show("你已经是该圈子的成员了!")
@@ -571,7 +573,9 @@ lvtuanApp.controller("groupviewCtrl",function($scope,$http,$state,$rootScope,$st
 
 
 	}).error(function (data, status) {
-		layer.msg(status);
+		if(status == 401){
+		        		layer.msg(status);
+		        	}
         console.info(JSON.stringify(data));
     })
 	
@@ -612,7 +616,9 @@ lvtuanApp.controller("groupsiteCtrl",function($scope,$http,$state,$rootScope,$st
 			$scope.is_mine = $scope.group.is_mine;
 			$scope.file = $scope.group.group_avatar;
 		}).error(function (data, status) {
-			layer.msg(status);
+			if(status == 401){
+		        		layer.msg(status);
+		        	}
 	        console.info(JSON.stringify(data));
 	    })
 
@@ -631,7 +637,9 @@ lvtuanApp.controller("groupsiteCtrl",function($scope,$http,$state,$rootScope,$st
 				$scope.group.members.splice(index,1);
 
 			}).error(function (data, status) {
-				layer.msg(status);
+				if(status == 401){
+		        		layer.msg(status);
+		        	}
 				console.info(data);
 		        console.info(JSON.stringify(data));
 		    })
@@ -658,7 +666,9 @@ lvtuanApp.controller("groupsiteCtrl",function($scope,$http,$state,$rootScope,$st
 			        	location.href='#/group/list';
 			    		window.location.reload();
 					}).error(function (data, status) {
-						layer.msg(status);
+						if(status == 401){
+		        		layer.msg(status);
+		        	}
 						console.info(data);
 				        console.info(JSON.stringify(data));
 				    })
@@ -686,7 +696,9 @@ lvtuanApp.controller("groupsiteCtrl",function($scope,$http,$state,$rootScope,$st
 			    }).success(function(data) {
 			       layer.show("修改成功！");
 			    }).error(function (data, status) {
-			    	layer.msg(status);
+			    	if(status == 401){
+		        		layer.msg(status);
+		        	}
 			    	var errMsg = JSON.stringify(data.error_messages);
 			    	layer.show(errMsg);
 			    });
@@ -749,7 +761,9 @@ lvtuanApp.controller("groupsiteCtrl",function($scope,$http,$state,$rootScope,$st
 			        	location.href='#/group/list';
 			    		window.location.reload();
 					}).error(function (data, status) {
-						layer.msg(status);
+						if(status == 401){
+		        		layer.msg(status);
+		        	}
 						console.info(data);
 				        console.info(JSON.stringify(data));
 				    })
@@ -802,7 +816,9 @@ lvtuanApp.controller("groupaddCtrl",function($scope,$http,$state,$rootScope,$sta
 					return false;
 				}
 			}).error(function (data, status) {
-				layer.msg(status);
+				if(status == 401){
+		        		layer.msg(status);
+		        	}
 		        console.info(JSON.stringify(data));
 		    })
 		    .finally(function() {
@@ -855,7 +871,9 @@ lvtuanApp.controller("groupaddCtrl",function($scope,$http,$state,$rootScope,$sta
 	        	window.location.reload();
 		       
 		    }).error(function (data, status) {
-		    	layer.msg(status);
+		    	if(status == 401){
+		        		layer.msg(status);
+		        	}
 		    	var errMsg = JSON.stringify(data.error_messages);
 		    	layer.show(errMsg);
 		    });
@@ -900,7 +918,9 @@ lvtuanApp.controller("groupcreateCtrl",function($scope,$http,$state,$rootScope,$
 					return false;
 				}
 			}).error(function (data, status) {
-				layer.msg(status);
+				if(status == 401){
+		        		layer.msg(status);
+		        	}
 		        console.info(JSON.stringify(data));
 		    })
 		    .finally(function() {
@@ -968,7 +988,9 @@ lvtuanApp.controller("groupcreateCtrl",function($scope,$http,$state,$rootScope,$
 	           location.href='#/group/list';
 	           window.location.reload();
 	        }).error(function (data, status) {
-	        	layer.msg(status);
+	        	if(status == 401){
+		        		layer.msg(status);
+		        	}
 	        	if(status == 400){
 	        		var errMsg = JSON.stringify(data.error_messages.group_name[0]);
 	        		console.info(errMsg);
@@ -1103,7 +1125,9 @@ lvtuanApp.controller("televisecreateCtrl",function($scope,$http,$state,$rootScop
 	            location.href='#/broadcast/view/'+data.data.id;
 
 	        }).error(function (data, status) {
-	        	layer.msg(status);
+	        	if(status == 401){
+		        		layer.msg(status);
+		        	}
 	        	var errMsg = JSON.stringify(data.error_messages);
 	        	layer.show(errMsg);
             });
@@ -1127,7 +1151,9 @@ lvtuanApp.controller("broadcastviewCtrl",function($scope,$http,$state,$rootScope
     	console.info('广播详情',data.data)
 		$scope.items = data.data; 
 	}).error(function (data, status) {
-		layer.msg(status);
+		if(status == 401){
+		        		layer.msg(status);
+		        	}
         console.info(JSON.stringify(data));
     })
 
@@ -1149,7 +1175,9 @@ lvtuanApp.controller("broadcastviewCtrl",function($scope,$http,$state,$rootScope
         	$scope.items.post_extra.likes_count = like.likes_count;
            layer.show("点赞成功！");
         }).error(function (data, status) {
-        	layer.msg(status);
+        	if(status == 401){
+		        		layer.msg(status);
+		        	}
         	console.info(data);
         	var errMsg = "";
         	if(JSON.stringify(data.error_messages.item_type)){
@@ -1205,7 +1233,9 @@ lvtuanApp.controller("broadcastviewCtrl",function($scope,$http,$state,$rootScope
 	        	//$scope.items.post_extra.likes_count = like.likes_count;
 	           layer.show("分享成功！");
 	        }).error(function (data, status) {
-	        	layer.msg(status);
+	        	if(status == 401){
+		        		layer.msg(status);
+		        	}
 	        	console.info(data);
 	        	var errMsg = "";
 	        	if(JSON.stringify(data.error_messages.parent_id)){
@@ -1265,8 +1295,9 @@ lvtuanApp.controller("broadcastviewCtrl",function($scope,$http,$state,$rootScope
 	        }).error(function (data, status) {
 
 	        	console.info(data);
-	        	//layer.msg(status);
-	        	
+	        	if(status == 401){
+		        	layer.msg(status);
+		        }
 	        	var errMsg = "";
 	        	if(JSON.stringify(data.error_messages.parent_id)){
 	        		errMsg = JSON.stringify(data.error_messages.parent_id[0]);
@@ -1329,7 +1360,9 @@ lvtuanApp.controller("knowledgesCtrl",function($scope,$http,$rootScope){
 				}
 
 			}).error(function (data, status) {
-				layer.msg(status);
+				if(status == 401){
+		        		layer.msg(status);
+		        	}
 		        console.info(JSON.stringify(data));
 		    })
 		    .finally(function() {
@@ -1403,7 +1436,9 @@ lvtuanApp.controller("documentsCtrl",function($scope,$http,$rootScope){
 				}
 
 			}).error(function (data, status) {
-				layer.msg(status);
+				if(status == 401){
+		        		layer.msg(status);
+		        	}
 		        console.info(JSON.stringify(data));
 		    })
 		    .finally(function() {
@@ -1464,7 +1499,9 @@ lvtuanApp.controller("casesCtrl",function($scope,$http,$rootScope){
 				return false;
 			}
 		}).error(function (data, status) {
-			layer.msg(status);
+			if(status == 401){
+		        		layer.msg(status);
+		        	}
 	        console.info(JSON.stringify(data));
 	        console.info(JSON.stringify(status));
 	    })
@@ -1493,7 +1530,9 @@ lvtuanApp.controller("knowKnowledgesCtrl",function($scope,$http,$rootScope,$stat
 	        	$scope.items = data.data;
 
 			}).error(function (data, status) {
-				layer.msg(status);
+				if(status == 401){
+		        		layer.msg(status);
+		        	}
 		        console.info(JSON.stringify(data));
 		    })
 
@@ -1523,7 +1562,9 @@ lvtuanApp.controller("knowDocumentsCtrl",function($scope,$http,$rootScope,$inter
 					}
 				}
 			}).error(function (data, status) {
-				layer.msg(status);
+				if(status == 401){
+		        		layer.msg(status);
+		        	}
 		        console.info(JSON.stringify(data));
 		    })
 	}
@@ -1546,7 +1587,9 @@ lvtuanApp.controller("knowCasesCtrl",function($scope,$http,$rootScope,$interval,
 	        	$scope.items = data.data;
 
 			}).error(function (data, status) {
-				layer.msg(status);
+				if(status == 401){
+		        		layer.msg(status);
+		        	}
 		        console.info(JSON.stringify(data));
 		    })
 	}
@@ -1576,7 +1619,9 @@ lvtuanApp.controller("centerCtrl",function($scope,$http,$rootScope,$ionicPopup,$
 					return false;
 				}
 			}).error(function (data, status) {
-				layer.msg(status);
+				if(status == 401){
+		        		layer.msg(status);
+		        	}
 		        console.info(JSON.stringify(data));
 		        console.info(JSON.stringify(status));
 		    })
@@ -1599,7 +1644,9 @@ lvtuanApp.controller("centerCtrl",function($scope,$http,$rootScope,$ionicPopup,$
 					return false;
 				}
 			}).error(function (data, status) {
-				layer.msg(status);
+				if(status == 401){
+		        		layer.msg(status);
+		        	}
 		        console.info(JSON.stringify(data));
 		    })
 	}
@@ -1652,7 +1699,9 @@ lvtuanApp.controller("infoCtrl",function($scope,$http,$rootScope,$timeout,Upload
 					return false;
 				}
 			}).error(function (data, status) {
-				layer.msg(status);
+				if(status == 401){
+		        		layer.msg(status);
+		        	}
 		        console.info(JSON.stringify(data));
 		        console.info(JSON.stringify(status));
 		    })
@@ -1681,7 +1730,9 @@ lvtuanApp.controller("infoCtrl",function($scope,$http,$rootScope,$timeout,Upload
 					return false;
 				}
 			}).error(function (data, status) {
-				layer.msg(status);
+				if(status == 401){
+		        		layer.msg(status);
+		        	}
 		        console.info(JSON.stringify(data));
 		    })
 	}
@@ -1737,7 +1788,9 @@ lvtuanApp.controller("infoCtrl",function($scope,$http,$rootScope,$timeout,Upload
 	            layer.show("提交成功！");
 
 	        }).error(function (data, status) {
-	        	layer.msg(status);
+	        	if(status == 401){
+		        		layer.msg(status);
+		        	}
 	        	console.info(data.error_messages);
 	        	var errMsg = JSON.stringify(data.error_messages.content[0]);
 	        	layer.show(errMsg);
@@ -1771,7 +1824,9 @@ lvtuanApp.controller("viewMessageCtrl",function($scope,$http,$rootScope,$interva
         }).success(function(data) {
         	$scope.item = data.data;
 		}).error(function (data, status) {
-			layer.msg(status);
+			if(status == 401){
+		        		layer.msg(status);
+		        	}
 	        console.info(JSON.stringify(data));
 	    })
 })
@@ -1875,7 +1930,9 @@ lvtuanApp.controller("becomelawyerCtrl",function($scope,$http,$rootScope,$ionicA
 				$scope.law_cases = $scope.items.user.lawyer.law_cases
 				
 			}).error(function (data, status) {
-				layer.msg(status);
+				if(status == 401){
+		        		layer.msg(status);
+		        	}
 		        console.info(JSON.stringify(data));
 		    })
 
@@ -1915,7 +1972,9 @@ lvtuanApp.controller("becomelawyerCtrl",function($scope,$http,$rootScope,$ionicA
 					}
 				}	
 			}).error(function (data, status) {
-				layer.msg(status);
+				if(status == 401){
+		        		layer.msg(status);
+		        	}
 		        console.info(JSON.stringify(data));
 		    })
 
@@ -1946,7 +2005,9 @@ lvtuanApp.controller("becomelawyerCtrl",function($scope,$http,$rootScope,$ionicA
 						}
 		        	}
 				}).error(function (data, status) {
-					layer.msg(status);
+					if(status == 401){
+		        		layer.msg(status);
+		        	}
 			        console.info(JSON.stringify(data));
 			    })
 		}else{
@@ -1977,7 +2038,9 @@ lvtuanApp.controller("becomelawyerCtrl",function($scope,$http,$rootScope,$ionicA
 						}
 		        	}
 				}).error(function (data, status) {
-					layer.msg(status);
+					if(status == 401){
+		        		layer.msg(status);
+		        	}
 			        console.info(JSON.stringify(data));
 			    })
 		}else{
@@ -2008,7 +2071,9 @@ lvtuanApp.controller("becomelawyerCtrl",function($scope,$http,$rootScope,$ionicA
 					}
 	        	}
 			}).error(function (data, status) {
-				layer.msg(status);
+				if(status == 401){
+		        		layer.msg(status);
+		        	}
 		        console.info(JSON.stringify(data));
 		    })
 	}
@@ -2037,7 +2102,9 @@ lvtuanApp.controller("becomelawyerCtrl",function($scope,$http,$rootScope,$ionicA
 					}
 	        	}
 			}).error(function (data, status) {
-				layer.msg(status);
+				if(status == 401){
+		        		layer.msg(status);
+		        	}
 		        console.info(JSON.stringify(data));
 		    })
 	}
@@ -2079,7 +2146,9 @@ lvtuanApp.controller("becomelawyerCtrl",function($scope,$http,$rootScope,$ionicA
 					}
 	        	}
 			}).error(function (data, status) {
-				layer.msg(status);
+				if(status == 401){
+		        		layer.msg(status);
+		        	}
 		        console.info(JSON.stringify(data));
 		    })
 	}
@@ -2234,14 +2303,15 @@ lvtuanApp.controller("becomelawyerCtrl",function($scope,$http,$rootScope,$ionicA
 				window.location.reload();
 
 	        }).error(function (data, status) {
-	        	//layer.msg(status);
+	        	if(status == 401){
+		        		layer.msg(status);
+		        	}
 	        	console.info(data.error_messages);
 	        	console.info(JSON.stringify(data.message));
 	        	var errMsg = JSON.stringify(data.error_messages);
 	        	layer.show(errMsg);
 	        	console.info(errMsg);
 	        	layer.show(errMsg);
-	        	//layer.msg(status);
 	        });
     }
     
@@ -2324,7 +2394,9 @@ lvtuanApp.controller("becomelawyerCtrl",function($scope,$http,$rootScope,$ionicA
 				window.location.reload();
 
 	        }).error(function (data, status) {
-	        	/*layer.msg(status);*/
+	        	if(status == 401){
+		        		layer.msg(status);
+		        }
 	        	console.info(data.error_messages);
 	        	console.info(JSON.stringify(data.message));
 	        	var errMsg = JSON.stringify(data.error_messages);
@@ -2394,7 +2466,9 @@ lvtuanApp.controller("commentlaywerCtrl",function($scope,$http,$rootScope,$state
 	// 		}
 	// 		page++;
 	// 	}).error(function (data, status) {
-	// 		layer.msg(status);
+	// 		if(status == 401){
+		        		//layer.msg(status);
+		        	//}
 	//         console.info(JSON.stringify(data));
 	//         console.info(JSON.stringify(status));
 	//     })
@@ -2502,7 +2576,9 @@ lvtuanApp.controller("viewarticlelawyerCtrl",function($scope,$http,$rootScope,$s
 					return false;
 				}
 			}).error(function (data, status) {
-				layer.msg(status);
+				if(status == 401){
+		        		layer.msg(status);
+		        	}
 		        console.info(JSON.stringify(data));
 		        console.info(JSON.stringify(status));
 		    })
@@ -2615,7 +2691,9 @@ lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope){
 	        }).success(function(data) {
 				$scope.cities = data.data; 
 			}).error(function (data, status) {
-				layer.msg(status);
+				if(status == 401){
+		        		layer.msg(status);
+		        	}
 		        console.info(JSON.stringify(data));
 		    })
 	}
@@ -2631,7 +2709,9 @@ lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope){
 	        }).success(function(data) {
 				$scope.workscopes = data.data;
 			}).error(function (data, status) {
-				layer.msg(status);
+				if(status == 401){
+		        		layer.msg(status);
+		        	}
 		        console.info(JSON.stringify(data));
 		    })
 	}
@@ -2648,7 +2728,9 @@ lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope){
 	        	console.info(data.data)
 				$scope.periods = data.data; 
 			}).error(function (data, status) {
-				layer.msg(status);
+				if(status == 401){
+		        		layer.msg(status);
+		        	}
 		        console.info(JSON.stringify(data));
 		    })
 	}
@@ -2743,7 +2825,9 @@ lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope){
 				}
 				page++;
 			}).error(function (data, status) {
-				layer.msg(status);
+				if(status == 401){
+		        		layer.msg(status);
+		        	}
 		        console.info(JSON.stringify(data));
 		    })
 		    .finally(function() {
@@ -2796,7 +2880,9 @@ lvtuanApp.controller("viewCtrl",function($scope,$state,$http,$rootScope,$statePa
 	        	console.info(data.data)
 	        	$scope.items = data.data;
 			}).error(function (data, status) {
-				layer.msg(status);
+				if(status == 401){
+		        		layer.msg(status);
+		        	}
 		        console.info(JSON.stringify(data));
 		    })
 	}
@@ -2866,7 +2952,9 @@ lvtuanApp.controller("viewevaluateCtrl",function($scope,$http,$rootScope,$stateP
 				}
 				page++;
 			}).error(function (data, status) {
-				layer.msg(status);
+				if(status == 401){
+		        		layer.msg(status);
+		        	}
 		        console.info(JSON.stringify(data));
 		    })
 		    .finally(function() {
@@ -2918,7 +3006,9 @@ lvtuanApp.controller("viewarticleCtrl",function($scope,$http,$rootScope,$statePa
 				}
 				page++;
 			}).error(function (data, status) {
-				layer.msg(status);
+				if(status == 401){
+		        		layer.msg(status);
+		        	}
 		        console.info(JSON.stringify(data));
 		    })
 		    .finally(function() {
@@ -2973,7 +3063,9 @@ lvtuanApp.controller("viewteleviseCtrl",function($scope,$http,$rootScope){
 				}
 				page++;
 			}).error(function (data, status) {
-				layer.msg(status);
+				if(status == 401){
+		        		layer.msg(status);
+		        	}
 		        console.info(JSON.stringify(data));
 		    })
 		    .finally(function() {
@@ -3024,7 +3116,9 @@ lvtuanApp.controller("questionsCtrl",function($scope,$state,$http,$rootScope){
 	      	layer.show("暂无数据！");
 	      }
 	    }).error(function (data, status) {
-	    	layer.msg(status);
+	    	if(status == 401){
+		        		layer.msg(status);
+		        	}
 	        console.info(JSON.stringify(data));
 	        console.info(JSON.stringify(status));
 	    });
@@ -3059,7 +3153,9 @@ lvtuanApp.controller("questionsCtrl",function($scope,$state,$http,$rootScope){
 	           $scope.user = {}; //清空数据
 
 	        }).error(function (data, status) {
-	        	layer.msg(status);
+	        	if(status == 401){
+		        		layer.msg(status);
+		        	}
 	        	console.info(data.error_messages);
 	        	var errMsg = JSON.stringify(data.error_messages.content[0]);
 	        	layer.show(errMsg);
@@ -3105,7 +3201,9 @@ lvtuanApp.controller("questionsCtrl",function($scope,$state,$http,$rootScope){
 				}
 				page++;
 			}).error(function (data, status) {
-				layer.msg(status);
+				if(status == 401){
+		        		layer.msg(status);
+		        	}
 		        console.info(JSON.stringify(data));
 		    })
 	}
@@ -3176,7 +3274,9 @@ lvtuanApp.controller("questionslistCtrl",function($http,$scope,$state,$rootScope
 				}
 				page++;
 			}).error(function (data, status) {
-				layer.msg(status);
+				if(status == 401){
+		        		layer.msg(status);
+		        	}
 		        console.info(JSON.stringify(data));
 		    })
 		    .finally(function() {
@@ -3208,7 +3308,9 @@ lvtuanApp.controller("questionsviewsCtrl",function($http,$scope,$state,$rootScop
 	        	console.info(data.data)
 	        	$scope.items = data.data;
 			}).error(function (data, status) {
-				layer.msg(status);
+				if(status == 401){
+		        		layer.msg(status);
+		        	}
 		        console.info(JSON.stringify(data));
 		    })
 	}
@@ -3265,7 +3367,9 @@ lvtuanApp.controller("legaladviceCtrl",function($http,$scope,$rootScope){
 				}
 
 			}).error(function (data, status) {
-				layer.msg(status);
+				if(status == 401){
+		        		layer.msg(status);
+		        	}
 		        console.info(JSON.stringify(data));
 		    })
 		    .finally(function() {
@@ -3314,7 +3418,9 @@ lvtuanApp.controller("lvtuanallianceCtrl",function($http,$scope,$state,$rootScop
 	        }).success(function(data) {
 	        	$scope.unions = data.data;
 			}).error(function (data, status) {
-				layer.msg(status);
+				if(status == 401){
+		        		layer.msg(status);
+		        	}
 		        console.info(JSON.stringify(data));
 		    })
 	}
@@ -3345,7 +3451,9 @@ lvtuanApp.controller("lvtuanallianceviewCtrl",function($http,$scope,$state,$root
 					}
 				}
 			}).error(function (data, status) {
-				layer.msg(status);
+				if(status == 401){
+		        		layer.msg(status);
+		        	}
 		        console.info(JSON.stringify(data));
 		    })
 	}
@@ -3370,7 +3478,9 @@ lvtuanApp.controller("talentCtrl",function($http,$scope,$state,$rootScope){
 	        	$scope.positions = data.data;
 	        	console.info($scope.positions)
 			}).error(function (data, status) {
-				layer.msg(status);
+				if(status == 401){
+		        		layer.msg(status);
+		        	}
 		        console.info(JSON.stringify(data));
 		    })
 	}
@@ -3392,7 +3502,9 @@ lvtuanApp.controller("talentviewCtrl",function($http,$scope,$state,$rootScope,$s
 	        	$scope.positions = data.data;
 	        	console.info($scope.positions)
 			}).error(function (data, status) {
-				layer.msg(status);
+				if(status == 401){
+		        		layer.msg(status);
+		        	}
 		        console.info(JSON.stringify(data));
 		    })
 	}
@@ -3423,7 +3535,9 @@ lvtuanApp.controller("workbenchLawyerCtrl",function($http,$scope,$state,$rootSco
 				return false;
 			}
 		}).error(function (data, status) {
-			layer.msg(status);
+			if(status == 401){
+		        		layer.msg(status);
+		        	}
 	        console.info(JSON.stringify(data));
 	        console.info(JSON.stringify(status));
 	    })
@@ -3531,7 +3645,9 @@ lvtuanApp.controller("userorderAllCtrl",function($http,$scope,$state,$rootScope)
 				return false;
 			}
 		}).error(function (data, status) {
-			layer.msg(status);
+			if(status == 401){
+		        		layer.msg(status);
+		        	}
 	        console.info(JSON.stringify(data));
 	    })
 	};
@@ -3578,7 +3694,9 @@ lvtuanApp.controller("userOrderDetailCtrl",function($http,$scope,$state,$rootSco
 				return false;
 			}
 		}).error(function (data, status) {
-			layer.msg(status);
+			if(status == 401){
+		        		layer.msg(status);
+		        	}
 	        console.info(JSON.stringify(data));
 	    })
 
@@ -3653,7 +3771,9 @@ lvtuanApp.controller("documentlistCtrl",function($http,$scope,$state,$rootScope,
       	layer.show("暂无数据！");
       }
     }).error(function (data, status) {
-    	layer.msg(status);
+    	if(status == 401){
+		        		layer.msg(status);
+		        	}
         console.info(JSON.stringify(data));
         console.info(JSON.stringify(status));
     });
@@ -3724,7 +3844,9 @@ lvtuanApp.controller("documentlistCtrl",function($http,$scope,$state,$rootScope,
 				}
 
 			}).error(function (data, status) {
-				layer.msg(status);
+				if(status == 401){
+		        		layer.msg(status);
+		        	}
 		        console.info(JSON.stringify(data));
 		    })
 		    .finally(function() {
@@ -3761,7 +3883,9 @@ lvtuanApp.controller("documentownloadlistCtrl",function($http,$scope,$state,$roo
     	console.info('法律文书详情',data.data)
     	$scope.itmes = data.data;
 	}).error(function (data, status) {
-		layer.msg(status);
+		if(status == 401){
+		        		layer.msg(status);
+		        	}
         console.info(JSON.stringify(data));
     })
 })
@@ -3802,7 +3926,9 @@ lvtuanApp.controller("corporateservicesCtrl",function($http,$scope,$state,$rootS
 				return false;
 			}
 		}).error(function (data, status) {
-			layer.msg(status);
+			if(status == 401){
+		        		layer.msg(status);
+		        	}
 	        console.info(JSON.stringify(data));
 	    })
 	};
@@ -3881,7 +4007,9 @@ lvtuanApp.controller("corporatebuynowCtrl",function($scope,$http,$rootScope,$sta
         	console.info(data.data)
 			$scope.provinces = data.data; 	
 		}).error(function (data, status) {
-			layer.msg(status);
+			if(status == 401){
+		        		layer.msg(status);
+		        	}
 	        console.info(JSON.stringify(data));
 	    })
 	}
@@ -3898,7 +4026,9 @@ lvtuanApp.controller("corporatebuynowCtrl",function($scope,$http,$rootScope,$sta
         }).success(function(data) {
         	$scope.citys = data.data; 
 		}).error(function (data, status) {
-			layer.msg(status);
+			if(status == 401){
+		        		layer.msg(status);
+		        	}
 	        console.info(JSON.stringify(data));
 	    })
 	}
@@ -3915,7 +4045,9 @@ lvtuanApp.controller("corporatebuynowCtrl",function($scope,$http,$rootScope,$sta
         }).success(function(data) {
 			$scope.districts = data.data; 
 		}).error(function (data, status) {
-			layer.msg(status);
+			if(status == 401){
+		        		layer.msg(status);
+		        	}
 	        console.info(JSON.stringify(data));
 	    })
 	}
@@ -3949,14 +4081,12 @@ lvtuanApp.controller("corporatebuynowCtrl",function($scope,$http,$rootScope,$sta
 		}
 		if(user.invoice == true){
 			$scope.items['invoice'] = 'Y';
-		}
-		if(user.invoice == false){
+		}else{
 			$scope.items['invoice'] = 'N';
 		}
 		if($stateParams.id){
 			$scope.items['product_id'] = $stateParams.id;
 		}
-
 		console.info($scope.items);
 		$http.post('http://'+$rootScope.hostName+'/company/order/submit',$scope.items,
 	            {
