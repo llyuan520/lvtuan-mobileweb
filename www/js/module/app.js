@@ -423,13 +423,13 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
           }
       }
     })
-   .state('orderlawyer.pending', { //律师订单 - 待受理
-      url: '/pending',
+   .state('orderlawyer.new', { //律师订单 - 待受理
+      url: '/new',
       cache: 'true',
       views: {
-          'order-pending': {
-              templateUrl: 'template/mylvtuan/lawyer/order/order-pending.html',
-              controller: 'orderPendingCtrl'
+          'order-new': {
+              templateUrl: 'template/mylvtuan/lawyer/order/order-new.html',
+              controller: 'orderNewCtrl'
           }
       }
     })
@@ -443,13 +443,13 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
           }
       }
     })
-   .state('orderlawyer.completed', { //律师订单 - 已完成
-      url: '/completed',
+   .state('orderlawyer.complete', { //律师订单 - 已完成
+      url: '/complete',
       cache: 'true',
       views: {
-          'order-completed': {
-              templateUrl: 'template/mylvtuan/lawyer/order/order-completed.html',
-              controller: 'orderCompletedCtrl'
+          'order-complete': {
+              templateUrl: 'template/mylvtuan/lawyer/order/order-complete.html',
+              controller: 'orderCompleteCtrl'
           }
       }
     })
@@ -458,6 +458,16 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       url: '/lawyerquestion',
       templateUrl: 'template/mylvtuan/lawyer/question/question.html'
     })
+  .state('lawyerquestion.all', { //律师的咨询 - 待受理
+      url: '/all',
+      cache: 'true',
+      views: {
+          'question-all': {
+              templateUrl: 'template/mylvtuan/lawyer/question/all.html',
+              controller: 'lawyerquestionAllCtrl'
+          }
+      }
+    })
   .state('lawyerquestion.new', { //律师的咨询 - 全部
       url: '/new',
       cache: 'true',
@@ -465,16 +475,6 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
           'question-new': {
               templateUrl: 'template/mylvtuan/lawyer/question/new.html',
               controller: 'lawyerquestionNewCtrl'
-          }
-      }
-    })
-  .state('lawyerquestion.ssigned', { //律师的咨询 - 待受理
-      url: '/ssigned',
-      cache: 'true',
-      views: {
-          'question-ssigned': {
-              templateUrl: 'template/mylvtuan/lawyer/question/ssigned.html',
-              controller: 'lawyerquestionSsignedCtrl'
           }
       }
     })

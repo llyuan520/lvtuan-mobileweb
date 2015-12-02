@@ -3086,7 +3086,7 @@ lvtuanApp.controller("orderAllCtrl",function($scope,listHelper){
 	listHelper.bootstrap('/center/pay/lawyer/question/all', $scope);
 })
 //律师订单 - 待受理
-lvtuanApp.controller("orderPendingCtrl",function($scope,listHelper){
+lvtuanApp.controller("orderNewCtrl",function($scope,listHelper){
 	listHelper.bootstrap('/center/pay/lawyer/question/new', $scope);
 })
 //律师订单 - 待确认
@@ -3094,7 +3094,7 @@ lvtuanApp.controller("orderRepliedCtrl",function($scope,listHelper){
 	listHelper.bootstrap('/center/pay/lawyer/question/replied', $scope);
 })
 //律师订单 - 已完成
-lvtuanApp.controller("orderCompletedCtrl",function($scope,listHelper){
+lvtuanApp.controller("orderCompleteCtrl",function($scope,listHelper){
 	listHelper.bootstrap('/center/pay/lawyer/question/complete', $scope);
 })
 
@@ -3104,10 +3104,6 @@ lvtuanApp.controller("lawyerquestionAllCtrl",function($scope,listHelper){
 })
 //律师的工作 - 咨询 － 待受理
 lvtuanApp.controller("lawyerquestionNewCtrl",function($scope,listHelper){
-	listHelper.bootstrap('/center/lawyer/question/all', $scope);
-})
-//律师的工作 - 咨询 － 待受理
-lvtuanApp.controller("lawyerquestionSsignedCtrl",function($scope,listHelper){
 	listHelper.bootstrap('/center/lawyer/question/new', $scope);
 })
 //律师的工作 - 咨询 － 待确认
@@ -3125,27 +3121,27 @@ lvtuanApp.controller("userlvtuanCtrl",function($http,$scope,$state,$rootScope){
 	console.info("律师的律团");
 })
 
-//用户的工作 - 全部
+//用户的工作 - 咨询 － 全部
 lvtuanApp.controller("questionAllCtrl",function($scope,listHelper){
 	listHelper.bootstrap('/center/question/all', $scope);
 })
 
-//用户的工作 - 待受理
+//用户的工作 - 咨询 － 待受理
 lvtuanApp.controller("questionNewCtrl",function($scope,listHelper){
 	listHelper.bootstrap('/center/question/new', $scope);
 })
 
-//用户的工作 - 待确认
+//用户的工作 - 咨询 － 待确认
 lvtuanApp.controller("questionRepliedCtrl",function($scope,listHelper){
 	listHelper.bootstrap('/center/question/replied', $scope);
 })
 
-//用户的工作 - 已完成
+//用户的工作 - 咨询 － 已完成
 lvtuanApp.controller("userConfirmCompletionCtrl",function($scope,listHelper){
 	listHelper.bootstrap('/center/question/complete', $scope);
 })
 
-//用户的工作 - 待评价
+//用户的工作 - 咨询 － 待评价
 lvtuanApp.controller("questionWaitforconfirmationCtrl",function($scope,listHelper){
 	listHelper.bootstrap('/center/question/waitforevaluation', $scope);
 })
