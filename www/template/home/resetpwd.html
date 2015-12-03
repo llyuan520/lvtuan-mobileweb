@@ -1,11 +1,11 @@
 <ion-view hide-tabs="false" view-title="修改密码">
 	<ion-pane>
 		<ion-header-bar class="bar bar-header bar-light">
-			<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" onclick="history.go(-1);"></a>
+			<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" href="#/index"></a>
 			<h1 class="title">修改密码</h1>
 		</ion-header-bar>
 		<ion-content class="web-body">
-			<form name="myForm" novalidate ng-submit="save(user)">
+			<form name="myForm" novalidate ng-submit="save(user)" ngCloak ng-controller="resetpwdCtrl" ng-cloak class="ng-cloak">
 				<div class="list" style="">
 					<label class="item item-input web-item-botb0">
 						<span class="input-label ion-ios-unlocked-outline web-wid20"></span>
