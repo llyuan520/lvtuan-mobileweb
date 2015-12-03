@@ -64,22 +64,19 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
     .state('login', { //登录
       url: '/login',
       cache: 'true',
-      templateUrl: 'template/home/login.html',
-      controller: 'loginCtrl'
+      templateUrl: 'template/home/login.html'
     })
 
     .state('register', { //注册
       url: '/register',
       cache: 'true',
-      templateUrl: 'template/home/register.html',
-      controller: 'registerCtrl'
+      templateUrl: 'template/home/register.html'
     })
 
     .state('resetpwd', { //密码重置
       url: '/resetpwd',
       cache: 'true',
-      templateUrl: 'template/home/resetpwd.html',
-      controller: 'resetpwdCtrl'
+      templateUrl: 'template/home/resetpwd.html'
     })
 
 /********************************** 圈子 **********************************/
@@ -281,6 +278,12 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       cache: 'true',
       templateUrl: 'template/center/lawyer/list_scores.html',
       controller: 'listscoreslaywerCtrl'
+    })
+    .state('comment_lawyer', { //律师-我的评论
+      url: '/comment_lawyer/:id',
+      cache:'false',
+      templateUrl: 'template/center/lawyer/comment.html',
+      controller: 'commentlaywerCtrl'
     })
     .state('article_lawyer', { //律师-我的文章
       url: '/article_lawyer',
@@ -634,10 +637,36 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       controller: 'userOrderDetailCtrl'
     })
 
-    .state('userwallet', { //我的律团-用户的钱包
-      url: '/userwallet',
-      templateUrl: 'template/mylvtuan/user/wallet/wallet.html'
+    .state('user/wallet', { //我的律团-用户的钱包
+      url: '/user/wallet',
+      templateUrl: 'template/mylvtuan/user/wallet/wallet.html',
+      controller: 'userwalletCtrl'
     })
+    .state('user/moneyin', { //我的律团-钱包充值
+      url: '/user/moneyin',
+      templateUrl: 'template/mylvtuan/user/wallet/moneyin.html',
+      controller: 'usermoneyinCtrl'
+    })
+    .state('user/record', { //我的律团-充值记录
+      url: '/user/record',
+      templateUrl: 'template/mylvtuan/user/wallet/record.html',
+      controller: 'userrecordCtrl'
+    })
+    .state('user/moneyout', { //我的律团-充值记录
+      url: '/user/moneyout',
+      templateUrl: 'template/mylvtuan/user/wallet/moneyout.html'
+    })
+    .state('user/withdraw', { //我的律团-提现记录
+      url: '/user/withdraw',
+      templateUrl: 'template/mylvtuan/user/wallet/withdraw.html',
+      controller: 'userwithdrawCtrl'
+    })
+    .state('user/payall', { //我的律团-收支明细
+      url: '/user/payall',
+      templateUrl: 'template/mylvtuan/user/wallet/payall.html',
+      controller: 'userpayallCtrl'
+    })
+    
 
 /********************************** 法律讲堂 **********************************/
 /*workbench-lawyer.html*/

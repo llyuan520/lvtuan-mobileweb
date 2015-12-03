@@ -1,0 +1,21 @@
+<ion-view view-title="我的钱包">
+		<ion-pane>
+			<ion-header-bar class="bar bar-header bar-light">
+				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" onclick="history.go(-1);"></a>
+				<h1 class="title">我的钱包</h1>
+			</ion-header-bar>
+			<ion-content>
+				<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+			    <ion-list>
+			        <ion-item class="item item-icon-right" ng-repeat="item in items">
+			        	<i class="icon ion-ios-arrow-right"></i>
+			            <label>{{item.type}}</label>
+					    <label>{{item.created_at.date}}</label>
+						<p >{{item.direction}} ￥{{item.sum}}</p>
+					</ion-item>
+				<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
+		        </ion-list>
+			</ion-content>
+			
+		</ion-pane>
+</ion-view>

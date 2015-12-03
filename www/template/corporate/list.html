@@ -33,15 +33,19 @@
 	<script type="text/ng-template" id="list-evaluate.tpl.html">
 	<div ng-controller="corporatelistevaluateCtrl">
 		<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
-		<ion-list> <!-- ng-repeat="item in items" -->
-			<ion-item class="item-thumbnail-left" >
-				<img ng-src="{{item.creator_avatar}}"/>
-				<h2>{{item.creator_realname}} <label class="rig">{{item.evaluate_created_at}}</label></h2>
-
-				<div star rating-value="ratingVal[$index]" max="max" on-hover="onHover" on-leave="onLeave" readonly="{{readonly}}"></div>
-				<input type="hidden" name="input" ng-model="max" min="0" max="10" required>
-
-				<p class="contents">{{item.evaluate_comment}}</p>
+		<ion-list>
+			<ion-item class="item-thumbnail-left" ng-repeat="item in items">
+				<img ng-src="{{item.user.avatar}}"/>
+				<h2>{{item.user.realname}} 
+					<div class="rig" star rating-value="ratingVal[$index]" max="max" on-hover="onHover" on-leave="onLeave" readonly="{{readonly}}"></div>
+					<input type="hidden" name="input" ng-model="max" min="0" max="10" required>
+				</h2>
+				<p class="contents">{{item.comment}}</p>
+				<p>
+					<lablel>产品：{{item.title}}</lablel>
+					<lablel>年限：{{item.qty}}</lablel>
+				</p>
+				<p>{{item.created_at}}</label></p>
 			</ion-item>
 		</ion-list>
 		<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>

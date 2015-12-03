@@ -8,35 +8,35 @@
 				<div class="list">
 		        	<ion-item class="item positive-bg">
 					    <h2 style="color:#fff;font-size:20px;line-height: 40px;">可用余额</h2>
-						<p style="color:#fff;font-size:20px;line-height: 40px;">￥ 2015</p>
+						<p style="color:#fff;font-size:20px;line-height: 40px;">￥ {{items.money}}</p>
 			        </ion-item>
 			        <ion-item class="item">
 						  账户总余额
-						  <p class="rig">￥2015</p>
+						  <p class="rig">￥ {{items.money}}</p>
 			        </ion-item>
 			    </div>
 			    <ion-list>
-			        <ion-item class="item item-icon-right">
+			        <ion-item class="item item-icon-right" ng-href="#/user/moneyin">
 			            立即充值
 					      <i class="icon ion-ios-arrow-right"></i>
 					</ion-item>
-					<ion-item class="item item-icon-right">
+					<ion-item class="item item-icon-right" ng-href="#/user/record">
 			            充值历史
 					      <i class="icon ion-ios-arrow-right"></i>
 					</ion-item>
-			        <ion-item class="item item-icon-right">
+			        <ion-item class="item item-icon-right" ng-href="#/user/moneyout">
 			            申请提现
 					      <i class="icon ion-ios-arrow-right"></i>
 					</ion-item>
-					<ion-item class="item item-icon-right">
+					<ion-item class="item item-icon-right" ng-href="#/user/withdraw">
 			            提现记录
 					      <i class="icon ion-ios-arrow-right"></i>
 					</ion-item>
-					<ion-item class="item item-icon-right">
+					<!-- <ion-item class="item item-icon-right">
 			            添加银行卡
 					      <i class="icon ion-ios-arrow-right"></i>
-					</ion-item>
-					<ion-item class="item item-icon-right">
+					</ion-item> -->
+					<ion-item class="item item-icon-right"  ng-href="#/user/payall">
 			            收支明细
 					      <i class="icon ion-ios-arrow-right"></i>
 					</ion-item>

@@ -3975,6 +3975,38 @@ lvtuanApp.controller("corporatelistCtrl",function($scope,$state,$http,$rootScope
 //评价
 lvtuanApp.controller("corporatelistevaluateCtrl",function($scope,$http,$rootScope,$stateParams){
 	console.info("id",$stateParams.id);
+	
+	 $http.get('http://'+$rootScope.hostName+'/company/product/'+$stateParams.id+'/comments',
+        {
+        cache: true,
+        headers: {
+            'Content-Type': 'application/json' , 
+            'Authorization': 'bearer ' + $rootScope.token
+       		}
+        }).success(function(data) {
+        	console.info("评价详情",data.data);				
+        	$scope.items = data.data; 
+        	$scope.ratingVal = [];
+			for(var i=0; i<$scope.items.length; i++){
+				$scope.ratingVal.push($scope.items[i].score);
+			}
+		}).error(function (data, status) {
+			if(status == 401){
+        		layer.msg(status);
+        	}
+	        console.info(JSON.stringify(data));
+	    })
+	    $scope.max = 5;
+		$scope.readonly = true;
+		$scope.onHover = function(val){
+			$scope.hoverVal = val;
+		};
+		$scope.onLeave = function(){
+			$scope.hoverVal = null;
+		}
+		$scope.onChange = function(val){
+			$scope.ratingVal = val;
+		}
 })
 
 //立即购买
@@ -3990,6 +4022,9 @@ lvtuanApp.controller("corporatebuynowCtrl",function($scope,$http,$rootScope,$sta
         	console.info("详情",data.data);				
         	$scope.items = data.data; 
 		}).error(function (data, status) {
+			if(status == 401){
+        		layer.msg(status);
+        	}
 	        console.info(JSON.stringify(data));
 	    })
 
@@ -4008,8 +4043,8 @@ lvtuanApp.controller("corporatebuynowCtrl",function($scope,$http,$rootScope,$sta
 			$scope.provinces = data.data; 	
 		}).error(function (data, status) {
 			if(status == 401){
-		        		layer.msg(status);
-		        	}
+        		layer.msg(status);
+        	}
 	        console.info(JSON.stringify(data));
 	    })
 	}
@@ -4095,7 +4130,6 @@ lvtuanApp.controller("corporatebuynowCtrl",function($scope,$http,$rootScope,$sta
 	            	'Authorization': 'bearer ' + $rootScope.token,
 	            }
 	        }).success(function(data) {
-	        	debugger
 	        	console.log(data.data)
 	            layer.show("提交成功！");
 	            $scope.user = {};
@@ -4111,3 +4145,126 @@ lvtuanApp.controller("corporatebuynowCtrl",function($scope,$http,$rootScope,$sta
 	}
 })
 
+
+//用户律师 - 钱包
+lvtuanApp.controller("userwalletCtrl",function($scope,$http,$rootScope){
+	//判断是否是律师
+	if($rootScope.user_group_id == 1 || $rootScope.user_group_id == 2 && $rootScope.is_verified == 0){
+		$http.get('http://'+$rootScope.hostName+'/center/customer/wallet',
+	        {
+	        cache: true,
+	        headers: {
+	            'Content-Type': 'application/json' , 
+	            'Authorization': 'bearer ' + $rootScope.token
+	       		}
+	        }).success(function(data) {
+				$scope.items = data.data; 
+				localStorage.setItem("summoney", $scope.items.money);
+			}).error(function (data, status) {
+				if(status == 401){
+	        		layer.msg(status);
+	        	}
+		        console.info(JSON.stringify(data));
+		    })
+	}else{
+		$http.get('http://'+$rootScope.hostName+'/center/lawyer/wallet',
+	        {
+	        cache: true,
+	        headers: {
+	            'Content-Type': 'application/json' , 
+	            'Authorization': 'bearer ' + $rootScope.token
+	       		}
+	        }).success(function(data) {
+				$scope.items = data.data; 
+				localStorage.setItem("money", $scope.items.money);
+			}).error(function (data, status) {
+				if(status == 401){
+	        		layer.msg(status);
+	        	}
+		        console.info(JSON.stringify(data));
+		    })
+	}
+})
+//用户律师 - 钱包充值
+lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$stateParams){
+	$scope.summoney = localStorage.getItem('summoney');
+	$scope.submit = function(user){
+		$http.post('http://'+$rootScope.hostName+'/wallet/recharge',{
+				money 	: user.money
+			},
+	            {
+	            headers: {
+	                'Content-Type': 'application/json' , 
+	            	'Authorization': 'bearer ' + $rootScope.token,
+	            }
+	        }).success(function(data) {
+	        	localStorage.removeItem('summoney');
+	        	$scope.money = data.data.money;
+	        	$scope.summoney = $scope.money;
+	        	localStorage.setItem("summoney", $scope.summoney);
+	            layer.show("提交成功！");
+	            $scope.user = {};
+	            angular.element("#money").val("");
+	            console.info($scope.user);
+
+	        }).error(function (data, status) {
+	        	if(status == 401){
+	        		layer.msg(status);
+	        	}
+	        	var errMsg = JSON.stringify(data.message);
+	        	console.info(errMsg);
+	        	layer.show(errMsg);
+	        });
+	}
+})
+
+//用户律师 - 充值记录
+lvtuanApp.controller("userrecordCtrl",function($scope,$http,$rootScope,listHelper){
+	//判断是否是律师
+	listHelper.bootstrap('/wallet/record?type=recharge', $scope);
+})
+
+//用户律师 - 提现
+lvtuanApp.controller("usermoneyoutCtrl",function($scope,$http,$rootScope){
+	//判断是否是律师
+	//listHelper.bootstrap('/wallet/record?type=recharge', $scope);
+	$scope.summoney = localStorage.getItem('summoney');
+	$scope.submit = function(user){
+		$http.post('http://'+$rootScope.hostName+'/wallet/withdraw',user,
+	            {
+	            headers: {
+	                'Content-Type': 'application/json' , 
+	            	'Authorization': 'bearer ' + $rootScope.token,
+	            }
+	        }).success(function(data) {
+
+	        	$scope.items = data.data;
+	        	console.info($scope.items);
+	        	localStorage.setItem("summoney", $scope.items.money);
+	        	$scope.summoney = $scope.items.money;
+	            layer.show("提交成功！");
+	            $scope.user = {};
+	            console.info($scope.user)
+
+	        }).error(function (data, status) {
+	        	if(status == 401){
+	        		layer.msg(status);
+	        	}
+	        	var errMsg = JSON.stringify(data.message);
+	        	console.info(errMsg);
+	        	layer.show(errMsg);
+	        });
+	}
+	
+})
+//用户律师 - 提现记录
+lvtuanApp.controller("userwithdrawCtrl",function($scope,$http,$rootScope,listHelper){
+	//判断是否是律师
+	listHelper.bootstrap('/wallet/record?type=withdraw', $scope);
+})
+
+//用户律师 - 提现记录
+lvtuanApp.controller("userpayallCtrl",function($scope,$http,$rootScope,listHelper){
+	//判断是否是律师
+	listHelper.bootstrap('/wallet/record', $scope);
+})

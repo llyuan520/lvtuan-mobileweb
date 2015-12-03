@@ -2,13 +2,11 @@
 
     <ion-pane>
       <ion-header-bar class="bar bar-header bar-light">
-      	<a class="button button-icon  button-clear button-positive"  onclick="history.go(-1)">
-      		<img class="v-align" src="img/smallback.png"/>
-      	</a>
+      	<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" href="#/index"></a>
         <h1 class="title">注册</h1>
       </ion-header-bar>
       <ion-content>
-		<form novalidate name="registerForm" id="registerForm">
+		<form novalidate name="registerForm" id="registerForm" ngCloak ng-controller="registerCtrl" ng-cloak class="ng-cloak">
 			<div class="list login">
 				<div class="item item-input">
 					<span class="bg-man login-lbl-pl login-lbl-fc">&nbsp;</span>
