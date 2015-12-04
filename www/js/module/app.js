@@ -354,8 +354,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
     .state('graphic', { //图文咨询
       url: '/graphic',
       cache: 'true',
-      templateUrl: 'template/lawyer/graphic.html',
-      controller: 'graphicCtrl'
+      templateUrl: 'template/lawyer/graphic.html'
     })
     .state('special', { //专业咨询
       url: '/special',

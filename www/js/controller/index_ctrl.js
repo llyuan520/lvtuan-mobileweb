@@ -3083,8 +3083,77 @@ lvtuanApp.controller("viewteleviseCtrl",function($scope,$http,$rootScope){
 
 
 //找律师-图文咨询
-lvtuanApp.controller("graphicCtrl",function($scope,$http,$rootScope){
+lvtuanApp.controller("graphicCtrl",function($scope,$http,$rootScope,$timeout,listHelper,httpWrapper,Upload){
 	console.info("图文咨询");
+	//选择类型
+	$http.get('http://'+$rootScope.hostName+'/lawyer/workscopes',
+	        {
+	        cache: true,
+	        headers: {
+	            'Content-Type': 'application/json' , 
+	            'Authorization': 'bearer ' + $rootScope.token
+	        }
+	    }).success(function(data) {
+	      if(data.data){
+	        $scope.workscopes = data.data;
+	      }else{
+	      	layer.show("暂无数据！");
+	      }
+	    }).error(function (data, status) {
+	    	if(status == 401){
+		        		layer.msg(status);
+		        	}
+	        console.info(JSON.stringify(data));
+	        console.info(JSON.stringify(status));
+	    });
+
+    //提交问题
+	$scope.submit = function(user){
+		httpWrapper.request('http://'+$rootScope.hostName+'/question/create','post',user,
+			function(data){
+				console.info(data);
+				debugger
+				$scope.user = {};
+			},function(data){
+				console.info(data);
+			}
+		);
+	}
+
+	//修改圈子头像
+   $scope.uploadFiles = function (group_avatar) {
+   		 if(group_avatar) {
+	        $scope.upload(group_avatar);
+	      }
+    };
+    // 圈子头像上传图片
+    $scope.upload = function (group_avatar) {
+    	Upload.upload({
+        	headers: {
+	            'Content-Type': 'application/json' , 
+	            'Authorization': 'bearer ' + $rootScope.token
+       		},
+            url: 'http://'+$rootScope.hostName+'/group/uploadImage',
+            data: {
+            	group_avatar: group_avatar
+            }
+        }).then(function (response) {
+        	var file_path = 'http://'+$rootScope.hostName+'/'+response.data.data;
+        	$scope.file = file_path;
+            $timeout(function () {
+                $scope.result = response.data;
+            });
+        }, function (response) {
+            if (response.status > 0) {
+             	var errorMsg = response.status + ': ' + response.data;
+        		console.info('errorMsg',errorMsg);
+        		layer.show(errorMsg);
+            }
+        }, function (evt) {
+        	var progres = parseInt(100.0 * evt.loaded / evt.total);
+        	$scope.progress = progres;
+        });
+    };
 
 })
 //找律师-专业咨询
@@ -3546,6 +3615,7 @@ lvtuanApp.controller("workbenchLawyerCtrl",function($http,$scope,$state,$rootSco
 //律师订单 - 全部
 lvtuanApp.controller("orderAllCtrl",function($scope,listHelper){
 	listHelper.bootstrap('/center/pay/lawyer/question/all', $scope);
+
 })
 //律师订单 - 待受理
 lvtuanApp.controller("orderNewCtrl",function($scope,listHelper){
@@ -3609,7 +3679,7 @@ lvtuanApp.controller("questionWaitforconfirmationCtrl",function($scope,listHelpe
 })
 
 //用户的订单 - 全部
-lvtuanApp.controller("userorderAllCtrl",function($http,$scope,$state,$rootScope){
+lvtuanApp.controller("userorderAllCtrl",function($http,$scope,$state,$rootScope,httpWrapper){
 	var page = 1; //页数
     $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
     $scope.items = [];	//创建一个数组接收后台的数据
@@ -3651,6 +3721,58 @@ lvtuanApp.controller("userorderAllCtrl",function($http,$scope,$state,$rootScope)
 	        console.info(JSON.stringify(data));
 	    })
 	};
+
+	//删除
+	$scope.remove = function(id,index){
+		httpWrapper.request('http://'+$rootScope.hostName+'/center/question/'+id+'/remove','post',
+			function(data){
+				$scope.items.splice(index, 1);
+				layer.show("删除成功！");
+			},function(data){
+				console.info(data);
+			}
+		);
+	}
+
+	//取消
+	$scope.cancel = function(id,index){
+		httpWrapper.request('http://'+$rootScope.hostName+'/center/question/'+id+'/cancel','post',
+			function(data){
+				console.info(data);
+				debugger
+				layer.show("取消成功！");
+			},function(data){
+				console.info(data);
+			}
+		);
+	}
+	//确认
+	$scope.complete = function(id,index){
+		httpWrapper.request('http://'+$rootScope.hostName+'/center/question/'+id+'/to_complete','post',
+			function(data){
+				$scope.items.splice(index, 1);
+				layer.show("删除成功！");
+			},function(data){
+				console.info(data);
+			}
+		);
+	}
+
+	//联系律师
+	$scope.ask = function(id,index){
+		location.href='#/center';
+	}
+
+	//付款
+	$scope.pay = function(id,index){
+		location.href='#/center';
+	}
+
+	//评价
+	$scope.evaluate = function(id,index){
+		location.href='#/center';
+	}
+
 })
 
 //用户的订单 - 待付款
