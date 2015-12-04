@@ -19,10 +19,11 @@ httpModule.factory('httpWrapper', function($http, $rootScope) {
 	    });
 	}
 
-    httpRequest.request = function(url, method, successCallback, failureCallback) {
+    httpRequest.request = function(url, method, data,successCallback, failureCallback) {
     	$http({
 			method: method,
 			url: url,
+			data : data,
 	        cache: true,
 	        headers: {
 	            'Content-Type': 'application/json' , 
