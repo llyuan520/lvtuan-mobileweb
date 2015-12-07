@@ -21,19 +21,36 @@
 						  <input ng-model="user.title" name="title" type="text" placeholder="请输入标题" required>
 						</label>
 						<label class="item item-input">
-				          <textarea ng-model="user.content" name="content" rows="10" placeholder="请输入问题" required></textarea>
+				          <textarea ng-model="user.content" name="content" rows="10" placeholder="请输入问题" required ng-minlength="2" ng-maxlength="1000"></textarea>
 				        </label>
+				        <p class="item" ng-show="myForm.content.$error.minlength">
+							<span class="fc-red">字符不能小于2个字符</span>
+						</p>
+						<p class="item" ng-show="myForm.content.$error.maxlength">
+							<span class="fc-red">字符的长度不能超过1000个</span>
+						</p>
 					</div>
 					<div class="item group-site">
 						<label class="name">上传附件：</label>
 
 						<div class="rig" style="width: 92px;">
-							<div ng-disabled="booleans" ng-model="group_avatar" accept="image/*" ngf-pattern="'image/*'" ngf-max-size="20MB" ngf-min-height="100" ngf-select="uploadFiles($file)" class="icon-right" style="font-size:4em;padding:0 20px;color:#ccc;float:right"><i class="icon ion-ios-plus-outline"></i></div>
-							<input type="hidden" name="group_avatar" value="{{file}}" />
+							<div ng-disabled="booleans" ng-model="file_paths"  accept="image/*,.doc,.docx"  gf-pattern="'image/*,.doc,.docx'" ngf-max-size="2MB" ngf-select="uploadFiles($files, $invalidFiles)" class="icon-right" style="font-size:4em;padding:0 20px;color:#ccc;float:right" multiple><i class="icon ion-ios-plus-outline"></i></div>
+							<input type="hidden" name="file_paths" value="{{file}}" />
 						</div>
-						<label class="rig">
-							<img ng-src="{{file}}" ngf-thumbnail="group_avatar || '{{group.group_avatar}}'" width="52" height="50">
-						</label>
+						 <br><br>
+						  <label ng-show="files">文件名称:</label>
+						  <ul>
+						    <li ng-repeat="f in files" style="font:smaller">{{f.name}} {{f.$errorParam}}
+						      <span class="progress" ng-show="f.progress >= 0">
+						        <div style="width:{{f.progress}}%"  
+						            ng-bind="f.progress + '%'"></div>
+						      </span>
+						    </li>
+						    <li ng-repeat="f in errFiles" style="font:smaller">{{f.name}} {{f.$error}} {{f.$errorParam}}</li> 
+						  </ul>
+						<!-- <label class="rig">
+							<img ng-src="{{file}}" ngf-thumbnail="upload_file || '{{group.group_avatar}}'" width="52" height="50">
+						</label> -->
 					</div>
 					<div class="padding">
 						<button class="button button-block button-positive" type="submit" ng-disabled="myForm.$invalid" ng-click="submit(user)" >提交</button>

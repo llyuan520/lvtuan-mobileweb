@@ -1,4 +1,4 @@
-<ion-view view-title="order-all">
+<ion-view view-title="我的订单-全部">
     <ion-content>
     	<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
     	<ion-list ng-repeat="item in items">
@@ -21,7 +21,7 @@
 	  						<button class="button button-small button-positive" ng-click="remove(item.id,$index)">删除</button>
 	  					</label>
 	  					<label ng-if="item.status_code == 'wait_pay'">
-	  						<button class="button button-small button-positive" ng-click="pay(item.id,$index)">付款</button>
+	  						<button class="button button-small button-positive" ng-click="pay(item.id)">付款</button>
 	  					</label>
 	  					<label ng-if="item.status_code == 'new'">
 	  						<button class="button button-small button-positive" ng-click="cancel(item.id,$index)">取消</button>
