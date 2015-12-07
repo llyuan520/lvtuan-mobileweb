@@ -2,7 +2,7 @@
 .css-form .row{padding: 5px 0}
 .css-form .item-input{padding: 6px 0 5px 0px}
 </style>
-<ion-view hide-tabs="true" view-title="认证为律师">
+<ion-view hide-tabs="true" view-title="认证成为律师">
 		<ion-pane  class="web-body">
 			<ion-header-bar class="bar bar-header bar-light">
 				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" onclick="history.go(-1);"></a>
@@ -12,7 +12,7 @@
 			<ion-content class="web-body" style="margin-bottom:0;">
 			<form name="myForm" class="css-form" id="myForm" novalidate>
 				<div ng-if="user_group_id == 1 || user_group_id == 2 && is_verified == 0">
-						<h4 class="title web-title web-fc666">资格认证 <span class="web-ftcred" style="font-size:12px;">(审核通过后，不可修改)</span></h4>
+						<h4 class="title web-title web-fc666">资格认证 <span class="web-ftcred" style="font-size:14px;">(审核通过后，不可修改)</span></h4>
 						<div class="list">
 							<div class="item item-input">
 								<div class="row">
@@ -57,7 +57,7 @@
 								  <div class="col col-75 col-center">
 
 									<div ng-model="license_file" class="button item-note ion-ios-plus-empty button-light" ngf-pattern="'image/*'"  accept="image/*" ngf-max-size="20MB" ngf-min-height="100" ngf-select="uploadFiles($file,1)"></div>
-									<img ng-src="{{file_1}}" ngf-thumbnail="license_file || '/thumb.jpg'" width="52" height="50">
+									<img ng-src="{{file_1}}" ngf-thumbnail="license_file || ''" width="52" height="50">
 									<input type="hidden" name="license_file" value="{{file_1}}" />
 									<span class="progress_1" ng-show="progress_1 >= 0">
 					                  <div style="width:{{progress_1}}%" ng-bind="progress_1 + '%'"></div>
@@ -72,7 +72,7 @@
 								  <div class="col col-75 col-center">
 
 									<div ng-model="ID_img" class="button item-note ion-ios-plus-empty button-light" ngf-pattern="'image/*'"  accept="image/*" ngf-max-size="20MB" ngf-min-height="100" ngf-select="uploadFiles($file,4)"></div>
-									<img ng-src="{{file_4}}" ngf-thumbnail="ID_img || '/thumb.jpg'" width="52" height="50">
+									<img ng-src="{{file_4}}" ngf-thumbnail="ID_img || ''" width="52" height="50">
 									<input type="hidden" name="ID_img" value="{{file_1}}" />
 									<span class="progress_4" ng-show="progress_4 >= 0">
 					                  <div style="width:{{progress_4}}%" ng-bind="progress_4 + '%'"></div>
@@ -91,7 +91,7 @@
 							  <div class="col col-75 col-center">
 
 								<div class="button item-note ion-ios-plus-empty button-light" ng-model="avatar" ngf-pattern="'image/*'"  accept="image/*" ngf-max-size="20MB" ngf-min-height="100" ngf-select="uploadFiles($file,2)"></div>
-								<img ng-src="{{file_2}}" ngf-thumbnail="avatar || '/thumb.jpg'" width="52" height="50">
+								<img ng-src="{{file_2}}" ngf-thumbnail="avatar || ''" width="52" height="50">
 								<input type="hidden" name="avatar" value="{{file_2}}" />
 								<span class="progress_2" ng-show="progress_2 >= 0">
 				                  <div style="width:{{progress_2}}%" ng-bind="progress_2 + '%'"></div>
@@ -107,7 +107,7 @@
 							  <div class="col col-75 col-center">
 
 								<div class="button item-note ion-ios-plus-empty button-light" ng-model="bg_image" ngf-pattern="'image/*'"  accept="image/*" ngf-max-size="20MB" ngf-min-height="100" ngf-select="uploadFiles($file,3)"></div>
-								<img ng-src="{{file_3}}" ngf-thumbnail="bg_image || '/thumb.jpg'" width="52" height="50">
+								<img ng-src="{{file_3}}" ngf-thumbnail="bg_image || ''" width="52" height="50">
 								<input type="hidden" name="bg_image" value="{{file_3}}" />
 								<span class="progress_3" ng-show="progress_3 >= 0">
 				                  <div style="width:{{progress_3}}%" ng-bind="progress_3 + '%'"></div>

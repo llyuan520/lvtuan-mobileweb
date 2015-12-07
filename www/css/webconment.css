@@ -118,7 +118,7 @@ body,
 	color:#000000;
 }
 .web-fc666{
-	color:#666666;
+	color: #333;
 }
 .item .web-fc000{
 	color:#000000;
@@ -173,7 +173,7 @@ body,
 	margin-bottom:0px;
 }
 .web-ftcred{
-	color:#FF0000;
+	color:#666;
 }
 .web-ftc000{
 	color:#000000;
@@ -265,6 +265,7 @@ body,
 	line-height:32px;
 	margin:0px;
 	font-size:16px;
+	font-weight: bold;
 }
 .item .web-breakall,.web-breakall{
 	word-break: break-all;
@@ -334,6 +335,9 @@ body,
 }
 .col-center{
 	text-center:center;
+}
+.item-input .col-center input {
+	padding-right: 0px;
 }
 .basekong1{
 	width:100%;
