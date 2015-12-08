@@ -3,7 +3,7 @@
 
     	<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 			<ion-list ng-repeat="item in items">
-	        	<ion-item class="item" ng-href="#/questionsview/{{item.id}}">
+	        	<ion-item class="item" ng-href="#/lawyer/questions/view/{{item.id}}">
 		          	<span class="sp-l fc-33">{{item.title}}</span>
 					<span class="sp-r fc-33">{{item.created_at}}</span>
 		        </ion-item>

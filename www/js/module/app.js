@@ -482,6 +482,13 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
           }
       }
     })
+  
+  .state('lawyer/questions/view', { // 律师的工作台 - 咨询详情
+    url: '/lawyer/questions/view/:id',
+    cache: 'true', 
+    templateUrl: 'template/mylvtuan/lawyer/question/view.html',
+    controller: 'lawyerquestionsviewCtrl'
+  })
 
   .state('queryrefer', { // 律师的工作台 - 咨询参考
     url: '/queryrefer',
@@ -545,10 +552,16 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
         }
     }
   })
+
+  .state('user/question/view', { //首页 - 我的律团 - 用户的咨询
+    url: 'user/question/view/:id',
+    templateUrl: 'template/mylvtuan/user/question/view.html',
+    controller: 'userquestionviewCtr'
+  })
+
   .state('confirmCompletion', { //首页 - 我的律团 - 用户的咨询
     url: '/confirmCompletion/:id',
-    templateUrl: 'template/mylvtuan/user/question/confirm-completion.html',
-    controller : 'confirmCompletionCtrl'
+    templateUrl: 'template/mylvtuan/user/question/confirm-completion.html'
   })
 
   .state('orderuser', { //首页 - 我的律团 - 用户的订单

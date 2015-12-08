@@ -12,7 +12,7 @@ httpModule.factory('httpWrapper', function($http, $rootScope) {
 	            'Authorization': 'bearer ' + $rootScope.token
 	   		}
 	    }).success(
-	    	successCallback? successCallback : function successCallback(data) {}
+	    	successCallback ? successCallback : function successCallback(data) {}
 	    ).error(function (data, status) {
 			layer.msg(status);
 	        console.info(JSON.stringify(data));
