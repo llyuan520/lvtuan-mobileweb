@@ -1,7 +1,6 @@
 var curUserId = null;
-var curChatUserId = null;
+//var curChatUserId = null;
 var conn = null;
-var curRoomId = null;
 var msgCardDivId = "chat01";
 var talkToDivId = "talkTo";
 var talkInputId = "talkInputId";
@@ -281,7 +280,7 @@ $(document).ready(function() {
     //发送文件的模态窗口
     $('#fileModal').on('hidden.bs.modal', function(e) {
         document.getElementById("fileSend").disabled = false;
-		document.getElementById("cancelfileSend").disabled = false;
+        document.getElementById("cancelfileSend").disabled = false;
         
         if(!Easemob.im.Helper.isCanUploadFileAsync) return;
         var ele = document.getElementById(fileInputId);
@@ -377,13 +376,12 @@ var handleOpen = function(conn) {
                     toRoster.push(ros);
                 }
             }
+            conn.setPresence();//设置用户上线状态，必须调用
             if (bothRoster.length > 0) {
-                curroster = bothRoster[0];
-                buildContactDiv("contractlist", bothRoster);//联系人列表页面处理
-                if (curroster)
-                    var easemob_id = JSON.parse(localStorage.getItem('easemob_id'));
-                    setCurrentContact(easemob_id);//页面处理将第一个联系人作为当前聊天div
-                    conn.setPresence();//设置用户上线状态，必须调用
+                curroster = curChatUserId;
+//                buildContactDiv("contractlist", bothRoster);//联系人列表页面处理
+//                if (curChatUserId)
+//                setCurrentContact(curChatUserId);//页面处理将第一个联系人作为当前聊天div
             }
             //获取当前登录人的群组列表
             conn.listRooms({
@@ -396,6 +394,7 @@ var handleOpen = function(conn) {
                             $('#accordion2').click();
                         }
                     }
+ //                   showContactChatDiv(defaultUserId);
                     conn.setPresence();//设置用户上线状态，必须调用
                 },
                 error : function(e) {
@@ -648,13 +647,16 @@ var logout = function() {
 //设置当前显示的聊天窗口div，如果有联系人则默认选中联系人中的第一个联系人，如没有联系人则当前div为null-nouser
 var setCurrentContact = function(defaultUserId) {
     showContactChatDiv(defaultUserId);
-    if (curChatUserId != null) {
-        hiddenContactChatDiv(curChatUserId);
-    } else {
-        $('#null-nouser').css({
-            "display" : "none"
-        });
-    }
+//    if (curChatUserId != null) {
+//        hiddenContactChatDiv(curChatUserId);
+//    } else {
+//        $('#null-nouser').css({
+//            "display" : "none"
+//        });
+//    }
+    $('#null-nouser').css({
+        "display" : "none"
+    });
     curChatUserId = defaultUserId;
 };
 //构造联系人列表
@@ -743,7 +745,10 @@ var createContactChatDiv = function(chatUserId) {
         "id" : msgContentDivId,
         "class" : "chat01_content",
         "className" : "chat01_content",
-        "style" : "display:none"
+        "style" : "display:block"
+    });
+    $('#null-nouser').css({
+        "display" : "none"
     });
     return newContent;
 };
@@ -754,22 +759,23 @@ var showContactChatDiv = function(chatUserId) {
         contentDiv = createContactChatDiv(chatUserId);
         document.getElementById(msgCardDivId).appendChild(contentDiv);
     }
+    console.info(contentDiv.style.display);
     contentDiv.style.display = "block";
-    var contactLi = document.getElementById(chatUserId);
-    if (contactLi == null) {
-        return;
-    }
-    contactLi.style.backgroundColor = "#33CCFF";
-    var dispalyTitle = null;//聊天窗口显示当前对话人名称
-    if (chatUserId.indexOf(groupFlagMark) >= 0) {
-        dispalyTitle = "群组" + $(contactLi).attr('displayname') + "聊天中";
-        curRoomId = $(contactLi).attr('roomid');
-        $("#roomMemberImg").css('display', 'block');
-    } else {
-        dispalyTitle = "与" + chatUserId + "聊天中";
-        $("#roomMemberImg").css('display', 'none');
-    }
-    document.getElementById(talkToDivId).children[0].innerHTML = dispalyTitle;
+//    var contactLi = document.getElementById(chatUserId);
+//    if (contactLi == null) {
+//        return;
+//    }
+//    contactLi.style.backgroundColor = "#33CCFF";
+//    var dispalyTitle = null;//聊天窗口显示当前对话人名称
+//    if (chatUserId.indexOf(groupFlagMark) >= 0) {
+//        dispalyTitle = "群组" + $(contactLi).attr('displayname') + "聊天中";
+//        curRoomId = $(contactLi).attr('roomid');
+//        $("#roomMemberImg").css('display', 'block');
+//    } else {
+//        dispalyTitle = "与" + chatUserId + "聊天中";
+//        $("#roomMemberImg").css('display', 'none');
+//    }
+//    document.getElementById(talkToDivId).children[0].innerHTML = dispalyTitle;
 };
 //对上一个联系人的聊天窗口div做隐藏处理，并将联系人列表中选择的联系人背景色置空
 var hiddenContactChatDiv = function(chatUserId) {
@@ -889,32 +895,28 @@ var showSendAudio = function() {
     uploadType = 'audio';
 };
 var sendText = function() {
-    if (textSending) {
-        return;
-    }
+//    if (textSending) {
+//        return;
+//    }
     textSending = true;
     var msgInput = document.getElementById(talkInputId);
     var msg = msgInput.value;
     if (msg == null || msg.length == 0) {
         return;
     }
-    var to = curChatUserId;
+    var to = curRoomId;
     if (to == null) {
         return;
     }
     var options = {
         to : to,
         msg : msg,
-        type : "chat"
+        type : "groupchat"
     };
-    // 群组消息和个人消息的判断分支
-    if (curChatUserId.indexOf(groupFlagMark) >= 0) {
-        options.type = 'groupchat';
-        options.to = curRoomId;
-    }
     //easemobwebim-sdk发送文本消息的方法 to为发送给谁，meg为文本消息对象
     conn.sendTextMessage(options);
     //当前登录人发送的信息在聊天窗口中原样显示
+    to = curChatUserId;
     var msgtext = msg.replace(/\n/g, '<br>');
     appendMsg(curUserId, to, msgtext);
     turnoffFaces_box();
@@ -978,8 +980,8 @@ var sendPic = function() {
                 } else {
                     filename = data.filename || '';
                     var img = document.createElement("img");
-					img.src = data.uri + '/' + data.entities[0].uuid + '?token=';
-					img.width = maxWidth;
+                    img.src = data.uri + '/' + data.entities[0].uuid + '?token=';
+                    img.width = maxWidth;
                 }
                 appendMsg(curUserId, to, {
                     data : [ {
@@ -1055,6 +1057,7 @@ var sendAudio = function() {
 };
 //easemobwebim-sdk收到文本消息的回调方法的实现
 var handleTextMessage = function(message) {
+    console.info(message);
     var from = message.from;//消息的发送者
     var mestype = message.type;//消息发送的类型是群组消息还是个人消息
     var messageContent = message.data;//文本消息体

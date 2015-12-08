@@ -31,6 +31,7 @@ listModule.factory('listHelper', function($http, $rootScope, httpWrapper) {
 				'http://'+$rootScope.hostName+url+'?'+params, 
 				function(data) {
 					var data = data.data;
+					console.info(data);
 					if(data.length){
 						$scope.items = $scope.items.concat(data);
 						if (data.length < rows_per_page) {

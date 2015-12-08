@@ -1,4 +1,4 @@
-<ion-view view-title="question-new">
+<ion-view hide-tabs="false" view-title="我的咨询-待受理">
     <ion-content>
     	<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 
@@ -13,7 +13,7 @@
 		        			<p class="fc-33">{{item.post_category}}</p>
 			        	</div>
 		  				<div class="col" style="text-align: right;">
-		  					<button class="button button-small button-positive">取消</button>
+		  					<button class="button button-small button-positive" ng-click="cancel(item.id,$index)">取消</button>
 		  				</div>
 		        	</div>
 		        </ion-item>
