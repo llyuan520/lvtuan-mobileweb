@@ -1,18 +1,31 @@
-<ion-view hide-tabs="true" view-title="我的订单-全部">
-    <ion-content>
-		<div class="list web-top10">
-			<a style="height:auto;padding-left:16px;" class="item web-itemheight45 item-avatar">
-			      <p class="web-listtext web-fc000">{{item.creator_realname}}&nbsp;&nbsp;{{item.creator_realname}}</p>
-			      <p class="web-listtext web-fc666" style="font-size:14px;margin-top:5px;">
-			      	{{item.evaluate_score}}
-			      	&nbsp;<i class="icon ion-star web-ion-img1-5" style="color:#f00;"></i>&nbsp;
-			      	<i class="icon ion-star web-ion-img1-5"></i>&nbsp;
-			      	<i class="icon ion-star web-ion-img1-5"></i>&nbsp;
-			      	<i class="icon ion-star web-ion-img1-5"></i>&nbsp;
-			      	<i class="icon ion-star web-ion-img1-5"></i>
-			      </p>
-			      <p class="web-listtext web-fc000">{{item.evaluate_comment}}</p>
-			</a>
-		</div>
-    </ion-content>
+<ion-view hide-tabs="true" view-title="评价详情">
+	<ion-pane>
+		<ion-header-bar class="bar bar-header bar-light">
+			<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" onclick="history.go(-1);"></a>
+			<h1 class="title">评价详情</h1>
+		</ion-header-bar>
+		<ion-content class="web-body">
+			 <ion-list>
+            	<ion-item class="item item-thumbnail-left">
+		          	<img ng-src="{{item.avatar}}" style="border-radius:50px;" />
+					<div class="row">
+					  <div class="col">{{item.post_type}}</div>
+					  <div class="col">
+						  	<div class="rig" star ng-model="ratingVal" rating-value="ratingVal" max="max" on-hover="onHover" on-leave="onLeave" readonly="{{readonly}}"></div>
+						</div>
+					</div>
+					<div class="row">
+					  <div class="col">{{item.post_category}}</div>
+					  <div class="col" style="text-align:right;">
+					  	<label class="rig">{{item.post_type}}</label>
+					  </div>
+					</div>
+		        </ion-item>
+		        <ion-item>
+		        	<p>{{item.created_at.date}}</p>
+		        	<p class="contents">{{item.evaluate_content}}</p>
+		    	</ion-item>
+	         </ion-list>
+	    </ion-content>
+	</ion-pane>
 </ion-view>

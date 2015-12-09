@@ -3272,11 +3272,31 @@ lvtuanApp.controller("orderlawyerDetailCtrl",function($http,$scope,$stateParams,
 	}
 })
 //律师订单 - 评价详情
-lvtuanApp.controller("commentorderlawyerCtrl",function($http,$scope,$stateParams,$rootScope,httpWrapper){
-	httpWrapper.get('http://'+$rootScope.hostName+'/center/pay/lawyer/question/'+$stateParams.id+'/view', function(data){
+lvtuanApp.controller("commentorderlawyerCtrl",function($http,$scope,$stateParams,$rootScope,$timeout,httpWrapper){
+	$scope.max = 5;
+	$scope.ratingVal = 0;
+	$scope.readonly = false;
+	$scope.onHover = function(val){
+		$scope.hoverVal = val;
+	};
+	$scope.onLeave = function(){
+		$scope.hoverVal = null;
+	}
+
+	httpWrapper.get('http://'+$rootScope.hostName+'/center/lawyer/question/'+$stateParams.id+'/evaluate/view', function(data){
 		$scope.item = data.data;
+		$timeout(function() {  
+          $scope.$apply(function() {   
+            $scope.ratingVal = $scope.item.evaluate_score;   
+          });  
+          debugger
+        }, 2000);  
+		console.info($scope.ratingVal);
 		console.info($scope.item);
+
 	});
+
+
 });
 
 
