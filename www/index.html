@@ -29,7 +29,7 @@
             <i class="icon ion-home"></i>
             首页
           </a>
-          <a ng-if="currentUser.user_group_id == 2 && is_verified == 1" ng-href="#/group/list" class="tab-item" ng-class="{active:isActives('/group/list')}">
+          <a ng-if="currentUser.user_group_id == 2 && currentUser.is_verified == 1" ng-href="#/group/list" class="tab-item" ng-class="{active:isActives('/group/list')}">
             <i class="icon ion-android-contacts"></i>
             圈子
           </a>

@@ -2466,6 +2466,7 @@ lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope){
 //律师个人主页
 lvtuanApp.controller("viewCtrl",function($scope,$http,$rootScope,$stateParams,httpWrapper){
 	$scope.max = 5;
+	$scope.ratingVal = 5;
 	$scope.readonly = true;
 	$scope.onHover = function(val){
 		$scope.hoverVal = val;
@@ -3271,11 +3272,14 @@ lvtuanApp.controller("orderlawyerDetailCtrl",function($http,$scope,$stateParams,
 		location.href='#/center';
 	}
 })
+
+
 //律师订单 - 评价详情
 lvtuanApp.controller("commentorderlawyerCtrl",function($http,$scope,$stateParams,$rootScope,$timeout,httpWrapper){
+
 	$scope.max = 5;
-	$scope.ratingVal = 0;
-	$scope.readonly = false;
+	$scope.ratingVal = 5;
+	$scope.readonly = true;
 	$scope.onHover = function(val){
 		$scope.hoverVal = val;
 	};
@@ -3285,19 +3289,12 @@ lvtuanApp.controller("commentorderlawyerCtrl",function($http,$scope,$stateParams
 
 	httpWrapper.get('http://'+$rootScope.hostName+'/center/lawyer/question/'+$stateParams.id+'/evaluate/view', function(data){
 		$scope.item = data.data;
-		$timeout(function() {  
-          $scope.$apply(function() {   
-            $scope.ratingVal = $scope.item.evaluate_score;   
-          });  
-          debugger
-        }, 2000);  
-		console.info($scope.ratingVal);
-		console.info($scope.item);
-
+		$scope.ratingVal = $scope.item.evaluate_score;
 	});
 
-
 });
+
+
 
 
 //律师的工作 - 咨询 － 待受理
