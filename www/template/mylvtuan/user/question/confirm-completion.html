@@ -1,35 +1,30 @@
-<ion-view view-title="咨询详情">
+<ion-view hide-tabs="false" view-title="评价">
 	<ion-pane>
 		<ion-header-bar class="bar bar-header bar-light">
 			<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" onclick="history.go(-1);"></a>
-			<h1 class="title">咨询详情</h1>
+			<h1 class="title">评价</h1>
 		</ion-header-bar>
 		<ion-content class="web-body">
-			<ion-list>
-	        	<ion-item class="item">
-	        		<i class="icon positive ion-clipboard ion-chevron-left" style="font-size:20px;"></i>
-	        		 确认完成
-	        		 <h2 class="fc-ee" style="margin-top:10px;">确认后订单将关闭！</h2>
-		        </ion-item>
-		        <ion-item class="item" >
-		          	<h2 class="fc-ee">请对本次服务进行评价</h2>
-					<p class="fc-33" style="font-size:20px;">
-						<i class="ion-ios-star energized"></i>
-						<i class="ion-ios-star energized"></i>
-						<i class="ion-ios-star energized"></i>
-						<i class="ion-ios-star-outline"></i>
-						<i class="ion-ios-star-outline"></i>
-					</p>
-		        </ion-item>
-		        <ion-item class="item item-text-wrap">
-		          	<textarea placeholder="我要说两句..." id="introduce" rows="10" cols="70" class="itxtarea" name="introduce"></textarea>
-		        </ion-item>
-		        <div class="item row">
-				  <div class="col"><button class="button button-block"> 取 消 </button></div>
-				  <div class="col"><button class="button button-block button-positive"> 完 成 </button></div>
-				</div>
+			<form name="myForm" role="form" novalidate ng-controller="confirmCompletionCtrl">
+				<ion-list>
+			        <ion-item class="item" >
+			          	<h2 class="fc-ee">请对本次服务进行评价</h2>
+						<p class="fc-33" style="font-size:20px;">
+							<div class="lef" star rating-value="ratingVal" max="max" on-hover="onHover" on-leave="onLeave" readonly="{{readonly}}"  ng-click="onChange(ratingVal)"></div>
+						</p>
+			        </ion-item>
+			        <ion-item class="item item-text-wrap">
+			          	<label class="item item-input">
+				          <textarea ng-model="user.evaluate_comment" name="evaluate_comment" rows="10" cols="70" class="itxtarea" placeholder="我要说两句..."required></textarea>
+				        </label>
+			        </ion-item>
 
-	         </ion-list>
+			        <div class="item row">
+					  <div class="col"><button class="button button-block" ng-click="cancel()"> 取 消 </button></div>
+					  <div class="col"><button class="button button-block button-positive" ng-disabled="myForm.$invalid" ng-click="submit()"> 完 成 </button></div>
+					</div>
+		         </ion-list>
+	     	</form>
 	    </ion-content>
 	</ion-pane>
 </ion-view>

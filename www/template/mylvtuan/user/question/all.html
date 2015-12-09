@@ -1,9 +1,9 @@
-<ion-view view-title="question-all">
+<ion-view hide-tabs="false" view-title="我的咨询-全部">
     <ion-content>
     	<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
     		<ion-list ng-repeat="item in items">
 	        	<ion-item class="item" >
-		          	<span class="sp-l fc-33"><a ng-href="#/questionsview/{{item.id}}">{{item.title}}</a></span>
+		          	<span class="sp-l fc-33"><a ng-href="#/user/question/view/{{item.id}}">{{item.title}}</a></span>
 					<span class="sp-r fc-33">{{item.created_at}}</span>
 		        </ion-item>
 		        <ion-item class="item itemdata">
@@ -16,9 +16,28 @@
 		        		<div class="col">
 		        			<p class="fc-33">{{item.post_category}}</p>
 			        	</div>
-		  				<div class="col" style="text-align: right;">
-		  					<button class="button button-small button-positive">取消</button>
-		  				</div>
+			        	<div class="col" style="text-align: right;">
+		  					<label ng-if="item.status_code == 'new'">
+		  						<button class="button button-small button-positive" ng-click="cancel(item.id,$index)">取消</button>
+		  					</label>
+		  					<label ng-if="item.status_code == 'replied'">
+		  						<button class="button button-small button-positive" ng-click="ask(item.id,$index)">联系律师</button>
+		  						<button class="button button-small button-positive" ng-click="complete(item.id,$index)">确认</button>
+		  					</label>
+		  						<a href="#/send/mind">送心意</a>
+		  					
+		  					<label ng-if="item.status_code == 'complete'">
+<<<<<<< Updated upstream
+		  						<button class="button button-small button-positive" ng-click="pay(item.id)">送心意</button>
+=======
+		  						<!-- <button class="button button-small button-positive" ng-click="remove(item.id,$index)">送心意</button> -->
+>>>>>>> Stashed changes
+		  						<button class="button button-small button-positive" ng-click="remove(item.id,$index)">删除</button>
+		  					</label>
+		  					<label ng-if="item.status_code == 'wait_for_evaluation'">
+		  						<button class="button button-small button-positive" ng-click="evaluate(item.id,$index)">评价</button>
+		  					</label>
+	  					</div>
 		        	</div>
 		        </ion-item>
 	         </ion-list>

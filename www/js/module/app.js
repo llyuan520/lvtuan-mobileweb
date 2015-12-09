@@ -29,12 +29,12 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
   $rootScope.show = function() {
     $ionicLoading.show({
       template: '<ion-spinner icon="circles"></ion-spinner>',
-      duration: 800,
+      //duration: 800,
       noBackdrop: false
     });
   };
   $rootScope.hide = function(){
-    //$ionicLoading.hide();
+    $ionicLoading.hide();
   };
 
   //localStorage.removeItem('is_lawyer');
@@ -466,17 +466,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       url: '/lawyerquestion',
       templateUrl: 'template/mylvtuan/lawyer/question/question.html'
     })
-  .state('lawyerquestion.all', { //律师的咨询 - 待受理
-      url: '/all',
-      cache: 'true',
-      views: {
-          'question-all': {
-              templateUrl: 'template/mylvtuan/lawyer/question/all.html',
-              controller: 'lawyerquestionAllCtrl'
-          }
-      }
-    })
-  .state('lawyerquestion.new', { //律师的咨询 - 全部
+  .state('lawyerquestion.new', { //律师的咨询 - 待受理
       url: '/new',
       cache: 'true',
       views: {
@@ -506,6 +496,13 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
           }
       }
     })
+  
+  .state('lawyer/questions/view', { // 律师的工作台 - 咨询详情
+    url: '/lawyer/questions/view/:id',
+    cache: 'true', 
+    templateUrl: 'template/mylvtuan/lawyer/question/view.html',
+    controller: 'lawyerquestionsviewCtrl'
+  })
 
   .state('queryrefer', { // 律师的工作台 - 咨询参考
     url: '/queryrefer',
@@ -569,16 +566,18 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
         }
     }
   })
-  .state('userquestion.complete', { //用户的咨询 - 已完成
-    url: '/complete',
-    cache: 'true',
-    views: {
-        'question-complete': {
-            templateUrl: 'template/mylvtuan/user/question/complete.html',
-            controller: 'userConfirmCompletionCtrl'
-        }
-    }
+
+  .state('user/question/view', { //首页 - 我的律团 - 用户的咨询
+    url: 'user/question/view/:id',
+    templateUrl: 'template/mylvtuan/user/question/view.html',
+    controller: 'userquestionviewCtr'
   })
+
+  .state('confirmCompletion', { //首页 - 我的律团 - 用户的咨询
+    url: '/confirmCompletion/:id',
+    templateUrl: 'template/mylvtuan/user/question/confirm-completion.html'
+  })
+
   .state('orderuser', { //首页 - 我的律团 - 用户的订单
       url: '/orderuser',
       templateUrl: 'template/mylvtuan/user/order/order-user.html'
@@ -642,6 +641,11 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
               controller: 'userorderCompleteCtrl'
           }
       }
+    })
+
+   .state('send/mind', { //用户的订单 - 订单详情
+      url: '/send/mind',
+      templateUrl: 'template/mylvtuan/user/question/send-mind.html'
     })
 
    .state('userorderdetail', { //用户的订单 - 订单详情
@@ -746,6 +750,11 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       controller: 'corporatebuynowCtrl'
     })
 
+    .state('pay', { //首页 - 微信支付
+      url: '/pay/:id',
+      templateUrl: 'template/pay.html',
+      controller: 'payCtrl'
+    })
 
 /********************************** error **********************************/
     .state('error', { //error

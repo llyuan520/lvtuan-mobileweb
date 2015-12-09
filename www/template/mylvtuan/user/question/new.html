@@ -1,10 +1,10 @@
-<ion-view view-title="question-new">
+<ion-view hide-tabs="false" view-title="我的咨询-待受理">
     <ion-content>
     	<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 
     		<ion-list ng-repeat="item in items">
 	        	<ion-item class="item" >
-		          	<span class="sp-l fc-33"><a ng-href="#/questionsview/{{item.id}}">{{item.title}}</a></span>
+		          	<span class="sp-l fc-33"><a ng-href="#/user/question/view/{{item.id}}">{{item.title}}</a></span>
 					<span class="sp-r fc-33">{{item.created_at}}</span>
 		        </ion-item>
 		        <ion-item class="item itemdata" >
@@ -13,7 +13,7 @@
 		        			<p class="fc-33">{{item.post_category}}</p>
 			        	</div>
 		  				<div class="col" style="text-align: right;">
-		  					<button class="button button-small button-positive">取消</button>
+		  					<button class="button button-small button-positive" ng-click="cancel(item.id,$index)">取消</button>
 		  				</div>
 		        	</div>
 		        </ion-item>
