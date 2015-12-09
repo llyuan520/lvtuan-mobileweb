@@ -629,6 +629,11 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       }
     })
 
+   .state('send/mind', { //用户的订单 - 订单详情
+      url: '/send/mind',
+      templateUrl: 'template/mylvtuan/user/question/send-mind.html'
+    })
+
    .state('userorderdetail', { //用户的订单 - 订单详情
       url: '/userorderdetail/:id',
       templateUrl: 'template/mylvtuan/user/order/order-detail.html',
