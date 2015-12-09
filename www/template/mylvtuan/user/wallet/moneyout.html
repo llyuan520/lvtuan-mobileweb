@@ -40,7 +40,7 @@
 								<div class="row" style="padding:0;">
 								  <div class="col col-center">银行卡号</div>
 								  <div class="col col-75 col-center">
-								  	<input id="money" placeholder="请输入银行卡号" ng-model="user.card_id" name="card_id" type="number" required>
+								  	<input id="money" placeholder="请输入银行卡号" ng-model="user.card_id" name="card_id" ng-maxlength="19" type="number" required>
 								  </div>
 								</div>
 							</div>
@@ -48,7 +48,7 @@
 								<div class="row" style="padding:0;">
 								  <div class="col col-center">联系方式</div>
 								  <div class="col col-75 col-center">
-								  	<input id="money" placeholder="请输入联系方式" ng-model="user.contact_phone" name="contact_phone" type="text" required>
+								  	<input id="money" placeholder="请输入联系方式" ng-model="user.contact_phone" name="contact_phone" type="text" maxlength="11" required>
 								  </div>
 								</div>
 							</div>
