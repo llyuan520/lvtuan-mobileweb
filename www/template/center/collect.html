@@ -22,15 +22,17 @@
 					<div ng-if="item.show_img" class="item item-thumbnail-left">
 						<img ng-src='{{item.collect_img}}'/>
 						<p class="content" style="color:#333;font-size:16px">
-							<a ng-href="#/lawyer/article/view/{{item.id}}">{{item.title}}</a>
+							<a ng-if="item.collect_type == 1" href="#/questionsview/{{item.item_id}}">{{item.title}}</a>
+							<a ng-if="item.collect_type == 3" href="#/knowledgeview/{{item.item_id}}">{{item.title}}</a>
 						</p>
-						<p>{{item.collect_type}}</p>
+						<p>{{item.collect_type_str}}</p>
 					</div>
 					<div ng-if="!item.show_img" class="item">
 						<p class="content" style="color:#333;font-size:16px">
-							<a ng-href="#/lawyer/article/view/{{item.id}}">{{item.title}}</a>
+							<a ng-if="item.collect_type == 1" href="#/questionsview/{{item.item_id}}">{{item.title}}</a>
+							<a ng-if="item.collect_type == 3" href="#/knowledgeview/{{item.item_id}}">{{item.title}}</a>
 						</p>
-						<p>{{item.collect_type}}</p>
+						<p>{{item.collect_type_str}}</p>
 					</div>
 				</ion-item>
 			</ion-list>

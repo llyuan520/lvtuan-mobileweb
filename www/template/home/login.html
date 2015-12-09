@@ -15,18 +15,6 @@
 					<span class="bg-clock login-lbl-pl login-lbl-fc">&nbsp;</span>
 					<input type="password" name="password" placeholder="登录密码(6-20位字符)" ng-model="user.password" ng-minlength="6" ng-maxlength="20" ng-pattern="/^[\@A-Za-z0-9\!\#\$\%\^\&\*\.\~]{6,20}$/" required="required">
 				</div>
-				<p class="item" ng-show="loginForm.password.$error.minlength">
-					<span class="fc-red">字符不能小于6个字符</span>
-				</p>
-				<p class="item" ng-show="loginForm.password.$error.maxlength">
-					<span class="fc-red">字符的长度不能超过20个</span>
-				</p>
-				<p class="item" ng-show="(loginForm.password.$invalid && !loginForm.password.$pristine)">
-					<span class="fc-red">请输入6-20位字符</span>
-				</p>
-				<p class="item" ng-show="loginForm.password.$required ">
-					<span class="fc-red">密码不能为空</span>
-				</p>
 				<div class="item">
 					<!--<label class="item item-input">-->
 						<button ng-disabled="loginForm.$invalid" ng-click="submit(user)" class="button button-block button-positive btn-login-button" type="button">登录</button>

@@ -1,9 +1,9 @@
-<ion-view view-title="question-waitforconfirmation">
+<ion-view hide-tabs="false" view-title="我的咨询-待评价">
     <ion-content>
     	<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
     		<ion-list ng-repeat="item in items">
 	        	<ion-item class="item" >
-		          	<span class="sp-l fc-33"><a ng-href="#/questionsview/{{item.id}}">{{item.title}}</a></span>
+		          	<span class="sp-l fc-33"><a ng-href="#/user/question/view/{{item.id}}">{{item.title}}</a></span>
 					<span class="sp-r fc-33">{{item.created_at}}</span>
 		        </ion-item>
 		        <ion-item class="item itemdata">
@@ -12,7 +12,7 @@
 		        			<p class="fc-33">{{item.post_category}}</p>
 			        	</div>
 		  				<div class="col" style="text-align: right;">
-		  					<button class="button button-small button-positive">评价</button>
+		  					<button class="button button-small button-positive" ng-click="evaluate(item.id,$index)">评价</button>
 		  				</div>
 		        	</div>
 		        </ion-item>

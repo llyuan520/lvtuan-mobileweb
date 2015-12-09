@@ -6,7 +6,10 @@ listModule.factory('listHelper', function($http, $rootScope, httpWrapper) {
 	// 这个函数支持下拉刷新和上拉加载
 	listHelper.bootstrap = function(url, $scope) {
 		var page = 1; //页数
-		var rows_per_page = 4; // 每页的数量
+		var rows_per_page = 5; // 每页的数量
+		if ($scope.rows_per_page) {
+			rows_per_page = $scope.rows_per_page;
+		}
 	    $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
 	    $scope.items = [];	//创建一个数组接收后台的数据
     
@@ -30,10 +33,9 @@ listModule.factory('listHelper', function($http, $rootScope, httpWrapper) {
 			httpWrapper.get(
 				'http://'+$rootScope.hostName+url+'?'+params, 
 				function(data) {
-					var data = data.data;
-					if(data.length){
-						$scope.items = $scope.items.concat(data);
-						if (data.length < rows_per_page) {
+					if(data && data.data && data.data.length){
+						$scope.items = $scope.items.concat(data.data);
+						if (data.data.length < rows_per_page) {
 							$scope.moredata = false;
 						} else {
 							$scope.moredata = true;
