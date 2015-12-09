@@ -1,4 +1,4 @@
-var httpModule = angular.module('httpModule', []);
+var httpModule = angular.module('httpModule', ['authModule']);
 
 httpModule.factory('httpWrapper', function($http, $rootScope) {
 	var httpRequest = {};
@@ -39,5 +39,90 @@ httpModule.factory('httpWrapper', function($http, $rootScope) {
     }
 
 	return httpRequest;
+});
 
-})
+httpModule.factory('APIInterceptor', ['$log', '$q', '$rootScope', 'authService', 'HOST', function($log, $q, $rootScope, authService, HOST) {  
+    $log.debug('$log is here to show you that this is a regular factory with injection');
+
+    var myInterceptor = {
+	    // optional method
+	    'request': function(config) {
+	      // do something on success
+  		  if(config.url.indexOf(HOST) > -1) {
+
+	      	$rootScope.show();
+
+			var token = authService.getToken();
+			if(token) {
+				config.headers.Authorization = 'Bearer ' + token;
+			}
+			config.headers.Accept = 'application/json';
+			config.cache = true;
+
+			if (config.url.indexOf(HOST + '/center') > -1 
+				|| config.url.indexOf(HOST + '/group') > -1
+				|| config.url.indexOf(HOST + '/microblog') > -1) {
+        		var canceller = $q.defer();
+				if (!authService.isAuthed()) {
+					$rootScope.$broadcast('unauthorized');
+					config.timeout = canceller.promise;
+
+		            // Cancel the request
+		            canceller.resolve();
+				} else {
+					if (config.url.indexOf(HOST + '/group') > -1
+						|| config.url.indexOf(HOST + '/microblog') > -1) {
+						// 动态和圈子一定要律师才可以访问
+						user = authService.getUser();
+						if (user.user_group_id === 1 || !user.is_verified) {
+							$rootScope.$broadcast('unauthorized');
+						}
+					}
+				}
+			}
+		  }
+	      return config;
+	    },
+
+	    // optional method
+	   'requestError': function(rejection) {
+	      // do something on error
+	      if (canRecover(rejection)) {
+	        return responseOrNewPromise
+	      }
+	      return $q.reject(rejection);
+	    },
+
+	    // optional method
+	    'response': function(response) {
+		    // do something on success
+			if(response.config.url.indexOf(HOST) > -1) {
+				// check the token and if it's expired
+				// $rootScope.$broadcast('unauthorized');
+	        	$rootScope.hide();
+
+	      //   	var token = response.headers('Authorization') ? response.headers('Authorization').toLowerCase().replace('bearer ', '') : null;
+	    		// if (token) {
+	      //   		authService.saveToken(token);
+	      //   	}
+			}
+		    return response;
+	    },
+
+	    // optional method
+	   'responseError': function(response) {
+	      if (response.status == 401) {
+	        $rootScope.$broadcast('unauthorized');
+	      }
+	      $rootScope.hide();
+	      // do something on error
+	      return response;
+	    }
+    };
+
+    return myInterceptor;
+}]);
+
+
+httpModule
+.constant('HOST', AppSettings.baseApiUrl)

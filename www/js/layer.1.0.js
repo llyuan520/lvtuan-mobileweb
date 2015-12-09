@@ -443,8 +443,8 @@ this.stopDefault = function(e)
     switch(data) {
       case 401 :
          _msg = "账号过期，请重新登录。";
-        window.location.href = '#/login';
-        window.location.reload();
+        //window.location.href = '#/login';
+        //window.location.reload();
         break;
 
         default :
