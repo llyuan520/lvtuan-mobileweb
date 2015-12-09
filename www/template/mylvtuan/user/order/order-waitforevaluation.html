@@ -1,4 +1,4 @@
-<ion-view view-title="我的订单-待评价">
+<ion-view hide-tabs="true" view-title="我的订单-待评价">
     <ion-content>
 
     	<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
@@ -13,7 +13,7 @@
 	        			<h2 class="fc-ee">{{item.post_type}}</h2>
 		        	</div>
 	  				<div class="col" style="text-align: right;">
-	  					<button class="button button-small button-positive">评价</button>
+	  					<button class="button button-small button-positive" ng-click="evaluate(item.id,$index)">评价</button>
 	  				</div>
 	        	</div>
 	        </ion-item>

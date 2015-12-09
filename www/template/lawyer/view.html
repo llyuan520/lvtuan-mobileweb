@@ -10,13 +10,9 @@
 				      <h2 class="web-top10" style="color:#ffffff;">{{items.realname}}  <span class="web-font14">律师</span></h2>
 				      <h2 class="web-top10" style="color:#ffffff;">您的专属律师</h2>
 				      <div style="width:100%;height:2px;clear:both;"></div>
-				      <p class="web-listtext web-fc666" style="float:left;font-size:14px;margin-top:5px;border:2px solid #ffffff;width:103px;border-radius:15px;padding:0px 10px 3px 10px;">
-				      	<i class="icon ion-star" style="color:#f00;"></i>
-				      	<i class="icon ion-star" style="color:#fff;"></i>
-				      	<i class="icon ion-star" style="color:#fff;"></i>
-				      	<i class="icon ion-star" style="color:#fff;"></i>
-				      	<i class="icon ion-star" style="color:#fff;"></i>
-				      </p>
+				      <div class="web-listtext web-fc666" style="float:left;font-size:14px;margin-top:5px;border:2px solid #ffffff;border-radius:15px;padding:0px 10px 3px 10px;">
+				      	<div star rating-value="ratingVal" max="max" on-hover="onHover" on-leave="onLeave" readonly="{{readonly}}"></div>
+				      </div>
 				      <div style="font-size:14px;width:50px;height:30px;float:right;line-height:30px;color:#ffffff;">
 				      	<p style="font-size:14px;width:30px;border-radius:30px;height:30px;float:left;background-color:#ffffff;text-align:center;"><i class="icon ion-android-favorite web-ion-img1-5" style="color:#f00;"></i></p>
 				      	&nbsp;12
@@ -80,14 +76,11 @@
 	  	<div class="list web-top10" ng-repeat="evaluation in evaluations">
 		  <a style="height:auto;padding-left:16px;" class="item web-itemheight45 item-avatar">
 		      <p class="web-listtext web-fc000">{{evaluation.creator_realname}}&nbsp;&nbsp;{{evaluation.creator_realname}}</p>
-		      <p class="web-listtext web-fc666" style="font-size:14px;margin-top:5px;">
-		      	{{evaluation.evaluate_score}}
-		      	&nbsp;<i class="icon ion-star web-ion-img1-5" style="color:#f00;"></i>&nbsp;
-		      	<i class="icon ion-star web-ion-img1-5"></i>&nbsp;
-		      	<i class="icon ion-star web-ion-img1-5"></i>&nbsp;
-		      	<i class="icon ion-star web-ion-img1-5"></i>&nbsp;
-		      	<i class="icon ion-star web-ion-img1-5"></i>
-		      </p>
+		      <div class="web-listtext web-fc666" style="font-size:14px;margin-top:5px;">
+		      	<p class="evaluate_score">{{evaluation.evaluate_score}}</p>
+		      	<div class="rig" star rating-value="ratingVal[$index]" max="max" on-hover="onHover" on-leave="onLeave" readonly="{{readonly}}"></div>
+				<input type="hidden" name="input" ng-model="max" min="0" max="5" required>
+		      </div>
 		      <p class="web-listtext web-fc000">{{evaluation.evaluate_comment}}</p>
 		    </a>
 		</div>
@@ -115,38 +108,26 @@
 <script type="text/ng-template" id="televise.tpl.html">
     <ul class="list" ng-controller="viewteleviseCtrl">
     	<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
-		<div class="list list-comment">
-			<div class="item">
-				<div class="item-main">
-					<div class="item-a">
-						<span class="sp-date txt-fw">动态列表</span><br />
-						<span class="sp-month">动态列表</span>
-					</div>
-					<div class="item-b">
-						<div class="item-b-t fc-ee">
-							动态列表<br />动态列表
-						</div>
-						<div class="item-b-b">	
-							<span>动态列表</span>
-							<span>&nbsp;</span>
-							<span>动态列表</span>
-							<span class="clear"></span>
-						</div>
-					</div>
-					<div class="clear"></div>							
-				</div>
-				<div class="item-who fc-nan lh-2em"><span>动态列表</span>等动态列表位赞过</div>
-				<div class="item-who-title fc-ee">全部评论</div>
-				<div>
-					<div class="list list-other-cmt">
-						<div class="item lh-2em">
-							<span class="fc-nan">动态列表:</span>
-							<span class="fc-ee">动态列表</span>
-						</div>
-					</div>
-				</div>
+		<ion-list>
+			<div class="item" ng-repeat="item in items" >
+			  	<p href="#/broadcast/view/{{item.id}}">
+			    	{{item.content}}
+				</p>
+				<p>{{item.created_at}}</p>
+				<div class="web-paddingtb0" style="padding-left:55px;height:30px;line-height:30px;border-top:0px;color:#767676;">
+				    <i class="icon ion-compose web-ion-img1-2" style="float:right;font-size:14px;">&nbsp;
+				    	<label>{{item.post_extra.comments_count}}</label>
+					</i>
+				    <i ng-click="likes({{item.id}},[$index])"  class="icon ion-heart web-ion-img1-2" style="float:right;margin-right:10px;font-size:14px;">&nbsp;
+				    	<label>{{item.post_extra.likes_count}}</label>
+				    </i>
+				    <i class="icon ion-chatbubble web-ion-img1-2" style="float:right;margin-right:10px;font-size:14px;">&nbsp;
+				    	<label>{{item.post_extra.views_count}}</label>
+				    </i>
+				  </div>
 			</div>
-		</div>
+
+         </ion-list>
 		<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%" > </ion-infinite-scroll>
 	</ul> 
 </script>

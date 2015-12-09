@@ -1,4 +1,4 @@
-<ion-view view-title="我的订单-全部">
+<ion-view hide-tabs="true" view-title="我的订单-全部">
     <ion-content>
     	<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
     	<ion-list ng-repeat="item in items">
@@ -6,7 +6,7 @@
 	          	<span class="sp-l fc-33">{{item.title}}</span>
 				<span class="sp-r fc-33">{{item.created_at}}</span>
 	        </ion-item>
-	        <ion-item class="item itemdata" >
+	        <ion-item class="item itemdata">
 	        	<div class="row">
 	        		<div class="col">
 	        			<h2 class="fc-ee">{{item.status}}</h2>

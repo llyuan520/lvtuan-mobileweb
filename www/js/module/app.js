@@ -307,7 +307,8 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
           }
       }
     })
-    .state('/lawyer/article/view/', { //律师-我的文章 - 文章详情
+
+    .state('/lawyer/article/view', { //律师-我的文章 - 文章详情
       url: '/lawyer/article/view/:id',
       templateUrl: 'template/center/lawyer/view.html',
       controller: 'viewarticlelawyerCtrl'
@@ -460,6 +461,16 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
               controller: 'orderCompleteCtrl'
           }
       }
+    })
+   .state('orderlawyerdetail', { //律师订单 - 订单详情
+      url: '/orderlawyerdetail/:id',
+      templateUrl: 'template/mylvtuan/lawyer/order/order-detail.html',
+      controller: 'orderlawyerDetailCtrl'
+    })
+    .state('/lawyer/order/comment', { //律师订单-我的订单 - 评价详情
+      url: '/lawyer/order/comment/:id',
+      templateUrl: 'template/mylvtuan/lawyer/order/comment.html',
+      controller: 'commentorderlawyerCtrl'
     })
 
    .state('lawyerquestion', { //首页 - 我的律团 - 律师的咨询
