@@ -273,7 +273,8 @@ lvtuanApp.controller("groupCtrl",function($scope,$http,$state,$rootScope){
 	//跳转到登陆页面
 	$scope.jumplogin = function(){
 		console.info($rootScope.is_lawyer);
-		$state.go("login", {reload: true});
+    	location.href='#/login';
+		window.location.reload();
 	}
 
 })
