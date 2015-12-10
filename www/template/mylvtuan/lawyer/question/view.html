@@ -26,10 +26,11 @@
 	  						<button class="button button-small button-positive" ng-click="to_take(item.id)">抢单</button>
 	  					</label>
 	  					<label ng-if="items.status_code == 'replied'">
-	  						<button class="button button-small button-positive">联系客户</button>
+	  						<button class="button button-small button-positive" ng-click="ask(item.id,$index)">联系客户</button>
 	  					</label>
 	  					<label ng-if="items.status_code == 'complete'">
-	  						<button class="button button-small button-positive">查看评论</button>
+	  						<button class="button button-small button-positive" ng-click="comment(item.id)">查看评论</button>
+	  						<button class="button button-small button-positive" ng-click="remove(item.id,$index)">删除</button>
 	  					</label>
 	  				</p>
 		        </ion-item>

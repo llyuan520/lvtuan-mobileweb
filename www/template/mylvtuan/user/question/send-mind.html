@@ -1,18 +1,18 @@
-<ion-view hide-tabs="false" view-title="我的咨询-送心意">
+<ion-view hide-tabs="true" view-title="我的咨询-送心意">
     <ion-pane>
         <ion-header-bar class="bar bar-header bar-light">
-          <a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back"></a>
-          <h1 class="title">送心意</h1>
+            <a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" onclick="history.go(-1);"></a>
+            <h1 class="title">我的咨询-送心意</h1>
         </ion-header-bar>
-        <ion-content>
-            <form action="" method="">
+        <ion-content class="web-body">
+           <form action="" method="">
                 <div class="mind-pic">
                     <div>
                         <span>您将是第</span>
                         <i>3</i>
                         <strong>位给Ta送心意的用户哦</strong>
                     </div>
-                        <input type="text" placeholder="请输入金额" />
+                        <input type="number" placeholder="请输入金额"  />
                 </div>
                 <div class="payment-method">请选择支付方式</div>
                 <div class="method">
@@ -38,7 +38,7 @@
                     </dl>
                 </div>
                 <div>
-                    <input class="mind-button" type="button" value="送心意" />
+                    <button class="mind-button" type="button">送心意</button>
                 </div>
             </form>
         </ion-content>
