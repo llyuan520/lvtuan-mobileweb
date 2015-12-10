@@ -3578,7 +3578,10 @@ lvtuanApp.controller("userquestionviewCtrl",function($http,$scope,$stateParams,$
 	$scope.ask = function(id,index){
 		location.href='#/center';
 	}
-
+	//送心意
+	$scope.send = function(id){
+		location.href='#/send/mind/'+id;
+	}
 	//评价
 	$scope.evaluate = function(id,index){
 		$scope.items.splice(index, 1);
@@ -3587,11 +3590,35 @@ lvtuanApp.controller("userquestionviewCtrl",function($http,$scope,$stateParams,$
 })
 
 //用户 - 我的咨询 - 送心意
-lvtuanApp.controller("sendmindCtrl",function($http,$scope,$rootScope,listHelper,httpWrapper){
-	//付款
-	/*$scope.pay = function(id){
-		location.href='#/pay/'+id;
-	}*/
+lvtuanApp.controller("sendmindCtrl",function($http,$scope,$rootScope,$stateParams){
+	$scope.submit = function(){
+		var money = $scope.user.money;
+		if(money <= 0){
+			layer.show("金额不能小于0！");
+			return false
+		}
+		if(money > 1000000){
+			layer.show("金额不能大于1000000！");
+			return false
+		}
+
+		$http.post('http://'+$rootScope.hostName+'/wallet/reward',
+			{
+				user_id : $stateParams.id,
+				money	: money
+			}
+		)
+		.success(function(data) {
+			layer.show("送心意成功。");
+			$scope.user = {};
+		})
+		.error(function (data, status) {
+			if(status == 401){
+        		layer.msg(status);
+        	}
+        	console.info(JSON.stringify(data));
+		})
+	}
 })
 //用户的订单 - 全部
 lvtuanApp.controller("userorderAllCtrl",function($http,$scope,$rootScope,listHelper,httpWrapper){

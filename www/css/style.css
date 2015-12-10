@@ -705,6 +705,9 @@ ul.rating {
 	font-size: 18px;
 	color: #fff;
 }
+.mind-button:hover{
+	color: #fff;
+}
 /*去除输入金额右边的小箭头*/
 input::-webkit-inner-spin-button {
 	-webkit-appearance: none;

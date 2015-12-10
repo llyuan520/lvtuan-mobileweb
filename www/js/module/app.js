@@ -656,8 +656,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
 
    .state('send/mind', { //用户的订单 - 订单详情
       url: '/send/mind/:id',
-      templateUrl: 'template/mylvtuan/user/question/send-mind.html',
-      controller: 'sendmindCtrl'
+      templateUrl: 'template/mylvtuan/user/question/send-mind.html'
     })
 
    .state('userorderdetail', { //用户的订单 - 订单详情

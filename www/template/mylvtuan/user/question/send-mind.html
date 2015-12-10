@@ -5,14 +5,15 @@
             <h1 class="title">我的咨询-送心意</h1>
         </ion-header-bar>
         <ion-content class="web-body">
-           <form action="" method="">
+            <form novalidate name="myForm" id="myForm" ng-controller="sendmindCtrl" ng-cloak class="ng-cloak">
                 <div class="mind-pic">
                     <div>
-                        <span>您将是第</span>
+                        <!-- <span>您将是第</span>
                         <i>3</i>
-                        <strong>位给Ta送心意的用户哦</strong>
+                        <strong>位给Ta送心意的用户哦</strong> -->
+                        <span>感谢您的支持，我们将会做的更好。</span>
                     </div>
-                        <input type="number" placeholder="请输入金额"  />
+                    <input ng-model="user.money" name="money" type="number" placeholder="请输入金额" required/>
                 </div>
                 <div class="payment-method">请选择支付方式</div>
                 <div class="method">
@@ -38,7 +39,7 @@
                     </dl>
                 </div>
                 <div>
-                    <button class="mind-button" type="button">送心意</button>
+                    <button class="button button-block mind-button" type="button" ng-disabled="myForm.$invalid" ng-click="submit()" >提交</button>
                 </div>
             </form>
         </ion-content>
