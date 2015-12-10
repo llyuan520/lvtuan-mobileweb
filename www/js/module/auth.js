@@ -116,7 +116,6 @@ function userService($http, HOST, authService) {
   }
 
   self.loginWithWx = function(code, state) {
-  	alert('loginWithWx - ' + code + ' - ' + state);
   	return $http.post('http://' + HOST + '/loginWithWx', {
       code: code,
       state: state
