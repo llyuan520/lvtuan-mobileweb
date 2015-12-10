@@ -265,11 +265,14 @@ lvtuanApp.controller("resetpwdCtrl",function($scope,$http,$rootScope){
 })
 
 /****************************************************** 微信 ******************************************************/
-lvtuanApp.controller("wxAuthCtrl",function($scope,$stateParams,$http,$rootScope,wxService){
+lvtuanApp.controller("wxAuthCtrl",function($scope,$stateParams,wxService,authService){
 	console.info($stateParams);
-	alert($stateParams);
+	// 获取code和state，通过后端进行登录
+
+	authService.loginWithWx($stateParams.code,$stateParams.state);
 })
 
+//自动跳转到微信授权登录页面
 lvtuanApp.controller("wxLoginCtrl",function($scope,$http,$rootScope,wxService){
 	window.location.replace(wxService.getWxAuthUrl());
 })
