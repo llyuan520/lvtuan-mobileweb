@@ -3401,8 +3401,20 @@ lvtuanApp.controller("questionAllCtrl",function($scope,$rootScope,listHelper,htt
 })
 
 //用户的工作 - 咨询 － 待受理
-lvtuanApp.controller("questionNewCtrl",function($scope,listHelper){
+lvtuanApp.controller("questionNewCtrl",function($scope,$rootScope,$http,listHelper,httpWrapper){
 	listHelper.bootstrap('/center/question/new', $scope);
+
+	//取消
+	$scope.cancel = function(id,index){
+		httpWrapper.request('http://'+$rootScope.hostName+'/center/question/'+id+'/cancel','post',null,
+			function(data){
+				$scope.items.splice(index, 1);
+				layer.show("取消成功！");
+			},function(data){
+				console.info(data);
+			}
+		);
+	}
 })
 
 //用户的工作 - 咨询 － 待确认
