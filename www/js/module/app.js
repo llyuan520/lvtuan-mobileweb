@@ -47,6 +47,9 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
 
 }])
 
+
+
+
 .config(function($httpProvider) {
   $httpProvider.interceptors.push('APIInterceptor');
 })
