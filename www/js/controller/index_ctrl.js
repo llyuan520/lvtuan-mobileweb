@@ -267,6 +267,7 @@ lvtuanApp.controller("resetpwdCtrl",function($scope,$http,$rootScope){
 /****************************************************** 微信 ******************************************************/
 lvtuanApp.controller("wxAuthCtrl",function($scope,$stateParams,wxService,authService){
 	console.info($stateParams);
+	alert('wxAuthCtrl' + $stateParams.code + $stateParams.state);
 	// 获取code和state，通过后端进行登录
 
 	authService.loginWithWx($stateParams.code,$stateParams.state);
