@@ -17,6 +17,9 @@ var layer = (function(){
           div.remove();
         });
       },2500);
+      $("#hintShow").bind('click',function(){
+        div.remove();
+      });
     }   
   } 
   

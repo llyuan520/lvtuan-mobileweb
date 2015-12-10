@@ -13,7 +13,8 @@
 		        			<p class="fc-33">{{item.post_category}}</p>
 			        	</div>
 		  				<div class="col" style="text-align: right;">
-		  					<button class="button button-small button-positive">查看评论</button>
+		  					<button class="button button-small button-positive" ng-click="remove(item.id,$index)">删除</button>
+		  					<button class="button button-small button-positive" ng-click="comment(item.id)">查看评论</button>
 		  				</div>
 		        	</div>
 		        </ion-item>

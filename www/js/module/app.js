@@ -47,6 +47,9 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
 
 }])
 
+
+
+
 .config(function($httpProvider) {
   $httpProvider.interceptors.push('APIInterceptor');
 })
@@ -655,7 +658,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
     })
 
    .state('send/mind', { //用户的订单 - 订单详情
-      url: '/send/mind',
+      url: '/send/mind/:id',
       templateUrl: 'template/mylvtuan/user/question/send-mind.html'
     })
 
