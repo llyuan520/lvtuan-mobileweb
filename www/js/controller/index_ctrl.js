@@ -1,4 +1,4 @@
-var lvtuanApp = angular.module('lvtuanApp.Ctrl', ['ionic','ngSanitize','ngFileUpload','listModule', 'authModule'])
+var lvtuanApp = angular.module('lvtuanApp.Ctrl', ['ionic','ngSanitize','ngFileUpload','listModule','authModule','wxModule'])
 lvtuanApp.constant("HOST", AppSettings.baseApiUrl)
 lvtuanApp.controller("MainController",function($rootScope, $scope, $state, userService, authService){
 	var self = this;
@@ -21,6 +21,7 @@ lvtuanApp.controller("MainController",function($rootScope, $scope, $state, userS
         $state.go('login');
 		window.location.reload();
     });
+
 
     $scope.currentUser = authService.getUser();
 })
@@ -261,6 +262,15 @@ lvtuanApp.controller("resetpwdCtrl",function($scope,$http,$rootScope){
 		}
 
 	}
+})
+
+/****************************************************** 微信 ******************************************************/
+lvtuanApp.controller("wxAuthCtrl",function($scope,$stateParams,$http,$rootScope,wxService){
+	console.info($stateParams);
+})
+
+lvtuanApp.controller("wxLoginCtrl",function($scope,$http,$rootScope,wxService){
+	window.location.replace(wxService.getWxAuthUrl());
 })
 
 /****************************************************** 圈子 ******************************************************/

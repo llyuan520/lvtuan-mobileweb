@@ -97,6 +97,18 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       templateUrl: 'template/home/resetpwd.html'
     })
 
+    .state('wxauth', {
+      url: '/wxauth?code&state',
+      cache: 'true',
+      controller: 'wxAuthCtrl'
+    })
+
+    .state('wxlogin', {
+      url: '/wxlogin',
+      cache: 'true',
+      controller: 'wxLoginCtrl'
+    })
+
 /********************************** 圈子 **********************************/
     .state('group', { //圈子
       url: '/group',
