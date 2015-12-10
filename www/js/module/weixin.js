@@ -11,7 +11,7 @@ function wxService() {
 		str += "redirect_uri=" + encodeURIComponent(redirect_uri) + "&";
 		str += "response_type=code&";
 		str += "scope=snsapi_base&";
-		str += "state=STATE";
+		str += "state=1";
 		str += "#wechat_redirect";
 		return str;
 	}
