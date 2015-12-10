@@ -114,6 +114,36 @@ function userService($http, HOST, authService) {
 	  }
 	});
   }
+
+  self.loginWithWx = function(code, state) {
+  	return $http.post('http://' + HOST + '/loginWithWx', {
+      code: code,
+      state: state
+    }).then(
+    	function (res) {
+	    	var user = res.data ? res.data.data : null;
+	    	if(user) {
+	    		authService.saveUser(user);
+	    		console.log('user:', user);
+	    	}
+
+	    	var token = res.data ? res.data.token : null;
+        	// var token = res.headers('Authorization') ? res.headers('Authorization').toLowerCase().replace('bearer ', '') : null;
+    		if (token) {
+        		authService.saveToken(token);
+	    		console.log('token:', token);
+        	}
+
+	    	location.href='#/center';
+			window.location.reload();
+    	}
+    ).catch(function(response) {
+	  console.error('Gists error', response.status, response.data);
+	  if (response.status === 400) {
+		layer.show("登录失败，账号或密码错误，请重新登录。");
+	  }
+	});
+  }
 };
 
 authModule

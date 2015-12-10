@@ -274,10 +274,12 @@ lvtuanApp.controller("resetpwdCtrl",function($scope,$http,$rootScope){
 })
 
 /****************************************************** 微信 ******************************************************/
-lvtuanApp.controller("wxAuthCtrl",function($scope,$stateParams,$http,$rootScope,wxService){
-	console.info($stateParams);
+lvtuanApp.controller("wxAuthCtrl",function($scope,$stateParams,wxService,userService){
+	// 获取code和state，通过后端进行登录
+	userService.loginWithWx($stateParams.code,$stateParams.state);
 })
 
+//自动跳转到微信授权登录页面
 lvtuanApp.controller("wxLoginCtrl",function($scope,$http,$rootScope,wxService){
 	window.location.replace(wxService.getWxAuthUrl());
 })
@@ -4149,6 +4151,7 @@ lvtuanApp.controller("userwithdrawCtrl",function($scope,$http,$rootScope,listHel
 //用户律师 - 提现记录
 lvtuanApp.controller("userpayallCtrl",function($scope,$http,$rootScope,listHelper){
 	//判断是否是律师
+	$scope.rows_per_page = 15;
 	listHelper.bootstrap('/wallet/record', $scope);
 })
 
