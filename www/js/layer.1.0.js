@@ -434,7 +434,7 @@ this.stopDefault = function(e)
   //菜单首页按钮
   this.goHome = function() {
     window.location.reload();
-    window.location.href = '#/';
+    window.location.href = '#/index';
   }
 
   //获取错误信息

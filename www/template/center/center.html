@@ -1,9 +1,9 @@
-<ion-view hide-tabs="true" view-title="我的">
+<ion-view hide-Tabs="false" view-title="我的">
 		<ion-pane  class="web-body">
 			<ion-header-bar class="bar bar-header bar-light">
-				<a class="button button-icon  button-clear button-positive" ng-href="#/index">
+				<button class="button button-icon  button-clear button-positive" onclick='layer.goHome()'>
       				<img class="v-align" src="img/smallback.png"/>
-      			</a>
+      			</button>
 				<h1 class="title">我的</h1>
 			</ion-header-bar>
 
@@ -25,10 +25,6 @@
 				</div>
 				
 				<div ng-if="currentUser.user_group_id == 1 || currentUser.user_group_id == 2 && currentUser.is_verified == 0" class="list">
-					 <!-- <a class="item" ng-href="#/userlvtuan">
-					    我的律团
-					    <i class="icon ion-chevron-right"></i>
-					  </a> -->
 					  <a class="item" ng-href="#/orderuser">
 					    我的订单
 					    <i class="icon ion-chevron-right"></i>
@@ -76,10 +72,6 @@
 				</div>
 
 				<div ng-if="currentUser.user_group_id == 2 && currentUser.is_verified == 1" class="list">
-					<!-- <a class="item" ng-href="#/workbenchlawyer">
-					    我的律团
-					    <i class="icon ion-chevron-right"></i>
-					  </a> -->
 					  <a class="item" ng-href="#/orderlawyer">
 					    我的订单
 					    <i class="icon ion-chevron-right"></i>

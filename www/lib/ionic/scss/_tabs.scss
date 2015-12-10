@@ -27,6 +27,8 @@
   background-size: 0;
   line-height: $tabs-height;
 
+
+
   @media (min--moz-device-pixel-ratio: 1.5),
          (-webkit-min-device-pixel-ratio: 1.5),
          (min-device-pixel-ratio: 1.5),
@@ -38,6 +40,8 @@
     background-position: top;
     background-size: 100% 1px;
     background-repeat: no-repeat;
+    -webkit-transition: all linear 0.2s;
+    transition: all linear 0.2s;
   }
 
 }
@@ -395,7 +399,12 @@ ion-tabs {
     display:none;
   }
 }
-
+.tabs-item-hide > .tabs{
+  -webkit-transition: all linear 0.2s;
+  transition: all linear 0.2s;
+  bottom: -$tabs-height;
+  display: flex;
+}
 .tabs-item-hide > .tabs,
 .tabs.tabs-item-hide {
   display: none;

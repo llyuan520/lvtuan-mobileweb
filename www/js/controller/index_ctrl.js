@@ -24,27 +24,40 @@ lvtuanApp.controller("MainController",function($rootScope, $scope, $state, userS
 
 
     $scope.currentUser = authService.getUser();
+
+    function widgetsController($scope, $route) {
+	    $scope.$route = $route;
+	}
+
 })
 
 /****************************************************** 引导页 ******************************************************/
 //tabs选择项
 lvtuanApp.controller("HeaderController",function($scope,$location){
       $scope.isActives = function (route) { 
-      	return route === $location.path();
+      	//return route === $location.path();
+      	return $location.path().indexOf(route) == 0
+
       };
 })
+
+
 //设置是否显示底部导航
 lvtuanApp.directive('hideTabs', function($rootScope) {
-    return {
-        restrict: 'A',
-        link: function($scope, $el) {
-            $rootScope.hideTabs = true;
-            $scope.$on('$destroy', function() {
-                $rootScope.hideTabs = false;
-            });
-        }
-    };
+  return {
+      restrict: 'A',
+      link: function(scope, element, attributes) {
+          scope.$watch(attributes.hideTabs, function(value){
+              $rootScope.hideTabs = value;
+          });
+          scope.$on('$ionicView.beforeLeave', function() {
+              $rootScope.hideTabs = false;
+          });
+      }
+  };
 });
+
+
 
 lvtuanApp.directive('star', function () {
   return {

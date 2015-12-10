@@ -791,3 +791,4 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/index');
 });
+
