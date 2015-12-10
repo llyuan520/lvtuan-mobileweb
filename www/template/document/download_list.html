@@ -9,8 +9,11 @@
 			
 					<div style="background-color: #fff;">
 						<div class="row">
-						  <div class="col col-60" style="padding: 5px 0 0 0;">{{itmes.title}}</div>
-						  <div class="col" style="text-align: right;padding-right: 0px;">收藏</div>
+						    <div class="col col-60" style="padding: 5px 0 0 0;">{{itmes.title}}</div>
+						    <div class="col share" style="text-align: right;padding-right: 0px;">
+                                <i class="ion-android-star"></i>
+                                <span>收藏</span>
+                            </div>
 						</div>
 						<div class="row">
 						  <div class="col col-60" style="padding: 5px 0 0 0;">
@@ -18,7 +21,10 @@
 						  	<div>已下载：{{itmes.downs}}</div>
 						  </div>
 						  <div class="col" style="text-align: right;padding-right: 0px;line-height:45px;">
-						  		<div style="border-left: 1px solid #ccc;">分享</div>
+						  		<div class="share clearfix" style="border-left: 1px solid #ccc;">
+                                    <strong class="ion-android-open"></strong>
+                                    <span>分享</span>
+                                </div>
 						  </div>
 						</div>
 						<div class="list">
@@ -28,10 +34,14 @@
 								<p class="contents" ng-show="isclose">{{itmes.info}}</p>
 							</div>
 							<div class="item">
-								<!-- <div class="row">
-								  <div class="col" style="padding: 5px 0 0 0;"><img style="width:100%" ng-src="http://192.168.1.43/img/default_imgs/[]16.png"></div>
-								  <div class="col" style="text-align: right;padding-right: 0px;"><img style="width:100%" src="http://192.168.1.43/img/default_imgs/[]16.png"></div>
-								</div> -->
+								<div class="row">
+								    <div class="col" style="padding: 5px 0 0 0;">
+                                        <img style="width:100%" ng-src="http://192.168.1.43/img/default_imgs/[]16.png">
+                                    </div>
+								    <div class="col" style="text-align: right;padding-right: 0px;">
+                                        <img style="width:100%" src="http://192.168.1.43/img/default_imgs/[]16.png">
+                                    </div>
+								</div>
 								<a class="button button-block button-positive web-wid8c web-top10" href="{{itmes.file_path}}">下载</a>
 							</div>
 								

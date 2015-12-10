@@ -705,3 +705,28 @@ ul.rating {
 	font-size: 18px;
 	color: #fff;
 }
+.mind-button:hover{
+	color: #fff;
+}
+/*去除输入金额右边的小箭头*/
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+}
+input::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+}
+/*文书下载页--收藏、分享*/
+.share span {
+	float: right;
+	margin-left: 10px;
+	font-size: 16px;
+}
+.share i, .share strong {
+	font-size: 20px;
+}
+.share i {
+	color: #ffb007;
+}
+.share strong {
+	color: skyblue;
+}

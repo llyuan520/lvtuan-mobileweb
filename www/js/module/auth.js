@@ -43,7 +43,7 @@ function authService($window) {
 	}
 }
 
-function userService($http, $state, HOST, authService) {
+function userService($http, HOST, authService) {
   var self = this;
 
   // add authentication methods here
@@ -72,7 +72,7 @@ function userService($http, $state, HOST, authService) {
 	    		console.log('token:', token);
         	}
 
-	    	$state.go('center');
+	    	location.href='#/center';
 			window.location.reload();
     	}
     ).catch(function(response) {
@@ -104,7 +104,7 @@ function userService($http, $state, HOST, authService) {
 	    		console.log('token:', token);
         	}
 
-	    	$state.go('center');
+	    	location.href='#/center';
 			window.location.reload();
     	}
     ).catch(function(response) {
