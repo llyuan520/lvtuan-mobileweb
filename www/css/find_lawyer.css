@@ -57,6 +57,7 @@
 .slct-title select option{
 	text-align: center;
 	width:100%;
+	font-size: 18px;
 }
 .slct-title .opt-bl{
 	border-left: 1px solid #DDDDDD;	
