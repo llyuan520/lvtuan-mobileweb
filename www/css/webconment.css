@@ -84,13 +84,6 @@ body,
 .list-margin-top{
 	margin-top: 19px;
 }
-.login-lbl-pl{
-	text-indent: 25px;
-}
-
-.login-lbl-fc{
-	color: #999999;
-}
 
 /*.login2 {
 	margin: 0px 0px 41px 0px;
@@ -100,9 +93,8 @@ body,
 }
 
 .bg-man{
-	background-image: url(../img/man.png);
-	background-repeat: no-repeat;
-	background-position: left;
+	background: url(../img/man.png) 0 0 no-repeat;
+	background-size: 63%;
 }
 .bg-mobel{
 	background-image: url(../img/mobel.png);
@@ -110,9 +102,8 @@ body,
 	background-position: left;
 }
 .bg-clock{
-	background-image: url(../img/clock.png);
-	background-repeat: no-repeat;
-	background-position: left;
+	background: url(../img/clock.png) 0 0 no-repeat;
+	background-size: 69%;
 }
 .web-fc000{
 	color:#000000;

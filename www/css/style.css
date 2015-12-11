@@ -40,13 +40,6 @@ body,
 .list-margin-top{
 	margin-top: 19px;
 }
-.login-lbl-pl{
-	text-indent: 25px;
-}
-
-.login-lbl-fc{
-	color: #999999;
-}
 
 /*.login2 {
 	margin: 0px 0px 41px 0px;
@@ -54,19 +47,8 @@ body,
 .login2 .item{
 	border: none;
 }
-
-.bg-man{
-	background-image: url(../img/man.png);
-	background-repeat: no-repeat;
-	background-position: left;
-}
 .bg-mobel{
 	background-image: url(../img/mobel.png);
-	background-repeat: no-repeat;
-	background-position: left;
-}
-.bg-clock{
-	background-image: url(../img/clock.png);
 	background-repeat: no-repeat;
 	background-position: left;
 }
@@ -241,11 +223,11 @@ a:hover{
 .list-margin-top{
 	margin-top: 19px;
 }
-.login-lbl-pl{
-	text-indent: 25px;
-}
 
 .login-lbl-fc{
+	display: inline-block;
+	width: 30px;
+	height: 22px;
 	color: #999999;
 }
 

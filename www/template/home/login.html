@@ -7,12 +7,12 @@
       <ion-content>
 		<form novalidate rol="form" name="loginForm" id="loginForm" ng-controller="loginCtrl" ng-cloak class="ng-cloak">
 			<div class="list login">
-				<div class="item item-input item-text-wrap">
-					<span class="bg-man login-lbl-pl login-lbl-fc">&nbsp;</span>
+				<div class="item item-input item-text-wrap clearfix">
+					<span class="bg-man login-lbl-fc"></span>
 					<input type="text" name="username" ng-model="user.username" required="required" placeholder="手机号码或者邮箱" ng-messages-multiple />
 				</div>
-				<div class="item item-input">
-					<span class="bg-clock login-lbl-pl login-lbl-fc">&nbsp;</span>
+				<div class="item item-input clearfix">
+					<span class="bg-clock login-lbl-fc"></span>
 					<input type="password" name="password" placeholder="登录密码(6-20位字符)" ng-model="user.password" ng-minlength="6" ng-maxlength="20" ng-pattern="/^[\@A-Za-z0-9\!\#\$\%\^\&\*\.\~]{6,20}$/" required="required">
 				</div>
 				<div class="item">
