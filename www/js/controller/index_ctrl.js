@@ -1,6 +1,6 @@
 var lvtuanApp = angular.module('lvtuanApp.Ctrl', ['ionic','ngSanitize','ngFileUpload','listModule','authModule','wxModule'])
 lvtuanApp.constant("HOST", AppSettings.baseApiUrl)
-lvtuanApp.controller("MainController",function($rootScope, $scope, $state, userService, authService){
+lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $location, userService, authService){
 	var self = this;
 
 	self.login = function() {
@@ -18,12 +18,13 @@ lvtuanApp.controller("MainController",function($rootScope, $scope, $state, userS
 	}
 
     $rootScope.$on('unauthorized', function() {
-        $state.go('login');
-		window.location.reload();
+        $location.path('/login');
+        /*$window.location.href = '/login';*/
+		//window.location.reload();
     });
 
 
-    $scope.currentUser = authService.getUser();
+    $scope.currentUser = authService.getUser(); 
 
 })
 
@@ -32,14 +33,14 @@ lvtuanApp.controller("MainController",function($rootScope, $scope, $state, userS
 lvtuanApp.controller("HeaderController",function($scope,$location){
       $scope.isActives = function (route) { 
       	//return route === $location.path();
-      	return $location.path().indexOf(route) == 0
+      	return $location.path().indexOf(route) == 0;
 
       };
 })
 
 
 //设置是否显示底部导航
-lvtuanApp.directive('hideTabs', function($rootScope) {
+/*lvtuanApp.directive('hideTabs', function($rootScope) {
   return {
       restrict: 'A',
       link: function(scope, element, attributes) {
@@ -51,8 +52,33 @@ lvtuanApp.directive('hideTabs', function($rootScope) {
           });
       }
   };
-});
+});*/
+lvtuanApp.directive('hideTabs', function($rootScope) {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attributes) {
+            scope.$watch(attributes.hideTabs, function(value){
+                $rootScope.hideTabs = value;
+            });
 
+            scope.$on('$destroy', function() {
+                $rootScope.hideTabs = false;
+            });
+        }
+    };
+});
+//ng-class="{'tabs-item-hide': $root.hideTabs}"
+/*lvtuanApp.directive('hideTabs', function($rootScope) {
+  return {
+      restrict: 'A',
+      link: function($scope, $el) {
+          $rootScope.hideTabs = 'tabs-item-hide';
+          $scope.$on('$destroy', function() {
+              $rootScope.hideTabs = '';
+          });
+      }
+  };
+});*/
 
 
 lvtuanApp.directive('star', function () {
@@ -447,10 +473,8 @@ lvtuanApp.controller("groupviewCtrl",function($scope,$http,$state,$rootScope,$st
 	$("#user_password").val();
 	$http.get('http://'+$rootScope.hostName+'/group/'+$stateParams.id+'/chat'
     ).success(function(data) {
-    	if (data & data.data) {
-
-	    	console.info('圈子详情',data.data)
-
+    	if (data && data.data) {
+	    	console.info('圈子详情',data.data);
 	    	var itmes = data.data;
 	    	$scope.user_name = itmes.user_id;
 	    	$scope.user_password = itmes.pwd;
@@ -2265,7 +2289,7 @@ lvtuanApp.controller("siteCtrl",function($scope,$http,$rootScope,authService){
 
 /****************************************************** 找律师 ******************************************************/
 //找律师的列表
-lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope){
+lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$location){
 	$scope.orders = [
 					{
 						"key"	:"",
@@ -2417,6 +2441,13 @@ lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope){
 	        });
 	}
 	
+	$scope.jumppage = function(id){
+		//$location.path('/lawyer/'+id);
+		location.href='#/lawyer/'+id;
+		window.location.reload();
+
+
+	}
 })
 //律师个人主页
 lvtuanApp.controller("viewCtrl",function($scope,$http,$rootScope,$stateParams,httpWrapper){
@@ -3279,11 +3310,21 @@ lvtuanApp.controller("lawyerquestionNewCtrl",function($scope,$rootScope,listHelp
 	}
 })
 //律师的工作 - 咨询 － 待确认
-lvtuanApp.controller("lawyerquestionRepliedCtrl",function($scope,$rootScope,listHelper,httpWrapper){
+lvtuanApp.controller("lawyerquestionRepliedCtrl",function($scope,$rootScope,$http,listHelper,httpWrapper){
 	listHelper.bootstrap('/center/lawyer/question/replied', $scope);
 	//联系客户
-	$scope.ask = function(id,index){
-		location.href='#/center';
+	$scope.ask = function(id){
+		$http.get('http://'+$rootScope.hostName+'/center/question/'+id+'/ask'
+    	).success(function(data) {
+
+			location.href='#/easemobmain/'+id;
+			window.location.reload();
+		}).error(function (data, status) {
+			if(status == 401){
+        		layer.msg(status);
+        	}
+	        console.info(JSON.stringify(data));
+	    })
 	}
 })
 //律师的工作 - 咨询 － 已完成
@@ -3339,6 +3380,61 @@ lvtuanApp.controller("lawyerquestionsviewCtrl",function($http,$scope,$stateParam
 				console.info(data);
 			}
 		);
+	}
+})
+
+//咨询和订单的一对一咨询 - 即时通讯
+lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$stateParams){
+	$scope.user_name = "";
+	$scope.user_password = "";
+	$("#user_name").val("");
+	$("#user_password").val("");
+	$http.get('http://'+$rootScope.hostName+'/center/lawyer/question/'+$stateParams.id+'/ask'
+    ).success(function(data) {
+    	if (data && data.data) {
+	    	console.info('圈子详情',data.data);
+	    	var itmes = data.data;
+	    	$scope.user_name = itmes.easemob_id;
+	    	$scope.user_password = itmes.easemob_pwd;
+	    	$scope.easemoParam = {
+	    		'jumpUrl'		:'http://'+$rootScope.hostName+'/question/'+itmes.user_id+'/comment',
+	    		'curChatUserId' : itmes.user_id,
+		    	'content'	 	: itmes.content,
+		    	'created_at' 	: itmes.created_at.date,
+		    	'post_id' 		: itmes.post_id,
+		    	'realname' 		: itmes.realname,
+		    	'user_avatar' 	: itmes.user_avatar,
+		    	'myName' 		: itmes.myName
+	    	};
+
+	    	console.info($scope.easemoParam);
+	    	localStorage.setItem("easemoParam", JSON.stringify($scope.easemoParam));
+			var time = null;
+			time = setInterval(function() { 
+				if(getuserpwd(itmes) == true){
+	        		clearInterval(time);
+	        		login();
+	        	}
+			}, 2000); 
+		}
+
+	}).error(function (data, status) {
+		if(status == 401){
+    		layer.msg(status);
+        }
+        console.info(JSON.stringify(data));
+    })
+	
+	function getuserpwd(itmes){
+		var name = $("#user_name").val();
+    	var pwd = $("#user_password").val();
+    	if(name != null && pwd != null){
+    		if(name == itmes.easemob_id && pwd == itmes.easemob_pwd){
+    			return true;
+    		}
+    	}else{
+    		return false;
+    	}
 	}
 })
 

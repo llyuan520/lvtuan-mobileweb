@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>微首页</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <meta name="format-detection" content="telephone=no"/>
+    <link href="/lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+    <link rel="stylesheet" href="lib/js/web-im-1.0.7.2/css/bootstrap.css" />
+    <link rel="stylesheet" href="lib/js/web-im-1.0.7.2/css/webim.css" />
+
+    <script src="lib/js/jquery-1.11.1.js"></script>
+
+    <script src="lib/js/web-im-1.0.7.2/sdk/strophe.js"></script>
+    <script src="lib/js/web-im-1.0.7.2/sdk/json2.js"></script>
+    <script src="lib/js/web-im-1.0.7.2/sdk/easemob.im-1.0.7.js"></script>
+    <script src="lib/js/web-im-1.0.7.2/easemob.im.config.js"></script>
+    <script src="lib/js/web-im-1.0.7.2/bootstrap.js"></script>
+    <script type="text/javascript">
+        var easemob = JSON.parse(localStorage.getItem('easemoParam'));
+        var jumpUrl = easemob.jumpUrl;
+        var curChatUserId = easemob.curChatUserId;
+        var content = easemob.content;
+        var created_at = easemob.created_at.date;
+        var post_id = easemob.post_id;
+        var realname = easemob.realname;
+        var user_avatar = easemob.user_avatar;
+        var myName = easemob.myName;
+    </script>
+    <script src="lib/js/web-im-1.0.7.2/easemobmain.js"></script>
+
+
+    <!--[if lte IE 9]>
+    <script src="lib/js/web-im-1.0.7.2/sdk/jplayer/jquery.jplayer.min.js"></script>
+    <script src="lib/js/web-im-1.0.7.2/sdk/swfupload/swfupload.js"></script>
+    <![endif]-->
+
+    <style>
+      body {
+        font-family: "Microsoft YaHei","Microsoft JhengHei",STHeiti,MingLiu;
+      }
+    </style>
+  </head>
+  <body>
+    
+    <div hide-Tabs="true" class="web-body web-top10 ">
+            <ion-header-bar class="bar bar-header bar-light item-icon-right">
+                <a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" onclick="history.go(-1);"></a>
+                <h1 class="title">咨询详情</h1>
+                <i ng-click="site()" class="icon ion-more dark"></i>
+            </ion-header-bar>
+
+                <div class="webin" style="overflow-x: scroll;">
+                    <div id="loginmodal" class="modal hide in" role="dialog" aria-hidden="true" data-backdrop="static">
+                        <div class="modal-header">
+                        </div>
+                        <div class="modal-body">
+                            <table>
+                                <tr>
+                                    <td width="65%">
+                                        用户名：<input type="text" ng-model="user_name" name="user_name" id="user_name" tabindex="1"/> 
+                                        密码：<input type="password" ng-model="user_password" name="user_password" id="user_password" tabindex="2" />
+                                    </td>
+                                </tr>
+                            </table>    
+                        </div>
+                    </div>
+                    
+                    <div id="waitLoginmodal" class="modal hide" data-backdrop="static">
+                        <img ng-src="lib/js/web-im-1.0.7.2/img/waitting.gif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;正在努力加载中...
+                    </div>
+                    <div class="content" id="content" style="display: none;width:562px;">
+
+                        <!-- 聊天页面 -->
+                        <div class="chatRight">
+                            <div id="chat01">
+                                <div class="chat01_title">
+                                    <a href="javascript:window.close()"><div id="recycle"></div></a>
+                                    <ul class="talkTo">
+                                        <li><img class="" src="" alt="头像" style="width:80px;height:80px;margin:0 20px 10px 10px"/></li>
+                                        <li><p class="realname">用户姓名</p><p class="post_type">咨询类型</p></li>    
+                                    </ul>
+                                </div>
+                                <!-- <div id="null-nouser" class="chat01_content"></div> -->
+                            </div>
+
+                            <div class="chat02">
+                                <div class="chat02_title">
+                                    <div id="wl_faces_box" class="wl_faces_box">
+                                        <div class="wl_faces_content">
+                                            <div class="title">
+                                                <ul>
+                                                    <li class="title_name">常用表情</li>
+                                                    <li class="wl_faces_close"><span
+                                                        onclick='turnoffFaces_box()'>&nbsp;</span></li>
+                                                </ul>
+                                            </div>
+                                            <div id="wl_faces_main" class="wl_faces_main">
+                                                <ul id="emotionUL">
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="wlf_icon"></div>
+                                    </div>
+                                </div>
+                                <form id="chatform">
+                                <div id="input_content" class="chat02_content">
+                                    <textarea name="comment" id="talkInputId" style="resize: none;"></textarea>
+                                </div>
+                                <div class="chat02_bar">
+                                    <ul style="width:90%;">
+                                        <a href="##" style="float: left"><li onclick="sendText()">发&nbsp;&nbsp;送</li></a>
+                                        <a href="##" style="float: right"><li >确认完成</li></a>   
+                                    </ul>
+                                </div>
+                				</form>
+                                <div style="clear: both;"></div>
+                            </div>
+                            <div id="fileModal" class="modal hide" role="dialog"
+                                aria-hidden="true" data-backdrop="static">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"
+                                        aria-hidden="true">&times;</button>
+                                    <h3>文件选择框</h3>
+                                </div>
+                                <div class="modal-body">
+                                    <input type='file' id="fileInput" /> <input type='hidden'
+                                        id="sendfiletype" />
+                                    <div id="send-file-warning"></div>
+                                </div>
+                                <div class="modal-footer">
+                                	
+                                    <button id="fileSend" class="btn btn-primary" onclick="sendFile()">发送</button>
+                                    <button id="cancelfileSend" class="btn" data-dismiss="modal">取消</button>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- 群组成员操作界面 -->
+                        <div id="option-room-div-modal" class="alert modal hide"
+                            role="dialog" aria-hidden="true" data-backdrop="static">
+                            <button type="button" class="close" data-dismiss="modal"
+                                aria-hidden="true">&times;</button>
+                            <div class="modal-header">
+                                <h3>群组成员</h3>
+                            </div>
+                            <div class="modal-body">
+                                <div id="room-member-list" style="height: 100px; overflow-y: auto"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+  </body>
+</html>

@@ -1,23 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>WebIM-DEMO</title>
-<link rel="stylesheet" href="css/bootstrap.css" />
-<script src="sdk/jquery-1.11.1.js"></script>
-<script src="sdk/strophe.js"></script>
-<script src="sdk/json2.js"></script>
-<script src="sdk/easemob.im-1.0.7.js"></script>
-<script src="easemob.im.config.js"></script>
-<script src="bootstrap.js"></script>
-<link rel="stylesheet" href="css/webim.css" />
-<!--[if lte IE 9]>
-<script src="sdk/jplayer/jquery.jplayer.min.js"></script>
-<script src="sdk/swfupload/swfupload.js"></script>
-<![endif]-->
-<script type="text/javascript">
     var curUserId = null;
-    var curChatUserId = null;
+//    var curChatUserId = null;
     var conn = null;
     var curRoomId = null;
     var msgCardDivId = "chat01";
@@ -167,7 +149,7 @@
     };
     var showLoginUI = function() {
         $('#loginmodal').modal('show');
-        $('#username').focus();
+        $('#user_name').focus();
     };
     var hiddenLoginUI = function() {
         $('#loginmodal').modal('hide');
@@ -182,9 +164,9 @@
         $('#content').css({
             "display" : "block"
         });
-        var login_userEle = document.getElementById("login_user").children[0];
-        login_userEle.innerHTML = curUserId;
-        login_userEle.setAttribute("title", curUserId);
+//        var login_userEle = document.getElementById("login_user").children[0];
+//        login_userEle.innerHTML = curUserId;
+//        login_userEle.setAttribute("title", curUserId);
     };
     //登录之前不显示web对话框
     var hiddenChatUI = function() {
@@ -213,10 +195,10 @@
             }
         });
         $("#usetoken").on("click", function(){
-            if ($("#password").attr("disabled")) {
-                $("#password").removeAttr("disabled");
+            if ($("#user_password").attr("disabled")) {
+                $("#user_password").removeAttr("disabled");
             } else {
-                $("#password").attr("disabled", "disabled");
+                $("#user_password").attr("disabled", "disabled");
             }
             if ($("#token").attr("disabled")) {
                 $("#token").removeAttr("disabled");
@@ -335,7 +317,7 @@
         $('#regist-div-modall').on('hidden.bs.modal', function(e) {
         });
         //在 密码输入框时的回车登录
-        $('#password').keypress(function(e) {
+        $('#user_password').keypress(function(e) {
             var key = e.which;
             if (key == 13) {
                 login();
@@ -395,11 +377,14 @@
                         toRoster.push(ros);
                     }
                 }
+                conn.setPresence();//设置用户上线状态，必须调用
                 if (bothRoster.length > 0) {
-                    curroster = bothRoster[0];
-                    buildContactDiv("contractlist", bothRoster);//联系人列表页面处理
-                    if (curroster)
-                        setCurrentContact(curroster.name);//页面处理将第一个联系人作为当前聊天div
+                    curroster = curChatUserId;
+//                    buildContactDiv("contractlist", bothRoster);//联系人列表页面处理
+                    if (curChatUserId){
+                    	conn.setPresence();
+                        setCurrentContact(curChatUserId);//页面处理将第一个联系人作为当前聊天div
+                    }
                 }
                 //获取当前登录人的群组列表
                 conn.listRooms({
@@ -431,8 +416,7 @@
         curRoomId = null;
         bothRoster = [];
         toRoster = [];
-        hiddenChatUI();
-        for(var i=0,l=audioDom.length;i<l;i++) {
+        for(var i=0,l=audioDom.length;i<l;i++) {alert('here')
             if(audioDom[i].jPlayer) audioDom[i].jPlayer('destroy');
         }
         clearContactUI("contactlistUL", "contactgrouplistUL",
@@ -542,26 +526,26 @@
     //异常情况下的处理方法
     var handleError = function(e) {
         e && e.upload && $('#fileModal').modal('hide');
-        if (curUserId == null) {
-            hiddenWaitLoginedUI();
-            alert(e.msg + ",请重新登录");
-            showLoginUI();
-        } else {
-            var msg = e.msg;
-            if (e.type == EASEMOB_IM_CONNCTION_SERVER_CLOSE_ERROR) {
-                if (msg == "" || msg == 'unknown' ) {
-                    alert("服务器断开连接,可能是因为在别处登录");
-                } else {
-                    alert("服务器断开连接");
-                }
-            } else if (e.type === EASEMOB_IM_CONNCTION_SERVER_ERROR) {
-                if (msg.toLowerCase().indexOf("user removed") != -1) {
-                    alert("用户已经在管理后台删除");
-                }
-            } else {
-                alert(msg);
-            }
-        }
+//        if (curUserId == null) {
+//            hiddenWaitLoginedUI();
+//            alert(e.msg + ",请重新登录");
+//            showLoginUI();
+//        } else {
+//            var msg = e.msg;
+//            if (e.type == EASEMOB_IM_CONNCTION_SERVER_CLOSE_ERROR) {
+//                if (msg == "" || msg == 'unknown' ) {
+//                    alert("服务器断开连接,可能是因为在别处登录");
+//                } else {
+//                    alert("服务器断开连接");
+//                }
+//            } else if (e.type === EASEMOB_IM_CONNCTION_SERVER_ERROR) {
+//                if (msg.toLowerCase().indexOf("user removed") != -1) {
+//                    alert("用户已经在管理后台删除");
+//                }
+//            } else {
+//                alert(msg);
+//            }
+//        }
         conn.stopHeartBeat(conn);
     };
     //判断要操作的联系人和当前联系人列表的关系
@@ -589,8 +573,9 @@
     };
     //登录系统时的操作方法
     var login = function() {
+
         if ($("#usetoken").is(":checked")) {
-            var user = $("#username").val();
+            var user = $("#user_name").val();
             var token = $("#token").val();
             if (user == '' || token == '') {
                 alert("请输入用户名和令牌");
@@ -604,11 +589,11 @@
                 user : user,
                 accessToken : token,    
                 //连接时提供appkey
-                appKey : Easemob.im.config.appkey
+                appKey : 'gsflowertrees#gsflower' 
             });
         } else {
-            var user = $("#username").val();
-            var pass = $("#password").val();
+            var user = $("#user_name").val();
+            var pass = $("#user_password").val();
             if (user == '' || pass == '') {
                 alert("请输入用户名和密码");
                 return;
@@ -621,7 +606,7 @@
                 user : user,
                 pwd : pass,
                 //连接时提供appkey
-                appKey : Easemob.im.config.appkey
+                appKey : 'gsflowertrees#gsflower'  
             });         
         }
         return false;
@@ -639,7 +624,8 @@
             username : user,
             password : pass,
             nickname : nickname,
-            appKey : Easemob.im.config.appkey,
+//            appKey : Easemob.im.config.appkey,
+            appKey : 'gsflowertrees#gsflower',
             success : function(result) {
                 alert("注册成功!");
                 $('#loginmodal').modal('show');
@@ -731,7 +717,7 @@
                 chooseContactDivClick(this);
             });
             $('<img>').attr({
-                'src' : 'lib/js/web-im-1.0.7.2/img/head/group_normal.png'
+                'src' : ''
             }).appendTo(lielem);
             $('<span>').html(roomsName).appendTo(lielem);
             $('#contactgrouplistUL').append(lielem);
@@ -758,8 +744,8 @@
         $(newContent).attr({
             "id" : msgContentDivId,
             "class" : "chat01_content",
-            "className" : "chat01_content",
-            "style" : "display:none"
+            "className" : "chat01_content"/*,
+            "style" : "display:none"*/
         });
         return newContent;
     };
@@ -793,10 +779,10 @@
         if (contactLi) {
             contactLi.style.backgroundColor = "";
         }
-        var contentDiv = getContactChatDiv(chatUserId);
-        if (contentDiv) {
-            contentDiv.style.display = "none";
-        }
+            $('#null-nouser').css({
+                "display" : "none"
+            });
+
     };
     //切换联系人聊天窗口div
     var chooseContactDivClick = function(li) {
@@ -905,6 +891,8 @@
         uploadType = 'audio';
     };
     var sendText = function() {
+
+        alert("0");
         if (textSending) {
             return;
         }
@@ -915,6 +903,7 @@
             return;
         }
         var to = curChatUserId;
+
         if (to == null) {
             return;
         }
@@ -924,15 +913,12 @@
             type : "chat"
         };
         // 群组消息和个人消息的判断分支
-        if (curChatUserId.indexOf(groupFlagMark) >= 0) {
-            options.type = 'groupchat';
-            options.to = curRoomId;
-        }
         //easemobwebim-sdk发送文本消息的方法 to为发送给谁，meg为文本消息对象
         conn.sendTextMessage(options);
         //当前登录人发送的信息在聊天窗口中原样显示
+        //saveComment();
         var msgtext = msg.replace(/\n/g, '<br>');
-        appendMsg(curUserId, to, msgtext);
+        appendMsg(curUserId, to, msgtext,'',myName);
         turnoffFaces_box();
         msgInput.value = "";
         msgInput.focus();
@@ -940,6 +926,23 @@
             textSending = false;
         }, 1000);
     };
+    
+    /*var saveComment = function(){
+            var params = {};
+            params['comment'] = $('#talkInputId').val();
+            params['creator_id'] = $("#user_name").val();
+            params['_token'] = $("#chatToken").val();
+            var url =jumpUrl;
+            $.post(url,params,function(data){
+
+                }, "json").error(function(data) {
+                  var error =  $.parseJSON(data.responseText);
+                  layer.msg(error.error_messages.item_type[0]);
+                }).success(function(data) {
+                })
+
+    }*/
+    
     var pictype = {
         "jpg" : true,
         "gif" : true,
@@ -980,7 +983,7 @@
                 onFileUploadError : function(error) {
                     $('#fileModal').modal('hide');
                     var messageContent = (error.msg || '') + ",发送图片文件失败:" + (filename||flashFilename);
-                    appendMsg(curUserId, to, messageContent);
+                    appendMsg(curUserId, curChatUserId, messageContent);
                 },
                 onFileUploadComplete : function(data) {
                     var file = document.getElementById(fileInputId);
@@ -997,7 +1000,7 @@
 						img.src = data.uri + '/' + data.entities[0].uuid + '?token=';
 						img.width = maxWidth;
                     }
-                    appendMsg(curUserId, to, {
+                    appendMsg(curUserId, curChatUserId, {
                         data : [ {
                             type : 'pic',
                             filename : (filename||flashFilename),
@@ -1050,12 +1053,12 @@
                 onFileUploadError : function(error) {
                     $('#fileModal').modal('hide');
                     var messageContent = (error.msg || '') + ",发送音频失败:" + (filename || flashFilename);
-                    appendMsg(curUserId, to, messageContent);
+                    appendMsg(curUserId, curChatUserId, messageContent);
                 },
                 onFileUploadComplete : function(data) {
                     var messageContent = "发送音频" + (filename || flashFilename);
                     $('#fileModal').modal('hide');
-                    appendMsg(curUserId, to, messageContent);
+                    appendMsg(curUserId, curChatUserId, messageContent);
                 },
                 flashUpload: flashUpload
             };
@@ -1077,9 +1080,9 @@
         //TODO  根据消息体的to值去定位那个群组的聊天记录
         var room = message.to;
         if (mestype == 'groupchat') {
-            appendMsg(message.from, message.to, messageContent, mestype);
+            appendMsg(message.from, message.to, messageContent, mestype,realname);
         } else {
-            appendMsg(from, from, messageContent);
+            appendMsg(from, from, messageContent,'',realname);
         }
     };
     //easemobwebim-sdk收到表情消息的回调方法的实现，message为表情符号和文本的消息对象，文本和表情符号sdk中做了
@@ -1355,17 +1358,12 @@
         momogrouplistUL.appendChild(lielem);
     };
     //显示聊天记录的统一处理方法
-    var appendMsg = function(who, contact, message, chattype) {
-        var contactUL = document.getElementById("contactlistUL");
+    var appendMsg = function(who, contact, message, chattype,realname) {
         var contactDivId = contact;
         if (chattype && chattype == 'groupchat') {
             contactDivId = groupFlagMark + contact;
         }
         var contactLi = getContactLi(contactDivId);
-        if (contactLi == null) {
-            createMomogrouplistUL(who, message);
-        }
-        // 消息体 {isemotion:true;body:[{type:txt,msg:ssss}{type:emotion,msg:imgdata}]}
         var localMsg = null;
         if (typeof message == 'string') {
             localMsg = Easemob.im.Helper.parseTextMessage(message);
@@ -1373,7 +1371,7 @@
         } else {
             localMsg = message.data;
         }
-        var headstr = [ "<p1>" + who + "   <span></span>" + "   </p1>",
+        var headstr = [ "<p1>" + realname + "   <span></span>" + "   </p1>",
                 "<p2>" + getLoacalTimeString() + "<b></b><br/></p2>" ];
         var header = $(headstr.join(''))
         var lineDiv = document.createElement("div");
@@ -1426,29 +1424,29 @@
                 time++;
             }
         }
-        if (curChatUserId && curChatUserId.indexOf(contact) < 0) {
-            var contactLi = getContactLi(contactDivId);
-            if (contactLi == null) {
-                return;
-            }
-            contactLi.style.backgroundColor = "green";
-            var badgespan = $(contactLi).children(".badge");
-            if (badgespan && badgespan.length > 0) {
-                var count = badgespan.text();
-                var myNum = new Number(count);
-                myNum++;
-                badgespan.text(myNum);
-            } else {
-                $(contactLi).append('<span class="badge">1</span>');
-            }
-            //联系人不同分组的未读消息提醒
-            var badgespanGroup = $(contactLi).parent().parent().parent().prev()
-                    .children().children(".badgegroup");
-            if (badgespanGroup && badgespanGroup.length == 0) {
-                $(contactLi).parent().parent().parent().prev().children()
-                        .append('<span class="badgegroup">New</span>');
-            }
-        }
+//        if (curChatUserId && curChatUserId.indexOf(contact) < 0) {
+//            var contactLi = getContactLi(contactDivId);
+//            if (contactLi == null) {
+//                return;
+//            }
+//            contactLi.style.backgroundColor = "green";
+//            var badgespan = $(contactLi).children(".badge");
+//            if (badgespan && badgespan.length > 0) {
+//                var count = badgespan.text();
+//                var myNum = new Number(count);
+//                myNum++;
+//                badgespan.text(myNum);
+//            } else {
+//                $(contactLi).append('<span class="badge">1</span>');
+//            }
+//            //联系人不同分组的未读消息提醒
+//            var badgespanGroup = $(contactLi).parent().parent().parent().prev()
+//                    .children().children(".badgegroup");
+//            if (badgespanGroup && badgespanGroup.length == 0) {
+//                $(contactLi).parent().parent().parent().prev().children()
+//                        .append('<span class="badgegroup">New</span>');
+//            }
+//        }
         var msgContentDiv = getContactChatDiv(contactDivId);
         if (curUserId == who) {
             lineDiv.style.textAlign = "right";
@@ -1709,291 +1707,4 @@
                 + date.getSeconds();
         return time;
     }
-</script>
-</head>
-<body>
-    <div id="loginmodal" class="modal hide in" role="dialog"
-        aria-hidden="true" data-backdrop="static">
-        <div class="modal-header">
-            <h3>用户登录</h3>
-        </div>
-        <div class="modal-body">
-            <table>
-                <tr>
-                    <td width="65%">
-                        <label for="username">用户名:</label>
-                        <input type="text" name="username" value="" id="username" tabindex="1"/>
-                        <label for="password">密码:</label>
-                        <input type="password" name="password" value="" id="password" tabindex="2" />
-                        <label for="token">令牌:</label>
-                        <input type="text" name="token" value="" id="token" disabled="disabled" tabindex="3" />
-                    </td>
-                </tr>
-            </table>
-            <label class="checkbox">
-                <input type="checkbox" name="usetoken" id="usetoken" tabindex="4" />使用令牌登录
-            </label>    
-        </div>
-        <div class="modal-footer">
-            <button class="flatbtn-blu" onclick="login()" tabindex="3">登录</button>
-            <button class="flatbtn-blu" onclick="showRegist()" tabindex="4">注册</button>
-        </div>
-    </div>
-
-    <!-- 注册操作界面 -->
-    <div id="regist-div-modal" class="alert modal hide" role="dialog"
-        aria-hidden="true" data-backdrop="static">
-        <div class="modal-header">
-            <h3>用户注册</h3>
-        </div>
-        <div class="modal-body">
-            <div id="regist_div" style="overflow-y: auto">
-                <table>
-                    <tr>
-                        <td width="65%"><label>用户名:</label> <input type="text"
-                            value="" id="regist_username" tabindex="1" /> <label>密码:</label>
-                            <input type="password" value="" id="regist_password" tabindex="2" />
-                            <label>昵称:</label> <input type="text" value=""
-                            id="regist_nickname" tabindex="3" /></td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button id="confirm-regist-confirmButton" class="btn btn-primary"
-                onclick="regist()">完成</button>
-            <button id="confirm-regist-cancelButton" class="btn"
-                onclick="showlogin()">返回</button>
-        </div>
-    </div>
-
-    <div id="waitLoginmodal" class="modal hide" data-backdrop="static">
-        <img src="img/waitting.gif" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;正在努力加载中...
-    </div>
-    <div class="content" id="content" style="display: none">
-        <div class="leftcontact" id="leftcontact">
-            <div id="headerimg" class="leftheader">
-                <span> <img src="img/head/header2.jpg" alt="logo"
-                    class="img-circle" width="60px" height="60px"
-                    style="margin-top: -40px; margin-left: 20px" /></span> <span
-                    id="login_user" class="login_user_title"> <a
-                    class="leftheader-font" href="#"></a>
-                </span> <span>
-                    <div class="btn-group" style="margin-left: 5px;">
-                        <button class="btn btn-inverse dropdown-toggle" data-toggle="dropdown">
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a href="javascript:;" onclick="showAddFriend()">添加好友</a></li>
-                            <li><a href="javascript:;" onclick="showDelFriend()">删除好友</a></li>
-                            <li class="divider"></li>
-                            <li><a href="javascript:;" onclick="logout();return false;">退出</a></li>
-                        </ul>
-                    </div>
-                </span>
-            </div>
-            <div id="leftmiddle">
-                <!--
-                <input style="width: 120px; color: #999999; margin-top: 8px;"
-                    type="text" id="searchfriend" value="搜索"
-                    onFocus="if(value==defaultValue){value='';this.style.color='#000'}"
-                    onBlur="if(!value){value=defaultValue;this.style.color='#999'}" />
-                <button id="searchFriend" style="background: #cccccc">查询</button>
-            -->
-            </div>
-            <div id="contractlist11"
-                style="height: 492px; overflow-y: auto; overflow-x: auto;">
-                <div class="accordion" id="accordionDiv">
-                    <div class="accordion-group">
-                        <div class="accordion-heading">
-                            <a id="accordion1" class="accordion-toggle"
-                                data-toggle="collapse" data-parent="#accordionDiv"
-                                href="#collapseOne">我的好友 </a>
-                        </div>
-                        <div id="collapseOne" class="accordion-body collapse in">
-                            <div class="accordion-inner" id="contractlist">
-                                <ul id="contactlistUL" class="chat03_content_ul"></ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-group">
-                        <div class="accordion-heading">
-                            <a id="accordion2" class="accordion-toggle collapsed"
-                                data-toggle="collapse" data-parent="#accordionDiv"
-                                href="#collapseTwo">我的群组</a>
-                        </div>
-                        <div id="collapseTwo" class="accordion-body collapse">
-                            <div class="accordion-inner" id="contracgrouplist">
-                                <ul id="contactgrouplistUL" class="chat03_content_ul"></ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-group">
-                        <div class="accordion-heading">
-                            <a id="accordion3" class="accordion-toggle collapsed"
-                                data-toggle="collapse" data-parent="#accordionDiv"
-                                href="#collapseThree">陌生人</a>
-                        </div>
-                        <div id="collapseThree" class="accordion-body collapse">
-                            <div class="accordion-inner" id="momogrouplist">
-                                <ul id="momogrouplistUL" class="chat03_content_ul"></ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        <div id="rightTop" style="height: 78px;"></div>
-        <!-- 聊天页面 -->
-        <div class="chatRight">
-            <div id="chat01">
-                <div class="chat01_title">
-                    <ul class="talkTo">
-                        <li id="talkTo"><a href="#"></a></li>
-                        <li id="recycle" style="float: right;"><img
-                            src="img/recycle.png" onclick="clearCurrentChat();"
-                            style="margin-right: 15px; cursor: hand; width: 18px;" title="清屏" /></li>
-                        <li id="roomInfo" style="float: right;"><img
-                            id="roomMemberImg"
-                            src="img/head/find_more_friend_addfriend_icon.png"
-                            onclick="showRoomMember();"
-                            style="margin-right: 15px; cursor: hand; width: 18px; display: none"
-                            title="群组成员" /></li>
-                    </ul>
-                </div>
-                <div id="null-nouser" class="chat01_content"></div>
-            </div>
-
-            <div class="chat02">
-                <div class="chat02_title">
-                    <a class="chat02_title_btn ctb01" onclick="showEmotionDialog()"
-                        title="选择表情"></a> <a class="chat02_title_btn ctb03" title="选择图片"
-                        onclick="showSendPic()" href="#"> </a> <a
-                        class="chat02_title_btn ctb02" onclick="showSendAudio()" href="#"
-                        title="选择语音"><span></span></a> <label id="chat02_title_t"></label>
-                    <div id="wl_faces_box" class="wl_faces_box">
-                        <div class="wl_faces_content">
-                            <div class="title">
-                                <ul>
-                                    <li class="title_name">常用表情</li>
-                                    <li class="wl_faces_close"><span
-                                        onclick='turnoffFaces_box()'>&nbsp;</span></li>
-                                </ul>
-                            </div>
-                            <div id="wl_faces_main" class="wl_faces_main">
-                                <ul id="emotionUL">
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="wlf_icon"></div>
-                    </div>
-                </div>
-                <div id="input_content" class="chat02_content">
-                    <textarea id="talkInputId" style="resize: none;"></textarea>
-                </div>
-                <div class="chat02_bar">
-                    <ul>
-                        <li style="right: 5px; top: 5px;"><img src="img/send_btn.jpg"
-                            onclick="sendText()" /></li>
-                    </ul>
-                </div>
-
-                <div style="clear: both;"></div>
-            </div>
-            <div id="fileModal" class="modal hide" role="dialog"
-                aria-hidden="true" data-backdrop="static">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"
-                        aria-hidden="true">&times;</button>
-                    <h3>文件选择框</h3>
-                </div>
-                <div class="modal-body">
-                    <input type='file' id="fileInput" /> <input type='hidden'
-                        id="sendfiletype" />
-                    <div id="send-file-warning"></div>
-                </div>
-                <div class="modal-footer">
-                    <button id="fileSend" class="btn btn-primary" onclick="sendFile()">发送</button>
-                    <button id="cancelfileSend" class="btn" data-dismiss="modal">取消</button>
-                </div>
-            </div>
-        </div>
-
-        <div id="addFridentModal" class="modal hide" role="dialog"
-            aria-hidden="true" data-backdrop="static">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"
-                    aria-hidden="true">&times;</button>
-                <h3>添加好友</h3>
-            </div>
-            <div class="modal-body">
-                <input id="addfridentId" onfocus='clearInputValue("addfridentId")' />
-                <div id="add-frident-warning"></div>
-            </div>
-            <div class="modal-footer">
-                <button id="addFridend" class="btn btn-primary"
-                    onclick="startAddFriend()">添加</button>
-                <button id="cancelAddFridend" class="btn" data-dismiss="modal">取消</button>
-            </div>
-        </div>
-
-        <div id="delFridentModal" class="modal hide" role="dialog"
-            aria-hidden="true" data-backdrop="static">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"
-                    aria-hidden="true">&times;</button>
-                <h3>删除好友</h3>
-            </div>
-            <div class="modal-body">
-                <input id="delfridentId" onfocus='clearInputValue("delfridentId")' />
-                <div id="del-frident-warning"></div>
-            </div>
-            <div class="modal-footer">
-                <button id="delFridend" class="btn btn-primary"
-                    onclick="directDelFriend()">删除</button>
-                <button id="canceldelFridend" class="btn" data-dismiss="modal">取消</button>
-            </div>
-        </div>
-
-        <!-- 一般消息通知 -->
-        <div id="notice-block-div" class="modal hide">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <div class="modal-body">
-                <h4>Warning!</h4>
-                <div id="notice-block-body"></div>
-            </div>
-        </div>
-
-        <!-- 确认消息通知 -->
-        <div id="confirm-block-div-modal" class="modal hide"
-            role="dialog" aria-hidden="true" data-backdrop="static">
-            <div class="modal-header">
-                <h3>订阅通知</h3>
-            </div>
-            <div class="modal-body">
-                <div id="confirm-block-footer-body"></div>
-            </div>
-            <div class="modal-footer">
-                <button id="confirm-block-footer-confirmButton"
-                    class="btn btn-primary">同意</button>
-                <button id="confirm-block-footer-cancelButton" class="btn"
-                    data-dismiss="modal">拒绝</button>
-            </div>
-        </div>
-
-        <!-- 群组成员操作界面 -->
-        <div id="option-room-div-modal" class="alert modal hide"
-            role="dialog" aria-hidden="true" data-backdrop="static">
-            <button type="button" class="close" data-dismiss="modal"
-                aria-hidden="true">&times;</button>
-            <div class="modal-header">
-                <h3>群组成员</h3>
-            </div>
-            <div class="modal-body">
-                <div id="room-member-list" style="height: 100px; overflow-y: auto"></div>
-            </div>
-        </div>
-    </div>
-</body>
-</html>
+    
