@@ -39,11 +39,11 @@
             <i class="icon ion-social-buffer"></i>
             知识
           </a>
-          <a ng-if="user_group_id == null" ng-href="#/login" class="tab-item">
+          <a ng-if="currentUser.user_group_id == null" ng-href="#/login" class="tab-item">
             <i class="icon ion-android-contact"></i>
             我的
           </a>
-          <a ng-if="user_group_id == 1 || user_group_id == 2" ng-href="#/center" class="tab-item" ng-class="{active:isActives('/center')}">
+          <a ng-if="currentUser.user_group_id == 1 || currentUser.user_group_id == 2" ng-href="#/center" class="tab-item" ng-class="{active:isActives('/center')}">
             <i class="icon ion-android-contact"></i>
             我的
           </a>
@@ -59,7 +59,7 @@
     -->
 
 
-    <script src="conf/settings.prod.js"></script>
+    <script src="conf/settings.dev.js"></script>
 
     <script src="js/layer.1.0.js"></script>
     <script src="lib/js/jquery-1.11.1.js"></script>
