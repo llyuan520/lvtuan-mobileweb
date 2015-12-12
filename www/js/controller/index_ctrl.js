@@ -4222,55 +4222,56 @@ lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$statePa
 	var currentUser = authService.getUser();
 	var params = null;
 
-	alert('here');
-	if (currentUser.wx_openid) {
-		alert('usermoneyin' + currentUser.wx_openid);
-		$http.get('http://'+$rootScope.hostName+'/payment/jsapiparams/'+currentUser.wx_openid,{
-		}).success(function(data) {
-			console.info(data);
-				alert('success:' + data);
-			if (data && data.data && data.data.params) {
-				self.params = data.data.params;
-				alert('params:' + self.params);
-			}
-		}).error(function (data, status) {
-        	if(status == 401){
-        		layer.msg(status);
-        	}
-        	var errMsg = JSON.stringify(data.message);
-        	console.info(errMsg);
-        	layer.show(errMsg);
-        });
-	} else {
-		layer.show("用户需要先通过微信登录才可以使用这个功能");
+	self.init = function()
+	{
+		alert('into init');
+		if (currentUser.wx_openid) {
+			$http.get('http://'+$rootScope.hostName+'/payment/jsapiparams/'+currentUser.wx_openid,{
+			}).success(function(data) {
+				console.info(data);
+				if (data && data.data && data.data.params) {
+					self.params = data.data.params;
+					alert('params:' + self.params);
+				}
+			}).error(function (data, status) {
+	        	if(status == 401){
+	        		layer.msg(status);
+	        	}
+	        	var errMsg = JSON.stringify(data.message);
+	        	console.info(errMsg);
+	        	layer.show(errMsg);
+	        });
+		} else {
+			layer.show("用户需要先通过微信登录才可以使用这个功能");
+		}
 	}
 
 	self.jsApiCall = function()
 	{
-		// alert('calling jsApiCall');
-		// WeixinJSBridge.invoke(
-		// 	'getBrandWCPayRequest',
-		// 	self.params,
-		// 	function(res){
-		// 		alert('into the res');
-		// 		WeixinJSBridge.log(res.err_msg);
-		// 		alert(res.err_code+res.err_desc+res.err_msg);
-		// 	}
-		// );
+		alert('calling jsApiCall');
+		WeixinJSBridge.invoke(
+			'getBrandWCPayRequest',
+			self.params,
+			function(res){
+				alert('into the res');
+				WeixinJSBridge.log(res.err_msg);
+				alert(res.err_code+res.err_desc+res.err_msg);
+			}
+		);
 	}
 
 	self.callpay = function()
 	{
-		// if (typeof WeixinJSBridge == "undefined"){
-		//     if( document.addEventListener ){
-		//         document.addEventListener('WeixinJSBridgeReady', self.jsApiCall(), false);
-		//     }else if (document.attachEvent){
-		//         document.attachEvent('WeixinJSBridgeReady', self.jsApiCall()); 
-		//         document.attachEvent('onWeixinJSBridgeReady', self.jsApiCall());
-		//     }
-		// }else{
-		//     self.jsApiCall();
-		// }
+		if (typeof WeixinJSBridge == "undefined"){
+		    if( document.addEventListener ){
+		        document.addEventListener('WeixinJSBridgeReady', self.jsApiCall(), false);
+		    }else if (document.attachEvent){
+		        document.attachEvent('WeixinJSBridgeReady', self.jsApiCall()); 
+		        document.attachEvent('onWeixinJSBridgeReady', self.jsApiCall());
+		    }
+		}else{
+		    self.jsApiCall();
+		}
 		//   wx.config({
 		//       debug: false,
 		//       appId: 'wxf2c36d3bee50e935',
@@ -4329,7 +4330,7 @@ lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$statePa
 
 	$scope.submit = function(user){
 		alert('submit callpay');
-		// self.callpay();
+		self.callpay();
 
 		// $http.post('http://'+$rootScope.hostName+'/wallet/recharge',{
 		// 		money 	: user.money
@@ -4352,6 +4353,8 @@ lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$statePa
 	 //        	layer.show(errMsg);
 	 //        });
 	}
+
+	self.init();
 })
 
 //用户律师 - 充值记录
