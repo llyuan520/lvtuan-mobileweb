@@ -4248,30 +4248,84 @@ lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$statePa
 
 	self.jsApiCall = function()
 	{
-		alert('calling jsApiCall');
-		WeixinJSBridge.invoke(
-			'getBrandWCPayRequest',
-			self.params,
-			function(res){
-				alert('into the res');
-				WeixinJSBridge.log(res.err_msg);
-				alert(res.err_code+res.err_desc+res.err_msg);
-			}
-		);
+		// alert('calling jsApiCall');
+		// WeixinJSBridge.invoke(
+		// 	'getBrandWCPayRequest',
+		// 	self.params,
+		// 	function(res){
+		// 		alert('into the res');
+		// 		WeixinJSBridge.log(res.err_msg);
+		// 		alert(res.err_code+res.err_desc+res.err_msg);
+		// 	}
+		// );
 	}
 
 	self.callpay = function()
 	{
-		if (typeof WeixinJSBridge == "undefined"){
-		    if( document.addEventListener ){
-		        document.addEventListener('WeixinJSBridgeReady', self.jsApiCall(), false);
-		    }else if (document.attachEvent){
-		        document.attachEvent('WeixinJSBridgeReady', self.jsApiCall()); 
-		        document.attachEvent('onWeixinJSBridgeReady', self.jsApiCall());
-		    }
-		}else{
-		    self.jsApiCall();
-		}
+		// if (typeof WeixinJSBridge == "undefined"){
+		//     if( document.addEventListener ){
+		//         document.addEventListener('WeixinJSBridgeReady', self.jsApiCall(), false);
+		//     }else if (document.attachEvent){
+		//         document.attachEvent('WeixinJSBridgeReady', self.jsApiCall()); 
+		//         document.attachEvent('onWeixinJSBridgeReady', self.jsApiCall());
+		//     }
+		// }else{
+		//     self.jsApiCall();
+		// }
+		  wx.config({
+		      debug: false,
+		      appId: 'wxf2c36d3bee50e935',
+		      timestamp: 1449937342,
+		      nonceStr: 'tTd0syVjXwe3DAb0',
+		      signature: 'fd4cf6bbe839b0c7740bffa7c90831e851094d76',
+		      jsApiList: [
+		        'checkJsApi',
+		        'onMenuShareTimeline',
+		        'onMenuShareAppMessage',
+		        'onMenuShareQQ',
+		        'onMenuShareWeibo',
+		        'onMenuShareQZone',
+		        'hideMenuItems',
+		        'showMenuItems',
+		        'hideAllNonBaseMenuItem',
+		        'showAllNonBaseMenuItem',
+		        'translateVoice',
+		        'startRecord',
+		        'stopRecord',
+		        'onVoiceRecordEnd',
+		        'playVoice',
+		        'onVoicePlayEnd',
+		        'pauseVoice',
+		        'stopVoice',
+		        'uploadVoice',
+		        'downloadVoice',
+		        'chooseImage',
+		        'previewImage',
+		        'uploadImage',
+		        'downloadImage',
+		        'getNetworkType',
+		        'openLocation',
+		        'getLocation',
+		        'hideOptionMenu',
+		        'showOptionMenu',
+		        'closeWindow',
+		        'scanQRCode',
+		        'chooseWXPay',
+		        'openProductSpecificView',
+		        'addCard',
+		        'chooseCard',
+		        'openCard'
+		      ]
+		  });
+		wx.ready(function () {
+			wx.chooseWXPay({
+		      timestamp: 1414723227,
+		      nonceStr: 'noncestr',
+		      package: 'addition=action_id%3dgaby1234%26limit_pay%3d&bank_type=WX&body=innertest&fee_type=1&input_charset=GBK&notify_url=http%3A%2F%2F120.204.206.246%2Fcgi-bin%2Fmmsupport-bin%2Fnotifypay&out_trade_no=1414723227818375338&partner=1900000109&spbill_create_ip=127.0.0.1&total_fee=1&sign=432B647FE95C7BF73BCD177CEECBEF8D',
+		      signType: 'SHA1', // 注意：新版支付接口使用 MD5 加密
+		      paySign: 'bd5b1933cda6e9548862944836a9b52e8c9a2b69'
+		    });
+		});
 	}
 
 	$scope.submit = function(user){
