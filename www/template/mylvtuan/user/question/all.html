@@ -21,7 +21,7 @@
 		  						<button class="button button-small button-positive" ng-click="cancel(item.id,$index)">取消</button>
 		  					</label>
 		  					<label ng-if="item.status_code == 'replied'">
-		  						<button class="button button-small button-positive" ng-click="ask(item.id,$index)">联系律师</button>
+		  						<button class="button button-small button-positive" ng-click="ask(item.id)">联系律师</button>
 		  						<button class="button button-small button-positive" ng-click="complete(item.id,$index)">确认</button>
 		  					</label>
 		  					<label ng-if="item.status_code == 'complete'">

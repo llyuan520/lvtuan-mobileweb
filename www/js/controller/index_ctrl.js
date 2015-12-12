@@ -3343,6 +3343,10 @@ lvtuanApp.controller("lawyerquestionRepliedCtrl",function($scope,$rootScope,$htt
 	$scope.ask = function(id){
 		$http.get('http://'+$rootScope.hostName+'/center/question/'+id+'/ask'
     	).success(function(data) {
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 			location.href='#/easemobmain/'+id;
 			window.location.reload();
 		}).error(function (data, status) {
@@ -3420,11 +3424,19 @@ lvtuanApp.controller("lawyerquestionsviewCtrl",function($http,$scope,$stateParam
 
 //咨询和订单的一对一咨询 - 即时通讯
 lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$stateParams){
+<<<<<<< Updated upstream
+	localStorage.removeItem('easemoParam'); //清空之前的旧数据
+=======
+>>>>>>> Stashed changes
 	$scope.user_name = "";
 	$scope.user_password = "";
 	$("#user_name").val("");
 	$("#user_password").val("");
+<<<<<<< Updated upstream
+	$http.get('http://'+$rootScope.hostName+'/center/question/'+$stateParams.id+'/ask'
+=======
 	$http.get('http://'+$rootScope.hostName+'/center/lawyer/question/'+$stateParams.id+'/ask'
+>>>>>>> Stashed changes
     ).success(function(data) {
     	if (data && data.data) {
 	    	console.info('圈子详情',data.data);
@@ -3432,25 +3444,44 @@ lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$
 	    	$scope.user_name = itmes.easemob_id;
 	    	$scope.user_password = itmes.easemob_pwd;
 	    	$scope.easemoParam = {
+<<<<<<< Updated upstream
+	    		'jumpUrl'		:'http://'+$rootScope.hostName+'/question/'+itmes.post_id+'/comment',
+=======
 	    		'jumpUrl'		:'http://'+$rootScope.hostName+'/question/'+itmes.user_id+'/comment',
+>>>>>>> Stashed changes
 	    		'curChatUserId' : itmes.user_id,
 		    	'content'	 	: itmes.content,
 		    	'created_at' 	: itmes.created_at.date,
 		    	'post_id' 		: itmes.post_id,
 		    	'realname' 		: itmes.realname,
 		    	'user_avatar' 	: itmes.user_avatar,
+<<<<<<< Updated upstream
+		    	'myName' 		: itmes.myName,
+		    	'comments'		: itmes.comments
+	    	};
+
+	    	console.info($scope.easemoParam);
+	    	$scope.jwtToken = localStorage.getItem('jwtToken');
+	    	console.info($scope.jwtToken);
+=======
 		    	'myName' 		: itmes.myName
 	    	};
 
 	    	console.info($scope.easemoParam);
+>>>>>>> Stashed changes
 	    	localStorage.setItem("easemoParam", JSON.stringify($scope.easemoParam));
 			var time = null;
 			time = setInterval(function() { 
 				if(getuserpwd(itmes) == true){
+<<<<<<< Updated upstream
 	        		if(angular.isDefined(login)){
 	        			login();
 	        			clearInterval(time);
 	        		}
+=======
+	        		clearInterval(time);
+	        		login();
+>>>>>>> Stashed changes
 	        	}
 			}, 2000); 
 		}
@@ -3482,7 +3513,7 @@ lvtuanApp.controller("userlvtuanCtrl",function($scope,$rootScope){
 })
 
 //用户的工作 - 咨询 － 全部
-lvtuanApp.controller("questionAllCtrl",function($scope,$rootScope,listHelper,httpWrapper){
+lvtuanApp.controller("questionAllCtrl",function($http,$scope,$rootScope,listHelper,httpWrapper){
 	listHelper.bootstrap('/center/question/all', $scope);
 	//删除
 	$scope.remove = function(id,index){
@@ -3518,8 +3549,17 @@ lvtuanApp.controller("questionAllCtrl",function($scope,$rootScope,listHelper,htt
 		);
 	}
 	//联系律师
-	$scope.ask = function(id,index){
-		location.href='#/center';
+	$scope.ask = function(id){
+		$http.get('http://'+$rootScope.hostName+'/center/question/'+id+'/ask'
+    	).success(function(data) {
+			location.href='#/easemobmain/'+id;
+			window.location.reload();
+		}).error(function (data, status) {
+			if(status == 401){
+        		layer.msg(status);
+        	}
+	        console.info(JSON.stringify(data));
+	    })
 	}
 
 	//送心意
@@ -3675,8 +3715,17 @@ lvtuanApp.controller("userquestionviewCtrl",function($http,$scope,$stateParams,$
 		);
 	}
 	//联系律师
-	$scope.ask = function(id,index){
-		location.href='#/center';
+	$scope.ask = function(id){
+		$http.get('http://'+$rootScope.hostName+'/center/question/'+id+'/ask'
+    	).success(function(data) {
+			location.href='#/easemobmain/'+id;
+			window.location.reload();
+		}).error(function (data, status) {
+			if(status == 401){
+        		layer.msg(status);
+        	}
+	        console.info(JSON.stringify(data));
+	    })
 	}
 	//送心意
 	$scope.send = function(id){
@@ -3758,8 +3807,17 @@ lvtuanApp.controller("userorderAllCtrl",function($http,$scope,$rootScope,listHel
 		);
 	}
 	//联系律师
-	$scope.ask = function(id,index){
-		location.href='#/center';
+	$scope.ask = function(id){
+		$http.get('http://'+$rootScope.hostName+'/center/question/'+id+'/ask'
+    	).success(function(data) {
+			location.href='#/easemobmain/'+id;
+			window.location.reload();
+		}).error(function (data, status) {
+			if(status == 401){
+        		layer.msg(status);
+        	}
+	        console.info(JSON.stringify(data));
+	    })
 	}
 
 	//付款
@@ -3813,8 +3871,17 @@ lvtuanApp.controller("userorderRepliedCtrl",function($http,$scope,$rootScope,lis
 		);
 	}
 	//联系律师
-	$scope.ask = function(id,index){
-		location.href='#/center';
+	$scope.ask = function(id){
+		$http.get('http://'+$rootScope.hostName+'/center/question/'+id+'/ask'
+    	).success(function(data) {
+			location.href='#/easemobmain/'+id;
+			window.location.reload();
+		}).error(function (data, status) {
+			if(status == 401){
+        		layer.msg(status);
+        	}
+	        console.info(JSON.stringify(data));
+	    })
 	}
 })
 //用户的订单 - 待评价
