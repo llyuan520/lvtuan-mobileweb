@@ -4222,9 +4222,8 @@ lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$statePa
 	var currentUser = authService.getUser();
 	var params = null;
 
-	self.init = function()
+	self.jsApiCall = function()
 	{
-		alert('into init');
 		if (currentUser.wx_openid) {
 			$http.get('http://'+$rootScope.hostName+'/payment/jsapiparams/'+currentUser.wx_openid,{
 			}).success(function(data) {
@@ -4244,11 +4243,7 @@ lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$statePa
 		} else {
 			layer.show("用户需要先通过微信登录才可以使用这个功能");
 		}
-	}
 
-	self.jsApiCall = function()
-	{
-		alert('calling jsApiCall');
 		WeixinJSBridge.invoke(
 			'getBrandWCPayRequest',
 			self.params,
@@ -4353,8 +4348,6 @@ lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$statePa
 	 //        	layer.show(errMsg);
 	 //        });
 	}
-
-	self.init();
 })
 
 //用户律师 - 充值记录
