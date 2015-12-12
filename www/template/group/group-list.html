@@ -1,7 +1,7 @@
-<a ng-if="user_group_id == null" ng-href="#/login" class="item item-icon-right"  style="background: none;border: 0px;width: 40px;height: 40px;float: right;margin-right: 10px;border-radius: 25px;position: absolute;z-index: 10000;bottom: 60px;right:0px;">
+<a ng-if="currentUser.user_group_id == null" ng-href="#/login" class="item item-icon-right"  style="background: none;border: 0px;width: 40px;height: 40px;float: right;margin-right: 10px;border-radius: 25px;position: absolute;z-index: 10000;bottom: 60px;right:0px;">
 	<span class="item-note" style="color:#387ef5;margin-left:20px;"><i class="icon ion-ios-plus"></i></span>
 </a>
-<a ng-if="user_group_id == 2 && is_verified == 1" class="item item-icon-right" href="#/groupcreate" style="background: none;border: 0px;width: 40px;height: 40px;float: right;margin-right: 10px;border-radius: 25px;position: absolute;z-index: 10000;bottom: 60px;right:0px;">
+<a ng-if="currentUser.user_group_id == 2 && currentUser.is_verified == 1" class="item item-icon-right" href="#/groupcreate" style="background: none;border: 0px;width: 40px;height: 40px;float: right;margin-right: 10px;border-radius: 25px;position: absolute;z-index: 10000;bottom: 60px;right:0px;">
 	<span class="item-note" style="color:#387ef5;margin-left:20px;"><i class="icon ion-ios-plus"></i></span>
 </a>
 <ion-view view-title="group-list">

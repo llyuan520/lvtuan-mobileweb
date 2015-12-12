@@ -6,12 +6,12 @@
 		<ion-pane  class="web-body">
 			<ion-header-bar class="bar bar-header bar-light">
 				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-href="#/center"></a>
-				<h1 ng-if="user_group_id == 1 || user_group_id == 2 && is_verified == 0" class="title">认证律师</h1>
-				<h1 ng-if="user_group_id == 2 &&  is_verified == 1" class="title">修改认证律师</h1>
+				<h1 ng-if="currentUser.user_group_id == 1 || currentUser.user_group_id == 2 && currentUser.is_verified == 0" class="title">认证律师</h1>
+				<h1 ng-if="currentUser.user_group_id == 2 && currentUser.is_verified == 1" class="title">修改认证律师</h1>
 			</ion-header-bar>
 			<ion-content class="web-body" style="margin-bottom:0;">
 			<form name="myForm" class="css-form" id="myForm" novalidate>
-				<div ng-if="user_group_id == 1 || user_group_id == 2 && is_verified == 0">
+				<div ng-if="currentUser.user_group_id == 1 || currentUser.user_group_id == 2 && currentUser.is_verified == 0">
 						<h4 class="title web-title web-fc666">资格认证 <span class="web-ftcred" style="font-size:14px;">(审核通过后，不可修改)</span></h4>
 						<div class="list">
 							<div class="item item-input">
@@ -246,8 +246,8 @@
 						</div>
 					</div>
 
-					<button ng-if="user_group_id == 1 || user_group_id == 2 && is_verified == 0" class="button button-block button-positive web-wid8c web-top10" type="submit" ng-disabled="myForm.$invalid" ng-click="submit()">提交</button>
-					<button ng-if="user_group_id == 2 &&  is_verified == 1" class="button button-block button-positive web-wid8c web-top10" type="submit" ng-disabled="myForm.$invalid" ng-click="sever()">保存</button>
+					<button ng-if="currentUser.user_group_id == 1 || currentUser.user_group_id == 2 && currentUser.is_verified == 0" class="button button-block button-positive web-wid8c web-top10" type="submit" ng-disabled="myForm.$invalid" ng-click="submit()">提交</button>
+					<button ng-if="currentUser.user_group_id == 2 && currentUser.is_verified == 1" class="button button-block button-positive web-wid8c web-top10" type="submit" ng-disabled="myForm.$invalid" ng-click="sever()">保存</button>
 				</form>
 			</ion-content>
 			

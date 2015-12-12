@@ -416,7 +416,7 @@
         curRoomId = null;
         bothRoster = [];
         toRoster = [];
-        for(var i=0,l=audioDom.length;i<l;i++) {alert('here')
+        for(var i=0,l=audioDom.length;i<l;i++) {
             if(audioDom[i].jPlayer) audioDom[i].jPlayer('destroy');
         }
         clearContactUI("contactlistUL", "contactgrouplistUL",
@@ -744,8 +744,8 @@
         $(newContent).attr({
             "id" : msgContentDivId,
             "class" : "chat01_content",
-            "className" : "chat01_content"/*,
-            "style" : "display:none"*/
+            "className" : "chat01_content",
+            "style" : "display:none"
         });
         return newContent;
     };
@@ -891,8 +891,6 @@
         uploadType = 'audio';
     };
     var sendText = function() {
-
-        alert("0");
         if (textSending) {
             return;
         }
@@ -916,7 +914,7 @@
         //easemobwebim-sdk发送文本消息的方法 to为发送给谁，meg为文本消息对象
         conn.sendTextMessage(options);
         //当前登录人发送的信息在聊天窗口中原样显示
-        //saveComment();
+        saveComment();
         var msgtext = msg.replace(/\n/g, '<br>');
         appendMsg(curUserId, to, msgtext,'',myName);
         turnoffFaces_box();
@@ -924,24 +922,35 @@
         msgInput.focus();
         setTimeout(function() {
             textSending = false;
-        }, 1000);
+        }, 2000);
     };
     
-    /*var saveComment = function(){
-            var params = {};
-            params['comment'] = $('#talkInputId').val();
-            params['creator_id'] = $("#user_name").val();
-            params['_token'] = $("#chatToken").val();
-            var url =jumpUrl;
-            $.post(url,params,function(data){
+    var saveComment = function(){
+            var comment = $('#talkInputId').val();
+            var creator_id = $("#user_name").val();
+            var _token = $("#chatToken").val();
+            var params = 'comment='+comment+'&creator_id='+creator_id;
+            var url = jumpUrl;
+           $.ajax(url, {
+                type: 'post',
+                dataType : 'json',
+                data    : params,
+                headers: { 
+                    'Authorization': 'bearer ' + _token, 
+                },
+                success: function(data){
+                    console.info(data);
+                },
+                error: function(data){
+                    console.info(data);
+                    var error =  $.parseJSON(data.responseText);
+                    layer.show(error.error_messages);
+                    console.info(error);
+                    
+                }
+            });
 
-                }, "json").error(function(data) {
-                  var error =  $.parseJSON(data.responseText);
-                  layer.msg(error.error_messages.item_type[0]);
-                }).success(function(data) {
-                })
-
-    }*/
+    }
     
     var pictype = {
         "jpg" : true,

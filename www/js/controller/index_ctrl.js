@@ -3420,11 +3420,12 @@ lvtuanApp.controller("lawyerquestionsviewCtrl",function($http,$scope,$stateParam
 
 //咨询和订单的一对一咨询 - 即时通讯
 lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$stateParams){
+	localStorage.removeItem('easemoParam'); //清空之前的旧数据
 	$scope.user_name = "";
 	$scope.user_password = "";
 	$("#user_name").val("");
 	$("#user_password").val("");
-	$http.get('http://'+$rootScope.hostName+'/center/lawyer/question/'+$stateParams.id+'/ask'
+	$http.get('http://'+$rootScope.hostName+'/center/question/'+$stateParams.id+'/ask'
     ).success(function(data) {
     	if (data && data.data) {
 	    	console.info('圈子详情',data.data);
@@ -3432,17 +3433,20 @@ lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$
 	    	$scope.user_name = itmes.easemob_id;
 	    	$scope.user_password = itmes.easemob_pwd;
 	    	$scope.easemoParam = {
-	    		'jumpUrl'		:'http://'+$rootScope.hostName+'/question/'+itmes.user_id+'/comment',
+	    		'jumpUrl'		:'http://'+$rootScope.hostName+'/question/'+itmes.post_id+'/comment',
 	    		'curChatUserId' : itmes.user_id,
 		    	'content'	 	: itmes.content,
 		    	'created_at' 	: itmes.created_at.date,
 		    	'post_id' 		: itmes.post_id,
 		    	'realname' 		: itmes.realname,
 		    	'user_avatar' 	: itmes.user_avatar,
-		    	'myName' 		: itmes.myName
+		    	'myName' 		: itmes.myName,
+		    	'comments'		: itmes.comments
 	    	};
 
 	    	console.info($scope.easemoParam);
+	    	$scope.jwtToken = localStorage.getItem('jwtToken');
+	    	console.info($scope.jwtToken);
 	    	localStorage.setItem("easemoParam", JSON.stringify($scope.easemoParam));
 			var time = null;
 			time = setInterval(function() { 
@@ -3475,6 +3479,7 @@ lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$
 	}
 })
 
+
 /*———————————————————————————— 我的律团 - 用户的律团 ————————————————————————————*/
 //首页 - 我的律团 - 用户的工作台
 lvtuanApp.controller("userlvtuanCtrl",function($scope,$rootScope){
@@ -3482,7 +3487,7 @@ lvtuanApp.controller("userlvtuanCtrl",function($scope,$rootScope){
 })
 
 //用户的工作 - 咨询 － 全部
-lvtuanApp.controller("questionAllCtrl",function($scope,$rootScope,listHelper,httpWrapper){
+lvtuanApp.controller("questionAllCtrl",function($http,$scope,$rootScope,listHelper,httpWrapper){
 	listHelper.bootstrap('/center/question/all', $scope);
 	//删除
 	$scope.remove = function(id,index){
@@ -3518,8 +3523,17 @@ lvtuanApp.controller("questionAllCtrl",function($scope,$rootScope,listHelper,htt
 		);
 	}
 	//联系律师
-	$scope.ask = function(id,index){
-		location.href='#/center';
+	$scope.ask = function(id){
+		$http.get('http://'+$rootScope.hostName+'/center/question/'+id+'/ask'
+    	).success(function(data) {
+			location.href='#/easemobmain/'+id;
+			window.location.reload();
+		}).error(function (data, status) {
+			if(status == 401){
+        		layer.msg(status);
+        	}
+	        console.info(JSON.stringify(data));
+	    })
 	}
 
 	//送心意
@@ -3675,8 +3689,17 @@ lvtuanApp.controller("userquestionviewCtrl",function($http,$scope,$stateParams,$
 		);
 	}
 	//联系律师
-	$scope.ask = function(id,index){
-		location.href='#/center';
+	$scope.ask = function(id){
+		$http.get('http://'+$rootScope.hostName+'/center/question/'+id+'/ask'
+    	).success(function(data) {
+			location.href='#/easemobmain/'+id;
+			window.location.reload();
+		}).error(function (data, status) {
+			if(status == 401){
+        		layer.msg(status);
+        	}
+	        console.info(JSON.stringify(data));
+	    })
 	}
 	//送心意
 	$scope.send = function(id){
@@ -3758,8 +3781,17 @@ lvtuanApp.controller("userorderAllCtrl",function($http,$scope,$rootScope,listHel
 		);
 	}
 	//联系律师
-	$scope.ask = function(id,index){
-		location.href='#/center';
+	$scope.ask = function(id){
+		$http.get('http://'+$rootScope.hostName+'/center/question/'+id+'/ask'
+    	).success(function(data) {
+			location.href='#/easemobmain/'+id;
+			window.location.reload();
+		}).error(function (data, status) {
+			if(status == 401){
+        		layer.msg(status);
+        	}
+	        console.info(JSON.stringify(data));
+	    })
 	}
 
 	//付款
@@ -3813,8 +3845,17 @@ lvtuanApp.controller("userorderRepliedCtrl",function($http,$scope,$rootScope,lis
 		);
 	}
 	//联系律师
-	$scope.ask = function(id,index){
-		location.href='#/center';
+	$scope.ask = function(id){
+		$http.get('http://'+$rootScope.hostName+'/center/question/'+id+'/ask'
+    	).success(function(data) {
+			location.href='#/easemobmain/'+id;
+			window.location.reload();
+		}).error(function (data, status) {
+			if(status == 401){
+        		layer.msg(status);
+        	}
+	        console.info(JSON.stringify(data));
+	    })
 	}
 })
 //用户的订单 - 待评价
@@ -4219,26 +4260,41 @@ lvtuanApp.controller("userwalletCtrl",function($scope,$http,$rootScope,authServi
 lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$stateParams){
 	$scope.summoney = sessionStorage.getItem('summoney');
 	$scope.submit = function(user){
-		$http.post('http://'+$rootScope.hostName+'/wallet/recharge',{
-				money 	: user.money
-			}).success(function(data) {
-	        	sessionStorage.removeItem('summoney');
-	        	$scope.money = data.data.money;
-	        	$scope.summoney = $scope.money;
-	        	sessionStorage.setItem("summoney", $scope.summoney);
-	            layer.show("提交成功！");
-	            $scope.user = {};
-	            angular.element("#money").val("");
-	            console.info($scope.user);
+		$http.get('http://'+$rootScope.hostName+'/payment/url',{
+		}).success(function(data) {
+			console.info(data);
+			if (data && data.data && data.data.url) {
+				location.href=data.data.url;
+			}
+		}).error(function (data, status) {
+        	if(status == 401){
+        		layer.msg(status);
+        	}
+        	var errMsg = JSON.stringify(data.message);
+        	console.info(errMsg);
+        	layer.show(errMsg);
+        });
 
-	        }).error(function (data, status) {
-	        	if(status == 401){
-	        		layer.msg(status);
-	        	}
-	        	var errMsg = JSON.stringify(data.message);
-	        	console.info(errMsg);
-	        	layer.show(errMsg);
-	        });
+		// $http.post('http://'+$rootScope.hostName+'/wallet/recharge',{
+		// 		money 	: user.money
+		// 	}).success(function(data) {
+	 //        	sessionStorage.removeItem('summoney');
+	 //        	$scope.money = data.data.money;
+	 //        	$scope.summoney = $scope.money;
+	 //        	sessionStorage.setItem("summoney", $scope.summoney);
+	 //            layer.show("提交成功！");
+	 //            $scope.user = {};
+	 //            angular.element("#money").val("");
+	 //            console.info($scope.user);
+
+	 //        }).error(function (data, status) {
+	 //        	if(status == 401){
+	 //        		layer.msg(status);
+	 //        	}
+	 //        	var errMsg = JSON.stringify(data.message);
+	 //        	console.info(errMsg);
+	 //        	layer.show(errMsg);
+	 //        });
 	}
 })
 
