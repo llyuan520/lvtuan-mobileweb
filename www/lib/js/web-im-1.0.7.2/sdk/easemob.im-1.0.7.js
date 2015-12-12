@@ -314,6 +314,7 @@ var doAjaxRequest = function(options) {
             var status = xhr.status || 0;
             if (status == 200) {
                 if(dataType=='text'){
+                    alert('text');
                     suc(xhr.responseText,xhr);
                     return;
                 }
@@ -359,6 +360,7 @@ var doAjaxRequest = function(options) {
             }
         }
         if( xhr.readyState === 0){
+            alert("0");
             error(xhr.responseText,xhr,"服务器异常");
         }
     };

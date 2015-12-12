@@ -536,6 +536,12 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
     cache: 'true', 
     templateUrl: 'template/mylvtuan/lawyer/queryrefer-detail.html'
   })
+
+  .state('easemobmain', { //咨询和订单的一对一咨询 - 即时通讯
+    url: '/easemobmain/:id',
+    templateUrl: 'template/mylvtuan/easemobmain.html',
+    controller: 'easemobmainCtrl'
+  })
   
 /*———————————————————————————— 我的律团- 用户 -公用 ————————————————————————————*/
   .state('userlvtuan', { //首页 - 我的律团 - 用户的工作台
