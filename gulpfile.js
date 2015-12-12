@@ -27,11 +27,11 @@ gulp.task('build-dev', function(cb) {
 });
  
 gulp.task('build-prod', function(cb) {
-  runSequence('templates', 'minifyDevJs', 'minifyLibJs', 'minifyAllJs', 'prod', cb);
+  runSequence('minifyDevJs', 'minifyLibJs', 'minifyAllJs', 'prod', 'templates', cb);
 });
 
 gulp.task('build', function(cb) {
-  runSequence('templates', 'minifyDevJs', 'minifyLibJs', 'minifyAllJs', cb);
+  runSequence('minifyDevJs', 'minifyLibJs', 'minifyAllJs', 'templates', cb);
 });
 
 gulp.task('templates', function() {
