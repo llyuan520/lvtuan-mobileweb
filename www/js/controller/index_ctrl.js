@@ -4231,7 +4231,18 @@ lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$statePa
 				if (data && data.data && data.data.params) {
 					self.params = data.data.params;
 					alert('params:' + self.params);
+					
+					WeixinJSBridge.invoke(
+						'getBrandWCPayRequest',
+						self.params,
+						function(res){
+							alert('into the res');
+							WeixinJSBridge.log(res.err_msg);
+							alert(res.err_code+res.err_desc+res.err_msg);
+						}
+					);
 				}
+
 			}).error(function (data, status) {
 	        	if(status == 401){
 	        		layer.msg(status);
@@ -4243,16 +4254,6 @@ lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$statePa
 		} else {
 			layer.show("用户需要先通过微信登录才可以使用这个功能");
 		}
-
-		WeixinJSBridge.invoke(
-			'getBrandWCPayRequest',
-			self.params,
-			function(res){
-				alert('into the res');
-				WeixinJSBridge.log(res.err_msg);
-				alert(res.err_code+res.err_desc+res.err_msg);
-			}
-		);
 	}
 
 	self.callpay = function()
