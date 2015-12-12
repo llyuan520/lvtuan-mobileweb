@@ -4222,30 +4222,27 @@ lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$statePa
 	var currentUser = authService.getUser();
 	var params = null;
 
-	self.init();
-
-	self.init = function() {
-		if (currentUser.wx_openid) {
-			alert('usermoneyin' + currentUser.wx_openid);
-			$http.get('http://'+$rootScope.hostName+'/payment/jsapiparams/'+currentUser.wx_openid,{
-			}).success(function(data) {
-				console.info(data);
-					alert('success:' + data);
-				if (data && data.data && data.data.params) {
-					self.params = data.data.params;
-					alert('params:' + self.params);
-				}
-			}).error(function (data, status) {
-	        	if(status == 401){
-	        		layer.msg(status);
-	        	}
-	        	var errMsg = JSON.stringify(data.message);
-	        	console.info(errMsg);
-	        	layer.show(errMsg);
-	        });
-		} else {
-			layer.show("用户需要先通过微信登录才可以使用这个功能");
-		}
+	alert('here');
+	if (currentUser.wx_openid) {
+		alert('usermoneyin' + currentUser.wx_openid);
+		$http.get('http://'+$rootScope.hostName+'/payment/jsapiparams/'+currentUser.wx_openid,{
+		}).success(function(data) {
+			console.info(data);
+				alert('success:' + data);
+			if (data && data.data && data.data.params) {
+				self.params = data.data.params;
+				alert('params:' + self.params);
+			}
+		}).error(function (data, status) {
+        	if(status == 401){
+        		layer.msg(status);
+        	}
+        	var errMsg = JSON.stringify(data.message);
+        	console.info(errMsg);
+        	layer.show(errMsg);
+        });
+	} else {
+		layer.show("用户需要先通过微信登录才可以使用这个功能");
 	}
 
 	self.jsApiCall = function()
