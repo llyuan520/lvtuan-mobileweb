@@ -3133,7 +3133,7 @@ lvtuanApp.controller("workbenchLawyerCtrl",function($http,$scope,$state,$rootSco
 
 })
 //律师订单 - 全部
-lvtuanApp.controller("orderAllCtrl",function($scope,$rootScope,listHelper,httpWrapper){
+lvtuanApp.controller("orderAllCtrl",function($http,$scope,$rootScope,listHelper,httpWrapper){
 	listHelper.bootstrap('/center/pay/lawyer/question/all', $scope);
 	//删除
 	$scope.remove = function(id,index){
@@ -3173,8 +3173,17 @@ lvtuanApp.controller("orderAllCtrl",function($scope,$rootScope,listHelper,httpWr
 		location.href='#/lawyer/order/comment/'+id;
 	}
 	//联系客户
-	$scope.ask = function(id,index){
-		location.href='#/center';
+	$scope.ask = function(id){
+		$http.get('http://'+$rootScope.hostName+'/center/question/'+id+'/ask'
+    	).success(function(data) {
+			location.href='#/easemobmain/'+id;
+			window.location.reload();
+		}).error(function (data, status) {
+			if(status == 401){
+        		layer.msg(status);
+        	}
+	        console.info(JSON.stringify(data));
+	    })
 	}
 
 })
@@ -3205,11 +3214,20 @@ lvtuanApp.controller("orderNewCtrl",function($scope,$rootScope,listHelper,httpWr
 	}
 })
 //律师订单 - 待确认
-lvtuanApp.controller("orderRepliedCtrl",function($scope,listHelper){
+lvtuanApp.controller("orderRepliedCtrl",function($http,$rootScope,$scope,listHelper){
 	listHelper.bootstrap('/center/pay/lawyer/question/replied', $scope);
 	//联系客户
-	$scope.ask = function(id,index){
-		location.href='#/center';
+	$scope.ask = function(id){
+		$http.get('http://'+$rootScope.hostName+'/center/question/'+id+'/ask'
+    	).success(function(data) {
+			location.href='#/easemobmain/'+id;
+			window.location.reload();
+		}).error(function (data, status) {
+			if(status == 401){
+        		layer.msg(status);
+        	}
+	        console.info(JSON.stringify(data));
+	    })
 	}
 })
 //律师订单 - 已完成
@@ -3264,8 +3282,17 @@ lvtuanApp.controller("orderlawyerDetailCtrl",function($http,$scope,$stateParams,
 		location.href='#/lawyer/order/comment/'+id;
 	}
 	//联系客户
-	$scope.ask = function(id,index){
-		location.href='#/center';
+	$scope.ask = function(id){
+		$http.get('http://'+$rootScope.hostName+'/center/question/'+id+'/ask'
+    	).success(function(data) {
+			location.href='#/easemobmain/'+id;
+			window.location.reload();
+		}).error(function (data, status) {
+			if(status == 401){
+        		layer.msg(status);
+        	}
+	        console.info(JSON.stringify(data));
+	    })
 	}
 })
 
@@ -3316,7 +3343,6 @@ lvtuanApp.controller("lawyerquestionRepliedCtrl",function($scope,$rootScope,$htt
 	$scope.ask = function(id){
 		$http.get('http://'+$rootScope.hostName+'/center/question/'+id+'/ask'
     	).success(function(data) {
-
 			location.href='#/easemobmain/'+id;
 			window.location.reload();
 		}).error(function (data, status) {
@@ -3367,8 +3393,17 @@ lvtuanApp.controller("lawyerquestionsviewCtrl",function($http,$scope,$stateParam
 		);
 	}
 	//联系客户
-	$scope.ask = function(id,index){
-		location.href='#/center';
+	$scope.ask = function(id){
+		$http.get('http://'+$rootScope.hostName+'/center/question/'+id+'/ask'
+    	).success(function(data) {
+			location.href='#/easemobmain/'+id;
+			window.location.reload();
+		}).error(function (data, status) {
+			if(status == 401){
+        		layer.msg(status);
+        	}
+	        console.info(JSON.stringify(data));
+	    })
 	}
 	//删除
 	$scope.remove = function(id,index){
@@ -3412,8 +3447,10 @@ lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$
 			var time = null;
 			time = setInterval(function() { 
 				if(getuserpwd(itmes) == true){
-	        		clearInterval(time);
-	        		login();
+	        		if(angular.isDefined(login)){
+	        			login();
+	        			clearInterval(time);
+	        		}
 	        	}
 			}, 2000); 
 		}
