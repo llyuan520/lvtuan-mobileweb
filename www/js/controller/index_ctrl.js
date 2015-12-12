@@ -4086,26 +4086,41 @@ lvtuanApp.controller("userwalletCtrl",function($scope,$http,$rootScope,authServi
 lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$stateParams){
 	$scope.summoney = sessionStorage.getItem('summoney');
 	$scope.submit = function(user){
-		$http.post('http://'+$rootScope.hostName+'/wallet/recharge',{
-				money 	: user.money
-			}).success(function(data) {
-	        	sessionStorage.removeItem('summoney');
-	        	$scope.money = data.data.money;
-	        	$scope.summoney = $scope.money;
-	        	sessionStorage.setItem("summoney", $scope.summoney);
-	            layer.show("提交成功！");
-	            $scope.user = {};
-	            angular.element("#money").val("");
-	            console.info($scope.user);
+		$http.get('http://'+$rootScope.hostName+'/payment/url',{
+		}).success(function(data) {
+			console.info(data);
+			if (data && data.data && data.data.url) {
+				location.href=data.data.url;
+			}
+		}).error(function (data, status) {
+        	if(status == 401){
+        		layer.msg(status);
+        	}
+        	var errMsg = JSON.stringify(data.message);
+        	console.info(errMsg);
+        	layer.show(errMsg);
+        });
 
-	        }).error(function (data, status) {
-	        	if(status == 401){
-	        		layer.msg(status);
-	        	}
-	        	var errMsg = JSON.stringify(data.message);
-	        	console.info(errMsg);
-	        	layer.show(errMsg);
-	        });
+		// $http.post('http://'+$rootScope.hostName+'/wallet/recharge',{
+		// 		money 	: user.money
+		// 	}).success(function(data) {
+	 //        	sessionStorage.removeItem('summoney');
+	 //        	$scope.money = data.data.money;
+	 //        	$scope.summoney = $scope.money;
+	 //        	sessionStorage.setItem("summoney", $scope.summoney);
+	 //            layer.show("提交成功！");
+	 //            $scope.user = {};
+	 //            angular.element("#money").val("");
+	 //            console.info($scope.user);
+
+	 //        }).error(function (data, status) {
+	 //        	if(status == 401){
+	 //        		layer.msg(status);
+	 //        	}
+	 //        	var errMsg = JSON.stringify(data.message);
+	 //        	console.info(errMsg);
+	 //        	layer.show(errMsg);
+	 //        });
 	}
 })
 

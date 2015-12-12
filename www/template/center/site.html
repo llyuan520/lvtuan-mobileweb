@@ -6,7 +6,7 @@
 			</ion-header-bar>
 			<ion-content class="web-body">
 				<!-- 用户设置 -->
-				<div class="list" ng-if="user_group_id == 1 || user_group_id == 2 && is_verified == 0">
+				<div class="list" ng-if="currentUser.user_group_id == 1 || currentUser.user_group_id == 2 && currentUser.is_verified == 0">
 			         <!-- <ion-toggle toggle-class="toggle-positive" ng-model="system.checked" ng-change="systemChange()">
 			          系统通知
 			        </ion-toggle> -->
@@ -20,7 +20,7 @@
 					</a>
 			    </div>
 			    <!-- 律师设置 -->
-			    <div class="list" ng-if="user_group_id == 2 && is_verified == 1">
+			    <div class="list" ng-if="currentUser.user_group_id == 2 && currentUser.is_verified == 1">
 			    	 <!-- <ion-toggle toggle-class="toggle-positive" ng-model="client.checked" ng-change="clientChange()">
 			          休息时间免打扰
 			          <br>

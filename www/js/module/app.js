@@ -20,10 +20,6 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
  /*$timeout(function() {
       localStorage.removeItem('is_lawyer');
   }, 600);*/
-  $rootScope.token = localStorage.getItem('token');
-  $rootScope.user_id = localStorage.getItem('user_id');
-  $rootScope.user_group_id = localStorage.getItem('user_group_id');
-  $rootScope.is_verified = localStorage.getItem('is_verified');
 
   // 显示spinner
   $rootScope.show = function() {
