@@ -18,7 +18,7 @@
 	  						<button class="button button-small button-positive" ng-click="refuse(item.id,$index)">拒绝</button>
 	  					</label>
 	  					<label ng-if="item.status_code == 'replied'">
-	  						<button class="button button-small button-positive" ng-click="ask(item.id,$index)">联系客户</button>
+	  						<button class="button button-small button-positive" ng-click="ask(item.id)">联系客户</button>
 	  					</label>
 	  					<label ng-if="item.status_code == 'complete'">
 	  						<button class="button button-small button-positive" ng-click="comment(item.id)">查看评论</button>
