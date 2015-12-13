@@ -1,6 +1,6 @@
 var lvtuanApp = angular.module('lvtuanApp.Ctrl', ['ionic','ngSanitize','ngFileUpload','listModule','authModule','wxModule'])
 lvtuanApp.constant("HOST", AppSettings.baseApiUrl)
-lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $location, userService, authService){
+lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $location, userService, authService, $http){
 	var self = this;
 
 	self.login = function() {
@@ -25,6 +25,29 @@ lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $loca
 
 
     $scope.currentUser = authService.getUser(); 
+
+    self.getLocation = function() {
+
+    $http.get("http://" + $rootScope.hostName + "/common/wxconfig"
+    ).success(function(data) {
+	data.debug = true;
+	wx.config(data);
+    }).error(function(data, status) {
+    });
+
+    wx.ready(function () {
+	    wx.getLocation({
+	      success: function (res) {
+	        alert(JSON.stringify(res));
+	      },
+	      cancel: function (res) {
+	        alert('用户拒绝授权获取地理位置');
+	      }
+	    });
+});
+    }
+
+    self.getLocation();
 
 })
 
