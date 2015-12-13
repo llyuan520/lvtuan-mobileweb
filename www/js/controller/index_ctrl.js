@@ -38,7 +38,13 @@ lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $loca
     wx.ready(function () {
 	    wx.getLocation({
 	      success: function (res) {
-	        alert(JSON.stringify(res));
+		$http.get("http://" + $rootScope.hostName + "/common/addressCode/" + res.latitude + "," + res.longitude)
+		.success(function(data) {
+			$scope.currentUser.city_id = data.city_id;
+			$scope.currentUser.region_id = data.region_id;
+			authService.saveUser($scope.currentUser);
+		}).error(function(data, status) {
+		});
 	      },
 	      cancel: function (res) {
 	        alert('用户拒绝授权获取地理位置');
