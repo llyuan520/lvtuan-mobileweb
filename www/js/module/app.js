@@ -596,9 +596,9 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
   })
 
   .state('user/question/view', { //首页 - 我的律团 - 用户的咨询
-    url: 'user/question/view/:id',
+    url: '/user/question/view/:id',
     templateUrl: 'template/mylvtuan/user/question/view.html',
-    controller: 'userquestionviewCtr'
+    controller: 'userquestionviewCtrl'
   })
 
   .state('confirmCompletion', { //首页 - 我的律团 - 用户的咨询

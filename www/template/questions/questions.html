@@ -21,6 +21,28 @@
 				          <textarea ng-model="user.content" name="content" rows="10" placeholder="请输入问题" required></textarea>
 				        </label>
 					</div>
+					<div class="item group-site">
+						<label class="name">上传附件：</label>
+
+						<div class="rig" style="width: 92px;">
+							<div ng-disabled="booleans" ng-model="file_paths"  accept="image/*,.doc,.docx"  gf-pattern="'image/*,.doc,.docx'" ngf-max-size="2MB" ngf-select="uploadFiles($files, $invalidFiles)" class="icon-right" style="font-size:4em;padding:0 20px;color:#ccc;float:right" multiple><i class="icon ion-ios-plus-outline"></i></div>
+							<input type="hidden" name="file_paths" value="{{file}}" />
+						</div>
+						 <br><br>
+						  <label ng-show="files">文件名称:</label>
+						  <ul>
+						    <li ng-repeat="f in files" style="font:smaller">{{f.name}} {{f.$errorParam}}
+						      <span class="progress" ng-show="f.progress >= 0">
+						        <div style="width:{{f.progress}}%"  
+						            ng-bind="f.progress + '%'"></div>
+						      </span>
+						    </li>
+						    <li ng-repeat="f in errFiles" style="font:smaller">{{f.name}} {{f.$error}} {{f.$errorParam}}</li> 
+						  </ul>
+						<!-- <label class="rig">
+							<img ng-src="{{file}}" ngf-thumbnail="upload_file || '{{group.group_avatar}}'" width="52" height="50">
+						</label> -->
+					</div>
 					<div class="padding">
 						<button class="button button-block button-positive" type="submit" ng-disabled="myForm.$invalid" ng-click="submit(user)" >提交</button>
 					</div>
@@ -38,8 +60,9 @@
 				</div>
 				<hr />
 				<!--评论-->
+				<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 				<div class="list list-inset">
-					<div ng-repeat="item in list_questions" class="item card item-borderless noboxshadow">
+					<div ng-repeat="item in items" class="item card item-borderless noboxshadow">
 						<div class="item item-button-right">
 						   <a ng-href="#/questionsview/{{item.id}}"> {{item.title}}</a>
 						 <i class="button button-clear icon-right ion-ios-star-outline"></i>

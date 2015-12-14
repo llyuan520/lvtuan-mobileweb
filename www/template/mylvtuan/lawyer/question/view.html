@@ -21,18 +21,16 @@
 					<p>操作时间：{{items.updated_at.date}}</p>
 					<p ng-if="items.status_code != 'new'">受理律师：{{items.lawyer.realname}}</p>
 					<p class="contents">问题描述：{{items.content}}</p>
-		        	<p style="text-align: right;">
-	  					<label ng-if="items.status_code == 'new'">
-	  						<button class="button button-small button-positive" ng-click="to_take(item.id)">抢单</button>
-	  					</label>
-	  					<label ng-if="items.status_code == 'replied'">
-	  						<button class="button button-small button-positive" ng-click="ask(item.id)">联系客户</button>
-	  					</label>
-	  					<label ng-if="items.status_code == 'complete'">
-	  						<button class="button button-small button-positive" ng-click="comment(item.id)">查看评论</button>
-	  						<button class="button button-small button-positive" ng-click="remove(item.id,$index)">删除</button>
-	  					</label>
-	  				</p>
+  					<p style="text-align: right;" ng-if="items.status_code == 'new'">
+  						<button class="button button-small button-positive" ng-click="to_take(item.id)">抢单</button>
+  					</p>
+  					<p style="text-align: right;" ng-if="items.status_code == 'replied'">
+  						<button class="button button-small button-positive" ng-click="ask(item.id)">联系客户</button>
+  					</p>
+  					<p style="text-align: right;" ng-if="items.status_code == 'complete'">
+  						<button class="button button-small button-positive" ng-click="comment(item.id)">查看评论</button>
+  						<button class="button button-small button-positive" ng-click="remove(item.id,$index)">删除</button>
+  					</p>
 		        </ion-item>
 		        
 	         </ion-list>

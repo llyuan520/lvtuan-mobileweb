@@ -13,17 +13,17 @@
 	        			<h2 class="fc-ee">{{item.post_type}}</h2>
 		        	</div>
 		        	<div class="col" style="text-align: right;">
-	  					<label ng-if="item.status_code == 'new'">
+	  					<p ng-if="item.status_code == 'new'">
 	  						<button class="button button-small button-positive" ng-click="accept(item.id,$index)">受理</button>
 	  						<button class="button button-small button-positive" ng-click="refuse(item.id,$index)">拒绝</button>
-	  					</label>
-	  					<label ng-if="item.status_code == 'replied'">
+	  					</p>
+	  					<p ng-if="item.status_code == 'replied'">
 	  						<button class="button button-small button-positive" ng-click="ask(item.id)">联系客户</button>
-	  					</label>
-	  					<label ng-if="item.status_code == 'complete'">
+	  					</p>
+	  					<p ng-if="item.status_code == 'complete'">
 	  						<button class="button button-small button-positive" ng-click="comment(item.id)">查看评论</button>
 	  						<button class="button button-small button-positive" ng-click="remove(item.id,$index)">删除</button>
-	  					</label>
+	  					</p>
 	  				</div>
 	        	</div>
 	        </ion-item>

@@ -35,6 +35,7 @@ listModule.factory('listHelper', function($http, $rootScope, httpWrapper) {
 				function(data) {
 					if(data && data.data && data.data.length){
 						$scope.items = $scope.items.concat(data.data);
+						console.info($scope.items);
 						if (data.data.length < rows_per_page) {
 							$scope.moredata = false;
 						} else {

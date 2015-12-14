@@ -24,19 +24,17 @@
 					<p>订单编号：{{item.order_no}}</p>
 					<p>问题标题：{{item.title}}</p>
 					<p>问题描述：{{item.content}}</p>
-		        	<p style="text-align: right;">
-	  					<label ng-if="item.status_code == 'new'">
-	  						<button class="button button-small button-positive" ng-click="accept(item.id,$index)">受理</button>
-	  						<button class="button button-small button-positive" ng-click="refuse(item.id,$index)">拒绝</button>
-	  					</label>
-	  					<label ng-if="item.status_code == 'replied'">
-	  						<button class="button button-small button-positive" ng-click="ask(item.id)">联系客户</button>
-	  					</label>
-	  					<label ng-if="item.status_code == 'complete'">
-	  						<button class="button button-small button-positive" ng-click="comment(item.id)">查看评论</button>
-	  						<button class="button button-small button-positive" ng-click="remove(item.id,$index)">删除</button>
-	  					</label>
-	  				</p>
+  					<p style="text-align: right;" ng-if="item.status_code == 'new'">
+  						<button class="button button-small button-positive" ng-click="accept(item.post_id)">受理</button>
+  						<button class="button button-small button-positive" ng-click="refuse(item.post_id)">拒绝</button>
+  					</p>
+  					<p style="text-align: right;" ng-if="item.status_code == 'replied'">
+  						<button class="button button-small button-positive" ng-click="ask(item.post_id)">联系客户</button>
+  					</p>
+  					<p style="text-align: right;" ng-if="item.status_code == 'complete'">
+  						<button class="button button-small button-positive" ng-click="comment(item.post_id)">查看评论</button>
+  						<button class="button button-small button-positive" ng-click="remove(item.post_id)">删除</button>
+  					</p>
 		        </ion-item>
 		        
 	         </ion-list>
