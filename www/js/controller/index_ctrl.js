@@ -1,5 +1,6 @@
 var lvtuanApp = angular.module('lvtuanApp.Ctrl', ['ionic','ngSanitize','ngFileUpload','listModule','authModule','wxModule'])
 lvtuanApp.constant("HOST", AppSettings.baseApiUrl)
+
 lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $location, userService, authService, $http){
 	var self = this;
 
@@ -28,29 +29,30 @@ lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $loca
 
     self.getLocation = function() {
 
-    $http.get("http://" + $rootScope.hostName + "/common/wxconfig"
-    ).success(function(data) {
-	data.debug = true;
-	wx.config(data);
-    }).error(function(data, status) {
-    });
-
-    wx.ready(function () {
-	    wx.getLocation({
-	      success: function (res) {
-		$http.get("http://" + $rootScope.hostName + "/common/addressCode/" + res.latitude + "," + res.longitude)
-		.success(function(data) {
-			$scope.currentUser.city_id = data.city_id;
-			$scope.currentUser.region_id = data.region_id;
-			authService.saveUser($scope.currentUser);
-		}).error(function(data, status) {
-		});
-	      },
-	      cancel: function (res) {
-	        alert('用户拒绝授权获取地理位置');
-	      }
+	    // 配置wx接口
+	    $http.get("http://" + $rootScope.hostName + "/common/wxconfig"
+	    ).success(function(data) {
+		    data.debug = true;
+		    wx.config(data);
+	    }).error(function(data, status) {
 	    });
-});
+
+    	wx.ready(function () {
+		    wx.getLocation({
+		    	success: function (res) {
+					$http.get("http://" + $rootScope.hostName + "/common/addressCode/" + res.latitude + "," + res.longitude)
+					.success(function(data) {
+						$scope.currentUser.city_id = data.city_id;
+						$scope.currentUser.region_id = data.region_id;
+						authService.saveUser($scope.currentUser);
+					}).error(function(data, status) {
+					});
+	      		},
+		        cancel: function (res) {
+		        	alert('用户拒绝授权获取地理位置');
+		        }
+	    	});
+    	});
     }
 
     self.getLocation();
