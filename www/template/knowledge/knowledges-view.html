@@ -1,9 +1,9 @@
 <script src="/lib/ionic/js/angular/angular-sanitize.min.js"></script>
-<ion-view hide-tabs="true" view-title="法规详情">
+<ion-view hide-tabs view-title="知识详情">
 	<ion-pane>
 		<ion-header-bar class="bar bar-header bar-light">
-			<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" onclick="history.go(-1);"></a>
-			<h1 class="title">法规详情</h1>
+			<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" href="#/knowledge/knowledges"></a>
+			<h1 class="title">知识详情</h1>
 		</ion-header-bar>
 		<ion-content class="web-body">
 			<ion-list>
@@ -13,6 +13,7 @@
 				      <label class="lef">律团</label>
 				      <label class="rig">{{items.created_at.date}}</label>
 				    </p>
+				    <img class="full-image" src="{{items.img}}" style="max-height:150px;">
 				    <p class="contents" ng-bind-html="items.content"></p>
 		        </ion-item>
 	         </ion-list>

@@ -426,6 +426,7 @@ this.stopDefault = function(e)
   //菜单返回按钮
   this.goBack = function() {
     window.history.back();
+    window.location.reload();
   }
   //菜单刷新按钮
   this.refresh = function() {

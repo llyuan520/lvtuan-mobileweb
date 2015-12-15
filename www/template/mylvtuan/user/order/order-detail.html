@@ -1,4 +1,4 @@
-<ion-view hide-tabs="true" view-title="订单详情">
+<ion-view hide-tabs view-title="订单详情">
 	<ion-pane>
 		<ion-header-bar class="bar bar-header bar-light">
 			<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" onclick="history.go(-1);"></a>
@@ -24,11 +24,9 @@
 					<p>订单编号：{{item.order_no}}</p>
 					<p>问题标题：{{item.title}}</p>
 					<p>问题描述：{{item.content}}</p>
-  					<p style="text-align: right;" ng-if="item.status_code == 'wait_pay' || item.status_code == 'complete'">
-  						<button class="button button-small button-positive" ng-click="remove(item.post_id)">删除</button>
-  					</p>
-  					<p style="text-align: right;" ng-if="item.status_code == 'wait_pay'">
-  						<button class="button button-small button-positive" ng-click="pay(item.post_id)">付款</button>
+  					<p style="text-align: right;">
+  						<button ng-if="item.status_code == 'wait_pay' || item.status_code == 'complete'" class="button button-small button-positive" ng-click="remove(item.post_id)">删除</button>
+  						<button ng-if="item.status_code == 'wait_pay'" class="button button-small button-positive" ng-click="pay(item.post_id)">付款</button>
   					</p>
   					<p style="text-align: right;" ng-if="item.status_code == 'new'">
   						<button class="button button-small button-positive" ng-click="cancel(item.post_id)">取消</button>
