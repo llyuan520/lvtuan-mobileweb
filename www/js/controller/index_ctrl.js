@@ -52,9 +52,6 @@ lvtuanApp.directive('hideTabs', function($rootScope) {
 });
 
 
-
-
-
 lvtuanApp.directive('star', function () {
   return {
     template: '<ul class="rating" ng-mouseleave="leave()">' +
@@ -3072,6 +3069,7 @@ lvtuanApp.controller("commentorderlawyerCtrl",function($http,$scope,$stateParams
 
 	httpWrapper.get('http://'+$rootScope.hostName+'/center/lawyer/question/'+$stateParams.id+'/evaluate/view', function(data){
 		$scope.item = data.data;
+		console.info($scope.item);
 		$scope.ratingVal = $scope.item.evaluate_score;
 	});
 
@@ -3237,6 +3235,11 @@ lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$
     	}else{
     		return false;
     	}
+	}
+
+	$scope.jumpreplied = function(){
+		location.href='#/lawyerquestion/replied';
+		window.location.reload();
 	}
 })
 

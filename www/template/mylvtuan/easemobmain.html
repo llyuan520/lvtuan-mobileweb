@@ -49,11 +49,11 @@
     </style>
 
     <ion-header-bar class="bar bar-header bar-light item-icon-right">
-        <a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" onclick="history.go(-1);"></a>
+        <a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-click="jumpreplied()"></a>
         <h1 class="title">咨询详情</h1>
     </ion-header-bar>
     <div hide-tabs class="web-body web-top10 scroll-content ionic-scroll  has-header">
-                <div class="webin" style="overflow-x: scroll;">
+                <div class="webin" style="height: 100%;">
                     <div id="loginmodal" class="modal hide in" role="dialog" aria-hidden="true" data-backdrop="static">
                         <div class="modal-header">
                         </div>
@@ -72,7 +72,7 @@
                     <div id="waitLoginmodal" class="modal hide" data-backdrop="static">
                         <img ng-src="lib/js/web-im-1.0.7.2/img/waitting.gif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;正在努力加载中...
                     </div>
-                    <div class="content" id="content" style="display: none;width:562px;">
+                    <div class="content" id="content" style="display: none;width:100%;">
 
                         <!-- 聊天页面 -->
                         <div class="chatRight">
@@ -81,7 +81,7 @@
                                     <a href="javascript:window.close()"><div id="recycle"></div></a>
                                 </div>
                                 <!-- <div id="null-nouser" class="chat01_content"></div> -->
-                                <div id="{{user_name}}-{{easemoParam.curChatUserId}}" calss="chat00_content" classname="chat00_content" style="height:250px;width:100%;overflow:auto;padding: 20px;display:block;">
+                                <div id="{{user_name}}-{{easemoParam.curChatUserId}}" calss="chat00_content" classname="chat00_content" style="height:205px;width:100%;    overflow-y: scroll;padding: 20px;display:block;">
                                     <div ng-repeat="comment in easemoParam.comments">
                                         <div ng-if="comment.creator_id == user_name" style="text-align:right" > 
                                             <p1>{{comment.creator_name}}<span></span></p1>
@@ -116,14 +116,16 @@
                                         <div class="wlf_icon"></div>
                                     </div>
                                 </div>
-                                <form id="chatform">
+                                <form id="chatform" style="margin:0;">
                                     <div id="input_content" class="chat02_content">
                                         <input type="hidden" id="chatToken" name="_token" value="{{jwtToken}}" />
                                         <textarea name="comment" id="talkInputId" style="resize: none;"></textarea>
                                     </div>
                                     <div class="chat02_bar">
-                                        <ul style="width:90%;">
-                                            <a href="##" style="float: left"><li onclick="sendText()">发&nbsp;&nbsp;送</li></a>
+                                        <ul style="width:90%;text-align: right;">
+                                            <a href="##" style="width:10%;display: inline-block;line-height: 35px;height: 35px;">
+                                                <li style="height: 30px;line-height: 35px;" onclick="sendText()">发&nbsp;&nbsp;送</li>
+                                            </a>
                                            <!--  <a href="##" style="float: right"><li >确认完成</li></a>    -->
                                         </ul>
                                     </div>
