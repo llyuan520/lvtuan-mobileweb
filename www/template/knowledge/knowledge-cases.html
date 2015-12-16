@@ -1,12 +1,19 @@
 <ion-view view-title="knowledge-documents">
     <ion-content>
-
+    	<form id="search_form">
+			<div class="item item-input-inset web-body">
+				<div class="item-input-wrapper">
+			    	<input name="q" type="search" placeholder="搜索你想要的内容" class="search">
+			    	<i class="icon ion-search placeholder-icon" ng-click="search()"></i>
+				</div>
+			</div>
+		</form>
     	<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 		<ion-list>
-        	<ion-item class="item item-thumbnail-left"  ng-repeat="case in cases" ng-href="#/knowcasesview/{{case.id}}">
-	          	<img ng-src="{{case.img}}" style="left:6px;border-radius:5px;">
-		      	<h2 style="height:30px;margin-top:5px;">{{case.title}}</h2>
-	      		<p>{{case.created_at.date}}</p>
+        	<ion-item class="item item-thumbnail-left"  ng-repeat="item in items" ng-href="#/knowledgeview/{{item.id}}">
+	          	<img ng-src="{{item.img}}" style="left:6px;border-radius:5px;">
+		      	<h2 style="height:30px;margin-top:5px;">{{item.title}}</h2>
+	      		<p>{{item.created_at.date}}</p>
 	        </ion-item>
          </ion-list>
 		<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>

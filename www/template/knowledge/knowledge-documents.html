@@ -11,10 +11,10 @@
 		</form>
 		<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 		<ion-list>
-        	<ion-item class="item item-thumbnail-left"  ng-repeat="document in documents" ng-href="#/knowdocumentsview/{{document.id}}">
-	          	<img ng-src="{{document.img}}" style="left:6px;border-radius:5px;">
-				<h2 style="height:30px;margin-top:5px;">{{document.title}}</h2>
-			    <p>{{document.created_at.date}}</p>
+        	<ion-item class="item item-thumbnail-left"  ng-repeat="item in items" ng-href="#/knowledgeview/{{item.id}}">
+	          	<img ng-src="{{item.img}}" style="left:6px;border-radius:5px;">
+				<h2 style="height:30px;margin-top:5px;">{{item.title}}</h2>
+			    <p>{{item.created_at.date}}</p>
 	        </ion-item>
          </ion-list>
 		<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>

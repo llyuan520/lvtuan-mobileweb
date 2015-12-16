@@ -1,4 +1,4 @@
-<ion-view hide-tabs="true" view-title="咨询详情">
+<ion-view hide-tabs view-title="咨询详情">
 	<ion-pane>
 		<ion-header-bar class="bar bar-header bar-light">
 			<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" onclick="history.go(-1);"></a>
@@ -21,22 +21,20 @@
 					<p>操作时间：{{items.updated_at.date}}</p>
 					<p ng-if="items.status_code != 'new'">受理律师：{{items.lawyer.realname}}</p>
 					<p class="contents">问题描述：{{items.content}}</p>
-		        	<p style="text-align: right;">
-	  					<label ng-if="items.status_code == 'new'">
-	  						<button class="button button-small button-positive" ng-click="cancel(items.id)">取消</button>
-	  					</label>
-	  					<label ng-if="items.status_code == 'replied'">
-	  						<button class="button button-small button-positive" ng-click="ask(items.id)">联系律师</button>
-	  						<button class="button button-small button-positive" ng-click="complete(items.id)">确认</button>
-	  					</label>
-	  					<label ng-if="items.status_code == 'complete'">
-	  						<button class="button button-small button-positive" ng-click="send(items.id)">送心意</button>
-	  						<button class="button button-small button-positive" ng-click="remove(items.id)">删除</button>
-	  					</label>
-	  					<label ng-if="items.status_code == 'wait_for_evaluation'">
-	  						<button class="button button-small button-positive" ng-click="evaluate(items.id)">评价</button>
-	  					</label>
-	  				</p>
+  					<p style="text-align: right;" ng-if="items.status_code == 'new'">
+  						<button class="button button-small button-positive" ng-click="cancel(items.post_id)">取消</button>
+  					</p>
+  					<p style="text-align: right;" ng-if="items.status_code == 'replied'">
+  						<button class="button button-small button-positive" ng-click="ask(items.post_id)">联系律师</button>
+  						<button class="button button-small button-positive" ng-click="to_complete(items.post_id)">确认</button>
+  					</p>
+  					<p style="text-align: right;" ng-if="items.status_code == 'complete'">
+  						<button class="button button-small button-positive" ng-click="send(items.post_id)">送心意</button>
+  						<button class="button button-small button-positive" ng-click="remove(items.post_id)">删除</button>
+  					</p>
+  					<p style="text-align: right;" ng-if="items.status_code == 'wait_for_evaluation'">
+  						<button class="button button-small button-positive" ng-click="evaluate(items.post_id)">评价</button>
+  					</p>
 		        </ion-item>
 		        
 	         </ion-list>

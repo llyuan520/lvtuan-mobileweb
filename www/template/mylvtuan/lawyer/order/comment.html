@@ -1,11 +1,11 @@
-<ion-view hide-tabs="true" view-title="评价详情">
+<ion-view hide-tabs view-title="评价详情">
 	<ion-pane>
 		<ion-header-bar class="bar bar-header bar-light">
-			<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" onclick="history.go(-1);"></a>
+			<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-href="#/orderlawyer/complete"></a>
 			<h1 class="title">评价详情</h1>
 		</ion-header-bar>
 		<ion-content class="web-body">
-			 <ion-list>
+			 <ion-list ng-if="item.evaluate_content != '' ">
             	<ion-item class="item item-thumbnail-left">
 		          	<img ng-src="{{item.avatar}}" style="border-radius:50px;" />
 					<div class="row">
@@ -24,6 +24,11 @@
 		        <ion-item>
 		        	<p>{{item.created_at.date}}</p>
 		        	<p class="contents">{{item.evaluate_content}}</p>
+		    	</ion-item>
+	         </ion-list>
+	         <ion-list ng-if="item.evaluate_content == '' ">
+		        <ion-item style="text-align: center;">
+		        	<h2>暂无评价！</h2>
 		    	</ion-item>
 	         </ion-list>
 	    </ion-content>

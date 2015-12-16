@@ -1,10 +1,10 @@
-<ion-view hide-tabs="true" view-title="我的订单-全部">
+<ion-view hide-tabs view-title="我的订单-全部">
     <ion-content>
     	<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
     	<ion-list ng-repeat="item in items">
-        	<ion-item class="item" >
-	          	<span class="sp-l fc-33">{{item.title}}</span>
-				<span class="sp-r fc-33">{{item.created_at}}</span>
+        	<ion-item class="item" ng-href="#/userorderdetail/{{item.id}}">
+	          	<span class="sp-l fc-33" style="width: 50%;">{{item.title}}</span>
+				<span class="sp-r fc-33" style="width: 50%;">{{item.created_at}}</span>
 	        </ion-item>
 	        <ion-item class="item itemdata">
 	        	<div class="row">
@@ -17,28 +17,22 @@
         				<h2 class="fc-33">{{item.post_type}}</h2>
 		        	</div>
 	  				<div class="col" style="text-align: right;">
-	  					<label ng-if="item.status_code == 'wait_pay' || item.status_code == 'complete'">
-	  						<button class="button button-small button-positive" ng-click="remove(item.id,$index)">删除</button>
-	  					</label>
-	  					<label ng-if="item.status_code == 'wait_pay'">
-	  						<button class="button button-small button-positive" ng-click="pay(item.id)">付款</button>
-	  					</label>
-	  					<label ng-if="item.status_code == 'new'">
-	  						<button class="button button-small button-positive" ng-click="cancel(item.id,$index)">取消</button>
-	  					</label>
-	  					<label ng-if="item.status_code == 'replied'">
-	  						<button class="button button-small button-positive" ng-click="ask(item.id,$index)">联系律师</button>
+	  					<p>
+	  						<button ng-if="item.status_code == 'wait_pay' || item.status_code == 'complete'" class="button button-small button-positive" ng-click="remove(item.id,$index)">删除</button>
+	  						<button ng-if="item.status_code == 'wait_pay'" class="button button-small button-positive" ng-click="pay(item.id)">付款</button>
+	  					</p>
+	  					<p >
+	  						<button ng-if="item.status_code == 'new'" class="button button-small button-positive" ng-click="cancel(item.id,$index)">取消</button>
+	  					</p>
+	  					<p ng-if="item.status_code == 'replied'">
+	  						<button class="button button-small button-positive" ng-click="ask(item.id)">联系律师</button>
 	  						<button class="button button-small button-positive" ng-click="complete(item.id,$index)">确认</button>
-	  					</label>
-	  					<label ng-if="item.status_code == 'wait_for_evaluation'">
+	  					</p>
+	  					<p ng-if="item.status_code == 'wait_for_evaluation'">
 	  						<button class="button button-small button-positive" ng-click="evaluate(item.id,$index)">评价</button>
-	  					</label>
+	  					</p>
 	  				</div>
 	        	</div>
-	        </ion-item>
-			<ion-item class="item item-icon-right" ng-href="#/userorderdetail/{{item.id}}">
-	          	<i class="icon ion-chevron-right" style="font-size:20px;"></i>
-			    <p> 订单号：{{item.order_no}} </p>
 	        </ion-item>
          </ion-list>
 		<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>

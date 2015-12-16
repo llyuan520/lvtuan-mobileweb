@@ -12,10 +12,11 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       StatusBar.styleDefault();
     }
   });
+  
 })
 
 //声明全局的方法和变量
-.run(['$rootScope','$timeout','$location','$ionicLoading',function($rootScope,$timeout,$location,$ionicLoading){
+.run(['$rootScope','$timeout','$location','$ionicLoading',function($rootScope,$timeout,$location,$ionicLoading,$ionicHistory,$window){
   
  /*$timeout(function() {
       localStorage.removeItem('is_lawyer');
@@ -37,14 +38,12 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
   var hostName = AppSettings.baseApiUrl;
   localStorage.setItem("hostName", JSON.stringify(hostName));
   $rootScope.hostName = JSON.parse(localStorage.getItem('hostName'));
+  //回到首页
   $rootScope.goHome = function(){
     layer.goHome();
   }
 
 }])
-
-
-
 
 .config(function($httpProvider) {
   $httpProvider.interceptors.push('APIInterceptor');
@@ -60,7 +59,6 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       templateUrl: 'template/home.html',
       controller:'ionicNavBarDelegateCtrl'
     })
-
     .state('index', { //首页
       url: '/index',
       cache: 'true', 
@@ -184,9 +182,10 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
 /********************************** 知识 **********************************/
     .state('knowledge', { //知识
       url: '/knowledge',
-     /* abstract:true,*/
+      /*abstract: true,*/
       templateUrl: 'template/knowledge/knowledge.html'
     }) 
+
    .state('knowledge.knowledges', { //法规
       url: '/knowledges',
       cache: 'true',
@@ -222,24 +221,6 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
         cache: 'true',
         templateUrl: 'template/knowledge/knowledges-view.html',
         controller: 'knowledgeViewCtrl'
-    })
-    .state('knowknowledgesview', { //法规-详情
-        url: '/knowknowledgesview/:id',
-        cache: 'true',
-        templateUrl: 'template/knowledge/knowledges-view.html',
-        controller: 'knowKnowledgesCtrl'
-    })
-    .state('knowdocumentsview', { //文库-详情
-        url: '/knowdocumentsview/:id',
-        cache: 'true',
-        templateUrl: 'template/knowledge/documents-view.html',
-        controller: 'knowDocumentsCtrl'
-    })
-    .state('knowcasesview', { //案列-详情
-        url: '/knowcasesview/:id',
-        cache: 'true',
-        templateUrl: 'template/knowledge/cases-view.html',
-        controller: 'knowCasesCtrl'
     })
 
 /********************************** 我的 **********************************/
@@ -596,9 +577,9 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
   })
 
   .state('user/question/view', { //首页 - 我的律团 - 用户的咨询
-    url: 'user/question/view/:id',
+    url: '/user/question/view/:id',
     templateUrl: 'template/mylvtuan/user/question/view.html',
-    controller: 'userquestionviewCtr'
+    controller: 'userquestionviewCtrl'
   })
 
   .state('confirmCompletion', { //首页 - 我的律团 - 用户的咨询

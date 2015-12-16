@@ -47,8 +47,6 @@ body,
 .login2 .item{
 	border: none;
 }
-<<<<<<< Updated upstream
-=======
 .bg-man,.bg-clock,.bg-mobel{
 	background-repeat: no-repeat;
 	background-position: left;
@@ -59,16 +57,12 @@ body,
 	background-image: url(../img/man.png);
 	
 }
->>>>>>> Stashed changes
 .bg-mobel{
 	background-image: url(../img/mobel.png);
 }
-<<<<<<< Updated upstream
-=======
 .bg-clock{
 	background-image: url(../img/clock.png);
 }
->>>>>>> Stashed changes
 .login{
 	margin: 0;
 	margin-top: 19px;
