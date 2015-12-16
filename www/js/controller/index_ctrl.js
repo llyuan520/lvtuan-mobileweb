@@ -1161,6 +1161,11 @@ lvtuanApp.controller("documentsCtrl",function($scope,$http,$rootScope,listHelper
 //知识-案例
 lvtuanApp.controller("casesCtrl",function($scope,$http,$rootScope,listHelper){
 	listHelper.bootstrap('/case/list_case', $scope);
+	$scope.search = function(){
+    	$scope.items = [];	//创建一个数组接收后台的数据
+    	var param = layer.getParams("#search_form");
+    	listHelper.bootstrap('/knowledge/document/list_documents?q='+param.q, $scope);
+    }
 })
 
 //文章-详情
