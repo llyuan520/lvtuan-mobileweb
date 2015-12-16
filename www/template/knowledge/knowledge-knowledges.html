@@ -1,6 +1,5 @@
 <ion-view view-title="knowledge-knowledges">
     <ion-content>
-   		
    		<form id="search_form">
 			<div class="item item-input-inset web-body">
 				<div class="item-input-wrapper">
@@ -11,8 +10,8 @@
 		</form>
 		<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 		<ion-list>
-        	<ion-item class="item" ng-repeat="item in items" ng-href="#/knowledgeview/{{item.id}}">
-	          	<img class="full-image" ng-src="{{item.img}}" style="max-height:150px;">
+        	<ion-item  ng-repeat="item in items" style="margin-top: 10px;padding:16px;">
+        		<a ng-href="#/knowledgeview/{{item.id}}"><img class="full-image" ng-src="{{item.img}}" style="max-height:150px;"></a>
 				<h2> {{item.title}}</h2>
 			    <p class="web-paddingtb5" style="margin:0px;">
 			      律团

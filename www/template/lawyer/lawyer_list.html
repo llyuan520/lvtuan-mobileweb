@@ -28,19 +28,19 @@
 						      	{{citie.city_name}}
 						      </option>
 						    </select>
-						    <select name="cat_id" class="opt-bl" ng-change="searchCat()" ng-model="cat_id">
+						    <select name="cat_id" class="opt-bl" ng-change="searchCity()" ng-model="cat_id">
 						    	<option value="" selected>法律专长</option>
 						      	<option ng-repeat="workscope in workscopes" value="{{workscope.key}}">
 						      	{{workscope.value}}
 						      </option>
 						    </select>
-						    <select name="experience" class="opt-bl" ng-change="searchCat()" ng-model="experience">
+						    <select name="experience" class="opt-bl" ng-change="searchCity()" ng-model="experience">
 						      <option value="" selected>执业年限</option>
 						      	<option ng-repeat="period in periods" value="{{period.key}}">
 						      		{{period.value}}
 						      	</option>
 						    </select>
-						    <select name="order_by" class="opt-bl" ng-model="order_by">
+						    <select name="order_by" class="opt-bl" ng-change="searchCity()"  ng-model="order_by">
 						      	<option value="" selected>默认</option>
 						      	<option ng-repeat="order in orders" value="{{order.key}}">
 						      		{{order.value}}
@@ -48,7 +48,6 @@
 						    </select>
 						</div>
 					</form>
-					<!-- <div class="item-divider dvd-title">你查找的律师类型：<span class="sp-blue">律师辩护</span>，共找到<span class="sp-blue">421</span>位律师。</div> -->
 					<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 					<div class="list">
 					    <a class="item item-thumbnail-left" ng-repeat="item in items" ng-click="jumppage(item.id)">

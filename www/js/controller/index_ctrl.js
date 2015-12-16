@@ -1171,21 +1171,21 @@ lvtuanApp.controller("broadcastviewCtrl",function($scope,$http,$state,$rootScope
 /****************************************************** 知识 ******************************************************/
 //知识
 lvtuanApp.controller("knowledgesCtrl",function($scope,$http,$rootScope,listHelper){
-	listHelper.bootstrap('/knowledge/article/list_articles', $scope);
+	listHelper.bootstrap('/knowledge/list_knowledge', $scope);
 	$scope.search = function(){
     	$scope.items = [];	//创建一个数组接收后台的数据
     	var param = layer.getParams("#search_form");
-    	listHelper.bootstrap('/knowledge/article/list_articles?q='+param.q, $scope);
+    	listHelper.bootstrap('/knowledge/list_knowledge?q='+param.q, $scope);
     }
 })
 
 //知识-文库
 lvtuanApp.controller("documentsCtrl",function($scope,$http,$rootScope,listHelper){
-	listHelper.bootstrap('/knowledge/document/list_documents', $scope);
+	listHelper.bootstrap('/knowledge/article/list_articles', $scope);
 	$scope.search = function(){
     	$scope.items = [];	//创建一个数组接收后台的数据
     	var param = layer.getParams("#search_form");
-    	listHelper.bootstrap('/knowledge/document/list_documents?q='+param.q, $scope);
+    	listHelper.bootstrap('/knowledge/article/list_articles?q='+param.q, $scope);
     }
 })
 
@@ -1195,7 +1195,7 @@ lvtuanApp.controller("casesCtrl",function($scope,$http,$rootScope,listHelper){
 	$scope.search = function(){
     	$scope.items = [];	//创建一个数组接收后台的数据
     	var param = layer.getParams("#search_form");
-    	listHelper.bootstrap('/knowledge/document/list_documents?q='+param.q, $scope);
+    	listHelper.bootstrap('/knowledge/case/list_case?q='+param.q, $scope);
     }
 })
 
@@ -2134,6 +2134,14 @@ lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$l
 		    })
 	}
 
+
+
+	$scope.$watch('max', function (oldVal, newVal) {
+        if (newVal) {
+          updateStars();
+        }
+      });
+
 	var page = 1; //页数
     $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
     $scope.items = [];	//创建一个数组接收后台的数据
@@ -2154,11 +2162,11 @@ lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$l
 	    getParams();
 	}
 	//根据法律专长查找律师
-	$scope.searchCat = function(){
+/*	$scope.searchCat = function(){
 		page = 1;
 		$scope.items = [];
 	    getParams();
-	}
+	}*/
 	//获取参数，处理被收藏书签的情况
 	function getParams(){
 		var params = layer.getParams("#searchForm");
