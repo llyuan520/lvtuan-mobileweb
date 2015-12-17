@@ -22,28 +22,28 @@
   <body ng-controller="MainController">
     
   	<ion-nav-view></ion-nav-view>
-    <div class="tabs tabs-icon-top tabs-color-positive ng-cloak" ng-model="currentUser.user_group_id" ng-hide="$root.hideTabs" ng-controller="HeaderController">
-        <a ng-href="#/index"  class="tab-item" ng-class="{active:isActives('/index')}">
+    <div class="tabs tabs-icon-top tabs-color-positive {{$root.hideTabs}}" ng-model="currentUser.user_group_id" ng-controller="HeaderController">
+        <a ng-href="#/index"  class="tab-item ng-cloak" ng-class="{active:isActives('/index')}">
           <i class="icon ion-home"></i>
           首页
         </a>
-        <a ng-if="currentUser.user_group_id == null" ng-href="#/login" class="tab-item">
+        <a ng-if="currentUser.user_group_id == null" ng-href="#/login" class="tab-item ng-cloak">
           <i class="icon ion-android-contacts"></i>
           圈子
         </a>
-        <a ng-if="currentUser.user_group_id == 2 && currentUser.is_verified == 1" ng-href="#/group" class="tab-item" ng-class="{active:isActives('/group/list')}">
+        <a ng-if="currentUser.user_group_id == 2 && currentUser.is_verified == 1" ng-href="#/group" class="tab-item ng-cloak" ng-class="{active:isActives('/group/list')}">
           <i class="icon ion-android-contacts"></i>
           圈子
         </a>
-        <a  ng-href="#/knowledge"  class="tab-item"  ng-class="{active:isActives('/knowledge')}">
+        <a  ng-href="#/knowledge"  class="tab-item ng-cloak"  ng-class="{active:isActives('/knowledge')}">
           <i class="icon ion-social-buffer"></i>
           知识
         </a>
-        <a ng-if="currentUser.user_group_id == null" ng-href="#/login" class="tab-item">
+        <a ng-if="currentUser.user_group_id == null" ng-href="#/login" class="tab-item ng-cloak">
           <i class="icon ion-android-contact"></i>
           我的
         </a>
-        <a ng-if="currentUser.user_group_id == 1 || currentUser.user_group_id == 2" ng-href="#/center" class="tab-item" ng-class="{active:isActives('/center')}">
+        <a ng-if="currentUser.user_group_id == 1 || currentUser.user_group_id == 2" ng-href="#/center" class="tab-item ng-cloak" ng-class="{active:isActives('/center')}">
           <i class="icon ion-android-contact"></i>
           我的
         </a>
@@ -51,18 +51,15 @@
     
 
     
-    
-    <!-- ionic/angularjs js -->
-    
-    <!-- <script src="js/jweixin-1.0.0.js"></script> -->
-    
+ 
     <!-- 
     cordova script (this will be a 404 during development) 
     <script src="cordova.js"></script>
+    <script src="conf/settings.prod.js"></script>
     -->
   
     <script src="conf/settings.dev.js"></script>
-    
+
     <script src="js/layer.1.0.js"></script>
     <script src="lib/js/jquery-1.11.1.js"></script>
     <script src="lib/ionic/js/ionic.bundle.js"></script>
@@ -74,7 +71,6 @@
     <script type="text/javascript">
       var templates = angular.module('templates', []);
     </script>
-    <script src="dist/js/templates.js"></script>
     
     <script src="js/module/auth.js"></script>
     <script src="js/module/weixin.js"></script>
