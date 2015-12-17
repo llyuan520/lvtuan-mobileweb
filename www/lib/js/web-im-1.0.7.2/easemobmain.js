@@ -1717,3 +1717,50 @@
         return time;
     }
     
+
+    //查看更多聊天记录
+    var page = 1;
+    var rows_per_page = 10;
+    $(document).on('click', '#comments-list', function(e){
+        $this = $(this);
+        $this.css('display', 'none');
+        var _token = $("#chatToken").val();
+        $("#page").css('display', 'block');
+        var commentUrl = rootUrl+'?page='+page+'&rows_per_page='+rows_per_page;
+        var str = '';
+
+           $.ajax(commentUrl, {
+                type: 'get',
+                dataType : 'json',
+                data    : '',
+                headers: { 
+                    'Authorization': 'bearer ' + _token, 
+                },
+                success: function(data){
+                    obj = data.data.comments;
+                    console.info(obj);
+                    for(var i=0; i<obj.length; i++){
+                         style = "left";
+                        if(obj[i].creator_id == curUserId) style = "right";
+                        str+='<div class="textbox" style="text-align:'+style+';">'; 
+                            str+='<p1>'+obj[i].creator_name+'<span></span></p1>';
+                            str+='<p2>'+obj[i].created_at+'<b></b></p2><br>';
+                            str+='<p3 class="chat-content-p3" className="chat-content-p3">'+obj[i].content+'</p3>';
+                        str+='</div>';
+                    }
+                    if(obj.length == rows_per_page) $this.css('display', 'block');
+                    $("#page").after(str);
+                    $("#page").css('display', 'none');
+                    page++;
+                    stopDefault(e);
+                },
+                error: function(data){
+                    console.info(data);
+                    var error =  $.parseJSON(data.responseText);
+                    layer.show(error.error_messages);
+                    console.info(error);
+                    
+                }
+            });
+    });
+   

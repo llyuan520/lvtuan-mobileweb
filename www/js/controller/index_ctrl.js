@@ -3239,6 +3239,7 @@ lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$
 	    	$scope.user_password = itmes.easemob_pwd;
 	    	$scope.easemoParam = {
 	    		'jumpUrl'		:'http://'+$rootScope.hostName+'/question/'+itmes.post_id+'/comment',
+	    		'rootUrl'		:'http://'+$rootScope.hostName+'/question/'+itmes.post_id+'/comment_list',
 	    		'curChatUserId' : itmes.user_id,
 		    	'content'	 	: itmes.content,
 		    	'created_at' 	: itmes.created_at.date,
