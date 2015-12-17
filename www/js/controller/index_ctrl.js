@@ -47,18 +47,11 @@ lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $loca
 		    	success: function (res) {
 					$http.get("http://" + $rootScope.hostName + "/common/addressCode/" + res.latitude + "," + res.longitude)
 					.success(function(data) {
-<<<<<<< Updated upstream
 						if (data) {
 							$scope.currentUser.city_id = data.city_id;
 							$scope.currentUser.region_id = data.region_id;
 							authService.saveUser($scope.currentUser);
 						}
-=======
-						$scope.currentUser.city_id = '广东' //data.city_id;
-						$scope.currentUser.region_id = '深圳市' //data.region_id;
-						authService.saveUser($scope.currentUser);
-						debugger
->>>>>>> Stashed changes
 					}).error(function(data, status) {
 					});
 	      		},
