@@ -4309,7 +4309,7 @@ lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$io
 })
 
 
-lvtuanApp.controller("citypickerCtrl",function($state,$timeout,$http,$location,$scope,$rootScope,$anchorScroll){
+lvtuanApp.controller("citypickerCtrl",function($state,$timeout,$http,$location,$scope,$rootScope,$anchorScroll,$stateParams,$ionicHistory){
 	console.info('citypickerCtrl');
 	$scope.provinces = {
 					    "A": {
@@ -4406,9 +4406,8 @@ lvtuanApp.controller("citypickerCtrl",function($state,$timeout,$http,$location,$
 		$scope.citypicker = JSON.parse(sessionStorage.getItem('citypicker'));
 		$rootScope.region_id = $scope.citypicker.region_id;
 
-		console.info($rootScope.region_id);
-		$location.path('/index');
-		window.location.reload();
+		$ionicHistory.goBack(); 
+		
 	}
 	
 })
