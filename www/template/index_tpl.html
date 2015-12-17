@@ -3,10 +3,11 @@
   	</ion-nav-bar>
 	<ion-nav-title>律团</ion-nav-title>
 	<ion-nav-buttons side="left">
-		<button class="button button-icon">  <!-- ng-click="mylvteam()" -->
+		<a ng-href="#/citypicker" class="button button-icon">  <!-- ng-click="mylvteam()" -->
 			<!-- <img style="height:30px;" src="../img/coordinate.png"/>  -->
-			<ion class="ion-ios-location-outline" style="font-size: 32px;"></ion> 深圳
-		</button>
+			<ion class="ion-ios-location-outline" style="font-size: 32px;"></ion>
+			{{region_id}}
+		</a>
 	</ion-nav-buttons>
 	<!-- <ion-nav-buttons ng-model="currentUser.user_group_id" side="right" >
 		<a ng-if="currentUser.user_group_id == null" ng-href="#/login" class="button button-icon">
@@ -82,4 +83,3 @@
 
 	</ion-content>
 </ion-view>
-
