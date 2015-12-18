@@ -116,7 +116,7 @@ httpModule.factory('APIInterceptor', ['$log', '$q', '$rootScope', 'authService',
 	      }
 	      $rootScope.hide();
 	      // do something on error
-	      return response;
+	      return $q.reject(response);
 	    }
     };
 

@@ -25,6 +25,7 @@
         console.info(easemob);
         if(easemob != null){
             var jumpUrl = easemob.jumpUrl;
+            var rootUrl = easemob.rootUrl;
             var curChatUserId = easemob.curChatUserId;
             var content = easemob.content;
             var created_at = easemob.created_at.date;
@@ -82,6 +83,10 @@
                                 </div>
                                 <!-- <div id="null-nouser" class="chat01_content"></div> -->
                                 <div id="{{user_name}}-{{easemoParam.curChatUserId}}" calss="chat00_content" classname="chat00_content" style="height:205px;width:100%;    overflow-y: scroll;padding: 20px;display:block;">
+
+                                    <div style="text-align: center"><a href="javascript:void(0)" id="comments-list" style="text-align: center">查看更多</a></div>
+                                    <div id="page" class="loading" style="display: none">加载中...</div>
+
                                     <div ng-repeat="comment in easemoParam.comments">
                                         <div ng-if="comment.creator_id == user_name" style="text-align:right" > 
                                             <p1>{{comment.creator_name}}<span></span></p1>

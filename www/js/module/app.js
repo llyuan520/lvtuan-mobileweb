@@ -38,6 +38,13 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
   var hostName = AppSettings.baseApiUrl;
   localStorage.setItem("hostName", JSON.stringify(hostName));
   $rootScope.hostName = JSON.parse(localStorage.getItem('hostName'));
+
+  $rootScope.region_id_user = JSON.parse(localStorage.getItem('currentUser'));
+  if($rootScope.region_id_user){
+    $rootScope.region_id = $rootScope.region_id_user.region_id;
+  }
+  
+
   //回到首页
   $rootScope.goHome = function(){
     layer.goHome();
@@ -223,6 +230,12 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
         controller: 'knowledgeViewCtrl'
     })
 
+    .state('comments/view', { //评论-详情
+        url: '/comments/view/:id',
+        cache: 'true',
+        templateUrl: 'template/knowledge/comments-view.html',
+        controller: 'commentsViewCtrl'
+    })
 /********************************** 我的 **********************************/
 /*———————————————————————————— 用户的个人中心 ————————————————————————————*/
     .state('center', { //用户-我的
@@ -763,6 +776,13 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       url: '/pay/:id',
       templateUrl: 'template/pay.html',
       controller: 'payCtrl'
+    })
+
+
+    .state('citypicker', { //首页 - 微信支付
+      url: '/citypicker',
+      templateUrl: 'template/citypicker.html',
+      controller: 'citypickerCtrl'
     })
 
 /********************************** error **********************************/

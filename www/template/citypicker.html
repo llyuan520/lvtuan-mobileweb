@@ -1,0 +1,59 @@
+<style type="text/css">
+.citypicker{
+	/*position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;*/
+    overflow: auto;
+    width: 100%;
+	z-index: 1;
+}
+.citypicker .list{
+	margin-bottom: 0px;
+}
+.navbar{
+	position: fixed;
+    top: 50%;
+    right: 5%;
+    width: 20px;
+    z-index: 2;
+    -webkit-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+    border-radius: 5px;
+}
+.tabs.tabs-icon-top.tabs-color-positive{
+	display: none;
+}
+</style>
+<ion-view hideTabs view-title="选择地址">
+		<ion-pane  class="web-body">
+			<ion-header-bar class="bar bar-header bar-light">
+				<!-- <a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-href="#/index"></a> -->
+				<h1 class="title">选择地址</h1>
+				<!-- <button ng-click="createSubmit()" class="button button-clear button-positive" type="button">保存</button> -->
+			</ion-header-bar>
+
+			<ion-content class="citypicker">
+				<div class="province">
+					<div class="list" id="{{key}}" ng-repeat="(key, value) in provinces">
+						<div class="item item-divider">
+					          {{key}}
+					    </div>
+				        <div class="item" ng-repeat="(key, value) in value" ng-click="province(key,value)">
+				            {{key}}
+				        </div>
+					</div>
+				</div>
+				<div class="cities">
+					<div class="list">
+				        <div class="item" ng-repeat="(key, value) in cities" ng-click="citie(value)">
+				            {{value}}
+				        </div>
+					</div>
+				</div>
+		</ion-content>
+		<ul class="navbar">
+			<li ng-repeat="(key, value) in str" ng-click="goto(value)">{{value}}</li>
+		</ul>
+	</ion-pane>
+</ion-view>
