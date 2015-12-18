@@ -1192,9 +1192,9 @@ lvtuanApp.controller("broadcastviewCtrl",function($scope,$http,$state,$rootScope
 })
 
 /****************************************************** 知识 ******************************************************/
-//知识
+//知识 - 看新闻
 lvtuanApp.controller("knowledgesCtrl",function($scope,$http,$rootScope,listHelper){
-	listHelper.bootstrap('/knowledge/list_knowledge', $scope);
+	listHelper.bootstrap('/news/list_news', $scope);
 })
 
 //知识-文库
