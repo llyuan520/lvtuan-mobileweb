@@ -39,11 +39,7 @@
           <i class="icon ion-social-buffer"></i>
           知识
         </a>
-        <a ng-if="currentUser.user_group_id == null" ng-href="#/login" class="tab-item ng-cloak">
-          <i class="icon ion-android-contact"></i>
-          我的
-        </a>
-        <a ng-if="currentUser.user_group_id == 1 || currentUser.user_group_id == 2" ng-href="#/center" class="tab-item ng-cloak" ng-class="{active:isActives('/center')}">
+        <a ng-href="#/center" class="tab-item" ng-class="{active:isActives('/center')}">
           <i class="icon ion-android-contact"></i>
           我的
         </a>
@@ -72,6 +68,9 @@
       var templates = angular.module('templates', []);
     </script>
     
+    <!--
+    <script src="dist/js/templates.js"></script>
+    -->
     <script src="js/module/auth.js"></script>
     <script src="js/module/weixin.js"></script>
     <script src="js/module/list.js"></script>
