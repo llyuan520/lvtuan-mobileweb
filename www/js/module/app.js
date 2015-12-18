@@ -230,6 +230,12 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
         controller: 'knowledgeViewCtrl'
     })
 
+    .state('comments/view', { //评论-详情
+        url: '/comments/view/:id',
+        cache: 'true',
+        templateUrl: 'template/knowledge/comments-view.html',
+        controller: 'commentsViewCtrl'
+    })
 /********************************** 我的 **********************************/
 /*———————————————————————————— 用户的个人中心 ————————————————————————————*/
     .state('center', { //用户-我的

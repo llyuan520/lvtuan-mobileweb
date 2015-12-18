@@ -1216,13 +1216,76 @@ lvtuanApp.controller("knowledgeViewCtrl",function($scope,$http,$rootScope,$state
 		$http.get(url).success(function(data) {
 	        	console.info(data.data)
 	        	$scope.items = data.data;
-
+	        	sessionStorage.setItem("comments_count", JSON.stringify($scope.items.comments_count));
 			}).error(function (data, status) {
 				if(status == 401){
 		        		layer.msg(status);
 		        	}
 		        console.info(JSON.stringify(data));
 		    })
+	}
+
+	//点赞
+	$scope.likes = function(id){
+		$http.post('http://'+$rootScope.hostName+'/like',
+			{
+				item_type : 'article',
+				item_id   : id
+			},
+			{
+            headers: {
+                'Content-Type': 'application/json' ,
+            	'Authorization': 'bearer ' + $rootScope.token
+            }
+        }).success(function(data) {
+        	console.info(data);
+        	var itmes = data.data;
+        	$scope.items.likes_count = itmes.likes_count;
+           layer.show("点赞成功！");
+        }).error(function (data, status) {
+        	if(status == 401){
+		        		layer.msg(status);
+		        	}
+        	console.info(data);
+        	var errMsg = "";
+        	if(JSON.stringify(data.error_messages.item_type)){
+        		errMsg = JSON.stringify(data.error_messages.item_type[0]);
+        	}else if(JSON.stringify(data.error_messages.item_id)){
+				errMsg = JSON.stringify(data.error_messages.item_id[0]);
+        	}
+        	layer.show(errMsg);
+        });
+	}
+
+	//收藏
+	$scope.collects = function(id){
+		$http.post('http://'+$rootScope.hostName+'/collect',
+			{
+				collect_type : 3,
+				item_id   : id
+			},
+			{
+            headers: {
+                'Content-Type': 'application/json' ,
+            	'Authorization': 'bearer ' + $rootScope.token
+            }
+        }).success(function(data) {
+        	var itmes = data.data;
+        	$scope.items.collects_count = itmes;
+           layer.show("收藏成功！");
+        }).error(function (data, status) {
+        	if(status == 401){
+		        layer.msg(status);
+		    }
+        	console.info(data);
+        	var errMsg = "";
+        	if(JSON.stringify(data.error_messages.item_type)){
+        		errMsg = JSON.stringify(data.error_messages.item_type[0]);
+        	}else if(JSON.stringify(data.error_messages.item_id)){
+				errMsg = JSON.stringify(data.error_messages.item_id[0]);
+        	}
+        	layer.show(errMsg);
+        });
 	}
 
 	//评论
@@ -1261,8 +1324,9 @@ lvtuanApp.controller("knowledgeViewCtrl",function($scope,$http,$rootScope,$state
 						evaluate_comment 	: $scope.evaluate_comment,
 						item_id				: id
 					}).success(function(data, status, headers, config) {
-			        	var comment = data.data;
-			        	$scope.items.comments_count = comment.comments_count;
+			        	$scope.comment = data.data;
+			        	$scope.items.comments_count = $scope.comment.comments_count;
+			        	sessionStorage.setItem("comments_count", JSON.stringify($scope.items.comments_count));
 			           layer.show("评论成功！");
 			        }).error(function (data, status, headers, config) {
 			        	if(status == 401){
@@ -1280,6 +1344,69 @@ lvtuanApp.controller("knowledgeViewCtrl",function($scope,$http,$rootScope,$state
 	    });
 	}
 })
+//评论-详情
+lvtuanApp.controller("commentsViewCtrl",function($scope,$http,$rootScope,$stateParams,$ionicPopup,$ionicPopup,listHelper){
+	$scope.comments_count = JSON.parse(sessionStorage.getItem('comments_count'));
+	listHelper.bootstrap('/article/'+$stateParams.id+'/comment/list', $scope);
+	console.info('/article/'+$stateParams.id+'/comment/list');
+	//评论
+	$scope.comments = function(){
+		$scope.data = {}
+       // 自定义弹窗
+       var myPopup = $ionicPopup.show({
+       	template: '<textarea ng-model="data.evaluate_comment" name="evaluate_comment" rows="5" placeholder="想说些什么呢？..."></textarea>',
+         title: '评论',
+         scope: $scope,
+         buttons: [
+           { text: '取消' },
+           {
+             text: '<b>确认</b>',
+             type: 'button-positive',
+             onTap: function(e) {
+               if (!$scope.data.evaluate_comment) {
+                 layer.show("内容不能为空！");
+                 e.preventDefault();
+               }else if($scope.data.evaluate_comment.length > 140){
+                 layer.show("内容字数不能大于140字符！");
+                 e.preventDefault();
+               }else{
+                 return $scope.data.evaluate_comment;
+               }
+             }
+           },
+         ]
+       });
+       myPopup.then(function(res) {
+	        if(res != undefined){
+	        	$scope.evaluate_comment = res;
+		        $http.post('http://'+$rootScope.hostName+'/article/'+$stateParams.id+'/comment',
+					{
+						evaluate_comment 	: $scope.evaluate_comment,
+						item_id				: $stateParams.id
+					}).success(function(data, status, headers, config) {
+			        	$scope.comment = data.data;
+			        	$scope.items = $scope.items.concat($scope.comment);
+			        	$scope.comments_count = $scope.comment.comments_count;
+			        	sessionStorage.setItem("comments_count", JSON.stringify($scope.comment.comments_count));
+			           layer.show("评论成功！");
+			        }).error(function (data, status, headers, config) {
+			        	if(status == 401){
+				        	layer.msg(status);
+				        	return false;
+				        }
+			        	var errMsg = "";
+			        	if(JSON.stringify(data.error_messages.item_id)){
+			        		errMsg = JSON.stringify(data.error_messages.item_id[0]);
+			        	}
+			        	layer.show(errMsg);
+			        });
+	      	}else{
+	      		 myPopup.close(); // 关闭弹窗
+	      	}
+	    });
+	}
+})
+
 /****************************************************** 我的 ******************************************************/
 /*———————————————————————————— 用户的个人中心 ————————————————————————————*/
 //普通用户-我的

@@ -9,9 +9,9 @@
 		<ion-content class="web-body" style="margin-bottom:50px;">
 			<ion-list>
 	        	<ion-item class="item">
-	        		<h2 style="text-align:center"> {{items.title}}</h2>
+	        		<p class="contents"> <b>{{items.title}}</b></p>
 	        		<p class="web-paddingtb5" style="margin:0px;">
-				      <label class="lef">律团</label>
+				      <label class="lef">{{items.author.author_name}}</label>
 				      <label class="rig">{{items.created_at.date}}</label>
 				    </p>
 				    <img class="full-image" src="{{items.img}}" style="max-height:150px;">
@@ -21,12 +21,10 @@
 	    </ion-content>
 
 	    <div class="tabs tabs-color-positive">
-		  <p class="tab-item active" ng-click="graphic5(items.id,5)">图文咨询</p>  
-		  <p class="tab-item active" ng-click="graphic5(items.id,6)">电话咨询</p>
 		  	<div class="row">
 		  		<!-- 点击评论 -->
 			  <div class="col" style="border-right:1px solid #b2b2b2;text-align:center" ng-click="comments(items.id)">
-			  	<i class="icon ion-edit web-ion-img1-2" style="margin-right:10px;font-size: 1.4rem;"></i>
+			  	<i class="icon ion-edit web-ion-img1-2" style="margin-right:10px;font-size: 1.4rem;"></i>写评论
 			  </div>
 			  <div class="col col-66" style="text-align:right">
 			  	<i ng-click="likes(items.id)" class="icon ion-android-favorite-outline web-ion-img1-2" style="margin-right:10px;font-size:1.4rem;">
@@ -35,9 +33,9 @@
 			  	<i ng-click="collects(items.id)" class="icon ion-android-star-outline web-ion-img1-2" style="margin-right:10px;font-size:1.6rem;">
 			  		<label>{{items.collects_count}}</label>
 			  	</i>
-				<i class="icon ion-chatbox-working web-ion-img1-2" style="margin-right:10px;font-size:1.4rem;">
+				<a class="icon ion-chatbox-working web-ion-img1-2" style="margin-right:10px;font-size:1.4rem;" ng-href="#/comments/view/{{items.id}}">
 					<label class="positive">{{items.comments_count}}</label>
-				</i>
+				</a>
 			  </div>
 			</div>
 		</div>
