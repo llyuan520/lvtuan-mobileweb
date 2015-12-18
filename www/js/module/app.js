@@ -40,7 +40,10 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
   $rootScope.hostName = JSON.parse(localStorage.getItem('hostName'));
 
   $rootScope.region_id_user = JSON.parse(localStorage.getItem('currentUser'));
-  $rootScope.region_id = $rootScope.region_id_user.region_id;
+  if($rootScope.region_id_user){
+    $rootScope.region_id = $rootScope.region_id_user.region_id;
+  }
+  
 
   //回到首页
   $rootScope.goHome = function(){

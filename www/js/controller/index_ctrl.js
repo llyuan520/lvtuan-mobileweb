@@ -28,9 +28,11 @@ lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $loca
     $scope.currentUser = authService.getUser(); 
 
     self.getLocation = function() {
-		$scope.currentUser.city_id = '广东' //data.city_id;
-		$scope.currentUser.region_id = '深圳市' //data.region_id;
-		authService.saveUser($scope.currentUser);
+    	if($scope.currentUser){
+    		$scope.currentUser.city_id = '广东' //data.city_id;
+			$scope.currentUser.region_id = '深圳市' //data.region_id;
+			authService.saveUser($scope.currentUser);
+    	}
 
 	    // 配置wx接口
 	    $http.get("http://" + $rootScope.hostName + "/common/wxconfig"
@@ -1156,30 +1158,33 @@ lvtuanApp.controller("broadcastviewCtrl",function($scope,$http,$state,$rootScope
          ]
        });
        myPopup.then(function(res) {
-         $scope.comments = res;
-         console.info($scope.comments);
-         $http.post('http://'+$rootScope.hostName+'/microblog/'+id+'/comment/create',
-			{
-				content 	: $scope.comments,
-				post_id		: id
-			}).success(function(data) {
+	       	if(res != undefined){
+		         $scope.comments = res;
+		         $http.post('http://'+$rootScope.hostName+'/microblog/'+id+'/comment/create',
+					{
+						content 	: $scope.comments,
+						post_id		: id
+					}).success(function(data) {
 
-	        	console.info(data);
-	        	//var like = data.data;
-	        	//$scope.items.post_extra.likes_count = like.likes_count;
-	           layer.show("评论成功！");
-	        }).error(function (data, status) {
+			        	console.info(data);
+			        	//var like = data.data;
+			        	//$scope.items.post_extra.likes_count = like.likes_count;
+			           layer.show("评论成功！");
+			        }).error(function (data, status) {
 
-	        	console.info(data);
-	        	if(status == 401){
-		        	layer.msg(status);
-		        }
-	        	var errMsg = "";
-	        	if(JSON.stringify(data.error_messages.parent_id)){
-	        		errMsg = JSON.stringify(data.error_messages.parent_id[0]);
-	        	}
-	        	layer.show(errMsg);
-	        });
+			        	console.info(data);
+			        	if(status == 401){
+				        	layer.msg(status);
+				        }
+			        	var errMsg = "";
+			        	if(JSON.stringify(data.error_messages.parent_id)){
+			        		errMsg = JSON.stringify(data.error_messages.parent_id[0]);
+			        	}
+			        	layer.show(errMsg);
+			        });
+			}else{
+	      		 myPopup.close(); // 关闭弹窗
+	      	}        
 
        });
 	}
@@ -1203,7 +1208,7 @@ lvtuanApp.controller("casesCtrl",function($scope,$http,$rootScope,listHelper){
 })
 
 //文章-详情
-lvtuanApp.controller("knowledgeViewCtrl",function($scope,$http,$rootScope,$stateParams,$ionicPopup){
+lvtuanApp.controller("knowledgeViewCtrl",function($scope,$http,$rootScope,$stateParams,$ionicPopup,$ionicPopup,$timeout){
 	init();
 	//获取律师的个人信息
 	function init(){ 
@@ -1226,7 +1231,7 @@ lvtuanApp.controller("knowledgeViewCtrl",function($scope,$http,$rootScope,$state
 		$scope.data = {}
        // 自定义弹窗
        var myPopup = $ionicPopup.show({
-       	template: '<textarea ng-model="data.comments" name="comments" rows="5" placeholder="想说些什么呢？..."></textarea>',
+       	template: '<textarea ng-model="data.evaluate_comment" name="evaluate_comment" rows="5" placeholder="想说些什么呢？..."></textarea>',
          title: '评论',
          scope: $scope,
          buttons: [
@@ -1235,51 +1240,44 @@ lvtuanApp.controller("knowledgeViewCtrl",function($scope,$http,$rootScope,$state
              text: '<b>确认</b>',
              type: 'button-positive',
              onTap: function(e) {
-             	console.info($scope.data.comments);
-             	console.info($scope.data.comments.length);
-             	debugger
-               if (!$scope.data.comments) {
+               if (!$scope.data.evaluate_comment) {
                  layer.show("内容不能为空！");
                  e.preventDefault();
-               }else if($scope.data.comments.length > 140){
+               }else if($scope.data.evaluate_comment.length > 140){
                  layer.show("内容字数不能大于140字符！");
                  e.preventDefault();
                }else{
-                 return $scope.data.comments;
+                 return $scope.data.evaluate_comment;
                }
-
-              /* return $scope.data.comments;*/
              }
            },
          ]
        });
        myPopup.then(function(res) {
-         $scope.comments = res;
-         console.info($scope.comments);
-        /* $http.post('http://'+$rootScope.hostName+'/microblog/'+id+'/comment/create',
-			{
-				content 	: $scope.comments,
-				post_id		: id
-			}).success(function(data) {
-
-	        	console.info(data);
-	        	//var like = data.data;
-	        	//$scope.items.post_extra.likes_count = like.likes_count;
-	           layer.show("评论成功！");
-	        }).error(function (data, status) {
-
-	        	console.info(data);
-	        	if(status == 401){
-		        	layer.msg(status);
-		        }
-	        	var errMsg = "";
-	        	if(JSON.stringify(data.error_messages.parent_id)){
-	        		errMsg = JSON.stringify(data.error_messages.parent_id[0]);
-	        	}
-	        	layer.show(errMsg);
-	        });*/
-
-       });
+	        if(res != undefined){
+	        	$scope.evaluate_comment = res;
+		        $http.post('http://'+$rootScope.hostName+'/article/'+id+'/comment',
+					{
+						evaluate_comment 	: $scope.evaluate_comment,
+						item_id				: id
+					}).success(function(data, status, headers, config) {
+			        	var comment = data.data;
+			        	$scope.items.comments_count = comment.comments_count;
+			           layer.show("评论成功！");
+			        }).error(function (data, status, headers, config) {
+			        	if(status == 401){
+				        	layer.msg(status);
+				        }
+			        	var errMsg = "";
+			        	if(JSON.stringify(data.error_messages.item_id)){
+			        		errMsg = JSON.stringify(data.error_messages.item_id[0]);
+			        	}
+			        	layer.show(errMsg);
+			        });
+	      	}else{
+	      		 myPopup.close(); // 关闭弹窗
+	      	}
+	    });
 	}
 })
 /****************************************************** 我的 ******************************************************/
