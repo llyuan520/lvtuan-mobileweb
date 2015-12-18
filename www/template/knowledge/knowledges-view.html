@@ -4,8 +4,9 @@
 		<ion-header-bar class="bar bar-header bar-light">
 			<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" href="#/knowledge/knowledges"></a>
 			<h1 class="title">知识详情</h1>
+			<i class="button icon-right button-clear button-positive button-small ion-android-open"></i>
 		</ion-header-bar>
-		<ion-content class="web-body">
+		<ion-content class="web-body" style="margin-bottom:50px;">
 			<ion-list>
 	        	<ion-item class="item">
 	        		<h2 style="text-align:center"> {{items.title}}</h2>
@@ -18,5 +19,28 @@
 		        </ion-item>
 	         </ion-list>
 	    </ion-content>
+
+	    <div class="tabs tabs-color-positive">
+		  <p class="tab-item active" ng-click="graphic5(items.id,5)">图文咨询</p>  
+		  <p class="tab-item active" ng-click="graphic5(items.id,6)">电话咨询</p>
+		  	<div class="row">
+			  <div class="col" style="border-right:1px solid #b2b2b2" ng-click="comments(items.id)">
+			  	点击评论
+			  </div>
+			  <div class="col col-66" style="text-align:right">
+			  	<i ng-click="likes(items.id)" class="icon ion-chatbubble web-ion-img1-2" style="margin-right:10px;font-size:12px;">&nbsp;&nbsp;
+			  		<label>{{items.likes_count}}</label>
+			  	</i>
+			  	<i ng-click="collects(items.id)" class="icon ion-chatbubble web-ion-img1-2" style="margin-right:10px;font-size:12px;">&nbsp;&nbsp;
+			  		<label>{{items.collects_count}}</label>
+			  	</i>
+				<i class="icon ion-heart web-ion-img1-2" style="margin-right:10px;font-size:12px;color:#f00;">&nbsp;&nbsp;
+					<span style="color:#666666;">
+						<label>{{items.comments_count}}</label>
+					</span>
+				</i>
+			  </div>
+			</div>
+		</div>
 	</ion-pane>
 </ion-view>

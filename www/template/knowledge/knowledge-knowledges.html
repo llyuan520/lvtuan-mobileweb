@@ -1,13 +1,5 @@
 <ion-view view-title="knowledge-knowledges">
     <ion-content>
-   		<form id="search_form">
-			<div class="item item-input-inset web-body">
-				<div class="item-input-wrapper">
-			    	<input name="q" type="search" placeholder="搜索你想要的内容" class="search">
-			    	<i class="icon ion-search placeholder-icon" ng-click="search()"></i>
-				</div>
-			</div>
-		</form>
 		<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 		<ion-list>
         	<ion-item class="item item-thumbnail-left"  ng-repeat="item in items" ng-href="#/knowledgeview/{{item.id}}">

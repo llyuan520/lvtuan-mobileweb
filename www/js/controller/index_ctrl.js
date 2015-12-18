@@ -1190,35 +1190,20 @@ lvtuanApp.controller("broadcastviewCtrl",function($scope,$http,$state,$rootScope
 //知识
 lvtuanApp.controller("knowledgesCtrl",function($scope,$http,$rootScope,listHelper){
 	listHelper.bootstrap('/knowledge/list_knowledge', $scope);
-	$scope.search = function(){
-    	$scope.items = [];	//创建一个数组接收后台的数据
-    	var param = layer.getParams("#search_form");
-    	listHelper.bootstrap('/knowledge/list_knowledge?q='+param.q, $scope);
-    }
 })
 
 //知识-文库
 lvtuanApp.controller("documentsCtrl",function($scope,$http,$rootScope,listHelper){
 	listHelper.bootstrap('/knowledge/article/list_articles', $scope);
-	$scope.search = function(){
-    	$scope.items = [];	//创建一个数组接收后台的数据
-    	var param = layer.getParams("#search_form");
-    	listHelper.bootstrap('/knowledge/article/list_articles?q='+param.q, $scope);
-    }
 })
 
 //知识-案例
 lvtuanApp.controller("casesCtrl",function($scope,$http,$rootScope,listHelper){
 	listHelper.bootstrap('/case/list_case', $scope);
-	$scope.search = function(){
-    	$scope.items = [];	//创建一个数组接收后台的数据
-    	var param = layer.getParams("#search_form");
-    	listHelper.bootstrap('/knowledge/case/list_case?q='+param.q, $scope);
-    }
 })
 
 //文章-详情
-lvtuanApp.controller("knowledgeViewCtrl",function($scope,$http,$rootScope,$stateParams){
+lvtuanApp.controller("knowledgeViewCtrl",function($scope,$http,$rootScope,$stateParams,$ionicPopup){
 	init();
 	//获取律师的个人信息
 	function init(){ 
@@ -1233,6 +1218,68 @@ lvtuanApp.controller("knowledgeViewCtrl",function($scope,$http,$rootScope,$state
 		        	}
 		        console.info(JSON.stringify(data));
 		    })
+	}
+
+	//评论
+	$scope.comments = function(id){
+		$scope.id = id;
+		$scope.data = {}
+       // 自定义弹窗
+       var myPopup = $ionicPopup.show({
+       	template: '<textarea ng-model="data.comments" name="comments" rows="5" placeholder="想说些什么呢？..."></textarea>',
+         title: '评论',
+         scope: $scope,
+         buttons: [
+           { text: '取消' },
+           {
+             text: '<b>确认</b>',
+             type: 'button-positive',
+             onTap: function(e) {
+             	console.info($scope.data.comments);
+             	console.info($scope.data.comments.length);
+             	debugger
+               if (!$scope.data.comments) {
+                 layer.show("内容不能为空！");
+                 e.preventDefault();
+               }else if($scope.data.comments.length > 140){
+                 layer.show("内容字数不能大于140字符！");
+                 e.preventDefault();
+               }else{
+                 return $scope.data.comments;
+               }
+
+              /* return $scope.data.comments;*/
+             }
+           },
+         ]
+       });
+       myPopup.then(function(res) {
+         $scope.comments = res;
+         console.info($scope.comments);
+        /* $http.post('http://'+$rootScope.hostName+'/microblog/'+id+'/comment/create',
+			{
+				content 	: $scope.comments,
+				post_id		: id
+			}).success(function(data) {
+
+	        	console.info(data);
+	        	//var like = data.data;
+	        	//$scope.items.post_extra.likes_count = like.likes_count;
+	           layer.show("评论成功！");
+	        }).error(function (data, status) {
+
+	        	console.info(data);
+	        	if(status == 401){
+		        	layer.msg(status);
+		        }
+	        	var errMsg = "";
+	        	if(JSON.stringify(data.error_messages.parent_id)){
+	        		errMsg = JSON.stringify(data.error_messages.parent_id[0]);
+	        	}
+	        	layer.show(errMsg);
+	        });*/
+
+       });
 	}
 })
 /****************************************************** 我的 ******************************************************/
