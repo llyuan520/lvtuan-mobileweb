@@ -64,7 +64,7 @@ httpModule.factory('APIInterceptor', ['$log', '$q', '$rootScope', 'authService',
 				|| config.url.indexOf(HOST + '/microblog') > -1) {
         		var canceller = $q.defer();
 				if (!authService.isAuthed()) {
-					$rootScope.$broadcast('unauthorized');
+					$rootScope.$broadcast('unauthenticated');
 					config.timeout = canceller.promise;
 
 		            // Cancel the request
@@ -74,7 +74,7 @@ httpModule.factory('APIInterceptor', ['$log', '$q', '$rootScope', 'authService',
 						|| config.url.indexOf(HOST + '/microblog') > -1) {
 						// 动态和圈子一定要律师才可以访问
 						user = authService.getUser();
-						if (user.user_group_id === 1 || !user.is_verified) {
+						if (!user.is_verified_lawyer) {
 							$rootScope.$broadcast('unauthorized');
 						}
 					}
@@ -111,12 +111,33 @@ httpModule.factory('APIInterceptor', ['$log', '$q', '$rootScope', 'authService',
 
 	    // optional method
 	   'responseError': function(response) {
-	      if (response.status == 401) {
-	        $rootScope.$broadcast('unauthorized');
-	      }
-	      $rootScope.hide();
-	      // do something on error
-	      return $q.reject(response);
+		    switch(response.status) {
+		      	case 401:
+		      	case 403:
+	        		$rootScope.$broadcast('unauthorized');
+	        		break;
+	        	case 400:
+					angular.forEach(response.data.error_messages,function(val,key){
+						if (angular.isArray(val)) {
+							layer.show(val.join(', '));
+						} else {
+							layer.show(val);
+						}
+					});
+	        		break;
+	        	case 405:
+	        		layer.show("提交数据的方法错误");
+	        		break;
+	        	case 503:
+	        	case 500:
+	        		layer.show("暂时无法处理您的请求，请稍后再试。");
+	        		break;
+	        }
+		    console.info(response);
+
+			$rootScope.hide();
+			// do something on error
+			return $q.reject(response);
 	    }
     };
 

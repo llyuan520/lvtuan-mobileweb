@@ -20,6 +20,11 @@ function authService($window) {
 	}
 
 	self.saveUser = function(user) {
+		if (user.user_group_id == 2 && user.is_verified == 1) {
+			user.is_verified_lawyer = true;
+		} else {
+			user.is_verified_lawyer = false;
+		}
 		localStorage.setItem('currentUser', JSON.stringify(user));
 	}
 
