@@ -11,18 +11,17 @@
 				    <div class="item item-thumbnail-left item-icon-right" >
 				      <img ng-src="{{items.user.avatar}}">
 				      <h2 class="web-top10">
-				      		<a ng-if="currentUser.user_group_id == 1 || currentUser.user_group_id == 2 && currentUser.is_verified == 0" ng-href="#/info">{{items.user.realname}}</a>
-				      		<a ng-if="currentUser.user_group_id == 2 && currentUser.is_verified == 1" ng-href="#/becomelawyer">{{items.user.realname}} <span class="web-font14">律师</span></a>
+				      		<a ng-if="!currentUser.is_verified_lawyer" ng-href="#/info">{{items.user.realname}}</a>
+				      		<a ng-if="currentUser.is_verified_lawyer" ng-href="#/becomelawyer">{{items.user.realname}} <span class="web-font14">律师</span></a>
 				      </h2>
 				      <a ng-href="#/messages">
 					      <icon  class="icon ion-ios-email-outline positive" style="font-size: 42px;"></icon>
 					  </a>
-
 				      <p  class="web-top5" >{{items.user.phone}}</p>
 				    </div>
 				</div>
 				
-				<div ng-if="currentUser.user_group_id == 1 || currentUser.user_group_id == 2 && currentUser.is_verified == 0" class="list">
+				<div ng-if="!currentUser.is_verified_lawyer" class="list">
 					  <a class="item" ng-href="#/orderuser">
 					    我的订单
 					    <i class="icon ion-chevron-right"></i>
@@ -35,7 +34,7 @@
 					    我的钱包
 					    <i class="icon ion-chevron-right"></i>
 					  </a>
-					  <a class="item" ng-if="currentUser.user_group_id == 1 && currentUser.is_verified == 0" ng-href="#/becomelawyer">
+					  <a class="item" ng-if="currentUser.user_group_id == 1" ng-href="#/becomelawyer">
 					    认证律师
 					    <i class="icon ion-chevron-right"></i>
 					  </a>
@@ -69,7 +68,7 @@
 					  </a>
 				</div>
 
-				<div ng-if="currentUser.user_group_id == 2 && currentUser.is_verified == 1" class="list">
+				<div ng-if="currentUser.is_verified_lawyer" class="list">
 					  <a class="item" ng-href="#/orderlawyer">
 					    我的订单
 					    <i class="icon ion-chevron-right"></i>
@@ -112,8 +111,6 @@
 					    <i class="icon ion-chevron-right"></i>
 					  </a>
 				</div>
-
-
 				<div style="width:100%;height:50px;clear:both;"></div>
 			</ion-content>
 		</ion-pane>

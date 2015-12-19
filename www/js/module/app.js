@@ -60,12 +60,15 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
 
             // 如果用户没有登录
             if (!authService.isAuthed()) {
-                $rootScope.$broadcast('unauthenticated');  
+                $rootScope.$broadcast('unauthenticated');
+                event.preventDefault(); 
             } else {
                 // 如果用户没有登录
                 currentUser = authService.getUser();
                 if (toState.authz && toState.authz == 'lawyer' && !currentUser.is_verified_lawyer) {
                     $rootScope.$broadcast('unauthorized');
+                    $state.transitionTo("login");
+                    event.preventDefault();
                 }
             }
         }
@@ -74,13 +77,15 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
     $rootScope.$on('unauthorized', function() {
         layer.show('您没有权限访问这个链接！');
         $location.path('/login');
+        $state.transitionTo("login");
         /*$window.location.href = '/login';*/
         //window.location.reload();
     });
 
     $rootScope.$on('unauthenticated', function() {
         layer.show('请先登录！');
-        $location.path('/login');
+        // $location.path('/login');
+        $state.transitionTo("login");
         /*$window.location.href = '/login';*/
         //window.location.reload();
     });

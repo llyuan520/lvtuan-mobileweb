@@ -70,7 +70,7 @@ lvtuanApp.controller("HeaderController",function($scope,$location){
     console.log('HomeTabCtrl');
 })
 
-//设置是否显示底部导航
+// 如果想在ion-view中隐藏底部导航，则加入show-tabs，例如：<ion-view hide-tabs view-title="首页">
 lvtuanApp.directive('hideTabs', function($rootScope) {
   return {
       restrict: 'A',
@@ -83,17 +83,18 @@ lvtuanApp.directive('hideTabs', function($rootScope) {
   };
 });
 
-/*lvtuanApp.directive('showTabs', function($rootScope) {
+// 如果想在ion-view中显示底部导航，则加入show-tabs，例如：<ion-view show-tabs view-title="首页">
+lvtuanApp.directive('showTabs', function($rootScope) {
   return {
       restrict: 'AE',
       link: function($scope, $el) {
-          $rootScope.showTabs = '';
+          $rootScope.hideTabs = '';
           $scope.$on('$destroy', function() {
               $rootScope.hideTabs = 'tabs-item-hide';
           });
       }
   };
-});*/
+});
 
 lvtuanApp.directive('star', function () {
   return {
@@ -1204,7 +1205,7 @@ lvtuanApp.controller("centerCtrl",function($scope,$http,$rootScope,$ionicPopup,$
 
 	var currentUser = authService.getUser();
 	$scope.currentUser = currentUser;
-	if(currentUser.user_group_id == 1 || currentUser.user_group_id == 2 && currentUser.is_verified == 0){
+	if(!currentUser.is_verified_lawyer){
 		//普通用户个人信息
 		$http.get('http://'+$rootScope.hostName+'/center/customer/info')
 		.success(function(data) {
