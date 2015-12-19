@@ -2115,10 +2115,12 @@ lvtuanApp.controller("viewCtrl",function($scope,$http,$rootScope,$stateParams,ht
         }, {
             title: '文章',
             url: 'article.tpl.html'
-        }, {
-            title: '广播',
-            url: 'televise.tpl.html'
-    }];
+        }
+        //, {
+        //    title: '广播',
+        //    url: 'televise.tpl.html'
+    	// }
+    ];
 
     $scope.currentTab = 'selfintro.tpl.html'; //默认第一次显示的tpl
 
