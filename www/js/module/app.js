@@ -107,7 +107,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
     })
     .state('index', { //首页
       url: '/index',
-      cache: 'true', 
+      /*cache: 'true', */
       templateUrl: 'template/index_tpl.html',
       controller: 'indexCtrl'
     })

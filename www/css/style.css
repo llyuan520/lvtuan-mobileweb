@@ -523,53 +523,45 @@ img.avatar{border-radius: 50%;border:2px solid #fff;}
 }
 
 
+/*其它分辨率支持*/
+.slct-title>select{width: 24%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;margin-right: 1%;}
+.index .list .row,.index .list .row .col{padding: 0;}
 
-/* 兼容iphone4c -- */
-@media only screen and (max-device-width :480px){ 
-	.slide1 .slider,.slide1 .slider-slide img{height: 130px;}
-	.st2-swap,.st2-swap .listimg,.slide2 .slider-slide img{height: 140px;}
-	.st2-swap .listimg .top, .st2-swap .listimg .left, .st2-swap .listimg .right,.st2-swap .listimg .top img, .st2-swap .listimg .left img, .st2-swap .listimg .right img{height: 70px;}
+/*4-4s*/
+@media only screen and (min-device-width: 320px) and (min-device-height :480px){ 
+	.slide1 .slider,.slide1 .slider-slide img{height: 120px;}
+
+	.index .list.list1{text-align:center;margin-bottom:10px;background-color: #FFFFFF;color:#333;border-top: 1px solid #333;}
+	.index .list.list1 .row.padding1{padding: 2% 0;}
+	.index .list.list1 .row.padding2{padding:0 20% 2% 20%;}
+	.index .list.list2 .row .col.padding3{padding: 10% 0;text-align:center;margin-bottom:0;background-color: #FFFFFF;color:#333}
 }
+/*5-5s*/
+@media only screen and (min-device-width: 320px) and (min-device-height :568px){ 
+	.slide1 .slider,.slide1 .slider-slide img{height: 140px;}
 
-/*魅族 --*/
-@media only screen and (min-device-width :481px){ 
-	.slide1 .slider,.slide1 .slider-slide img{height: 150px;}
-	.st2-swap,.st2-swap .listimg,.slide2 .slider-slide img{height: 140px;}
-	.st2-swap .listimg .top, .st2-swap .listimg .left, .st2-swap .listimg .right,.st2-swap .listimg .top img, .st2-swap .listimg .left img, .st2-swap .listimg .right img{height: 70px;}
-  
+	.index .list.list1{text-align:center;margin-bottom:10px;background-color: #FFFFFF;color:#333;border-top: 1px solid #333;}
+	.index .list.list1 .row.padding1{padding: 3% 0;}
+	.index .list.list1 .row.padding2{padding:0 20% 3% 20%;}
+	.index .list.list2 .row .col.padding3{padding: 12% 0;text-align:center;margin-bottom:0;background-color: #FFFFFF;color:#333}
 }
-
-/*华为 --*/
-@media only screen and (min-device-width :1080px) and (-webkit-min-device-pixel-ratio : 2.5){
-	.slide1 .slider,.slide1 .slider-slide img{height: 250px;}
-	.st2-swap,.st2-swap .listimg,.slide2 .slider-slide img{height: 140px;}
-	.st2-swap .listimg .top, .st2-swap .listimg .left, .st2-swap .listimg .right,.st2-swap .listimg .top img, .st2-swap .listimg .left img, .st2-swap .listimg .right img{height: 70px;}
-  
- }
-
-
-/* 兼容iphone5 -- */
-@media (device-height:568px) and (-webkit-min-device-pixel-ratio:2){
-	.slide1 .slider,.slide1 .slider-slide img{height: 180px;}
-}
-/*兼容iphone6 --*/
-@media (min-device-width : 375px) and (max-device-width : 667px) and (-webkit-min-device-pixel-ratio : 2){
-	.slide1 .slider,.slide1 .slider-slide img{height: 220px;}
- }
-
-/*6+*/
-@media (min-device-width : 414px) and (max-device-width : 736px) and (-webkit-min-device-pixel-ratio : 3){ 
-	.slide1 .slider,.slide1 .slider-slide img{height: 280px;}
-}
-
-/*mate7*/
-@media only screen and (min-device-width :1080px) and (-webkit-min-device-pixel-ratio : 3){
+/*6*/
+@media only screen and (min-device-width: 375px) and (min-device-height :557px){ 
 	.slide1 .slider,.slide1 .slider-slide img{height: 200px;}
- }
 
-/*4 4s*/
-@media only screen and (device-height :480px) and (-webkit-device-pixel-ratio:2){ 
-	.slide1 .slider,.slide1 .slider-slide img{height: 130px;}
+	.index .list.list1{text-align:center;margin-bottom:10px;background-color: #FFFFFF;color:#333;border-top: 1px solid #333;}
+	.index .list.list1 .row.padding1{padding: 4% 0;}
+	.index .list.list1 .row.padding2{padding:0 20% 4% 20%;}
+	.index .list.list2 .row .col.padding3{padding: 14% 0;text-align:center;margin-bottom:0;background-color: #FFFFFF;color:#333}
+}
+/*6 plus*/
+@media only screen and (min-device-width: 414px) and (min-device-height :736px){ 
+	.slide1 .slider,.slide1 .slider-slide img{height: 220px;}
+
+	.index .list.list1{text-align:center;margin-bottom:10px;background-color: #FFFFFF;color:#333;border-top: 1px solid #333;}
+	.index .list.list1 .row.padding1{padding: 6% 0;}
+	.index .list.list1 .row.padding2{padding:0 20% 6% 20%;}
+	.index .list.list2 .row .col.padding3{padding: 16% 0;text-align:center;margin-bottom:0;background-color: #FFFFFF;color:#333}
 }
 
 

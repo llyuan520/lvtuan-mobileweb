@@ -1,11 +1,11 @@
 <ion-view show-tabs view-title="首页">
 	<ion-nav-bar>
   	</ion-nav-bar>
-	<ion-nav-title>律团</ion-nav-title>
+	<ion-nav-title style="color: #32a9f2;">律团</ion-nav-title>
 	<ion-nav-buttons side="right">
-		<a ng-href="#/citypicker" class="button button-icon">
+		<a ng-href="#/citypicker" class="button-clear">
 			{{region_id}}
-			<ion class="ion-ios-location-outline" style="font-size: 32px;"></ion>
+			<ion class="ion-ios-location-outline" style="font-size: 32px; vertical-align: text-bottom;"></ion>
 		</a>
 	</ion-nav-buttons>
 	<!-- <ion-nav-buttons ng-model="currentUser.user_group_id" side="right" >
@@ -13,7 +13,7 @@
 			<img ng-src="../img/13.png"/>
 		</a>
 	</ion-nav-buttons> -->
-	<ion-content>
+	<ion-content class="index">
 		<div class="slide1">
 			<ion-slide-box active-slide="myActiveSlide1" does-continue="true" show-pager="true" slide-interval="3000" auto-play="true"  active-slide="index">
 		        <ion-slide>
@@ -28,32 +28,46 @@
 			</ion-slide-box>
 		</div>
 
-		<div class="list" style="text-align:center;margin-bottom:10px;">
-			<div class="row">
+		<div class="list list1">
+			<div class="row padding1">
 				<div class="col">
-					<a class="col" style="padding: 10px;background-color: #FFFFFF;color:#333" ng-href="#/questions">
-				  	 	<img ng-src="img/mfzx.png" style="width:50px;height:50px;" /><br/>
-				  	    免费咨询
-				    </a>
+				  	<img ng-src="img/mfzx.png" style="width:30%;height:30%;margin-top: 2%;" />
 				</div>
-				<div class="col">
-					<a class="col" style="padding: 10px;background-color: #FFFFFF;color:#333" ng-href="#/lawyerlist">
-				  	 	<img ng-src="img/zyzx.png" style="width:50px;height:50px;" /><br/>
-				  	    专业咨询
-				    </a>
+				<div class="col" style="text-align: left;line-height: 25px;">
+					<b style="font-size:16px">免费咨询</b><br>
+					<font style="font-size:14px">24小时有问必答</font>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row padding2">
 				<div class="col">
-					<a class="col" style="padding: 10px;background-color: #FFFFFF;color:#333" ng-href="#/document/list">
-				  	 	<img ng-src="img/flws.png" style="width:50px;height:50px;" /><br/>
-				  	    法律文书
+				  	<a class="button button-block" ng-href="#/questions" style="border-color:#32a9f2;background-color:#32a9f2;color:#fff;min-height: 27px;line-height: 31px;margin-bottom: 0;margin-top:0;">
+					  立即咨询
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="list list2">
+			<div class="row">
+				<div class="col" style="margin-right:10px;">
+					<a class="col padding3" ng-href="#/lawyerlist">
+				  	 	<img ng-src="img/zyzx.png" style="width:40%;height:40%;" /><br/>
+				  	    <b>专业咨询</b><br>
+						<font style="font-size:10px;">一对一付费服务</font>
+				    </a>
+				</div>
+				<div class="col" style="margin-right:10px;">
+					<a class="col padding3" ng-href="#/document/list">
+				  	 	<img ng-src="img/flws.png" style="width:40%;height:40%;" /><br/>
+				  	    <b>法律文书</b><br>
+						<font style="font-size:10px;">海量文书免费下载</font>
 				    </a>
 				</div>
 				<div class="col">
-					<a class="col" style="padding: 10px;background-color: #FFFFFF;color:#333" ng-href="#/corporate">
-				  	 	<img ng-src="img/xwqf.png" style="width:50px;height:50px;" /><br/>
-				  	    小微企服
+					<a class="col padding3" ng-href="#/corporate">
+				  	 	<img ng-src="img/xwqf.png" style="width:40%;height:40%;" /><br/>
+				  	    <b>法律顾问</b><br>
+						<font style="font-size:10px;">为您企业保驾护航</font>
 				    </a>
 				</div>
 			</div>
