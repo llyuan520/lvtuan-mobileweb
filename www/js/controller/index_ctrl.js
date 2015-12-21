@@ -22,56 +22,11 @@ lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $loca
     $scope.currentUser = authService.getUser();
 
     currentLocation = locationService.getLocation();
-    if (!currentLocation) {
-    	currentLocation = locationService.fetchLocation();
+    if (!currentLocation || !currentLocation.city_name) {
+    	locationService.fetchLocation($scope);
+    } else {
+        $scope.currentLocation = currentLocation;
     }
-    if (!currentLocation) {
-    	currentLocation = locationService.getDefaultLocation();
-    }
-
-    $scope.currentLocation = currentLocation;
-    alert(currentLocation.city_name);
-
-   //  self.getLocation = function() {
-   //  	if($scope.currentUser){
-   //  		$scope.currentUser.city_id = '440300';
-			// $scope.currentUser.city_name = '深圳市';
-			// authService.saveUser($scope.currentUser);
-   //  	}
-
-	  //   // 配置wx接口
-	  //   $http.get("http://" + $rootScope.hostName + "/common/wxconfig"
-	  //   ).success(function(data) {
-	  //   	if (data) {
-		 //    	data.debug = false;
-		 //    	wx.config(data);
-		 //    }
-	  //   });
-
-   //  	wx.ready(function () {
-		 //    wx.getLocation({
-		 //    	success: function (res) {
-			// 		$http.get("http://" + $rootScope.hostName + "/common/addressCode/" + res.latitude + "," + res.longitude)
-			// 		.success(function(data) {
-			// 			if (data) {
-			// 				$scope.currentUser.province_id = data.province_id;
-			// 				$scope.currentUser.city_id = data.city_id;
-			// 				$scope.currentUser.district_id = data.district_id;
-			// 				$scope.currentUser.province_name = data.province_name;
-			// 				$scope.currentUser.city_name = data.city_name;
-			// 				$scope.currentUser.district_name = data.district_name;
-			// 				authService.saveUser($scope.currentUser);
-			// 			}
-			// 		});
-	  //     		},
-		 //        cancel: function (res) {
-		 //        	alert('用户拒绝授权获取地理位置');
-		 //        }
-	  //   	});
-   //  	});
-   //  }
-
-   //  self.getLocation();
 
 })
 
