@@ -12,7 +12,7 @@ function locationService($http) {
 	    $http.get("http://" + AppSettings.baseApiUrl + "/common/wxconfig"
 	    ).success(function(data) {
 	    	if (data) {
-		    	data.debug = true;
+		    	data.debug = false;
 		    	wx.config(data);
 		    }
 	    });
