@@ -43,8 +43,9 @@ lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $loca
 					$http.get("http://" + $rootScope.hostName + "/common/addressCode/" + res.latitude + "," + res.longitude)
 					.success(function(data) {
 						if (data) {
+							$scope.currentUser.district_id = data.district_id;
 							$scope.currentUser.city_id = data.city_id;
-							$scope.currentUser.region_id = data.region_id;
+							$scope.currentUser.province_id = data.province_id;
 							authService.saveUser($scope.currentUser);
 						}
 					});
