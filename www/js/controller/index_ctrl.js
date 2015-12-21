@@ -23,8 +23,9 @@ lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $loca
 
     self.getLocation = function() {
     	if($scope.currentUser){
-    		$scope.currentUser.city_id = '广东' //data.city_id;
-			$scope.currentUser.region_id = '深圳市' //data.region_id;
+    		$scope.currentUser.city_id = '深圳市';
+			$scope.currentUser.province_id = '广东省';
+			$scope.currentUser.district_id = '福田区';
 			authService.saveUser($scope.currentUser);
     	}
 
