@@ -39,15 +39,15 @@
 						<div class="item item-divider">
 					          {{key}}
 					    </div>
-				        <div class="item" ng-repeat="(key, value) in value" ng-click="province(key,value)">
-				            {{key}}
+				        <div class="item" ng-repeat="(key, value) in value" ng-click="province(value)">
+				            {{value.value}}
 				        </div>
 					</div>
 				</div>
 				<div class="cities">
 					<div class="list">
-				        <div class="item" ng-repeat="(key, value) in cities" ng-click="citie(value)">
-				            {{value}}
+				        <div class="item" ng-repeat="(key, value) in citys" ng-click="citie(value)">
+				            {{value.value}}
 				        </div>
 					</div>
 				</div>

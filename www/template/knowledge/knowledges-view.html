@@ -26,7 +26,7 @@
 	    </ion-content>
 
 	    <div class="tabs tabs-color-positive">
-		  	<div class="row">
+		  	<div class="row" style="line-height: 28px;">
 		  		<!-- 点击评论 -->
 			  <div class="col" style="border-right:1px solid #b2b2b2;text-align:center" ng-click="comments(items.id)">
 			  	<i class="icon ion-edit web-ion-img1-2" style="margin-right:10px;font-size: 1.4rem;"></i>写评论
@@ -35,11 +35,11 @@
 			  	<i ng-click="likes(items.id)" class="icon ion-android-favorite-outline web-ion-img1-2" style="margin-right:10px;font-size:1.4rem;">
 			  		<label>{{items.likes_count}}</label>
 			  	</i>
-			  	<i ng-click="collects(items.id)" class="icon ion-android-star-outline web-ion-img1-2" style="margin-right:10px;font-size:1.6rem;">
+			  	<i ng-click="collects(items.id,items.is_collect)" class="icon ion-android-star-outline web-ion-img1-2" style="margin-right:10px;font-size:1.6rem;">
 			  		<label>{{items.collects_count}}</label>
 			  	</i>
-				<a class="icon ion-chatbox-working web-ion-img1-2" style="margin-right:10px;font-size:1.4rem;" ng-href="#/comments/view/{{items.id}}">
-					<label class="positive">{{items.comments_count}}</label>
+				<a class="icon ion-chatbox-working web-ion-img1-2" style="margin-right:10px;font-size:1.4rem;color:#444;" ng-href="#/comments/view/{{items.id}}">
+					<label>{{items.comments_count}}</label>
 				</a>
 			  </div>
 			</div>
