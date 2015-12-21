@@ -3751,7 +3751,7 @@ lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$statePa
 	var currentUser = authService.getUser();
 	var params = null;
 
-	self.jsApiCall = function()
+	self.jsApiCall = function(user)
 	{
 		if (currentUser.wx_openid) {
 			$http.get('http://'+$rootScope.hostName+'/payment/jsapiparams/'+currentUser.wx_openid,{
@@ -3764,7 +3764,22 @@ lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$statePa
 						self.params,
 						function(res){
 							WeixinJSBridge.log(res.err_msg);
-							alert(res.err_code+res.err_desc+res.err_msg);
+							switch(res.err_msg) {
+								case "get_brand_wcpay_request:ok":
+									$http.post('http://'+$rootScope.hostName+'/wallet/recharge',user)
+									.success(function(data) {
+									};
+									location.href='#/user/wallet';
+								    window.location.reload();
+									break;
+								case "get_brand_wcpay_request:fail":
+									layer.show("充值失败，请稍候再试。");
+									break;
+								case "get_brand_wcpay_request:cancel":
+									layer.show("您已取消充值。");
+									$state.go("user/wallet");
+									break;
+							}
 						}
 					);
 				}
@@ -3774,14 +3789,14 @@ lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$statePa
 		}
 	}
 
-	self.callpay = function()
+	self.callpay = function(user)
 	{
 		if (typeof WeixinJSBridge == "undefined"){
 		    if( document.addEventListener ){
-		        document.addEventListener('WeixinJSBridgeReady', self.jsApiCall(), false);
+		        document.addEventListener('WeixinJSBridgeReady', self.jsApiCall(user), false);
 		    }else if (document.attachEvent){
-		        document.attachEvent('WeixinJSBridgeReady', self.jsApiCall()); 
-		        document.attachEvent('onWeixinJSBridgeReady', self.jsApiCall());
+		        document.attachEvent('WeixinJSBridgeReady', self.jsApiCall(user)); 
+		        document.attachEvent('onWeixinJSBridgeReady', self.jsApiCall(user));
 		    }
 		}else{
 		    self.jsApiCall();
@@ -3789,7 +3804,7 @@ lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$statePa
 	}
 
 	$scope.submit = function(user){
-		self.callpay();
+		self.callpay(user);
 	}
 })
 
