@@ -32,7 +32,7 @@ lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $loca
 	    $http.get("http://" + $rootScope.hostName + "/common/wxconfig"
 	    ).success(function(data) {
 	    	if (data) {
-		    	data.debug = true;
+		    	data.debug = false;
 		    	wx.config(data);
 		    }
 	    });
