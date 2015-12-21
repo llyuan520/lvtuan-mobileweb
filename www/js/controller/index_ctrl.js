@@ -1,7 +1,7 @@
-var lvtuanApp = angular.module('lvtuanApp.Ctrl', ['ionic','ngSanitize','ngFileUpload','listModule','authModule','wxModule'])
+var lvtuanApp = angular.module('lvtuanApp.Ctrl', ['ionic','ngSanitize','ngFileUpload','listModule','authModule','wxModule','locationModule'])
 lvtuanApp.constant("HOST", AppSettings.baseApiUrl)
 
-lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $location, userService, authService, $http){
+lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $location, userService, authService, $http, locationService){
 	var self = this;
 
 	self.login = function() {
@@ -19,44 +19,58 @@ lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $loca
 	}
 
 
-    $scope.currentUser = authService.getUser(); 
+    $scope.currentUser = authService.getUser();
 
-    self.getLocation = function() {
-    	if($scope.currentUser){
-    		$scope.currentUser.city_id = '广东' //data.city_id;
-			$scope.currentUser.region_id = '深圳市' //data.region_id;
-			authService.saveUser($scope.currentUser);
-    	}
-
-	    // 配置wx接口
-	    $http.get("http://" + $rootScope.hostName + "/common/wxconfig"
-	    ).success(function(data) {
-	    	if (data) {
-		    	data.debug = false;
-		    	wx.config(data);
-		    }
-	    });
-
-    	wx.ready(function () {
-		    wx.getLocation({
-		    	success: function (res) {
-					$http.get("http://" + $rootScope.hostName + "/common/addressCode/" + res.latitude + "," + res.longitude)
-					.success(function(data) {
-						if (data) {
-							$scope.currentUser.city_id = data.city_id;
-							$scope.currentUser.region_id = data.region_id;
-							authService.saveUser($scope.currentUser);
-						}
-					});
-	      		},
-		        cancel: function (res) {
-		        	alert('用户拒绝授权获取地理位置');
-		        }
-	    	});
-    	});
+    currentLocation = locationService.getLocation();
+    if (!currentLocation) {
+    	currentLocation = locationService.fetchLocation();
+    }
+    if (!currentLocation) {
+    	currentLocation = locationService.getDefaultLocation();
     }
 
-    self.getLocation();
+    $scope.currentLocation = currentLocation;
+
+   //  self.getLocation = function() {
+   //  	if($scope.currentUser){
+   //  		$scope.currentUser.city_id = '440300';
+			// $scope.currentUser.city_name = '深圳市';
+			// authService.saveUser($scope.currentUser);
+   //  	}
+
+	  //   // 配置wx接口
+	  //   $http.get("http://" + $rootScope.hostName + "/common/wxconfig"
+	  //   ).success(function(data) {
+	  //   	if (data) {
+		 //    	data.debug = false;
+		 //    	wx.config(data);
+		 //    }
+	  //   });
+
+   //  	wx.ready(function () {
+		 //    wx.getLocation({
+		 //    	success: function (res) {
+			// 		$http.get("http://" + $rootScope.hostName + "/common/addressCode/" + res.latitude + "," + res.longitude)
+			// 		.success(function(data) {
+			// 			if (data) {
+			// 				$scope.currentUser.province_id = data.province_id;
+			// 				$scope.currentUser.city_id = data.city_id;
+			// 				$scope.currentUser.district_id = data.district_id;
+			// 				$scope.currentUser.province_name = data.province_name;
+			// 				$scope.currentUser.city_name = data.city_name;
+			// 				$scope.currentUser.district_name = data.district_name;
+			// 				authService.saveUser($scope.currentUser);
+			// 			}
+			// 		});
+	  //     		},
+		 //        cancel: function (res) {
+		 //        	alert('用户拒绝授权获取地理位置');
+		 //        }
+	  //   	});
+   //  	});
+   //  }
+
+   //  self.getLocation();
 
 })
 
@@ -3955,11 +3969,11 @@ lvtuanApp.controller("citypickerCtrl",function($http,$location,$scope,$rootScope
 		console.info(val);
 		$scope.items = {
 			'city_id' : val.key,
-			'region_id' : val.value
+			'city_name' : val.value
 		}
 		localStorage.setItem("citypicker", JSON.stringify($scope.items));
 		$scope.citypicker = JSON.parse(localStorage.getItem('citypicker'));
-		$rootScope.region_id = $scope.citypicker.region_id;
+		$rootScope.city_name = $scope.citypicker.city_name;
 		$rootScope.city_id = $scope.citypicker.city_id;
 		console.info($rootScope.city_id);
 

@@ -39,19 +39,13 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
   localStorage.setItem("hostName", JSON.stringify(hostName));
   $rootScope.hostName = JSON.parse(localStorage.getItem('hostName'));
 
-  $rootScope.region_id_user = JSON.parse(localStorage.getItem('currentUser'));
-  if($rootScope.region_id_user){
-    $rootScope.region_id = $rootScope.region_id_user.region_id;
-  }
-  
-
   //回到首页
   $rootScope.goHome = function(){
     layer.goHome();
   }
 
 }])
-.run(function($rootScope, $location, $state, authService) {
+.run(function($rootScope, $location, $state, authService, locationService) {
 
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
 
