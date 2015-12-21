@@ -30,6 +30,7 @@ lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $loca
     }
 
     $scope.currentLocation = currentLocation;
+    alert(currentLocation.city_name);
 
    //  self.getLocation = function() {
    //  	if($scope.currentUser){
