@@ -6,10 +6,7 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <meta name="format-detection" content="telephone=no"/>
     <link href="/lib/ionic/css/ionic.css" rel="stylesheet">
-    <link href="/css/style.css" rel="stylesheet">
-    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
-    <link href="css/ionic.app.css" rel="stylesheet">
-    -->
+    <!-- <link href="/css/style.css" rel="stylesheet"> -->
     <link rel="stylesheet" href="lib/js/web-im-1.0.7.2/css/bootstrap.css" />
     <link rel="stylesheet" href="lib/js/web-im-1.0.7.2/css/webim.css" />
 
@@ -77,12 +74,12 @@
 
                         <!-- 聊天页面 -->
                         <div class="chatRight">
-                            <div id="chat01">
+                            <div id="chat01" class="chats">
                                 <div class="chat01_title">
                                     <a href="javascript:window.close()"><div id="recycle"></div></a>
                                 </div>
                                 <!-- <div id="null-nouser" class="chat01_content"></div> -->
-                                <div id="{{user_name}}-{{easemoParam.curChatUserId}}" calss="chat00_content" classname="chat00_content" style="height:205px;width:100%;    overflow-y: scroll;padding: 20px;display:block;">
+                                <div id="{{user_name}}-{{easemoParam.curChatUserId}}" class="chat00_content" classname="chat00_content">
 
                                     <div style="text-align: center"><a href="javascript:void(0)" id="comments-list" style="text-align: center">查看更多</a></div>
                                     <div id="page" class="loading" style="display: none">加载中...</div>

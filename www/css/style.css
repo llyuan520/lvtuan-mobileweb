@@ -16,7 +16,6 @@ body,
 }
 .scroll-content{
 	background-color: #EEEEEE;
-	/*margin-bottom: 50px;*/
 }
 .fc-33{
 	color: #333333;
@@ -301,8 +300,12 @@ img.avatar{border-radius: 50%;border:2px solid #fff;}
 
 
 .scroll{
-	background-color: #eeeeee
+	background-color: #eeeeee;
 }
+.scroll .item-thumbnail-left {
+	padding-top: 25px;
+}
+
 .list-lawyerinfo{
 	margin: 0px;
 	padding: 0px;
