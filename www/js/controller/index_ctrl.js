@@ -3768,7 +3768,7 @@ lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$statePa
 								case "get_brand_wcpay_request:ok":
 									$http.post('http://'+$rootScope.hostName+'/wallet/recharge',user)
 									.success(function(data) {
-									};
+									});
 									location.href='#/user/wallet';
 								    window.location.reload();
 									break;
