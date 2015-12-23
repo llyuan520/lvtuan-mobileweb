@@ -328,6 +328,67 @@ lvtuanApp.controller("resetpwdCtrl",function($scope,$http,$rootScope){
 	}
 })
 
+//忘记密码
+lvtuanApp.controller("forgotpwdCtrl",function($scope,$http,$rootScope){
+	$scope.user = {};
+	//获取验证码
+	$scope.phonecode = function(phone){
+		console.info(phone);
+		if(phone == undefined){
+			layer.show("请输入手机号！");
+			return false;
+		}else{
+			var param = 'phone='+phone;
+			$http.post('http://'+$rootScope.hostName+'/send-code?'+param
+			).success(function(data) {
+				console.info(data)
+	           layer.show("验证码已发送到您的手机！");
+	        });
+	        return true;
+		}
+	}
+	//用户可以通过手机或者邮箱找回密码
+	$scope.submit = function(user){
+		console.info(user);
+		$scope.user = user;
+		$http.post('http://'+$rootScope.hostName+'/forgotpwd', $scope.user
+			).success(function(data) {
+           $scope.user = {}; //清空数据
+           $scope.uid = data.data.uid;
+           sessionStorage.setItem("uid", JSON.stringify($scope.uid));
+           $("#forgotForm").hide();
+           $("#upwdForm").show();
+        });
+	}
+})
+
+//忘记密码
+lvtuanApp.controller("upwdCtrl",function($scope,$http,$rootScope){
+
+	$scope.user = {};
+	$scope.submit = function(user){
+		$scope.uid = JSON.parse(sessionStorage.getItem('uid'));
+		$scope.user = user;
+		if($scope.user.password_1.length != $scope.user.password_2.length){
+			layer.show("重置密码的长度不一致！");
+			return false;
+		}else if($scope.user.password_1 != $scope.user.password_2){
+			layer.show("两次输入的密码不一致！");
+			return false;
+		}else{
+			$http.post('http://'+$rootScope.hostName+'/forgotpwd/resetpwd/'+$scope.uid, $scope.user
+  			).success(function(data) {
+	           layer.show("修改成功！");
+	           sessionStorage.removeItem("uid");
+	           $scope.user = {}; //清空数据
+	           location.href='#/login';
+		        window.location.reload();
+	        });
+		}
+
+	}
+})
+
 /****************************************************** 微信 ******************************************************/
 lvtuanApp.controller("wxAuthCtrl",function($scope,$stateParams,wxService,userService){
 	// 获取code和state，通过后端进行登录
@@ -1982,17 +2043,20 @@ lvtuanApp.controller("siteCtrl",function($scope,$http,$rootScope,authService){
 lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$location){
 	$scope.orders = [
 					{
-						"key"	:"",
-						"value" : "离我最近"
-					},
-					{
 						"key"	:"most_popular",
 						"value" : "人气最高"
-					}
-					,
+					},
 					{
 						"key"	:"best_evaluated",
-						"value" : "评价最好"
+						"value" : "评分最好"
+					},
+					{
+						"key"	:"experience",
+						"value" : "执业年限"
+					},
+					{
+						"key"	:"pay_reply_count",
+						"value" : "接单数"
 					}
 				];
 	getCities();
@@ -2020,8 +2084,6 @@ lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$l
 				$scope.periods = data.data; 
 			})
 	}
-
-
 
 	$scope.$watch('max', function (oldVal, newVal) {
         if (newVal) {

@@ -78,7 +78,7 @@ function userService($http, HOST, authService) {
 	    		console.log('token:', token);
         	}
 
-	    	location.href='#/center';
+	    	location.href='#/index';
 			window.location.reload();
     	}
     ).catch(function(response) {
@@ -110,7 +110,11 @@ function userService($http, HOST, authService) {
 	    		console.log('token:', token);
         	}
 
-	    	location.href='#/center';
+        	if(!user.is_verified_lawyer){
+        		location.href='#/index';
+        	}else{
+        		location.href='#/center';
+        	}
 			window.location.reload();
     	}
     ).catch(function(response) {
@@ -141,7 +145,7 @@ function userService($http, HOST, authService) {
 	    		console.log('token:', token);
         	}
 
-	    	location.href='#/center';
+	    	location.href='#/index';
 			window.location.reload();
     	}
     ).catch(function(response) {

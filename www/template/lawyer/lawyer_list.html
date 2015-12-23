@@ -1,13 +1,16 @@
 <ion-view hide-tabs view-title="找律师">
 		<ion-pane>
+		<h1 class="title">找律师</h1>
 			<ion-header-bar class="bar bar-header bar-light">
 				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" onclick="history.go(-1);"></a>
 				<h1 class="title">找律师</h1>
 				<a ng-href="#/citypicker" class="icon-right button-clear" style="position: absolute;top: 12px;right: 5px;bottom: 5px;">
-					<label>{{currentLocation.city_name}}</label>
-					<i class="icon ion-android-arrow-dropdown"></i>
+					<label ng-bind="currentLocation.city_name"></label>
+					<ion class="ion-ios-location-outline" style="font-size: 32px; vertical-align: text-bottom;"></ion>
 				</a>
 			</ion-header-bar>
+			
+
 			<ion-content style="margin-bottom:0;">
 
 					<form id="searchForm">

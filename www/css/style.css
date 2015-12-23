@@ -254,7 +254,6 @@ a:hover{
 .item p label{margin-right: 5px;}
 
 .list.mato20{margin-top: 20px;}
-.item-input-inset .item-input-wrapper input{width: 100%;}
 .ion-chevron-right:before,.ion-chevron-down:before{float: right;}
 .ion-chevron-down:before{margin-top: 5px;}
 .tab-item.tab-item-active, .tab-item.active, .tab-item.activated {
@@ -714,7 +713,7 @@ input::-webkit-outer-spin-button {
 .login .weixin{background: url(../img/weixin.png) center center no-repeat;background-size: 40%;}
 .login-img label{display: inline-block;}
 .log-content form{margin: 0;}
-
+.color999{color: #999;}
 
 /*其它分辨率支持*/
 .slct-title>select{width: 24%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;margin-right: 1%;}

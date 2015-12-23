@@ -131,6 +131,12 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       templateUrl: 'template/home/resetpwd.html'
     })
 
+    .state('forgotpwd', { //忘记密码
+      url: '/forgotpwd',
+      cache: 'true',
+      templateUrl: 'template/home/forgotpwd.html'
+    })
+
     .state('wxauth', {
       url: '/wxauth?code&state',
       cache: 'true',
