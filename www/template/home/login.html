@@ -1,41 +1,46 @@
 <ion-view hide-tabs view-title="登录">
     <ion-pane>
-      <ion-header-bar class="bar bar-header bar-light">
-      	<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" href="#/index"></a>
-        <h1 class="title">登录</h1>
-      </ion-header-bar>
-      <ion-content>
-		<form novalidate rol="form" name="loginForm" id="loginForm" ng-controller="loginCtrl" ng-cloak class="ng-cloak">
-			<div class="list login">
-				<div class="item item-input item-text-wrap clearfix">
-					<span class="bg-man login-lbl-fc"></span>
-					<input type="text" name="username" ng-model="user.username" required="required" placeholder="手机号码或者邮箱" ng-messages-multiple />
-				</div>
-				<div class="item item-input clearfix">
-					<span class="bg-clock login-lbl-fc"></span>
-					<input type="password" name="password" placeholder="登录密码(6-20位字符)" ng-model="user.password" ng-minlength="6" ng-maxlength="20" ng-pattern="/^[\@A-Za-z0-9\!\#\$\%\^\&\*\.\~]{6,20}$/" required="required">
-				</div>
-				<div class="item">
-					<!--<label class="item item-input">-->
-						<button ng-disabled="loginForm.$invalid" ng-click="submit(user)" class="button button-block button-positive btn-login-button" type="button">登录</button>
-					<!--</label>-->
-
-					<p class="a-right" style="padding: 10px 0;">
-						<a href="#/resetpwd" >忘记密码？</a>
-					</p>
-					<p style="padding: 10px 0;">
-						还没有账号？快去注册吧。
-					</p>
-					<div style="padding: 0;">
-						<a ng-href="#/register" class="button button-block button-positive btn-login-button">注册</a>
-						<a ng-href="#/wxlogin" class="button button-block button-positive btn-login-button">微信登录</a>
+    	<div class="bg_div"></div> 
+		<div class="log-header">
+			<h1>律团</h1>
+			<h4>wdlst.com</h4>
+		</div>
+		<div class="log-content">
+			<form novalidate rol="form" name="loginForm" id="loginForm" ng-controller="loginCtrl" ng-cloak class="ng-cloak">
+				<div class="login">
+					<div class="log-input-bg">
+						<div class="ion-wap ion-row">
+							<i class="ion-android-phone-portrait phone-size"></i>
+						</div>
+						<div class="ion-wap ion-clo">
+							<input type="text" name="username" ng-model="user.username" required="required" placeholder="手机号码或者邮箱" ng-messages-multiple />
+						</div>
+					</div>
+					<div class="log-input-bg">
+						<div class="ion-wap ion-row">
+							<i class="ion-android-lock phone-size"></i>
+						</div>
+						<div class="ion-wap ion-clo">
+							<input type="password" name="password" placeholder="登录密码(6-20位字符)" ng-model="user.password" ng-minlength="6" ng-maxlength="20" ng-pattern="/^[\@A-Za-z0-9\!\#\$\%\^\&\*\.\~]{6,20}$/" required="required">
+						</div>
 					</div>
 				</div>
 				
-				
-			</div>			
-		</form>
-		
-      </ion-content>
-    </ion-pane>
+				<div class="log-but">
+					<button ng-disabled="loginForm.$invalid" ng-click="submit(user)" class="button button-block" type="button">登录</button>
+				</div>
+				<div class="log-but">
+					<a ng-href="#/resetpwd" class="lef">忘记密码？</a>
+					<a ng-href="#/register" class="rig">还没有账号？快去注册吧。</a>
+				</div>
+				<div class="login login-img2">
+					<a ng-href="#/wxlogin" class="width weixin"></a>
+					<a class="width qq"></a>
+				</div>
+				<div class="log-but login-img">
+					<label>第三方登录</label>
+				</div>
+			</form>
+		</div>
+	</ion-pane>
 </ion-view>

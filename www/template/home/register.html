@@ -1,59 +1,60 @@
 <ion-view hide-tabs view-title="注册">
-
     <ion-pane>
-      <ion-header-bar class="bar bar-header bar-light">
-      	<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" href="#/index"></a>
-        <h1 class="title">注册</h1>
-      </ion-header-bar>
-      <ion-content>
-		<form novalidate name="registerForm" id="registerForm" ng-controller="registerCtrl" ng-cloak class="ng-cloak">
-			<div class="list login">
-				<div class="item item-input">
-					<span class="bg-man login-lbl-pl login-lbl-fc">&nbsp;</span>
-					<input type="text" name="username" ng-model="user.username" required ng-pattern="/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/" placeholder="手机号码">
+		<div class="bg_div"></div> 
+		<div class="log-header">
+			<h1>律团</h1>
+			<h4>wdlst.com</h4>
+		</div>
+		<div class="log-content">
+			<form novalidate name="registerForm" id="registerForm" ng-controller="registerCtrl" ng-cloak class="ng-cloak">
+				<div class="login">
+					<div class="log-input-bg">
+						<div class="ion-wap ion-row">
+							<i class="ion-android-phone-portrait phone-size"></i>
+						</div>
+						<div class="ion-wap ion-clo">
+							<input type="text" name="username" ng-model="user.username" required ng-pattern="/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/" placeholder="手机号码">
+						</div>
+						<p ng-cloak class="log-but ion-wap ng-cloak" ng-show="registerForm.username.$invalid && !registerForm.username.$pristine">请输入合法的手机号码</p>
+					</div>
+					<div class="log-input-bg">
+						<div class="ion-wap ion-row">
+							<i class="ion-email phone-size"></i>
+						</div>
+						<div class="ion-wap ion-clo1">
+							<input type="text" ng-model="user.phonecode" name="phonecode" placeholder="验证码">
+						</div>
+						<div class="ion-wap ion-row2">
+							<button ng-disabled="!user.username" ng-click="phonecode(user.username)">获取验证码</button>
+						</div>
+					</div>
+					<div class="log-input-bg">
+						<div class="ion-wap ion-row">
+							<i class="ion-android-lock phone-size"></i>
+						</div>
+						<div class="ion-wap ion-clo">
+							<input type="password" ng-model="user.password" name="password" placeholder="登录密码(6-20位字符)" ng-minlength="6" ng-maxlength="20" ng-pattern="/^[\@A-Za-z0-9\!\#\$\%\^\&\*\.\~]{6,20}$/" required>
+						</div>
+						<p ng-cloak class="log-but ion-wap ng-cloak" ng-show="registerForm.password.$error.minlength">字符不能小于6个字符</p>
+						<p ng-cloak class="log-but ion-wap ng-cloak" ng-show="registerForm.password.$error.maxlength">字符的长度不能超过20个</p>
+						<p ng-cloak class="log-but ion-wap ng-cloak" ng-show="(registerForm.password.$invalid && !registerForm.password.$pristine)">请输入6-20位字符</p>
+					</div>
 				</div>
-				<p class="item fc-red" ng-show="registerForm.username.$invalid && !registerForm.username.$pristine">请输入合法的手机号码</p>
-				<p class="item fc-red" ng-show="registerForm.username.$required">手机号码不能为空</p>
-				<div class="item item-input">
-					<span class="bg-mobel login-lbl-pl login-lbl-fc">&nbsp;</span>
-					<input type="password" ng-model="user.phonecode" name="phonecode" placeholder="验证码">
-					<button ng-disabled="!user.username" ng-click="phonecode(user.username)" class="button button-positive button-outline button-small button-border-left">
-						获取验证码
-					</button>
-				</div>
-				<p class="item fc-red" ng-show="registerForm.phonecode.$required">验证码不能为空</p>
-				<label class="item item-input">
-					<span class="bg-clock login-lbl-pl login-lbl-fc">&nbsp;</span>
-					<input type="password" ng-model="user.password" name="password" placeholder="登录密码(6-20位字符)" ng-minlength="6" ng-maxlength="20" ng-pattern="/^[\@A-Za-z0-9\!\#\$\%\^\&\*\.\~]{6,20}$/" required>
-				</label>
-				<p class="item" ng-show="registerForm.password.$error.minlength">
-					<span class="fc-red">字符不能小于6个字符</span>
-				</p>
-				<p class="item" ng-show="registerForm.password.$error.maxlength">
-					<span class="fc-red">字符的长度不能超过20个</span>
-				</p>
-				<p class="item" ng-show="(registerForm.password.$invalid && !registerForm.password.$pristine)">
-					<span class="fc-red">请输入6-20位字符</span>
-				</p>
-				<p class="item" ng-show="registerForm.password.$required ">
-					<span class="fc-red">密码不能为空</span>
-				</p>
-				<div class="item">
-					<div class="item item-checkbox" style="border: none;">
+				<div class="log-but">
+					<div class="item item-checkbox">
 			        	<div class="checkbox">
 					  		<input type="checkbox" name="isCheck" ng-model="user.isCheck"  ng-false-value="false"> 
 					  	</div>
 					  	是否认证为律师？
 			        </div>
-						
-					<!--<label class="item item-input">-->
-						<button ng-disabled="registerForm.$invalid" ng-click="submit(user)" class="button button-block button-positive btn-login-button" type="button">提交</button>
-					<!--</label>-->
 				</div>
-			</div>
-				
-		</form>	
-      </ion-content>
-    </ion-pane>
-
+				<div class="log-but">
+					<button ng-disabled="registerForm.$invalid" ng-click="submit(user)" class="button button-block button-positive btn-login-button" type="button">提交</button>
+				</div>
+				<div class="log-but">
+					<a ng-href="#/login" class="rig">已有账户？直接登录</a>
+				</div>
+			</form>
+		</div>
+	</ion-pane>
 </ion-view>
