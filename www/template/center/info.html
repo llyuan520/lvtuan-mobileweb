@@ -1,6 +1,6 @@
 <style type="text/css">
-.css-form .row{padding: 5px 0}
-.css-form .item-input{padding: 6px 0 5px 0px}
+.css-form .row{padding: 5px 0;}
+.css-form .item-input{padding: 6px 0 5px 0px;}
 </style>
 <ion-view hide-tabs view-title="我的资料">
 		<ion-pane  class="web-body">
@@ -9,7 +9,7 @@
 				<h1 class="title">我的资料</h1>
 			</ion-header-bar>
 			<ion-content class="web-body web-top10">
-			<form name="myForm" class="css-form" id="myForm" novalidate>
+			<form name="myForm" class="css-form" id="myForm">
 				<div class="list">
 					<div class="item item-input item-icon-right">
 						<div class="row">
@@ -17,7 +17,7 @@
 						  <div class="col col-75 col-center item-thumbnail-right">
 
 							<div style="float: right;" ng-model="user.avatar" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="6MB" ngf-min-height="100" ngf-select="uploadFiles($file,items.user.id)">
-								<img ng-src="{{file}}" ngf-thumbnail="user.avatar || '/thumb.jpg'" width="80" height="80">
+								<img ng-src="{{file}}" ngf-thumbnail="user.avatar || '{{file}}'" width="80" height="80">
 								<span class="progress" ng-show="progress >= 0">
 				                  <div style="width:{{progress}}%" ng-bind="progress + '%'"></div>
 				                </span>
@@ -30,7 +30,7 @@
 						<div class="row">
 						  <div class="col col-center">姓名</div>
 						  <div class="col col-75 col-center">
-						  	<input ng-model="user.realname" name="realname" type="text" required >
+						  	<input ng-model="user.realname" name="realname" type="text" >
 						  </div>
 						</div>
 					</div>
@@ -38,7 +38,7 @@
 						<div class="row">
 						  <div class="col col-center">联系方式</div>
 						  <div class="col col-75 col-center">
-						  	<input ng-model="user.phone" name="phone" type="text" required ng-pattern="/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/" >
+						  	<input ng-model="user.phone" name="phone" type="text" ng-pattern="/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/" >
 						  	<span class="error" ng-show="(myForm.phone.$invalid && !myForm.phone.$pristine)">
 						     请输入有效的电话号码！
 						  	</span>
@@ -49,7 +49,7 @@
 						<div class="row">
 						  <div class="col col-center">电子邮箱</div>
 						  <div class="col col-75 col-center">
-						  	<input type="email" name="email" ng-model="user.email" required >
+						  	<input type="email" name="email" ng-model="user.email" >
 						  	<!-- <span class="error" ng-show="myForm.email.$error.required">
       							电子邮箱不能为空！
       						</span> -->
@@ -61,7 +61,7 @@
 					</div>
 					<div style="clear:both;width:100%;height:20px;"></div>
 					<button class="button button-block button-positive web-wid8c web-top10" type="submit" ng-disabled="myForm.$invalid" ng-click="submit()">保存</button>
-				    <div style="clear:both;width:100%;height:20px;"></div> 
+				    <!-- <div style="clear:both;width:100%;height:20px;"></div> -->
 				</div>
 			</form>
 		</ion-content>

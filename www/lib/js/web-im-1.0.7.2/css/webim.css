@@ -295,7 +295,7 @@ a:hover {
 .chat-content-p3 {
 	white-space: pre-wrap;
 	border-radius: 5px;
-	background-color: #C0C0C0;
+	/*background-color: #C0C0C0;*/
 	position: relative;
 	/*padding: 5px 10px 5px 5px;*/ 
 }
@@ -527,3 +527,4 @@ label.offline {
 	padding-bottom: 156px;
 	background-color: #fff;
 }
+
