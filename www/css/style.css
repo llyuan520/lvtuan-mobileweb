@@ -736,53 +736,61 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
 
 
 /* select with element */
+
+.slct-title{
+    padding: 10.67px 0px;
+}
+.select-cnt:nth-child(1) {
+    margin-left: 1%;
+}
 .select-cnt {            
-	width: 25%;
-    position: relative;            
-    height:35px;
+    width: 24%;
+    position: relative;
+    height: 35px;
     line-height: 35px;
     margin-right: 1%;
 }     
 .select-cnt select {
-    background: none;
-    width:100%;
-    border:1px solid transparent;
-    border-radius:2px;
-    padding:5px 10px 5px 5px;
-    -moz-box-sizing:border-box;
-    -webkit-box-sizing:border-box;
-    box-sizing:border-box;
-    position: relative;
     z-index: 2;
-    cursor: pointer;            
-    -webkit-appearance: none; 
-    -moz-appearance: none; 
-    apperance:none;        
-    text-indent: 0.01px;
-    text-overflow: "";
+    overflow: hidden;
     position: absolute;
-    left:0;
-    top:0;
-    overflow: hidden;text-overflow: ellipsis;white-space: nowrap;
+    top: 0;
+    left: 0;
+    height: 35px;
+    width: 100%;
+    padding: 5px 10px 5px 5px;
+    border: 1px solid transparent;
+    background: none;
+    font-size: 0.2rem;
+    text-indent: 0.01px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    border-radius: 2px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    apperance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
 }
 .select-cnt select::-ms-expand {
     display: none;
 }
 .select-cnt .select {
-    background: #fff;
-    width:100%;
+    z-index: 0;
     display:block;
-    box-shadow:inset 0 1px 3px rgba(0,0,0,0.1);
-    border:1px solid #CBD5DD;
-    border-radius:2px;
+    width:100%;
     height:35px;
-    padding:10px;    
+    /*padding:10px;*/
+    border:1px solid #CBD5DD;
+    background: #fff;
+    box-shadow:inset 0 1px 3px rgba(0,0,0,0.1);
+    border-radius:2px;
     -moz-box-sizing:border-box;
     -webkit-box-sizing:border-box;
     box-sizing:border-box;
-    position: relative;
-    z-index: 0;
-    cursor: pointer;  
+    /*position: relative;*/
+    /*cursor: pointer;*/
 }
 .select-cnt .select:before {
     width:8px;
@@ -801,32 +809,32 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
     -ms-transition: 0.3s color; 
     transition: 0.3s color;
     position: absolute;
-    top:16px;
-    right:10px;
+    top: 50%;
+    right: 8%;
     z-index:1;
     pointer-events:none;
 }   
 .select-cnt .select:after {
-    width:8px;
-    height:2px;
-    border-radius:1px;
+    width: 8px;
+    height: 2px;
+    border-radius: 1px;
     display: block;
-    content:'';
+    content: '';
     background: #CBD5DD;
-    -moz-transform:rotate(-44deg);
-    -webkit-transform:rotate(-44deg);
-    transform:rotate(-44deg);
-    color:#CBD5DD;
+    -moz-transform: rotate(-44deg);
+    -webkit-transform: rotate(-44deg);
+    transform: rotate(-44deg);
+    color: #CBD5DD;
     -webkit-transition: 0.3s color; 
     -moz-transition: 0.3s color; 
     -o-transition: 0.3s color;  
     -ms-transition: 0.3s color; 
     transition: 0.3s color;
     position: absolute;
-    top:16px;
-    right:5px;
-    z-index:1;
-    pointer-events:none;
+    top: 50%;
+    right: 2%;
+    z-index: 1;
+    pointer-events: none;
 } 
 .ie9 .select-cnt select,
 .lt-ie9 .select-cnt select {
@@ -911,4 +919,8 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
 	.log-content{padding-top: 8%;}
 	.login-img{padding-top: 10%;}
 	.login-img2{padding-top: 20%;}
+}
+
+.item-input-wrapper input {
+    width: 100%;
 }
