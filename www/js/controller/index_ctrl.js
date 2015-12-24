@@ -1356,6 +1356,7 @@ lvtuanApp.controller("infoCtrl",function($scope,$http,$rootScope,$timeout,Upload
 					//用于连接两个或多个数组并返回一个新的数组
 					$scope.items = data.data;
 					$scope.file = $scope.items.user.avatar
+					debugger
 					$scope.user = {
 						realname:$scope.items.user.realname,
 						phone:$scope.items.user.phone,

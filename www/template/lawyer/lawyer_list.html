@@ -21,31 +21,44 @@
 						    	<i class="icon ion-search placeholder-icon" ng-click="search()"></i>
 							</div>
 						</div>
+
 						<div class="slct-title item item-input-inset web-body">
-						    <select name="city_id" ng-change="searchCity()" ng-model="city_id">
-						      <option value="" selected>所在区域</option>
-						      <option ng-repeat="citie in cities" value="{{citie.city_code}}">
-						      	{{citie.city_name}}
-						      </option>
-						    </select>
-						    <select name="cat_id" class="opt-bl" ng-change="searchCity()" ng-model="cat_id">
-						    	<option value="" selected>法律专长</option>
-						      	<option ng-repeat="workscope in workscopes" value="{{workscope.key}}">
-						      	{{workscope.value}}
-						      </option>
-						    </select>
-						    <select name="experience" class="opt-bl" ng-change="searchCity()" ng-model="experience">
-						      <option value="" selected>执业年限</option>
-						      	<option ng-repeat="period in periods" value="{{period.key}}">
-						      		{{period.value}}
-						      	</option>
-						    </select>
-						    <select name="order_by" class="opt-bl" ng-change="searchCity()"  ng-model="order_by">
-						      	<option value="" selected>默认</option>
-						      	<option ng-repeat="order in orders" value="{{order.key}}">
-						      		{{order.value}}
-						      	</option>
-						    </select>
+							<div class="select-cnt">
+					            <select name="city_id" ng-change="searchCity()" ng-model="city_id">
+							      <option value="" selected>所在区域</option>
+							      <option ng-repeat="citie in cities" value="{{citie.city_code}}">
+							      	{{citie.city_name}}
+							      </option>
+							    </select>
+					            <i class="select"></i>
+					        </div>
+							<div class="select-cnt">
+					            <select name="cat_id" class="opt-bl" ng-change="searchCity()" ng-model="cat_id">
+							    	<option value="" selected>法律专长</option>
+							      	<option ng-repeat="workscope in workscopes" value="{{workscope.key}}">
+							      	{{workscope.value}}
+							      </option>
+							    </select>
+					            <i class="select"></i>
+					        </div>
+							<div class="select-cnt">
+					            <select name="experience" class="opt-bl" ng-change="searchCity()" ng-model="experience">
+							      <option value="" selected>执业年限</option>
+							      	<option ng-repeat="period in periods" value="{{period.key}}">
+							      		{{period.value}}
+							      	</option>
+							    </select>
+					            <i class="select"></i>
+					        </div>
+							<div class="select-cnt">
+					            <select name="order_by" class="opt-bl" ng-change="searchCity()"  ng-model="order_by">
+							      	<option value="" selected>默认</option>
+							      	<option ng-repeat="order in orders" value="{{order.key}}">
+							      		{{order.value}}
+							      	</option>
+							    </select>
+					            <i class="select"></i>
+					        </div>
 						</div>
 					</form>
 					
