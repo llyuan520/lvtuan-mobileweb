@@ -32,10 +32,17 @@
 			  	<i class="icon ion-edit web-ion-img1-2" style="margin-right:10px;font-size: 1.4rem;"></i>写评论
 			  </div>
 			  <div class="col col-66" style="text-align:right">
-			  	<i ng-click="likes(items.id)" class="icon ion-android-favorite-outline web-ion-img1-2" style="margin-right:10px;font-size:1.4rem;">
+			  	<i ng-if="items.is_like == true" class="icon ion-android-favorite web-ion-img1-2 positive" style="margin-right:10px;font-size:1.4rem;">
 			  		<label>{{items.likes_count}}</label>
 			  	</i>
-			  	<i ng-click="collects(items.id,items.is_collect)" class="icon ion-android-star-outline web-ion-img1-2" style="margin-right:10px;font-size:1.6rem;">
+			  	<i ng-if="items.is_collect == true" ng-click="collects_del(items.id)" class="icon ion-android-star web-ion-img1-2 positive" style="margin-right:10px;font-size:1.6rem;">
+			  		<label>{{items.collects_count}}</label>
+			  	</i>
+
+			  	<i ng-if="items.is_like == false" ng-click="likes(items.id)" class="icon ion-android-favorite-outline web-ion-img1-2" style="margin-right:10px;font-size:1.4rem;">
+			  		<label>{{items.likes_count}}</label>
+			  	</i>
+			  	<i ng-if="items.is_collect == false" ng-click="collects(items.id)" class="icon ion-android-star-outline web-ion-img1-2" style="margin-right:10px;font-size:1.6rem;">
 			  		<label>{{items.collects_count}}</label>
 			  	</i>
 				<a class="icon ion-chatbox-working web-ion-img1-2" style="margin-right:10px;font-size:1.4rem;color:#444;" ng-href="#/comments/view/{{items.id}}">

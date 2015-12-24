@@ -1168,13 +1168,13 @@ lvtuanApp.controller("knowledgeViewCtrl",function($scope,$http,$rootScope,$state
         	console.info(data);
         	var itmes = data.data;
         	$scope.items.likes_count = itmes.likes_count;
+        	$scope.items.is_like = itmes.is_like;
            layer.show("点赞成功！");
         });
 	}
 
 	//收藏
-	$scope.collects = function(id,is_collect){
-		console.info(id,is_collect);
+	$scope.collects = function(id){
 		$http.post('http://'+$rootScope.hostName+'/collect',
 			{
 				collect_type : 3,
@@ -1187,8 +1187,31 @@ lvtuanApp.controller("knowledgeViewCtrl",function($scope,$http,$rootScope,$state
             }
         }).success(function(data) {
         	var itmes = data.data;
-        	$scope.items.collects_count = itmes;
+        	$scope.items.collects_count = itmes.collects_count;
+        	$scope.items.is_collect = itmes.is_collect;
            layer.show("收藏成功！");
+        });
+	}
+
+	//取消收藏
+	$scope.collects_del = function(id){
+		$http.post('http://'+$rootScope.hostName+'/collect/delete',
+			{
+				collect_type : 3,
+				item_id   : id
+			},
+			{
+            headers: {
+                'Content-Type': 'application/json' ,
+            	'Authorization': 'bearer ' + $rootScope.token
+            }
+        }).success(function(data) {
+        	var itmes = data.data;
+        	console.info(itmes);
+        	debugger
+        	$scope.items.collects_count = itmes.collects_count;
+        	$scope.items.is_collect = itmes.is_collect;
+           layer.show("取消成功！");
         });
 	}
 
@@ -2041,7 +2064,8 @@ lvtuanApp.controller("siteCtrl",function($scope,$http,$rootScope,authService){
 
 /****************************************************** 找律师 ******************************************************/
 //找律师的列表
-lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$location){
+lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$location,$timeout){
+
 	$scope.orders = [
 					{
 						"key"	:"most_popular",
@@ -2097,14 +2121,15 @@ lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$l
     $scope.items = [];	//创建一个数组接收后台的数据
 
     //搜索问题
-	$scope.search = function(e){
+	/*$scope.search = function(e){
 		localStorage.removeItem('items'); //清空之前的旧数据
 		localStorage.removeItem('q');
 		page = 1;
 		$scope.items = [];
 		getParams();
 		layer.stopDefault(e);
-	}
+	}*/
+
 	//根据地区查找律师
 	$scope.searchCity = function(){
 		page = 1;
@@ -2112,11 +2137,33 @@ lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$l
 	    getParams();
 	}
 	//根据法律专长查找律师
-/*	$scope.searchCat = function(){
+	/*$scope.searchCat = function(){
 		page = 1;
 		$scope.items = [];
 	    getParams();
 	}*/
+
+	
+	/*$scope.onkeyup = function(q,$event){
+		page = 1;
+		$scope.items = [];
+		console.info('items',$scope.items)
+		getParams();
+		$event.stopPropagation();
+		// $scope.$broadcast('keyup');
+	}*/
+
+	$scope.q = '';
+	$scope.$watch('q', function(newVal, oldVal) {
+		console.info(newVal);
+		if(newVal !== oldVal){
+			page = 1;
+			$scope.items = [];
+			console.info($scope.items);
+			getParams();
+    	}
+	});
+
 	//获取参数，处理被收藏书签的情况
 	function getParams(){
 		var params = layer.getParams("#searchForm");
@@ -2189,7 +2236,10 @@ lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$l
 
 
 	}
+
 })
+
+
 //律师个人主页
 lvtuanApp.controller("viewCtrl",function($scope,$http,$rootScope,$stateParams,httpWrapper){
 	$scope.max = 5;

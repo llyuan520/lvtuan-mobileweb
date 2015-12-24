@@ -438,8 +438,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
     .state('lawyerlist', { //找律师列表
       url: '/lawyerlist',
       cache: 'true',
-      templateUrl: 'template/lawyer/lawyer_list.html',
-      controller: 'lawyerlistCtrl'
+      templateUrl: 'template/lawyer/lawyer_list.html'
     })
     .state('lawyer', { //律师个人主页
       url: '/lawyer/:id',

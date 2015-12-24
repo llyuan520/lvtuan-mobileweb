@@ -8,8 +8,12 @@
 				<p class="content">{{item.title}}</p>
 				<p>{{item.info}}</p>
 				<p>
-					<i class="icon ion-chatbubble web-ion-img1-2" style="margin-right:10px;font-size:12px;">&nbsp;{{item.likes_count}}</i>
-					<i class="icon ion-heart web-ion-img1-2" style="margin-right:10px;font-size:12px;color:#f00;">&nbsp;<span style="color:#666666;">{{item.views_count}}</span></i>
+					<i class="icon ion-android-favorite-outline web-ion-img1-2" style="margin-right:10px;font-size:1.4rem;">
+						<label>{{item.likes_count}}</label>
+					</i>
+					<i class="icon ion-android-star-outline web-ion-img1-2" style="margin-right:10px;font-size:1.8rem;">
+						<label>{{item.views_count}}</label>
+					</i>
 				</p>
 	        </ion-item>
         </ion-list>

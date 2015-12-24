@@ -12,16 +12,14 @@
 			
 
 			<ion-content style="margin-bottom:0;">
-
-					<form id="searchForm">
-						<!--搜索你想要的内容-->
-						<div class="item item-input-inset web-body">
+					<form id="searchForm" ng-controller="lawyerlistCtrl">
+						<!--搜索你想要的内容 ng-keyup="onkeyup(q,$event)" -->
+						<div class="item item-input-inset web-body"> 
 							<div class="item-input-wrapper">
-						    	<input type="search" name="q" placeholder="搜索你想要的内容" class="search">
+						    	<input ng-model="q" type="search" name="q" placeholder="搜索你想要的内容" class="search">
 						    	<i class="icon ion-search placeholder-icon" ng-click="search()"></i>
 							</div>
 						</div>
-
 						<div class="slct-title item item-input-inset web-body">
 							<div class="select-cnt">
 					            <select name="city_id" ng-change="searchCity()" ng-model="city_id">
@@ -60,7 +58,7 @@
 					            <i class="select"></i>
 					        </div>
 						</div>
-					</form>
+					
 					
 					<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 					<div class="list">
@@ -81,7 +79,7 @@
 					    </a>
 					</div>
 					<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
-
+				</form>
 			</ion-content>
 		</ion-pane>
 
