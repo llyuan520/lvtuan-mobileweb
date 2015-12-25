@@ -717,7 +717,7 @@ input::-webkit-outer-spin-button {
 .color999{color: #999;}
 input,select{-webkit-appearance: none; /*去除input默认样式*/}
 .select-cnt {            
-	width: 24%;
+	width: 25%;
     position: relative;            
     height:40px;
     line-height: 40px;
@@ -735,113 +735,6 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
   padding-right: 14px;
   font-size: 1.0rem;
 }
-
-.select-cnt {            
-    width: 24%;
-    position: relative;
-    height: 35px;
-    line-height: 35px;
-    margin-right: 1%;
-}     
-.select-cnt select {
-    z-index: 2;
-    overflow: hidden;
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 35px;
-    width: 100%;
-    padding: 5px 10px 5px 5px;
-    border: 1px solid transparent;
-    background: none;
-    font-size: 0.2rem;
-    text-indent: 0.01px;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    border-radius: 2px;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    apperance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-}
-.select-cnt select::-ms-expand {
-    display: none;
-}
-.select-cnt .select {
-    z-index: 0;
-    display:block;
-    width:100%;
-    height:35px;
-    /*padding:10px;*/
-    border:1px solid #CBD5DD;
-    background: #fff;
-    box-shadow:inset 0 1px 3px rgba(0,0,0,0.1);
-    border-radius:2px;
-    -moz-box-sizing:border-box;
-    -webkit-box-sizing:border-box;
-    box-sizing:border-box;
-    /*position: relative;*/
-    /*cursor: pointer;*/
-}
-.select-cnt .select:before {
-    width:8px;
-    height:2px;
-    border-radius:1px;
-    display: block;
-    content:'';
-    background: #CBD5DD;
-    -moz-transform:rotate(44deg);
-    -webkit-transform:rotate(44deg);
-    transform:rotate(44deg);
-    color:#CBD5DD;
-    -webkit-transition: 0.3s color; 
-    -moz-transition: 0.3s color; 
-    -o-transition: 0.3s color;  
-    -ms-transition: 0.3s color; 
-    transition: 0.3s color;
-    position: absolute;
-    top: 50%;
-    right: 8%;
-    z-index:1;
-    pointer-events:none;
-}   
-.select-cnt .select:after {
-    width: 8px;
-    height: 2px;
-    border-radius: 1px;
-    display: block;
-    content: '';
-    background: #CBD5DD;
-    -moz-transform: rotate(-44deg);
-    -webkit-transform: rotate(-44deg);
-    transform: rotate(-44deg);
-    color: #CBD5DD;
-    -webkit-transition: 0.3s color; 
-    -moz-transition: 0.3s color; 
-    -o-transition: 0.3s color;  
-    -ms-transition: 0.3s color; 
-    transition: 0.3s color;
-    position: absolute;
-    top: 50%;
-    right: 2%;
-    z-index: 1;
-    pointer-events: none;
-} 
-.ie9 .select-cnt select,
-.lt-ie9 .select-cnt select {
-    padding-right:10px;
-}
-.ie9 .select-cnt .select:before,
-.lt-ie9 .select-cnt .select:before,
-.ie9 .select-cnt .select:after,
-.lt-ie9 .select-cnt .select:after {
-    display:none;    
-}
-/*.list .row {
-    padding: 1.2rem 0;
-}*/
 
 
 /*清除ie的默认选择框样式清除，隐藏下拉箭头*/
