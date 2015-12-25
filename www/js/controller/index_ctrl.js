@@ -22,55 +22,11 @@ lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $loca
     $scope.currentUser = authService.getUser();
 
     currentLocation = locationService.getLocation();
-    if (!currentLocation) {
-    	currentLocation = locationService.fetchLocation();
+    if (!currentLocation || !currentLocation.city_name) {
+    	locationService.fetchLocation($scope);
+    } else {
+        $scope.currentLocation = currentLocation;
     }
-    if (!currentLocation) {
-    	currentLocation = locationService.getDefaultLocation();
-    }
-
-    $scope.currentLocation = currentLocation;
-
-   //  self.getLocation = function() {
-   //  	if($scope.currentUser){
-   //  		$scope.currentUser.city_id = '440300';
-			// $scope.currentUser.city_name = '深圳市';
-			// authService.saveUser($scope.currentUser);
-   //  	}
-
-	  //   // 配置wx接口
-	  //   $http.get("http://" + $rootScope.hostName + "/common/wxconfig"
-	  //   ).success(function(data) {
-	  //   	if (data) {
-		 //    	data.debug = false;
-		 //    	wx.config(data);
-		 //    }
-	  //   });
-
-   //  	wx.ready(function () {
-		 //    wx.getLocation({
-		 //    	success: function (res) {
-			// 		$http.get("http://" + $rootScope.hostName + "/common/addressCode/" + res.latitude + "," + res.longitude)
-			// 		.success(function(data) {
-			// 			if (data) {
-			// 				$scope.currentUser.province_id = data.province_id;
-			// 				$scope.currentUser.city_id = data.city_id;
-			// 				$scope.currentUser.district_id = data.district_id;
-			// 				$scope.currentUser.province_name = data.province_name;
-			// 				$scope.currentUser.city_name = data.city_name;
-			// 				$scope.currentUser.district_name = data.district_name;
-			// 				authService.saveUser($scope.currentUser);
-			// 			}
-			// 		});
-	  //     		},
-		 //        cancel: function (res) {
-		 //        	alert('用户拒绝授权获取地理位置');
-		 //        }
-	  //   	});
-   //  	});
-   //  }
-
-   //  self.getLocation();
 
 })
 
@@ -3908,7 +3864,7 @@ lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$statePa
 	var currentUser = authService.getUser();
 	var params = null;
 
-	self.jsApiCall = function()
+	self.jsApiCall = function(user)
 	{
 		if (currentUser.wx_openid) {
 			$http.get('http://'+$rootScope.hostName+'/payment/jsapiparams/'+currentUser.wx_openid,{
@@ -3921,7 +3877,22 @@ lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$statePa
 						self.params,
 						function(res){
 							WeixinJSBridge.log(res.err_msg);
-							alert(res.err_code+res.err_desc+res.err_msg);
+							switch(res.err_msg) {
+								case "get_brand_wcpay_request:ok":
+									$http.post('http://'+$rootScope.hostName+'/wallet/recharge',user)
+									.success(function(data) {
+									});
+									location.href='#/user/wallet';
+								    window.location.reload();
+									break;
+								case "get_brand_wcpay_request:fail":
+									layer.show("充值失败，请稍候再试。");
+									break;
+								case "get_brand_wcpay_request:cancel":
+									layer.show("您已取消充值。");
+									$state.go("user/wallet");
+									break;
+							}
 						}
 					);
 				}
@@ -3931,14 +3902,14 @@ lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$statePa
 		}
 	}
 
-	self.callpay = function()
+	self.callpay = function(user)
 	{
 		if (typeof WeixinJSBridge == "undefined"){
 		    if( document.addEventListener ){
-		        document.addEventListener('WeixinJSBridgeReady', self.jsApiCall(), false);
+		        document.addEventListener('WeixinJSBridgeReady', self.jsApiCall(user), false);
 		    }else if (document.attachEvent){
-		        document.attachEvent('WeixinJSBridgeReady', self.jsApiCall()); 
-		        document.attachEvent('onWeixinJSBridgeReady', self.jsApiCall());
+		        document.attachEvent('WeixinJSBridgeReady', self.jsApiCall(user)); 
+		        document.attachEvent('onWeixinJSBridgeReady', self.jsApiCall(user));
 		    }
 		}else{
 		    self.jsApiCall();
@@ -3946,7 +3917,7 @@ lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$statePa
 	}
 
 	$scope.submit = function(user){
-		self.callpay();
+		self.callpay(user);
 	}
 })
 

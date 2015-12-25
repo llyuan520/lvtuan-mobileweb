@@ -3,7 +3,8 @@ var locationModule = angular.module('locationModule', []);
 function locationService($http) {
 	var self = this;
 
-	self.fetchLocation = function() {
+	self.fetchLocation = function($scope) {
+	    $scope.currentLocation = self.getDefaultLocation();
 
 	    var location = {};
 
@@ -11,7 +12,7 @@ function locationService($http) {
 	    $http.get("http://" + AppSettings.baseApiUrl + "/common/wxconfig"
 	    ).success(function(data) {
 	    	if (data) {
-		    	data.debug = true;
+		    	data.debug = false;
 		    	wx.config(data);
 		    }
 	    });
@@ -25,17 +26,16 @@ function locationService($http) {
 						if (data) {
 							location = data;
 						}
+						location.latitude = res.latitude;
+						location.longitude = res.longitude;
+						self.saveLocation(location);
+						$scope.currentLocation = location;
 					});
 
-					location.latitude = res.latitude;
-					location.longitude = res.longitude;
 
-					self.saveLocation(location);
-
-					return location;
 	      		},
 		        cancel: function (res) {
-		        	alert('用户拒绝授权获取地理位置');
+		        	lawyer.show('用户拒绝授权获取地理位置');
 		        }
 	    	});
     	});
@@ -52,7 +52,7 @@ function locationService($http) {
 	self.getDefaultLocation = function() {
 		var location = {};
 		location.city_id = '440300';
-		location.city_name = '深圳';
+		location.city_name = '深圳市';
 		return location;
 	}
 }
