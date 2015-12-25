@@ -4011,8 +4011,15 @@ lvtuanApp.controller("citypickerCtrl",function($http,$location,$scope,$rootScope
         $anchorScroll();  //设置页内跳转锚点
     }
 
+    $scope.province_city_id = null;
+    $scope.province_city_name = null;
     //获取 省份
 	$scope.province = function(val){
+		console.info(val);
+		debugger
+		$scope.province_city_id = val.key;
+    	$scope.province_city_name = val.value;
+
 		$(".citypicker .province,.navbar").hide();
 		$scope.province = val.key;
 		$(".citypicker .cities").show();
@@ -4023,7 +4030,17 @@ lvtuanApp.controller("citypickerCtrl",function($http,$location,$scope,$rootScope
 	function getCityParm(province){
 		$http.get('http://'+$rootScope.hostName+'/area/'+province+'/city')
 		.success(function(data) {
-        	$scope.citys = data.data; 
+			if(data && data.data && data.data.length){
+        		$scope.citys = data.data; 
+        	}else{
+        		$scope.items = {
+					'city_id' : angular.toJson($scope.province_city_id, true),
+					'city_name' : $scope.province_city_name
+				}
+				console.info($scope.items);
+				debugger
+        		return false;
+        	}
 		})
 	}
 
@@ -4039,7 +4056,7 @@ lvtuanApp.controller("citypickerCtrl",function($http,$location,$scope,$rootScope
 		$rootScope.city_name = $scope.citypicker.city_name;
 		$rootScope.city_id = $scope.citypicker.city_id;*/
 
-		/*var locations = locationService.getLocation();
+		var locations = locationService.getLocation();
 		console.info(locations);
 		debugger
 
@@ -4050,11 +4067,11 @@ lvtuanApp.controller("citypickerCtrl",function($http,$location,$scope,$rootScope
 		debugger
 		
 		console.info(locations);
-		debugger*/
+		debugger
 
 		
 
-		$location.href='#/lawyerlist';
+		location.href='#/lawyerlist';
 		window.location.reload();
 
 		/*debugger
@@ -4066,4 +4083,8 @@ lvtuanApp.controller("citypickerCtrl",function($http,$location,$scope,$rootScope
 		
 	}
 	
+	$scope.jumplawyerlist = function(){
+		location.href='#/lawyerlist';
+		window.location.reload();
+	}
 })

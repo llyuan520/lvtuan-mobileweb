@@ -79,6 +79,7 @@
 .item .sp-name{
 	zoom:2;
 	font-weight: bold;
+	font-size: 0.8rem;
 }
 .item .sp-level{
 	margin: 0 .5em;
