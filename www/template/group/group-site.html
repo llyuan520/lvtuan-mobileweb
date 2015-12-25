@@ -11,7 +11,7 @@
 		<ion-content style="margin-bottom: 0px;">
 			<div class="item group-site">
 				<a ng-repeat="member in group.members">
-					<img class="avatar" src="http://mobiledev.wdlst.law-pc-new/{{member.avatar}}">
+					<img class="avatar" src="{{member.avatar}}">
 					<i ng-show="isclose" class="icon ion-close-circled color999 close" ng-click="del({{member.user_id}},$index)"></i>
 					<br>
 					<p>{{member.realname}}</p>
