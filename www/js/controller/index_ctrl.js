@@ -4038,7 +4038,6 @@ lvtuanApp.controller("citypickerCtrl",function($http,$location,$scope,$rootScope
 					'city_name' : $scope.province_city_name
 				}
 				console.info($scope.items);
-				debugger
         		return false;
         	}
 		})
@@ -4058,17 +4057,13 @@ lvtuanApp.controller("citypickerCtrl",function($http,$location,$scope,$rootScope
 
 		var locations = locationService.getLocation();
 		console.info(locations);
-		debugger
 
 		locations.city_id = $scope.items.city_id;
 		locations.city_name = $scope.items.city_name;
 
 		locations.saveLocation(locations);
-		debugger
 		
 		console.info(locations);
-		debugger
-
 		
 
 		location.href='#/lawyerlist';
