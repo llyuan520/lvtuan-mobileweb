@@ -90,7 +90,7 @@ a:hover {
 	position: absolute;
 	bottom: 0;
 	width: 100%;
-	/*height: 37%;*/
+    box-shadow: 0 -1px 5px 0 #ddd;
 }
 .content_login {
 	width: 320px;
@@ -141,23 +141,16 @@ a:hover {
 }
 
 .chatRight {
-	/*border-right: 1px #bebebe solid;*/
-	/*width: 320px;*/
 	position: relative;
 	height: 100%;
-	/*border: 1px #666666 solid;*/
-	/*-webkit-border-radius: 3px;*/
-	/*-moz-border-radius: 3px;
-	border-radius: 3px;*/
-	/*top: 0%;*/
-	/*right: 0;*/
-	/*bottom: 0%;*/
-	/*left: 0;*/
+    margin-top: -38px;
 }
 .word-height {
-	height: 23rem;
+	height: 100%;
+    padding: 38px 0 4.4rem;
 }
 .chat01_title {
+	display: none;
 	background-color: #5D6978;
 	height: 3.2rem;
 	/*margin-top: -4px;*/
@@ -168,12 +161,15 @@ a:hover {
 	height: 30px;
 	position: relative;
 }
-
-.talkTo {
-	
+.group-content {
+	height: 100%;
+}
+.group-content .webin {
+    overflow-x: scroll;
+    height: 100%;
 }
 
-.talkTo li {
+/*.talkTo li {
 	line-height: 17px;
 	float: left;
 	padding-left: 6px;
@@ -190,8 +186,10 @@ a:hover {
 	font-weight: bold;
 	color: #333;
 	text-decoration: none;
+}*/
+.web-body .bar-header {
+    border-bottom: 1px solid #666;
 }
-
 .close_btn {
 	background: url('../img/icon.png') no-repeat 0 0;
 	position: absolute;
@@ -203,26 +201,46 @@ a:hover {
 }
 
 .chat02_title {
+	display: none;
+	position: relative;
 	background: url('../img/chat_title_bg.jpg') repeat-x 0 0;
 	height: 25px;
-	position: relative;
 }
 
 .chat02_bar {
-	background: url('../img/chat_bar_bg.jpg') repeat-x 0 0;
-	height: 35px;
-	position: relative;
-	margin-bottom: 0px;
+    float: left;
+    height: 4rem;
+    position: relative;
+    width: 25%;
+    padding: 10px 0 4px 5px;
+    margin-bottom: 0px;
 }
 
 .chat02_bar ul {
-	height: 100%;
-	margin: 0;
-	background: url('../img/wlf_bg.png') no-repeat 10px 8px;
+    position: relative;
+    height: 100%;
+    margin: 0;
+    /*background: url('../img/wlf_bg.png') no-repeat 10px 8px;*/
 }
 
 .chat02_bar li {
-	position: absolute;
+    position: absolute;
+    width: 95%;
+    height: 100%;
+    padding-left: 5px;
+}
+.chat02_bar li span {
+    display: block;
+    width: 85%;
+    height: 2.8rem;
+    border: 0;
+    background-color: #999;
+    line-height: 2.8rem;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 1.2rem;
+    color: #fff;
+    border-radius: 4px;
 }
 
 .chat03_title_t {
@@ -240,15 +258,17 @@ a:hover {
 
 .chat01_content {
 	width: 100%;
-	height: 20.2rem;
-	padding-right: 13%;
-	/*background: */
+	height: 100%;
+	padding-right: 17%;
 	overflow-x: none;
 	overflow-y: auto;
 }
 
 .chat02_content {
-	height: auto;
+    float: left;
+    width: 74%;
+    height: 4rem;
+    padding: 10px 0 4px 8px;
 }
 
 .chat03_content_ul {
@@ -273,14 +293,18 @@ a:hover {
 }
 
 .chat02_content textarea {
-	border: medium none;
-	display: block;
-	width: 100%;
-	height: 96px;
-	padding: 5px;
-	margin: 0;
-	overflow-y: auto;
-	resize: vertical;
+    display: block;
+    width: 100%;
+    height: 36px;
+    padding: 0px;
+    padding-left: 3%;
+    margin: 0;
+    border: 1px solid #999;
+    font-size: 14px;
+    overflow-y: auto;
+    line-height: 34px;
+    resize: vertical;
+    border-radius: 4px;
 }
 
 .chat03_name {
@@ -293,11 +317,15 @@ a:hover {
 }
 
 .chat-content-p3 {
-	white-space: pre-wrap;
-	border-radius: 5px;
-	/*background-color: #C0C0C0;*/
-	position: relative;
-	/*padding: 5px 10px 5px 5px;*/ 
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 0.6rem;
+    background: #00cafa;
+    color: #fff;
+    font-size: 1rem;
+    white-space: pre-wrap;
+    border-radius: 5px;
 }
 
 .chat03_content ul {
@@ -319,9 +347,6 @@ a:hover {
 	background: #ebeef3;
 }
 
-.chat03_content ul li a {
-	
-}
 
 .chat03_content ul img {
 	width: 30px;
@@ -344,9 +369,6 @@ a:hover {
 	_margin-left: 8px;
 }
 
-.ctb03 {
-	background-position: 0 -152px;
-}
 
 .ctb02 {
 	background-position: 0 -457px;
@@ -398,9 +420,6 @@ a:hover {
 	background: url('../img/wlf_title_bg.jpg') repeat-x 0 0;
 }
 
-.wl_faces_content .title ul {
-	
-}
 
 .wl_faces_content .title ul li {
 	position: absolute;
@@ -527,4 +546,25 @@ label.offline {
 	padding-bottom: 156px;
 	background-color: #fff;
 }
-
+.clearfix:after {
+	content:"\200B";
+	display:block; height:0;
+	clear:both;
+}
+.clearfix { 
+	*zoom:1;
+}
+.chat01_content p1 {
+	display: none;
+}
+.chat01_content p2 {
+    text-align: right;
+    display: inline-block;
+    margin-bottom: 0.4rem;
+}
+.chat01_content div {
+    float: left;
+    width: 100%;
+    padding-left: 22%;
+    margin: 0.8rem 0;
+}

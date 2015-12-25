@@ -1398,9 +1398,9 @@ var appendMsg = function(who, contact, message, chattype) {
             var ele = $(eletext);
             ele[0].setAttribute("class", "chat-content-p3");
             ele[0].setAttribute("className", "chat-content-p3");
-            if (curUserId == who) {
+            /*if (curUserId == who) {
                 ele[0].style.backgroundColor = "#EBEBEB";
-            }
+            }*/
             for (var j = 0; j < ele.length; j++) {
                 lineDiv.appendChild(ele[j]);
             }
