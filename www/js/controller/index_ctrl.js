@@ -27,7 +27,6 @@ lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $loca
     } else {
         $scope.currentLocation = currentLocation;
     }
-
 })
 
 /****************************************************** 引导页 ******************************************************/
@@ -1121,10 +1120,9 @@ lvtuanApp.controller("knowledgeViewCtrl",function($scope,$http,$rootScope,$state
             	'Authorization': 'bearer ' + $rootScope.token
             }
         }).success(function(data) {
-        	console.info(data);
         	var itmes = data.data;
         	$scope.items.likes_count = itmes.likes_count;
-        	$scope.items.is_like = itmes.is_like;
+        	$scope.items.is_like = true;
            layer.show("点赞成功！");
         });
 	}
@@ -1142,9 +1140,8 @@ lvtuanApp.controller("knowledgeViewCtrl",function($scope,$http,$rootScope,$state
             	'Authorization': 'bearer ' + $rootScope.token
             }
         }).success(function(data) {
-        	var itmes = data.data;
-        	$scope.items.collects_count = itmes.collects_count;
-        	$scope.items.is_collect = itmes.is_collect;
+        	$scope.items.collects_count = $scope.items.collects_count + 1;
+        	$scope.items.is_collect = true;
            layer.show("收藏成功！");
         });
 	}
@@ -1162,11 +1159,8 @@ lvtuanApp.controller("knowledgeViewCtrl",function($scope,$http,$rootScope,$state
             	'Authorization': 'bearer ' + $rootScope.token
             }
         }).success(function(data) {
-        	var itmes = data.data;
-        	console.info(itmes);
-        	debugger
-        	$scope.items.collects_count = itmes.collects_count;
-        	$scope.items.is_collect = itmes.is_collect;
+        	$scope.items.collects_count = $scope.items.collects_count - 1 ;
+        	$scope.items.is_collect = false;
            layer.show("取消成功！");
         });
 	}
@@ -2021,7 +2015,6 @@ lvtuanApp.controller("siteCtrl",function($scope,$http,$rootScope,authService){
 /****************************************************** 找律师 ******************************************************/
 //找律师的列表
 lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$location,$timeout){
-
 	$scope.orders = [
 					{
 						"key"	:"most_popular",
@@ -2076,16 +2069,6 @@ lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$l
     $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
     $scope.items = [];	//创建一个数组接收后台的数据
 
-    //搜索问题
-	/*$scope.search = function(e){
-		localStorage.removeItem('items'); //清空之前的旧数据
-		localStorage.removeItem('q');
-		page = 1;
-		$scope.items = [];
-		getParams();
-		layer.stopDefault(e);
-	}*/
-
 	//根据地区查找律师
 	$scope.searchCity = function(){
 		page = 1;
@@ -2099,16 +2082,7 @@ lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$l
 	    getParams();
 	}*/
 
-	
-	/*$scope.onkeyup = function(q,$event){
-		page = 1;
-		$scope.items = [];
-		console.info('items',$scope.items)
-		getParams();
-		$event.stopPropagation();
-		// $scope.$broadcast('keyup');
-	}*/
-
+	//搜索问题
 	$scope.q = '';
 	$scope.$watch('q', function(newVal, oldVal) {
 		console.info(newVal);
@@ -2144,12 +2118,14 @@ lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$l
 	  	geturl(param);
 	}
 
-	//下拉刷新
+    //下拉刷新
 	$scope.doRefresh = function() {
 		page = 1;
 		$scope.items = [];
-        getParams();
+        $scope.loadMore();
+        $scope.$broadcast('scroll.refreshComplete');
     };
+
 
     //上拉加载
 	$scope.loadMore = function() {
@@ -2168,21 +2144,24 @@ lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$l
 		$http.get(url)
 			.success(function(data) {
 	        	console.info(data.data)
-				if(data.data.length > 0){
-					$scope.moredata = true;
-					//用于连接两个或多个数组并返回一个新的数组
-					$scope.items = $scope.items.concat(data.data); 
+	        	if(data && data.data && data.data.length){
+					$scope.items = $scope.items.concat(data.data);
+					console.info($scope.items);
+					if (data.data.length < 10) {
+						$scope.moredata = false;
+					} else {
+						$scope.moredata = true;
+					}
 				}else{
-					layer.show("暂无数据！")
+					if (page == 1) {
+						layer.show('暂无数据！');
+					}
 					$scope.moredata = false;
-					return false;
 				}
 				page++;
+				$scope.$broadcast('scroll.infiniteScrollComplete');
+
 			})
-		    .finally(function() {
-	            $scope.$broadcast('scroll.refreshComplete');
-	            $scope.$broadcast('scroll.infiniteScrollComplete');
-	        });
 	}
 	
 	$scope.jumppage = function(id){
@@ -4017,7 +3996,7 @@ lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$io
 })
 
 
-lvtuanApp.controller("citypickerCtrl",function($http,$location,$scope,$rootScope,$anchorScroll,$ionicHistory){
+lvtuanApp.controller("citypickerCtrl",function($http,$location,$scope,$rootScope,$anchorScroll,$ionicHistory,locationService){
 	//获取地址定位 根据a-z排序显示
 	$http.get('http://'+$rootScope.hostName+'/area/province/letters')
 	.success(function(data) {
@@ -4052,16 +4031,38 @@ lvtuanApp.controller("citypickerCtrl",function($http,$location,$scope,$rootScope
 		$(".citypicker .province,.citypicker .cities").hide();
 		console.info(val);
 		$scope.items = {
-			'city_id' : val.key,
+			'city_id' : angular.toJson(val.key, true),
 			'city_name' : val.value
 		}
-		localStorage.setItem("citypicker", JSON.stringify($scope.items));
+		/*localStorage.setItem("citypicker", JSON.stringify($scope.items));
 		$scope.citypicker = JSON.parse(localStorage.getItem('citypicker'));
 		$rootScope.city_name = $scope.citypicker.city_name;
-		$rootScope.city_id = $scope.citypicker.city_id;
-		console.info($rootScope.city_id);
+		$rootScope.city_id = $scope.citypicker.city_id;*/
 
-		$ionicHistory.goBack(); 
+		/*var locations = locationService.getLocation();
+		console.info(locations);
+		debugger
+
+		locations.city_id = $scope.items.city_id;
+		locations.city_name = $scope.items.city_name;
+
+		locations.saveLocation(locations);
+		debugger
+		
+		console.info(locations);
+		debugger*/
+
+		
+
+		$location.href='#/lawyerlist';
+		window.location.reload();
+
+		/*debugger
+		console.info(location.saveLocation(location));
+		console.info($ionicHistory.goBack());
+		debugger
+
+		$ionicHistory.goBack(); */
 		
 	}
 	

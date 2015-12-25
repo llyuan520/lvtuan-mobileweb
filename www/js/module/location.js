@@ -5,8 +5,9 @@ function locationService($http) {
 
 	self.fetchLocation = function($scope) {
 	    $scope.currentLocation = self.getDefaultLocation();
+		self.saveLocation($scope.currentLocation);
 
-	    var location = {};
+	    var locations = {};
 
 	    // 配置wx接口
 	    $http.get("http://" + AppSettings.baseApiUrl + "/common/wxconfig"
@@ -24,12 +25,12 @@ function locationService($http) {
 					$http.get("http://" + AppSettings.baseApiUrl + "/common/addressCode/" + res.latitude + "," + res.longitude)
 					.success(function(data) {
 						if (data) {
-							location = data;
+							locations = data;
 						}
-						location.latitude = res.latitude;
-						location.longitude = res.longitude;
-						self.saveLocation(location);
-						$scope.currentLocation = location;
+						locations.latitude = res.latitude;
+						locations.longitude = res.longitude;
+						self.saveLocation(locations);
+						$scope.currentLocation = locations;
 					});
 
 
@@ -50,10 +51,14 @@ function locationService($http) {
 	}
 
 	self.getDefaultLocation = function() {
-		var location = {};
-		location.city_id = '440300';
-		location.city_name = '深圳市';
-		return location;
+		var locations = {};
+		locations.city_id = '440300';
+		locations.city_name = '深圳市';
+		locations.district_id = '440301';
+		locations.district_name = '福田区';
+		locations.province_id = '440000';
+		locations.province_name = '广东省';
+		return locations;
 	}
 }
 
