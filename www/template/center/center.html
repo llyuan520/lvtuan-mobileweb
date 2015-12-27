@@ -1,3 +1,6 @@
+<style type="text/css">
+	.scroll .item-thumbnail-left{padding-top: 0px;}
+</style>
 <ion-view view-title="我的">
 		<ion-pane  class="web-body">
 			<ion-header-bar class="bar bar-header bar-light">
@@ -9,7 +12,12 @@
 
 				<div class="list">
 				    <div class="item item-thumbnail-left item-icon-right" >
-				      <img ng-src="{{items.user.avatar}}">
+				    	<a class="item-thumbnail-left" ng-if="!currentUser.is_verified_lawyer" ng-href="#/info">
+				    		<img ng-src="{{items.user.avatar}}" style="width:100%;">
+				    	</a>
+				    	<a class="item-thumbnail-left" ng-if="currentUser.is_verified_lawyer" ng-href="#/becomelawyer">
+				    		<img ng-src="{{items.user.avatar}}" style="width:100%;">
+				    	</a>
 				      <h2 class="web-top10">
 				      		<a ng-if="!currentUser.is_verified_lawyer" ng-href="#/info">{{items.user.realname}}</a>
 				      		<a ng-if="currentUser.is_verified_lawyer" ng-href="#/becomelawyer">{{items.user.realname}} <span class="web-font14">律师</span></a>

@@ -24,8 +24,8 @@
 							<div class="select-cnt">
 					            <select name="city_id" ng-change="searchCity()" ng-model="city_id">
 							      <option value="" selected>所在区域</option>
-							      <option ng-repeat="citie in cities" value="{{citie.city_code}}">
-							      	{{citie.city_name}}
+							      <option ng-repeat="district in districts" value="{{district.key}}">
+							      	{{district.value}}
 							      </option>
 							    </select>
 					            <i class="select"></i>

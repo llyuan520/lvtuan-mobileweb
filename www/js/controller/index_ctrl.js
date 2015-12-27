@@ -2014,7 +2014,11 @@ lvtuanApp.controller("siteCtrl",function($scope,$http,$rootScope,authService){
 
 /****************************************************** 找律师 ******************************************************/
 //找律师的列表
-lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$location,$timeout){
+lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$location,$timeout,locationService){
+
+	$scope.locations = locationService.getLocation();
+	$scope.city = $scope.locations.city_id;
+
 	$scope.orders = [
 					{
 						"key"	:"most_popular",
@@ -2033,14 +2037,15 @@ lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$l
 						"value" : "接单数"
 					}
 				];
-	getCities();
+	getDistrict();
 	getWorkscopes();
 	getPractisePeriods();
+
 	//获取所在区域
-	function getCities(){
-		$http.get('http://'+$rootScope.hostName+'/lawyer/cities')
+	function getDistrict(){
+		$http.get('http://'+$rootScope.hostName+'/area/'+$scope.city+'/district')
 			.success(function(data) {
-				$scope.cities = data.data; 
+				$scope.districts = data.data; 
 			})
 	}
 	//获取法律专长
@@ -2058,12 +2063,6 @@ lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$l
 				$scope.periods = data.data; 
 			})
 	}
-
-	$scope.$watch('max', function (oldVal, newVal) {
-        if (newVal) {
-          updateStars();
-        }
-      });
 
 	var page = 1; //页数
     $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
@@ -2085,11 +2084,9 @@ lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$l
 	//搜索问题
 	$scope.q = '';
 	$scope.$watch('q', function(newVal, oldVal) {
-		console.info(newVal);
 		if(newVal !== oldVal){
 			page = 1;
 			$scope.items = [];
-			console.info($scope.items);
 			getParams();
     	}
 	});
@@ -2224,6 +2221,20 @@ lvtuanApp.controller("viewCtrl",function($scope,$http,$rootScope,$stateParams,ht
    	sessionStorage.setItem("index", index);
 	location.href='#/graphic';
    }
+
+   //点赞
+	$scope.likes = function(id){
+		$http.post('http://'+$rootScope.hostName+'/like',
+		{
+			item_type : 'post',
+			item_id   : id
+		}).success(function(data) {
+        	console.info(data);
+        	var itmes = data.data;
+        	$scope.items.task_count = itmes.likes_count;
+           layer.show("点赞成功！");
+        });
+	}
 })
 
 //律师个人主页-律师评价
@@ -4015,8 +4026,6 @@ lvtuanApp.controller("citypickerCtrl",function($http,$location,$scope,$rootScope
     $scope.province_city_name = null;
     //获取 省份
 	$scope.province = function(val){
-		console.info(val);
-		debugger
 		$scope.province_city_id = val.key;
     	$scope.province_city_name = val.value;
 
@@ -4037,8 +4046,7 @@ lvtuanApp.controller("citypickerCtrl",function($http,$location,$scope,$rootScope
 					'city_id' : angular.toJson($scope.province_city_id, true),
 					'city_name' : $scope.province_city_name
 				}
-				console.info($scope.items);
-        		return false;
+				locationServices($scope.items);
         	}
 		})
 	}
@@ -4050,34 +4058,24 @@ lvtuanApp.controller("citypickerCtrl",function($http,$location,$scope,$rootScope
 			'city_id' : angular.toJson(val.key, true),
 			'city_name' : val.value
 		}
-		/*localStorage.setItem("citypicker", JSON.stringify($scope.items));
-		$scope.citypicker = JSON.parse(localStorage.getItem('citypicker'));
-		$rootScope.city_name = $scope.citypicker.city_name;
-		$rootScope.city_id = $scope.citypicker.city_id;*/
-
+		
+		locationServices($scope.items);
+	}
+	
+	//公共调用服务器返回来的数据并且显示到地址定位上
+	function locationServices(obj){
 		var locations = locationService.getLocation();
-		console.info(locations);
 
-		locations.city_id = $scope.items.city_id;
-		locations.city_name = $scope.items.city_name;
+		locations.city_id = obj.city_id;
+		locations.city_name = obj.city_name;
 
-		locations.saveLocation(locations);
-		
-		console.info(locations);
-		
-
+		locationService.saveLocation(locations);
 		location.href='#/lawyerlist';
 		window.location.reload();
 
-		/*debugger
-		console.info(location.saveLocation(location));
-		console.info($ionicHistory.goBack());
-		debugger
-
-		$ionicHistory.goBack(); */
-		
+		//$ionicHistory.goBack();
 	}
-	
+
 	$scope.jumplawyerlist = function(){
 		location.href='#/lawyerlist';
 		window.location.reload();
