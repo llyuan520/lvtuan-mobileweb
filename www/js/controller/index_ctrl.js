@@ -37,6 +37,20 @@ lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $loca
 		location.href=url;
 	    window.location.reload();
 	}
+	//返回跳转上一次操作的页面
+	$scope.jumpGoBack = function(){
+		$ionicHistory.goBack();
+		window.location.reload();
+	}
+
+	var $body = $('body');    
+	document.title = '律团';  
+	// hack在微信等webview中无法修改document.title的情况    
+	var $iframe = $('<iframe src="/favicon.ico"></iframe>').on('load', function() {      
+			setTimeout(function() {       
+				 $iframe.off('load').remove()      
+			}, 0)   
+		}).appendTo($body);
 
 })
 
@@ -4088,8 +4102,4 @@ lvtuanApp.controller("citypickerCtrl",function($http,$location,$scope,$rootScope
 		window.location.reload();
 	}
 
-	$scope.jumplawyerlist = function(){
-		location.href='#/lawyerlist';
-		window.location.reload();
-	}
 })

@@ -746,12 +746,6 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
 
 /*4-4s*/
 @media only screen and (min-device-width: 320px) and (min-device-height :480px){ 
-    .scroll .list {
-        margin-bottom: 15px;
-    }
-    .bar-header .title {
-        margin-bottom: 15px;
-    }
 	.slide1 .slider,.slide1 .slider-slide img{
         height: 120px;
     }
@@ -871,12 +865,6 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
 /*6 plus*/
 @media only screen and (min-device-width: 414px) and (min-device-height :736px){ 
 	.slide1 .slider,.slide1 .slider-slide img{height: 220px;}
-    .scroll .list {
-        margin-bottom: 20px;
-    }
-    .bar-header .title {
-        margin-bottom: 20px;
-    }
 	.index .list.list1{
         text-align: center;
         margin-bottom: 10px;
