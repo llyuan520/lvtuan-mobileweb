@@ -12,15 +12,15 @@
 			</ion-content> -->
 			<ion-content  class="web-body">
 				<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
-				<ion-list>
+				<ion-list class="corporate-list">
 					<div style="margin-bottom:5px;">
 						<img src="img/xwqf-banner.jpg" style="width: 100%;">
 					</div>
-					<ion-item class="item-thumbnail-left" ng-repeat="item in items" ng-href="#/corporate/list/{{item.id}}">
-						<img ng-src="{{item.picture}}">
-						<h2 style="margin-top:10px">{{item.name}}</h2>
-						<p style="margin-top:5px">￥：{{item.price}}元/年</p>
-						<p style="margin-top:5px">{{item.life}}年起签</p>
+					<ion-item class="item-thumbnail-left corporate-items" ng-repeat="item in items" ng-href="#/corporate/list/{{item.id}}">
+						<img id="corporate-pic" ng-src="{{item.picture}}">
+						<h2>{{item.name}}</h2>
+						<p>￥：{{item.price}}元/年</p>
+						<p>{{item.life}}年起签</p>
 					</ion-item>
 				</ion-list>
 				<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>

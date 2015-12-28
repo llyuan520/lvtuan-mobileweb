@@ -15,7 +15,7 @@ body,
 	color: #333333;
 }
 .scroll-content{
-	background-color: #EEEEEE;
+	background-color: #fff;
 }
 .fc-33{
 	color: #333333;
@@ -301,8 +301,25 @@ img.avatar{border-radius: 50%;border:2px solid #fff;}
 .scroll{
 	background-color: #eeeeee;
 }
-.scroll .item-thumbnail-left {
-	padding-top: 25px;
+.corporate-list .corporate-items a {
+    padding-top: 20px;
+    padding-left: 134px;
+    min-height: 84px;
+}
+.corporate-list .corporate-items a:active {
+    background-color: #fff;
+}
+#corporate-pic {
+    position: absolute;
+    top: 20px;
+    left: 14px;
+    max-width: 100px;
+    max-height: 65px;
+    width: 100%;
+    height: 100%;
+}
+.corporate-list .corporate-items p {
+    margin-top:5px;
 }
 
 .list-lawyerinfo{
