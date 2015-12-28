@@ -148,7 +148,7 @@
         };
     };
     var showLoginUI = function() {
-        $('#loginmodal').modal('show');
+        $('#loginmodal').modal('hide');  //调用登录的显示隐藏
         $('#user_name').focus();
     };
     var hiddenLoginUI = function() {

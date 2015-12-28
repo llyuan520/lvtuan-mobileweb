@@ -27,6 +27,17 @@ lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $loca
     } else {
         $scope.currentLocation = currentLocation;
     }
+
+
+    //返回跳转页面
+	$scope.jump = function(url,id){
+		if(id){
+			location.href=url+$scope.id;
+		}
+		location.href=url;
+	    window.location.reload();
+	}
+
 })
 
 /****************************************************** 引导页 ******************************************************/
@@ -526,7 +537,6 @@ lvtuanApp.controller("groupviewCtrl",function($scope,$http,$state,$rootScope,$st
 		location.href='#/group/site/'+$scope.id;
 	    window.location.reload();
 	}
-
 })
 
 //圈子设置
@@ -2226,7 +2236,7 @@ lvtuanApp.controller("viewCtrl",function($scope,$http,$rootScope,$stateParams,ht
 	$scope.likes = function(id){
 		$http.post('http://'+$rootScope.hostName+'/like',
 		{
-			item_type : 'post',
+			item_type : 'user',
 			item_id   : id
 		}).success(function(data) {
         	console.info(data);
@@ -3111,10 +3121,6 @@ lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$
     	}
 	}
 
-	$scope.jumpreplied = function(){
-		location.href='#/lawyerquestion/replied';
-		window.location.reload();
-	}
 })
 
 

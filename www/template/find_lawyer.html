@@ -68,9 +68,9 @@
 
 				<div class="list" ng-controller="lawyerInfoCtr">
 				    <a class="item item-thumbnail-left" href="#" ng-repeat="lawyerInfoItem in lawyerInfoItems">
-				      <img class="img-header" src="{{lawyerInfoItem.iconHeader}}" />
+				      <img class="img-header" ng-src="{{lawyerInfoItem.iconHeader}}" />
 				      	<!--<img ng-src="img/icon-header.png"/>-->
-				      <h2><span class="sp-name fc-nan">{{lawyerInfoItem.name}}</span><span class="sp-level fc-nan">{{lawyerInfoItem.level}}</span><img ng-show="{{lawyerInfoItem.isDispVipImg}}" class="img-v" src="img/vip.png"/></h2>
+				      <h2><span class="sp-name fc-nan">{{lawyerInfoItem.name}}</span><span class="sp-level fc-nan">{{lawyerInfoItem.level}}</span><img ng-show="{{lawyerInfoItem.isDispVipImg}}" class="img-v" ng-src="img/vip.png"/></h2>
 				      <p>
 				      	擅长领域：{{lawyerInfoItem.beGoodAtField}}<br />
 				      	所在区域：{{lawyerInfoItem.address}}<br />
