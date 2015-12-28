@@ -82,17 +82,17 @@
                                     <div style="text-align: center"><a href="javascript:void(0)" id="comments-list" style="text-align: center">查看更多</a></div>
                                     <div id="page" class="loading" style="display: none">加载中...</div>
 
-                                    <div ng-repeat="comment in easemoParam.comments">
-                                        <div ng-if="comment.creator_id == user_name" style="text-align:right" > 
+                                    <div ng-repeat="comment in easemoParam.comments" class="easemobmain-list">
+                                        <div ng-if="comment.creator_id == user_name" class="easemobmain-record" style="text-align:right" >
                                             <p1>{{comment.created_at}}<span></span></p1>
                                             <p2>{{comment.creator_name}}<b></b></p2>
-                                            <img style="width: 10%;display: inline-block;vertical-align: middle;" ng-src="{{easemoParam.user_avatar}}"><br>
+                                            <img ng-src="{{easemoParam.user_avatar}}"><br>
                                             <p3 class="chat-content-p3" className="chat-content-p3">{{comment.content}}</p3>
                                         </div>
-                                        <div ng-if="comment.creator_id != user_name" style="text-align:left">
+                                        <div ng-if="comment.creator_id != user_name" class="easemobmain-record" style="text-align:left">
                                             <p1>{{comment.created_at}}<span></span></p1>
                                             <p2>{{comment.creator_name}}<b></b></p2>
-                                            <img style="width: 10%;display: inline-block;vertical-align: middle;" ng-src="{{easemoParam.user_avatar}}"><br>
+                                            <img ng-src="{{easemoParam.user_avatar}}"><br>
                                             <p3 class="chat-content-p3" className="chat-content-p3">{{comment.content}}</p3>
                                         </div>
                                     </div>
@@ -125,8 +125,8 @@
                                     </div>
                                     <div class="chat02_bar">
                                         <ul style="width:100%;">
-                                            <a href="##" style="display: inline-block;line-height: 35px;height: 35px;width:100%;">
-                                                <li style="width:100%;height: 30px;line-height: 35px;padding-left:0;position: relative;text-align: center;" onclick="sendText()">发&nbsp;&nbsp;送</li>
+                                            <a href="##" class="easemobmain-sub">
+                                                <li onclick="sendText()">发&nbsp;&nbsp;送</li>
                                             </a>
                                            <!--  <a href="##" style="float: right"><li >确认完成</li></a>    -->
                                         </ul>

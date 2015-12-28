@@ -143,11 +143,14 @@ a:hover {
 .chatRight {
 	position: relative;
 	height: 100%;
-    margin-top: -38px;
+    /*margin-top: -38px;*/
+}
+.group-cen {
+	margin-top: -3.5rem;
 }
 .word-height {
 	height: 100%;
-    padding: 38px 0 4.4rem;
+    padding: 3.5rem 0 4.4rem;
 }
 .chat01_title {
 	display: none;
@@ -295,16 +298,34 @@ a:hover {
 .chat02_content textarea {
     display: block;
     width: 100%;
-    height: 36px;
+    height: 2.9rem;
     padding: 0px;
     padding-left: 3%;
     margin: 0;
     border: 1px solid #999;
     font-size: 14px;
     overflow-y: auto;
-    line-height: 34px;
+    line-height: 2.8rem;
     resize: vertical;
     border-radius: 4px;
+}
+.chat02_bar .easemobmain-sub {
+	display: inline-block;
+	width: 100%;
+	height: 2.8rem;
+	background-color: #999;
+	line-height: 2.8rem;
+	border-radius: 4px;
+}
+.chat02_bar .easemobmain-sub li {
+	position: relative;
+	width: 100%;
+	height: 2.8rem;
+	padding-left: 0;
+	line-height: 2.8rem;
+	text-align: center;
+	font-size: 1.2rem;
+    color: #fff;
 }
 
 .chat03_name {
@@ -319,7 +340,7 @@ a:hover {
 .chat-content-p3 {
     position: relative;
     display: inline-block;
-    max-width: 100%;
+    max-width: 72%;
     padding: 0.6rem;
     background: #00cafa;
     color: #fff;
@@ -535,16 +556,43 @@ label.offline {
     *position: relative;
 }
 /*咨询详情*/
+.easemobmain-record {
+    position: relative;
+    text-align: right;
+    padding-right: 17%;
+}
+.easemobmain-record img {
+    position: absolute;
+    top: 5%;
+    right: 1%;
+    width: 15%;
+    display: inline-block;
+    vertical-align: middle;
+}
+.easemobmain-record p1 {
+	display: inline-block;
+    margin-bottom: 0.8rem;
+}
+.easemobmain-record p2 {
+	display: inline-block;
+    margin-bottom: 0.8rem;
+    margin-left: 0.8rem;
+}
+.easemobmain-list {
+	float: right;
+    width: 100%;
+    margin: 0.8rem 0;
+}
 .chatRight .chat00_content {
 	width:100%;
-	height: 93%;
-	padding: 20px;
+	height: 100%;
+	/*padding: 20px;*/
 	display:block;
 	overflow-y: scroll;
 }
 .chatRight .chats {
 	height: 100%;
-	padding-bottom: 156px;
+	padding-bottom: 57px;
 	background-color: #fff;
 }
 .clearfix:after {
