@@ -164,8 +164,11 @@ lvtuanApp.controller("ionicNavBarDelegateCtrl",function($state,$timeout,$http,$l
 
 
 //首页
-lvtuanApp.controller("indexCtrl",function($scope,listHelper){
-	listHelper.bootstrap('/lawyer/list_lawyers?is_recommended=1', $scope);
+lvtuanApp.controller("indexCtrl",function($scope,listHelper,locationService){
+	$scope.locations = locationService.getLocation();
+	$scope.city = $scope.locations.city_id;
+
+	listHelper.bootstrap('/lawyer/list_lawyers?is_recommended=1&city_id='+$scope.city, $scope);
     
 	$scope.mylvteam = function(){
 		location.href='#/mylvteam';
@@ -2120,6 +2123,9 @@ lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$l
 	  	if(params.order_by){
 	  		param.push('order_by=' + params.order_by);
 	  	}
+	  	if($scope.city){
+	  		param.push('city_id=' + $scope.city);
+	  	}
 	  	param = param.join('&');
 	  	console.info(param)
 	  	geturl(param);
@@ -2241,7 +2247,7 @@ lvtuanApp.controller("viewCtrl",function($scope,$http,$rootScope,$stateParams,ht
 		}).success(function(data) {
         	console.info(data);
         	var itmes = data.data;
-        	$scope.items.task_count = itmes.likes_count;
+        	$scope.items.likes_count = itmes.likes_count;
            layer.show("点赞成功！");
         });
 	}
@@ -3092,7 +3098,7 @@ lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$
 		    	'comments'		: itmes.comments
 	    	};
 
-	    	console.info($scope.easemoParam);
+	    	console.info('easemoParam',$scope.easemoParam);
 	    	$scope.jwtToken = localStorage.getItem('jwtToken');
 	    	console.info($scope.jwtToken);
 	    	localStorage.setItem("easemoParam", JSON.stringify($scope.easemoParam));
@@ -4076,10 +4082,10 @@ lvtuanApp.controller("citypickerCtrl",function($http,$location,$scope,$rootScope
 		locations.city_name = obj.city_name;
 
 		locationService.saveLocation(locations);
-		location.href='#/lawyerlist';
+		/*location.href='#/lawyerlist';
+		window.location.reload();*/
+		$ionicHistory.goBack();
 		window.location.reload();
-
-		//$ionicHistory.goBack();
 	}
 
 	$scope.jumplawyerlist = function(){
