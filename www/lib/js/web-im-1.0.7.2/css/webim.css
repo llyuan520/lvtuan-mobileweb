@@ -510,7 +510,7 @@ label.offline {
 	background: url('../img/status.gif') no-repeat 0 -11px;
 	bottom: 4px;
 	_top: 25px;
-	align: center
+	align: center;
 }
 
 .fade {
@@ -556,11 +556,12 @@ label.offline {
 }
 .chat01_content p1 {
 	/*display: none;*/
-	margin-left: 0.8rem;
+	/*margin-left: 0.8rem;*/
 }
 .chat01_content p2 {
     text-align: right;
     margin-bottom: 0.4rem;
+    margin-left: 0.8rem;
 }
 .chat01_content div {
     float: left;
