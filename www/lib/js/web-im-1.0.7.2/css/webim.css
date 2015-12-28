@@ -560,7 +560,6 @@ label.offline {
 }
 .chat01_content p2 {
     text-align: right;
-    display: inline-block;
     margin-bottom: 0.4rem;
 }
 .chat01_content div {
