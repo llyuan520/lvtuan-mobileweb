@@ -301,6 +301,7 @@ img.avatar{border-radius: 50%;border:2px solid #fff;}
 .scroll{
 	background-color: #eeeeee;
 }
+<<<<<<< Updated upstream
 .corporate-list .corporate-items a {
     padding-top: 20px;
     padding-left: 134px;
@@ -320,6 +321,10 @@ img.avatar{border-radius: 50%;border:2px solid #fff;}
 }
 .corporate-list .corporate-items p {
     margin-top:5px;
+=======
+.scroll .item-thumbnail-left {
+	/*padding-top: 25px;*/
+>>>>>>> Stashed changes
 }
 
 .list-lawyerinfo{

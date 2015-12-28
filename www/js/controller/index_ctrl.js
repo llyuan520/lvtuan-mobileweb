@@ -1,7 +1,7 @@
 var lvtuanApp = angular.module('lvtuanApp.Ctrl', ['ionic','ngSanitize','ngFileUpload','listModule','authModule','wxModule','locationModule'])
 lvtuanApp.constant("HOST", AppSettings.baseApiUrl)
 
-lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $location, userService, authService, $http, locationService){
+lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $location,$ionicHistory, $http, userService, authService, locationService){
 	var self = this;
 
 	self.login = function() {
@@ -37,20 +37,24 @@ lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $loca
 		location.href=url;
 	    window.location.reload();
 	}
+
+
+
 	//返回跳转上一次操作的页面
 	$scope.jumpGoBack = function(){
-		$ionicHistory.goBack();
-		window.location.reload();
+		//$ionicHistory.goBack();
+		window.history.back();
+		//window.location.reload();
+    	
 	}
-
-	var $body = $('body');    
-	document.title = '律团';  
-	// hack在微信等webview中无法修改document.title的情况    
-	var $iframe = $('<iframe src="/favicon.ico"></iframe>').on('load', function() {      
-			setTimeout(function() {       
-				 $iframe.off('load').remove()      
-			}, 0)   
-		}).appendTo($body);
+	var $body = $('body');
+	document.title = '律团';
+	// hack在微信等webview中无法修改document.title的情况
+	var $iframe = $('<iframe src="/favicon.ico"></iframe>').on('load', function() {
+	  setTimeout(function() {
+	    $iframe.off('load').remove()
+	  }, 0)
+	}).appendTo($body)
 
 })
 
@@ -2125,8 +2129,8 @@ lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$l
 	  	if(params.q){
 	  		param.push('q=' + params.q);
 	  	}
-	  	if(params.city_id){
-	  		param.push('city_id=' + params.city_id);
+	  	if(params.district_id){
+	  		param.push('district_id=' + params.district_id);
 	  	}
 	  	if(params.cat_id){
 	  		param.push('cat_id=' + params.cat_id);
