@@ -555,7 +555,8 @@ label.offline {
 	*zoom:1;
 }
 .chat01_content p1 {
-	display: none;
+	/*display: none;*/
+	margin-left: 0.8rem;
 }
 .chat01_content p2 {
     text-align: right;
