@@ -86,15 +86,15 @@
 
                                     <div ng-repeat="comment in easemoParam.comments">
                                         <div ng-if="comment.creator_id == user_name" style="text-align:right" > 
-                                            <img ng-src="{{easemoParam.user_avatar}}">
-                                            <p1>{{comment.creator_name}}<span></span></p1>
-                                            <p2>{{comment.created_at}}<b></b></p2><br>
+                                            <p1>{{comment.created_at}}<span></span></p1>
+                                            <p2>{{comment.creator_name}}<b></b></p2>
+                                            <img style="width: 10%;display: inline-block;vertical-align: middle;" ng-src="{{easemoParam.user_avatar}}"><br>
                                             <p3 class="chat-content-p3" className="chat-content-p3">{{comment.content}}</p3>
                                         </div>
                                         <div ng-if="comment.creator_id != user_name" style="text-align:left">
-                                            <img ng-src="{{easemoParam.user_avatar}}">
-                                            <p1>{{comment.creator_name}}<span></span></p1>
-                                            <p2>{{comment.created_at}}<b></b></p2><br>
+                                            <p1>{{comment.created_at}}<span></span></p1>
+                                            <p2>{{comment.creator_name}}<b></b></p2>
+                                            <img style="width: 10%;display: inline-block;vertical-align: middle;" ng-src="{{easemoParam.user_avatar}}"><br>
                                             <p3 class="chat-content-p3" className="chat-content-p3">{{comment.content}}</p3>
                                         </div>
                                     </div>
