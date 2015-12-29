@@ -148,7 +148,7 @@
         };
     };
     var showLoginUI = function() {
-        $('#loginmodal').modal('hide');  //调用登录的显示隐藏
+        $('#loginmodal').modal('show');  //调用登录的显示隐藏
         $('#user_name').focus();
     };
     var hiddenLoginUI = function() {
@@ -1462,7 +1462,7 @@
         } else {
             lineDiv.style.textAlign = "left";
         }
-        lineDiv.className = "className";
+        lineDiv.className = "immediate-information";
         var create = false;
         if (msgContentDiv == null) {
             msgContentDiv = createContactChatDiv(contactDivId);

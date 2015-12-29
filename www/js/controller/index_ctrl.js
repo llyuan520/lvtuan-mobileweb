@@ -42,8 +42,8 @@ lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $loca
 
 	//返回跳转上一次操作的页面
 	$scope.jumpGoBack = function(){
-		//$ionicHistory.goBack();
-		window.history.back();
+		$ionicHistory.goBack();
+		//window.history.back();
 		//window.location.reload();
     	
 	}
@@ -55,7 +55,6 @@ lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $loca
 	    $iframe.off('load').remove()
 	  }, 0)
 	}).appendTo($body)
-
 })
 
 /****************************************************** 引导页 ******************************************************/
@@ -69,49 +68,37 @@ lvtuanApp.controller("HeaderController",function($scope,$location){
 })
 
 //设置是否显示底部导航 ng-class="{'tabs-item-hide': $root.hideTabs}"
-/*lvtuanApp.directive('hideTabs', function($rootScope) {
+lvtuanApp.directive('hideTabs', function($rootScope) {
     return {
         restrict: 'A',
         link: function(scope, element, attributes) {
             scope.$on('$ionicView.beforeEnter', function() {
                 scope.$watch(attributes.hideTabs, function(value){
-                    $rootScope.hideTabs = value;
+                	if(value == undefined){
+                		$rootScope.hideTabs = true;
+                	}else{
+                		$rootScope.hideTabs = value;
+                	}
+                   
                 });
             });
 
             scope.$on('$ionicView.beforeLeave', function() {
-                $rootScope.hideTabs = false;
+            	scope.$watch(attributes.hideTabs, function(value){
+                	if(value == undefined){
+                		$rootScope.hideTabs = true;
+                	}else{
+                		$rootScope.hideTabs = value;
+                	}
+                   
+                });
+                
             });
         }
     };
-});*/
-
-// 如果想在ion-view中隐藏底部导航，则加入show-tabs，例如：<ion-view hide-tabs view-title="首页">
-lvtuanApp.directive('hideTabs', function($rootScope) {
-  return {
-      restrict: 'A',
-      link: function($scope, $el) {
-          $rootScope.hideTabs = 'tabs-item-hide';
-          $scope.$on('$destroy', function() {
-              $rootScope.hideTabs = '';
-          });
-      }
-  };
 });
 
-// 如果想在ion-view中显示底部导航，则加入show-tabs，例如：<ion-view show-tabs view-title="首页">
-lvtuanApp.directive('showTabs', function($rootScope) {
-  return {
-      restrict: 'AE',
-      link: function($scope, $el) {
-          $rootScope.hideTabs = '';
-          $scope.$on('$destroy', function() {
-              $rootScope.hideTabs = 'tabs-item-hide';
-          });
-      }
-  };
-});
-
+//显示星星
 lvtuanApp.directive('star', function () {
   return {
     template: '<ul class="rating" ng-mouseleave="leave()">' +
@@ -3090,7 +3077,6 @@ lvtuanApp.controller("lawyerquestionsviewCtrl",function($http,$scope,$stateParam
 
 //咨询和订单的一对一咨询 - 即时通讯
 lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$stateParams){
-
 	localStorage.removeItem('easemoParam'); //清空之前的旧数据
 	$scope.user_name = "";
 	$scope.user_password = "";
@@ -3125,10 +3111,11 @@ lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$
 				if(getuserpwd(itmes) == true){
 	        		if(angular.isDefined(login)){
 	        			login();
+	        			console.info('login()');
 	        			clearInterval(time);
 	        		}
 	        	}
-			}, 2000); 
+			}, 1000); 
 		}
 
 	})

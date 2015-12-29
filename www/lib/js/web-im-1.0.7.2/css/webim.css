@@ -603,10 +603,6 @@ label.offline {
 .clearfix { 
 	*zoom:1;
 }
-.chat01_content p1 {
-	/*display: none;*/
-	/*margin-left: 0.8rem;*/
-}
 .chat01_content p2 {
     text-align: right;
     margin-bottom: 0.4rem;
@@ -617,4 +613,19 @@ label.offline {
     width: 100%;
     padding-left: 22%;
     margin: 0.8rem 0;
+}
+.immediate-information, .textbox {
+    display: inline-block;
+    width: 100%;
+    padding: 0 17%;
+    margin: 0.8rem 0;
+}
+.immediate-information p1, .textbox p1 {
+    display: inline-block;
+    margin-bottom: 0.8rem;
+}
+.immediate-information p2, .textbox p2 {
+    display: inline-block;
+    margin-bottom: 0.8rem;
+    margin-left: 0.8rem;
 }
