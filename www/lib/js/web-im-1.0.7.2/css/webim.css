@@ -299,13 +299,12 @@ a:hover {
     display: block;
     width: 100%;
     height: 2.9rem;
-    padding: 0px;
-    padding-left: 3%;
+    padding: 0.9rem 0 0 3%;
     margin: 0;
     border: 1px solid #999;
-    font-size: 14px;
+    font-size: 1.2rem;
     overflow-y: auto;
-    line-height: 2.8rem;
+    /*line-height: 2.7rem;*/
     resize: vertical;
     border-radius: 4px;
 }
@@ -614,10 +613,6 @@ label.offline {
 .clearfix { 
     *zoom:1;
 }
-.chat01_content p1 {
-    /*display: none;*/
-    /*margin-left: 0.8rem;*/
-}
 .chat01_content p2 {
     text-align: right;
     margin-bottom: 0.4rem;
@@ -643,4 +638,7 @@ label.offline {
     display: inline-block;
     margin-bottom: 0.8rem;
     margin-left: 0.8rem;
+}
+.chat00_content .loading {
+    text-align: center;
 }

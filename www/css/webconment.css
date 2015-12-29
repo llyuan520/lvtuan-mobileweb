@@ -141,6 +141,9 @@ body,
 .web-body{
 	background-color:#F0EEF9;
 }
+.page-background {
+    background-color: #fff;
+}
 .web-top10{
 	height: 100%;
 }
