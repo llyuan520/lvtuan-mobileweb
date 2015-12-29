@@ -15,7 +15,8 @@ body,
 	color: #333333;
 }
 .scroll-content{
-	background-color: #fff;
+	background-color: #eee;
+    margin-bottom: 50px;
 }
 .fc-33{
 	color: #333333;
@@ -34,7 +35,7 @@ body,
 	border-top: none;
 	border-right: none;
 	border-bottom: none;
-	border-left: 1px solid #DDDDDD!important;
+	border-left: 1px solid #ddd!important;
 }
 .list-margin-top{
 	margin-top: 19px;
