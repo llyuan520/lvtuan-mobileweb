@@ -1,7 +1,7 @@
-<ion-view view-title="我的">
+<ion-view hide-tabs="false" view-title="我的">
 		<ion-pane  class="web-body">
 			<ion-header-bar class="bar bar-header bar-light">
-				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-click="jump('#/index')" ></a>
+				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-href="#/index" ></a>
 				<h1 class="title">我的</h1>
 			</ion-header-bar>
 
@@ -15,8 +15,8 @@
 				    	<a class="item-thumbnail-left" ng-if="currentUser.is_verified_lawyer" ng-href="#/becomelawyer" style="position: absolute;top: 0px;left: 0px;">
 				    		<img ng-src="{{items.user.avatar}}" style="width:100%;">
 				    	</a>
-			      		<a class="web-top10" ng-if="!currentUser.is_verified_lawyer" ng-href="#/info">{{items.user.realname}}</a>
-			      		<a class="web-top10" ng-if="currentUser.is_verified_lawyer" ng-href="#/becomelawyer">{{items.user.realname}} <span class="web-font14">律师</span></a>
+			      		<a style="margin-top: 20px;display: inline-block;" ng-if="!currentUser.is_verified_lawyer" ng-href="#/info">{{items.user.realname}}</a>
+			      		<a style="margin-top: 20px;display: inline-block;" ng-if="currentUser.is_verified_lawyer" ng-href="#/becomelawyer">{{items.user.realname}} <span class="web-font14">律师</span></a>
 					    <a ng-href="#/messages">
 						      <icon  class="icon ion-ios-email-outline positive" style="font-size: 42px;"></icon>
 						</a>

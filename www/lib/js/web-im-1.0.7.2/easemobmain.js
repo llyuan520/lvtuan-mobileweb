@@ -1462,6 +1462,7 @@
         } else {
             lineDiv.style.textAlign = "left";
         }
+
         var create = false;
         if (msgContentDiv == null) {
             msgContentDiv = createContactChatDiv(contactDivId);
