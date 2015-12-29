@@ -83,13 +83,13 @@
                                     <div id="page" class="loading" style="display: none">加载中...</div>
 
                                     <div ng-repeat="comment in easemoParam.comments" class="easemobmain-list">
-                                        <div ng-if="comment.creator_id == user_name" class="easemobmain-record" style="text-align:right" >
+                                        <div ng-if="comment.creator_id == user_name" class="easemobmain-record img-right" style="text-align:right" >
                                             <p1>{{comment.created_at}}<span></span></p1>
                                             <p2>{{comment.creator_name}}<b></b></p2>
                                             <img ng-src="{{easemoParam.user_avatar}}"><br>
                                             <p3 class="chat-content-p3" className="chat-content-p3">{{comment.content}}</p3>
                                         </div>
-                                        <div ng-if="comment.creator_id != user_name" class="easemobmain-record" style="text-align:left">
+                                        <div ng-if="comment.creator_id != user_name" class="easemobmain-record img-left" style="text-align:left">
                                             <p1>{{comment.created_at}}<span></span></p1>
                                             <p2>{{comment.creator_name}}<b></b></p2>
                                             <img ng-src="{{easemoParam.user_avatar}}"><br>
@@ -125,7 +125,7 @@
                                     </div>
                                     <div class="chat02_bar">
                                         <ul style="width:100%;">
-                                            <a href="javascript:void(0);" class="easemobmain-sub">
+                                            <a href="##" class="easemobmain-sub">
                                                 <li onclick="sendText()">发&nbsp;&nbsp;送</li>
                                             </a>
                                            <!--  <a href="##" style="float: right"><li >确认完成</li></a>    -->
