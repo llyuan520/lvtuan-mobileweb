@@ -42,8 +42,8 @@ lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $loca
 
 	//返回跳转上一次操作的页面
 	$scope.jumpGoBack = function(){
-		$ionicHistory.goBack();
-		//window.history.back();
+		//$ionicHistory.goBack();
+		window.history.back();
 		//window.location.reload();
 	}
 
@@ -2194,7 +2194,7 @@ lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$l
 
 
 //律师个人主页
-lvtuanApp.controller("viewCtrl",function($scope,$http,$rootScope,$stateParams,httpWrapper){
+lvtuanApp.controller("viewCtrl",function($scope,$http,$rootScope,$stateParams,httpWrapper,authService){
 	$scope.max = 5;
 	$scope.ratingVal = 5;
 	$scope.readonly = true;
@@ -2240,7 +2240,15 @@ lvtuanApp.controller("viewCtrl",function($scope,$http,$rootScope,$stateParams,ht
    $scope.graphic5 = function(id,index){
    	sessionStorage.setItem("lawyerId", id);
    	sessionStorage.setItem("index", index);
-	location.href='#/graphic';
+
+   	var currentUser = authService.getUser();
+	if(currentUser.user_group_id == 1 || currentUser.user_group_id == 2 && currentUser.is_verified == 0){
+		//普通用户个人信息
+		location.href='#/graphic';
+	}else{
+		layer.show("对不起，您没有该功能操作权限!");
+	}
+	
    }
 
    //点赞

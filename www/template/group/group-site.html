@@ -1,7 +1,9 @@
 <ion-view hide-tabs="true"  view-title="圈子设置">
 	<ion-pane  class="web-body">
 		<ion-header-bar class="bar bar-header bar-light">
-			<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-click="jumpGoBack()"></a>
+			<button class="button button-clear button-positive" ng-click="jumpGoBack()">  
+                <i class="icon icon-left ion-ios-arrow-back"></i>  
+            </button>
 			<h1 ng-show="is_mine == true" class="title">圈子设置</h1>
 			<h1 ng-show="is_mine == false" class="title">圈子详情</h1>
 			<button ng-show="is_mine == true" ng-click="edit()" class="button button-clear button-positive" type="button">保存</button>
