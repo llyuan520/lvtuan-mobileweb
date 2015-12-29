@@ -14,7 +14,7 @@
 			<div class="item group-site">
 				<a ng-repeat="member in group.members">
 					<img class="avatar" src="{{member.avatar}}">
-					<i ng-show="isclose" class="icon ion-close-circled color999 close" ng-click="del({{member.user_id}},$index)"></i>
+					<i ng-if="member.user_id != currentUser.id" ng-show="isclose" class="icon ion-close-circled color999 close" ng-click="del({{member.user_id}},$index)"></i>
 					<br>
 					<p>{{member.realname}}</p>
 				</a>
