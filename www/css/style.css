@@ -302,8 +302,7 @@ img.avatar{border-radius: 50%;border:2px solid #fff;}
 	background-color: #eeeeee;
 }
 .corporate-list .corporate-items a {
-    padding-top: 20px;
-    padding-left: 134px;
+    padding: 20px 30px 20px 134px;
     min-height: 84px;
 }
 .corporate-list .corporate-items a:active {

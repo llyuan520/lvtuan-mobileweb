@@ -1462,6 +1462,7 @@
         } else {
             lineDiv.style.textAlign = "left";
         }
+        lineDiv.className = "className";
         var create = false;
         if (msgContentDiv == null) {
             msgContentDiv = createContactChatDiv(contactDivId);
@@ -1493,7 +1494,7 @@
         $('#delfridentId').val('好友账号');//输入好友账号
         $('#del-frident-warning').html("");
     };
-    //消息通知操作时条用的方法
+    //消息通知操作时调用的方法
     var showNewNotice = function(message) {
         $('#confirm-block-div-modal').modal('toggle');
         $('#confirm-block-footer-body').html(message);
