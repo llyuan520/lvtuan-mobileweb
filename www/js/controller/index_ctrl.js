@@ -42,8 +42,8 @@ lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $loca
 
 	//返回跳转上一次操作的页面
 	$scope.jumpGoBack = function(){
-		//$ionicHistory.goBack();
-		window.history.back();
+		$ionicHistory.goBack();
+		//window.history.back();
 		//window.location.reload();
 	}
 
@@ -4094,6 +4094,11 @@ lvtuanApp.controller("citypickerCtrl",function($http,$location,$scope,$rootScope
 			location.href='#/lawyerlist';
 		}
 		window.location.reload();
+	}
+
+	$scope.jump_citypicke_GoBack = function(){
+		$ionicHistory.goBack();
+		//window.location.reload();
 	}
 
 })
