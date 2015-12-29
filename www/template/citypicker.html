@@ -4,7 +4,6 @@
     top: 0;
     left: 0;
     bottom: 0;*/
-    overflow: auto;
     width: 100%;
 	z-index: 1;
 }
@@ -20,6 +19,8 @@
     -webkit-transform: translate(0, -50%);
     transform: translate(0, -50%);
     border-radius: 5px;
+    width: 10%;
+    text-align: center;
 }
 .navbar li{
 	height: 1.3rem;
@@ -29,31 +30,34 @@
 .tabs.tabs-icon-top.tabs-color-positive{
 	display: none;
 }
+
 </style>
 <ion-view hide-tabs="true" view-title="选择地址">
 		<ion-pane  class="web-body">
 			<ion-header-bar class="bar bar-header bar-light">
-				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-click="jumpGoBack()"></a>
+				<i class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back"  ng-click="jumpGoBack()"></i>
 				<h1 class="title">选择地址</h1>
 				<!-- <button ng-click="createSubmit()" class="button button-clear button-positive" type="button">保存</button> -->
 			</ion-header-bar>
 
-			<ion-content class="citypicker">
-				<div class="province">
-					<div class="list" id="{{key}}" ng-repeat="(key, value) in provinces">
-						<div class="item item-divider">
-					          {{key}}
-					    </div>
-				        <div class="item" ng-repeat="(key, value) in value" ng-click="province(value)">
-				            {{value.value}}
-				        </div>
+			<ion-content delegate-handle="mainScroll">
+				<div class="citypicker">
+					<div class="province">
+						<div class="list" id="{{key}}" ng-repeat="(key, value) in provinces">
+							<div class="item item-divider">
+						          {{key}}
+						    </div>
+					        <div class="item" ng-repeat="(key, value) in value" ng-click="province(value)">
+					            {{value.value}}
+					        </div>
+						</div>
 					</div>
-				</div>
-				<div class="cities">
-					<div class="list">
-				        <div class="item" ng-repeat="(key, value) in citys" ng-click="citie(value)">
-				            {{value.value}}
-				        </div>
+					<div class="cities">
+						<div class="list">
+					        <div class="item" ng-repeat="(key, value) in citys" ng-click="citie(value)">
+					            {{value.value}}
+					        </div>
+						</div>
 					</div>
 				</div>
 		</ion-content>

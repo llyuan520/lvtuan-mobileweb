@@ -42,11 +42,11 @@ lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $loca
 
 	//返回跳转上一次操作的页面
 	$scope.jumpGoBack = function(){
-		$ionicHistory.goBack();
-		//window.history.back();
+		//$ionicHistory.goBack();
+		window.history.back();
 		//window.location.reload();
-    	
 	}
+
 	var $body = $('body');
 	document.title = '律团';
 	// hack在微信等webview中无法修改document.title的情况
@@ -4024,7 +4024,7 @@ lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$io
 })
 
 
-lvtuanApp.controller("citypickerCtrl",function($http,$location,$scope,$rootScope,$anchorScroll,$ionicHistory,locationService){
+lvtuanApp.controller("citypickerCtrl",function($http,$location,$scope,$rootScope,$anchorScroll,$ionicHistory,$stateParams,$ionicScrollDelegate,locationService){
 	//获取地址定位 根据a-z排序显示
 	$http.get('http://'+$rootScope.hostName+'/area/province/letters')
 	.success(function(data) {
@@ -4050,6 +4050,8 @@ lvtuanApp.controller("citypickerCtrl",function($http,$location,$scope,$rootScope
 		$scope.province = val.key;
 		$(".citypicker .cities").show();
 		getCityParm($scope.province);
+		//回到顶部
+		$ionicScrollDelegate.$getByHandle('mainScroll').scrollTop();
 	}
 
 	//获取 市区
@@ -4070,7 +4072,6 @@ lvtuanApp.controller("citypickerCtrl",function($http,$location,$scope,$rootScope
 
 	$scope.citie = function(val){
 		$(".citypicker .province,.citypicker .cities").hide();
-		console.info(val);
 		$scope.items = {
 			'city_id' : angular.toJson(val.key, true),
 			'city_name' : val.value
@@ -4085,11 +4086,13 @@ lvtuanApp.controller("citypickerCtrl",function($http,$location,$scope,$rootScope
 
 		locations.city_id = obj.city_id;
 		locations.city_name = obj.city_name;
-
 		locationService.saveLocation(locations);
-		/*location.href='#/lawyerlist';
-		window.location.reload();*/
-		$ionicHistory.goBack();
+
+		if($stateParams.id == "index"){
+			location.href='#/index';
+		}else{
+			location.href='#/lawyerlist';
+		}
 		window.location.reload();
 	}
 
