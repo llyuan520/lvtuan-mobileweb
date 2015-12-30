@@ -1,12 +1,11 @@
-<ion-view hide-tabs view-title="找律师">
+<ion-view hide-tabs="true" view-title="找律师">
 		<ion-pane>
-		<h1 class="title">找律师</h1>
 			<ion-header-bar class="bar bar-header bar-light">
-				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" onclick="history.go(-1);"></a>
+				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-href="#/index"></a>
 				<h1 class="title">找律师</h1>
-				<a ng-href="#/citypicker" class="icon-right button-clear" style="position: absolute;top: 12px;right: 5px;bottom: 5px;">
+				<a ng-href="#/citypicker/lawyerlist" class="icon-right button-clear" style="position: absolute;top: 12px;right: 5px;bottom: 5px;">
 					<label ng-bind="currentLocation.city_name"></label>
-					<ion class="ion-ios-location-outline" style="font-size: 32px; vertical-align: text-bottom;"></ion>
+					<!-- <ion class="ion-ios-location-outline" style="font-size: 32px; vertical-align: text-bottom;"></ion> -->
 				</a>
 			</ion-header-bar>
 			
@@ -22,10 +21,10 @@
 						</div>
 						<div class="slct-title item item-input-inset web-body" style="background-color:#fff">
 							<div class="select-cnt">
-					            <select name="city_id" ng-change="searchCity()" ng-model="city_id">
+					            <select name="district_id" ng-change="searchCity()" ng-model="district_id">
 							      <option value="" selected>所在区域</option>
-							      <option ng-repeat="citie in cities" value="{{citie.city_code}}">
-							      	{{citie.city_name}}
+							      <option ng-repeat="district in districts" value="{{district.key}}">
+							      	{{district.value}}
 							      </option>
 							    </select>
 					            <i class="select"></i>

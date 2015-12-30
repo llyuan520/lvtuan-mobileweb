@@ -1,8 +1,8 @@
 <style type="text/css">
 .css-form .row{padding: 5px 0}
-.css-form .item-input{padding: 6px 0 5px 0px}
+.css-form .item-input{padding: 6px 0 5px 0px;}
 </style>
-<ion-view hide-tabs view-title="认证成为律师">
+<ion-view hide-tabs="true" view-title="认证成为律师">
 		<ion-pane  class="web-body">
 			<ion-header-bar class="bar bar-header bar-light">
 				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-href="#/center"></a>
@@ -188,20 +188,22 @@
 						</div>
 						<div class="item item-input">
 							<div class="row">
-							  <div class="col col-center">语音咨询价格</div>
-							  <div class="col col-55 col-center">
+							  <div class="col col-center">语音咨询</div>
+							  <div class="col col-50 col-center">
 							  	<input placeholder="请输入语音咨询价格" ng-model="phonereplyfee" name="phone_reply_fee" type="number" required>
 							  	<span class="error" ng-show="myForm.phone_reply_fee.$error.number">您输入的不是数字!</span>
 							  </div>
+							  <div class="col col-center">元/次</div>
 							</div>
 						</div>
 						<div class="item item-input">
 							<div class="row">
-							  <div class="col col-center">图文咨询价格</div>
-							  <div class="col col-55 col-center">
+							  <div class="col col-center">图文咨询</div>
+							  <div class="col col-50 col-center">
 							  	<input placeholder="请输入图文咨询价格" ng-model="textreplyfee" name="text_reply_fee" type="number" required>
 							  	<span class="error" ng-show="myForm.text_reply_fee.$error.number">您输入的不是数字!</span>
 							  </div>
+							  <div class="col col-center">元/次</div>
 							</div>
 						</div>
 						

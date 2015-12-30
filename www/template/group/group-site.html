@@ -1,7 +1,9 @@
-<ion-view hide-tabs  view-title="圈子设置">
+<ion-view hide-tabs="true"  view-title="圈子设置">
 	<ion-pane  class="web-body">
 		<ion-header-bar class="bar bar-header bar-light">
-			<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" onclick="history.go(-1);"></a>
+			<button class="button button-clear button-positive" ng-click="jumpGoBack()">  
+                <i class="icon icon-left ion-ios-arrow-back"></i>  
+            </button>
 			<h1 ng-show="is_mine == true" class="title">圈子设置</h1>
 			<h1 ng-show="is_mine == false" class="title">圈子详情</h1>
 			<button ng-show="is_mine == true" ng-click="edit()" class="button button-clear button-positive" type="button">保存</button>
@@ -11,8 +13,8 @@
 		<ion-content style="margin-bottom: 0px;">
 			<div class="item group-site">
 				<a ng-repeat="member in group.members">
-					<img class="avatar" src="http://mobiledev.wdlst.law-pc-new/{{member.avatar}}">
-					<i ng-show="isclose" class="icon ion-close-circled color999 close" ng-click="del({{member.user_id}},$index)"></i>
+					<img class="avatar" src="{{member.avatar}}">
+					<i ng-if="member.user_id != currentUser.id" ng-show="isclose" class="icon ion-close-circled color999 close" ng-click="del({{member.user_id}},$index)"></i>
 					<br>
 					<p>{{member.realname}}</p>
 				</a>

@@ -1,11 +1,14 @@
-<ion-view hide-tabs view-title="律师的个人主页">
+<ion-view hide-tabs="true" view-title="律师个人主页">
 		<ion-pane  class="web-body">
 			<ion-header-bar class="bar bar-header bar-light" style="background-color:#2BA1E8;border-bottom:0px;">
-				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" style="color:#ffffff;" onclick="history.go(-1);"></a>
+				<button class="button button-clear button-positive" ng-click="jumpGoBack()">  
+                    <i class="icon icon-left ion-ios-arrow-back" style="color:#ffffff;"></i>  
+                </button> 
+				<h1 class="title" style="color:#fff;">律师个人主页</h1>
 			</ion-header-bar>
 			<ion-content class="web-body">
-				<div class="list" style="width:100%;height:161px;border-top:0px;background:url({{items.bg_img}});background-size:100% 100%;">
-				    <a class="item item-thumbnail-left" style="background:none;border:0px;padding-left:100px;padding-top:50px;background:rgba(43,159,230,0.5);">
+				<div class="list view-heard" style="background:url({{items.bg_img}});background-size:100% 100%;">
+				    <a class="item item-thumbnail-left">
 				      <img class="avatar" ng-src="{{items.avatar}}" spinner-on-load style="left:10px;top:50px;">
 				      <h2 class="web-top10" style="color:#ffffff;">{{items.realname}}  <span class="web-font14">律师</span></h2>
 				      <h2 class="web-top10" style="color:#ffffff;">您的专属律师</h2>
@@ -14,8 +17,9 @@
 				      	<div star rating-value="ratingVal" max="max" on-hover="onHover" on-leave="onLeave" readonly="{{readonly}}"></div>
 				      </div>
 				      <div style="font-size:14px;width:50px;height:30px;float:right;line-height:30px;color:#ffffff;">
-				      	<p style="font-size:14px;width:30px;border-radius:30px;height:30px;float:left;background-color:#ffffff;text-align:center;"><i class="icon ion-android-favorite web-ion-img1-5" style="color:#f00;"></i></p>
-				      	&nbsp;{{items.task_count}}
+				      	<p ng-if="items.is_like == false" ng-click="likes(items.id)" style="font-size:14px;width:30px;border-radius:30px;height:30px;float:left;background-color:#ffffff;text-align:center;"><i class="icon ion-android-favorite-outline web-ion-img1-5" style="color:#f00;"></i></p>
+				      	<p ng-if="items.is_like == true" style="font-size:14px;width:30px;border-radius:30px;height:30px;float:left;background-color:#ffffff;text-align:center;"><i class="icon ion-android-favorite web-ion-img1-5" style="color:#f00;"></i></p>
+				      	&nbsp;{{items.likes_count}}
 				      </div>
 				    </a>
 				</div>

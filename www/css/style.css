@@ -15,7 +15,8 @@ body,
 	color: #333333;
 }
 .scroll-content{
-	background-color: #EEEEEE;
+	background-color: #eee;
+    margin-bottom: 50px;
 }
 .fc-33{
 	color: #333333;
@@ -34,7 +35,7 @@ body,
 	border-top: none;
 	border-right: none;
 	border-bottom: none;
-	border-left: 1px solid #DDDDDD!important;
+	border-left: 1px solid #ddd!important;
 }
 .list-margin-top{
 	margin-top: 19px;
@@ -301,8 +302,24 @@ img.avatar{border-radius: 50%;border:2px solid #fff;}
 .scroll{
 	background-color: #eeeeee;
 }
-.scroll .item-thumbnail-left {
-	padding-top: 25px;
+.corporate-list .corporate-items a {
+    padding: 20px 30px 20px 134px;
+    min-height: 84px;
+}
+.corporate-list .corporate-items a:active {
+    background-color: #fff;
+}
+#corporate-pic {
+    position: absolute;
+    top: 20px;
+    left: 14px;
+    max-width: 100px;
+    max-height: 65px;
+    width: 100%;
+    height: 100%;
+}
+.corporate-list .corporate-items p {
+    margin-top:5px;
 }
 
 .list-lawyerinfo{
@@ -368,7 +385,7 @@ img.avatar{border-radius: 50%;border:2px solid #fff;}
 	width:30px;
 	height:30px;
 	border-radius: 15px;
-	 background:rgba(255,255,255,.8)
+	 background:rgba(255,255,255,.8);
 }
 .bg-left{
 	border-left: 1px solid #DDDDDD;
@@ -746,12 +763,6 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
 
 /*4-4s*/
 @media only screen and (min-device-width: 320px) and (min-device-height :480px){ 
-    .scroll .list {
-        margin-bottom: 15px;
-    }
-    .bar-header .title {
-        margin-bottom: 15px;
-    }
 	.slide1 .slider,.slide1 .slider-slide img{
         height: 120px;
     }
@@ -871,12 +882,6 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
 /*6 plus*/
 @media only screen and (min-device-width: 414px) and (min-device-height :736px){ 
 	.slide1 .slider,.slide1 .slider-slide img{height: 220px;}
-    .scroll .list {
-        margin-bottom: 20px;
-    }
-    .bar-header .title {
-        margin-bottom: 20px;
-    }
 	.index .list.list1{
         text-align: center;
         margin-bottom: 10px;
@@ -924,4 +929,18 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
 
 .item-input-wrapper input {
     width: 100%;
+}
+.scroll .view-heard {
+    width: 100%;
+    height: 161px;
+    border-top: 0px;
+    padding: 0px;
+}
+.view-heard .item-thumbnail-left {
+    background: none;
+    border: 0px;
+    padding-left: 100px;
+    padding-top: 47px;
+    margin: 0px;
+    background: rgba(43,159,230,0.5);
 }

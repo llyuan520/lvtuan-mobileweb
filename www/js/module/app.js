@@ -895,7 +895,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
 
 
     .state('citypicker', { //首页 - 微信支付
-      url: '/citypicker',
+      url: '/citypicker/:id',
       templateUrl: 'template/citypicker.html',
       controller: 'citypickerCtrl'
     })

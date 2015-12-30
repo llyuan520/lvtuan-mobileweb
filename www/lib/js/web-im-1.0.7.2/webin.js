@@ -147,7 +147,7 @@ var getLoginInfo = function() {
     };
 };
 var showLoginUI = function() {
-    $('#loginmodal').modal('show');
+    $('#loginmodal').modal('show'); //调用登录的显示隐藏
     $('#user_name').focus();
 };
 var hiddenLoginUI = function() {
@@ -1360,8 +1360,8 @@ var appendMsg = function(who, contact, message, chattype) {
     } else {
         localMsg = message.data;
     }
-    var headstr = [ "<p1>" + who + "   <span></span>" + "   </p1>",
-            "<p2>" + getLoacalTimeString() + "<b></b><br/></p2>" ];
+    var headstr = [ "<p1>" + getLoacalTimeString() + "   <span></span>" + "   </p1>",
+            "<p2>" + who + "<b></b><br/></p2>" ];
     var header = $(headstr.join(''))
     var lineDiv = document.createElement("div");
     for (var i = 0; i < header.length; i++) {

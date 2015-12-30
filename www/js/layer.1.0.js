@@ -432,11 +432,6 @@ this.stopDefault = function(e)
   this.refresh = function() {
      window.location.reload();
   }
-  //菜单首页按钮
-  this.goHome = function() {
-    window.location.reload();
-    window.location.href = '#/index';
-  }
 
   //获取错误信息
   this.msg = function(data) {

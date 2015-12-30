@@ -148,7 +148,7 @@
         };
     };
     var showLoginUI = function() {
-        $('#loginmodal').modal('show');
+        $('#loginmodal').modal('hide');  //调用登录的显示隐藏
         $('#user_name').focus();
     };
     var hiddenLoginUI = function() {
@@ -281,7 +281,7 @@
         //发送文件的模态窗口
         $('#fileModal').on('hidden.bs.modal', function(e) {
             document.getElementById("fileSend").disabled = false;
-			document.getElementById("cancelfileSend").disabled = false;
+            document.getElementById("cancelfileSend").disabled = false;
             
             if(!Easemob.im.Helper.isCanUploadFileAsync) return;
             var ele = document.getElementById(fileInputId);
@@ -382,7 +382,7 @@
                     curroster = curChatUserId;
 //                    buildContactDiv("contractlist", bothRoster);//联系人列表页面处理
                     if (curChatUserId){
-                    	conn.setPresence();
+                        conn.setPresence();
                         setCurrentContact(curChatUserId);//页面处理将第一个联系人作为当前聊天div
                     }
                 }
@@ -1006,8 +1006,8 @@
                     } else {
                         filename = data.filename || '';
                         var img = document.createElement("img");
-						img.src = data.uri + '/' + data.entities[0].uuid + '?token=';
-						img.width = maxWidth;
+                        img.src = data.uri + '/' + data.entities[0].uuid + '?token=';
+                        img.width = maxWidth;
                     }
                     appendMsg(curUserId, curChatUserId, {
                         data : [ {
@@ -1380,8 +1380,8 @@
         } else {
             localMsg = message.data;
         }
-        var headstr = [ "<p1>" + realname + "   <span></span>" + "   </p1>",
-                "<p2>" + getLoacalTimeString() + "<b></b><br/></p2>" ];
+        var headstr = [ "<p1>" + getLoacalTimeString() + "   <span></span>" + "   </p1>",
+                "<p2>" + realname + "<b></b><br/></p2><br/>" ];
         var header = $(headstr.join(''))
         var lineDiv = document.createElement("div");
         for (var i = 0; i < header.length; i++) {
@@ -1462,6 +1462,7 @@
         } else {
             lineDiv.style.textAlign = "left";
         }
+        lineDiv.className = "immediate-information";
         var create = false;
         if (msgContentDiv == null) {
             msgContentDiv = createContactChatDiv(contactDivId);
@@ -1493,7 +1494,7 @@
         $('#delfridentId').val('好友账号');//输入好友账号
         $('#del-frident-warning').html("");
     };
-    //消息通知操作时条用的方法
+    //消息通知操作时调用的方法
     var showNewNotice = function(message) {
         $('#confirm-block-div-modal').modal('toggle');
         $('#confirm-block-footer-body').html(message);
@@ -1742,9 +1743,15 @@
                     for(var i=0; i<obj.length; i++){
                          style = "left";
                         if(obj[i].creator_id == curUserId) style = "right";
-                        str+='<div class="textbox" style="text-align:'+style+';">'; 
-                            str+='<p1>'+obj[i].creator_name+'<span></span></p1>';
-                            str+='<p2>'+obj[i].created_at+'<b></b></p2><br>';
+                        str+='<div class="textbox" style="text-align:'+style+';">';
+                            if (obj[i].creator_id == curUserId) {
+                                str+='<p1>'+obj[i].created_at+'<span></span></p1>';
+                                str+='<p2>'+obj[i].creator_name+'<b></b></p2><br/>';
+                            } else {
+                                str+='<p1>'+obj[i].creator_name+'<span></span></p1>';
+                                str+='<p2>'+obj[i].created_at+'<b></b></p2><br/>';
+                                // str+='<img ng-src='+obj[i].creator_avatar+'><br>';
+                            }
                             str+='<p3 class="chat-content-p3" className="chat-content-p3">'+obj[i].content+'</p3>';
                         str+='</div>';
                     }

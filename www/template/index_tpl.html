@@ -1,11 +1,10 @@
-<ion-view show-tabs view-title="首页">
+<ion-view hide-tabs="false" view-title="律团">
 	<ion-nav-bar>
   	</ion-nav-bar>
 	<ion-nav-title style="color: #32a9f2;">律团</ion-nav-title>
 	<ion-nav-buttons side="right">
-		<a ng-href="#/citypicker" class="button-clear">
+		<a ng-href="#/citypicker/index" class="button-clear" style="line-height: 34px;">
 			{{currentLocation.city_name}}
-			<ion class="ion-ios-location-outline" style="font-size: 32px; vertical-align: text-bottom;"></ion>
 		</a>
 	</ion-nav-buttons>
 	<!-- <ion-nav-buttons ng-model="currentUser.user_group_id" side="right" >

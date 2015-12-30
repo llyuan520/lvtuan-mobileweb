@@ -9,8 +9,8 @@
     <link href="/css/style.css" rel="stylesheet">
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
-    -->
     <link rel="stylesheet" href="lib/js/web-im-1.0.7.2/css/bootstrap.css" />
+    -->
 	<link rel="stylesheet" href="lib/js/web-im-1.0.7.2/css/webim.css" />
 
     <script src="lib/js/jquery-1.11.1.js"></script>
@@ -46,7 +46,7 @@
     
   	<div hide-Tabs class="web-body web-top10 group-content">
   			<ion-header-bar class="bar bar-header bar-light item-icon-right">
-				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" onclick="history.go(-1);"></a>
+				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-click="jump('#/group/list')"></a>
 				<h1 class="title">圈子内页</h1>
 				<i ng-click="site()" class="icon ion-more dark"></i>
 			</ion-header-bar>
@@ -203,9 +203,9 @@
 
 				            </div>
 				        </div>
-				        <div id="rightTop" style="height: 38px;"></div>
+				        <div id="rightTop" style="height: 3.5rem;"></div>
 				        <!-- 聊天页面 -->
-				        <div class="chatRight">
+				        <div class="chatRight group-cen">
 				            <div id="chat01" class="word-height">
 				                <div class="chat01_title">
 				                    <ul class="talkTo">

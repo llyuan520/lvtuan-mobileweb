@@ -30,7 +30,9 @@
 	<body ng-app="findLawyer">
 		<ion-pane>
 			<ion-header-bar class="bar bar-header bar-light">
-				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" onclick="history.go(-1);"></a>
+				<button class="button button-clear button-positive" ng-click="jumpGoBack()">  
+	                <i class="icon icon-left ion-ios-arrow-back"></i>  
+	            </button>
 				<h1 class="title">问律师参考</h1>
 				<button class="button icon-right button-clear">
 					深圳
@@ -68,9 +70,9 @@
 
 				<div class="list" ng-controller="lawyerInfoCtr">
 				    <a class="item item-thumbnail-left" href="#" ng-repeat="lawyerInfoItem in lawyerInfoItems">
-				      <img class="img-header" src="{{lawyerInfoItem.iconHeader}}" />
+				      <img class="img-header" ng-src="{{lawyerInfoItem.iconHeader}}" />
 				      	<!--<img ng-src="img/icon-header.png"/>-->
-				      <h2><span class="sp-name fc-nan">{{lawyerInfoItem.name}}</span><span class="sp-level fc-nan">{{lawyerInfoItem.level}}</span><img ng-show="{{lawyerInfoItem.isDispVipImg}}" class="img-v" src="img/vip.png"/></h2>
+				      <h2><span class="sp-name fc-nan">{{lawyerInfoItem.name}}</span><span class="sp-level fc-nan">{{lawyerInfoItem.level}}</span><img ng-show="{{lawyerInfoItem.isDispVipImg}}" class="img-v" ng-src="img/vip.png"/></h2>
 				      <p>
 				      	擅长领域：{{lawyerInfoItem.beGoodAtField}}<br />
 				      	所在区域：{{lawyerInfoItem.address}}<br />

@@ -6,10 +6,8 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <meta name="format-detection" content="telephone=no"/>
     <link href="/lib/ionic/css/ionic.css" rel="stylesheet">
-    <!-- <link href="/css/style.css" rel="stylesheet"> -->
-    <link rel="stylesheet" href="lib/js/web-im-1.0.7.2/css/bootstrap.css" />
-    <link rel="stylesheet" href="lib/js/web-im-1.0.7.2/css/webim.css" />
 
+    <link rel="stylesheet" href="lib/js/web-im-1.0.7.2/css/webim.css" />
     <script src="lib/js/jquery-1.11.1.js"></script>
 
     <script src="lib/js/web-im-1.0.7.2/sdk/strophe.js"></script>
@@ -47,7 +45,7 @@
     </style>
 
     <ion-header-bar class="bar bar-header bar-light item-icon-right">
-        <a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-click="jumpreplied()"></a>
+        <a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-click="jump('#/lawyerquestion/replied')"></a>
         <h1 class="title">咨询详情</h1>
     </ion-header-bar>
     <div hide-tabs class="web-body web-top10 scroll-content ionic-scroll  has-header">
@@ -84,15 +82,17 @@
                                     <div style="text-align: center"><a href="javascript:void(0)" id="comments-list" style="text-align: center">查看更多</a></div>
                                     <div id="page" class="loading" style="display: none">加载中...</div>
 
-                                    <div ng-repeat="comment in easemoParam.comments">
-                                        <div ng-if="comment.creator_id == user_name" style="text-align:right" > 
-                                            <p1>{{comment.creator_name}}<span></span></p1>
-                                            <p2>{{comment.created_at}}<b></b></p2><br>
+                                    <div ng-repeat="comment in easemoParam.comments" class="easemobmain-list">
+                                        <div ng-if="comment.creator_id == user_name" class="easemobmain-record img-right" style="text-align:right" >
+                                            <p1>{{comment.created_at}}<span></span></p1>
+                                            <p2>{{comment.creator_name}}<b></b></p2>
+                                            <img ng-src="{{easemoParam.user_avatar}}"><br>
                                             <p3 class="chat-content-p3" className="chat-content-p3">{{comment.content}}</p3>
                                         </div>
-                                        <div ng-if="comment.creator_id != user_name" style="text-align:left">
-                                            <p1>{{comment.creator_name}}<span></span></p1>
-                                            <p2>{{comment.created_at}}<b></b></p2><br>
+                                        <div ng-if="comment.creator_id != user_name" class="easemobmain-record img-left" style="text-align:left">
+                                            <p1>{{comment.created_at}}<span></span></p1>
+                                            <p2>{{comment.creator_name}}<b></b></p2>
+                                            <img ng-src="{{easemoParam.user_avatar}}"><br>
                                             <p3 class="chat-content-p3" className="chat-content-p3">{{comment.content}}</p3>
                                         </div>
                                     </div>
@@ -124,9 +124,9 @@
                                         <textarea name="comment" id="talkInputId" style="resize: none;"></textarea>
                                     </div>
                                     <div class="chat02_bar">
-                                        <ul style="width:90%;text-align: right;">
-                                            <a href="##" style="width:10%;display: inline-block;line-height: 35px;height: 35px;">
-                                                <li style="height: 30px;line-height: 35px;" onclick="sendText()">发&nbsp;&nbsp;送</li>
+                                        <ul style="width:100%;">
+                                            <a href="##" class="easemobmain-sub">
+                                                <li onclick="sendText()">发&nbsp;&nbsp;送</li>
                                             </a>
                                            <!--  <a href="##" style="float: right"><li >确认完成</li></a>    -->
                                         </ul>
