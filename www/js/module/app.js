@@ -101,9 +101,10 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
     })
     .state('index', { //首页
       url: '/index',
-      /*cache: 'true', */
+      cache: 'true',
       templateUrl: 'template/index_tpl.html',
-      controller: 'indexCtrl'
+      controller: 'indexCtrl',
+      activetab: 'index'
     })
 
     .state('mylvteam', { //我的律师团
@@ -157,7 +158,8 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       templateUrl: 'template/group/group.html',
       controller: 'groupCtrl',
       authn: true,
-      authz: 'lawyer'
+      authz: 'lawyer',
+      activetab: 'group'
     })
 
     .state('group.list', { //圈子 - 列表
@@ -249,7 +251,8 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
     .state('knowledge', { //知识
       url: '/knowledge',
       /*abstract: true,*/
-      templateUrl: 'template/knowledge/knowledge.html'
+      templateUrl: 'template/knowledge/knowledge.html',
+      activetab: 'knowledge'
     }) 
 
    .state('knowledge.knowledges', { //法规
@@ -302,7 +305,8 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       cache: 'true',
       templateUrl: 'template/center/center.html',
       controller: 'centerCtrl',
-      authn: true
+      authn: true,
+      activetab: 'center'
     })
     .state('info', { //用户-个人资料
       url: '/info',
