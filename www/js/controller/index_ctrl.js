@@ -44,7 +44,6 @@ lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $loca
 		//window.location.reload();
 	}
 
-
 	var $body = $('body');    
 	document.title = '律团';    
 	// hack在微信等webview中无法修改document.title的情况    
@@ -53,7 +52,6 @@ lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $loca
 			$iframe.off('load').remove();      
 		}, 0);    
 	}).appendTo($body);
-
 })
 
 /****************************************************** 引导页 ******************************************************/
