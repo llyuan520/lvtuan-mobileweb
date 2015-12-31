@@ -8,11 +8,13 @@
 				<p class="content">{{item.title}}</p>
 				<p>{{item.info}}</p>
 				<p>
-					<i class="icon ion-android-favorite-outline web-ion-img1-2 knowledge-love">
-						<label>{{item.likes_count}}</label>
-					</i>
-					<i class="icon ion-android-star-outline web-ion-img1-2 knowledge-stars">
-						<label>{{item.views_count}}</label>
+					<!-- <i class="icon ion-chatbox-working web-ion-img1-2 knowledge-love"> -->
+                    <!-- <i class="icon ion-android-star-outline web-ion-img1-2 knowledge-stars"> -->
+                    <i class="praise knowledge-stars">
+                        <label>{{item.likes_count}}</label>
+                    </i>
+                    <i class="messages knowledge-love">
+                        <label>{{item.comments_count}}</label>
 					</i>
 				</p>
 	        </ion-item>
