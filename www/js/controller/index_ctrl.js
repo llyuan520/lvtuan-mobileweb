@@ -1413,7 +1413,8 @@ lvtuanApp.controller("infoCtrl",function($scope,$http,$rootScope,$timeout,Upload
 
     $scope.submit = function(){
     	var params = layer.getParams("#myForm");
-    	console.info(params);
+    	// 传数据的时候要传相对路径
+    	params.avatar = params.avatar.replace(/^https?\:\/\/([^\/?#]+)/, '');
     	$http.post('http://'+$rootScope.hostName+'/center/customer/info',params)
     		.success(function(data) {
     			if (data && data.data) {
