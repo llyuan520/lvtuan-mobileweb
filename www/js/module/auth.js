@@ -132,7 +132,7 @@ function userService($http, HOST, authService) {
     }).then(
     	function (res) {
 	    	var user = res.data ? res.data.data : null;
-	    	alert(user.wx_openid);
+	    	// alert(user.wx_openid);
 	    	if(user) {
 	    		authService.saveUser(user);
 	    		console.log('user:', user);
