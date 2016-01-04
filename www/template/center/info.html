@@ -38,7 +38,7 @@
 						<div class="row">
 						  <div class="col col-center">联系方式</div>
 						  <div class="col col-75 col-center">
-						  	<input ng-model="user.phone" name="phone" type="text" ng-pattern="/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/" >
+						  	<input ng-model="user.phone" name="phone" type="text" ng-pattern="/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/" ng-model-options="{debounce:2000}">
 						  	<span class="error" ng-show="(myForm.phone.$invalid && !myForm.phone.$pristine)">
 						     请输入有效的电话号码！
 						  	</span>
@@ -49,10 +49,7 @@
 						<div class="row">
 						  <div class="col col-center">电子邮箱</div>
 						  <div class="col col-75 col-center">
-						  	<input type="email" name="email" ng-model="user.email" >
-						  	<!-- <span class="error" ng-show="myForm.email.$error.required">
-      							电子邮箱不能为空！
-      						</span> -->
+						  	<input type="email" name="email" ng-model="user.email" ng-model-options="{debounce:2000}">
 						  	<span class="error" ng-show="myForm.email.$error.email">
 						     请输入有效的电子邮件！
 						  	</span>

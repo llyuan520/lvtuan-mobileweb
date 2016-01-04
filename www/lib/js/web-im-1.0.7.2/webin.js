@@ -1,3 +1,6 @@
+console.info("a");
+
+
 var curUserId = null;
 //var curChatUserId = null;
 var conn = null;

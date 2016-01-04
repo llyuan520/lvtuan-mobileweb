@@ -791,7 +791,7 @@ input::-webkit-outer-spin-button {
 .color999{color: #999;}
 input,select{-webkit-appearance: none; /*去除input默认样式*/}
 .select-cnt {            
-    width: 25%;
+    width: 24%;
     position: relative;            
     height:40px;
     line-height: 40px;

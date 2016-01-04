@@ -332,7 +332,7 @@ lvtuanApp.controller("forgotpwdCtrl",function($scope,$http,$rootScope){
 	}
 })
 
-//忘记密码
+//修改密码
 lvtuanApp.controller("upwdCtrl",function($scope,$http,$rootScope){
 
 	$scope.user = {};
@@ -520,7 +520,7 @@ lvtuanApp.controller("groupviewCtrl",function($scope,$http,$state,$rootScope,$st
 	        		clearInterval(time);
 	        		login();
 	        	}
-			}, 2000); 
+			}, 3000); 
 		}
 
 	})
@@ -1759,7 +1759,7 @@ lvtuanApp.controller("becomelawyerCtrl",function($scope,$http,$rootScope,$ionicA
             url: 'http://'+$rootScope.hostName+'/file/upload/user',
             data: {
             	upload_file: license_file,
-            	'user_id': $rootScope.user_id
+            	'user_id': currentUser.id
             }
         }).then(function (response) {
         	var file_path = 'http://'+$rootScope.hostName+'/'+response.data.data.file_path;
@@ -1861,7 +1861,7 @@ lvtuanApp.controller("becomelawyerCtrl",function($scope,$http,$rootScope,$ionicA
 		}
 
     	console.info($scope.work_scope);
-		console.info($scope.user);
+		debugger
 
 		if($scope.user.license_file.length < 1){
 			layer.show("请上传执业证书！");
@@ -1880,9 +1880,11 @@ lvtuanApp.controller("becomelawyerCtrl",function($scope,$http,$rootScope,$ionicA
 			return false;
 		}
 
-
+		console.info($scope.user);
+		debugger
 		$http.post('http://'+$rootScope.hostName+'/center/become_lawyer',$scope.user)
 			.success(function(data) {
+				debugger
 	        	if (data && data.data) {
 		        	var obj = data.data
 		        	//当 is_verified = 1 的时候就显示律师的信息
@@ -1911,7 +1913,10 @@ lvtuanApp.controller("becomelawyerCtrl",function($scope,$http,$rootScope,$ionicA
 					location.href='#/index';
 					window.location.reload();
 				}
-	        });
+	        }).error(function(data){
+	        	debugger
+				console.info(data);
+			});
 	}
 
 
@@ -2464,6 +2469,7 @@ lvtuanApp.controller("graphicCtrl",function($scope,$http,$rootScope,$timeout,$st
 				$scope.user = {};
 				$scope.files = {};
         		$scope.errFiles = {};
+        		location.href='#/pay/'+data.data.data.id;
 			},function(data){
 				console.info(data);
 			}
