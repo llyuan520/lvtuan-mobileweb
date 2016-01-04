@@ -2021,7 +2021,7 @@ lvtuanApp.controller("siteCtrl",function($scope,$http,$rootScope,authService){
 	$scope.logout = function(){
 		authService.logout();
 		location.href='#/login';
-		window.location.reload();
+		// window.location.reload();
 	}
 
 })
