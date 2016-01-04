@@ -454,13 +454,15 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
     .state('graphic', { //图文咨询
       url: '/graphic',
       cache: 'true',
-      templateUrl: 'template/lawyer/graphic.html'
+      templateUrl: 'template/lawyer/graphic.html',
+      authn: true
     })
     .state('special', { //专业咨询
       url: '/special',
       cache: 'true',
       templateUrl: 'template/lawyer/special.html',
-      controller: 'specialCtrl'
+      controller: 'specialCtrl',
+      authn: true
     })
     
 /********************************** 问律师 **********************************/
@@ -468,19 +470,22 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       url: '/questions',
       cache: 'true', 
       templateUrl: 'template/questions/questions.html',
-      controller: 'questionsCtrl'
+      controller: 'questionsCtrl',
+      authn: true
     })
     .state('questionslist', { //问律师列表
       cache: 'true', 
       url: '/questionslist',
       templateUrl: 'template/questions/questions_list.html',
-      controller: 'questionslistCtrl'
+      controller: 'questionslistCtrl',
+      authn: true
     })
     .state('questionsview', { //问律师详情
       cache: 'true', 
       url: '/questionsview/:id',
       templateUrl: 'template/questions/view.html',
-      controller: 'questionsviewsCtrl'
+      controller: 'questionsviewsCtrl',
+      authn: true
     })
 
 /********************************** 法律咨询 **********************************/
@@ -883,25 +888,26 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
     .state('corporate/list', { //首页 - 小微企服
       url: '/corporate/list/:id',
       templateUrl: 'template/corporate/list.html',
-      controller: 'corporatelistCtrl'
+      controller: 'corporatelistCtrl',
+      authn: true
     })
     .state('corporate/buynow', { //首页 - 小微企服 - 立即购买
       url: '/corporate/buynow/:id',
       templateUrl: 'template/corporate/buynow.html',
-      controller: 'corporatebuynowCtrl'
+      controller: 'corporatebuynowCtrl',
+      authn: true
     })
-
     .state('pay', { //首页 - 微信支付
       url: '/pay/:id',
       templateUrl: 'template/pay.html',
-      controller: 'payCtrl'
+      controller: 'payCtrl',
+      authn: true
     })
-
-
     .state('citypicker', { //首页 - 微信支付
       url: '/citypicker/:id',
       templateUrl: 'template/citypicker.html',
-      controller: 'citypickerCtrl'
+      controller: 'citypickerCtrl',
+      authn: true
     })
 
 /********************************** error **********************************/
