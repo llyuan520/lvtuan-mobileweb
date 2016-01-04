@@ -32,20 +32,23 @@
     </style>
   </head>
   <body ng-controller="MainController">
-    
-    <ion-nav-view></ion-nav-view>
-    <div class="tabs tabs-icon-top tabs-color-positive" ng-controller="HeaderController" ng-class="{'tabs-item-hide': $root.hideTabs}">
+  	<ion-nav-view></ion-nav-view>
+    <div class="tabs tabs-icon-top tabs-color-positive nav-set" ng-controller="HeaderController" ng-class="{'tabs-item-hide': $root.hideTabs}">
         <a ng-class="{active:isActive('/index')}" ng-href="#/index" class="tab-item ng-cloak nav-home">
-          首页
+            <i class="icon home"></i>
+            首页
         </a>
         <a ng-class="{active:isActive('/group/list')}"  ng-href="#/group/list" class="tab-item ng-cloak nav-circle">
-          圈子
+            <i class="icon group"></i>
+            圈子
         </a>
         <a ng-class="{active:isActive('/knowledge/knowledges')}" ng-href="#/knowledge/knowledges" class="tab-item ng-cloak nav-knowledge">
-          知识
+            <i class="icon knowledge"></i>
+            知识
         </a>
         <a ng-class="{active:isActive('/center')}"  ng-href="#/center" class="tab-item ng-cloak nav-my">
-          我的
+            <i class="icon center"></i>
+            我的
         </a>
     </div>
     
