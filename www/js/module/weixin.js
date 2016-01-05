@@ -16,5 +16,5 @@ function wxService() {
 		return str;
 	}
 }
-
+					
 wxModule.service('wxService', wxService);
