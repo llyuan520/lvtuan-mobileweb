@@ -268,11 +268,11 @@ a:hover{
 }
 
 .item p label{
-    display: block;
+    /*display: block;
     width: 100%;
-    height: 2rem;
+    height: 2rem;*/
     text-align: center;
-    padding-top: 0.7rem;
+    padding: 0.7rem 0.6rem 0 0;
     font-size: 12px;
 }
 
@@ -346,7 +346,11 @@ a:hover{
     margin-bottom: 10px;
 }
 
-img.avatar{border-radius: 50%;border:2px solid #fff;}
+img.avatar{
+    border-radius: 50%;
+    /*border: 2px solid #fff;*/
+    box-shadow: 0 0 0 2px #fff;
+}
 
 
 .slideBox .bd ul{display: none;}
@@ -357,6 +361,9 @@ img.avatar{border-radius: 50%;border:2px solid #fff;}
 
 
 .scroll{
+    position: absolute;
+    top: -1px;
+    width: 100%;
     background-color: #eeeeee;
 }
 .corporate-list .corporate-items a {
@@ -791,11 +798,9 @@ input::-webkit-outer-spin-button {
 .color999{color: #999;}
 input,select{-webkit-appearance: none; /*去除input默认样式*/}
 .select-cnt {            
-    width: 25%;
-    position: relative;            
-    height:40px;
-    line-height: 40px;
-    margin-left: 1%;
+    width: 24%;
+    position: relative;
+    margin: 0 0.5%;
 }
 .select-cnt select {
     width:100%;
@@ -807,7 +812,7 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
   -webkit-appearance:none;
   background: url("../img/arrow.png") no-repeat scroll right center transparent;
   padding-right: 14px;
-  font-size: 1.0rem;
+  font-size: 0.8rem;
 }
 
 
@@ -992,6 +997,7 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
     height: 161px;
     border-top: 0px;
     padding: 0px;
+    margin: 0px 0 20px 0;
 }
 .view-heard .item-thumbnail-left {
     background: none;
@@ -1007,7 +1013,7 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
 * @Author: anchen
 * @Date:   2015-12-30 10:04:11
 * @Last Modified by:   anchen
-* @Last Modified time: 2016-01-04 14:57:25
+* @Last Modified time: 2016-01-04 19:50:32
 */
 .knowledge-love {
     margin: 0 0.7rem 0 0.2rem;
@@ -1055,4 +1061,10 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
 }
 .nav-set .tab-item {
     color: #333;
-} 
+}
+
+.emails {
+    width: 13%;
+    background: url("../img/emails.png") center center no-repeat;
+    background-size: 90% 26%;
+}
