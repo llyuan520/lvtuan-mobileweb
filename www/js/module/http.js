@@ -50,7 +50,7 @@ httpModule.factory('APIInterceptor', ['$log', '$q', '$rootScope', 'authService',
 	      // do something on success
   		  if(config.url.indexOf(HOST) > -1) {
 
-	      	$rootScope.show();
+	      	// $rootScope.show();
 
 			var token = authService.getToken();
 			if(token) {

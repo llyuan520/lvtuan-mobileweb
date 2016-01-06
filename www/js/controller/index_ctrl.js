@@ -153,7 +153,7 @@ lvtuanApp.directive('star', function () {
 });
 //设置加载动画
 lvtuanApp.constant("$ionicLoadingConfig",{
-  content: '<ion-spinner icon="android"></ion-spinner>',animation: 'fade-in',showBackdrop: true,maxWidth: 200,showDelay: 0 
+  content: '<ion-spinner icon="ios"></ion-spinner>',animation: 'fade-in',showBackdrop: true,maxWidth: 200,showDelay: 0 
 })
 //hone 
 lvtuanApp.controller("ionicNavBarDelegateCtrl",function($state,$timeout,$http,$location){
@@ -2196,7 +2196,7 @@ lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$l
 
 
 //律师个人主页
-lvtuanApp.controller("viewCtrl",function($scope,$http,$rootScope,$stateParams,httpWrapper,authService){
+lvtuanApp.controller("viewCtrl",function($scope,$http,$rootScope,$stateParams,httpWrapper,authService,$ionicLoading){
 	$scope.max = 5;
 	$scope.ratingVal = 5;
 	$scope.readonly = true;
@@ -2233,10 +2233,12 @@ lvtuanApp.controller("viewCtrl",function($scope,$http,$rootScope,$stateParams,ht
         return tabUrl == $scope.currentTab;
     }
 
+    $ionicLoading.show();
 	httpWrapper.get('http://'+$rootScope.hostName+'/lawyer/'+$stateParams.id, function(data){
 		$scope.items = data.data;
 	    $scope.ratingVal = $scope.items.average_evaluate_score;
 		console.info($scope.items);
+		$ionicLoading.hide();
 	});
 
    $scope.graphic5 = function(id,index){
