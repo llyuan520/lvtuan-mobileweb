@@ -3892,7 +3892,12 @@ lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$statePa
 				console.info(data);
 				if (data && data.data && data.data.params) {
 					self.params = data.data.params;
-					self.params['attach'] = 'test';
+					var attach_params = [];
+					attach_params['platform'] = 'wechat';
+					attach_params['type'] = 'wallet';
+					attach_params['user_id'] = currentUser.id;
+					attach_params['money'] = user.money;
+					self.params['attach'] = attach_params;
 					WeixinJSBridge.invoke(
 						'getBrandWCPayRequest',
 						self.params,
@@ -3900,11 +3905,12 @@ lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$statePa
 							WeixinJSBridge.log(res.err_msg);
 							switch(res.err_msg) {
 								case "get_brand_wcpay_request:ok":
-									$http.post('http://'+$rootScope.hostName+'/wallet/recharge',user)
-									.success(function(data) {
-									});
+									// $http.post('http://'+$rootScope.hostName+'/wallet/recharge',user)
+									// .success(function(data) {
+									// });
 									location.href='#/user/wallet';
 								    window.location.reload();
+									layer.show("充值成功。");
 									break;
 								case "get_brand_wcpay_request:fail":
 									layer.show("充值失败，请稍候再试。");
