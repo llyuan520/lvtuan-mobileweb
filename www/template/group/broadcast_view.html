@@ -24,12 +24,17 @@
 					</p>
 				    <p style="text-align: right;">{{items.created_at}}</p>
 				  </div>
-				  <div class="item web-paddingtb0" style="padding-left:55px;height:30px;line-height:30px;border-top:0px;color:#767676;">
+				  <div class="item web-paddingtb0" style="padding-left:55px;height:30px;line-height:30px;border-top:0px;color:#767676;margin:0;">
 				  	
-				  	<i ng-click="share(items.id)" class="icon ion-android-share-alt web-ion-img1-2" style="float:right;font-size:14px;">&nbsp;
-				    	<!-- <label>10</label> -->
-					</i>
-				  	<i ng-click="comments(items.id)" class="icon ion-compose web-ion-img1-2" style="float:right;margin-right:10px;font-size:14px;">&nbsp;
+				  	<!-- <i ng-click="share(items.id)" class="icon ion-android-share-alt web-ion-img1-2" style="float:right;font-size:14px;">&nbsp;
+					</i> -->
+					<!-- <i ng-click="share(items.id)" class="televise-share"></i> -->
+					<span class="details-counts">{{items.post_extra.comments_count}}</span>
+					<i ng-click="comments(items.id)" class="details-comments"></i>
+                    <span class="details-counts">{{items.post_extra.likes_count}}</span>
+				    <i ng-if="items.post_extra.likes_count == true" ng-click="likes(items.id)" class="details-tpraise"></i>
+				    <i ng-if="items.post_extra.likes_count == false" ng-click="likes(items.id)" class="details-fpraise"></i>
+				  	<!-- <i ng-click="comments(items.id)" class="icon ion-compose web-ion-img1-2" style="float:right;margin-right:10px;font-size:14px;">&nbsp;
 				    	<label>{{items.post_extra.comments_count}}</label>
 					</i>
 				    <i ng-click="likes(items.id)"  class="icon ion-heart web-ion-img1-2" style="float:right;margin-right:10px;font-size:14px;">&nbsp;
@@ -37,16 +42,16 @@
 				    </i>
 				    <i class="icon ion-chatbubble web-ion-img1-2" style="float:right;margin-right:10px;font-size:14px;">&nbsp;
 				    	<label>{{items.post_extra.views_count}}</label>
-				    </i>
+				    </i> -->
 				  </div>
-				  <div class="item web-item web-paddingtb5 web-font14 web-item-topb0 web-item-botb0" style="color:#f00;">
+				  <div class="item web-item web-paddingtb5 web-font14 web-item-topb0 web-item-botb0" style="color:#f00;margin:0;">
 				    <i class="icon ion-heart"></i>
 				    <span style="color:#35A9F2;">广播广播广播广播广播广播</span>
 				  </div>
-				  <div class="item web-item web-paddingtb5 web-font14 web-item-topb0 web-item-botb0">
+				  <div class="item web-item web-paddingtb5 web-font14 web-item-topb0 web-item-botb0" style="margin:0;">
 				    全部评论
 				  </div>
-				  <div class="item web-item web-paddingtb5 web-font14 web-item-topb0 web-item-botb0">
+				  <div class="item web-item web-paddingtb5 web-font14 web-item-topb0 web-item-botb0" style="margin:0;">
 				    <span style="color:#35A9F2;">{{items.comments.content}}&nbsp;:&nbsp;</span>{{items.comments.content}}
 				    <p>{{items.comments.created_at}}</p>
 				  </div>
