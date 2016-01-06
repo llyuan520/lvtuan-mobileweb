@@ -117,7 +117,6 @@ function userService($http, HOST, authService) {
         	}*/
         	window.history.back();
 			window.location.reload();
-        	}
 			// window.location.reload();
     	}
     ).catch(function(response) {
