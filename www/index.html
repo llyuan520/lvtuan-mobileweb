@@ -7,12 +7,11 @@
     <meta name="format-detection" content="telephone=no"/>
 
     
-    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="lib/ionic/css/ionic.min.css" rel="stylesheet">
     <link href="css/find_lawyer.css" rel="stylesheet">
     <link href="css/common.css" rel="stylesheet">
     <link href="css/webconment.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-    <!-- <link href="css/style_modify.css" rel="stylesheet"> -->
 
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
@@ -24,8 +23,7 @@
     </style>
   </head>
   <body ng-controller="MainController">
-    
-    <ion-nav-view></ion-nav-view>
+  	<ion-nav-view></ion-nav-view>
     <div class="tabs tabs-icon-top tabs-color-positive nav-set" ng-controller="HeaderController" ng-class="{'tabs-item-hide': $root.hideTabs}">
         <a ng-class="{active:isActive('/index')}" ng-href="#/index" class="tab-item ng-cloak nav-home">
             <i class="icon home"></i>
@@ -46,24 +44,26 @@
     </div>
     
     <!-- ionic/angularjs js -->
-    
-    <!-- <script src="js/jweixin-1.0.0.js"></script> -->
-    
     <!-- 
     cordova script (this will be a 404 during development) 
     <script src="cordova.js"></script>
-    <script src="dist/js/templates.js"></script>
     -->
 
-    <script src="conf/settings.dev.js"></script>
+    <script src="conf/settings.prod.js"></script>
 
-    <script src="dist/js/lib.min.js"></script>
-    <script src="js/layer.1.0.js"></script>
+    <script src="lib/js/jquery-1.11.1.js"></script>
+    <script src="lib/ionic/js/ionic.bundle.min.js"></script>
+    <!-- <script src="lib/ionic/js/ngCordova/dist/ng-cordova.js"></script> -->
+    <script src="lib/js/ng-file-upload-master/dist/ng-file-upload-shim.min.js"></script>
+    <script src="lib/js/ng-file-upload-master/dist/ng-file-upload.min.js"></script>
     <script src="lib/js/jweixin-1.0.0.js"></script>
+
     <script type="text/javascript">
       var templates = angular.module('templates', []);
     </script>
+    <script src="dist/js/templates.js"></script>
     
+    <script src="js/layer.1.0.js"></script>
     <script src="js/module/auth.js"></script>
     <script src="js/module/weixin.js"></script>
     <script src="js/module/list.js"></script>
@@ -72,6 +72,7 @@
     <script src="js/module/app.js"></script>
     <script src="js/module/location.js"></script>
     <script src="js/module/adaptive.js"></script>
+
 
   </body>
 </html>

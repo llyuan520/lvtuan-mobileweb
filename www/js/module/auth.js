@@ -79,7 +79,7 @@ function userService($http, HOST, authService) {
         	}
 
 	    	location.href='#/index';
-			window.location.reload();
+			// window.location.reload();
     	}
     ).catch(function(response) {
 		console.error('Gists error', response.status, response.data);
@@ -117,6 +117,8 @@ function userService($http, HOST, authService) {
         	}*/
         	window.history.back();
 			window.location.reload();
+        	}
+			// window.location.reload();
     	}
     ).catch(function(response) {
 	  console.error('Gists error', response.status, response.data);
@@ -133,7 +135,7 @@ function userService($http, HOST, authService) {
     }).then(
     	function (res) {
 	    	var user = res.data ? res.data.data : null;
-	    	alert(user.wx_openid);
+	    	// alert(user.wx_openid);
 	    	if(user) {
 	    		authService.saveUser(user);
 	    		console.log('user:', user);
@@ -147,7 +149,7 @@ function userService($http, HOST, authService) {
         	}
 
 	    	location.href='#/index';
-			window.location.reload();
+			// window.location.reload();
     	}
     ).catch(function(response) {
 	  console.error('Gists error', response.status, response.data);
