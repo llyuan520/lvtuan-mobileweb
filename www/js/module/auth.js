@@ -110,10 +110,13 @@ function userService($http, HOST, authService) {
 	    		console.log('token:', token);
         	}
 
-        	if(!user.is_verified_lawyer){
+        	/*if(!user.is_verified_lawyer){
         		location.href='#/index';
         	}else{
         		location.href='#/center';
+        	}*/
+        	window.history.back();
+			window.location.reload();
         	}
 			// window.location.reload();
     	}

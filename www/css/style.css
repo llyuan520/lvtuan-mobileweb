@@ -799,8 +799,10 @@ input::-webkit-outer-spin-button {
 input,select{-webkit-appearance: none; /*去除input默认样式*/}
 .select-cnt {            
     width: 24%;
-    position: relative;
-    margin: 0 0.5%;
+    position: relative;            
+    height:40px;
+    line-height: 40px;
+    margin-left: 1%;
 }
 .select-cnt select {
     width:100%;
@@ -1075,3 +1077,5 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
     height: 1rem;
     line-height: 1rem;
 }
+
+.css-form  input, select{border:1px solid #ccc;}
