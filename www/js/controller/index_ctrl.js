@@ -3892,6 +3892,7 @@ lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$statePa
 				console.info(data);
 				if (data && data.data && data.data.params) {
 					self.params = data.data.params;
+					self.params['attach'] = 'test';
 					WeixinJSBridge.invoke(
 						'getBrandWCPayRequest',
 						self.params,
