@@ -3855,7 +3855,7 @@ lvtuanApp.controller("corporatebuynowCtrl",function($scope,$http,$rootScope,$sta
 
 
 //用户律师 - 钱包
-lvtuanApp.controller("userwalletCtrl",function($scope,$http,$rootScope,authService){
+lvtuanApp.controller("userwalletCtrl",function($scope,$http,$rootScope,authService,$ionicLoading){
 
 	$scope.$on('$ionicView.beforeEnter', function() {  
 		
