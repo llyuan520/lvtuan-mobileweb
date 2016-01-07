@@ -3911,6 +3911,9 @@ lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$statePa
 									location.href='#/user/wallet';
 								    // window.location.reload();
 									layer.show("充值成功。");
+									$scope.summoney = $scope.summoney + user.money;
+									$scope.items.money = $scope.summoney;
+									sessionStorage.setItem('summoney', $scope.summoney);
 									break;
 								case "get_brand_wcpay_request:fail":
 									layer.show("充值失败，请稍候再试。");
