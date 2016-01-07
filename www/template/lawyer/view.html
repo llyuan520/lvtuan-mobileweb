@@ -13,11 +13,13 @@
 				      <h2 class="web-top10" style="color:#ffffff;">{{items.realname}}  <span class="web-font14">律师</span></h2>
 				      <h2 class="web-top10" style="color:#ffffff;">您的专属律师</h2>
 				      <div style="width:100%;height:2px;clear:both;"></div>
-				      <div class="web-listtext web-fc666" style="float:left;font-size:14px;margin-top:5px;border:2px solid #ffffff;border-radius:15px;padding:0px 10px 3px 10px;">
+				      <div class="web-listtext web-fc666 lawyer-score">
 				      	<div star rating-value="ratingVal" max="max" on-hover="onHover" on-leave="onLeave" readonly="{{readonly}}"></div>
 				      </div>
-				      <div style="font-size:14px;width:50px;height:30px;float:right;line-height:30px;color:#ffffff;">
-				      	<p ng-click="likes(items.id)" style="font-size:14px;width:30px;border-radius:30px;height:30px;float:left;background-color:#ffffff;text-align:center;"><i class="icon ion-android-favorite web-ion-img1-5" style="color:#f00;"></i></p>
+				      <div class="concern-lawyer">
+				      	<p ng-click="likes(items.id)">
+				      		<i class="icon ion-android-favorite web-ion-img1-5"></i>
+			      		</p>
 				      	<!-- <p ng-if="items.is_like == true" style="font-size:14px;width:30px;border-radius:30px;height:30px;float:left;background-color:#ffffff;text-align:center;"><i class="icon ion-android-favorite web-ion-img1-5" style="color:#f00;"></i></p> -->
 				      	&nbsp;{{items.likes_count}}
 				      </div>

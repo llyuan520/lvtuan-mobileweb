@@ -79,12 +79,14 @@
 }
 .item .sp-name{
 	zoom:2;
-	font-weight: bold;
+	/*font-weight: bold;*/
 	font-size: 0.8rem;
+    color: #01cbfb;
 }
 .item .sp-level{
 	margin: 0 .5em;
-	font-weight: bold;
+    color: #01cbfb;
+	/*font-weight: bold;*/
 }
 .item .img-v{
 	margin: 0px;
