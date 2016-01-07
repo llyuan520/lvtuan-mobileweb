@@ -3908,7 +3908,8 @@ lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$statePa
 									// $http.post('http://'+$rootScope.hostName+'/wallet/recharge',user)
 									// .success(function(data) {
 									// });
-									location.href='#/user/wallet';
+									// location.href='#/user/wallet';
+									$state.go('user/wallet', {}, {reload: true});
 								    // window.location.reload();
 									layer.show("充值成功。");
 									$scope.summoney = $scope.summoney + user.money;
