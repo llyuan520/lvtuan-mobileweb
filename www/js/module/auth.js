@@ -127,7 +127,7 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
   }
 
   self.loginWithWx = function(code, state) {
-
+  	$ionicLoading.show();
   	return $http.post('http://' + HOST + '/loginWithWx', {
       code: code,
       state: state
@@ -149,6 +149,7 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
         		authService.saveToken(token);
 	    		console.log('token:', token);
         	}
+  			$ionicLoading.hide();
 
 	    	location.href='#/index';
 			// window.location.reload();

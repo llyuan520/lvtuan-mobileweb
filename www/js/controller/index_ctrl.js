@@ -3888,11 +3888,8 @@ lvtuanApp.controller("userwalletCtrl",function($scope,$http,$rootScope,authServi
 })
 
 lvtuanApp.controller("wxCheckOpenIdCtrl",function($scope,$http,$rootScope,$stateParams,authService,wxService){
-alert('hitting wxCheckOpenIdCtrl');
 	$scope.$on('$ionicView.beforeEnter', function() {
 		if (!wxService.getOpenId()) {
-	alert('hitting redirect');
-			alert(wxService.getWxAuthUrl('/wxauthpayment'));
 			window.location.replace(wxService.getWxAuthUrl('/wxauthpayment'));
 		} else {
 			location.href = "#/user/moneyin";
@@ -3902,7 +3899,6 @@ alert('hitting wxCheckOpenIdCtrl');
 
 //获取openid以供支付使用 
 lvtuanApp.controller("wxAuthPaymentCtrl",function($scope,$http,$rootScope,$stateParams,authService,wxService,$ionicLoading){
-alert('hitting wxauthpayment');
 	var code = $stateParams.code;
 	var state = $stateParams.state;
 
