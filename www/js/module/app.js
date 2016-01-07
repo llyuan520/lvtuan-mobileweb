@@ -144,6 +144,12 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       controller: 'wxAuthCtrl'
     })
 
+    .state('wxauthpayment', {
+      url: '/wxauthpayment?code&state',
+      cache: 'true',
+      controller: 'wxAuthPaymentCtrl'
+    })
+
     .state('wxlogin', {
       url: '/wxlogin',
       cache: 'true',

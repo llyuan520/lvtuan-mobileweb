@@ -3887,29 +3887,33 @@ lvtuanApp.controller("userwalletCtrl",function($scope,$http,$rootScope,authServi
 	});
 })
 //用户律师 - 钱包充值
+lvtuanApp.controller("wxAuthPaymentCtrl",function($scope,$http,$rootScope,$stateParams,authService,wxService){
+	var code = $stateParams.code;
+	var state = $stateParams.state;
+
+  	$http.post('http://' + AppSettings.baseApiUrl + '/openid', {
+      code: code,
+      state: state
+    }).then(
+    	function (res) {
+	    	var authData = res.data ? res.data.data : null;
+	    	alert(authData.openid);
+    	}
+    ).catch(function(response) {
+	  console.error('Gists error', response.status, response.data);
+	  if (response.status === 400) {
+	  }
+	});
+})
+
+//用户律师 - 钱包充值
 lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$stateParams,authService,wxService){
 	var self = this;
 	var currentUser = authService.getUser();
 
 	if (!currentUser.wx_openid) {
-		alert(wxService.getWxAuthUrl('/user/moneyin'));
-		window.location.replace(wxService.getWxAuthUrl('/user/moneyin'));
-		var code = $stateParams.code;
-		var state = $stateParams.state;
-
-	  	$http.post('http://' + AppSettings.baseApiUrl + '/openid', {
-	      code: code,
-	      state: state
-	    }).then(
-	    	function (res) {
-		    	var authData = res.data ? res.data.data : null;
-		    	alert(authData.openid);
-	    	}
-	    ).catch(function(response) {
-		  console.error('Gists error', response.status, response.data);
-		  if (response.status === 400) {
-		  }
-		});
+		alert(wxService.getWxAuthUrl('/wxauthpayment'));
+		window.location.replace(wxService.getWxAuthUrl('/wxauthpayment'));
 	}
 
 	$scope.summoney = sessionStorage.getItem('summoney');
