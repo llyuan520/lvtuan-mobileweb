@@ -3888,27 +3888,27 @@ lvtuanApp.controller("userwalletCtrl",function($scope,$http,$rootScope,authServi
 })
 
 lvtuanApp.controller("wxCheckOpenIdCtrl",function($scope,$http,$rootScope,$stateParams,authService,wxService){
-	var currentUser = authService.getUser();
-
-	if (!currentUser.wx_openid) {
+alert('hitting wxCheckOpenIdCtrl');
+	if (!$rootScope.wx_openid) {
+alert('hitting redirect');
 		alert(wxService.getWxAuthUrl('/wxauthpayment'));
 		window.location.replace(wxService.getWxAuthUrl('/wxauthpayment'));
 	}
 })
 
 //获取openid以供支付使用 
-lvtuanApp.controller("wxAuthPaymentCtrl",function($scope,$http,$rootScope,$stateParams,authService,wxService){
+lvtuanApp.controller("wxAuthPaymentCtrl",function($scope,$http,$rootScope,$stateParams,authService,wxService,$ionicLoading){
 alert('hitting wxauthpayment');
 	var code = $stateParams.code;
 	var state = $stateParams.state;
 
-  	$http.post('http://' + AppSettings.baseApiUrl + '/openid', {
-      code: code,
-      state: state
-    }).then(
+	$ionicLoading.show();
+  	$http.get('http://' + AppSettings.baseApiUrl + '/openid?code='+code+'&state='+state).then(
     	function (res) {
 	    	var authData = res.data ? res.data.data : null;
-alert('getting openid: ' + authData.openid);
+		$rootScope.wx_openid = authData.openid;
+		$ionicLoading.hide();
+		location.href = "#/user/moneyin";	
     	}
     ).catch(function(response) {
 	  console.error('Gists error', response.status, response.data);
@@ -3931,7 +3931,7 @@ lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$statePa
 
 	self.jsApiCall = function(user)
 	{
-		if (currentUser.wx_openid) {
+		if ($rootScope.wx_openid) {
 			var attach_params = {};
 			attach_params.platform = 'wechat';
 			attach_params.type = 'wallet';
@@ -3939,7 +3939,7 @@ lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$statePa
 			attach_params.money = user.money;
 			attach_str = JSON.stringify(attach_params);
 			var timestamp=Math.round(new Date().getTime()/1000);
-			$http.get('http://'+$rootScope.hostName+'/payment/jsapiparams/'+currentUser.wx_openid+'/'+attach_str+'?ts='+timestamp,{
+			$http.get('http://'+$rootScope.hostName+'/payment/jsapiparams/'+$rootScope.wx_openid+'/'+attach_str+'?ts='+timestamp,{
 			}).success(function(data) {
 				console.info(data);
 				if (data && data.data && data.data.params) {
