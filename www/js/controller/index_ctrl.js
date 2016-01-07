@@ -3857,25 +3857,29 @@ lvtuanApp.controller("corporatebuynowCtrl",function($scope,$http,$rootScope,$sta
 //用户律师 - 钱包
 lvtuanApp.controller("userwalletCtrl",function($scope,$http,$rootScope,authService){
 
-	//判断是否是律师
-	var currentUser = authService.getUser();
-	if(currentUser.user_group_id == 1 || currentUser.user_group_id == 2 && currentUser.is_verified == 0){
-		$http.get('http://'+$rootScope.hostName+'/center/customer/wallet')
-			.success(function(data) {
-				if (data && data.data) {
-					$scope.items = data.data; 
-					sessionStorage.setItem("summoney", $scope.items.money);
-				}
-			})
-	}else{
-		$http.get('http://'+$rootScope.hostName+'/center/lawyer/wallet')
-			.success(function(data) {
-				if (data && data.data) {
-					$scope.items = data.data; 
-					localStorage.setItem("money", $scope.items.money);
-				}
-			})
-	}
+	$scope.$on('$ionicView.beforeEnter', function(scopes, states, event) {  
+		
+		//判断是否是律师
+		var currentUser = authService.getUser();
+		if(currentUser.user_group_id == 1 || currentUser.user_group_id == 2 && currentUser.is_verified == 0){
+			$http.get('http://'+$rootScope.hostName+'/center/customer/wallet')
+				.success(function(data) {
+					if (data && data.data) {
+						$scope.items = data.data; 
+						sessionStorage.setItem("summoney", $scope.items.money);
+					}
+				})
+		}else{
+			$http.get('http://'+$rootScope.hostName+'/center/lawyer/wallet')
+				.success(function(data) {
+					if (data && data.data) {
+						$scope.items = data.data; 
+						localStorage.setItem("money", $scope.items.money);
+					}
+				})
+		}
+
+	});
 })
 //用户律师 - 钱包充值
 lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$stateParams,authService){
@@ -3883,6 +3887,13 @@ lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$statePa
 	$scope.summoney = sessionStorage.getItem('summoney');
 	var currentUser = authService.getUser();
 	var params = null;
+
+	$scope.$on('$ionicView.beforeEnter', function($scope) {  
+   //    console.log($scope.summoney);
+   //    $scope.summoney =
+	  // alert('before enter');
+
+	});
 
 	self.jsApiCall = function(user)
 	{
@@ -3912,9 +3923,6 @@ lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$statePa
 									$state.go('user/wallet', {}, {reload: true});
 								    // window.location.reload();
 									layer.show("充值成功。");
-									$scope.summoney = $scope.summoney + user.money;
-									$scope.items.money = $scope.summoney;
-									sessionStorage.setItem('summoney', $scope.summoney);
 									break;
 								case "get_brand_wcpay_request:fail":
 									layer.show("充值失败，请稍候再试。");

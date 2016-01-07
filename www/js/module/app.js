@@ -798,14 +798,12 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       url: '/user/wallet',
       templateUrl: 'template/mylvtuan/user/wallet/wallet.html',
       controller: 'userwalletCtrl',
-      cache: 'false', 
       authn: true
     })
     .state('user/moneyin', { //我的律团-钱包充值
       url: '/user/moneyin',
       templateUrl: 'template/mylvtuan/user/wallet/moneyin.html',
       controller: 'usermoneyinCtrl',
-      cache: 'false', 
       authn: true
     })
     .state('user/record', { //我的律团-充值记录
