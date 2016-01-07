@@ -3909,7 +3909,7 @@ lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$statePa
 									// .success(function(data) {
 									// });
 									location.href='#/user/wallet';
-								    window.location.reload();
+								    // window.location.reload();
 									layer.show("充值成功。");
 									break;
 								case "get_brand_wcpay_request:fail":
