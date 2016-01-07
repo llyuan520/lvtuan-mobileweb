@@ -3893,6 +3893,8 @@ alert('hitting wxCheckOpenIdCtrl');
 alert('hitting redirect');
 		alert(wxService.getWxAuthUrl('/wxauthpayment'));
 		window.location.replace(wxService.getWxAuthUrl('/wxauthpayment'));
+	} else {
+		location.href = "#/user/moneyin";
 	}
 })
 
