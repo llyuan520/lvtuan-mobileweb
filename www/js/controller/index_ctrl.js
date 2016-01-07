@@ -4059,13 +4059,11 @@ lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$io
 		var currentUser = authService.getUser();
 		console.info($scope.obj);
 		if($scope.obj == 'weixin'){
-			layer.show("研发中...敬请期待。")
-
 			var attach_params = {};
 			attach_params.platform = 'wechat';
             attach_params.type = 'question';
             attach_params.user_id = currentUser.id;
-            attach_params.money = 0.01;
+            attach_params.money = '0.01';
             attach_str = JSON.stringify(attach_params);
             var timestamp=Math.round(new Date().getTime()/1000);
             $ionicLoading.show();
