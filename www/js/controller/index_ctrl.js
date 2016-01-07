@@ -3903,7 +3903,8 @@ lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$statePa
 			attach_params.user_id = currentUser.id;
 			attach_params.money = user.money;
 			attach_str = JSON.stringify(attach_params);
-			$http.get('http://'+$rootScope.hostName+'/payment/jsapiparams/'+currentUser.wx_openid+'/'+attach_str,{
+			var timestamp=Math.round(new Date().getTime()/1000);
+			$http.get('http://'+$rootScope.hostName+'/payment/jsapiparams/'+currentUser.wx_openid+'/'+attach_str+'?ts='+timestamp,{
 			}).success(function(data) {
 				console.info(data);
 				if (data && data.data && data.data.params) {
