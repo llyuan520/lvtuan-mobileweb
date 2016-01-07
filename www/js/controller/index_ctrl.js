@@ -3857,7 +3857,7 @@ lvtuanApp.controller("corporatebuynowCtrl",function($scope,$http,$rootScope,$sta
 //用户律师 - 钱包
 lvtuanApp.controller("userwalletCtrl",function($scope,$http,$rootScope,authService){
 
-	$scope.$on('$ionicView.beforeEnter', function(scopes, states, event) {  
+	$scope.$on('$ionicView.beforeEnter', function() {  
 		
 		//判断是否是律师
 		var currentUser = authService.getUser();
@@ -3874,7 +3874,7 @@ lvtuanApp.controller("userwalletCtrl",function($scope,$http,$rootScope,authServi
 				.success(function(data) {
 					if (data && data.data) {
 						$scope.items = data.data; 
-						localStorage.setItem("money", $scope.items.money);
+						localStorage.setItem("summoney", $scope.items.money);
 					}
 				})
 		}
@@ -3885,9 +3885,11 @@ lvtuanApp.controller("userwalletCtrl",function($scope,$http,$rootScope,authServi
 lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$stateParams,authService){
 	var self = this;
 	var currentUser = authService.getUser();
+	$scope.summoney = sessionStorage.getItem('summoney');
 	var params = null;
 
-	$scope.$on('$ionicView.beforeEnter', function($scope) {  
+	$scope.$on('$ionicView.beforeEnter', function() {
+		console.info(sessionStorage.getItem('summoney'));
 		$scope.summoney = sessionStorage.getItem('summoney');
 	});
 
@@ -3912,9 +3914,14 @@ lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$statePa
 							WeixinJSBridge.log(res.err_msg);
 							switch(res.err_msg) {
 								case "get_brand_wcpay_request:ok":
+									// $http.post('http://'+$rootScope.hostName+'/wallet/recharge',user)
+									// .success(function(data) {
+									// });
 									location.href='#/user/wallet';
+									// $state.go('user/wallet', {}, {reload: true});
+								    // window.location.reload();
+								    sessionStorage.setItem('summoney', sessionStorage.getItem('summoney')+user.money);
 									layer.show("充值成功。");
-									sessionStorage.setItem('summoney', sessionStorage.getItem('summoney') + user.money);
 									break;
 								case "get_brand_wcpay_request:fail":
 									layer.show("充值失败，请稍候再试。");
