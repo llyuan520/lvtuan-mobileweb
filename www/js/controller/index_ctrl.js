@@ -3862,6 +3862,8 @@ lvtuanApp.controller("userwalletCtrl",function($scope,$http,$rootScope,authServi
 		//判断是否是律师
 		var currentUser = authService.getUser();
 		var timestamp=Math.round(new Date().getTime()/1000);
+		$scope.items = {};
+		$ionicLoading.show();
 		if(currentUser.user_group_id == 1 || currentUser.user_group_id == 2 && currentUser.is_verified == 0){
 			$http.get('http://'+$rootScope.hostName+'/center/customer/wallet?ts='+timestamp)
 				.success(function(data) {
@@ -3869,6 +3871,7 @@ lvtuanApp.controller("userwalletCtrl",function($scope,$http,$rootScope,authServi
 						$scope.items = data.data; 
 						sessionStorage.setItem("summoney", $scope.items.money);
 					}
+					$ionicLoading.hide();
 				})
 		}else{
 			$http.get('http://'+$rootScope.hostName+'/center/lawyer/wallet?ts='+timestamp)
@@ -3877,6 +3880,7 @@ lvtuanApp.controller("userwalletCtrl",function($scope,$http,$rootScope,authServi
 						$scope.items = data.data; 
 						localStorage.setItem("summoney", $scope.items.money);
 					}
+					$ionicLoading.hide();
 				})
 		}
 
