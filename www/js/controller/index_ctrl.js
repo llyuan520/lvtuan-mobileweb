@@ -3889,12 +3889,14 @@ lvtuanApp.controller("userwalletCtrl",function($scope,$http,$rootScope,authServi
 
 lvtuanApp.controller("wxCheckOpenIdCtrl",function($scope,$http,$rootScope,$stateParams,authService,wxService){
 alert('hitting wxCheckOpenIdCtrl');
-	if (!wxService.getOpenId()) {
-alert('hitting redirect');
-		alert(wxService.getWxAuthUrl('/wxauthpayment'));
-		window.location.replace(wxService.getWxAuthUrl('/wxauthpayment'));
-	} else {
-		location.href = "#/user/moneyin";
+	$scope.$on('$ionicView.beforeEnter', function() {
+		if (!wxService.getOpenId()) {
+	alert('hitting redirect');
+			alert(wxService.getWxAuthUrl('/wxauthpayment'));
+			window.location.replace(wxService.getWxAuthUrl('/wxauthpayment'));
+		} else {
+			location.href = "#/user/moneyin";
+		}
 	}
 })
 
