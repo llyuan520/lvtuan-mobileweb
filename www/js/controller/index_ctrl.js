@@ -3892,12 +3892,15 @@ lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$statePa
 				console.info(data);
 				if (data && data.data && data.data.params) {
 					self.params = data.data.params;
-					var attach_params = [];
-					attach_params['platform'] = 'wechat';
+					var attach_params = {};
+					attach_params.platform = 'wechat';
 					attach_params['type'] = 'wallet';
-					attach_params['user_id'] = currentUser.id;
-					attach_params['money'] = user.money;
-					self.params['attach'] = attach_params;
+					attach_params.type = 'wallet';
+					attach_params.user_id = currentUser.id;
+					attach_params.money = user.money;
+					self.params.attach = JSON.stringify(attach_params);
+					alert(self.params.attach);
+					alert(self.params.bank_type);
 					WeixinJSBridge.invoke(
 						'getBrandWCPayRequest',
 						self.params,
@@ -3939,7 +3942,7 @@ lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$statePa
 		        document.attachEvent('onWeixinJSBridgeReady', self.jsApiCall(user));
 		    }
 		}else{
-		    self.jsApiCall();
+		    self.jsApiCall(user);
 		}
 	}
 
