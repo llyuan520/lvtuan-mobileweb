@@ -367,7 +367,7 @@ lvtuanApp.controller("wxAuthCtrl",function($scope,$stateParams,wxService,userSer
 
 //自动跳转到微信授权登录页面
 lvtuanApp.controller("wxLoginCtrl",function($scope,$http,$rootScope,wxService){
-	window.location.replace(wxService.getWxAuthUrl());
+	window.location.replace(wxService.getWxAuthUrl('/wxauth'));
 })
 
 /****************************************************** 圈子 ******************************************************/
@@ -3887,9 +3887,31 @@ lvtuanApp.controller("userwalletCtrl",function($scope,$http,$rootScope,authServi
 	});
 })
 //用户律师 - 钱包充值
-lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$stateParams,authService){
+lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$stateParams,authService,wxService){
 	var self = this;
 	var currentUser = authService.getUser();
+
+	if (!currentUser.wx_openid) {
+		alert(wxService.getWxAuthUrl('/user/moneyin'));
+		window.location.replace(wxService.getWxAuthUrl('/user/moneyin'));
+		var code = $stateParams.code;
+		var state = $stateParams.state;
+
+	  	$http.post('http://' + AppSettings.baseApiUrl + '/openid', {
+	      code: code,
+	      state: state
+	    }).then(
+	    	function (res) {
+		    	var authData = res.data ? res.data.data : null;
+		    	alert(authData.openid);
+	    	}
+	    ).catch(function(response) {
+		  console.error('Gists error', response.status, response.data);
+		  if (response.status === 400) {
+		  }
+		});
+	}
+
 	$scope.summoney = sessionStorage.getItem('summoney');
 	var params = null;
 
