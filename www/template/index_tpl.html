@@ -79,7 +79,7 @@
 	      <ul class="list">
 	      	<!-- <ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher> -->
             <ion-list>
-            	<ion-item class="item item-thumbnail-left" ng-repeat="item in items" ng-href="#/lawyer/{{item.id}}">
+            	<ion-item class="item item-thumbnail-left i-lawyer-list" ng-repeat="item in items" ng-href="#/lawyer/{{item.id}}">
 		          	<img ng-src="{{item.avatar}}" style="border-radius:50px;" />
 					<h2>{{item.realname}}</h2>
 					<p>执业{{item.practice_period}}/{{item.city}}</p>

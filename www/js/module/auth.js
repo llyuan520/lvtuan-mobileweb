@@ -82,7 +82,6 @@ function userService($http, HOST, authService) {
 			// window.location.reload();
     	}
     ).catch(function(response) {
-		console.error('Gists error', response.status, response.data);
 		if (response.status === 400) {
 			var errMsg = JSON.stringify(data.error_messages.username);
 			layer.show(errMsg);
@@ -120,7 +119,6 @@ function userService($http, HOST, authService) {
 			// window.location.reload();
     	}
     ).catch(function(response) {
-	  console.error('Gists error', response.status, response.data);
 	  if (response.status === 400) {
 		layer.show("登录失败，账号或密码错误，请重新登录。");
 	  }
