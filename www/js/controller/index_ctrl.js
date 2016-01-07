@@ -3920,6 +3920,7 @@ lvtuanApp.controller("wxAuthPaymentCtrl",function($scope,$http,$rootScope,$state
 //用户律师 - 钱包充值
 lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$stateParams,authService,wxService,$ionicLoading){
 	var self = this;
+	var currentUser = authService.getUser();
 
 	$scope.summoney = sessionStorage.getItem('summoney');
 	var params = null;
@@ -3953,9 +3954,6 @@ lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$statePa
 							WeixinJSBridge.log(res.err_msg);
 							switch(res.err_msg) {
 								case "get_brand_wcpay_request:ok":
-									// $http.post('http://'+$rootScope.hostName+'/wallet/recharge',user)
-									// .success(function(data) {
-									// });
 									location.href='#/user/wallet';
 									// $state.go('user/wallet', {}, {reload: true});
 								    // window.location.reload();
@@ -4038,7 +4036,7 @@ lvtuanApp.controller("userpayallCtrl",function($scope,$http,$rootScope,listHelpe
 })
 
 //用户律师 - 微信支付
-lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$ionicPopup,listHelper){
+lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$ionicPopup,listHelper,authService,wxService,$ionicLoading){
 	$http.get('http://'+$rootScope.hostName+'/center/pay/question/'+$stateParams.id+'/view')
 		.success(function(data) {
 			if(data && data.data){
@@ -4058,11 +4056,47 @@ lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$io
 
 	//微信支付
 	$scope.pay = function(){
+		var currentUser = authService.getUser();
 		console.info($scope.obj);
 		if($scope.obj == 'weixin'){
 			layer.show("研发中...敬请期待。")
-			/*location.href='#/login';
-		    window.location.reload();*/
+
+			var attach_params = {};
+			attach_params.platform = 'wechat';
+            attach_params.type = 'question';
+            attach_params.user_id = currentUser.id;
+            attach_params.money = 0.01;
+            attach_str = JSON.stringify(attach_params);
+            var timestamp=Math.round(new Date().getTime()/1000);
+            $ionicLoading.show();
+            $http.get('http://'+$rootScope.hostName+'/payment/jsapiparams/'+wxService.getOpenId()+'/'+attach_str+'?ts='+timestamp,{
+            }).success(function(data) {
+            	$ionicLoading.hide();
+                console.info(data);
+                if (data && data.data && data.data.params) {
+                        self.params = data.data.params;
+                        WeixinJSBridge.invoke(
+                                'getBrandWCPayRequest',
+                                self.params,
+                                function(res){
+                                        WeixinJSBridge.log(res.err_msg);
+                                        switch(res.err_msg) {
+                                                case "get_brand_wcpay_request:ok":
+			            								location.href='#/orderuser/new';
+	                                                    sessionStorage.setItem('summoney', sessionStorage.getItem('summoney')+user.money);
+                                                        layer.show("支付成功。");
+                                                        break;
+                                                case "get_brand_wcpay_request:fail":
+                                                        layer.show("支付失败，请稍候再试。");
+                                                        break;
+                                                case "get_brand_wcpay_request:cancel":
+                                                        layer.show("您已取消支付。");
+                                                        break;
+                                        }
+                                }
+                        );
+                }
+            });
 		}else{
 			var confirmPopup = $ionicPopup.confirm({
 	           title: '是否立即付款？',
