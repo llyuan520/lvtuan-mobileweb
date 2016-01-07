@@ -4080,9 +4080,12 @@ lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$io
                                         WeixinJSBridge.log(res.err_msg);
                                         switch(res.err_msg) {
                                                 case "get_brand_wcpay_request:ok":
-			            								location.href='#/orderuser/new';
-	                                                    sessionStorage.setItem('summoney', sessionStorage.getItem('summoney')+user.money);
-                                                        layer.show("支付成功。");
+											            $http.post('http://'+$rootScope.hostName+'/center/question/'+$stateParams.id+'/money/pay'
+											            ).success(function(data) {
+												        	$scope.items = data.data;
+												            layer.show("付款成功！");
+												            location.href='#/orderuser/new';
+												        });
                                                         break;
                                                 case "get_brand_wcpay_request:fail":
                                                         layer.show("支付失败，请稍候再试。");
