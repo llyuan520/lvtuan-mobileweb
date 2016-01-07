@@ -49,7 +49,7 @@ function authService($window) {
 	}
 }
 
-function userService($http, HOST, authService) {
+function userService($http, HOST, authService, wxService, $ionicLoading) {
   var self = this;
 
   // add authentication methods here
@@ -91,6 +91,7 @@ function userService($http, HOST, authService) {
   }
 
   self.login = function(username, password) {
+  	$ionicLoading.show();
   	return $http.post('http://' + HOST + '/login', {
       username: username,
       password: password
@@ -114,6 +115,7 @@ function userService($http, HOST, authService) {
         	}else{
         		location.href='#/center';
         	}*/
+        	$ionicLoading.hide();
         	window.history.back();
 	//		window.location.reload();
     	}
@@ -125,6 +127,7 @@ function userService($http, HOST, authService) {
   }
 
   self.loginWithWx = function(code, state) {
+
   	return $http.post('http://' + HOST + '/loginWithWx', {
       code: code,
       state: state
@@ -132,6 +135,9 @@ function userService($http, HOST, authService) {
     	function (res) {
 	    	var user = res.data ? res.data.data : null;
 	    	// alert(user.wx_openid);
+
+	    	wxService.saveOpenId(user.wx_openid);
+
 	    	if(user) {
 	    		authService.saveUser(user);
 	    		console.log('user:', user);

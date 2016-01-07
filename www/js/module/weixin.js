@@ -15,6 +15,14 @@ function wxService() {
 		str += "#wechat_redirect";
 		return str;
 	}
+
+	self.saveOpenId = function(openid) {
+		localStorage.setItem('wx_openid', openid);
+	}
+
+	self.getOpenId = function() {
+		return localStorage.getItem('wx_openid');
+	}
 }
 					
 wxModule.service('wxService', wxService);

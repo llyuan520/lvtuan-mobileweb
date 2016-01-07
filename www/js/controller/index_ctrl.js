@@ -3875,13 +3875,13 @@ lvtuanApp.controller("userwalletCtrl",function($scope,$http,$rootScope,authServi
 				})
 		}else{
 			$http.get('http://'+$rootScope.hostName+'/center/lawyer/wallet?ts='+timestamp)
-				.success(function(data) {
-					if (data && data.data) {
-						$scope.items = data.data; 
-						localStorage.setItem("summoney", $scope.items.money);
-					}
-					$ionicLoading.hide();
-				})
+			.success(function(data) {
+				if (data && data.data) {
+					$scope.items = data.data; 
+					localStorage.setItem("summoney", $scope.items.money);
+				}
+				$ionicLoading.hide();
+			})
 		}
 
 	});
@@ -3889,7 +3889,7 @@ lvtuanApp.controller("userwalletCtrl",function($scope,$http,$rootScope,authServi
 
 lvtuanApp.controller("wxCheckOpenIdCtrl",function($scope,$http,$rootScope,$stateParams,authService,wxService){
 alert('hitting wxCheckOpenIdCtrl');
-	if (!$rootScope.wx_openid) {
+	if (!wxService.getOpenId()) {
 alert('hitting redirect');
 		alert(wxService.getWxAuthUrl('/wxauthpayment'));
 		window.location.replace(wxService.getWxAuthUrl('/wxauthpayment'));
@@ -3906,14 +3906,14 @@ alert('hitting wxauthpayment');
   	$http.get('http://' + AppSettings.baseApiUrl + '/openid?code='+code+'&state='+state).then(
     	function (res) {
 	    	var authData = res.data ? res.data.data : null;
-		$rootScope.wx_openid = authData.openid;
-		$ionicLoading.hide();
-		location.href = "#/user/moneyin";	
+			wxService.saveOpenId(authData.openid);
+			$ionicLoading.hide();
+			location.href = "#/user/moneyin";	
     	}
     ).catch(function(response) {
-	  console.error('Gists error', response.status, response.data);
-	  if (response.status === 400) {
-	  }
+	  	console.error('Gists error', response.status, response.data);
+	  	if (response.status === 400) {
+	  	}
 	});
 })
 
@@ -3931,7 +3931,7 @@ lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$statePa
 
 	self.jsApiCall = function(user)
 	{
-		if ($rootScope.wx_openid) {
+		if (wxService.getOpenId()) {
 			var attach_params = {};
 			attach_params.platform = 'wechat';
 			attach_params.type = 'wallet';
