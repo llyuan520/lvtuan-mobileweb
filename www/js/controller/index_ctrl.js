@@ -3897,7 +3897,7 @@ alert('hitting wxCheckOpenIdCtrl');
 		} else {
 			location.href = "#/user/moneyin";
 		}
-	}
+	})
 })
 
 //获取openid以供支付使用 
@@ -3922,7 +3922,7 @@ alert('hitting wxauthpayment');
 })
 
 //用户律师 - 钱包充值
-lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$stateParams,authService,wxService){
+lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$stateParams,authService,wxService,$ionicLoading){
 	var self = this;
 
 	$scope.summoney = sessionStorage.getItem('summoney');
@@ -3943,8 +3943,10 @@ lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$statePa
 			attach_params.money = user.money;
 			attach_str = JSON.stringify(attach_params);
 			var timestamp=Math.round(new Date().getTime()/1000);
-			$http.get('http://'+$rootScope.hostName+'/payment/jsapiparams/'+$rootScope.wx_openid+'/'+attach_str+'?ts='+timestamp,{
+			$ionicLoading.show();
+			$http.get('http://'+$rootScope.hostName+'/payment/jsapiparams/'+wxService.getOpenId()+'/'+attach_str+'?ts='+timestamp,{
 			}).success(function(data) {
+				$ionicLoading.hide();
 				console.info(data);
 				if (data && data.data && data.data.params) {
 					self.params = data.data.params;
