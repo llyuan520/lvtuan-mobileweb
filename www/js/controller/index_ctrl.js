@@ -4080,8 +4080,10 @@ lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$io
                                         WeixinJSBridge.log(res.err_msg);
                                         switch(res.err_msg) {
                                                 case "get_brand_wcpay_request:ok":
+                                                		$ionicLoading.show();
 											            $http.post('http://'+$rootScope.hostName+'/center/question/'+$stateParams.id+'/money/pay'
 											            ).success(function(data) {
+											            	$ionicLoading.hide();
 												        	$scope.items = data.data;
 												            layer.show("付款成功！");
 												            location.href='#/orderuser/new';
