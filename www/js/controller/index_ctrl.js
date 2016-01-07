@@ -3886,8 +3886,19 @@ lvtuanApp.controller("userwalletCtrl",function($scope,$http,$rootScope,authServi
 
 	});
 })
-//用户律师 - 钱包充值
+
+lvtuanApp.controller("wxCheckOpenIdCtrl",function($scope,$http,$rootScope,$stateParams,authService,wxService){
+	var currentUser = authService.getUser();
+
+	if (!currentUser.wx_openid) {
+		alert(wxService.getWxAuthUrl('/wxauthpayment'));
+		window.location.replace(wxService.getWxAuthUrl('/wxauthpayment'));
+	}
+})
+
+//获取openid以供支付使用 
 lvtuanApp.controller("wxAuthPaymentCtrl",function($scope,$http,$rootScope,$stateParams,authService,wxService){
+alert('hitting wxauthpayment');
 	var code = $stateParams.code;
 	var state = $stateParams.state;
 
@@ -3897,7 +3908,7 @@ lvtuanApp.controller("wxAuthPaymentCtrl",function($scope,$http,$rootScope,$state
     }).then(
     	function (res) {
 	    	var authData = res.data ? res.data.data : null;
-	    	alert(authData.openid);
+alert('getting openid: ' + authData.openid);
     	}
     ).catch(function(response) {
 	  console.error('Gists error', response.status, response.data);
@@ -3909,12 +3920,6 @@ lvtuanApp.controller("wxAuthPaymentCtrl",function($scope,$http,$rootScope,$state
 //用户律师 - 钱包充值
 lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$stateParams,authService,wxService){
 	var self = this;
-	var currentUser = authService.getUser();
-
-	if (!currentUser.wx_openid) {
-		alert(wxService.getWxAuthUrl('/wxauthpayment'));
-		window.location.replace(wxService.getWxAuthUrl('/wxauthpayment'));
-	}
 
 	$scope.summoney = sessionStorage.getItem('summoney');
 	var params = null;

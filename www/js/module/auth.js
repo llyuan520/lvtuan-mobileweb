@@ -115,8 +115,7 @@ function userService($http, HOST, authService) {
         		location.href='#/center';
         	}*/
         	window.history.back();
-			window.location.reload();
-			// window.location.reload();
+	//		window.location.reload();
     	}
     ).catch(function(response) {
 	  if (response.status === 400) {
