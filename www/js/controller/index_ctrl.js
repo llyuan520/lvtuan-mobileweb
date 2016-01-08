@@ -2471,7 +2471,7 @@ lvtuanApp.controller("graphicCtrl",function($scope,$http,$rootScope,$timeout,$st
 				$scope.user = {};
 				$scope.files = {};
         		$scope.errFiles = {};
-        		location.href='#/pay/'+data.data.data.id+'/question';
+        		location.href='#/pay/'+data.data.data.id+'?type=question';
 			},function(data){
 				console.info(data);
 			}
@@ -3452,7 +3452,7 @@ lvtuanApp.controller("userorderAllCtrl",function($http,$scope,$rootScope,listHel
 
 	//付款
 	$scope.pay = function(id){
-		location.href='#/pay/'+id+'/question';
+		location.href='#/pay/'+id+'?type=question';
 	}
 
 	//评价
@@ -3479,7 +3479,7 @@ lvtuanApp.controller("userorderPendingCtrl",function($http,$scope,$rootScope,lis
 	}
 	//付款
 	$scope.pay = function(id){
-		location.href='#/pay/'+id+'/question';
+		location.href='#/pay/'+id+'?type=question';
 	}
 })
 //用户的订单 - 待受理
@@ -3559,7 +3559,7 @@ lvtuanApp.controller("userOrderDetailCtrl",function($http,$scope,$state,$rootSco
 	}
 	//付款
 	$scope.pay = function(id){
-		location.href='#/pay/'+id+'/question';
+		location.href='#/pay/'+id+'?type=question';
 	}    
 
 	//取消
@@ -3855,7 +3855,7 @@ lvtuanApp.controller("corporatebuynowCtrl",function($scope,$http,$rootScope,$sta
 	        	console.log(data.data);
 	            $scope.user = {};
 	            $scope.items = {};
-        		location.href='#/pay/'+data.data.order.id+'/order';
+        		location.href='#/pay/'+data.data.order.id+'?type=order';
 	        });
 		
 	}
