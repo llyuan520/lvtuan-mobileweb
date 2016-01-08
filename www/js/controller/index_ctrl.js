@@ -1468,29 +1468,109 @@ lvtuanApp.controller("followedCtrl",function($scope, listHelper) {
 
 //普通用户-认证为律师的导航
 lvtuanApp.controller("becomenavCtrl",function($scope,$http,$rootScope,$ionicPopup,$timeout){
+	$scope.params = {};
 	//从业信息
 	$scope.practitioners = JSON.parse(localStorage.getItem('practitioners'));
 	if($scope.practitioners){
+		if($scope.practitioners.license){
+			$scope.params['license'] = $scope.practitioners.license;
+		}
+		if($scope.practitioners.company_name){
+			$scope.params['company_name'] = $scope.practitioners.company_name;
+		}
+		if($scope.practitioners.practice_period){
+			$scope.params['practice_period'] = $scope.practitioners.practice_period;
+		}
+		if($scope.practitioners.province){
+			$scope.params['province'] = $scope.practitioners.province;
+		}
+		if($scope.practitioners.city){
+			$scope.params['city'] = $scope.practitioners.city;
+		}
+		if($scope.practitioners.district){
+			$scope.params['district'] = $scope.practitioners.district;
+		}
+		if($scope.practitioners.license_file){
+			$scope.params['license_file'] = $scope.practitioners.license_file;
+		}	
 		$scope.practitioners = true;
 	}
 	//实名认证
 	$scope.verified = JSON.parse(localStorage.getItem('verified'));
 	if($scope.verified){
+		if($scope.verified.realname){
+			$scope.params['license'] = $scope.verified.realname;
+		}
+		if($scope.verified.ID_img){
+			$scope.params['ID_img'] = $scope.verified.ID_img;
+		}
 		$scope.verified = true;
 	}
 	//资费设置
 	$scope.tariffset = JSON.parse(localStorage.getItem('tariffset'));
 	if($scope.tariffset){
+		if($scope.tariffset.phone_reply_fee){
+			$scope.params['text_reply_fee'] = $scope.tariffset.text_reply_fee;
+		}
+		if($scope.tariffset.text_reply_fee){
+			$scope.params['text_reply_fee'] = $scope.tariffset.text_reply_fee;
+		}
 		$scope.tariffset = true;
 	}
 
-	//资费设置
+	//擅长领域
+	$scope.field = JSON.parse(localStorage.getItem('field'));
+	if($scope.field && $scope.field.workscope.length > 0){
+		var workscope = [];
+		angular.forEach($scope.field.workscope, function(item){
+			if (item.key) {
+				workscope.push(item.key);
+			}
+		});
+		if(workscope){
+			$scope.params['workscope'] = workscope;
+		}
+		$scope.field = true;
+	}
+
+	//经历案例
 	$scope.cases = JSON.parse(localStorage.getItem('cases'));
 	if($scope.cases){
+		if($scope.cases.experience){
+			$scope.params['experience'] = $scope.cases.experience;
+		}
+		if($scope.cases.introduce){
+			$scope.params['introduce'] = $scope.cases.introduce;
+		}
+		if($scope.cases.law_cases){
+			$scope.params['law_cases'] = $scope.cases.law_cases;
+		}
 		$scope.cases = true;
 	}
 	
-	
+	$scope.submit = function(){
+		console.info($scope.params);
+		$http.post('http://'+$rootScope.hostName+'/center/become_lawyer',$scope.user)
+			.success(function(data) {
+				
+	        	var obj = data.data;
+	        	console.info(obj);
+
+	        	debugger
+				//清空数据
+				/*localStorage.removeItem('practitioners');
+				localStorage.removeItem('verified');
+				localStorage.removeItem('tariffset');
+				localStorage.removeItem('field');
+				localStorage.removeItem('cases');
+				layer.show("提交成功！");
+				location.href='#/index';
+				window.location.reload();*/
+
+	        }).error(function(data){
+				console.info(data);
+			});
+	}
 })
 
 //普通用户- 认证为律师的导航 - 从业信息
@@ -1700,30 +1780,37 @@ lvtuanApp.controller("fieldCtrl",function($scope,$http,$rootScope,$timeout,$stat
 	    this.length -= 1;
 	}
 
+	$scope.inShowscopes = function(workscope, showscopes) {
+		var value = false;
+		angular.forEach(showscopes, function(item){
+			if (item.key == workscope.key) {
+				value = true;
+			}
+		});
+		return value;
+	}
+
 	//获取擅长领域
 	$http.get('http://'+$rootScope.hostName+'/lawyer/workscopes')
 		.success(function(data) {
 			$scope.workscopes = data.data; 
 			console.info($scope.workscopes);
-			/*if(parm){
-        		for(var i=0;i<$scope.workscopes_one.length; i++){
-					if(parm == $scope.workscopes_one[i].key){
-						$scope.workscope_one = $scope.workscopes_one[i];
-						break;
-					}
-				}
-        	}*/
+			$scope.field = JSON.parse(localStorage.getItem('field'));
+			if($scope.field && $scope.field.workscope.length > 0){
+				$scope.showscopes = $scope.field.workscope;
+			}else{
+				return false;
+			}
 		})
 
 	$scope.showscopes = [];
-	$scope.click_workscope = function(key,value,index){
-		console.info(key,value,index);
+	$scope.click_workscope = function(key,value){
+		var isvalue = false;
 		if($scope.showscopes.length < 3){
 			for(var i=0; i<$scope.showscopes.length; i++){
 				if($scope.showscopes[i].key == key){
-				
 					$scope.showscopes.remove(i);
-					$(".active"+index).removeClass('active');
+					isvalue = false;
 					return false;
 				}
 			}
@@ -1732,21 +1819,34 @@ lvtuanApp.controller("fieldCtrl",function($scope,$http,$rootScope,$timeout,$stat
 				workscope.key = key;
 				workscope.value = value;
 				$scope.showscopes.push(workscope);
-				$(".active"+index).addClass('active');
+				isvalue = true;
 			}
+			return isvalue;
 		}else{
-			for(var i=0; i<$scope.showscopes.length; i++){
-				if($scope.showscopes[i].key == key){
+			angular.forEach($scope.showscopes, function(item,index){
+				if (item.key == key) {
+					$scope.showscopes.remove(index);
 					console.info($scope.showscopes);
-					$scope.showscopes.remove(i);
-					$(".active"+index).removeClass('active');
+					isvalue = false;
 				}
-			}
-			layer.show("最多只能选择3个！");
+			});
+			return isvalue;
 			return false;
 		}
 	}
 
+	//提交
+	$scope.submit = function(){
+		var param = {};
+		if($scope.showscopes.length > 0){
+			param['workscope'] = $scope.showscopes;
+		}else{
+			layer.show("请选择擅长领域！")
+		}
+		localStorage.setItem("field", JSON.stringify(param));
+		location.href='#/becomenav';
+		window.location.reload();
+	}
 })
 
 //普通用户- 认证为律师的导航 - 经历案例

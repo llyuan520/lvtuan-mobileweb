@@ -18,6 +18,11 @@
 	    display: inline-block;
 	    color: #fff;
 	}
+	.bg_positive .errer{
+		color: #ccc;
+		 padding: 5px 8px;
+    	margin: 10px;
+	}
 
 	.workscope span.active{
 		background-color: #387ef5;
@@ -25,50 +30,29 @@
 	}
 </style>
 <ion-view hide-tabs="true">
-	<form name="practitionForm" class="css-form" id="practitionForm" novalidate ng-controller="practitionersCtrl">
-		<ion-pane  class="web-body">
-			<ion-header-bar class="bar bar-header bar-light">
-				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-href="#/becomenav"></a>
-				<h1 class="title">擅长领域</h1>
-				<button ng-click="submit()" class="button button-clear button-positive" type="submit" ng-disabled="practitionForm.$invalid">保存</button>
-			</ion-header-bar>
+	<ion-pane  class="web-body">
+		<ion-header-bar class="bar bar-header bar-light">
+			<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-href="#/becomenav"></a>
+			<h1 class="title">擅长领域</h1>
+			<button ng-click="submit()" class="button button-clear button-positive" type="submit">保存</button>
+		</ion-header-bar>
 
-			<ion-content style="margin-bottom: 0;">
-				<!-- <h4 class="title web-title web-fc666">资格认证 <span class="web-ftcred" style="font-size:14px;">(审核通过后，不可修改)</span></h4> -->
-				<div class="basekong20"></div>
-				<!-- <div class="list">
-					<div class="item item-input">
-						<div class="row">
-						  <div class="col col-center">擅长领域</div>
-						  <div class="col col-75 col-center">
-						  	<select class="web-font16" required data-disabled="disabled" id="workscope_one" ng-model="workscope_one" name="workscope_one"  ng-options="workscopes_one as workscopes_one.value for workscopes_one in workscopes_one track by workscopes_one.key" ng-change="getworkscopes_one(workscope_one)">
-									<option value="">--擅长领域--</option>
-						    </select>
-						    <br><br>
-						    <select class="web-font16" data-disabled="disabled" ng-show="workscope_one" id="workscope_two"  ng-model="workscope_two" name="workscope_two" ng-options="workscopes_two as workscopes_two.value for workscopes_two in workscopes_two track by workscopes_two.key" ng-change="getworkscopes_two(workscope_two)">
-									<option value="">--擅长领域--</option>
-						    </select>
-						    <br><br>
-						    <select class="web-font16" data-disabled="disabled" ng-show="workscope_two" id="workscope_three" ng-model="workscope_three" name="workscope_three"  ng-options="workscopes_three as workscopes_three.value for workscopes_three in workscopes_three track by workscopes_three.key" ng-change="getworkscopes_three(workscope_three)">
-									<option value="">--擅长领域--</option>
-						    </select>
-						  </div>
-						</div>
-					</div>
-				</div> -->
-				<div class="list">
-					<div class="item item-input bg_positive">
-						<span ng-repeat="showscope in showscopes">
-							<label>{{showscope.value}}</label>
-						</span>
-					</div>
-				</div>
-				<div class="list workscope">
-					<span ng-repeat="workscope in workscopes" class="active{{$index}}"> 
-						<label ng-click="click_workscope(workscope.key,workscope.value,$index)" >{{workscope.value}}</label>
+		<ion-content style="margin-bottom: 0;">
+			<!-- <h4 class="title web-title web-fc666">资格认证 <span class="web-ftcred" style="font-size:14px;">(审核通过后，不可修改)</span></h4> -->
+			<div class="basekong20"></div>
+			<div class="list">
+				<div class="item item-input bg_positive">
+					<label class="errer" ng-show="showscopes.length == 0 ">最多只能选择三个！</label>
+					<span ng-repeat="showscope in showscopes">
+						<label data-id="{{showscope.key}}">{{showscope.value}}</label>
 					</span>
 				</div>
-			</ion-content>
-		</ion-pane>
-	</form>
+			</div>
+			<div class="list workscope" >
+				<span ng-repeat="workscope in workscopes" ng-class="{ 'active':inShowscopes(workscope, showscopes) }"> 
+					<label ng-click="click_workscope(workscope.key,workscope.value)" >{{workscope.value}}</label>
+				</span>
+			</div>
+		</ion-content>
+	</ion-pane>
 </ion-view>

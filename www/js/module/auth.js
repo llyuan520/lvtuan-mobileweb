@@ -116,7 +116,7 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
         		location.href='#/center';
         	}*/
         	$ionicLoading.hide();
-        	window.history.back();
+        	//window.history.back();
 	//		window.location.reload();
         	var goback = sessionStorage.getItem("goback");
 			location.href='#'+goback;
