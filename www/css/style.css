@@ -84,7 +84,6 @@ body,
 }
 
 
-
 .slider-pager .slider-pager-page{
     color:#32a9f2;
 }
@@ -523,16 +522,40 @@ img.avatar{
 }
 /*.item-complex .item-content{padding-right: 26px;}*/
 
-.item .badge{top:62px;}
-.asklawyer{background: url(../img/asklawyer.png) no-repeat;display: inline-block;background-size: 42px;width: 86px;height: 45px;}
-.findlawyer{background: url(../img/findlawyer.png) no-repeat;display: inline-block;background-size: 42px;width: 78px;height: 45px;}
+.item .badge{
+    top: 62px;
+}
+.my-integral .badge {
+    background-color: #31c27c;
+}
+.asklawyer{
+    display: inline-block;
+    width: 86px;
+    height: 45px;
+    background: url(../img/asklawyer.png) no-repeat;
+    background-size: 42px;
+}
+.findlawyer{
+    background-size: 42px;
+    width: 78px;
+    height: 45px;
+    background: url(../img/findlawyer.png) no-repeat;
+    display: inline-block;
+}
 
-.slide1 .slider-slide img{width:100%;}
-.slide2 .slider{height: 140px;}
-.slide2 .slider-slide img{width:100%;height: 140px;}
+.slide1 .slider-slide img{
+    width: 100%;
+}
+.slide2 .slider{
+    height: 140px;
+}
+.slide2 .slider-slide img{
+    width: 100%;
+    height: 140px;
+}
 .st2-swap{
     margin: 0;
-    width:100%;
+    width: 100%;
     background-color: #EEEEEE;
     overflow: hidden;
     margin-top: 10px;
@@ -546,7 +569,9 @@ img.avatar{
     height: 140px;
     border-right: 1px solid #cccccc; padding: 0px;
 }
-.st2-swap .listimg a{display: inline-block;}
+.st2-swap .listimg a{
+    display: inline-block;
+}
 
 .st2-swap .listimg .top,.st2-swap .listimg .left,.st2-swap .listimg .right{
     overflow: hidden;
@@ -999,7 +1024,7 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
 * @Author: anchen
 * @Date:   2015-12-30 10:04:11
 * @Last Modified by:   anchen
-* @Last Modified time: 2016-01-07 20:19:48
+* @Last Modified time: 2016-01-08 19:06:56
 */
 .knowledge-love {
     margin: 0 0.7rem 0 0.2rem;
@@ -1017,6 +1042,7 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
 .nav-set a.active i.home {
     background: url("../img/indexs.png") center center no-repeat;
     background-size: 29% 72%;
+    color: #00cafa;
 }
 .tab-item .group {
     background: url("../img/circle.png") center center no-repeat;
@@ -1025,6 +1051,7 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
 .nav-set a.active i.group {
     background: url("../img/circles.png") center center no-repeat;
     background-size: 30% 73%;
+    color: #00cafa;
 }
 .tab-item .knowledge {
     background: url("../img/knowledge.png") center center no-repeat;
@@ -1033,6 +1060,7 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
 .nav-set a.active i.knowledge {
     background: url("../img/knowledges.png") center center no-repeat;
     background-size: 30% 73%;
+    color: #00cafa;
 }
 .tab-item .center {
     background: url("../img/my.png") center center no-repeat;
@@ -1041,6 +1069,7 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
 .nav-set a.active i.center {
     background: url("../img/mys.png") center center no-repeat;
     background-size: 32% 85%;
+    color: #00cafa;
 }
 /*6 plus*/
 @media only screen and (min-device-width: 414px) and (min-device-height :736px){
@@ -1259,3 +1288,61 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
     font-size: 14px;
     padding: 0;
 }
+
+
+/*个人中心图标*/
+.center-list {
+    background-color: #fff;
+}
+.center-list .item {
+    color: #666666;
+    padding-left: 0;
+    margin: 0;
+    border-bottom: 0.1rem #eee solid;
+}
+.center-list div {
+    padding-left: 18%;
+    background-color: #fff;
+}
+.center-list .my-order {
+    background: url("../img/my-order.png") 3% center no-repeat;
+    background-size: 9%;
+}
+.center-list .my-consultation {
+    background: url("../img/my-consultation.png") 3% center no-repeat;
+    background-size: 9%;
+}
+.center-list .my-wallet {
+    background: url("../img/my-wallet.png") 3% center no-repeat;
+    background-size: 9%;
+}
+.center-list .become-lawyer {
+    background: url("../img/become-lawyer.png") 3% center no-repeat;
+    background-size: 9%;
+}
+.center-list .my-integral {
+    background: url("../img/my-integral.png") 3% center no-repeat;
+    background-size: 9%;
+}
+.center-list .my-collection {
+    background: url("../img/my-collection.png") 3% center no-repeat;
+    background-size: 9%;
+}
+.center-list .my-comment {
+    background: url("../img/my-comment.png") 3% center no-repeat;
+    background-size: 9%;
+}
+.center-list .my-follow {
+    background: url("../img/my-follow.png") 3% center no-repeat;
+    background-size: 9%;
+}
+.center-list .my-set {
+    background: url("../img/my-set.png") 3% center no-repeat;
+    background-size: 9%;
+}
+.center-list .my-article {
+    background: url("../img/my-article.png") 3% center no-repeat;
+    background-size: 9%;
+}
+
+/*登录头部返回键设置*/
