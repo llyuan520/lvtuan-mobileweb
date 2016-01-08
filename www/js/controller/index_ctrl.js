@@ -2471,7 +2471,7 @@ lvtuanApp.controller("graphicCtrl",function($scope,$http,$rootScope,$timeout,$st
 				$scope.user = {};
 				$scope.files = {};
         		$scope.errFiles = {};
-        		location.href='#/pay/'+data.data.data.id;
+        		location.href='#/pay/'+data.data.data.id+'/question';
 			},function(data){
 				console.info(data);
 			}
@@ -3452,7 +3452,7 @@ lvtuanApp.controller("userorderAllCtrl",function($http,$scope,$rootScope,listHel
 
 	//付款
 	$scope.pay = function(id){
-		location.href='#/pay/'+id;
+		location.href='#/pay/'+id+'/question';
 	}
 
 	//评价
@@ -3479,7 +3479,7 @@ lvtuanApp.controller("userorderPendingCtrl",function($http,$scope,$rootScope,lis
 	}
 	//付款
 	$scope.pay = function(id){
-		location.href='#/pay/'+id;
+		location.href='#/pay/'+id+'/question';
 	}
 })
 //用户的订单 - 待受理
@@ -3559,7 +3559,7 @@ lvtuanApp.controller("userOrderDetailCtrl",function($http,$scope,$state,$rootSco
 	}
 	//付款
 	$scope.pay = function(id){
-		location.href='#/pay/'+id;
+		location.href='#/pay/'+id+'/question';
 	}    
 
 	//取消
@@ -3716,7 +3716,7 @@ lvtuanApp.controller("corporateservicesCtrl",function($http,$scope,$state,$rootS
 })
 
 //小微企服
-lvtuanApp.controller("corporatelistCtrl",function($scope,$state,$http,$rootScope,$stateParams,$ionicPopup, $timeout){
+lvtuanApp.controller("corporatelistCtrl",function($scope,$state,$http,$rootScope,$stateParams,$ionicPopup,$timeout,$ionicLoading){
 	//创建tabs列表
 	$scope.tabs = [{
             title: '产品详情',
@@ -3736,9 +3736,11 @@ lvtuanApp.controller("corporatelistCtrl",function($scope,$state,$http,$rootScope
     }
 
     //详情
+    $ionicLoading.show();
     $http.get('http://'+$rootScope.hostName+'/company/product/'+$stateParams.id+'/view')
     	.success(function(data) {
-        	console.info("详情",data.data);				
+        	console.info("详情",data.data);			
+        	$ionicLoading.hide();	
         	$scope.items = data.data; 
 		})
 
@@ -3771,7 +3773,7 @@ lvtuanApp.controller("corporatelistevaluateCtrl",function($scope,$http,$rootScop
 })
 
 //立即购买
-lvtuanApp.controller("corporatebuynowCtrl",function($scope,$http,$rootScope,$stateParams){
+lvtuanApp.controller("corporatebuynowCtrl",function($scope,$http,$rootScope,$stateParams,$ionicLoading){
 	$http.get('http://'+$rootScope.hostName+'/company/product/'+$stateParams.id+'/view')
 		.success(function(data) {
         	console.info("详情",data.data);				
@@ -3781,8 +3783,10 @@ lvtuanApp.controller("corporatebuynowCtrl",function($scope,$http,$rootScope,$sta
 	getProvince();
 	//获取所在区域 - 省
 	function getProvince(){
+		$ionicLoading.show();
 		$http.get('http://'+$rootScope.hostName+'/area/province')
 		.success(function(data) {
+			$ionicLoading.hide();
         	console.info(data.data)
 			$scope.provinces = data.data; 	
 		})
@@ -3790,16 +3794,20 @@ lvtuanApp.controller("corporatebuynowCtrl",function($scope,$http,$rootScope,$sta
 
 	//获取所在区域 - 市
 	$scope.getCity = function(province){
+		$ionicLoading.show();
 		$http.get('http://'+$rootScope.hostName+'/area/'+province+'/city')
 		.success(function(data) {
+			$ionicLoading.hide();
         	$scope.citys = data.data; 
 		})
 	}
 
 	//获取所在区域 - 地區
 	$scope.getDistrict = function(city){
+		$ionicLoading.show();
 		$http.get('http://'+$rootScope.hostName+'/area/'+city+'/district')
 		.success(function(data) {
+			$ionicLoading.hide();
 			$scope.districts = data.data; 
 		})
 	}
@@ -3840,14 +3848,14 @@ lvtuanApp.controller("corporatebuynowCtrl",function($scope,$http,$rootScope,$sta
 			$scope.items['product_id'] = $stateParams.id;
 		}
 		console.info($scope.items);
+		$ionicLoading.show();
 		$http.post('http://'+$rootScope.hostName+'/company/order/submit',$scope.items)
 			.success(function(data) {
-	        	console.log(data.data)
-	            layer.show("提交成功！");
+				$ionicLoading.hide();
+	        	console.log(data.data);
 	            $scope.user = {};
 	            $scope.items = {};
-	            location.href='#/corporate';
-
+        		location.href='#/pay/'+data.data.order.id+'/order';
 	        });
 		
 	}
@@ -4037,7 +4045,7 @@ lvtuanApp.controller("userpayallCtrl",function($scope,$http,$rootScope,listHelpe
 
 //用户律师 - 微信支付
 lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$ionicPopup,listHelper,authService,wxService,$ionicLoading){
-	$http.get('http://'+$rootScope.hostName+'/center/pay/question/'+$stateParams.id+'/view')
+	$http.get('http://'+$rootScope.hostName+'/center/pay/'+$stateParams.type+'/'+$stateParams.id+'/view')
 		.success(function(data) {
 			if(data && data.data){
 				$scope.item = data.data; 
