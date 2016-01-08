@@ -4048,6 +4048,7 @@ lvtuanApp.controller("userpayallCtrl",function($scope,$http,$rootScope,listHelpe
 //用户律师 - 微信支付
 lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$ionicPopup,listHelper,authService,wxService,$ionicLoading){
         $ionicLoading.show();
+        alert($stateParams.type);
 	$http.get('http://'+$rootScope.hostName+'/center/pay/'+$stateParams.type+'/'+$stateParams.id+'/view')
 		.success(function(data) {
 			$ionicLoading.hide();
@@ -4074,7 +4075,8 @@ lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$io
 alert('pay with weixin');
 			var attach_params = {};
 			attach_params.platform = 'wechat';
-            attach_params.type = 'question';
+            attach_params.type = $stateParams.type;
+            attach_params.item_id = $stateParams.id;
             attach_params.user_id = currentUser.id;
             attach_params.money = '0.01';
 alert('this is a test' + wxService.getOpenId());
@@ -4095,13 +4097,14 @@ alert('this is a test' + wxService.getOpenId());
                                         switch(res.err_msg) {
                                                 case "get_brand_wcpay_request:ok":
                                                 		$ionicLoading.show();
-											            $http.post('http://'+$rootScope.hostName+'/center/question/'+$stateParams.id+'/money/pay'
-											            ).success(function(data) {
-											            	$ionicLoading.hide();
-												        	$scope.items = data.data;
-												            layer.show("付款成功！");
-												            location.href='#/orderuser/new';
-												        });
+                                                		location.href='#/orderuser/new';
+											         //    $http.post('http://'+$rootScope.hostName+'/center/question/'+$stateParams.id+'/money/pay'
+											         //    ).success(function(data) {
+											         //    	$ionicLoading.hide();
+												        // 	$scope.items = data.data;
+												        //     layer.show("付款成功！");
+												        //     location.href='#/orderuser/new';
+												        // });
                                                         break;
                                                 case "get_brand_wcpay_request:fail":
                                                         layer.show("支付失败，请稍候再试。");
