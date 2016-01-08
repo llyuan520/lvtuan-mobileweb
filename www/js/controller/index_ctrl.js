@@ -3947,6 +3947,8 @@ lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$statePa
 			attach_params.user_id = currentUser.id;
 			attach_params.money = user.money;
 			attach_str = JSON.stringify(attach_params);
+alert('openid' + wxService.getOpenId());
+alert('attach_str' + attach_str);
 			var timestamp=Math.round(new Date().getTime()/1000);
 			$ionicLoading.show();
 			$http.get('http://'+$rootScope.hostName+'/payment/jsapiparams/'+wxService.getOpenId()+'/'+attach_str+'?ts='+timestamp,{
@@ -4045,8 +4047,10 @@ lvtuanApp.controller("userpayallCtrl",function($scope,$http,$rootScope,listHelpe
 
 //用户律师 - 微信支付
 lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$ionicPopup,listHelper,authService,wxService,$ionicLoading){
+        $ionicLoading.show();
 	$http.get('http://'+$rootScope.hostName+'/center/pay/'+$stateParams.type+'/'+$stateParams.id+'/view')
 		.success(function(data) {
+			$ionicLoading.hide();
 			if(data && data.data){
 				$scope.item = data.data; 
 				console.info($scope.item);
@@ -4067,11 +4071,13 @@ lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$io
 		var currentUser = authService.getUser();
 		console.info($scope.obj);
 		if($scope.obj == 'weixin'){
+alert('pay with weixin');
 			var attach_params = {};
 			attach_params.platform = 'wechat';
             attach_params.type = 'question';
             attach_params.user_id = currentUser.id;
             attach_params.money = '0.01';
+alert('this is a test' + wxService.getOpenId());
             attach_str = JSON.stringify(attach_params);
             var timestamp=Math.round(new Date().getTime()/1000);
             $ionicLoading.show();
