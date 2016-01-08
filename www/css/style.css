@@ -242,6 +242,7 @@ a:hover{
     width: 10%;
     height: 2rem;
     margin: 0;
+    margin-right: 10px;
 }
 .item .praise {
     background: url("../img/praise.png") left 0.5rem no-repeat;
@@ -1105,6 +1106,7 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
 .item .counts {
     padding-right: 8%;
     font-size: 1rem;
+    padding-right: 10%;
 }
 
 .css-form  input, select{border:1px solid #ccc;}

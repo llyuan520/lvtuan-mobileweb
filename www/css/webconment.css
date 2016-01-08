@@ -210,7 +210,7 @@ body,
 	font-size:14px;
 }
 .web-font16{
-	font-size:16px;
+	font-size: 1.2rem;
 }
 .web-padd-right40{
 	padding-right:40px;
@@ -330,8 +330,9 @@ body,
 .col-center{
 	text-center:center;
 }
-.item-input .col-center input {
+.item-input input {
 	padding-right: 0px;
+	border: 1px solid #ccc;
 }
 .basekong1{
 	width:100%;

@@ -1,0 +1,165 @@
+<ion-view hide-tabs="true">
+		<ion-pane  class="web-body">
+			<ion-header-bar class="bar bar-header bar-light">
+				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-href="#/center"></a>
+				<h1 ng-if="currentUser.user_group_id == 1 || currentUser.user_group_id == 2 && currentUser.is_verified == 0" class="title">认证律师</h1>
+				<h1 ng-if="currentUser.user_group_id == 2 && currentUser.is_verified == 1" class="title">修改认证律师</h1>
+			</ion-header-bar>
+
+			<ion-content class="web-body web-top10">
+				<div class="basekong20"></div>
+				<div ng-if="!currentUser.is_verified_lawyer" class="list" style="padding-bottom: 20px;">
+					<div class="item row">
+						<div class="col col-75 col-center">
+						  	<a ng-href="#/practitioners">
+							    从业信息
+							</a>
+						</div>
+					    <div class="col">
+					    	<div class="item item-checkbox" >
+				        	<div class="checkbox">
+						  		<input type="checkbox" name="practitioners" ng-model="practitioners"  ng-false-value="false"> 
+						  	</div>
+				        </div>
+					    </div>
+					</div>
+					<div class="item row">
+						<div class="col col-75 col-center">
+						  	<a ng-href="#/verified">
+							    实名认证
+							</a>
+						</div>
+					    <div class="col">
+					    	<div class="item item-checkbox" >
+				        	<div class="checkbox">
+						  		<input type="checkbox" name="verified" ng-model="verified"  ng-false-value="false"> 
+						  	</div>
+				        </div>
+					    </div>
+					</div>
+					<div class="item row">
+						<div class="col col-75 col-center">
+						  	<a ng-href="#/tariffset">
+							    资费设置
+							</a>
+						</div>
+					    <div class="col">
+					    	<div class="item item-checkbox" >
+				        	<div class="checkbox">
+						  		<input type="checkbox" name="tariffset" ng-model="tariffset"  ng-false-value="false"> 
+						  	</div>
+				        </div>
+					    </div>
+					</div>
+					<div class="item row">
+						<div class="col col-75 col-center">
+						  	<a ng-href="#/field">
+							    擅长领域
+							</a>
+						</div>
+					    <div class="col">
+					    	<div class="item item-checkbox" >
+				        	<div class="checkbox">
+						  		<input type="checkbox" name="field" ng-model="field"  ng-false-value="false"> 
+						  	</div>
+				        </div>
+					    </div>
+					</div>
+					<div class="item row">
+						<div class="col col-75 col-center">
+						  	<a ng-href="#/case">
+							    经历案例
+							</a>
+						</div>
+					    <div class="col">
+					    	<div class="item item-checkbox" >
+				        	<div class="checkbox">
+						  		<input type="checkbox" name="cases" ng-model="cases"  ng-false-value="false"> 
+						  	</div>
+				        </div>
+					    </div>
+					</div>
+					<div class="item row">
+						<button class="button button-block button-positive web-wid8c web-top10" type="submit" ng-disabled="myForm.$invalid" ng-click="sever()">保存</button>
+					</div>
+				</div>
+
+				<!-- <div ng-if="currentUser.is_verified_lawyer" class="list" style="padding-bottom: 20px;">
+					  <div class="item row">
+						<div class="col col-75 col-center">
+						  	<a ng-href="#/orderuser">
+							    从业信息
+							</a>
+						</div>
+					    <div class="col">
+					    	<div class="item item-checkbox" >
+				        	<div class="checkbox">
+						  		<input type="checkbox" name="cyinfo" ng-model="user.cyinfo"  ng-false-value="false"> 
+						  	</div>
+				        </div>
+					    </div>
+					</div>
+					<div class="item row">
+						<div class="col col-75 col-center">
+						  	<a ng-href="#/orderuser">
+							    实名认证
+							</a>
+						</div>
+					    <div class="col">
+					    	<div class="item item-checkbox" >
+				        	<div class="checkbox">
+						  		<input type="checkbox" name="verified" ng-model="user.verified"  ng-false-value="false"> 
+						  	</div>
+				        </div>
+					    </div>
+					</div>
+					<div class="item row">
+						<div class="col col-75 col-center">
+						  	<a ng-href="#/orderuser">
+							    资费设置
+							</a>
+						</div>
+					    <div class="col">
+					    	<div class="item item-checkbox" >
+				        	<div class="checkbox">
+						  		<input type="checkbox" name="tariffset" ng-model="user.tariffset"  ng-false-value="false"> 
+						  	</div>
+				        </div>
+					    </div>
+					</div>
+					<div class="item row">
+						<div class="col col-75 col-center">
+						  	<a ng-href="#/orderuser">
+							    擅长领域
+							</a>
+						</div>
+					    <div class="col">
+					    	<div class="item item-checkbox" >
+				        	<div class="checkbox">
+						  		<input type="checkbox" name="field" ng-model="user.field"  ng-false-value="false"> 
+						  	</div>
+				        </div>
+					    </div>
+					</div>
+					<div class="item row">
+						<div class="col col-75 col-center">
+						  	<a ng-href="#/orderuser">
+							    经历案例
+							</a>
+						</div>
+					    <div class="col">
+					    	<div class="item item-checkbox" >
+				        	<div class="checkbox">
+						  		<input type="checkbox" name="case" ng-model="user.case"  ng-false-value="false"> 
+						  	</div>
+				        </div>
+					    </div>
+					</div>
+					<div class="item row">
+						<button class="button button-block button-positive web-wid8c web-top10" type="submit" ng-disabled="myForm.$invalid" ng-click="sever()">保存</button>
+					</div>
+				</div> -->
+				<div style="width:100%;height:50px;clear:both;"></div>
+			</ion-content>
+		</ion-pane>
+</ion-view>
