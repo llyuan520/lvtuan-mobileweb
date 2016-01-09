@@ -1024,7 +1024,7 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
 * @Author: anchen
 * @Date:   2015-12-30 10:04:11
 * @Last Modified by:   anchen
-* @Last Modified time: 2016-01-08 19:06:56
+* @Last Modified time: 2016-01-09 14:59:42
 */
 .knowledge-love {
     margin: 0 0.7rem 0 0.2rem;
@@ -1215,25 +1215,25 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
     padding-right: 0.7rem;
 }
 .list-details {
-    height: 2.6rem;
+    height: 1.6rem;
 }
 .order-number, .concern-number {
     float: right;
-    height: 2.4rem;
+    height: 1.6rem;
     padding: 0.2rem 0 0.2rem 5%;
 }
 .concern-number, .order-number {
-    width: 35%;
+    width: 25%;
 }
 .concern-number {
     border-right: 0.1rem #999999 solid;
 }
 .concern-number span, .order-number span {
     display: block;
-    height: 2rem;
+    height: 1.2rem;
     padding-left: 50%;
-    line-height: 2rem;
-    font-size: 1rem;
+    line-height: 1.2rem;
+    font-size: 0.8rem;
 }
 .concern-number span {
    background: url("../img/gray-love.png") 0 center no-repeat;
@@ -1346,3 +1346,24 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
 }
 
 /*登录头部返回键设置*/
+.pane .login-header {
+    position: relative;
+    height: 3rem;
+    border: none;
+    background-color: rgba(255,255,255,0);
+}
+.login-header a {
+    position: absolute;
+    top: 12%;
+    right: 3%;
+    width: 10%;
+    height: 2.3rem;
+    background: url("../img/white-index.png") center center no-repeat;
+    background-size: 90%;
+}
+
+/*问律师页面样式修改*/
+.questions-content a {
+    float: left;
+    height: 21px;
+}
