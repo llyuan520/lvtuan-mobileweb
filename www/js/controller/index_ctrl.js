@@ -1499,7 +1499,7 @@ lvtuanApp.controller("becomenavCtrl",function($scope,$http,$rootScope,$ionicPopu
 	$scope.verified = JSON.parse(localStorage.getItem('verified'));
 	if($scope.verified){
 		if($scope.verified.realname){
-			$scope.params['license'] = $scope.verified.realname;
+			$scope.params['realname'] = $scope.verified.realname;
 		}
 		if($scope.verified.ID_img){
 			$scope.params['ID_img'] = $scope.verified.ID_img;
@@ -1528,7 +1528,7 @@ lvtuanApp.controller("becomenavCtrl",function($scope,$http,$rootScope,$ionicPopu
 			}
 		});
 		if(workscope){
-			$scope.params['workscope'] = workscope;
+			$scope.params['work_scope'] = workscope;
 		}
 		$scope.field = true;
 	}
@@ -1550,7 +1550,7 @@ lvtuanApp.controller("becomenavCtrl",function($scope,$http,$rootScope,$ionicPopu
 	
 	$scope.submit = function(){
 		console.info($scope.params);
-		$http.post('http://'+$rootScope.hostName+'/center/become_lawyer',$scope.user)
+		$http.post('http://'+$rootScope.hostName+'/center/become_lawyer',$scope.params)
 			.success(function(data) {
 				
 	        	var obj = data.data;
@@ -2088,7 +2088,7 @@ lvtuanApp.controller("becomelawyerCtrl",function($scope,$http,$rootScope,$ionicA
 	}
 	function getworkscopes_oneParm(workscope,parm){
 		$scope.workscopes_two = JSON.parse(sessionStorage.getItem('workscopes_one'));
-		if(workscope){
+		if(workscope && $scope.workscopes_two.length >1){
 			var index;
 			for(var i=0;i<$scope.workscopes_two.length; i++){
 				if(workscope.key == $scope.workscopes_two[i].key){
