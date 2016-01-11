@@ -27,17 +27,12 @@
     line-height: 2rem;
     font-size: 1.1rem;
 }
-.tabs.tabs-icon-top.tabs-color-positive{
-	display: none;
-}
-
+.citypicker .cities,.citypicker .districts{display: none;}
 </style>
 <ion-view hide-tabs="true">
 		<ion-pane  class="web-body">
 			<ion-header-bar class="bar bar-header bar-light">
-				<i class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back"  ng-click="jump_citypicke_GoBack()"></i>
 				<h1 class="title">选择地址</h1>
-				<!-- <button ng-click="createSubmit()" class="button button-clear button-positive" type="button">保存</button> -->
 			</ion-header-bar>
 
 			<ion-content delegate-handle="mainScroll" style="margin-bottom:0;">
@@ -55,6 +50,13 @@
 					<div class="cities">
 						<div class="list">
 					        <div class="item" ng-repeat="(key, value) in citys" ng-click="citie(value)">
+					        	{{value.value}}
+					        </div>
+						</div>
+					</div>
+					<div class="districts">
+						<div class="list">
+					        <div class="item" ng-repeat="(key, value) in districts" ng-click="district(value)">
 					        	{{value.value}}
 					        </div>
 						</div>

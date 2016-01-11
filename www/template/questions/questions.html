@@ -1,7 +1,7 @@
 <ion-view hide-Tabs="true">
 		<ion-pane>
 			<ion-header-bar class="bar bar-header bar-light">
-				<button class="button button-clear button-positive" ng-click="jumpGoBack()">  
+				<button class="button button-clear button-positive" ng-click="jumpGo('#/index')">  
                     <i class="icon icon-left ion-ios-arrow-back"></i>  
                 </button>
 				<h1 class="title">问律师</h1>
@@ -62,7 +62,7 @@
 				<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 				<div class="list list-inset">
 					<div ng-repeat="item in items" class="item card item-borderless noboxshadow">
-						<div class="item item-button-right">
+						<div class="item item-button-right questions-content">
 						   <a ng-href="#/questionsview/{{item.id}}"> {{item.title}}</a>
 						 <i class="button button-clear icon-right ion-ios-star-outline"></i>
 						</div>

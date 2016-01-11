@@ -73,7 +73,7 @@
 
 									<div ng-model="ID_img" class="button item-note ion-ios-plus-empty button-light" ngf-pattern="'image/*'"  accept="image/*" ngf-max-size="20MB" ngf-min-height="100" ngf-select="uploadFiles($file,4)"></div>
 									<img ng-src="{{file_4}}" ngf-thumbnail="ID_img || ''" width="52" height="50">
-									<input type="hidden" name="ID_img" value="{{file_1}}" />
+									<input type="hidden" name="ID_img" value="{{file_4}}" />
 									<span class="progress_4" ng-show="progress_4 >= 0">
 					                  <div style="width:{{progress_4}}%" ng-bind="progress_4 + '%'"></div>
 					                </span>

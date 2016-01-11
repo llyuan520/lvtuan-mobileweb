@@ -1,0 +1,60 @@
+<ion-view hide-tabs="true">
+	<form name="practitionForm" class="css-form" id="practitionForm" novalidate ng-controller="practitionersCtrl">
+		<ion-pane  class="web-body">
+			<ion-header-bar class="bar bar-header bar-light">
+				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-href="#/becomenav"></a>
+				<h1 class="title">从业信息</h1>
+				<button ng-click="submit()" class="button button-clear button-positive" type="submit" ng-disabled="practitionForm.$invalid">保存</button>
+			</ion-header-bar>
+
+			<ion-content style="margin-bottom: 0;">
+				<div class="basekong20"></div>
+				<div class="list">
+					<div class="item item-input">
+						<div class="input-label">
+			              执业证号
+			            </div>
+						<input placeholder="请输入执业证号"  ng-model="license" name="license" type="text" required>
+					</div>
+					<div class="item item-input">
+						<div class="input-label">
+			              执业机构
+			            </div>
+						<input placeholder="请输入执业机构" ng-model="company_name" name="company_name" type="text" required>
+					</div>
+					<div class="item item-input item-select">
+						<div class="input-label">
+			              执业年限
+			            </div>
+					  	<select class="web-font16" required ng-model="practice_period" name="practice_period" ng-options="period as period.value for period in periods track by period.key">
+								<option value="">--执业年限--</option>
+					    </select>
+					</div>
+					<div class="item item-input">
+						<div class="input-label">
+			              执业地址
+			            </div>
+			            <input placeholder="请选择执业地址" ng-model="address" type="text" required ng-click="getAddress()" data-disabled="disabled" >
+					</div>
+					<div class="item item-input">
+						<div class="input-label">
+			              执业证书
+			            </div>
+
+						<div class="row">
+						  <div class="col col-90">
+							<div ng-model="license_file" class="button item-note ion-ios-plus-empty button-light" ngf-pattern="'image/*'"  accept="image/*" ngf-max-size="20MB" ngf-min-height="100" ngf-select="uploadFiles($file)" ></div>
+							<img ng-src="{{file}}" ngf-thumbnail="file || '/thumb.jpg'" width="52" height="50">
+							<input type="hidden" name="license_file" value="{{file}}" />
+							<span class="progress" ng-show="progress > 0">
+			                  <div style="width:{{progress}}%" ng-bind="progress + '%'"></div>
+			                </span>
+
+						  </div>
+						</div>
+					</div>
+				</div>
+			</ion-content>
+		</ion-pane>
+	</form>
+</ion-view>

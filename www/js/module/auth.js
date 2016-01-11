@@ -116,8 +116,12 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
         		location.href='#/center';
         	}*/
         	$ionicLoading.hide();
-        	window.history.back();
+        	//window.history.back();
 	//		window.location.reload();
+        	var goback = sessionStorage.getItem("goback");
+			location.href='#'+goback;
+			sessionStorage.removeItem(goback);
+			// window.location.reload();
     	}
     ).catch(function(response) {
 	  if (response.status === 400) {
@@ -151,8 +155,11 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
         	}
   			$ionicLoading.hide();
 
-	    	location.href='#/index';
+	    	//location.href='#/index';
 			// window.location.reload();
+			var goback = sessionStorage.getItem("goback");
+			location.href='#'+goback;
+			sessionStorage.removeItem(goback);
     	}
     ).catch(function(response) {
 	  console.error('Gists error', response.status, response.data);

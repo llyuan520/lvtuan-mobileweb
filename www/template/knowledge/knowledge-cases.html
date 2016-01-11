@@ -4,17 +4,12 @@
 		<ion-list>
         	<ion-item class="item item-thumbnail-left"  ng-repeat="item in items" ng-href="#/knowledgeview/{{item.id}}">
 	          	<img ng-src="{{item.img}}" style="left:6px;border-radius:5px;">
-				<!-- <h2 style="height:30px;margin-top:5px;">{{item.title}}</h2> -->
 				<p class="content">{{item.title}}</p>
-				<p>{{item.info}}</p>
-				<p>
-					<i class="icon ion-android-favorite-outline web-ion-img1-2 knowledge-love" style="margin-right:10px;font-size:1.4rem;">
-						<label>{{item.likes_count}}</label>
-					</i>
-					<i class="icon ion-android-star-outline web-ion-img1-2" style="margin-right:10px;font-size:1.8rem;">
-						<label>{{item.views_count}}</label>
-					</i>
-				</p>
+				<p class="article-content">{{item.info}}</p>
+                <p>
+                    <i class="praise knowledge-stars"></i><span class="counts">{{item.likes_count}}</span>
+                    <i class="messages knowledge-love"></i><span class="counts">{{item.comments_count}}</span>
+                </p>
 	        </ion-item>
         </ion-list>
 		<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>

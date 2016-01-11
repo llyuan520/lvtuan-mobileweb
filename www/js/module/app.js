@@ -44,28 +44,37 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
     layer.goHome();
   }
 
+
+  
+
 }])
+
 .run(function($rootScope, $location, $state, authService, locationService) {
 
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
 
         // 如果这个state需要登录才可以访问
         if (toState.authn) {
-
             // 如果用户没有登录
             if (!authService.isAuthed()) {
+                sessionStorage.setItem("goback", toState.url);
                 $rootScope.$broadcast('unauthenticated');
                 event.preventDefault(); 
             } else {
-                // 如果用户没有登录
+                // 如果用户没有权限访问
+                sessionStorage.setItem("goback", toState.url);
                 currentUser = authService.getUser();
                 if (toState.authz && toState.authz == 'lawyer' && !currentUser.is_verified_lawyer) {
                     $rootScope.$broadcast('unauthorized');
-                    $state.transitionTo("login");
                     event.preventDefault();
                 }
             }
         }
+
+        //tabs选择项
+        //设置首页四个按钮的选中
+        $rootScope.path = $location.path();
+
     });
 
     $rootScope.$on('unauthorized', function() {
@@ -83,6 +92,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
         /*$window.location.href = '/login';*/
         //window.location.reload();
     });
+
 })
 
 .config(function($httpProvider) {
@@ -341,13 +351,60 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       controller: 'followedCtrl',
       authn: true
     })
+    .state('becomenav', { //用户-认证为律师
+      url: '/becomenav',
+      cache: 'true',
+      templateUrl: 'template/center/become/become_nav.html',
+      controller: 'becomenavCtrl',
+      authn: true
+    })
+    .state('practitioners', { //用户-认证为律师 - 从业信息
+      url: '/practitioners',
+      cache: 'true',
+      templateUrl: 'template/center/become/practitioners.html',
+      authn: true
+    })
+    .state('verified', { //用户-认证为律师 - 实名认证
+      url: '/verified',
+      cache: 'true',
+      templateUrl: 'template/center/become/verified.html',
+      authn: true
+    })
+    .state('tariffset', { //用户-认证为律师 - 资费设置
+      url: '/tariffset',
+      cache: 'true',
+      templateUrl: 'template/center/become/tariffset.html',
+      authn: true
+    })
+    .state('field', { //用户-认证为律师 - 擅长领域
+      url: '/field',
+      cache: 'true',
+      templateUrl: 'template/center/become/field.html',
+      controller: 'fieldCtrl',
+      authn: true
+    })
+    .state('case', { //用户-认证为律师 - 经历案例
+      url: '/case',
+      cache: 'true',
+      templateUrl: 'template/center/become/case.html',
+      authn: true
+    })
+    .state('citypicke/all', { //用户-认证为律师 - 经历案例
+      url: '/citypicke/all',
+      cache: 'true',
+      templateUrl: 'template/citypicker-all.html',
+      controller: 'citypickeAllCtrl',
+      authn: true
+    })
+    
     .state('becomelawyer', { //用户-认证为律师
       url: '/becomelawyer',
       cache: 'true',
-      templateUrl: 'template/center/become_lawyer.html',
+      templateUrl: 'template/center/become/become_lawyer.html',
       controller: 'becomelawyerCtrl',
       authn: true
     })
+
 /*———————————————————————————— 律师的个人中心 ————————————————————————————*/
     .state('followed_lawyer', { //律师-我的关注
       url: '/followed_lawyer',

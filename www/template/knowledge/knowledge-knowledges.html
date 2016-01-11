@@ -4,22 +4,11 @@
 		<ion-list>
         	<ion-item class="item item-thumbnail-left"  ng-repeat="item in items" ng-href="#/knowledgeview/{{item.id}}">
 	          	<img ng-src="{{item.img}}" style="left:6px;border-radius:5px;">
-				<!-- <h2 style="height:30px;margin-top:5px;">{{item.title}}</h2> -->
 				<p class="content">{{item.title}}</p>
-				<p>{{item.info}}</p>
+				<p class="article-content">{{item.info}}</p>
 				<p>
-					<!-- <i class="icon ion-chatbox-working web-ion-img1-2 knowledge-love"> -->
-                    <!-- <i class="icon ion-android-star-outline web-ion-img1-2 knowledge-stars"> -->
-                    <!-- <i class="praise knowledge-stars">
-                        <label class="counts">{{item.likes_count}}</label>
-                    </i>
-                    <i class="messages knowledge-love">
-                        <label class="counts">{{item.comments_count}}</label>
-					</i> -->
-                    <i class="praise knowledge-stars"></i>
-                    <span class="counts">{{item.likes_count}}</span>
-                    <i class="messages knowledge-love"></i>
-                    <span class="counts">{{item.comments_count}}</span>
+                    <i class="praise knowledge-stars"></i><span class="counts">{{item.likes_count}}</span>
+                    <i class="messages knowledge-love"></i><span class="counts">{{item.comments_count}}</span>
 				</p>
 	        </ion-item>
          </ion-list>

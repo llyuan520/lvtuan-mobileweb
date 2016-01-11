@@ -1,0 +1,38 @@
+<ion-view hide-tabs="true">
+		<ion-pane  class="web-body">
+			<form name="verifiedForm" class="css-form" id="verifiedForm" novalidate ng-controller="verifiedCtrl">
+				<ion-header-bar class="bar bar-header bar-light">
+					<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-href="#/becomenav"></a>
+					<h1 class="title">实名认证</h1>
+					<button ng-click="submit()" class="button button-clear button-positive" type="submit" ng-disabled="verifiedForm.$invalid">保存</button>
+				</ion-header-bar>
+
+				<ion-content style="margin-bottom: 0;">
+					<div class="basekong20"></div>
+					<div class="list">
+						<div class="item item-input">
+							<div class="row">
+							  <div class="col col-center">真实姓名</div>
+							  <div class="col col-75">
+							  	<input placeholder="请输入真实姓名" ng-model="realname" name="realname" type="text" required>
+							  </div>
+							</div>
+						</div>
+						<div class="item item-input">
+							<div class="row">
+							  <div class="col col-center">身份证照</div>
+							  <div class="col col-75">
+							  	<div ng-model="ID_img" class="button item-note ion-ios-plus-empty button-light" ngf-pattern="'image/*'"  accept="image/*" ngf-max-size="20MB" ngf-min-height="100" ngf-select="uploadFiles($file)"></div>
+								<img ng-src="{{file}}" ngf-thumbnail="file || '/thumb.jpg'" width="52" height="50">
+								<input type="hidden" name="ID_img" value="{{file}}" />
+								<span class="progress" ng-show="progress >= 0">
+				                  <div style="width:{{progress}}%" ng-bind="progress + '%'"></div>
+				                </span>
+							  </div>
+							</div>
+						</div>
+					</div>
+				</ion-content>
+			</form>
+	</ion-pane>
+</ion-view>
