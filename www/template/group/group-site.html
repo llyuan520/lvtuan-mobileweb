@@ -11,28 +11,12 @@
 
 
 		<ion-content style="margin-bottom: 0px;">
-			<div class="item group-site">
-				<a ng-repeat="member in group.members">
-					<img class="avatar" src="{{member.avatar}}">
-					<i ng-if="member.user_id != currentUser.id" ng-show="isclose" class="icon ion-close-circled color999 close" ng-click="del({{member.user_id}},$index)"></i>
-					<br>
-					<p>{{member.realname}}</p>
-				</a>
-				
-				<a ng-show="is_mine == true" ng-href="#/group/add/{{group.id}}">
-					<i class="icon ion-ios-plus-outline color999"></i>
-				</a>
-				<a ng-show="is_mine == true"  ng-click="isclose = !isclose" >
-					<i class="icon ion-ios-minus-outline color999"></i>
-				</a>
-
-			</div>
 			<form name="myForm" id="myForm">
-				<div class="item group-site" style="padding:16px 5px;">
+				<div class="item group-site" style="padding:16px 5px;line-height: 34px;">
 					<label>圈子名称：</label>
 					<label class="rig color999">
 						<input ng-show="is_mine == true" type="text" name="group_name" ng-model="group_name" placeholder="圈子名称" />
-						<input ng-show="is_mine == false" type="text" name="group_name" ng-model="group_name" disabled="disabled" />
+						<input ng-show="is_mine == false" type="text" name="group_name" ng-model="group_name" disabled="disabled" style="background-color: #fff;" />
 						
 					</label>
 				</div>
@@ -48,6 +32,22 @@
 					</label>
 				</div>
 			</form>
+			<div class="item group-site">
+				<a ng-repeat="member in group.members">
+					<img class="avatar" src="{{member.avatar}}">
+					<i ng-if="member.user_id != currentUser.id" ng-show="isclose" class="icon ion-close-circled color999 close" ng-click="del({{member.user_id}},$index)"></i>
+					<br>
+					<p>{{member.realname}}</p>
+				</a>
+				
+				<a ng-show="is_mine == true" ng-href="#/group/add/{{group.id}}">
+					<i class="icon ion-ios-plus-outline color999"></i>
+				</a>
+				<a ng-show="is_mine == true"  ng-click="isclose = !isclose" >
+					<i class="icon ion-ios-minus-outline color999"></i>
+				</a>
+			</div>
+			
 			<div class="item group-site">
 				<button ng-show="is_mine == true" class="button button-full button-positive web-wid8c web-top30" ng-click="logoutGroup()">解散该群</button>
 				<button ng-show="is_mine == false" class="button button-full button-positive web-wid8c web-top30" ng-click="quitGroup()">退出该群</button>

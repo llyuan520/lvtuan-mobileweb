@@ -1026,7 +1026,7 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
 * @Author: anchen
 * @Date:   2015-12-30 10:04:11
 * @Last Modified by:   anchen
-* @Last Modified time: 2016-01-09 14:59:42
+* @Last Modified time: 2016-01-11 21:11:44
 */
 .knowledge-love {
     margin: 0 0.7rem 0 0.2rem;
@@ -1139,8 +1139,15 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
     font-size: 1rem;
     padding-right: 10%;
 }
+.item .article-content {
+    height: 19px;
+    margin-bottom: 0;
+}
 
-.css-form  input, select{border:1px solid #ccc;}
+.css-form  input, select{
+    border:1px solid #ccc;
+    padding-left: 3%;
+}
 
 .televise-praise, .televise-comments, .televise-share {
     float: right;
@@ -1152,15 +1159,15 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
 .televise-counts, .details-counts {
     float: right;
     padding-right: 6%;
-    font-size: 1.4rem;
+    font-size: 1rem;
 }
 .televise-praise, .details-praise {
-    width: 8%;
+    width: 6%;
     background: url("../img/praise.png") center center no-repeat;
     background-size: contain;
 }
 .televise-comments, .details-comments {
-    width: 8%;
+    width: 6%;
     background: url("../img/messages.png") center center no-repeat;
     background-size: contain;
 }
@@ -1249,7 +1256,9 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
     float: left;
 }
 .lawyer-name {
+    height: 11px;
     margin-right: 3%;
+    line-height: 14px;
 }
 .concern-lawyer {
     float: right;
@@ -1303,55 +1312,55 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
     border-bottom: 0.1rem #eee solid;
 }
 .center-list div {
-    padding-left: 18%;
+    padding-left: 15%;
     background-color: #fff;
 }
 .center-list .my-order {
     background: url("../img/my-order.png") 3% center no-repeat;
-    background-size: 9%;
+    background-size: 7%;
 }
 .center-list .my-consultation {
     background: url("../img/my-consultation.png") 3% center no-repeat;
-    background-size: 9%;
+    background-size: 7%;
 }
 .center-list .my-wallet {
     background: url("../img/my-wallet.png") 3% center no-repeat;
-    background-size: 9%;
+    background-size: 7%;
 }
 .center-list .become-lawyer {
     background: url("../img/become-lawyer.png") 3% center no-repeat;
-    background-size: 9%;
+    background-size: 7%;
 }
 .center-list .my-integral {
     background: url("../img/my-integral.png") 3% center no-repeat;
-    background-size: 9%;
+    background-size: 7%;
 }
 .center-list .my-collection {
     background: url("../img/my-collection.png") 3% center no-repeat;
-    background-size: 9%;
+    background-size: 7%;
 }
 .center-list .my-comment {
     background: url("../img/my-comment.png") 3% center no-repeat;
-    background-size: 9%;
+    background-size: 7%;
 }
 .center-list .my-follow {
     background: url("../img/my-follow.png") 3% center no-repeat;
-    background-size: 9%;
+    background-size: 7%;
 }
 .center-list .my-set {
     background: url("../img/my-set.png") 3% center no-repeat;
-    background-size: 9%;
+    background-size: 7%;
 }
 .center-list .my-article {
     background: url("../img/my-article.png") 3% center no-repeat;
-    background-size: 9%;
+    background-size: 7%;
 }
 
 /*登录头部返回键设置*/
 .pane .login-header {
     position: relative;
     height: 3rem;
-    border: none;
+    border: 0;
     background-color: rgba(255,255,255,0);
 }
 .login-header a {
@@ -1366,6 +1375,33 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
 
 /*问律师页面样式修改*/
 .questions-content a {
+    overflow: hidden;
     float: left;
+    width: 100%;
     height: 21px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/*律师个人主页*/
+.pane .tabs .pic-consultation, .pane .tabs .phone-consultation {
+    color: #21a0f1;
+}
+
+/*头部样式*/
+.headers {
+    box-shadow: 0 1px 0 0 #999;
+}
+.nav-bar-block .headers {
+    border: none;
+    margin: 0;
+}
+.headers .title-center {
+    height: 44px;
+}
+.headers .title-center span {
+    display: block;
+    height: 44px;
+    line-height: 44px;
+    color: #32a9f2;
 }
