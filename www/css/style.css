@@ -16,6 +16,8 @@ body,
 }
 .scroll-content{
     background-color: #eee;
+}
+.content.bottom_50,.pane .bottom_50{
     margin-bottom: 50px;
 }
 .fc-33{

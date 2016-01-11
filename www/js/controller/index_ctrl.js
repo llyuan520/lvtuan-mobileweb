@@ -59,13 +59,6 @@ lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $loca
 })
 
 /****************************************************** 引导页 ******************************************************/
-//tabs选择项
-lvtuanApp.controller("HeaderController",function($scope,$location){
-   $scope.isActive = function(route) {
-        return route === $location.path();
-        //return $location.path().indexOf(route) == 0;
-    }
-})
 
 //设置是否显示底部导航 ng-class="{'tabs-item-hide': $root.hideTabs}"
 lvtuanApp.directive('hideTabs', function($rootScope) {
@@ -74,29 +67,24 @@ lvtuanApp.directive('hideTabs', function($rootScope) {
         link: function(scope, element, attributes) {
             scope.$on('$ionicView.beforeEnter', function() {
                 scope.$watch(attributes.hideTabs, function(value){
-                	if(value == undefined){
-                		$rootScope.hideTabs = true;
-                	}else{
-                		$rootScope.hideTabs = value;
-                	}
-                   
+                    $rootScope.hideTabs = value;
                 });
-            });
 
+            });
             scope.$on('$ionicView.beforeLeave', function() {
-            	scope.$watch(attributes.hideTabs, function(value){
-                	if(value == undefined){
-                		$rootScope.hideTabs = true;
-                	}else{
-                		$rootScope.hideTabs = value;
-                	}
-                   
+                scope.$watch(attributes.hideTabs, function(value){
+                    $rootScope.hideTabs = false;
                 });
-                
+
+                scope.$on('$destroy', function() {
+	                $rootScope.hideTabs = false;
+	            });
+
             });
         }
     };
-});
+})
+
 
 //显示星星
 lvtuanApp.directive('star', function () {

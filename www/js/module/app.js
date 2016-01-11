@@ -44,7 +44,11 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
     layer.goHome();
   }
 
+
+  
+
 }])
+
 .run(function($rootScope, $location, $state, authService, locationService) {
 
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
@@ -66,6 +70,11 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
                 }
             }
         }
+
+        //tabs选择项
+        //设置首页四个按钮的选中
+        $rootScope.path = $location.path();
+
     });
 
     $rootScope.$on('unauthorized', function() {
@@ -83,6 +92,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
         /*$window.location.href = '/login';*/
         //window.location.reload();
     });
+
 })
 
 .config(function($httpProvider) {
