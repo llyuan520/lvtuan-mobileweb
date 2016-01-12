@@ -44,13 +44,11 @@
 						</a>
 					</div>
 					<div class="become-lawyer">
-						<a class="item" ng-if="currentUser.user_group_id == 1" ng-href="#/becomenav">
+						<a class="item" ng-if="items.user.user_group_id == 1" ng-href="#/becomenav">
 						    认证律师
 						    <i class="icon ion-chevron-right"></i>
 						</a>
-					</div>
-					<div class="become-lawyer">
-						<a class="item" ng-if="currentUser.user_group_id == 2 && currentUser.is_verified == 0">
+						<a class="item" ng-if="items.user.user_group_id == 2 && items.user.is_verified == 0">
 						    认证律师审核中，请您耐心等待...
 						</a>
 					</div>
@@ -110,6 +108,12 @@
 						<a class="item" ng-href="#/user/wallet">
 					    	我的钱包
 					    	<i class="icon ion-chevron-right"></i>
+						</a>
+					</div>
+					<div class="become-lawyer">
+						<a class="item" ng-href="#/becomenav">
+						    认证律师
+						    <i class="icon ion-chevron-right"></i>
 						</a>
 					</div>
 					<div class="my-article">
