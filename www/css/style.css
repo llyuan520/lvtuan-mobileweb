@@ -17,7 +17,7 @@ body,
 .scroll-content{
     background-color: #eee;
 }
-.content.bottom_50,.pane .bottom_50{
+.content.bottom_50,.pane .bottom_50,.bottom_50{
     margin-bottom: 50px;
 }
 .fc-33{
@@ -1022,12 +1022,6 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
 }
 
 
-/* 
-* @Author: anchen
-* @Date:   2015-12-30 10:04:11
-* @Last Modified by:   anchen
-* @Last Modified time: 2016-01-11 21:11:44
-*/
 .knowledge-love {
     margin: 0 0.7rem 0 0.2rem;
     font-size: 1.4rem;
@@ -1037,44 +1031,80 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
     font-size:1.6rem;
 }
 
+.grade-a .nav-set {
+    padding-top: 0;
+}
+.grade-a .nav-set .tab-item {
+    font-size: 0.8rem;
+}
 .tab-item .home {
+    width: 32px;
+    margin-top: 2px;
     background: url("../img/index.png") center center no-repeat;
-    background-size: 30% 73%;
+    /*background-size: 30% 73%;*/
+    background-size: 75%;
 }
 .nav-set a.active i.home {
+    width: 32px;
+    margin-top: 2px;
     background: url("../img/indexs.png") center center no-repeat;
-    background-size: 29% 72%;
+    /*background-size: 29% 72%;*/
+    background-size: 75%;
     color: #00cafa;
 }
 .tab-item .group {
+    width: 32px;
+    margin-top: 2px;
     background: url("../img/circle.png") center center no-repeat;
-    background-size: 29% 72%;
+    background-size: 75%;
 }
 .nav-set a.active i.group {
+    width: 32px;
+    margin-top: 2px;
     background: url("../img/circles.png") center center no-repeat;
-    background-size: 30% 73%;
+    /*background-size: 30% 73%;*/
+    background-size: 75%;
     color: #00cafa;
 }
 .tab-item .knowledge {
+    width: 32px;
+    margin-top: 2px;
     background: url("../img/knowledge.png") center center no-repeat;
-    background-size: 30% 73%;
+    /*background-size: 30% 73%;*/
+    background-size: 75%;
 }
 .nav-set a.active i.knowledge {
+    width: 32px;
+    margin-top: 2px;
     background: url("../img/knowledges.png") center center no-repeat;
-    background-size: 30% 73%;
+    /*background-size: 30% 73%;*/
+    background-size: 75%;
     color: #00cafa;
 }
 .tab-item .center {
+    width: 32px;
+    margin-top: 2px;
     background: url("../img/my.png") center center no-repeat;
-    background-size: 32% 85%;
+    /*background-size: 32% 85%;*/
+    background-size: 75%;
 }
 .nav-set a.active i.center {
+    width: 32px;
+    margin-top: 2px;
     background: url("../img/mys.png") center center no-repeat;
-    background-size: 32% 85%;
+    /*background-size: 32% 85%;*/
+    background-size: 75%;
     color: #00cafa;
 }
 /*6 plus*/
 @media only screen and (min-device-width: 414px) and (min-device-height :736px){
+    .grade-a .nav-set {
+        height: 56px;
+        padding-top: 0;
+    }
+    .grade-a .nav-set a {
+        height: 56px;
+    }
     .navs {
         height: 3.6rem;
     }
@@ -1111,12 +1141,12 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
     .tab-item .center {
         height: 2.4rem;
         background: url("../img/my.png") center center no-repeat;
-        background-size: 33% 85%;
+        background-size: 31% 80%;
     }
     .nav-set a.active i.center {
         height: 2.4rem;
         background: url("../img/mys.png") center center no-repeat;
-        background-size: 33% 85%;
+        background-size: 31% 80%;
     }
 }
 
@@ -1312,8 +1342,7 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
     border-bottom: 0.1rem #eee solid;
 }
 .center-list div {
-    padding-left: 15%;
-    background-color: #fff;
+    padding-left: 14%;
 }
 .center-list .my-order {
     background: url("../img/my-order.png") 3% center no-repeat;
@@ -1404,4 +1433,40 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
     height: 44px;
     line-height: 44px;
     color: #32a9f2;
+}
+.center-list .my-consultation {
+    background: url("../img/my-consultation.png") 3% center no-repeat;
+    background-size: 7%;
+}
+.center-list .my-wallet {
+    background: url("../img/my-wallet.png") 3% center no-repeat;
+    background-size: 7%;
+}
+.center-list .become-lawyer {
+    background: url("../img/become-lawyer.png") 3% center no-repeat;
+    background-size: 7%;
+}
+.center-list .my-integral {
+    background: url("../img/my-integral.png") 3% center no-repeat;
+    background-size: 7%;
+}
+.center-list .my-collection {
+    background: url("../img/my-collection.png") 3% center no-repeat;
+    background-size: 7%;
+}
+.center-list .my-comment {
+    background: url("../img/my-comment.png") 3% center no-repeat;
+    background-size: 7%;
+}
+.center-list .my-follow {
+    background: url("../img/my-follow.png") 3% center no-repeat;
+    background-size: 7%;
+}
+.center-list .my-set {
+    background: url("../img/my-set.png") 3% center no-repeat;
+    background-size: 7%;
+}
+.center-list .my-article {
+    background: url("../img/my-article.png") 3% center no-repeat;
+    background-size: 7%;
 }

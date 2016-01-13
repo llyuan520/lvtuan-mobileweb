@@ -9,6 +9,7 @@
 	background-color: #EEEEEE;
 }
 .list .item{
+	padding-right: 16px;
 	margin: 1px 0px;
 	border: none;
 }
