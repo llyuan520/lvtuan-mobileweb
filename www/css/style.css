@@ -1112,44 +1112,60 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
         height: 3.6rem;
     }
     .tab-item .home {
+        width: 39px;
         height: 2.4rem;
         background: url("../img/index.png") center center no-repeat;
-        background-size: 32% 73%;
+        /*background-size: 32% 73%;*/
+        background-size: 75%;
     }
     .nav-set a.active i.home {
+        width: 39px;
         height: 2.4rem;
         background: url("../img/indexs.png") center center no-repeat;
-        background-size: 32% 73%;
+        /*background-size: 32% 73%;*/
+        background-size: 75%;
     }
     .tab-item .group {
+        width: 39px;
         height: 2.4rem;
         background: url("../img/circle.png") center center no-repeat;
-        background-size: 32% 75%;
+        /*background-size: 32% 75%;*/
+        background-size: 75%;
     }
     .nav-set a.active i.group {
+        width: 39px;
         height: 2.4rem;
         background: url("../img/circles.png") center center no-repeat;
-        background-size: 32% 75%;
+        /*background-size: 32% 75%;*/
+        background-size: 75%;
     }
     .tab-item .knowledge {
+        width: 39px;
         height: 2.4rem;
         background: url("../img/knowledge.png") center center no-repeat;
-        background-size: 30% 77%;
+        /*background-size: 30% 77%;*/
+        background-size: 75%;
     }
     .nav-set a.active i.knowledge {
+        width: 39px;
         height: 2.4rem;
         background: url("../img/knowledges.png") center center no-repeat;
-        background-size: 30% 77%;
+        /*background-size: 30% 77%;*/
+        background-size: 75%;
     }
     .tab-item .center {
+        width: 39px;
         height: 2.4rem;
         background: url("../img/my.png") center center no-repeat;
-        background-size: 31% 80%;
+        /*background-size: 31% 80%;*/
+        background-size: 75%;
     }
     .nav-set a.active i.center {
+        width: 39px;
         height: 2.4rem;
         background: url("../img/mys.png") center center no-repeat;
-        background-size: 31% 80%;
+        /*background-size: 31% 80%;*/
+        background-size: 75%;
     }
 }
 
@@ -1437,6 +1453,14 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
     line-height: 44px;
     color: #32a9f2;
 }
+.headers.bar-light .title {
+    height: 44px;
+    font-size: 1.6rem;
+    color: #00cafa;
+}
+.headers.bar-light .icon-left {
+    color: #00cafa;
+}
 .center-list .my-consultation {
     background: url("../img/my-consultation.png") 3% center no-repeat;
     background-size: 7%;
@@ -1472,4 +1496,28 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
 .center-list .my-article {
     background: url("../img/my-article.png") 3% center no-repeat;
     background-size: 7%;
+}
+
+/*认证律师*/
+.becomenav-content, .becomenav-content .scroll {
+    background-color: #fff;
+}
+.list .item:nth-child(6) {
+    margin: 0;
+    padding: 0;
+}
+.list .item:nth-child(6) button {
+    margin-top: 1.4rem;
+    max-width: 92%;
+    background-color: #00cafa;
+    border: none;
+}
+.scroll .list .becomenav-list {
+    width: 94%;
+    padding: 5px 0 5px 10%;
+    margin: 0 3%;
+    border-bottom: 1px #eee solid;
+}
+.becomenav-list a {
+    color: #333;
 }
