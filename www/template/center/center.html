@@ -9,14 +9,14 @@
 
 				<div class="list" style="padding:0;">
 				    <div class="item item-thumbnail-left item-icon-right" >
-				    	<a class="item-thumbnail-left" ng-if="!currentUser.is_verified_lawyer" ng-href="#/info" style="position: absolute;top: 0px;left: 0px;">
+				    	<a class="item-thumbnail-left" ng-href="#/info" style="position: absolute;top: 0px;left: 0px;">
 				    		<img ng-src="{{items.user.avatar}}" style="width:100%;border-radius:50%;">
 				    	</a>
-				    	<a class="item-thumbnail-left" ng-if="currentUser.is_verified_lawyer" ng-href="#/becomelawyer" style="position: absolute;top: 0px;left: 0px;">
-				    		<img ng-src="{{items.user.avatar}}" style="width:100%;border-radius:50%;">
-				    	</a>
-			      		<a style="margin-top: 20px;display: inline-block;" ng-if="!currentUser.is_verified_lawyer" ng-href="#/info">{{items.user.realname}}</a>
-			      		<a style="margin-top: 20px;display: inline-block;" ng-if="currentUser.is_verified_lawyer" ng-href="#/becomelawyer">{{items.user.realname}} <span class="web-font14">律师</span></a>
+			      		<a style="margin-top: 20px;display: inline-block;" ng-href="#/info">
+			      			<label ng-if="!currentUser.is_verified_lawyer">{{items.user.realname}}</label>
+			      			<label ng-if="currentUser.is_verified_lawyer">{{items.user.realname}} <span class="web-font14">律师</span></label>
+
+			      		</a>
 					    <a ng-href="#/messages">
 						      <icon  class="icon emails"></icon>
 						</a>

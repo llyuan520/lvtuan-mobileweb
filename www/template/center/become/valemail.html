@@ -1,0 +1,35 @@
+<ion-view hide-tabs="true">
+	<form name="emailForm" class="css-form" id="emailForm">
+		<ion-pane  class="web-body">
+			<ion-header-bar class="bar bar-header bar-light">
+				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back"  ng-href="#/info"></a>
+				<h1 class="title">邮箱修改</h1>
+				<button ng-click="submit()" class="button button-clear button-positive" type="submit" ng-disabled="emailForm.$invalid">保存</button>
+			</ion-header-bar>
+			<ion-content class="web-body web-top10">
+				<div class="list">
+					<div class="item item-input">
+						<div class="row">
+						  <div class="col col-99 col-center">
+						  	<input type="email" name="email" ng-model="user.email" ng-model-options="{debounce:2000}" required> 
+						  	<span class="error" ng-show="emailForm.email.$error.email">
+						     请输入有效的电子邮件！
+						  	</span>
+						  </div>
+						</div>
+					</div>
+					<div class="item item-input">
+						<div class="row">
+							  <div class="col col-75 col-center">
+							  		<input type="text" ng-model="user.phonecode" name="phonecode" placeholder="请输入验证码" required>
+							  </div>
+							  <div class="col col-center">
+									<button class="button button-small button-positive" ng-disabled="!user.email" ng-click="phonecode(user.email)">获取验证码</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</ion-content>
+		</ion-pane>
+	</form>
+</ion-view>

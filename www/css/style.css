@@ -20,6 +20,9 @@ body,
 .content.bottom_50,.pane .bottom_50,.bottom_50{
     margin-bottom: 50px;
 }
+.item-input{
+     padding: 6px 0 5px 0px;
+}
 .fc-33{
     color: #333333;
 }

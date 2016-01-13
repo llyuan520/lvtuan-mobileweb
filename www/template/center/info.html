@@ -11,54 +11,49 @@
 			<ion-content class="web-body web-top10">
 			<form name="myForm" class="css-form" id="myForm">
 				<div class="list">
-					<div class="item item-input item-icon-right">
-						<div class="row">
-						  <div class="col col-center">个人头像</div>
-						  <div class="col col-75 col-center item-thumbnail-right">
+					<a class="item">
+				    	<div class="row" style="padding: 0;">
+				    		<div class="col col-center" style="padding: 0;">头像</div>
+							<div class="col col-75 col-center" style="padding: 0;">
+								<div style="float: right;height: 80px;" ng-model="user.avatar" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="6MB" ngf-min-height="100" ngf-select="uploadFiles($file,items.user.id)">
+									<img style="border-radius:50%;" ng-src="{{file}}" ngf-thumbnail="user.avatar || '{{file}}'" width="80" height="80">
+									<!-- <span class="progress" ng-show="progress >= 0 || progress <= 99 ">
+								      <div style="width:{{progress}}%" ng-bind="progress + '%'"></div>
+								    </span> -->
+								</div>
+								<input type="hidden" name="avatar" value="{{file}}" />
+					  		</div>
+					  		<div class="col col-center" style="padding: 0;"><i class="icon ion-chevron-right"></i></div>
+						</div>
+					</a>
+					<a class="item" ng-href="#/valrealname">
+						<div class="row" style="padding: 0;">
+				    		<div class="col col-center" style="padding: 0;">姓名</div>
+							<div class="col col-75 col-center" style="padding: 0;text-align: right;">
+								{{items.user.realname}}
+					  		</div>
+					  		<div class="col col-center" style="padding: 0;"><i class="icon ion-chevron-right"></i></div>
+						</div>
+					</a>
+					<a class="item" ng-href="#/valphone">
+					    <div class="row" style="padding: 0;">
+				    		<div class="col col-center" style="padding: 0;">手机</div>
+							<div class="col col-75 col-center" style="padding: 0;text-align: right;">
+								{{items.user.phone}}
+					  		</div>
+					  		<div class="col col-center" style="padding: 0;"><i class="icon ion-chevron-right"></i></div>
+						</div>
 
-							<div style="float: right;" ng-model="user.avatar" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="6MB" ngf-min-height="100" ngf-select="uploadFiles($file,items.user.id)">
-								<img style="border-radius:50%;" ng-src="{{file}}" ngf-thumbnail="user.avatar || '{{file}}'" width="80" height="80">
-								<span class="progress" ng-show="progress >= 0">
-				                  <div style="width:{{progress}}%" ng-bind="progress + '%'"></div>
-				                </span>
-							</div>
-							<input type="hidden" name="avatar" value="{{file}}" />
-						  </div>
+					</a>
+					<a class="item" ng-href="#/valemail">
+						<div class="row" style="padding: 0;">
+				    		<div class="col col-center" style="padding: 0;">邮箱</div>
+							<div class="col col-75 col-center" style="padding: 0;text-align: right;">
+								{{items.user.email}}
+					  		</div>
+					  		<div class="col col-center" style="padding: 0;"><i class="icon ion-chevron-right"></i></div>
 						</div>
-					</div>
-					<div class="item item-input">
-						<div class="row">
-						  <div class="col col-center">姓名</div>
-						  <div class="col col-75 col-center">
-						  	<input ng-model="user.realname" name="realname" type="text" >
-						  </div>
-						</div>
-					</div>
-					<div class="item item-input">
-						<div class="row">
-						  <div class="col col-center">联系方式</div>
-						  <div class="col col-75 col-center">
-						  	<input ng-model="user.phone" name="phone" type="text" ng-pattern="/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/" ng-model-options="{debounce:2000}">
-						  	<span class="error" ng-show="(myForm.phone.$invalid && !myForm.phone.$pristine)">
-						     请输入有效的电话号码！
-						  	</span>
-						  </div>
-						</div>
-					</div>
-					<div class="item item-input">
-						<div class="row">
-						  <div class="col col-center">电子邮箱</div>
-						  <div class="col col-75 col-center">
-						  	<input type="email" name="email" ng-model="user.email" ng-model-options="{debounce:2000}"> 
-						  	<span class="error" ng-show="myForm.email.$error.email">
-						     请输入有效的电子邮件！
-						  	</span>
-						  </div>
-						</div>
-					</div>
-					<div style="clear:both;width:100%;height:20px;"></div>
-					<button class="button button-block button-positive web-wid8c web-top10" type="submit" ng-disabled="myForm.$invalid" ng-click="submit()">保存</button>
-				    <!-- <div style="clear:both;width:100%;height:20px;"></div> -->
+					</a>
 				</div>
 			</form>
 		</ion-content>

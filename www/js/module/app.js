@@ -405,6 +405,30 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       authn: true
     })
 
+    .state('valrealname', { //个人信息 - 修改姓名
+      url: '/valrealname',
+      cache: 'true',
+      templateUrl: 'template/center/become/valrealname.html',
+      controller: 'valrealnameCtrl',
+      authn: true
+    })
+    .state('valphone', { //个人信息 - 修改手机
+      url: '/valphone',
+      cache: 'true',
+      templateUrl: 'template/center/become/valphone.html',
+      controller: 'valphoneCtrl',
+      authn: true
+    })
+    .state('valemail', { //个人信息 - 修改邮箱
+      url: '/valemail',
+      cache: 'true',
+      templateUrl: 'template/center/become/valemail.html',
+      controller: 'valemailCtrl',
+      authn: true
+    })
+
+
+
 /*———————————————————————————— 律师的个人中心 ————————————————————————————*/
     .state('followed_lawyer', { //律师-我的关注
       url: '/followed_lawyer',
