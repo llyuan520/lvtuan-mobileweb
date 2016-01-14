@@ -8,7 +8,7 @@
 
 			<ion-content class="web-body web-top10 becomenav-content">
 				<!-- <div class="basekong20"></div> -->
-				<div ng-if="!currentUser.is_verified_lawyer" class="list" style="padding-bottom: 0px;background-color: #fff;">
+				<div ng-if="!currentUser.is_verified_lawyer" class="list" style="padding: 0px;background-color: #fff;">
 					<div class="item row becomenav-list">
 						<div class="col col-75 col-center">
 						  	<a ng-href="#/practitioners">
@@ -17,10 +17,10 @@
 						</div>
 					    <div class="col">
 					    	<div class="item item-checkbox" >
-				        	<div class="checkbox">
-						  		<input type="checkbox" name="practitioners" ng-model="practitioners"  ng-false-value="false"> 
-						  	</div>
-				        </div>
+					        	<div class="checkbox">
+							  		<input type="checkbox" name="practitioners" ng-model="practitioners"  ng-false-value="false">
+							  	</div>
+					        </div>
 					    </div>
 					</div>
 					<div class="item row becomenav-list">
@@ -31,10 +31,10 @@
 						</div>
 					    <div class="col">
 					    	<div class="item item-checkbox" >
-				        	<div class="checkbox">
-						  		<input type="checkbox" name="verified" ng-model="verified"  ng-false-value="false"> 
-						  	</div>
-				        </div>
+					        	<div class="checkbox">
+							  		<input type="checkbox" name="verified" ng-model="verified"  ng-false-value="false"> 
+							  	</div>
+					        </div>
 					    </div>
 					</div>
 					<div class="item row becomenav-list">
@@ -45,10 +45,10 @@
 						</div>
 					    <div class="col">
 					    	<div class="item item-checkbox" >
-				        	<div class="checkbox">
-						  		<input type="checkbox" name="tariffset" ng-model="tariffset"  ng-false-value="false"> 
-						  	</div>
-				        </div>
+					        	<div class="checkbox">
+							  		<input type="checkbox" name="tariffset" ng-model="tariffset"  ng-false-value="false"> 
+							  	</div>
+					        </div>
 					    </div>
 					</div>
 					<div class="item row becomenav-list">
@@ -59,10 +59,10 @@
 						</div>
 					    <div class="col">
 					    	<div class="item item-checkbox" >
-				        	<div class="checkbox">
-						  		<input type="checkbox" name="field" ng-model="field"  ng-false-value="false"> 
-						  	</div>
-				        </div>
+					        	<div class="checkbox">
+							  		<input type="checkbox" name="field" ng-model="field"  ng-false-value="false"> 
+							  	</div>
+					        </div>
 					    </div>
 					</div>
 					<div class="item row becomenav-list">
@@ -73,14 +73,14 @@
 						</div>
 					    <div class="col">
 					    	<div class="item item-checkbox" >
-				        	<div class="checkbox">
-						  		<input type="checkbox" name="cases" ng-model="cases"  ng-false-value="false"> 
-						  	</div>
-				        </div>
+					        	<div class="checkbox">
+							  		<input type="checkbox" name="cases" ng-model="cases"  ng-false-value="false">
+							  	</div>
+					        </div>
 					    </div>
 					</div>
-					<div class="item row becomenav-list">
-						<button class="button button-block button-positive web-wid8c web-top10" type="submit" ng-click="submit()">提交审核</button>
+					<div class="submit-examine">
+						<button type="submit" ng-click="submit()">提交审核</button>
 					</div>
 				</div>
 

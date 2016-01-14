@@ -1455,10 +1455,16 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
 }
 .headers.bar-light .title {
     height: 44px;
-    font-size: 1.6rem;
+    font-family: 'Microsoft YaHei';
+    font-size: 1.4rem;
     color: #00cafa;
 }
 .headers.bar-light .icon-left {
+    color: #00cafa;
+}
+.headers.bar-light button.button-clear {
+    font-family: 'Microsoft YaHei';
+    font-size: 1.2rem;
     color: #00cafa;
 }
 .center-list .my-consultation {
@@ -1500,24 +1506,141 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
 
 /*认证律师*/
 .becomenav-content, .becomenav-content .scroll {
+    margin-top: 1px;
     background-color: #fff;
-}
-.list .item:nth-child(6) {
-    margin: 0;
-    padding: 0;
-}
-.list .item:nth-child(6) button {
-    margin-top: 1.4rem;
-    max-width: 92%;
-    background-color: #00cafa;
-    border: none;
 }
 .scroll .list .becomenav-list {
     width: 94%;
-    padding: 5px 0 5px 10%;
+    height: 3.8rem;
+    padding: 0 0 0 11%;
     margin: 0 3%;
     border-bottom: 1px #eee solid;
 }
+.list .becomenav-list:nth-child(1) {
+    background: url("../img/practitioners.png") 1% center no-repeat;
+    background-size: 8%;
+}
+.list .becomenav-list:nth-child(2) {
+    background: url("../img/name-authentication.png") 1% center no-repeat;
+    background-size: 8%;
+}
+.list .becomenav-list:nth-child(3) {
+    background: url("../img/tariff-set.png") 1% center no-repeat;
+    background-size: 8%;
+}
+.list .becomenav-list:nth-child(4) {
+    background: url("../img/good-field.png") 1% center no-repeat;
+    background-size: 8%;
+}
+.list .becomenav-list:nth-child(5) {
+    background: url("../img/case.png") 1% center no-repeat;
+    background-size: 8%;
+}
+.submit-examine {
+    margin: 1.4rem 0;
+}
+.submit-examine button {
+    display: block;
+    width: 94%;
+    height: 3.26rem;
+    margin: 0 auto;
+    border: none;
+    background-color: #00cafa;
+    color: #fff;
+    font-size: 1.4rem;
+    border-radius: 3px;
+}
 .becomenav-list a {
+    font-size: 1.2rem;
     color: #333;
+}
+.becomenav-list .col {
+    padding: 0;
+}
+.becomenav-list .col .item-checkbox {
+    width: 100%;
+    height: 3.8rem;
+    padding: 0;
+    margin: 0;
+}
+.becomenav-list .col .checkbox {
+    position: absolute;
+    top: 36%;
+    right: 0;
+    height: 3.8rem;
+    padding: 0;
+}
+.becomenav-list .checkbox input {
+    float: right;
+    width: 1.74rem;
+    height: 1.74rem;
+    margin-top: 20%;
+}
+
+/*经历案例*/
+.scroll .list .case-list {
+    height: 4.1rem;
+    margin: 0px 0 0 0;
+    background-color: #eee;
+}
+.scroll .list .case-content {
+    margin: 0;
+    padding-top: 0;
+}
+.list .case-content .row {
+    padding-top: 0;
+}
+.case-content .row textarea {
+    height: 6rem;
+}
+
+/*擅长领域*/
+.pane .field-content {
+    margin-bottom: 0;
+    padding-top: 2px;
+    background-color: #fff;
+}
+.field-content .scroll {
+    margin-top: 3px;
+}
+.field-content .list {
+    padding: 0;
+    background-color: #fff;
+}
+.field-content .list:nth-child(1) {
+    margin-bottom: 1.6rem;
+}
+.field-content .list .item {
+    padding: 0 0 0.8rem 0;
+    margin: 0;
+}
+.field-content .item .errer {
+    padding: 0px;
+    margin-left: 5%;
+    font-family: 'Microsoft YaHei';
+    font-size: 1.2rem;
+}
+.field-content .item span {
+    margin-left: 6%;
+    margin-right: 6%;
+}
+.field-content .list span {
+    width: 29%;
+    margin: 0.8rem 1% 0rem;
+    background-color: #eee;
+    border-radius: 3px;
+    text-align: center;
+}
+.field-content .list label {
+    font-size: 1.2rem;
+    color: #666;
+}
+.field-content .list span.active {
+    background-color: #00cafa;
+}
+.field-content span.active label {
+    color: #fff;
+}
+.field-content .item span:nth-child(2) {
+    margin-left: 4.4%;
 }
