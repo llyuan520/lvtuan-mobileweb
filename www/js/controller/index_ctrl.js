@@ -4199,7 +4199,8 @@ lvtuanApp.controller("corporateservicesCtrl",function($http,$scope,$state,$rootS
 })
 
 //小微企服
-lvtuanApp.controller("corporatelistCtrl",function($scope,$state,$http,$rootScope,$stateParams,$ionicPopup, $timeout){
+lvtuanApp.controller("corporatelistCtrl",function($scope,$state,$http,$rootScope,$stateParams,$ionicPopup, $timeout,$ionicLoading){
+	$ionicLoading.show();
 	//创建tabs列表
 	$scope.tabs = [{
             title: '产品详情',
@@ -4223,6 +4224,7 @@ lvtuanApp.controller("corporatelistCtrl",function($scope,$state,$http,$rootScope
     	.success(function(data) {
         	console.info("详情",data.data);				
         	$scope.items = data.data; 
+        	$ionicLoading.hide();
 		})
 
 })
@@ -4254,53 +4256,56 @@ lvtuanApp.controller("corporatelistevaluateCtrl",function($scope,$http,$rootScop
 })
 
 //立即购买
-lvtuanApp.controller("corporatebuynowCtrl",function($scope,$http,$rootScope,$stateParams){
+lvtuanApp.controller("corporatebuynowCtrl",function($scope,$http,$rootScope,$stateParams,$ionicLoading){
+	$ionicLoading.show();
 	$http.get('http://'+$rootScope.hostName+'/company/product/'+$stateParams.id+'/view')
 		.success(function(data) {
         	console.info("详情",data.data);				
         	$scope.items = data.data; 
+        	$ionicLoading.hide();
 		})
 
 	getProvince();
 	//获取所在区域 - 省
 	function getProvince(){
+		$ionicLoading.show();
 		$http.get('http://'+$rootScope.hostName+'/area/province')
 		.success(function(data) {
         	console.info(data.data)
 			$scope.provinces = data.data; 	
+			$ionicLoading.hide();
 		})
 	}
 
 	//获取所在区域 - 市
 	$scope.getCity = function(province){
+		$ionicLoading.show();
 		$http.get('http://'+$rootScope.hostName+'/area/'+province+'/city')
 		.success(function(data) {
         	$scope.citys = data.data; 
+        	$ionicLoading.hide();
 		})
 	}
 
 	//获取所在区域 - 地區
 	$scope.getDistrict = function(city){
+		$ionicLoading.show();
 		$http.get('http://'+$rootScope.hostName+'/area/'+city+'/district')
 		.success(function(data) {
 			$scope.districts = data.data; 
+			$ionicLoading.hide();
 		})
 	}
 
 
 	$scope.submit = function(user){
+		$ionicLoading.show();
 		$scope.items = {};
-		if(user.contact_phone){
-			$scope.items['contact_phone'] = user.contact_phone;
-		}
 		if(user.email){
 			$scope.items['email'] = user.email;
 		}
 		if(user.company_name){
 			$scope.items['company_name'] = user.company_name;
-		}
-		if(user.contact){
-			$scope.items['contact'] = user.contact;
 		}
 		if(user.memo){
 			$scope.items['memo'] = user.memo;
@@ -4330,6 +4335,7 @@ lvtuanApp.controller("corporatebuynowCtrl",function($scope,$http,$rootScope,$sta
 	            $scope.user = {};
 	            $scope.items = {};
 	            location.href='#/corporate';
+	            $ionicLoading.hide();
 
 	        });
 		
