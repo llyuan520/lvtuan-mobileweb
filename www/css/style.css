@@ -1182,7 +1182,7 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
     background-size: 90% 26%;
 }
 
-.css-form  input, select{border:1px solid #ccc;}
+
 .item .counts {
     padding-right: 8%;
     font-size: 1rem;
@@ -1193,10 +1193,6 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
     margin-bottom: 0;
 }
 
-.css-form  input, select{
-    border:1px solid #ccc;
-    padding-left: 3%;
-}
 
 .televise-praise, .televise-comments, .televise-share {
     float: right;

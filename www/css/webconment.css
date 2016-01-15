@@ -330,11 +330,7 @@ body,
 .col-center{
 	text-center:center;
 }
-.item-input input {
-	padding-left: 3%;
-	padding-right: 0px;
-	border: 1px solid #ccc;
-}
+
 .basekong1{
 	width:100%;
 	height:1px;
