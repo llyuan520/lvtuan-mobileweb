@@ -863,7 +863,7 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
         text-align: center;
         margin-bottom: 0;
         background-color: #FFFFFF;
-        color: #333
+        color: #333;
     }
 
     .log-header{padding-top: 15%;}
@@ -1454,18 +1454,12 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
     color: #32a9f2;
 }
 .headers.bar-light .title {
-    height: 44px;
     font-family: 'Microsoft YaHei';
     font-size: 1.4rem;
-    color: #00cafa;
-}
-.headers.bar-light .icon-left {
-    color: #00cafa;
 }
 .headers.bar-light button.button-clear {
     font-family: 'Microsoft YaHei';
     font-size: 1.2rem;
-    color: #00cafa;
 }
 .center-list .my-consultation {
     background: url("../img/my-consultation.png") 3% center no-repeat;
@@ -1644,3 +1638,125 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
 .field-content .item span:nth-child(2) {
     margin-left: 4.4%;
 }
+/*.tariffset-list {
+    padding: 1.6rem 5% 0;
+    background-color: #fff;
+}
+.tariffset-content {
+    float: left;
+    width: 58%;
+}
+.tariffset-content input {
+    width: 94%;
+    padding-left: 6%;
+    border: none;
+    font-family: 'Microsoft YaHei';
+    font-size: 1.2rem;
+}
+.tariffset-content div {
+    width: 94%;
+    height: 0.8rem;
+    margin-top: -0.8rem;
+    border: 1px #eee solid;
+    border-top: none;
+}
+.tariffset-list span {
+    height: 2.6rem;
+    font-family: 'Microsoft YaHei';
+    font-size: 1.2rem;
+    line-height: 2.6rem;
+}
+.tariffset-list span:nth-child(1) {
+    float: left;
+    margin-right: 3%;
+    color: #333;
+}
+.tariffset-list span:nth-child(3) {
+    float: right;
+    color: #666;
+}*/
+
+.verified .has-header, .tariffset .has-header, .practitioners .has-header {
+    margin-bottom: 0;
+    background-color: #fff;
+}
+.tariffset-list, .verified-list, .practitioners-list {
+    margin-top: 3px;
+}
+/*.tariffset-list .item.item-input, 
+.verified-list .item.item-input, 
+.practitioners-list .item.item-input {
+    border: none;
+}*/
+.tariffset-content div:nth-child(1) {
+    text-align: right;
+    font-family: 'Microsoft YaHei', Arial;
+    color: #333;
+}
+.tariffset-content div:nth-child(3) {
+    padding-right: 0;
+    font-family: 'Microsoft YaHei', Arial;
+    color: #666;
+}
+.col-14 {
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 14%;
+    -moz-box-flex: 0;
+    -moz-flex: 0 0 14%;
+    -ms-flex: 0 0 14%;
+    flex: 0 0 14%;
+    max-width: 14%;
+}
+.tariffset-content .col input, .verified-name input {
+    padding-left: 8%;
+    border: none;
+    font-family: 'Microsoft YaHei', Arial;
+    font-size: 1.2rem;
+}
+.verified-name input {
+    padding-right: 8%;
+}
+/*.tariffset-content .col strong, .verified-name strong {
+    display: block;
+    height: 0.8rem;
+    margin-top: -0.8rem;
+    border: 1px #eee solid;
+    border-top: none;
+}
+.verified-name strong {
+    border-right: none;
+}*/
+.verified-list .verified-name {
+    padding-right: 0;
+}
+.verified-name .col-center, .verified-pic .col-center div, .tariffset-content div {
+    font-size: 1.32rem;
+}
+.verified-name div:nth-child(2) {
+    padding-right: 0;
+}
+.verified-pic .col-center span {
+    font-size: 1.08rem;
+    color: #999;
+}
+.verified-pic .col-60 .button {
+    border-color: #999;
+    color: #999;
+}
+.practitioners-list .item-input .input-label {
+    width: 28%;
+    padding-left: 4%;
+    line-height: 1.7rem;
+    font-size: 1.32rem;
+}
+.practitioners-list .item-input input {
+    height: 2.7rem;
+    padding: 0 8% 0.2rem 3%;
+    border: none;
+    line-height: 1.7rem;
+    font-size: 1.2rem;
+}
+/*.verified .has-header .scroll {
+    margin-top: 2px;
+    background-color: #fff;
+}*/
