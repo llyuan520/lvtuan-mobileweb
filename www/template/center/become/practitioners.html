@@ -14,13 +14,15 @@
 						<div class="input-label">
 			              执业证号
 			            </div>
-						<input placeholder="请输入执业证号"  ng-model="license" name="license" type="text" required>
+			            <label ng-if="currentUser.is_verified_lawyer">{{lvinfo.user.lawyer.license}}</label>
+						<input ng-if="!currentUser.is_verified_lawyer" placeholder="请输入执业证号"  ng-model="license" name="license" type="text" required>
 					</div>
 					<div class="item item-input">
 						<div class="input-label">
 			              执业机构
 			            </div>
-						<input placeholder="请输入执业机构" ng-model="company_name" name="company_name" type="text" required>
+			            <label ng-if="currentUser.is_verified_lawyer">{{lvinfo.user.lawyer.company_name}}</label>
+						<input ng-if="!currentUser.is_verified_lawyer" placeholder="请输入执业机构" ng-model="company_name" name="company_name" type="text" required>
 					</div>
 					<div class="item item-input item-select">
 						<div class="input-label">
@@ -43,9 +45,9 @@
 
 						<div class="row">
 						  <div class="col col-90">
-							<div ng-model="license_file" class="button item-note ion-ios-plus-empty button-light" ngf-pattern="'image/*'"  accept="image/*" ngf-max-size="20MB" ngf-min-height="100" ngf-select="uploadFiles($file)" ></div>
+							<div ng-if="!currentUser.is_verified_lawyer" ng-model="license_file" class="button item-note ion-ios-plus-empty button-light" ngf-pattern="'image/*'"  accept="image/*" ngf-max-size="20MB" ngf-min-height="100" ngf-select="uploadFiles($file)" ></div>
 							<img ng-src="{{file}}" ngf-thumbnail="file || '/thumb.jpg'" width="52" height="50">
-							<input type="hidden" name="license_file" value="{{file}}" />
+							<input ng-if="!currentUser.is_verified_lawyer" type="hidden" name="license_file" value="{{file}}" />
 							<span class="progress" ng-show="progress > 0">
 			                  <div style="width:{{progress}}%" ng-bind="progress + '%'"></div>
 			                </span>

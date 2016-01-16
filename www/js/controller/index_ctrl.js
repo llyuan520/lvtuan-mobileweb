@@ -1277,7 +1277,6 @@ lvtuanApp.controller("centerCtrl",function($scope,$http,$rootScope,$ionicPopup,$
 		var timestamp=Math.round(new Date().getTime()/1000);
 		var url = null;
 		$ionicLoading.show();
-		
 		if(!currentUser.is_verified_lawyer){
 			//普通用户个人信息
 			url = 'http://'+$rootScope.hostName+'/center/customer/info?ts='+timestamp;
@@ -1581,13 +1580,30 @@ lvtuanApp.controller("becomenavCtrl",function($scope,$http,$rootScope,$ionicPopu
 })
 
 //普通用户- 认证为律师的导航 - 从业信息
-lvtuanApp.controller("practitionersCtrl",function($scope,$http,$rootScope,$timeout,$stateParams,$localStorage,Upload) {
+lvtuanApp.controller("practitionersCtrl",function($scope,$http,$rootScope,$timeout,$stateParams,$localStorage,Upload,authService) {
 
 		$scope.lvinfo = JSON.parse(localStorage.getItem('lvinfo'));
 		console.info($scope.lvinfo);
 		if($scope.lvinfo){
 			$scope.license = $scope.lvinfo.user.lawyer.license;
 			$scope.company_name = $scope.lvinfo.user.lawyer.company_name;
+			$scope.file = $scope.lvinfo.user.lawyer.license_file;
+			var param = $scope.lvinfo.user.lawyer.practice_period;
+			//律师的从业年限
+			$scope.periods = null;
+			$http.get('http://'+$rootScope.hostName+'/lawyer/practiseperiods')
+				.success(function(data) {
+					$scope.periods = data.data; 
+					if(param){
+			    		for(var i=0;i<$scope.periods.length; i++){
+							if(param == $scope.periods[i].key){
+								$scope.practice_period = $scope.periods[i];
+								break;
+							}
+						}
+			    	}
+				})
+
 		}
 
 		$scope.address = "";
@@ -1650,38 +1666,16 @@ lvtuanApp.controller("practitionersCtrl",function($scope,$http,$rootScope,$timeo
 	    };
 		
 
-	    //判断是否已经填过数据
-		$scope.practitioner = JSON.parse(localStorage.getItem('practitioners'));
-		console.info($scope.practitioner);
-		if($scope.practitioner){
-			
-			$scope.license = $scope.practitioner.license;
-			$scope.company_name = $scope.practitioner.company_name;
-			$scope.file = $scope.practitioner.license_file;
-			var param = $scope.practitioner.practice_period;
-			//律师的从业年限
-			$scope.periods = null;
-			$http.get('http://'+$rootScope.hostName+'/lawyer/practiseperiods')
-				.success(function(data) {
-					$scope.periods = data.data; 
-					if(param){
-			    		for(var i=0;i<$scope.periods.length; i++){
-							if(param == $scope.periods[i].key){
-								$scope.practice_period = $scope.periods[i];
-								break;
-							}
-						}
-			    	}
-				})
-		}
-
 		//获取省市区
 		$scope.getAddress = function(){
 			delete $localStorage.addres;
 			location.href='#/citypicke/all';
 		}
 		
-		//提交
+		var currentUser = authService.getUser();
+		$scope.currentUser = currentUser;
+		
+			//提交
 		$scope.submit = function(){
 			
 			var param = layer.getParams("#practitionForm");
@@ -1697,9 +1691,11 @@ lvtuanApp.controller("practitionersCtrl",function($scope,$http,$rootScope,$timeo
 			if(district){
 				param['district'] = district;
 			}
-			if(param.license_file.length < 1){
-				layer.show("请上传执业证书！");
-				return false;
+			if(!currentUser.is_verified_lawyer){
+				if(param.license_file.length < 1){
+					layer.show("请上传执业证书！");
+					return false;
+				}
 			}
 			console.info(param);
 			$http.post('http://'+$rootScope.hostName+'/center/becomelawyer/work', param
@@ -1711,6 +1707,9 @@ lvtuanApp.controller("practitionersCtrl",function($scope,$http,$rootScope,$timeo
 			
 			
 		}
+		
+
+		
 
 })
 //普通用户- 认证为律师的导航 - 实名认证
@@ -1747,11 +1746,10 @@ lvtuanApp.controller("verifiedCtrl",function($scope,$http,$rootScope,$timeout,$s
     };
 
     //判断是否已经填过数据
-	$scope.verified = JSON.parse(localStorage.getItem('verified'));
-	console.info($scope.verified);
-	if($scope.verified){
-		$scope.realname = $scope.verified.realname;
-		$scope.file = $scope.verified.ID_img;
+    $scope.lvinfo = JSON.parse(localStorage.getItem('lvinfo'));
+	console.info($scope.lvinfo);
+	if($scope.lvinfo){
+		$scope.file = $scope.lvinfo.user.lawyer.ID_img;
 	}
 
     //提交
@@ -1773,11 +1771,11 @@ lvtuanApp.controller("verifiedCtrl",function($scope,$http,$rootScope,$timeout,$s
 //普通用户- 认证为律师的导航 - 资费设置
 lvtuanApp.controller("tariffsetCtrl",function($scope,$http,$rootScope,$timeout,$stateParams,$localStorage) {
 	//判断是否已经填过数据
-	$scope.tariffset = JSON.parse(localStorage.getItem('tariffset'));
-	console.info($scope.tariffset);
-	if($scope.tariffset){
-	    $scope.textreplyfee = parseInt($scope.tariffset.text_reply_fee);
-	    $scope.phonereplyfee = parseInt($scope.tariffset.phone_reply_fee);
+    $scope.lvinfo = JSON.parse(localStorage.getItem('lvinfo'));
+	console.info($scope.lvinfo);
+	if($scope.lvinfo){
+		$scope.textreplyfee = parseInt($scope.lvinfo.user.lawyer.text_reply_fee);
+	    $scope.phonereplyfee = parseInt($scope.lvinfo.user.lawyer.phone_reply_fee);
 	}
 
 	//提交
@@ -1822,9 +1820,13 @@ lvtuanApp.controller("fieldCtrl",function($scope,$http,$rootScope,$timeout,$stat
 		.success(function(data) {
 			$scope.workscopes = data.data; 
 			console.info($scope.workscopes);
-			$scope.field = JSON.parse(localStorage.getItem('field'));
-			if($scope.field && $scope.field.workscope.length > 0){
-				$scope.showscopes = $scope.field.workscope;
+
+			//判断是否已经填过数据
+		    $scope.lvinfo = JSON.parse(localStorage.getItem('lvinfo'));
+			console.info($scope.lvinfo);
+			if($scope.lvinfo && $scope.lvinfo.user.lawyer.work_scope.length > 0){
+				console.info($scope.lvinfo.user.lawyer.work_scope);
+				$scope.showscopes = $scope.lvinfo.user.lawyer.work_scope;
 			}else{
 				return false;
 			}
@@ -1874,8 +1876,10 @@ lvtuanApp.controller("fieldCtrl",function($scope,$http,$rootScope,$timeout,$stat
 		}else{
 			layer.show("请选择擅长领域！")
 		}
+		console.info(param);
 		$http.post('http://'+$rootScope.hostName+'/center/becomelawyer/workscope', param
 			).success(function(data) {
+				console.info(data);
 	            layer.show("添加成功！");
 	            location.href='#/becomenav';
 			    window.location.reload();
@@ -1886,12 +1890,12 @@ lvtuanApp.controller("fieldCtrl",function($scope,$http,$rootScope,$timeout,$stat
 //普通用户- 认证为律师的导航 - 经历案例
 lvtuanApp.controller("caseCtrl",function($scope,$http,$rootScope,$timeout,$stateParams,$localStorage,Upload) {
 	//判断是否已经填过数据
-	$scope.cases = JSON.parse(localStorage.getItem('cases'));
-	console.info($scope.cases);
-	if($scope.cases){
-	    $scope.introduce = $scope.cases.introduce;
-	    $scope.experience = $scope.cases.experience;
-	    $scope.law_cases = $scope.cases.law_cases;
+	$scope.lvinfo = JSON.parse(localStorage.getItem('lvinfo'));
+	console.info($scope.lvinfo);
+	if($scope.lvinfo){
+	    $scope.introduce = $scope.lvinfo.user.lawyer.introduce;
+	    $scope.experience = $scope.lvinfo.user.lawyer.experience;
+	    $scope.law_cases = $scope.lvinfo.user.lawyer.law_cases;
 	}
 
 	//提交
