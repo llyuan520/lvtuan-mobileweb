@@ -31,7 +31,7 @@
 				<!--评论-->
 				<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 
-				<ion-list ng-repeat="item in items" >
+				<ion-list ng-repeat="item in items" class="document-list" >
 	            	<ion-item class="item item-thumbnail-left" ng-href="#/document/download_list/{{item.id}}">
 			          	<img ng-src="{{item.img}}" style="border-radius:4px;" />
 						<div class="row" style="padding: 5px 0;">

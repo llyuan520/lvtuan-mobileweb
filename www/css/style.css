@@ -305,8 +305,8 @@ a:hover{
 .ion-chevron-down:before{margin-top: 5px;}
 .tab-item.tab-item-active, .tab-item.active, .tab-item.activated {
   opacity: 1;
-  color:#21a0f1;
-  border-bottom: 2px solid #21a0f1;
+  color:#00cafa;
+  border-bottom: 2px solid #00cafa;
 }
 .item .reply{  background-color: #EEEEEE;
   padding: 2px 10px;
@@ -1034,10 +1034,17 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
     font-size:1.6rem;
 }
 
+.nav-set a span {
+    display: block;
+    position: absolute;
+    bottom: 0.1rem;
+    width: 100%;
+}
 .grade-a .nav-set {
     padding-top: 0;
 }
 .grade-a .nav-set .tab-item {
+    position: relative;
     font-size: 0.8rem;
 }
 .tab-item .home {
@@ -1173,7 +1180,7 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
     color: #00cafa;
 }
 .nav-set .tab-item {
-    color: #333;
+    color: #666;
 }
 
 .emails {
@@ -1429,7 +1436,7 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
 
 /*律师个人主页*/
 .pane .tabs .pic-consultation, .pane .tabs .phone-consultation {
-    color: #21a0f1;
+    color: #00cafa;
 }
 
 /*头部样式*/
@@ -1565,6 +1572,20 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
     width: 1.74rem;
     height: 1.74rem;
     margin-top: 20%;
+}
+.not-selected {
+    float: right;
+    width: 60%;
+    height: 3.8rem;
+    background: url("../img/button-gray.png") right center no-repeat;
+    background-size: 43%;
+}
+.selected {
+    float: right;
+    width: 60%;
+    height: 3.8rem;
+    background: url("../img/button-blue.png") right center no-repeat;
+    background-size: 43%;
 }
 
 /*经历案例*/
@@ -1756,3 +1777,8 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
     margin-top: 2px;
     background-color: #fff;
 }*/
+
+/*法律文书*/
+.document-list .list {
+    padding: 0;
+}
