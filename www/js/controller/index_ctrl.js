@@ -1290,6 +1290,7 @@ lvtuanApp.controller("centerCtrl",function($scope,$http,$rootScope,$ionicPopup,$
 				if(data && data.data){
 					//用于连接两个或多个数组并返回一个新的数组
 					$scope.items = data.data; 
+					console.info($scope.items);
 				}else{
 					layer.show('暂无数据！');
 					return false;
@@ -1749,6 +1750,7 @@ lvtuanApp.controller("verifiedCtrl",function($scope,$http,$rootScope,$timeout,$s
     $scope.lvinfo = JSON.parse(localStorage.getItem('lvinfo'));
 	console.info($scope.lvinfo);
 	if($scope.lvinfo){
+		
 		$scope.file = $scope.lvinfo.user.lawyer.ID_img;
 	}
 
