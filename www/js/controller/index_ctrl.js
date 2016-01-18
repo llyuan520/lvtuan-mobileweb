@@ -67,7 +67,12 @@ lvtuanApp.directive('hideTabs', function($rootScope) {
         link: function(scope, element, attributes) {
             scope.$on('$ionicView.beforeEnter', function() {
                 scope.$watch(attributes.hideTabs, function(value){
-                    $rootScope.hideTabs = value;
+                    if($rootScope.hideTabs == undefined){
+                        $rootScope.hideTabs = true;
+                    }else{
+                        $rootScope.hideTabs = value;
+                    }
+                    
                 });
 
             });
@@ -2828,8 +2833,9 @@ lvtuanApp.controller("viewteleviseCtrl",function($scope,$http,$rootScope,listHel
 })
 
 //找律师-图文咨询
-lvtuanApp.controller("graphicCtrl",function($scope,$http,$rootScope,$timeout,$stateParams,listHelper,httpWrapper,Upload){
+lvtuanApp.controller("graphicCtrl",function($scope,$http,$rootScope,$timeout,$stateParams,$ionicLoading,listHelper,httpWrapper,Upload){
 	//选择类型
+   $ionicLoading.show(); 
 	$http.get('http://'+$rootScope.hostName+'/lawyer/workscopes')
 		.success(function(data) {
 	      if(data.data){
@@ -2837,6 +2843,7 @@ lvtuanApp.controller("graphicCtrl",function($scope,$http,$rootScope,$timeout,$st
 	      }else{
 	      	layer.show("暂无数据！");
 	      }
+          $ionicLoading.hide();
 	    });
 
 	//用来存储上传的值
@@ -2892,6 +2899,7 @@ lvtuanApp.controller("graphicCtrl",function($scope,$http,$rootScope,$timeout,$st
 		if(lawyerId){
 			$scope.user['lawyer_id'] = lawyerId;
 		}
+        $ionicLoading.show();
 		httpWrapper.request('http://'+$rootScope.hostName+'/center/pay/question/create','post',$scope.user,
 			function(data){
 				layer.show("提交成功！");
@@ -2899,6 +2907,7 @@ lvtuanApp.controller("graphicCtrl",function($scope,$http,$rootScope,$timeout,$st
 				$scope.files = {};
         		$scope.errFiles = {};
         		location.href='#/pay/'+data.data.data.id;
+                $ionicLoading.hide()
 			},function(data){
 				console.info(data);
 			}
@@ -2914,7 +2923,8 @@ lvtuanApp.controller("specialCtrl",function($scope,$http,$rootScope){
 /****************************************************** 问律师 ******************************************************/
 
 //问律师
-lvtuanApp.controller("questionsCtrl",function($scope,$http,$rootScope,$timeout,$stateParams,$state,listHelper,httpWrapper,Upload){
+lvtuanApp.controller("questionsCtrl",function($scope,$http,$rootScope,$timeout,$stateParams,$state,$ionicLoading,listHelper,httpWrapper,Upload){
+    $ionicLoading.show();
 	listHelper.bootstrap('/question/list_questions', $scope);
 	$http.get('http://'+$rootScope.hostName+'/lawyer/workscopes')
 		.success(function(data) {
@@ -2923,6 +2933,7 @@ lvtuanApp.controller("questionsCtrl",function($scope,$http,$rootScope,$timeout,$
 	      }else{
 	      	layer.show("暂无数据！");
 	      }
+          $ionicLoading.hide();
 	    });
 
 	//搜索问题
@@ -2977,12 +2988,14 @@ lvtuanApp.controller("questionsCtrl",function($scope,$http,$rootScope,$timeout,$
 		if($scope.file.length > 0){
 			$scope.user['file_paths'] = $scope.file;
 		}
+        $ionicLoading.show();
 		httpWrapper.request('http://'+$rootScope.hostName+'/question/create','post',$scope.user,
 			function(data){
 				layer.show("提交成功！");
 				$scope.user = {};
 				$scope.files = {};
         		$scope.errFiles = {};
+                $ionicLoading.hide();
 			},function(data){
 	        	console.info(data.error_messages);
 	        	var errMsg = JSON.stringify(data.error_messages.content[0]);
@@ -3910,7 +3923,7 @@ lvtuanApp.controller("userorderPendingCtrl",function($http,$scope,$rootScope,lis
 	}
 })
 //用户的订单 - 待受理
-lvtuanApp.controller("userorderNewCtrl",function($scope,listHelper){
+lvtuanApp.controller("userorderNewCtrl",function($scope,$rootScope,listHelper,httpWrapper){
 	listHelper.bootstrap('/center/pay/question/new', $scope);
 	//取消
 	$scope.cancel = function(id,index){

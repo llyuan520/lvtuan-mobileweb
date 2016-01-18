@@ -13,7 +13,9 @@
 	        			<h2 class="fc-ee">{{item.post_type}}</h2>
 		        	</div>
 	  				<div class="col" style="text-align: right;">
-	  					<button class="button button-small button-positive">取消</button>
+                        <!-- <p >
+                        </p> -->
+                            <button ng-if="item.status_code == 'new'" class="button button-small button-positive" ng-click="cancel(item.id,$index)">取消</button>
 	  				</div>
 	        	</div>
 	        </ion-item>

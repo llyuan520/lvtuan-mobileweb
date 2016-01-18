@@ -117,13 +117,17 @@ httpModule.factory('APIInterceptor', ['$log', '$q', '$rootScope', 'authService',
 	        		$rootScope.$broadcast('unauthorized');
 	        		break;
 	        	case 400:
-					angular.forEach(response.data.error_messages,function(val,key){
-						if (angular.isArray(val)) {
-							layer.show(val.join(', '));
-						} else {
-							layer.show(val);
-						}
-					});
+	        		if (angular.isArray(response.data.error_messages)) {
+	        			angular.forEach(response.data.error_messages,function(val,key){
+							if (angular.isArray(val)) {
+								layer.show(val.join(', '));
+							} else {
+								layer.show(val);
+							}
+						});
+	        		}else{
+	        			layer.show(response.data.error_messages);
+	        		}
 	        		break;
 	        	case 405:
 	        		layer.show("提交数据的方法错误");
