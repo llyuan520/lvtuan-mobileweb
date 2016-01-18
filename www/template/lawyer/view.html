@@ -97,12 +97,12 @@
 <script type="text/ng-template" id="article.tpl.html">
     <ul class="list" ng-controller="viewarticleCtrl">
     	<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
-	  	<ion-list ng-repeat="article in articles">
-			<ion-item class="item-thumbnail-left">
-				<img ng-src="{{article.avatar}}"/>
-				<h2>{{article.title}}</h2>
-				<p>{{article.content}}</p>
-				<p>{{article.created_at}}</p>
+	  	<ion-list ng-repeat="item in items">
+			<ion-item class="item-thumbnail-left" ng-href="#/lawyer/article/view/{{item.id}}">
+				<img ng-src="{{item.avatar}}"/>
+				<h2>{{item.title}}</h2>
+				<p>{{item.content}}</p>
+				<p>{{item.created_at}}</p>
 			</ion-item>
 		</ion-list>
 		<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%" > </ion-infinite-scroll>

@@ -2764,48 +2764,9 @@ lvtuanApp.controller("viewevaluateCtrl",function($scope,$http,$rootScope,$stateP
 	});
 })
 //律师个人主页-律师文章
-lvtuanApp.controller("viewarticleCtrl",function($scope,$http,$rootScope,$stateParams){
-	console.info("律师文章");
+lvtuanApp.controller("viewarticleCtrl",function($scope,$http,$rootScope,$stateParams,listHelper){
 	//获取律师文章列表
-	var page = 1; //页数
-    $scope.moredata = true; 
-    $scope.articles = [];	//创建一个数组接收后台的数据
-    //下拉刷新
-	$scope.doRefresh = function() {
-		page = 1;
-		$scope.articles = [];
-        $scope.loadMore();
-    };
-
-    $scope.loadMore = function(){
-		getArticles();
-	}
-	//获取律师的评价列表
-	function getArticles(){
-		var url = 'http://'+$rootScope.hostName+'/lawyer/'+$stateParams.id+'/articles?page='+page;
-		$http.get(url)
-			.success(function(data) {
-				if(data.data.length > 0){
-					$scope.moredata = true;
-					//用于连接两个或多个数组并返回一个新的数组
-					$scope.articles = $scope.articles.concat(data.data); 
-				}else{
-					layer.show("暂无数据！")
-					$scope.moredata = false;
-					return false;
-				}
-				page++;
-			})
-		    .finally(function() {
-	            $scope.$broadcast('scroll.refreshComplete');
-	            $scope.$broadcast('scroll.infiniteScrollComplete');
-	        });
-	}
-
-	$scope.$on('$stateChangeSuccess', function() {
-	    $scope.loadMore();
-	});
-
+	listHelper.bootstrap('/lawyer/'+$stateParams.id+'/articles', $scope);
 })
 
 //律师个人主页-律师广播
