@@ -67,7 +67,7 @@ lvtuanApp.directive('hideTabs', function($rootScope) {
         link: function(scope, element, attributes) {
             scope.$on('$ionicView.beforeEnter', function() {
                 scope.$watch(attributes.hideTabs, function(value){
-                    if($rootScope.hideTabs == undefined){
+                    if($rootScope.hideTabs == undefined || value == undefined){
                         $rootScope.hideTabs = true;
                     }else{
                         $rootScope.hideTabs = value;
@@ -516,23 +516,22 @@ lvtuanApp.controller("groupviewCtrl",function($scope,$http,$state,$rootScope,$st
                 }, 3000); 
             }
 
-    })
+        })
     
-    function getuserpwd(itmes){
-        var name = $("#user_name").val();
-        var pwd = $("#user_password").val();
-        if(name != null && pwd != null){
-            if(name == itmes.user_id && pwd == itmes.pwd){
-                return true;
+        function getuserpwd(itmes){
+            var name = $("#user_name").val();
+            var pwd = $("#user_password").val();
+            if(name != null && pwd != null){
+                if(name == itmes.user_id && pwd == itmes.pwd){
+                    return true;
+                }
+            }else{
+                return false;
             }
-        }else{
-            return false;
         }
-    }
 
     });
 	
-
 	$scope.site = function(){
 		location.href='#/group/site/'+$scope.id;
 	    window.location.reload();
