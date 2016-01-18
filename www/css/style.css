@@ -18,6 +18,7 @@ body,
     background-color: #eee;
 }
 .content.bottom_50,.pane .bottom_50,.bottom_50{
+    top: 0;
     margin-bottom: 50px;
 }
 .item-input{
@@ -1013,7 +1014,7 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
     height: 161px;
     border-top: 0px;
     padding: 0px;
-    margin: 0px 0 20px 0;
+    margin: 0px 0 13px 0;
 }
 .view-heard .item-thumbnail-left {
     background: none;
@@ -1034,12 +1035,12 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
     font-size:1.6rem;
 }
 
-.nav-set a span {
+/*.nav-set a span {
     display: block;
     position: absolute;
     bottom: 0.1rem;
     width: 100%;
-}
+}*/
 .grade-a .nav-set {
     padding-top: 0;
 }
@@ -1781,4 +1782,13 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
 /*法律文书*/
 .document-list .list {
     padding: 0;
+}
+
+/*圈子*/
+.group-title {
+    display: inline-block;
+    overflow: hidden;
+    width: 73%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
