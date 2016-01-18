@@ -4469,7 +4469,9 @@ lvtuanApp.controller("userpayallCtrl",function($scope,$http,$rootScope,listHelpe
 })
 
 //用户律师 - 微信支付
-lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$ionicPopup,listHelper){
+lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$ionicPopup,$ionicLoading,listHelper){
+	$scope.user = {};
+	$ionicLoading.show();
 	$http.get('http://'+$rootScope.hostName+'/center/pay/question/'+$stateParams.id+'/view')
 		.success(function(data) {
 			if(data && data.data){
@@ -4480,46 +4482,50 @@ lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$io
 				layer.show('暂无数据！');
 				return false;
 			}
+			$ionicLoading.hide();
 		})
 
-		$scope.obj = "";
-	    $scope.change = function(val){
-	    	$scope.obj = val;
-	    }
-
 	//微信支付
-	$scope.pay = function(){
-		console.info($scope.obj);
-		if($scope.obj == 'weixin'){
+	$scope.pay = function(user){
+		if(user.radioval == undefined){
 			layer.show("研发中...敬请期待。")
-			/*location.href='#/login';
-		    window.location.reload();*/
+			return false;
 		}else{
-			var confirmPopup = $ionicPopup.confirm({
-	           title: '是否立即付款？',
-	           cancelText: '取消', 
-	           okText: '确认', 
-	         });
-	         confirmPopup.then(function(res) {
-	           if(res) {
-	            //listHelper.bootstrap('/center/question/'+$stateParams.id+'/wallet/pay', $scope);
-		            $http.post('http://'+$rootScope.hostName+'/center/question/'+$stateParams.id+'/wallet/pay',{},
-			            {
-			            headers: {
-			                'Content-Type': 'application/json' , 
-			            	'Authorization': 'bearer ' + $rootScope.token,
-			            }
-			        }).success(function(data) {
-			        	$scope.items = data.data;
-			            layer.show("付款成功！");
-			            location.href='#/orderuser/new';
-		    			window.location.reload();
-			        });
-	           }else{
-	             return false;
-	           }
-	         });
+
+			if(user.radioval == 'weixin'){
+				layer.show("研发中...敬请期待。")
+				/*location.href='#/login';
+			    window.location.reload();*/
+			}else{
+				var confirmPopup = $ionicPopup.confirm({
+		           title: '是否立即付款？',
+		           cancelText: '取消', 
+		           okText: '确认', 
+		         });
+		         confirmPopup.then(function(res) {
+		           if(res) {
+		            	//listHelper.bootstrap('/center/question/'+$stateParams.id+'/wallet/pay', $scope);
+		           		$ionicLoading.show();
+			            $http.post('http://'+$rootScope.hostName+'/center/question/'+$stateParams.id+'/wallet/pay',{},
+				            {
+				            headers: {
+				                'Content-Type': 'application/json' , 
+				            	'Authorization': 'bearer ' + $rootScope.token,
+				            }
+				        }).success(function(data) {
+				        	$scope.items = data.data;
+				            layer.show("付款成功！");
+				            location.href='#/orderuser/new';
+			    			window.location.reload();
+				        });
+		           }else{
+		             return false;
+		           }
+		           $ionicLoading.hide();
+		         });
+			}
 		}
+
 	}
 	
 })

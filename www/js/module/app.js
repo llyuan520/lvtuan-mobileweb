@@ -989,7 +989,6 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
     .state('pay', { //首页 - 微信支付
       url: '/pay/:id',
       templateUrl: 'template/pay.html',
-      controller: 'payCtrl',
       authn: true
     })
     .state('citypicker', { //首页 - 微信支付
