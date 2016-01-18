@@ -491,43 +491,47 @@ lvtuanApp.controller("groupAttentionCtrl",function($scope,$http,$state,$rootScop
 
 //圈子详情
 lvtuanApp.controller("groupviewCtrl",function($scope,$http,$state,$rootScope,$stateParams){
-	console.info("圈子详情");
-	$scope.user_name = "";
-	$scope.user_password = "";
-	$("#user_name").val();
-	$("#user_password").val();
-	$http.get('http://'+$rootScope.hostName+'/group/'+$stateParams.id+'/chat'
-    ).success(function(data) {
-    	if (data && data.data) {
-	    	console.info('圈子详情',data.data);
-	    	var itmes = data.data;
-	    	$scope.user_name = itmes.user_id;
-	    	$scope.user_password = itmes.pwd;
-	    	$scope.id = itmes.id;
-	    	localStorage.setItem("goup_id", JSON.stringify($scope.id));
-	    	localStorage.setItem("easemob_id", JSON.stringify(itmes.easemob_id));
-			var time = null;
-			time = setInterval(function() { 
-				if(getuserpwd(itmes) == true){
-	        		clearInterval(time);
-	        		login();
-	        	}
-			}, 3000); 
-		}
+    $scope.$on('$ionicView.beforeEnter', function() {  
+        console.info("圈子详情");
+        $scope.user_name = "";
+        $scope.user_password = "";
+        $("#user_name").val();
+        $("#user_password").val();
+        $http.get('http://'+$rootScope.hostName+'/group/'+$stateParams.id+'/chat'
+        ).success(function(data) {
+            if (data && data.data) {
+                console.info('圈子详情',data.data);
+                var itmes = data.data;
+                $scope.user_name = itmes.user_id;
+                $scope.user_password = itmes.pwd;
+                $scope.id = itmes.id;
+                localStorage.setItem("goup_id", JSON.stringify($scope.id));
+                localStorage.setItem("easemob_id", JSON.stringify(itmes.easemob_id));
+                var time = null;
+                time = setInterval(function() { 
+                    if(getuserpwd(itmes) == true){
+                        clearInterval(time);
+                        login();
+                    }
+                }, 3000); 
+            }
 
-	})
+    })
+    
+    function getuserpwd(itmes){
+        var name = $("#user_name").val();
+        var pwd = $("#user_password").val();
+        if(name != null && pwd != null){
+            if(name == itmes.user_id && pwd == itmes.pwd){
+                return true;
+            }
+        }else{
+            return false;
+        }
+    }
+
+    });
 	
-	function getuserpwd(itmes){
-		var name = $("#user_name").val();
-    	var pwd = $("#user_password").val();
-    	if(name != null && pwd != null){
-    		if(name == itmes.user_id && pwd == itmes.pwd){
-    			return true;
-    		}
-    	}else{
-    		return false;
-    	}
-	}
 
 	$scope.site = function(){
 		location.href='#/group/site/'+$scope.id;

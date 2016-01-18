@@ -1035,12 +1035,12 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
     font-size:1.6rem;
 }
 
-/*.nav-set a span {
+.nav-set a span {
     display: block;
     position: absolute;
     bottom: 0.1rem;
     width: 100%;
-}*/
+}
 .grade-a .nav-set {
     padding-top: 0;
 }
@@ -1791,4 +1791,19 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
     width: 73%;
     white-space: nowrap;
     text-overflow: ellipsis;
+}
+
+/*我的订单模块设置*/
+.all-button .col button {
+    display: inline-block;
+    text-align: center;
+    font-size: 0.8rem;
+}
+.all-button .all-replied button, 
+.all-button .all-complete button:nth-child(1) {
+    width: 39%;
+}
+.all-button .all-new button, 
+.all-button .all-complete button:nth-child(2) {
+    width: 23%;
 }
