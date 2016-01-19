@@ -1408,15 +1408,16 @@ lvtuanApp.controller("valrealnameCtrl",function($scope,$http,$rootScope,$ionicLo
 	var currentUser = authService.getUser();
 	var timestamp=Math.round(new Date().getTime()/1000);
 	$scope.userinfo = JSON.parse(localStorage.getItem('userinfo'));
+    console.info($scope.userinfo)
 	$scope.user = {
-			realname:$scope.userinfo.user.realname 
+			nikname:$scope.userinfo.user.nikname
 		};
 
-	
+
 	//提交用户的信息
     $scope.submit = function(){
     	$ionicLoading.show();
-    	var params = layer.getParams("#realnameForm");
+    	var params = layer.getParams("#niknameForm");
     	var url = null;
     	if(currentUser.user_group_id == 1 || currentUser.user_group_id == 2 && currentUser.is_verified == 0){
     		url = 'http://'+$rootScope.hostName+'/center/customer/info?ts='+timestamp;
@@ -1427,7 +1428,7 @@ lvtuanApp.controller("valrealnameCtrl",function($scope,$http,$rootScope,$ionicLo
     		.success(function(data) {
 	            layer.show("提交成功！");
 	            $scope.user = {
-					realname: ""
+					nikname: ""
 				};
 	            location.href='#/info';
 	            $ionicLoading.hide();

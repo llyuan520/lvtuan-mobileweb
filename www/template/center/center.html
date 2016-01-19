@@ -13,8 +13,8 @@
 				    		<img ng-src="{{items.user.avatar}}" style="width:100%;border-radius:50%;">
 				    	</a>
 			      		<a style="margin-top: 20px;display: inline-block;" ng-href="#/info">
-			      			<label ng-if="!currentUser.is_verified_lawyer">{{items.user.realname}}</label>
-			      			<label ng-if="currentUser.is_verified_lawyer">{{items.user.realname}} <span class="web-font14">律师</span></label>
+			      			<label ng-if="!currentUser.is_verified_lawyer">{{items.user.nikname}}</label>
+			      			<label ng-if="currentUser.is_verified_lawyer">{{items.user.nikname}} <span class="web-font14">律师</span></label>
 
 			      		</a>
 					    <a ng-href="#/messages">
