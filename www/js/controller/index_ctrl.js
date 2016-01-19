@@ -490,7 +490,8 @@ lvtuanApp.controller("groupAttentionCtrl",function($scope,$http,$state,$rootScop
 })
 
 //圈子详情
-lvtuanApp.controller("groupviewCtrl",function($scope,$http,$state,$rootScope,$stateParams){
+lvtuanApp.controller("groupviewCtrl",function($scope,$http,$state,$rootScope,$stateParams,$ionicLoading){
+	$ionicLoading.show();
     $scope.$on('$ionicView.beforeEnter', function() {  
         console.info("圈子详情");
         $scope.user_name = "";
@@ -515,7 +516,7 @@ lvtuanApp.controller("groupviewCtrl",function($scope,$http,$state,$rootScope,$st
                     }
                 }, 3000); 
             }
-
+            $ionicLoading.hide();
         })
     
         function getuserpwd(itmes){
@@ -1591,14 +1592,50 @@ lvtuanApp.controller("becomenavCtrl",function($scope,$http,$rootScope,$ionicPopu
 //普通用户- 认证为律师的导航 - 从业信息
 lvtuanApp.controller("practitionersCtrl",function($scope,$http,$rootScope,$timeout,$stateParams,$localStorage,Upload,authService) {
 
-		$scope.lvinfo = JSON.parse(localStorage.getItem('lvinfo'));
-		console.info($scope.lvinfo);
-		if($scope.lvinfo){
-			$scope.license = $scope.lvinfo.user.lawyer.license;
-			$scope.company_name = $scope.lvinfo.user.lawyer.company_name;
-			$scope.file = $scope.lvinfo.user.lawyer.license_file;
-			var param = $scope.lvinfo.user.lawyer.practice_period;
+		var currentUser = authService.getUser();
+		$scope.currentUser = currentUser;
+		if(currentUser.is_verified_lawyer){
+			$scope.lvinfo = JSON.parse(localStorage.getItem('lvinfo'));
+			console.info($scope.lvinfo);
+			if($scope.lvinfo){
+				$scope.license = $scope.lvinfo.user.lawyer.license;
+				$scope.company_name = $scope.lvinfo.user.lawyer.company_name;
+				$scope.file = $scope.lvinfo.user.lawyer.license_file;
+				var param = $scope.lvinfo.user.lawyer.practice_period;
+				$scope.address = $scope.lvinfo.user.province_name +' '+ $scope.lvinfo.user.city_name +' '+ $scope.lvinfo.user.district_name;
+				periods();
+			}
+
+		}else{
+
+			$scope.address = "";
+			$scope.addres_param = {};
+			$scope.addres = $localStorage.addres || "";
+			$scope.$watch('addres', function(newVal, oldVal) {
+				// 监听变化，并获取参数的最新值
+			    console.log('newVal: ', newVal);   
+			    $localStorage.addres = $scope.addres;
+			    $scope.addres_param = $localStorage.addres;
+			    if($scope.addres_param){
+			    	$scope.address = $scope.addres_param.province.value +" "+ $scope.addres_param.city.value +" "+ $scope.addres_param.district.value;
+			   	 	console.info('address',$scope.address);
+			    }else{
+			    	$scope.address = "";
+			    }
+			});
+			$scope.$watch(function() {
+			    return angular.toJson($localStorage);
+			}, function() {
+			    $scope.addres = $localStorage.addres;
+			    console.info($scope.addres);
+			});
+			
 			//律师的从业年限
+			periods();
+		}
+
+		//律师的从业年限
+		function periods(){
 			$scope.periods = null;
 			$http.get('http://'+$rootScope.hostName+'/lawyer/practiseperiods')
 				.success(function(data) {
@@ -1612,37 +1649,8 @@ lvtuanApp.controller("practitionersCtrl",function($scope,$http,$rootScope,$timeo
 						}
 			    	}
 				})
-
 		}
-
-		$scope.address = "";
-		$scope.addres_param = {};
-		$scope.addres = $localStorage.addres || "";
-		$scope.$watch('addres', function(newVal, oldVal) {
-			// 监听变化，并获取参数的最新值
-		    console.log('newVal: ', newVal);   
-		    $localStorage.addres = $scope.addres;
-		    $scope.addres_param = $localStorage.addres;
-		    if($scope.addres_param){
-		    	$scope.address = $scope.addres_param.province.value +" "+ $scope.addres_param.city.value +" "+ $scope.addres_param.district.value;
-		   	 	console.info('address',$scope.address);
-		    }else{
-		    	$scope.address = "";
-		    }
-		});
-		$scope.$watch(function() {
-		    return angular.toJson($localStorage);
-		}, function() {
-		    $scope.addres = $localStorage.addres;
-		    console.info($scope.addres);
-		});
-
-		//律师的从业年限
-		$scope.periods = null;
-		$http.get('http://'+$rootScope.hostName+'/lawyer/practiseperiods')
-			.success(function(data) {
-				$scope.periods = data.data; 
-			})
+		
 		//上传执业证书
 	    $scope.uploadFiles = function (license_file) {
 	        Upload.upload({
@@ -1681,8 +1689,6 @@ lvtuanApp.controller("practitionersCtrl",function($scope,$http,$rootScope,$timeo
 			location.href='#/citypicke/all';
 		}
 		
-		var currentUser = authService.getUser();
-		$scope.currentUser = currentUser;
 		
 			//提交
 		$scope.submit = function(){
@@ -1713,12 +1719,7 @@ lvtuanApp.controller("practitionersCtrl",function($scope,$http,$rootScope,$timeo
 		           location.href='#/becomenav';
 				   window.location.reload();
 		        });
-			
-			
-		}
-		
-
-		
+		}	
 
 })
 //普通用户- 认证为律师的导航 - 实名认证

@@ -148,14 +148,14 @@
         };
     };
     var showLoginUI = function() {
-        $('#loginmodal').modal('show');  //调用登录的显示隐藏
+        $('#loginmodal').modal('hide');  //调用登录的显示隐藏
         $('#user_name').focus();
     };
     var hiddenLoginUI = function() {
         $('#loginmodal').modal('hide');
     };
     var showWaitLoginedUI = function() {
-        $('#waitLoginmodal').modal('show');
+        $('#waitLoginmodal').modal('hide');
     };
     var hiddenWaitLoginedUI = function() {
         $('#waitLoginmodal').modal('hide');
