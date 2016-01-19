@@ -1421,11 +1421,12 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
 .login-header a {
     position: absolute;
     top: 12%;
-    right: 3%;
-    width: 10%;
+    left: 3%;
+    width: 15%;
     height: 2.3rem;
-    background: url("../img/white-index.png") center center no-repeat;
     background-size: 90%;
+    color: #fff;
+    line-height: 3rem;
 }
 
 /*问律师页面样式修改*/

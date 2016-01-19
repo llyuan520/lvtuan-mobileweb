@@ -1400,8 +1400,6 @@ lvtuanApp.controller("infoCtrl",function($scope,$http,$rootScope,$timeout,$ionic
         });
     };
 
-    
-
 })
 
 //个人信息 - 修改姓名
