@@ -186,11 +186,11 @@ a{
 }
 a:link{
     text-decoration: none;
-    color: #32a9f2;
+    color: #00cafa;
 }
 a:visited{
     text-decoration: none;
-    color: #32a9f2;
+    color: #00cafa;
 }
 a:active{
     text-decoration: none;
@@ -785,7 +785,7 @@ input::-webkit-outer-spin-button {
 .log-content{width: 90%;margin: 0 auto;}
 .log-content .login,.log-but,.log-input-bg{overflow: hidden;}
 .log-but{width: 100%;}
-.login .ion-wap input,.ion-row2 button,.button.button-positive.activated, .button.button-positive.active{
+.login .ion-wap input,.ion-row2 button{
     background-color: rgba(225,225,225,0); color: #fff;width: 100%;
     border-color: #fff;
     box-shadow: inset 0 1px 4px rgba(225,225,225,.1);
@@ -1407,6 +1407,9 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
     background: url("../img/my-article.png") 3% center no-repeat;
     background-size: 7%;
 }
+.header-information a label {
+    color: #00cafa;
+}
 
 /*登录头部返回键设置*/
 .pane .login-header {
@@ -1455,7 +1458,7 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
     display: block;
     height: 44px;
     line-height: 44px;
-    color: #32a9f2;
+    color: #00cafa;
 }
 .headers.bar-light .title {
     font-family: 'Microsoft YaHei';
@@ -1795,6 +1798,7 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
 
 /*我的订单模块设置*/
 .all-button .col button {
+    /*float: right;*/
     display: inline-block;
     text-align: center;
     font-size: 0.8rem;
@@ -1807,3 +1811,10 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
 .all-button .all-complete button:nth-child(2) {
     width: 23%;
 }
+.button.button-positive.activated, .button.button-positive.active{
+    background-color: rgba(225,225,225,0); 
+    color: #fff;
+    border-color: #fff;
+    box-shadow: inset 0 1px 4px rgba(225,225,225,.1);
+}
+

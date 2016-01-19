@@ -16,19 +16,19 @@
 	        		<div class="col">
         				<h2 class="fc-33">{{item.post_type}}</h2>
 		        	</div>
-	  				<div class="col all-new" style="text-align: right;">
-	  					<p>
+	  				<div class="col" style="text-align: right;">
+	  					<p class="all-new">
 	  						<button ng-if="item.status_code == 'wait_pay' || item.status_code == 'complete'" class="button button-small button-positive" ng-click="remove(item.id,$index)">删除</button>
 	  						<button ng-if="item.status_code == 'wait_pay'" class="button button-small button-positive" ng-click="pay(item.id)">付款</button>
 	  					</p>
-	  					<p >
+	  					<p class="all-new">
 	  						<button ng-if="item.status_code == 'new'" class="button button-small button-positive" ng-click="cancel(item.id,$index)">取消</button>
 	  					</p>
-	  					<p ng-if="item.status_code == 'replied'">
+	  					<p class="all-complete" ng-if="item.status_code == 'replied'">
 	  						<button class="button button-small button-positive" ng-click="ask(item.id)">联系律师</button>
 	  						<button class="button button-small button-positive" ng-click="complete(item.id,$index)">确认</button>
 	  					</p>
-	  					<p ng-if="item.status_code == 'wait_for_evaluation'">
+	  					<p class="all-new" ng-if="item.status_code == 'wait_for_evaluation'">
 	  						<button class="button button-small button-positive" ng-click="evaluate(item.id,$index)">评价</button>
 	  					</p>
 	  				</div>

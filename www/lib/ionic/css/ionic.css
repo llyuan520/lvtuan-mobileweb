@@ -6650,8 +6650,8 @@ progress {
         box-shadow: none;
         color: #fff; }
   .button.button-positive {
-    border-color: #0c63ee;
-    background-color: #387ef5;
+    border-color: #00cafa;
+    background-color: #00cafa;
     color: #fff; }
     .button.button-positive:hover {
       color: #fff;
@@ -7495,7 +7495,7 @@ a.button {
   color: #387ef5; }
 
 .positive-bg {
-  background-color: #387ef5; }
+  background-color: #00cafa; }
 
 .positive-border {
   border-color: #0c63ee; }
