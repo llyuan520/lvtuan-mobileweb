@@ -53,6 +53,7 @@ gulp.task('sprites', function () {
     name: 'icons',
     style: './sprite.css',
     prefix: 'img',
+    margin: 10
     // ... other optional options 
     // for example if you want to generate scss instead of css 
     // processor: 'sass', // make sure you have installed sprity-sass 
