@@ -557,14 +557,14 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       url: '/questionslist',
       templateUrl: 'template/questions/questions_list.html',
       controller: 'questionslistCtrl',
-      authn: true
+      authn: false
     })
     .state('questionsview', { //问律师详情
       cache: 'true', 
       url: '/questionsview/:id',
       templateUrl: 'template/questions/view.html',
       controller: 'questionsviewsCtrl',
-      authn: true
+      authn: false
     })
 
 /********************************** 法律咨询 **********************************/

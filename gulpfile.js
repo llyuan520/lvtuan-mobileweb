@@ -27,8 +27,7 @@ gulp.task('build-dev', function(cb) {
 });
  
 gulp.task('build-prod', function(cb) {
-  // runSequence('minifyDevJs', 'minifyLibJs', 'minifyAllJs', 'prod', 'templates', cb);
-  runSequence('minifyDevJs', 'minifyLibJs', 'prod', 'templates', cb);
+  runSequence('minifyDevJs', 'minifyLibJs', 'minifyAllJs', 'prod', 'templates', cb);
 });
 
 gulp.task('build', function(cb) {
@@ -54,7 +53,7 @@ gulp.task('sprites', function () {
     name: 'icons',
     style: './sprite.css',
     prefix: 'img',
-    margin: 10
+    margin: 17
     // ... other optional options 
     // for example if you want to generate scss instead of css 
     // processor: 'sass', // make sure you have installed sprity-sass 
