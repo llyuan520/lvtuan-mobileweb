@@ -1,8 +1,3 @@
-body,
-.ionic-body{
-	font-family: "微软雅黑";
-	color: #333333;
-}
 .fc-33{
 	color: #333333;
 }
@@ -97,3 +92,126 @@ hr{
 	width:10px;
 	height:10px;
 }
+
+
+
+.item-input-wrapper{
+	background-color: #FFFFFF;
+}
+.list{
+	margin-top: auto;
+	background-color: #EEEEEE;
+}
+.list .item{
+	padding-right: 16px;
+	margin: 1px 0px;
+	border: none;
+}
+.item-mb{
+	margin-bottom: 3px;
+}
+.card{
+	border: none;
+}
+.card .item:last-child, .list-inset .item:last-child {
+    margin-bottom: 1em;
+}
+.bg-ff{
+	background-color: #FFFFFF;
+}
+.top-search{
+	border: 1px solid #DDDDDD;
+	margin: 0px 14px 14px 14px;
+	height:3em;
+}
+.divider-h{
+	margin: 0px;
+	padding: 0px;
+	height: 14px;
+	background-color: #EEEEEE;
+	min-height: 14px;
+}
+.slct-title{
+	margin: 0px;
+	padding: 0px;
+	width:100%;
+	height:3em;
+	/*line-height: 3rem;*/
+	background-color: #FFFFFF;
+	vertical-align: middle;
+	text-align: center;
+}
+.slct-title select{
+	margin: 0px;
+	padding: 0px;
+	width:25%;
+	height:3em;
+	border: none;
+	text-align: center;
+	float: left;
+}
+.slct-title select option{
+	text-align: center;
+	width:100%;
+	font-size: 18px;
+}
+.slct-title .opt-bl{
+	border-left: 1px solid #DDDDDD;	
+}
+.dvd-title{
+	min-height: 2em;
+	color: #999999;
+	text-indent: 1em;
+	line-height: 2em;
+	background-color: #EEEEEE;
+}
+.dvd-title .sp-blue{
+	color: #32a9f2;
+}
+.item .img-header{
+	border: none;
+	border-radius: 3px;
+}
+.item .sp-name{
+	zoom:2;
+	/*font-weight: bold;*/
+	font-size: 0.6rem;
+    color: #01cbfb;
+}
+.item .sp-level{
+	margin: 0 .5em;
+    color: #01cbfb;
+	/*font-weight: bold;*/
+}
+.item .img-v{
+	margin: 0px;
+	padding: 0px;
+	width:1em;
+	height:1em;
+}
+.item .sp-bgset{
+	margin: 0 0.5em;
+	display: inline-block;
+	min-height: 1em;
+	background-position: left;
+	background-repeat: no-repeat;
+	text-align:right;
+	text-indent: 1em;
+	background-size: 1em 1em;
+	float: right;	
+}
+.item .sp-man{
+	background-image: url(../img/man-black.png);
+}
+.item .sp-thumb{
+	background-image: url(../img/thumb-black.png);
+}
+.item .sp-tip{
+	background-image: url(../img/tip.png);
+}
+
+
+
+
+
+

@@ -24,13 +24,6 @@ body,
 .item-input{
      padding: 6px 0 5px 0px;
 }
-.fc-33{
-    color: #333333;
-}
-.fc-ee{
-    color: #999999;
-    
-}
 .item h2.fc-ee,.error{
     font-size: 14px;
 }

@@ -211,8 +211,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       cache: 'true',
       views: {
           'group-attention': {
-              templateUrl: 'template/group/group-attention.html',
-              controller: 'groupAttentionCtrl'
+              templateUrl: 'template/group/group-attention.html'
           }
       },
       authn: true,
@@ -392,15 +391,6 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       controller: 'citypickeAllCtrl',
       authn: true
     })
-    
-    .state('becomelawyer', { //用户-认证为律师
-      url: '/becomelawyer',
-      cache: 'true',
-      templateUrl: 'template/center/become/become_lawyer.html',
-      controller: 'becomelawyerCtrl',
-      authn: true
-    })
-
     .state('valrealname', { //个人信息 - 修改姓名
       url: '/valrealname',
       cache: 'true',
