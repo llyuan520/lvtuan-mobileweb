@@ -4451,6 +4451,7 @@ lvtuanApp.controller("userpayallCtrl",function($scope,$http,$rootScope,listHelpe
 
 //用户律师 - 微信支付
 lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$ionicPopup,listHelper,authService,wxService,$ionicLoading){
+	$scope.user = {};
         $ionicLoading.show();
         $http.get('http://'+$rootScope.hostName+'/center/pay/question/'+$stateParams.id+'/view')
         .success(function(data) {
@@ -4470,10 +4471,10 @@ lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$io
             $scope.obj = val;
         }
             //微信支付
-        $scope.pay = function(){
+        $scope.pay = function(user){
             var currentUser = authService.getUser();
             console.info($scope.obj);
-            if($scope.obj == 'weixin'){
+            if(user.radioval == 'weixin'){
                 var attach_params = {};
                 attach_params.platform = 'wechat';
 	            attach_params.type = $stateParams.type;
@@ -4517,8 +4518,7 @@ lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$io
                         );
                 }
             });
-
-                }else{
+                }else if (user.radioval == 'qianbao') {
                         var confirmPopup = $ionicPopup.confirm({
                    title: '是否立即付款？',
                    cancelText: '取消',
@@ -4543,7 +4543,9 @@ lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$io
                      return false;
                    }
                  });
-                }
+                } else {
+			layer.show("请先选择支付方式");
+		}
         }
 
 })
