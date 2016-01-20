@@ -1,33 +1,35 @@
 <ion-view hide-tabs="true">
-	<ion-pane  class="web-body">
+	<ion-pane  class="web-body tariffset">
 		<form name="tariffsetForm" class="css-form" id="tariffsetForm" novalidate ng-controller="tariffsetCtrl">
-			<ion-header-bar class="bar bar-header bar-light">
+			<ion-header-bar class="bar bar-header bar-light headers">
 				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-href="#/becomenav"></a>
 				<h1 class="title">资费设置</h1>
 				<button ng-click="submit()" class="button button-clear button-positive" type="submit" ng-disabled="tariffsetForm.$invalid">保存</button>
 			</ion-header-bar>
 
-			<ion-content style="margin-bottom: 0;">
-				<div class="basekong20"></div>
-				<div class="list">
+			<ion-content>
+				<!-- <div class="basekong20"></div> -->
+				<div class="tariffset-list">
 					<div class="item item-input">
-						<div class="row">
-						  <div class="col col-center">图文咨询</div>
-						  <div class="col col-50 col-center">
+						<div class="row tariffset-content">
+						  <div class="col col-25 col-center">图文咨询</div>
+						  <div class="col col-60 col-center">
 						  	<input placeholder="请输入图文咨询价格" ng-model="textreplyfee" name="text_reply_fee" type="number" required ng-model-options="{debounce:2000}">
-						  	<span class="error" ng-show="tariffsetForm.text_reply_fee.$error.number">您输入的不是数字!</span>
+						  	<!-- <span class="error" ng-show="tariffsetForm.text_reply_fee.$error.number">您输入的不是数字!</span> -->
+						  	<!-- <strong></strong> -->
 						  </div>
-						  <div class="col col-center">元/次</div>
+						  <div class="col col-14 col-center">元/次</div>
 						</div>
 					</div>
 					<div class="item item-input">
-						<div class="row">
-						  <div class="col col-center">语音咨询</div>
-						  <div class="col col-50 col-center">
+						<div class="row tariffset-content">
+						  <div class="col col-25 col-center">语音咨询</div>
+						  <div class="col col-60 col-center">
 						  	<input placeholder="请输入语音咨询价格" ng-model="phonereplyfee" name="phone_reply_fee" type="number" required ng-model-options="{debounce:2000}">
-						  	<span class="error" ng-show="tariffsetForm.phone_reply_fee.$error.number">您输入的不是数字!</span>
+						  	<!-- <span class="error" ng-show="tariffsetForm.phone_reply_fee.$error.number">您输入的不是数字!</span> -->
+						  	<!-- <strong></strong> -->
 						  </div>
-						  <div class="col col-center">元/分钟</div>
+						  <div class="col col-14 col-center">元/次</div>
 						</div>
 					</div>
 				</div>

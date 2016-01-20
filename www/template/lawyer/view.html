@@ -1,13 +1,13 @@
 <ion-view hide-tabs="true">
 		<ion-pane  class="web-body">
-			<ion-header-bar class="bar bar-header bar-light" style="background-color:#2BA1E8;border-bottom:0px;z-index:0;">
-				<button class="button button-clear button-positive" ng-click="jumpGoBack()">  
-                    <i class="icon icon-left ion-ios-arrow-back" style="color:#ffffff;"></i>  
-                </button> 
-				<h1 class="title" style="color:#fff; height:44px;">律师个人主页</h1>
-			</ion-header-bar>
 			<ion-content class="web-body bottom_50">
 				<div class="list view-heard" style="background:url({{items.bg_img}});background-size:100% 100%;">
+					<ion-header-bar class="bar bar-header bar-light" style="background-color:rgba(0,0,0,0);border-bottom:0px;z-index:5;">
+						<button class="button button-clear button-positive" ng-click="jumpGoBack()">  
+		                    <i class="icon icon-left ion-ios-arrow-back" style="color:#ffffff;"></i>  
+		                </button> 
+						<!-- <h1 class="title" style="color:#fff; height:44px;"></h1> -->
+					</ion-header-bar>
 				    <a class="item item-thumbnail-left">
 				      <img class="avatar" ng-src="{{items.avatar}}" spinner-on-load style="left:10px;top:50px;">
 				      <h2 class="web-top10" style="color:#ffffff;">{{items.realname}}  <span class="web-font14">律师</span></h2>
@@ -26,8 +26,8 @@
 				    </a>
 				</div>
 				<div class="button-bar">
-				  <a class="button button-clear" style="line-height:20px;"><span style="color:#26A3F1;">{{items.question_count}}</span><br/>服务次数</a>
-				  <a class="button button-clear" style="line-height:20px;"><span style="color:#26A3F1;">{{items.score}}</span><br/>评分</a>
+				  <a class="button button-clear" style="line-height:20px;"><span style="color:#00cafa;">{{items.question_count}}</span><br/>服务次数</a>
+				  <a class="button button-clear" style="line-height:20px;"><span style="color:#00cafa;">{{items.score}}</span><br/>评分</a>
 				</div>
 
 
@@ -59,9 +59,9 @@
 		    <p><label ng-repeat="item in items.work_scope">{{item.value}} &nbsp;</label></p>
 	  	</li>
 		<li class="item">
-		    执业时间: <span style="color:#37A9F2;">{{items.practice_period}}年</span>
+		    执业时间: <span style="color:#00cafa;">{{items.practice_period}}年</span>
 		      <p class="web-fc666 web-font14">专业咨询服务单价</p>
-		      <p class="web-fc000">图文咨询{{items.text_reply_fee}}元/次; 电话咨询{{items.phone_reply_fee}}元/分钟</p>
+		      <p class="web-fc000">图文咨询 {{items.text_reply_fee}}元/次; 电话咨询 {{items.phone_reply_fee}}元/分钟</p>
 		  </li>
 		 <li class="item item-icon-right white-space-normal">
 		      <p class="web-fc666 web-font14">个人简历</p>
@@ -97,12 +97,12 @@
 <script type="text/ng-template" id="article.tpl.html">
     <ul class="list" ng-controller="viewarticleCtrl">
     	<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
-	  	<ion-list ng-repeat="article in articles">
-			<ion-item class="item-thumbnail-left">
-				<img ng-src="{{article.avatar}}"/>
-				<h2>{{article.title}}</h2>
-				<p>{{article.content}}</p>
-				<p>{{article.created_at}}</p>
+	  	<ion-list ng-repeat="item in items">
+			<ion-item class="item-thumbnail-left" ng-href="#/lawyer/article/view/{{item.id}}">
+				<img ng-src="{{item.avatar}}"/>
+				<h2>{{item.title}}</h2>
+				<p>{{item.content}}</p>
+				<p>{{item.created_at}}</p>
 			</ion-item>
 		</ion-list>
 		<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%" > </ion-infinite-scroll>

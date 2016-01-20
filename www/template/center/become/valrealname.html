@@ -1,0 +1,22 @@
+<ion-view hide-tabs="true">
+	<form name="niknameForm" class="css-form" id="niknameForm">
+		<ion-pane  class="web-body">
+			<ion-header-bar class="bar bar-header bar-light">
+				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back"  ng-href="#/info"></a>
+				<h1 class="title">昵称修改</h1>
+				<button ng-click="submit()" class="button button-clear button-positive" type="submit" ng-disabled="niknameForm.$invalid">保存</button>
+			</ion-header-bar>
+			<ion-content class="web-body web-top10">
+				<div class="list">
+					<div class="item item-input">
+						<div class="row">
+						  <div class="col col-99 col-center">
+						  	<input ng-model="user.nikname" name="nikname" type="text" ng-model-options="{debounce:2000}" required placeholder="请输入昵称">
+						  </div>
+						</div>
+					</div>
+				</div>
+			</ion-content>
+		</ion-pane>
+	</form>
+</ion-view>

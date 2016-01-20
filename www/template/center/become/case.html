@@ -1,52 +1,52 @@
 <ion-view hide-tabs="true">
 	<form name="caseForm" class="css-form" id="caseForm" ng-controller="caseCtrl">
 		<ion-pane  class="web-body">
-			<ion-header-bar class="bar bar-header bar-light">
+			<ion-header-bar class="bar bar-header bar-light headers">
 				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-href="#/becomenav"></a>
 				<h1 class="title">经历案例</h1>
 				<button ng-click="submit()" class="button button-clear button-positive" type="submit">保存</button>
 			</ion-header-bar>
 
 			<ion-content style="margin-bottom: 0;">
-				<div class="basekong20"></div>
+				<!-- <div class="basekong20"></div> -->
 				<div class="list">
-					<div class="item item-input"  style="margin:1px 0 0 0;">
+					<div class="item item-input case-list">
 						<div class="row">
 						  <div class="col">个人简介</div>
 						</div>
 					</div>
-					<div class="item item-input" style="margin:0;">
+					<div class="item item-input case-content">
 						<div class="row">
 						  <div class="col">
-						  	<textarea placeholder="请输入个人简介" ng-model="introduce" name="introduce" ng-minlength="" ng-maxlength="" ng-pattern="" ng-trim="">
+						  	<textarea placeholder="请简单对自己做下介绍" ng-model="introduce" name="introduce" ng-minlength="" ng-maxlength="" ng-pattern="" ng-trim="">
 							</textarea>
 						  </div>
 						</div>
 					</div>
-					<div class="basekong20"></div>
-					<div class="item item-input"  style="margin:1px 0 0 0;">
+					<!-- <div class="basekong20"></div> -->
+					<div class="item item-input case-list">
 						<div class="row">
 						  <div class="col">执业经历</div>
 						</div>
 					</div>
-					<div class="item item-input" style="margin:0;">
+					<div class="item item-input case-content">
 						<div class="row">
 						  <div class="col">
-						  	<textarea placeholder="请输入执业经历" ng-model="experience" name="experience" ng-minlength="" ng-maxlength="" ng-pattern="" ng-trim="">
+						  	<textarea placeholder="请简单描述下执业经历" ng-model="experience" name="experience" ng-minlength="" ng-maxlength="" ng-pattern="" ng-trim="">
 							</textarea>
 						  </div>
 						</div>
 					</div>
-					<div class="basekong20"></div>
-					<div class="item item-input"  style="margin:1px 0 0 0;">
+					<!-- <div class="basekong20"></div> -->
+					<div class="item item-input case-list">
 						<div class="row">
 						  <div class="col">成功案例</div>
 						</div>
 					</div>
-					<div class="item item-input" style="margin:0;">
+					<div class="item item-input case-content">
 						<div class="row">
 						  <div class="col">
-						  	<textarea placeholder="请输入成功案例" ng-model="law_cases" name="law_cases" ng-minlength="" ng-maxlength="" ng-pattern=""  ng-trim="">
+						  	<textarea placeholder="请简单描述下成功案例" ng-model="law_cases" name="law_cases" ng-minlength="" ng-maxlength="" ng-pattern=""  ng-trim="">
 							</textarea>
 						  </div>
 						</div>

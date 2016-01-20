@@ -18,7 +18,11 @@ body,
     background-color: #eee;
 }
 .content.bottom_50,.pane .bottom_50,.bottom_50{
+    top: 0;
     margin-bottom: 50px;
+}
+.item-input{
+     padding: 6px 0 5px 0px;
 }
 .fc-33{
     color: #333333;
@@ -182,11 +186,11 @@ a{
 }
 a:link{
     text-decoration: none;
-    color: #32a9f2;
+    color: #00cafa;
 }
 a:visited{
     text-decoration: none;
-    color: #32a9f2;
+    color: #00cafa;
 }
 a:active{
     text-decoration: none;
@@ -302,8 +306,8 @@ a:hover{
 .ion-chevron-down:before{margin-top: 5px;}
 .tab-item.tab-item-active, .tab-item.active, .tab-item.activated {
   opacity: 1;
-  color:#21a0f1;
-  border-bottom: 2px solid #21a0f1;
+  color:#00cafa;
+  border-bottom: 2px solid #00cafa;
 }
 .item .reply{  background-color: #EEEEEE;
   padding: 2px 10px;
@@ -781,7 +785,7 @@ input::-webkit-outer-spin-button {
 .log-content{width: 90%;margin: 0 auto;}
 .log-content .login,.log-but,.log-input-bg{overflow: hidden;}
 .log-but{width: 100%;}
-.login .ion-wap input,.ion-row2 button,.button.button-positive.activated, .button.button-positive.active{
+.login .ion-wap input,.ion-row2 button{
     background-color: rgba(225,225,225,0); color: #fff;width: 100%;
     border-color: #fff;
     box-shadow: inset 0 1px 4px rgba(225,225,225,.1);
@@ -860,7 +864,7 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
         text-align: center;
         margin-bottom: 0;
         background-color: #FFFFFF;
-        color: #333
+        color: #333;
     }
 
     .log-header{padding-top: 15%;}
@@ -1010,7 +1014,7 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
     height: 161px;
     border-top: 0px;
     padding: 0px;
-    margin: 0px 0 20px 0;
+    margin: 0px 0 13px 0;
 }
 .view-heard .item-thumbnail-left {
     background: none;
@@ -1031,10 +1035,17 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
     font-size:1.6rem;
 }
 
+.nav-set a span {
+    display: block;
+    position: absolute;
+    bottom: 0.1rem;
+    width: 100%;
+}
 .grade-a .nav-set {
     padding-top: 0;
 }
 .grade-a .nav-set .tab-item {
+    position: relative;
     font-size: 0.8rem;
 }
 .tab-item .home {
@@ -1109,44 +1120,60 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
         height: 3.6rem;
     }
     .tab-item .home {
+        width: 39px;
         height: 2.4rem;
         background: url("../img/index.png") center center no-repeat;
-        background-size: 32% 73%;
+        /*background-size: 32% 73%;*/
+        background-size: 75%;
     }
     .nav-set a.active i.home {
+        width: 39px;
         height: 2.4rem;
         background: url("../img/indexs.png") center center no-repeat;
-        background-size: 32% 73%;
+        /*background-size: 32% 73%;*/
+        background-size: 75%;
     }
     .tab-item .group {
+        width: 39px;
         height: 2.4rem;
         background: url("../img/circle.png") center center no-repeat;
-        background-size: 32% 75%;
+        /*background-size: 32% 75%;*/
+        background-size: 75%;
     }
     .nav-set a.active i.group {
+        width: 39px;
         height: 2.4rem;
         background: url("../img/circles.png") center center no-repeat;
-        background-size: 32% 75%;
+        /*background-size: 32% 75%;*/
+        background-size: 75%;
     }
     .tab-item .knowledge {
+        width: 39px;
         height: 2.4rem;
         background: url("../img/knowledge.png") center center no-repeat;
-        background-size: 30% 77%;
+        /*background-size: 30% 77%;*/
+        background-size: 75%;
     }
     .nav-set a.active i.knowledge {
+        width: 39px;
         height: 2.4rem;
         background: url("../img/knowledges.png") center center no-repeat;
-        background-size: 30% 77%;
+        /*background-size: 30% 77%;*/
+        background-size: 75%;
     }
     .tab-item .center {
+        width: 39px;
         height: 2.4rem;
         background: url("../img/my.png") center center no-repeat;
-        background-size: 31% 80%;
+        /*background-size: 31% 80%;*/
+        background-size: 75%;
     }
     .nav-set a.active i.center {
+        width: 39px;
         height: 2.4rem;
         background: url("../img/mys.png") center center no-repeat;
-        background-size: 31% 80%;
+        /*background-size: 31% 80%;*/
+        background-size: 75%;
     }
 }
 
@@ -1154,7 +1181,7 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
     color: #00cafa;
 }
 .nav-set .tab-item {
-    color: #333;
+    color: #666;
 }
 
 .emails {
@@ -1163,7 +1190,7 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
     background-size: 90% 26%;
 }
 
-.css-form  input, select{border:1px solid #ccc;}
+
 .item .counts {
     padding-right: 8%;
     font-size: 1rem;
@@ -1174,10 +1201,6 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
     margin-bottom: 0;
 }
 
-.css-form  input, select{
-    border:1px solid #ccc;
-    padding-left: 3%;
-}
 
 .televise-praise, .televise-comments, .televise-share {
     float: right;
@@ -1384,6 +1407,9 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
     background: url("../img/my-article.png") 3% center no-repeat;
     background-size: 7%;
 }
+.header-information a label {
+    color: #00cafa;
+}
 
 /*登录头部返回键设置*/
 .pane .login-header {
@@ -1395,11 +1421,12 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
 .login-header a {
     position: absolute;
     top: 12%;
-    right: 3%;
-    width: 10%;
+    left: 3%;
+    width: 15%;
     height: 2.3rem;
-    background: url("../img/white-index.png") center center no-repeat;
     background-size: 90%;
+    color: #fff;
+    line-height: 3rem;
 }
 
 /*问律师页面样式修改*/
@@ -1411,10 +1438,25 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+.questions-type select {
+    width: 100%;
+    height: 50px;
+    border: none;
+    line-height: 50px;
+}
+.questions-site .rig {
+    width: 92px;
+}
+.questions-site .rig .icon-right {
+    float: right;
+    padding: 0 20px;
+    font-size: 4em;
+    color: #ccc;
+}
 
 /*律师个人主页*/
 .pane .tabs .pic-consultation, .pane .tabs .phone-consultation {
-    color: #21a0f1;
+    color: #00cafa;
 }
 
 /*头部样式*/
@@ -1432,7 +1474,15 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
     display: block;
     height: 44px;
     line-height: 44px;
-    color: #32a9f2;
+    color: #00cafa;
+}
+.headers.bar-light .title {
+    font-family: 'Microsoft YaHei';
+    font-size: 1.4rem;
+}
+.headers.bar-light button.button-clear {
+    font-family: 'Microsoft YaHei';
+    font-size: 1.2rem;
 }
 .center-list .my-consultation {
     background: url("../img/my-consultation.png") 3% center no-repeat;
@@ -1469,4 +1519,322 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
 .center-list .my-article {
     background: url("../img/my-article.png") 3% center no-repeat;
     background-size: 7%;
+}
+
+/*认证律师*/
+.becomenav-content, .becomenav-content .scroll {
+    margin-top: 1px;
+    background-color: #fff;
+}
+.scroll .list .becomenav-list {
+    width: 94%;
+    height: 3.8rem;
+    padding: 0 0 0 11%;
+    margin: 0 3%;
+    border-bottom: 1px #eee solid;
+}
+.list .becomenav-list:nth-child(1) {
+    background: url("../img/practitioners.png") 1% center no-repeat;
+    background-size: 8%;
+}
+.list .becomenav-list:nth-child(2) {
+    background: url("../img/name-authentication.png") 1% center no-repeat;
+    background-size: 8%;
+}
+.list .becomenav-list:nth-child(3) {
+    background: url("../img/tariff-set.png") 1% center no-repeat;
+    background-size: 8%;
+}
+.list .becomenav-list:nth-child(4) {
+    background: url("../img/good-field.png") 1% center no-repeat;
+    background-size: 8%;
+}
+.list .becomenav-list:nth-child(5) {
+    background: url("../img/case.png") 1% center no-repeat;
+    background-size: 8%;
+}
+.submit-examine {
+    margin: 1.4rem 0;
+}
+.submit-examine button {
+    display: block;
+    width: 94%;
+    height: 3.26rem;
+    margin: 0 auto;
+    border: none;
+    background-color: #00cafa;
+    color: #fff;
+    font-size: 1.4rem;
+    border-radius: 3px;
+}
+.becomenav-list a {
+    font-size: 1.2rem;
+    color: #333;
+}
+.becomenav-list .col {
+    padding: 0;
+}
+.becomenav-list .col .item-checkbox {
+    width: 100%;
+    height: 3.8rem;
+    padding: 0;
+    margin: 0;
+}
+.becomenav-list .col .checkbox {
+    position: absolute;
+    top: 36%;
+    right: 0;
+    height: 3.8rem;
+    padding: 0;
+}
+.becomenav-list .checkbox input {
+    float: right;
+    width: 1.74rem;
+    height: 1.74rem;
+    margin-top: 20%;
+}
+.not-selected {
+    float: right;
+    width: 60%;
+    height: 3.8rem;
+    background: url("../img/button-gray.png") right center no-repeat;
+    background-size: 43%;
+}
+.selected {
+    float: right;
+    width: 60%;
+    height: 3.8rem;
+    background: url("../img/button-blue.png") right center no-repeat;
+    background-size: 43%;
+}
+
+/*经历案例*/
+.scroll .list .case-list {
+    height: 4.1rem;
+    margin: 0px 0 0 0;
+    background-color: #eee;
+}
+.scroll .list .case-content {
+    margin: 0;
+    padding-top: 0;
+}
+.list .case-content .row {
+    padding-top: 0;
+}
+.case-content .row textarea {
+    height: 6rem;
+}
+
+/*擅长领域*/
+.pane .field-content {
+    margin-bottom: 0;
+    padding-top: 2px;
+    background-color: #fff;
+}
+.field-content .scroll {
+    margin-top: 3px;
+}
+.field-content .list {
+    padding: 0;
+    background-color: #fff;
+}
+.field-content .list:nth-child(1) {
+    margin-bottom: 1.6rem;
+}
+.field-content .list .item {
+    padding: 0 0 0.8rem 0;
+    margin: 0;
+}
+.field-content .item .errer {
+    padding: 0px;
+    margin-left: 5%;
+    font-family: 'Microsoft YaHei';
+    font-size: 1.2rem;
+}
+.field-content .item span {
+    margin-left: 6%;
+    margin-right: 6%;
+}
+.field-content .list span {
+    width: 29%;
+    margin: 0.8rem 1% 0rem;
+    background-color: #eee;
+    border-radius: 3px;
+    text-align: center;
+}
+.field-content .list label {
+    font-size: 1.2rem;
+    color: #666;
+}
+.field-content .list span.active {
+    background-color: #00cafa;
+}
+.field-content span.active label {
+    color: #fff;
+}
+.field-content .item span:nth-child(2) {
+    margin-left: 4.4%;
+}
+/*.tariffset-list {
+    padding: 1.6rem 5% 0;
+    background-color: #fff;
+}
+.tariffset-content {
+    float: left;
+    width: 58%;
+}
+.tariffset-content input {
+    width: 94%;
+    padding-left: 6%;
+    border: none;
+    font-family: 'Microsoft YaHei';
+    font-size: 1.2rem;
+}
+.tariffset-content div {
+    width: 94%;
+    height: 0.8rem;
+    margin-top: -0.8rem;
+    border: 1px #eee solid;
+    border-top: none;
+}
+.tariffset-list span {
+    height: 2.6rem;
+    font-family: 'Microsoft YaHei';
+    font-size: 1.2rem;
+    line-height: 2.6rem;
+}
+.tariffset-list span:nth-child(1) {
+    float: left;
+    margin-right: 3%;
+    color: #333;
+}
+.tariffset-list span:nth-child(3) {
+    float: right;
+    color: #666;
+}*/
+
+.verified .has-header, .tariffset .has-header, .practitioners .has-header {
+    margin-bottom: 0;
+    background-color: #fff;
+}
+.tariffset-list, .verified-list, .practitioners-list {
+    margin-top: 3px;
+}
+/*.tariffset-list .item.item-input, 
+.verified-list .item.item-input, 
+.practitioners-list .item.item-input {
+    border: none;
+}*/
+.tariffset-content div:nth-child(1) {
+    text-align: right;
+    font-family: 'Microsoft YaHei', Arial;
+    color: #333;
+}
+.tariffset-content div:nth-child(3) {
+    padding-right: 0;
+    font-family: 'Microsoft YaHei', Arial;
+    color: #666;
+}
+.col-14 {
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 14%;
+    -moz-box-flex: 0;
+    -moz-flex: 0 0 14%;
+    -ms-flex: 0 0 14%;
+    flex: 0 0 14%;
+    max-width: 14%;
+}
+.tariffset-content .col input, .verified-name input {
+    padding-left: 8%;
+    border: none;
+    font-family: 'Microsoft YaHei', Arial;
+    font-size: 1.2rem;
+}
+.verified-name input {
+    padding-right: 8%;
+}
+/*.tariffset-content .col strong, .verified-name strong {
+    display: block;
+    height: 0.8rem;
+    margin-top: -0.8rem;
+    border: 1px #eee solid;
+    border-top: none;
+}
+.verified-name strong {
+    border-right: none;
+}*/
+.verified-list .verified-name {
+    padding-right: 0;
+}
+.verified-name .col-center, .verified-pic .col-center div, .tariffset-content div {
+    font-size: 1.32rem;
+}
+.verified-name div:nth-child(2) {
+    padding-right: 0;
+}
+.verified-pic .col-center span {
+    font-size: 1.08rem;
+    color: #999;
+}
+.verified-pic .col-60 .button {
+    border-color: #999;
+    color: #999;
+}
+.practitioners-list .item-input .input-label {
+    width: 28%;
+    padding-left: 4%;
+    line-height: 1.7rem;
+    font-size: 1.32rem;
+}
+.practitioners-list .item-input input {
+    height: 2.7rem;
+    padding: 0 8% 0.2rem 3%;
+    border: none;
+    line-height: 1.7rem;
+    font-size: 1.2rem;
+}
+/*.verified .has-header .scroll {
+    margin-top: 2px;
+    background-color: #fff;
+}*/
+
+/*法律文书*/
+.document-list .list {
+    padding: 0;
+}
+
+/*圈子*/
+.group-title {
+    display: inline-block;
+    overflow: hidden;
+    width: 73%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/*我的订单模块设置*/
+.all-button .col button {
+    /*float: right;*/
+    display: inline-block;
+    text-align: center;
+    font-size: 0.8rem;
+}
+.all-button .all-replied button, 
+.all-button .all-complete button:nth-child(1) {
+    width: 39%;
+}
+.all-button .all-new button, 
+.all-button .all-complete button:nth-child(2) {
+    width: 23%;
+}
+.button.button-positive.activated, .button.button-positive.active{
+    background-color: #00a8ff; 
+    color: #fff;
+    border-color: #00a8ff;
+    box-shadow: inset 0 1px 4px #00a8ff;
+}
+
+/*去除高亮*/
+a,button,input{
+    -webkit-tap-highlight-color:rgba(255,255,255,0);
 }

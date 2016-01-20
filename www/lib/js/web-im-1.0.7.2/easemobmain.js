@@ -155,7 +155,7 @@
         $('#loginmodal').modal('hide');
     };
     var showWaitLoginedUI = function() {
-        $('#waitLoginmodal').modal('show');
+        $('#waitLoginmodal').modal('hide');
     };
     var hiddenWaitLoginedUI = function() {
         $('#waitLoginmodal').modal('hide');

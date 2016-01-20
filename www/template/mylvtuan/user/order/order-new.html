@@ -8,12 +8,12 @@
 				<span class="sp-r fc-33" style="width: 50%;">{{item.created_at}}</span>
 	        </ion-item>
 	        <ion-item class="item itemdata">
-	        	<div class="row">
+	        	<div class="row all-button">
 	        		<div class="col">
 	        			<h2 class="fc-ee">{{item.post_type}}</h2>
 		        	</div>
-	  				<div class="col" style="text-align: right;">
-	  					<button class="button button-small button-positive">取消</button>
+	  				<div class="col all-new" style="text-align: right;">
+                        <button ng-if="item.status_code == 'new'" class="button button-small button-positive" ng-click="cancel(item.id,$index)">取消</button>
 	  				</div>
 	        	</div>
 	        </ion-item>

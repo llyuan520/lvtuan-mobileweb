@@ -1,0 +1,35 @@
+<ion-view hide-tabs="true">
+	<form name="phoneForm" class="css-form" id="phoneForm">
+		<ion-pane  class="web-body">
+			<ion-header-bar class="bar bar-header bar-light">
+				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back"  ng-href="#/info"></a>
+				<h1 class="title">手机修改</h1>
+				<button ng-click="submit()" class="button button-clear button-positive" type="submit" ng-disabled="phoneForm.$invalid">保存</button>
+			</ion-header-bar>
+			<ion-content class="web-body web-top10">
+				<div class="list">
+					<div class="item item-input">
+						<div class="row">
+						  <div class="col col-99 col-center">
+						  	<input ng-model="user.phone" name="phone" type="text" ng-pattern="/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/" ng-model-options="{debounce:2000}" required>
+						  	<span class="error" ng-show="(phoneForm.phone.$invalid && !phoneForm.phone.$pristine)">
+						     请输入有效的电话号码！
+						  	</span>
+						  </div>
+						</div>
+					</div>
+					<div class="item item-input">
+						<div class="row">
+							  <div class="col col-75 col-center">
+							  		<input type="text" ng-model="user.phonecode" name="phonecode" placeholder="请输入验证码" required>
+							  </div>
+							  <div class="col col-center">
+									<button class="button button-small button-positive" ng-disabled="!user.phone" ng-click="phonecode(user.phone)">获取验证码</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</ion-content>
+		</ion-pane>
+	</form>
+</ion-view>

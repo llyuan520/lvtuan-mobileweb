@@ -113,8 +113,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       url: '/index',
       cache: 'true',
       templateUrl: 'template/index_tpl.html',
-      controller: 'indexCtrl',
-      activetab: 'index'
+      controller: 'indexCtrl'
     })
 
     .state('mylvteam', { //我的律师团
@@ -180,8 +179,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       templateUrl: 'template/group/group.html',
       controller: 'groupCtrl',
       authn: true,
-      authz: 'lawyer',
-      activetab: 'group'
+      authz: 'lawyer'
     })
 
     .state('group.list', { //圈子 - 列表
@@ -273,8 +271,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
     .state('knowledge', { //知识
       url: '/knowledge',
       /*abstract: true,*/
-      templateUrl: 'template/knowledge/knowledge.html',
-      activetab: 'knowledge'
+      templateUrl: 'template/knowledge/knowledge.html'
     }) 
 
    .state('knowledge.knowledges', { //法规
@@ -327,8 +324,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       cache: 'true',
       templateUrl: 'template/center/center.html',
       controller: 'centerCtrl',
-      authn: true,
-      activetab: 'center'
+      authn: true
     })
     .state('info', { //用户-个人资料
       url: '/info',
@@ -404,6 +400,30 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       controller: 'becomelawyerCtrl',
       authn: true
     })
+
+    .state('valrealname', { //个人信息 - 修改姓名
+      url: '/valrealname',
+      cache: 'true',
+      templateUrl: 'template/center/become/valrealname.html',
+      controller: 'valrealnameCtrl',
+      authn: true
+    })
+    .state('valphone', { //个人信息 - 修改手机
+      url: '/valphone',
+      cache: 'true',
+      templateUrl: 'template/center/become/valphone.html',
+      controller: 'valphoneCtrl',
+      authn: true
+    })
+    .state('valemail', { //个人信息 - 修改邮箱
+      url: '/valemail',
+      cache: 'true',
+      templateUrl: 'template/center/become/valemail.html',
+      controller: 'valemailCtrl',
+      authn: true
+    })
+
+
 
 /*———————————————————————————— 律师的个人中心 ————————————————————————————*/
     .state('followed_lawyer', { //律师-我的关注
@@ -969,7 +989,6 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
     .state('pay', { //首页 - 微信支付
       url: '/pay/:id?type',
       templateUrl: 'template/pay.html',
-      controller: 'payCtrl',
       authn: true
     })
     .state('citypicker', { //首页 - 微信支付

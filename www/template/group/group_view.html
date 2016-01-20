@@ -1,4 +1,12 @@
-
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>律团</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+  </head>
+  <body>
     <link href="/lib/ionic/css/ionic.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
@@ -18,6 +26,7 @@
 		var curChatUserId =	"group--"+easemob_id;
 		var defaultUserId =	"group--"+easemob_id;
 		var curRoomId = easemob_id;
+		console.log(easemob_id,curChatUserId,defaultUserId,curRoomId);
 	</script>
 	<script src="lib/js/web-im-1.0.7.2/webin.js"></script>
 	<script src="js/module/adaptive.js"></script>
@@ -62,7 +71,7 @@
 				<div style="clear:both;width:100%;height:20px;"></div> -->
 
 				<div class="webin">
-					<div id="loginmodal" class="modal in" role="dialog" aria-hidden="true" data-backdrop="static">
+					<div id="loginmodal" class="modal in hide" role="dialog" aria-hidden="true" data-backdrop="static">
 				        <div class="modal-header">
 				            <h3>用户登录</h3>
 				        </div>
@@ -117,7 +126,7 @@
 				    </div>
 
 				    <div id="waitLoginmodal" class="modal hide" data-backdrop="static">
-				        <img ng-src="lib/js/web-im-1.0.7.2/img/waitting.gif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;正在努力加载中...
+				        <img ng-src="lib/js/web-im-1.0.7.2/img/loading.gif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;正在努力加载中...
 				    </div>
 				    <div class="content hide" id="content">
 				        <div class="leftcontact hide" id="leftcontact">
@@ -345,3 +354,5 @@
 			</div>
 	</ion-pane>
 </ion-view>
+  </body>
+</html>
