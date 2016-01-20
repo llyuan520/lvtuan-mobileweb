@@ -1336,7 +1336,7 @@ lvtuanApp.controller("infoCtrl",function($scope,$http,$rootScope,$timeout,$ionic
 		var timestamp=Math.round(new Date().getTime()/1000);
 		var url = null;
 		$ionicLoading.show();
-		if(currentUser.user_group_id == 1 || currentUser.user_group_id == 2 && currentUser.is_verified == 0){
+		if(currentUser.status == 1 || currentUser.status == 2){
 			//普通用户个人信息
 			url = 'http://'+$rootScope.hostName+'/center/customer/info?ts='+timestamp;
 			getDate(url);
@@ -1419,7 +1419,7 @@ lvtuanApp.controller("valrealnameCtrl",function($scope,$http,$rootScope,$ionicLo
     	$ionicLoading.show();
     	var params = layer.getParams("#niknameForm");
     	var url = null;
-    	if(currentUser.user_group_id == 1 || currentUser.user_group_id == 2 && currentUser.is_verified == 0){
+    	if(currentUser.status == 1 || currentUser.status == 2){
     		url = 'http://'+$rootScope.hostName+'/center/customer/info?ts='+timestamp;
     	}else{
 			url = 'http://'+$rootScope.hostName+'/center/lawyer/info?ts='+timestamp;
@@ -1954,7 +1954,7 @@ lvtuanApp.controller("becomelawyerCtrl",function($scope,$http,$rootScope,$ionicA
 				];
 
 	var currentUser = authService.getUser();
-	if(currentUser.user_group_id == 2 && currentUser.is_verified == 1 ){
+	if(currentUser.status == 3){
 		//律师个人信息
 		$http.get('http://'+$rootScope.hostName+'/center/lawyer/info')
 			.success(function(data) {
@@ -2681,7 +2681,7 @@ lvtuanApp.controller("viewCtrl",function($scope,$http,$rootScope,$stateParams,ht
    	sessionStorage.setItem("index", index);
 
    	var currentUser = authService.getUser();
-	if(currentUser.user_group_id == 1 || currentUser.user_group_id == 2 && currentUser.is_verified == 0){
+	if(currentUser.status == 1 || currentUser.status == 2){
 		//普通用户个人信息
 		location.href='#/graphic';
 	}else{
@@ -4274,7 +4274,7 @@ lvtuanApp.controller("userwalletCtrl",function($scope,$http,$rootScope,authServi
 		var timestamp=Math.round(new Date().getTime()/1000);
 		$scope.items = {};
 		$ionicLoading.show();
-		if(currentUser.user_group_id == 1 || currentUser.user_group_id == 2 && currentUser.is_verified == 0){
+		if(currentUser.status == 1 || currentUser.status == 2){
 			$http.get('http://'+$rootScope.hostName+'/center/customer/wallet?ts='+timestamp)
 				.success(function(data) {
 					if (data && data.data) {

@@ -26,7 +26,7 @@ listModule.factory('listHelper', function($http, $rootScope, httpWrapper) {
 			var timestamp=Math.round(new Date().getTime()/1000);
 			// 如果url里面已经有params，预先处理一下
 			var urls = url.split('?');
-			var params = 'rows_per_page='+rows_per_page+'&page='+page+'?ts='+timestamp;
+			var params = 'rows_per_page='+rows_per_page+'&page='+page+'&ts='+timestamp;
 			if (urls.length == 2) {
 				url = urls[0];
 				params = urls[1]+'&'+params;

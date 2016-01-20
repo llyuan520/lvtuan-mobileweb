@@ -2,8 +2,8 @@
 		<ion-pane  class="web-body">
 			<ion-header-bar class="bar bar-header bar-light headers">
 				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-href="#/center"></a>
-				<h1 ng-if="currentUser.user_group_id == 1 || currentUser.user_group_id == 2 && currentUser.is_verified == 0" class="title">认证律师</h1>
-				<h1 ng-if="currentUser.user_group_id == 2 && currentUser.is_verified == 1" class="title">修改认证律师</h1>
+				<h1 ng-if="currentUser.status == 1 || currentUser.status == 2" class="title">认证律师</h1>
+				<h1 ng-if="currentUser.status == 3" class="title">修改认证律师</h1>
 			</ion-header-bar>
 
 			<ion-content class="web-body web-top10 becomenav-content">
