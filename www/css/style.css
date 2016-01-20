@@ -78,7 +78,6 @@ body,
 .right-buttons img,
 .left-buttons img{
     height:2em;
-    /*width:2em;*/
     vertical-align: middle;
 }
 
@@ -111,31 +110,22 @@ body,
     background-color: #FFFFFF;
     overflow: hidden;
 }
-.subtitle .subtitle-a{
-    min-width: 180px;
-    width:50%;
-    margin: 0px;
-    padding: 0px;
+.subtitle .subtitle-a, .subtitle .subtitle-b {
     float: left;
-    background-image: url(../img/14.png);
-    background-repeat: no-repeat;
-    background-position: 1em center;
-    background-size: 3em 3em;
+    width:50%;
+    min-width: 180px;
+    padding: 0px;
+    margin: 0px;
     text-align: center;
     text-indent: 4em;
 }
-.subtitle .subtitle-b{
-    min-width: 180px;
-    width:50%;
-    margin: 0px;
-    padding: 0px;
-    float: left;
-    background-image:url(../img/15.png);
-    background-repeat: no-repeat;
-    background-position: 1em center;
+.subtitle .subtitle-a{
+    background: url(../img/14.png) 1em center no-repeat;
     background-size: 3em 3em;
-    text-align: center;
-    text-indent: 4em;
+}
+.subtitle .subtitle-b{
+    background:url(../img/15.png) 1em center no-repeat;
+    background-size: 3em 3em;
 }
 .clear{
     clear:both;
@@ -148,9 +138,9 @@ body,
 }
 .clearfix { *zoom:1; }
 .nav-swap{
-    margin: 10px auto;
+    width: 100%;
     padding: 0px;
-    width:100%;
+    margin: 10px auto;
     background-color: #FFFFFF;
 }
 .nav-swap .n-swapmain{
@@ -605,7 +595,6 @@ img.avatar{
     margin: 0 2px;
     padding: 0px;
     text-align: center;
-    /*border-bottom: 2px solid #32a9f2;*/
     border-bottom: 2px solid #EEEEEE;
     float: left;
     line-height: 2em;
@@ -1668,43 +1657,6 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
 .field-content .item span:nth-child(2) {
     margin-left: 4.4%;
 }
-/*.tariffset-list {
-    padding: 1.6rem 5% 0;
-    background-color: #fff;
-}
-.tariffset-content {
-    float: left;
-    width: 58%;
-}
-.tariffset-content input {
-    width: 94%;
-    padding-left: 6%;
-    border: none;
-    font-family: 'Microsoft YaHei';
-    font-size: 1.2rem;
-}
-.tariffset-content div {
-    width: 94%;
-    height: 0.8rem;
-    margin-top: -0.8rem;
-    border: 1px #eee solid;
-    border-top: none;
-}
-.tariffset-list span {
-    height: 2.6rem;
-    font-family: 'Microsoft YaHei';
-    font-size: 1.2rem;
-    line-height: 2.6rem;
-}
-.tariffset-list span:nth-child(1) {
-    float: left;
-    margin-right: 3%;
-    color: #333;
-}
-.tariffset-list span:nth-child(3) {
-    float: right;
-    color: #666;
-}*/
 
 .verified .has-header, .tariffset .has-header, .practitioners .has-header {
     margin-bottom: 0;
@@ -1713,11 +1665,7 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
 .tariffset-list, .verified-list, .practitioners-list {
     margin-top: 3px;
 }
-/*.tariffset-list .item.item-input, 
-.verified-list .item.item-input, 
-.practitioners-list .item.item-input {
-    border: none;
-}*/
+
 .tariffset-content div:nth-child(1) {
     text-align: right;
     font-family: 'Microsoft YaHei', Arial;
@@ -1746,16 +1694,7 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
 .verified-name input {
     padding-right: 8%;
 }
-/*.tariffset-content .col strong, .verified-name strong {
-    display: block;
-    height: 0.8rem;
-    margin-top: -0.8rem;
-    border: 1px #eee solid;
-    border-top: none;
-}
-.verified-name strong {
-    border-right: none;
-}*/
+
 .verified-list .verified-name {
     padding-right: 0;
 }
@@ -1786,10 +1725,7 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
     line-height: 1.7rem;
     font-size: 1.2rem;
 }
-/*.verified .has-header .scroll {
-    margin-top: 2px;
-    background-color: #fff;
-}*/
+
 
 /*法律文书*/
 .document-list .list {
@@ -1807,7 +1743,6 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
 
 /*我的订单模块设置*/
 .all-button .col button {
-    /*float: right;*/
     display: inline-block;
     text-align: center;
     font-size: 0.8rem;
@@ -1821,7 +1756,7 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
     width: 23%;
 }
 .button.button-positive.activated, .button.button-positive.active{
-    background-color: #00a8ff; 
+    background-color: #00a8ff;
     color: #fff;
     border-color: #00a8ff;
     box-shadow: inset 0 1px 4px #00a8ff;
