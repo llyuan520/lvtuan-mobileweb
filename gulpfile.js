@@ -27,7 +27,8 @@ gulp.task('build-dev', function(cb) {
 });
  
 gulp.task('build-prod', function(cb) {
-  runSequence('minifyDevJs', 'minifyLibJs', 'minifyAllJs', 'prod', 'templates', cb);
+  // runSequence('minifyDevJs', 'minifyLibJs', 'minifyAllJs', 'prod', 'templates', cb);
+  runSequence('minifyDevJs', 'minifyLibJs', 'prod', 'templates', cb);
 });
 
 gulp.task('build', function(cb) {
