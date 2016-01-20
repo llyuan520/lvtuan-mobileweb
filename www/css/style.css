@@ -1438,6 +1438,21 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+.questions-type select {
+    width: 100%;
+    height: 50px;
+    border: none;
+    line-height: 50px;
+}
+.questions-site .rig {
+    width: 92px;
+}
+.questions-site .rig .icon-right {
+    float: right;
+    padding: 0 20px;
+    font-size: 4em;
+    color: #ccc;
+}
 
 /*律师个人主页*/
 .pane .tabs .pic-consultation, .pane .tabs .phone-consultation {
