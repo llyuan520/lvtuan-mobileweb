@@ -34,7 +34,6 @@ lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $loca
 			location.href=url+$scope.id;
 		}
 		location.href=url;
-	    window.location.reload();
 	}
 
 	$scope.jumpGo = function(url){
@@ -45,7 +44,6 @@ lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $loca
 	$scope.jumpGoBack = function(){
 		//$ionicHistory.goBack();
 		window.history.back();
-		//window.location.reload();
 	}
 
 	var $body = $('body');    
@@ -282,7 +280,6 @@ lvtuanApp.controller("resetpwdCtrl",function($scope,$http,$rootScope){
 	           layer.show("修改成功！");
 	           $scope.user = {}; //清空数据
 	           location.href='#/login';
-		        window.location.reload();
 	        });
 			return true;
 		}
@@ -344,7 +341,6 @@ lvtuanApp.controller("upwdCtrl",function($scope,$http,$rootScope){
 	           sessionStorage.removeItem("uid");
 	           $scope.user = {}; //清空数据
 	           location.href='#/login';
-		        window.location.reload();
 	        });
 		}
 
@@ -369,7 +365,6 @@ lvtuanApp.controller("groupCtrl",function($scope,$http,$state,$rootScope){
 	$scope.jumplogin = function(){
 		console.info($rootScope.is_lawyer);
     	location.href='#/login';
-		window.location.reload();
 	}
 
 })
@@ -544,7 +539,6 @@ lvtuanApp.controller("groupviewCtrl",function($scope,$http,$state,$rootScope,$st
 	
 	$scope.site = function(){
 		location.href='#/group/site/'+$scope.id;
-	    window.location.reload();
 	}
 })
 
@@ -599,7 +593,6 @@ lvtuanApp.controller("groupsiteCtrl",function($scope,$http,$state,$rootScope,$st
 			        }).success(function(data) {
 			        	layer.show(data.data);
 			        	location.href='#/group/list';
-			    		window.location.reload();
 					})
                }else{
                  return false;
@@ -672,7 +665,6 @@ lvtuanApp.controller("groupsiteCtrl",function($scope,$http,$state,$rootScope,$st
 			        ).success(function(data) {
 			        	layer.show(data.data);
 			        	location.href='#/group/list';
-			    		window.location.reload();
 					})
                }else{
                  return false;
@@ -757,8 +749,6 @@ lvtuanApp.controller("groupaddCtrl",function($scope,$http,$state,$rootScope,$sta
   					'members'	: $scope.selIds
 		        }).success(function(data) {
 		    	location.href='#/group/site/'+$stateParams.id;
-	        	window.location.reload();
-		       
 		    });
 	}
 })
@@ -858,7 +848,6 @@ lvtuanApp.controller("groupcreateCtrl",function($scope,$http,$state,$rootScope,$
 	           $scope.file = {};
 	           $(':input','#questions_form').not('textarea :submit, :reset, :hidden').val('');
 	           location.href='#/group/list';
-	           window.location.reload();
 	        });
             return true;
   		}    
@@ -1568,7 +1557,6 @@ lvtuanApp.controller("becomenavCtrl",function($scope,$http,$rootScope,$ionicPopu
 						delete $localStorage.addres;
 						layer.show("提交成功！请等待审核...");
 						location.href='#/center';
-						window.location.reload();
 
 			        }).error(function(data){
 						console.info(data);
@@ -1721,11 +1709,10 @@ lvtuanApp.controller("practitionersCtrl",function($scope,$http,$rootScope,$timeo
 			}
 			console.info(param);
 			$http.post('http://'+$rootScope.hostName+'/center/becomelawyer/work', param
-				).success(function(data) {
-		           layer.show("添加成功！");
-		           location.href='#/becomenav';
-				   window.location.reload();
-		        });
+			).success(function(data) {
+	           layer.show("添加成功！");
+	           location.href='#/becomenav';
+	        });
 		}	
 
 })
@@ -1778,11 +1765,10 @@ lvtuanApp.controller("verifiedCtrl",function($scope,$http,$rootScope,$timeout,$s
 			return false;
 		}
 		$http.post('http://'+$rootScope.hostName+'/center/becomelawyer/identity', param
-			).success(function(data) {
-	            layer.show("添加成功！");
-	            location.href='#/becomenav';
-			    window.location.reload();
-	        });
+		).success(function(data) {
+            layer.show("添加成功！");
+            location.href='#/becomenav';
+        });
 	}
 	
 })
@@ -1803,7 +1789,6 @@ lvtuanApp.controller("tariffsetCtrl",function($scope,$http,$rootScope,$timeout,$
 			).success(function(data) {
 	            layer.show("添加成功！");
 	            location.href='#/becomenav';
-			    window.location.reload();
 	        });
 	}
 })
@@ -1900,7 +1885,6 @@ lvtuanApp.controller("fieldCtrl",function($scope,$http,$rootScope,$timeout,$stat
 				console.info(data);
 	            layer.show("添加成功！");
 	            location.href='#/becomenav';
-			    window.location.reload();
 	        });
 	}
 })
@@ -1923,7 +1907,6 @@ lvtuanApp.controller("caseCtrl",function($scope,$http,$rootScope,$timeout,$state
 			).success(function(data) {
 	            layer.show("添加成功！");
 	            location.href='#/becomenav';
-			    window.location.reload();
 	        });
 	}
 })
@@ -2031,7 +2014,6 @@ lvtuanApp.controller("siteCtrl",function($scope,$http,$rootScope,authService){
 	$scope.logout = function(){
 		authService.logout();
 		location.href='#/login';
-		// window.location.reload();
 	}
 
 })
@@ -2194,9 +2176,6 @@ lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$l
 	$scope.jumppage = function(id){
 		//$location.path('/lawyer/'+id);
 		location.href='#/lawyer/'+id;
-		window.location.reload();
-
-
 	}
 
 })
@@ -2251,6 +2230,15 @@ lvtuanApp.controller("viewCtrl",function($scope,$http,$rootScope,$stateParams,ht
    $scope.graphic5 = function(id,index){
    	sessionStorage.setItem("lawyerId", id);
    	sessionStorage.setItem("index", index);
+	
+	if (index == 5 && $scope.items.text_reply_fee == 0) {
+		layer.show("对不起，这个律师还没有开始提供这个服务!");
+		return;
+	}
+	if (index == 6 && $scope.items.phone_reply_fee == 0) {
+		layer.show("对不起，这个律师还没有开始提供这个服务!");
+		return;
+	}
 
    	var currentUser = authService.getUser();
 	if(currentUser.status == 1 || currentUser.status == 2){
@@ -2973,7 +2961,6 @@ lvtuanApp.controller("lawyerquestionNewCtrl",function($scope,$rootScope,listHelp
 			function(data){
 				layer.show("抢单成功！");
 				location.href='#/lawyerquestion/replied';
-				window.location.reload();
 			},function(data){
 				console.info(data);
 			}
@@ -3021,7 +3008,6 @@ lvtuanApp.controller("lawyerquestionsviewCtrl",function($http,$scope,$stateParam
 			function(data){
 				layer.show("抢单成功！");
 				location.href='#/lawyerquestion/replied';
-				window.location.reload();
 			},function(data){
 				console.info(data);
 			}
@@ -3191,7 +3177,6 @@ lvtuanApp.controller("questionRepliedCtrl",function($http,$scope,$rootScope,list
 				layer.show("确认成功！");
 				$scope.items.splice(index, 1);
 				location.href='#/userquestion/waitforconfirmation';
-				window.location.reload();
 			},function(data){
 				console.info(data);
 			}
@@ -3264,7 +3249,6 @@ lvtuanApp.controller("confirmCompletionCtrl",['$scope','$http','$rootScope','$st
 		  	$scope.user = {
 			  	evaluate_comment : ""
 			}
-			window.location.reload();
 		  }
 }])
 
@@ -3302,7 +3286,6 @@ lvtuanApp.controller("userquestionviewCtrl",function($http,$scope,$stateParams,$
 			function(data){
 				layer.show("确认成功！");
 				location.href='#/userquestion/waitforconfirmation';
-				window.location.reload();
 			},function(data){
 				console.info(data);
 			}
@@ -3487,7 +3470,6 @@ lvtuanApp.controller("userOrderDetailCtrl",function($http,$scope,$state,$rootSco
 			function(data){
 				layer.show("删除成功！");
 				location.href='#/orderuser/pending';
-				window.location.reload();
 			},function(data){
 				console.info(data);
 			}
@@ -3504,7 +3486,6 @@ lvtuanApp.controller("userOrderDetailCtrl",function($http,$scope,$state,$rootSco
 			function(data){
 				layer.show("取消成功！");
 				location.href='#/orderuser/new';
-				window.location.reload();
 			},function(data){
 				console.info(data);
 			}
@@ -3901,8 +3882,6 @@ lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$statePa
 							switch(res.err_msg) {
 								case "get_brand_wcpay_request:ok":
 									location.href='#/user/wallet';
-									// $state.go('user/wallet', {}, {reload: true});
-								    // window.location.reload();
 								    sessionStorage.setItem('summoney', sessionStorage.getItem('summoney')+user.money);
 									layer.show("充值成功。");
 									break;
@@ -4029,15 +4008,8 @@ lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$io
                                         WeixinJSBridge.log(res.err_msg);
                                         switch(res.err_msg) {
                                                 case "get_brand_wcpay_request:ok":
-                                                                $ionicLoading.show();
-                                                                location.href='#/orderuser/new';
-                                                                                                 //    $http.post('http://'+$rootScope.hostName+'/center/question/'+$stateParams.id+'/money/pay'
-                                                                                                 //    ).success(function(data) {
-                                                                                                 //     $ionicLoading.hide();
-                                                                                                        //      $scope.items = data.data;
-                                                                                                        //     layer.show("付款成功！");
-                                                                                                        //     location.href='#/orderuser/new';
-                                                                                                        // });
+                                                        $ionicLoading.show();
+                                                        location.href='#/orderuser/new';
                                                         break;
                                                 case "get_brand_wcpay_request:fail":
                                                         layer.show("支付失败，请稍候再试。");
@@ -4058,19 +4030,17 @@ lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$io
                  });
                  confirmPopup.then(function(res) {
                    if(res) {
-                    //listHelper.bootstrap('/center/question/'+$stateParams.id+'/wallet/pay', $scope);
-                            $http.post('http://'+$rootScope.hostName+'/center/question/'+$stateParams.id+'/wallet/pay',{},
-                                    {
-                                    headers: {
-                                        'Content-Type': 'application/json' ,
-                                        'Authorization': 'bearer ' + $rootScope.token,
-                                    }
-                                }).success(function(data) {
-                                        $scope.items = data.data;
-                                    layer.show("付款成功！");
-                                    location.href='#/orderuser/new';
-                                        window.location.reload();
-                                });
+                        $http.post('http://'+$rootScope.hostName+'/center/question/'+$stateParams.id+'/wallet/pay',{},
+                        {
+                            headers: {
+                                'Content-Type': 'application/json' ,
+                                'Authorization': 'bearer ' + $rootScope.token,
+                            }
+                        }).success(function(data) {
+                            $scope.items = data.data;
+                            layer.show("付款成功！");
+                            location.href='#/orderuser/new';
+                        });
                    }else{
                      return false;
                    }
@@ -4152,12 +4122,10 @@ lvtuanApp.controller("citypickerCtrl",function($http,$location,$scope,$rootScope
 		}else{
 			location.href='#/lawyerlist';
 		}
-		window.location.reload();
 	}
 
 	$scope.jump_citypicke_GoBack = function(){
 		$ionicHistory.goBack();
-		//window.location.reload();
 	}
 
 })
@@ -4245,7 +4213,6 @@ lvtuanApp.controller("citypickeAllCtrl",function($http,$state,$location,$scope,$
 
 	$scope.jump_citypicke_GoBack = function(){
 		$ionicHistory.goBack();
-		//window.location.reload();
 	}
 
 })
