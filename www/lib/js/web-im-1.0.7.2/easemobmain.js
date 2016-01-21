@@ -589,7 +589,7 @@
                 user : user,
                 accessToken : token,    
                 //连接时提供appkey
-                appKey : Easemob.im.config.appkey
+                appKey : AppSettings.easemobAppKey
             });
         } else {
             var user = $("#user_name").val();
@@ -606,7 +606,7 @@
                 user : user,
                 pwd : pass,
                 //连接时提供appkey
-                appKey : Easemob.im.config.appkey
+                appKey : AppSettings.easemobAppKey
             });         
         }
         return false;
@@ -625,7 +625,7 @@
             password : pass,
             nickname : nickname,
 //            appKey : Easemob.im.config.appkey,
-            appKey : Easemob.im.config.appkey,
+            appKey : AppSettings.easemobAppKey,
             success : function(result) {
                 alert("注册成功!");
                 $('#loginmodal').modal('show');

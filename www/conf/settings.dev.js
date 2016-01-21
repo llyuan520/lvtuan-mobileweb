@@ -6,5 +6,7 @@ AppSettings = {
   // secret: 'eae0369b72bcb49e18134dc447df475e'
   // 法盲服务号
   appId: 'wx7912c6c84aad82a7',
-  secret: 'd75e1656d3c684f0d974f40ecf11cb3c'
+  secret: 'd75e1656d3c684f0d974f40ecf11cb3c',
+  // 测试账号
+  easemobAppKey: 'gsflowertrees#gsflower'
 }
