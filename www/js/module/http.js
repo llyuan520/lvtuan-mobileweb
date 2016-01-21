@@ -137,7 +137,7 @@ httpModule.factory('APIInterceptor', ['$log', '$q', '$rootScope', 'authService',
 	        		layer.show("暂时无法处理您的请求，请稍后再试。");
 	        		break;
 	        }
-		    console.info(response);
+		    // console.info(response);
 
 			$rootScope.hide();
 			// do something on error
