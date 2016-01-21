@@ -2837,7 +2837,6 @@ lvtuanApp.controller("orderAllCtrl",function($http,$scope,$rootScope,listHelper,
 	//联系客户
 	$scope.ask = function(id){
 		location.href='#/easemobmain/'+id;
-	    window.location.reload();
 	}
 
 })
@@ -2873,7 +2872,6 @@ lvtuanApp.controller("orderRepliedCtrl",function($http,$rootScope,$scope,listHel
 	//联系客户
 	$scope.ask = function(id){
 		location.href='#/easemobmain/'+id;
-	    window.location.reload();
 	}
 })
 //律师订单 - 已完成
@@ -2938,7 +2936,6 @@ lvtuanApp.controller("orderlawyerDetailCtrl",function($http,$scope,$stateParams,
 	//联系客户
 	$scope.ask = function(id){
 		location.href='#/easemobmain/'+id;
-	    window.location.reload();
 	}
 })
 
@@ -2989,7 +2986,6 @@ lvtuanApp.controller("lawyerquestionRepliedCtrl",function($scope,$rootScope,$htt
 	//联系客户
 	$scope.ask = function(id){
 		location.href='#/easemobmain/'+id;
-	    window.location.reload();
 	}
 })
 //律师的工作 - 咨询 － 已完成
@@ -3033,8 +3029,7 @@ lvtuanApp.controller("lawyerquestionsviewCtrl",function($http,$scope,$stateParam
 	}
 	//联系客户
 	$scope.ask = function(id){
-		location.href='#/easemobmain/'+id;
-	    window.location.reload();
+			location.href='#/easemobmain/'+id;
 	}
 	//删除
 	$scope.remove = function(id,index){
@@ -3154,7 +3149,6 @@ lvtuanApp.controller("questionAllCtrl",function($http,$scope,$rootScope,listHelp
 	//联系律师
 	$scope.ask = function(id){
 		location.href='#/easemobmain/'+id;
-	    window.location.reload();
 	}
 
 	//送心意
@@ -3206,7 +3200,6 @@ lvtuanApp.controller("questionRepliedCtrl",function($http,$scope,$rootScope,list
 	//联系律师
 	$scope.ask = function(id){
 		location.href='#/easemobmain/'+id;
-	    window.location.reload();
 	}
 
 })
@@ -3318,7 +3311,6 @@ lvtuanApp.controller("userquestionviewCtrl",function($http,$scope,$stateParams,$
 	//联系律师
 	$scope.ask = function(id){
 		location.href='#/easemobmain/'+id;
-	    window.location.reload();
 	}
 	//送心意
 	$scope.send = function(id){
@@ -3396,7 +3388,6 @@ lvtuanApp.controller("userorderAllCtrl",function($http,$scope,$rootScope,listHel
 	//联系律师
 	$scope.ask = function(id){
 		location.href='#/easemobmain/'+id;
-	    window.location.reload();
 	}
 
 	//付款
@@ -3464,7 +3455,6 @@ lvtuanApp.controller("userorderRepliedCtrl",function($http,$scope,$rootScope,lis
 	//联系律师
 	$scope.ask = function(id){
 		location.href='#/easemobmain/'+id;
-	    window.location.reload();
 	}
 })
 //用户的订单 - 待评价
