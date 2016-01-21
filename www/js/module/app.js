@@ -566,6 +566,12 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       controller: 'questionsviewsCtrl',
       authn: false
     })
+    .state('questions/help', { //咨询帮助
+      cache: 'true', 
+      url: '/questions/help',
+      templateUrl: 'template/questions/questions_help.html',
+      authn: true
+    })
 
 /********************************** 法律咨询 **********************************/
     .state('legaladvice', { //首页-法律咨询

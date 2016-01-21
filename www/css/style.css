@@ -1580,3 +1580,17 @@ a,button,input{
     font-size: 16px;
     text-align: center;
 }
+
+/*咨询帮助*/
+.pane .help-content {
+    background-color: #fff;
+}
+.help-content .scroll {
+    padding: 0 3%;
+    background-color: #fff;
+}
+.help-content .scroll div {
+    margin: 0;
+    border: none;
+    border-bottom: 1px #eee solid;
+}
