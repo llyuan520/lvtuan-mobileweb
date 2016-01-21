@@ -46,6 +46,7 @@ function authService($window) {
 	self.logout = function() {
 		localStorage.removeItem('jwtToken');
 		localStorage.removeItem('currentUser');
+		sessionStorage.removeItem("goback");
 	}
 }
 
@@ -120,7 +121,7 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
 	//		window.location.reload();
         	var goback = sessionStorage.getItem("goback");
 			location.href='#'+goback;
-			sessionStorage.removeItem(goback);
+			sessionStorage.removeItem("goback");
 			// window.location.reload();
     	}
     ).catch(function(response) {
