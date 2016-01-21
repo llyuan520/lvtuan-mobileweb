@@ -587,7 +587,7 @@ var login = function() {
             user : user,
             accessToken : token,    
             //连接时提供appkey
-            appKey : 'gsflowertrees#gsflower'
+            appKey : Easemob.im.config.appkey
         });
     } else {
         var user = $("#user_name").val();
@@ -604,7 +604,7 @@ var login = function() {
             user : user,
             pwd : pass,
             //连接时提供appkey
-            appKey : 'gsflowertrees#gsflower'
+            appKey : Easemob.im.config.appkey
         });         
     }
     return false;
@@ -622,7 +622,7 @@ var regist = function() {
         username : user,
         password : pass,
         nickname : nickname,
-        appKey : 'gsflowertrees#gsflower',
+        appKey : Easemob.im.config.appkey,
         success : function(result) {
             alert("注册成功!");
             $('#loginmodal').modal('show');
