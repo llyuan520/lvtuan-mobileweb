@@ -2252,6 +2252,17 @@ lvtuanApp.controller("viewCtrl",function($scope,$http,$rootScope,$stateParams,ht
    	sessionStorage.setItem("lawyerId", id);
    	sessionStorage.setItem("index", index);
 
+
+	
+	if (index == 5 && $scope.items.text_reply_fee == 0) {
+		layer.show("对不起，这个律师还没有开始提供这个服务!");
+		return;
+	}
+	if (index == 6 && $scope.items.phone_reply_fee == 0) {
+		layer.show("对不起，这个律师还没有开始提供这个服务!");
+		return;
+	}
+
    	var currentUser = authService.getUser();
 	if(currentUser.status == 1 || currentUser.status == 2){
 		//普通用户个人信息
