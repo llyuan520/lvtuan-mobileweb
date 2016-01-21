@@ -4012,7 +4012,7 @@ lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$io
 	            attach_params.type = $stateParams.type;
 	            attach_params.item_id = $stateParams.id;
 	            attach_params.user_id = currentUser.id;
-	            attach_params.money = '0.01';
+	            attach_params.money = $scope.item.price;
 	            attach_str = JSON.stringify(attach_params);
 	            var timestamp=Math.round(new Date().getTime()/1000);
 	            $ionicLoading.show();
