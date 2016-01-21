@@ -45,7 +45,8 @@
     </style>
 
     <ion-header-bar class="bar bar-header bar-light item-icon-right">
-        <a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-click="jump('#/lawyerquestion/replied')"></a>
+        <a ng-if="currentUser.status == 1 || currentUser.status == 2" class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-click="jump('#/userquestion/replied')"></a>
+        <a ng-if="currentUser.status == 3" class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-click="jump('#/lawyerquestion/replied')"></a>
         <h1 class="title">咨询详情</h1>
     </ion-header-bar>
     <div hide-tabs class="web-body web-top10 scroll-content ionic-scroll  has-header">

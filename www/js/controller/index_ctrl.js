@@ -34,6 +34,7 @@ lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $loca
 			location.href=url+$scope.id;
 		}
 		location.href=url;
+		window.location.reload();
 	}
 
 	$scope.jumpGo = function(url){
