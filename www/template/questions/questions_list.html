@@ -1,39 +1,36 @@
 <ion-view hide-Tabs="true">
 		<ion-pane>
 			<ion-header-bar class="bar bar-header bar-light">
-				<button class="button button-clear button-positive" ng-click="jumpGoBack()">  
+				<button class="button button-clear button-positive pull-left" ng-click="jumpGo('#/index')">  
 	                <i class="icon icon-left ion-ios-arrow-back"></i>  
 	            </button>
-				<h1 class="title">问律师参考</h1>
+	            <button class="button button-clear pull-right" ng-click="jumpGo('#/question/list/search')">  
+	                <i class="icon ion-ios-search-strong positive"></i>
+	            </button>
+	            
+				<h1 class="title">问律师</h1>
 			</ion-header-bar>
-			<ion-content>				
-				<!--搜索你想要的内容-->
-				<div class="item-input-inset">
-					<div class="item-input-wrapper">
-				    	<input type="search" placeholder="搜索你想要的内容" class="searchq">
-				    	<i class="icon ion-search placeholder-icon" ng-click="search()"></i>
-					</div>
-				</div>
-				
+			<ion-content>	
 				<!--评论-->
 				<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
-				<div class="list list-inset">
-					<div class="item card item-borderless noboxshadow" ng-repeat="item in items">
-						<div class="item item-button-right">
-						   <a ng-href="#/questionsview/{{item.id}}">{{item.title}}</a>
-						 <i class="button button-clear icon-right ion-ios-star-outline"></i>
-						</div>
-						<div ng-repeat="comment in item.comments|limitTo:1" class="item item-text-wrap item-avatar item-divider item-borderless item-mb">
-						    <img ng-src="{{comment.owner.avatar}}">
-						    <h2 class="fc-nan txt-fw">{{comment.owner.realname}}</h2>
-						    <p>{{comment.content}}<br />
-						    	{{comment.created_at}}
-						    </p>
-						</div>
+				<div class="list">
+					<a class="item" ng-repeat="item in items" ng-href="#/questionsview/{{item.id}}">
+						<span>{{item.title}}</span>
+						<span class="item-note">{{item.post_category}}</span>
+						<br>
+						<span style="color: #aaa;font-size: 14px;">{{item.lawyer.realname}} 律师</span>
+						<span class="item-note">{{item.created_at}}</span>
+					</a>
+				</div>
+				<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
+			</ion-content>
+			<div class="tabs" style="background-color:#fff;height: 69px;">
+				<div class="row">
+					<div class="col">
+					 <button class="button button-block button-positive" style="margin-top:0;" ng-click="jumpGo('#/questions')">我要问律师</button>
 					</div>
 				</div>
-				<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%" immediate-check="false"> </ion-infinite-scroll>
-			</ion-content>
+			</div>
 		</ion-pane>
 
 </ion-view>

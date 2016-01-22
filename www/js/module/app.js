@@ -44,9 +44,6 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
     layer.goHome();
   }
 
-
-  
-
 }])
 
 .run(function($rootScope, $location, $state, authService, locationService) {
@@ -549,16 +546,21 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       url: '/questions',
       cache: 'true', 
       templateUrl: 'template/questions/questions.html',
-      controller: 'questionsCtrl',
-      authn: true
+      controller: 'questionsCtrl'/*,
+      authn: true*/
     })
     .state('questionslist', { //问律师列表
       cache: 'true', 
       url: '/questionslist',
       templateUrl: 'template/questions/questions_list.html',
-      controller: 'questionslistCtrl',
-      authn: true
+      controller: 'questionslistCtrl'
     })
+    .state('question/list/search', { //问律师列表
+      cache: 'true', 
+      url: '/question/list/search',
+      templateUrl: 'template/questions/questions_list_search.html'
+    })
+    
     .state('questionsview', { //问律师详情
       cache: 'true', 
       url: '/questionsview/:id',

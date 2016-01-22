@@ -27,7 +27,7 @@ body,
 .item h2.fc-ee,.error{
     font-size: 14px;
 }
-.fc-red,.error,.item p.fc-red{
+.fc-red,.error,.item p.fc-red,.item p.error{
     color: #FF0000;
 }
 .button-border-left{
@@ -801,7 +801,7 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
     line-height: 40px;
     margin-left: 1%;
 }
-.select-cnt select {
+.select-cnt select{
     width:100%;
     padding:5px;
     overflow: hidden;text-overflow: ellipsis;white-space: nowrap;
@@ -809,11 +809,29 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
   appearance:none;
   -moz-appearance:none;
   -webkit-appearance:none;
+  
+}
+.select-cnt.ion-chevron-down:before{
+    height:40px;
+    line-height: 40px;
+}
+.select-cnt select {
   background: url("../img/arrow.png") no-repeat scroll right center transparent;
   padding-right: 14px;
   font-size: 0.8rem;
 }
-
+.select-cnt.arrow1{
+    width:100%;
+}
+.select-cnt.arrow1 select {
+ background: none;
+  background-size: 20px;*/
+  padding-right: 24px;
+  font-size: 01.2rem;
+}
+.bar .button.button-clear .icon.ion-ios-help-outline:before{  
+    font-size: 2.2rem;
+}
 
 /*清除ie的默认选择框样式清除，隐藏下拉箭头*/
 /*select::-ms-expand { display: none; }*/
@@ -1431,8 +1449,7 @@ input,select{-webkit-appearance: none; /*去除input默认样式*/}
 }
 .questions-site .rig .icon-right {
     float: right;
-    padding: 0 20px;
-    font-size: 4em;
+    font-size: 4rem;
     color: #ccc;
 }
 
