@@ -11,7 +11,7 @@
  * */
 body,
 .ionic-body{
-    font-family: "微软雅黑";
+    font-family: 'Microsoft YaHei';
     color: #333333;
 }
 .scroll-content {
@@ -29,6 +29,9 @@ body,
 }
 .fc-red,.error,.item p.fc-red,.item p.error{
     color: #FF0000;
+}
+.bar .title {
+    font-size: 1.4rem;
 }
 
 
@@ -60,23 +63,7 @@ body,
 .clearfix { *zoom:1; }
 
 /*login*/
-a{
-    text-decoration: none;
-    color: #00cafa;
-}
-a:link{
-    text-decoration: none;
-    color: #00cafa;
-}
-a:visited{
-    text-decoration: none;
-    color: #00cafa;
-}
-a:active{
-    text-decoration: none;
-    color: #00cafa;
-}
-a:hover{
+a, a:link, a:visited, a:active, a:hover {
     text-decoration: none;
     color: #00cafa;
 }
@@ -214,13 +201,8 @@ img.avatar{
     box-shadow: 0 0 0 2px #fff;
 }
 
-
 .slideBox .bd ul{display: none;}
 .slideBox .bd ul:first-child{display: block;}
-
-
-
-
 
 .scroll{
     position: absolute;
@@ -1633,4 +1615,46 @@ a,button,input{
     font-size: 0.8rem;
     line-height: 1.2rem;
     color: #999;
+}
+
+/*文书详情*/
+.download-content .download-name {
+    margin-bottom:0;
+}
+.download-content .list {
+    padding: 0;
+}
+.download-content .list .item {
+    margin: 0;
+}
+.download-name span {
+    font-size: 1.36rem;
+    line-height: 1.4rem;
+    color: #333;
+}
+.download-content .list span {
+    display: block;
+    margin-bottom: 0.6rem;
+    font-size: 1.22rem;
+    line-height: 1.26rem;
+    color: #666;
+}
+.download-content .item p {
+    line-height: 1.2rem;
+    font-size: 0.8rem;
+    color: #999;
+}
+.download-content .row {
+    padding: 5px 0;
+}
+.download-content .row div:nth-child(1) {
+    padding: 5px 0 0 0;
+}
+.download-content .row div:nth-child(2) {
+    padding-right: 0px;
+    text-align: right;
+}
+.download-content .row img {
+    display: block;
+    width: 100%;
 }
