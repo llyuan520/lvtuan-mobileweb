@@ -553,7 +553,8 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       cache: 'true', 
       url: '/questionslist',
       templateUrl: 'template/questions/questions_list.html',
-      controller: 'questionslistCtrl'
+      controller: 'questionslistCtrl',
+      authn: false
     })
     .state('question/list/search', { //问律师列表
       cache: 'true', 
@@ -566,6 +567,12 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       url: '/questionsview/:id',
       templateUrl: 'template/questions/view.html',
       controller: 'questionsviewsCtrl',
+      authn: false
+    })
+    .state('questions/help', { //咨询帮助
+      cache: 'true', 
+      url: '/questions/help',
+      templateUrl: 'template/questions/questions_help.html',
       authn: true
     })
 
@@ -986,8 +993,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
     .state('citypicker', { //首页 - 微信支付
       url: '/citypicker/:id',
       templateUrl: 'template/citypicker.html',
-      controller: 'citypickerCtrl',
-      authn: true
+      controller: 'citypickerCtrl'
     })
 
 /********************************** error **********************************/

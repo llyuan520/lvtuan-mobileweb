@@ -6,17 +6,17 @@
 		</ion-header-bar>
 		<ion-content class="web-body">
 			<form name="myForm" novalidate ng-submit="save(user)" ngCloak ng-controller="resetpwdCtrl" ng-cloak class="ng-cloak">
-				<div class="list" style="">
+				<div class="list resetpwd-list">
 					<label class="item item-input web-item-botb0">
-						<span class="input-label ion-ios-unlocked-outline web-wid20"></span>
+						<span class="ion-ios-unlocked-outline web-wid15"></span>
 						<input required ng-model="user.old_password" name="old_password" ng-minlength="6" ng-maxlength="20" type="password" class="input_text" placeholder="请输入旧密码">
 					</label>
 					<label class="item item-input web-item-topb0">
-						<span class="input-label ion-ios-locked-outline web-wid20"></span>
+						<span class="ion-ios-locked-outline web-wid20"></span>
 						<input required ng-model="user.new_password" name="new_password" ng-minlength="6" ng-maxlength="20" type="password" class="input_text" placeholder="请输入新密码(6-20位字符)">
 					</label>
 					<label class="item item-input web-item-topb0">
-						<span class="input-label ion-ios-locked-outline web-wid20"></span>
+						<span class="ion-ios-locked-outline web-wid20"></span>
 						<input required ng-model="user.new_password_retype" name="new_password_retype" ng-minlength="6" ng-maxlength="20"  type="password" class="input_text" placeholder="请输入新密码(6-20位字符)">
 					</label>
 
