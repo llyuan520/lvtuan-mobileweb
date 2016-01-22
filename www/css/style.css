@@ -1590,7 +1590,30 @@ a,button,input{
     background-color: #fff;
 }
 .help-content .scroll div {
+    min-height: 72px;
+    padding: 16px 0 16px 16%;
     margin: 0;
     border: none;
     border-bottom: 1px #eee solid;
+}
+.help-content .item img {
+    position: absolute;
+    top: 16px;
+    left: 8px;
+    width: 2rem;
+    height: 2rem;
+    max-width: 2rem;
+    max-height: 2rem;
+    border-radius: 0;
+}
+.help-content .item h2 {
+    margin-bottom: 0.6rem;
+    font-size: 1.2rem;
+    font-family: 'Microsoft YaHei';
+    color: #666;
+}
+.help-content .item p {
+    font-size: 0.8rem;
+    line-height: 1.2rem;
+    color: #999;
 }
