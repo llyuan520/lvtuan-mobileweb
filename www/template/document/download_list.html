@@ -4,53 +4,31 @@
 				<button class="button button-clear button-positive" ng-click="jumpGoBack()">  
 	                <i class="icon icon-left ion-ios-arrow-back"></i>  
 	            </button>
-				<h1 class="title">文书下载</h1>
+				<h1 class="title">文书详情</h1>
 			</ion-header-bar>
 			
-			<ion-content>	
-			
-					<div style="background-color: #fff;">
-						<div class="row">
-						    <div class="col col-60" style="padding: 5px 0 0 0;">{{itmes.title}}</div>
-						    <div class="col share" style="text-align: right;padding-right: 0px;">
-                                <i class="ion-android-star"></i>
-                                <span>收藏</span>
-                            </div>
+			<ion-content class="bg-c-white download-content">	
+					<div class="item download-name">
+						<span>{{itmes.title}}</span>
+					</div>
+					<div class="list">
+						<div class="item">
+							<!-- <i class="icon ion-chevron-down" ng-click="isclose = !isclose"></i> -->
+							<span>使用说明</span>
+							<p class="contents text-indent">{{itmes.info}}</p>
 						</div>
-						<div class="row">
-						  <div class="col col-60" style="padding: 5px 0 0 0;">
-						  	<div>已阅读：{{itmes.views_count}}</div>
-						  	<div>已下载：{{itmes.downs}}</div>
-						  </div>
-						  <div class="col" style="text-align: right;padding-right: 0px;line-height:45px;">
-						  		<div class="share clearfix" style="border-left: 1px solid #ccc;">
-                                    <strong class="ion-android-open"></strong>
-                                    <span>分享</span>
+						<div class="item">
+							<div class="row">
+							    <div class="col">
+                                    <img ng-src="http://192.168.1.43/img/default_imgs/[]10.png">
                                 </div>
-						  </div>
-						</div>
-						<div class="list">
-							<div class="item">
-								<i class="icon ion-chevron-down" ng-click="isclose = !isclose"></i>
-								使用说明
-								<p class="contents" ng-show="isclose">{{itmes.info}}</p>
+							    <div class="col">
+                                    <img src="http://192.168.1.43/img/default_imgs/[]16.png">
+                                </div>
 							</div>
-							<div class="item">
-								<div class="row">
-								    <div class="col" style="padding: 5px 0 0 0;">
-                                        <img style="width:100%" ng-src="http://192.168.1.43/img/default_imgs/[]16.png">
-                                    </div>
-								    <div class="col" style="text-align: right;padding-right: 0px;">
-                                        <img style="width:100%" src="http://192.168.1.43/img/default_imgs/[]16.png">
-                                    </div>
-								</div>
-								<a class="button button-block button-positive web-wid8c web-top10" href="{{itmes.file_path}}">下载</a>
-							</div>
-								
+							<a class="button button-block button-positive web-wid8c web-top10" href="{{itmes.file_path}}">下载</a>
 						</div>
 					</div>
-
 			</ion-content>
-
 		</ion-pane>
 </ion-view>

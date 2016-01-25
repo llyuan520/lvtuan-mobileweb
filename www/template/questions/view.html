@@ -1,23 +1,52 @@
+<style type="text/css">
+	.chathost .item p.contents{border-color: #fff;border: 1px solid #999;border-radius: 6px;padding: 5px;}
+	.chathost .item.item-avatar-right{border-color: #fff;}
+	.chathost .item h2.right{text-align: right;}
+	.chathost .item p.con_left{display: inline-block;}
+	.chathost .item p.con_right{display: inline-block;float: right;}
+	.item h2.title{width: 80%;display: inline-block;float: left;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient: vertical;white-space: normal;}
+</style>
 <ion-view hide-Tabs="true">
 		<ion-pane>
 		<ion-header-bar class="bar bar-header bar-light">
 			<button class="button button-clear button-positive" ng-click="jumpGoBack()">  
                 <i class="icon icon-left ion-ios-arrow-back"></i>  
             </button>
-			<h1 class="title">问律师参考</h1>
+			<h1 class="title">咨询参考</h1>
 		</ion-header-bar>
 		<ion-content>
-			<div class="item-divider divider-h"></div>
-			<div class="item">
-				<h2 class="fc-nan txt-fw">{{items.title}}</h2>
-				<p class="content">{{items.content}}</p>
-			    <p>
-			    	<label>提问者：xxxxx</label>
-			    	<label>提问时间：{{items.created_at}}</label>
+			<div class="item" style="border-color: #fff;">
+    			  	<!-- 未收藏  -->
+				  	<span ng-if="items.is_collect == false" ng-click="collects(items.id)"  class="item-note" style="font-size: 2rem;margin-top: -5px;"><i class="icon ion-ios-star-outline"></i></span>
+				  	<!-- 收藏 -->
+				  	<span ng-if="items.is_collect == true" ng-click="collects_del(items.id)"  class="item-note" style="font-size: 2rem;margin-top: -5px;"><i class="icon ion-star positive"></i></span>
+			  	<h2 class="title">{{items.title}}</h2>
+		  	</div>
+			<div class="item item-avatar" style="border-color: #fff;">
+				<img src="avatar.jpg">
+			  	<span class="item-note">{{items.created_at}}</span>
+			  	<h2>普通用户</h2>
+			    <p class="contents">
+			    	{{items.content}}
 			    </p>
 			</div>
-	
-			<div class="item-divider dvd-title">你查找的律师类型：<span class="sp-blue">律师辩护</span>，共找到<span class="sp-blue">{{items.comments.length}}</span>位律师。</div>
+			<div class="item item-divider" style="border-color: #fff;">
+			   律师回复
+			</div>
+
+			<div class="chathost">
+				<div class="item item-avatar">
+					<img src="avatar.jpg">
+				  	<h2>Machine</h2>
+				    <p class="contents con_left">Nine Inch NailsNine</p>
+				</div>
+
+				<div class="item item-avatar-right">
+					<img src="avatar.jpg">
+				  	<h2 class="right">Pretty</h2>
+				    <p class="contents con_right">Nine Inch NailsNine</p>
+				</div>
+			</div>
 
 			<ion-list ng-repeat="comment in items.comments">
             	<ion-item class="item item-thumbnail-left">

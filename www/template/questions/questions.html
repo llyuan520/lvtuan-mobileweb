@@ -1,40 +1,48 @@
 <ion-view hide-Tabs="true">
 		<ion-pane>
 			<ion-header-bar class="bar bar-header bar-light">
-				<button class="button button-clear button-positive" ng-click="jumpGo('#/index')">  
-                    <i class="icon icon-left ion-ios-arrow-back"></i>  
+				<button class="button button-clear button-positive pull-left" ng-click="jumpGo('#/questionslist')">  
+                    <i class="icon ion-ios-arrow-back"></i>  
                 </button>
-				<h1 class="title">问律师</h1>
+				<h1 class="title">添加咨询</h1>
+				<button class="button button-clear pull-right" ng-click="jumpGo('#/questions/help')">  
+	                <i class="icon ion-ios-help-outline positive"></i>
+	            </button>
 			</ion-header-bar>
 			<ion-content>
 				<form id="questions_form" name="myForm" novalidate>
-					<div class="ist-case-searchtype questions-type">	
-						<select required ng-model="user.cat_id" ng-options="value.key as value.value for value in workscopes">
-							<option value="">-- 请选择案例类型 --</option>
-					    </select>
-					</div>
-					<div class="list">
-						<label class="item item-input">
-						  <input ng-model="user.title" name="title" type="text" placeholder="请输入标题" required>
+					<div class="item ist-case-searchtype questions-type">	
+						<div class="select-cnt arrow1 ion-chevron-down border-bottom-colorf2f2">
+							<select required ng-model="user.cat_id" ng-options="value.key as value.value for value in workscopes">
+								<option value="">请选择案例类型</option>
+						    </select>
+						</div>
+						<label class="item-input border-bottom-colorf2f2">
+						  <input ng-model="user.title" name="title" type="text" ng-minlength="1" ng-maxlength="15" placeholder="请输入咨询标题" required>
 						</label>
-						<label class="item item-input">
-				          <textarea ng-model="user.content" name="content" rows="10" placeholder="请输入问题" required></textarea>
+						<p ng-cloak class="log-but error ng-cloak" ng-show="myForm.title.$error.minlength">字符不能小于1个字符</p>
+						<p ng-cloak class="log-but error ng-cloak" ng-show="myForm.title.$error.maxlength">字符不能大于15个字符</p>
+						<label class="item-input">
+				          <textarea ng-model="user.content" name="content" rows="6" placeholder="请详细描述您要咨询的问题" ng-minlength="1" ng-maxlength="300" required></textarea>
 				        </label>
+						<p ng-cloak class="log-but error ng-cloak" ng-show="myForm.content.$error.minlength">字符不能小于1个字符</p>
+						<p ng-cloak class="log-but error ng-cloak" ng-show="myForm.content.$error.maxlength">字符不能大于300个字符</p>
 					</div>
-					<div class="item group-site questions-site">
-						<label class="name">上传附件：</label>
+					<div class="item questions-site">
+						<label class="name" style="line-height: 50px;">请上传附件：</label>
 						<div class="rig">
 							<div ng-disabled="booleans" ng-model="file_paths"  accept="image/*,.doc,.docx"  gf-pattern="'image/*,.doc,.docx'" ngf-max-size="2MB" ngf-select="uploadFiles($files, $invalidFiles)" class="icon-right" multiple><i class="icon ion-ios-plus-outline"></i></div>
 							<input type="hidden" name="file_paths" value="{{file}}" />
 						</div>
-						 <br><br>
-						  <label ng-show="files">文件名称:</label>
-						  <ul>
-						    <li ng-repeat="f in files" style="font:smaller">{{f.name}} {{f.$errorParam}}
-						      <span class="progress" ng-show="f.progress >= 0">
+
+						  <ul style="margin-top: 10px;display: inline-block;float: left;width: 100%;">
+						    <li ng-repeat="f in files" style="font:smaller;width: 100%;">
+						    	<span style="width: 100%;float: left;display: inline-block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;height: 20px;">{{f.name}}</span> 
+						    	{{f.$errorParam}}
+						     <!--  <span class="progress" ng-show="f.progress >= 0">
 						        <div style="width:{{f.progress}}%"  
 						            ng-bind="f.progress + '%'"></div>
-						      </span>
+						      </span> -->
 						    </li>
 						    <li ng-repeat="f in errFiles" style="font:smaller">{{f.name}} {{f.$error}} {{f.$errorParam}}</li> 
 						  </ul>
@@ -46,37 +54,6 @@
 						<button class="button button-block button-positive" type="submit" ng-disabled="myForm.$invalid" ng-click="submit(user)" >提交</button>
 					</div>
 				</form>
-
-				<div class="item-divider txt-center fc-ee">看看其他人问了什么</div>
-				
-				<!--搜索你想要的内容-->
-				<div class="item-input-inset">
-					<div class="item-input-wrapper">
-				    	<input type="search" placeholder="搜索你想要的内容" class="search">
-				    	<i class="icon ion-search placeholder-icon" ng-click="search()"></i>
-					</div>
-				</div>
-				<hr />
-				<!--评论-->
-				<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
-				<div class="list list-inset">
-					<div ng-repeat="item in items" class="item card item-borderless noboxshadow">
-						<div class="item item-button-right questions-content">
-						   <a ng-href="#/questionsview/{{item.id}}"> {{item.title}}</a>
-						 <i class="button button-clear icon-right ion-ios-star-outline"></i>
-						</div>
-						
-						<div ng-repeat="comment in item.comments|limitTo:1" class="item item-text-wrap item-avatar item-divider item-borderless">
-						    <img ng-src="{{comment.owner.avatar}}">
-						    <h2 class="fc-nan txt-fw">{{comment.owner.realname}}</h2>
-						    <p>{{comment.content}}<br />
-						    	{{comment.created_at}}
-						    </p>
-						</div>
-					</div>
-				</div>
-				<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
-
 			</ion-content>
 			
 		</ion-pane>

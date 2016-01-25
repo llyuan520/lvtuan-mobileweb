@@ -1,0 +1,32 @@
+<ion-view hide-tabs="true">
+	<form id="searchForm" name="searchForm" ng-controller="questionslistsearchCtrl">
+		<ion-pane>
+			<ion-header-bar align-title="left" class="bar bar-header bar-light">
+				<!--搜索你想要的内容  -->
+				<div class="item item-input-inset" style="border-radius: 4px;margin-left: 1%;"> 
+					<label class="item-input-wrapper">
+						<i class="icon ion-ios-search placeholder-icon" style="font-size: 1.8rem;"></i>
+				    	<input ng-model="q" type="search" name="q" placeholder="搜索" class="search" ng-model-options="{debounce:2000}" >
+					</label>
+				</div>
+				<button class="button button-clear pull-right" ng-click="jumpGo('#/questionslist')">  
+					<span class="positive">取消</span>
+				</button>
+			</ion-header-bar>
+			
+			<ion-content>	
+				<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+				<div class="list">
+					<a class="item" ng-repeat="item in items">
+						<span>{{item.title}}</span>
+						<span class="item-note">{{item.post_category}}</span>
+						<br>
+						<span style="color: #aaa;font-size: 14px;">{{item.lawyer.realname}} 律师</span>
+						<span class="item-note">{{item.created_at}}</span>
+					</a>
+				</div>
+				<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
+			</ion-content>
+		</ion-pane>
+	</form>
+</ion-view>>

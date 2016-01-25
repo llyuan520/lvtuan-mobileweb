@@ -3076,7 +3076,9 @@ a.subdued {
     border-color: #ddd;
     background-color: white;
     background-image: linear-gradient(0deg, #ddd, #ddd 50%, transparent 50%);
-    color: #444; }
+    color: #444;
+    border-bottom: 1px solid #999;
+     }
     .bar.bar-light .title {
       color: #00cafa; }
     .bar.bar-light.bar-footer {
@@ -4796,7 +4798,7 @@ a.item {
 .item-complex .item-content, .item-radio .item-content {
   position: relative;
   z-index: 2;
-  padding: 16px 49px 16px 16px;
+  padding:16px;
   border: none;
   background-color: #fff; }
 
@@ -7491,7 +7493,7 @@ a.button {
   border-color: #b2b2b2; }
 
 .positive, a.positive {
-  color: #387ef5; }
+  color: #00cafa; }
 
 .positive-bg {
   background-color: #00cafa; }

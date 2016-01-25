@@ -2,10 +2,10 @@
     <ion-content>
     	<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 		<ion-list>
-        	<ion-item class="item item-thumbnail-left"  ng-repeat="item in items" ng-href="#/knowledgeview/{{item.id}}">
+        	<ion-item class="item item-thumbnail-left item-complex item-text-wrap"  ng-repeat="item in items" ng-href="#/knowledgeview/{{item.id}}">
 	          	<img ng-src="{{item.img}}" style="left:6px;border-radius:5px;">
-				<p class="content">{{item.title}}</p>
-				<p class="article-content">{{item.info}}</p>
+				<h2>{{item.title}}</h2>
+				<p class="content_txt1">{{item.info}}</p>
                 <p>
                     <i class="praise knowledge-stars"></i><span class="counts">{{item.likes_count}}</span>
                     <i class="messages knowledge-love"></i><span class="counts">{{item.comments_count}}</span>

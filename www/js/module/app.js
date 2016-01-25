@@ -44,9 +44,6 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
     layer.goHome();
   }
 
-
-  
-
 }])
 
 .run(function($rootScope, $location, $state, authService, locationService) {
@@ -559,12 +556,24 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       controller: 'questionslistCtrl',
       authn: false
     })
+    .state('question/list/search', { //问律师列表
+      cache: 'true', 
+      url: '/question/list/search',
+      templateUrl: 'template/questions/questions_list_search.html'
+    })
+    
     .state('questionsview', { //问律师详情
       cache: 'true', 
       url: '/questionsview/:id',
       templateUrl: 'template/questions/view.html',
       controller: 'questionsviewsCtrl',
       authn: false
+    })
+    .state('questions/help', { //咨询帮助
+      cache: 'true', 
+      url: '/questions/help',
+      templateUrl: 'template/questions/questions_help.html',
+      authn: true
     })
 
 /********************************** 法律咨询 **********************************/
@@ -957,6 +966,11 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       templateUrl: 'template/document/download_list.html',
       controller: 'documentownloadlistCtrl'
     })
+    .state('document/list/search', { //首页-文书搜索
+      url: '/document/list/search',
+      templateUrl: 'template/document/download_list_search.html'
+    })
+    
 
 /********************************** 小微企服 **********************************/
     .state('corporate', { //首页-小微企服
