@@ -3592,97 +3592,152 @@ lvtuanApp.controller("userOrderDetailCtrl",function($http,$scope,$state,$rootSco
 /*———————————————————————————— 首页 - 法律文书 ————————————————————————————*/
 //首页 - 法律文书
 //法律文书
-lvtuanApp.controller("documentlistCtrl",function($http,$scope,$state,$rootScope,$timeout){
+lvtuanApp.controller("documentlistCtrl",function($http,$scope,$state,$rootScope,$timeout,$ionicLoading){
 
 	//选择类型
+	$ionicLoading.show();
 	$http.get('http://'+$rootScope.hostName+'/lawyer/workscopes')
 		.success(function(data) {
 	      if(data.data){
 	        $scope.workscopes = data.data;
+	        sessionStorage.setItem("key", JSON.stringify($scope.workscopes[0].key));
+	        getParams($scope.workscopes[0].key);
+	        $ionicLoading.hide();
 	      }else{
 	      	layer.show("暂无数据！");
 	      }
 	    })
 
-
-	var page = 1; //页数
-    $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
-	$scope.items = [];	//创建一个数组接收后台的数据
-
-	$scope.search = function(){
-    	page = 1; //页数
-    	$scope.items = [];	//创建一个数组接收后台的数据
-    	getParams();
-    }
-
-    $scope.searchCatId = function(){
-    	page = 1; //页数
-    	$scope.items = [];	//创建一个数组接收后台的数据
-    	getParams();
-    }
-
-    //获取参数，处理被收藏书签的情况
-	function getParams(){
-		var params = layer.getParams("#search_form");
-		console.info(params)
-	  	var param = [];
-	  	if(params.q){
-	  		param.push('q='+params.q);
-	  	}
-	  	if(params.cat_id){
-	  		param.push('cat_id='+params.cat_id);
-	  	}
-	  	param = param.join('&');
-	  	console.info(param)
-	  	geturl(param);
+	$scope.inShowscopes = function(key) {
+		var value = false;
+		$scope.key = JSON.parse(sessionStorage.getItem('key'));
+		if (key == $scope.key) {
+			value = true;
+		}
+		return value;
 	}
 
-    function geturl(param){
-    	var url = "";
-    	if(param){ 
-    		url +='http://'+$rootScope.hostName+'/knowledge/document/list_documents?'+param+'&page='+page++;
-    	}else{
-    		url +='http://'+$rootScope.hostName+'/knowledge/document/list_documents?page='+page++;
-    	}
-
-    	$http.get(url)
-    		.success(function(data) {
-	        	console.info('法律文书',data.data)
-				if(data.data.length > 0){
-					if(data.data.length > 9){
-						$scope.moredata = true;
-					}else{
-						$scope.moredata = false;
-					}
-					//用于连接两个或多个数组并返回一个新的数组
-					$scope.items = $scope.items.concat(data.data); 
-
-				}else{
-					layer.show("暂无数据！")
-					$scope.moredata = false;
-					return false;
-				}
-
-			})
-		    .finally(function() {
-	            $scope.$broadcast('scroll.refreshComplete');
-	            $scope.$broadcast('scroll.infiniteScrollComplete');
-	        });
-
-    }
-
+	var page = 1; //页数
+	var rows_per_page = 5; // 每页的数量
+	if ($scope.rows_per_page) {
+		rows_per_page = $scope.rows_per_page;
+	}
+    $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
+    $scope.items = [];	//创建一个数组接收后台的数据
     //下拉刷新
 	$scope.doRefresh = function() {
 		page = 1;
 		$scope.items = [];
-        getParams();
+        $scope.loadMore();
+        $scope.$broadcast('scroll.refreshComplete');
     };
 
-    //上拉加载 - 文库
+    //上拉加载
 	$scope.loadMore = function() {
-		getParams();
+		$scope.key = JSON.parse(sessionStorage.getItem('key'));
+		getParams($scope.key);
 	};
 
+	$scope.ngClick_list = function(key){
+		page = 1;
+		$scope.items = [];
+		sessionStorage.setItem("key", JSON.stringify(key));
+		getParams(key);
+		
+	}
+	
+	function getParams(key){
+		$ionicLoading.show();
+		var url = 'http://'+$rootScope.hostName+'/knowledge/document/list_documents?cat_id='+key+'&rows_per_page='+rows_per_page+'&page='+page;
+		$http.get(url)
+			.success(function(data) {
+	        	console.info(data.data)
+	        	if(data && data.data && data.data.length){
+					$scope.items = $scope.items.concat(data.data);
+					console.info($scope.items);
+					if (data.data.length < rows_per_page) {
+						$scope.moredata = false;
+					} else {
+						$scope.moredata = true;
+					}
+				}else{
+					if (page == 1) {
+						layer.show('暂无数据！');
+					}
+					$scope.moredata = false;
+				}
+				page++;
+				$scope.$broadcast('scroll.infiniteScrollComplete');
+				$ionicLoading.hide();
+			})
+	}
+
+})
+//法律文书 - 搜索
+lvtuanApp.controller("documentlistsearchCtrl",function($http,$scope,$state,$rootScope,$timeout,$ionicLoading){
+	var page = 1; //页数
+	var rows_per_page = 5; // 每页的数量
+	if ($scope.rows_per_page) {
+		rows_per_page = $scope.rows_per_page;
+	}
+    $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
+    $scope.items = [];	//创建一个数组接收后台的数据
+
+	//搜索问题
+	$scope.q = '';
+	$scope.$watch('q', function(newVal, oldVal) {
+		if(newVal !== oldVal){
+			page = 1;
+			$scope.items = [];
+	        $scope.loadMore();
+	    }
+	});
+
+	//下拉刷新
+	$scope.doRefresh = function() {
+		page = 1;
+		$scope.items = [];
+        $scope.loadMore();
+        $scope.$broadcast('scroll.refreshComplete');
+    };
+
+    //上拉加载
+	$scope.loadMore = function() {
+		var params = layer.getParams("#searchForm");
+		var url = "";
+		if(params.q != ""){
+			url = 'http://'+$rootScope.hostName+'/knowledge/document/list_documents?q='+params.q+'&rows_per_page='+rows_per_page+'&page='+page;
+			$ionicLoading.show();
+			$http.get(url)
+				.success(function(data) {
+					if(data && data.data && data.data.length){
+						$scope.items = $scope.items.concat(data.data);
+						console.info($scope.items);
+						if (data.data.length < rows_per_page) {
+							$scope.moredata = false;
+						} else {
+							$scope.moredata = true;
+						}
+					}else{
+						if (page == 1) {
+							layer.show('暂无数据！');
+						}
+						$scope.moredata = false;
+					}
+					page++;
+					$scope.$broadcast('scroll.infiniteScrollComplete');
+					$ionicLoading.hide();
+				})
+		}else{
+			$scope.moredata = false;
+	    	return false;
+	    }
+		
+	};
+
+	$scope.$on('$stateChangeSuccess', function() {
+	    $scope.loadMore();
+	})
 })
 
 //法律文书 - 详情 - 下载

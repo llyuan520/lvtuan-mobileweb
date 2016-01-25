@@ -966,6 +966,11 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       templateUrl: 'template/document/download_list.html',
       controller: 'documentownloadlistCtrl'
     })
+    .state('document/list/search', { //首页-文书搜索
+      url: '/document/list/search',
+      templateUrl: 'template/document/download_list_search.html'
+    })
+    
 
 /********************************** 小微企服 **********************************/
     .state('corporate', { //首页-小微企服

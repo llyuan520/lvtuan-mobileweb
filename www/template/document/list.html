@@ -1,51 +1,119 @@
-<!-- <link href="lib\js\web-im-1.0.7.2\css\webim.css" rel="stylesheet"> -->
-<link href="css/style.css" rel="stylesheet">
+<style type="text/css">
+.main{
+	width:30%;
+	float:left;
+	height: 100%;
+	margin-top: 44px;
+	padding-bottom: 44px; 
+}
+.wsfb{
+	overflow: hidden;
+	text-align: center;
+	padding: 10px 0;
+	height: 118px;
+}
+.scroll1{
+	float:left;height: 100%;overflow-x: scroll;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	resize:both;
+	-webkit-overflow-scrolling: touch;
+	
+}
+::-webkit-scrollbar {
+    width: 0px;
+}
+.scroll2{
+	width: 70%;
+}
+.scroll2.scroll-content{
+	left: 30%;
+}
+.scroll1 ul{
+	width: 100%;
+	margin-bottom:118px;
+}
+.scroll1 ul li{
+	width: 80%;
+	margin: 0 10%;
+	height: 40px;
+    line-height: 40px;
+    display: inline-block;
+    text-align: center;
+    border-top: 1px solid #f2f2f2;
+    position: relative;
+}
+.textright{
+	font-size: 12px;
+	text-align:right;
+}
+.border-bottom{
+	border-bottom: 1px solid #f2f2f2;
+	margin: 10px;
+	padding-bottom: 10px;
+}
+.border-bottom .row {
+	padding: 5px 0;
+}
+.border-bottom .row .col{
+	padding: 0;
+}
+/*箭头向左*/
+.scroll1 ul li.active i{
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-width: 12px;
+    border-style: dashed;
+    border-color: transparent;
+    border-left-width: 0;
+    border-right-color: #eee;
+    border-right-style: solid;
+    top:8px;
+    right: -12%;
+    position: absolute;
+}
+
+</style>
 <ion-view hide-tabs="true">
 		<ion-pane  class="web-body">
 			<ion-header-bar class="bar bar-header bar-light">
-				<button class="button button-clear button-positive" ng-click="jumpGoBack()">  
+				<button class="button button-clear button-positive pull-left" ng-click="jumpGo('#/index')">  
 	                <i class="icon icon-left ion-ios-arrow-back"></i>  
+	            </button>
+	            <button class="button button-clear pull-right" ng-click="jumpGo('#/document/list/search')">  
+	                <i class="icon ion-ios-search-strong positive"></i>
 	            </button>
 				<h1 class="title">法律文书</h1>
 			</ion-header-bar>
-			
-			<ion-content>				
-				<form id="search_form" name="myForm">
-					<!--搜索你想要的内容-->
-					<div class="item-input-inset" style="background-color: #fff;">
-						<div class="item-input-wrapper">
-					    	<input name="q" type="search" placeholder="搜索你想要的内容" class="searchq">
-					    	<i class="icon ion-search placeholder-icon" ng-click="search()"></i>
-						</div>
-					</div>
-					<div class="item" style="padding:0;">
-						<select name="cat_id" class="opt-bl" ng-change="searchCatId()" ng-model="cat_id" style="width:100%;height:50px;line-height:50px;border: none;">
-					    	<option value="">-- 请选择法律领域 --</option>
-					      	<option ng-repeat="workscope in workscopes" value="{{workscope.key}}">
-					      	{{workscope.value}}
-					      	</option>
-						</select>
-					</div>
-				</form>
+				
+			<div class="main">
+				<div class="wsfb">
+					<img src="../img/wsfb.png" width="48" height="58">
+					<h5>文书范本</h5>
+				</div>
+				<div class="scroll1">
+					<ul>
+						<li ng-repeat="workscope in workscopes" ng-class="{ 'active':inShowscopes(workscope.key) }" ng-click="ngClick_list(workscope.key)">
+							{{workscope.value}}
+							<i></i>
+						</li>
+					</ul>
+				</div>
+			</div>
 
-				<!--评论-->
+			<ion-content  class="scroll2">	
 				<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
-
-				<ion-list ng-repeat="item in items" class="document-list" >
-	            	<ion-item class="item item-thumbnail-left" ng-href="#/document/download_list/{{item.id}}">
-			          	<img ng-src="{{item.img}}" style="border-radius:4px;" />
-						<div class="row" style="padding: 5px 0;">
-						  <div class="col col-60" style="padding: 5px 0 0 0;">
-						  	<h2>{{item.title}}</h2>
-						  </div>
-						  <div class="col" style="text-align: right;padding-right: 0px;"><h2>下载：{{item.downs}}</h2></div>
-						</div>
-						<p class="content">{{item.content}}</p>
-			        </ion-item>
-		         </ion-list>
-
+				<div class="border-bottom" ng-repeat="item in items">
+					<div class="row">
+						<div class="col col-60 content_txt1 txt-c-66"><a ng-href="#/document/download_list/{{item.id}}">{{item.title}}</a></div>
+					  <div class="col textright txt-c-99">下载:{{item.downs}}次</div>
+					</div>
+					<div class="row">
+						<div class="col content_txt2 txt-c-99">{{item.info}}</div>
+					</div>
+				</div>
 				<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
 			</ion-content>
-
 		</ion-pane>
 </ion-view>
