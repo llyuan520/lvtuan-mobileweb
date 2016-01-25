@@ -18,15 +18,16 @@ lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $loca
 		return authService.isAuthed ? authService.isAuthed() : false
 	}
 
+	$scope.$on('$ionicView.beforeEnter', function() {
+	    $scope.currentUser = authService.getUser();
 
-    $scope.currentUser = authService.getUser();
-
-    currentLocation = locationService.getLocation();
-    if (!currentLocation || !currentLocation.city_name) {
-    	locationService.fetchLocation($scope);
-    } else {
-        $scope.currentLocation = currentLocation;
-    }
+	    currentLocation = locationService.getLocation();
+	    if (!currentLocation || !currentLocation.city_name) {
+	    	locationService.fetchLocation($scope);
+	    } else {
+	        $scope.currentLocation = currentLocation;
+	    }
+	})
 
     //返回跳转页面
 	$scope.jump = function(url,id){
@@ -284,7 +285,6 @@ lvtuanApp.controller("resetpwdCtrl",function($scope,$http,$rootScope){
 	           location.href='#/login';
 		        window.location.reload();
 	        });
-			return true;
 		}
 
 	}
@@ -324,7 +324,7 @@ lvtuanApp.controller("forgotpwdCtrl",function($scope,$http,$rootScope){
 	}
 })
 
-//修改密码
+//找回密码
 lvtuanApp.controller("upwdCtrl",function($scope,$http,$rootScope){
 
 	$scope.user = {};
@@ -1113,15 +1113,17 @@ lvtuanApp.controller("casesCtrl",function($scope,$http,$rootScope,listHelper){
 })
 
 //文章-详情
-lvtuanApp.controller("knowledgeViewCtrl",function($scope,$http,$rootScope,$stateParams,$ionicPopup,$ionicPopup,$timeout){
+lvtuanApp.controller("knowledgeViewCtrl",function($scope,$http,$rootScope,$stateParams,$ionicPopup,$ionicPopup,$timeout,$ionicLoading){
 	init();
 	//获取律师的个人信息
 	function init(){ 
+		$ionicLoading.show();
 		var url = 'http://'+$rootScope.hostName+'/knowledge/'+$stateParams.id+'/view';
 		$http.get(url).success(function(data) {
 	        	console.info(data.data)
 	        	$scope.items = data.data;
 	        	sessionStorage.setItem("comments_count", JSON.stringify($scope.items.comments_count));
+	        	$ionicLoading.hide();
 			})
 	}
 
@@ -2253,11 +2255,15 @@ lvtuanApp.controller("viewCtrl",function($scope,$http,$rootScope,$stateParams,ht
    	sessionStorage.setItem("index", index);
 
    	var currentUser = authService.getUser();
+   	if(currentUser == null){
+   		location.href='#/login';
+   		return false;
+   	}
 	if(currentUser.status == 1 || currentUser.status == 2){
 		//普通用户个人信息
 		location.href='#/graphic';
 	}else{
-		layer.show("对不起，您没有该功能操作权限!");
+		layer.show("律师没有开通该项服务!");
 	}
 	
    }
@@ -4215,11 +4221,13 @@ lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$io
 })
 
 
-lvtuanApp.controller("citypickerCtrl",function($http,$location,$scope,$rootScope,$anchorScroll,$ionicHistory,$stateParams,$ionicScrollDelegate,locationService){
+lvtuanApp.controller("citypickerCtrl",function($http,$location,$scope,$rootScope,$anchorScroll,$ionicHistory,$stateParams,$ionicLoading,$ionicScrollDelegate,locationService){
 	//获取地址定位 根据a-z排序显示
+	$ionicLoading.show();
 	$http.get('http://'+$rootScope.hostName+'/area/province/letters')
 	.success(function(data) {
 		$scope.provinces = data.data;
+		$ionicLoading.hide();
 	})
 
 	$scope.str = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
@@ -4247,6 +4255,7 @@ lvtuanApp.controller("citypickerCtrl",function($http,$location,$scope,$rootScope
 
 	//获取 市区
 	function getCityParm(province){
+		$ionicLoading.show();
 		$http.get('http://'+$rootScope.hostName+'/area/'+province+'/city')
 		.success(function(data) {
 			if(data && data.data && data.data.length){
@@ -4258,6 +4267,7 @@ lvtuanApp.controller("citypickerCtrl",function($http,$location,$scope,$rootScope
 				}
 				locationServices($scope.items);
         	}
+        	$ionicLoading.hide();
 		})
 	}
 
@@ -4295,8 +4305,9 @@ lvtuanApp.controller("citypickerCtrl",function($http,$location,$scope,$rootScope
 })
 
 lvtuanApp.controller("citypickeAllCtrl",function($http,$state,$location,$scope,$rootScope,$anchorScroll,$ionicHistory,$stateParams,$ionicLoading,$ionicScrollDelegate,$localStorage){
-	$ionicLoading.show();
+	
 	//获取地址定位 根据a-z排序显示
+	$ionicLoading.show();
 	$http.get('http://'+$rootScope.hostName+'/area/province/letters')
 	.success(function(data) {
 		$scope.provinces = data.data;

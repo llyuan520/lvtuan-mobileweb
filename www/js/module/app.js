@@ -546,8 +546,8 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       url: '/questions',
       cache: 'true', 
       templateUrl: 'template/questions/questions.html',
-      controller: 'questionsCtrl'/*,
-      authn: true*/
+      controller: 'questionsCtrl',
+      authn: true
     })
     .state('questionslist', { //问律师列表
       cache: 'true', 

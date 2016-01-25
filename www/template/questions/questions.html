@@ -12,17 +12,17 @@
 			<ion-content>
 				<form id="questions_form" name="myForm" novalidate>
 					<div class="item ist-case-searchtype questions-type">	
-						<div class="select-cnt arrow1 ion-chevron-down">
+						<div class="select-cnt arrow1 ion-chevron-down border-bottom-colorf2f2">
 							<select required ng-model="user.cat_id" ng-options="value.key as value.value for value in workscopes">
-								<option value="">-- 请选择案例类型 --</option>
+								<option value="">请选择案例类型</option>
 						    </select>
 						</div>
-						<label class=" item-input">
+						<label class="item-input border-bottom-colorf2f2">
 						  <input ng-model="user.title" name="title" type="text" ng-minlength="1" ng-maxlength="15" placeholder="请输入咨询标题" required>
 						</label>
 						<p ng-cloak class="log-but error ng-cloak" ng-show="myForm.title.$error.minlength">字符不能小于1个字符</p>
 						<p ng-cloak class="log-but error ng-cloak" ng-show="myForm.title.$error.maxlength">字符不能大于15个字符</p>
-						<label class=" item-input">
+						<label class="item-input">
 				          <textarea ng-model="user.content" name="content" rows="6" placeholder="请详细描述您要咨询的问题" ng-minlength="1" ng-maxlength="300" required></textarea>
 				        </label>
 						<p ng-cloak class="log-but error ng-cloak" ng-show="myForm.content.$error.minlength">字符不能小于1个字符</p>
