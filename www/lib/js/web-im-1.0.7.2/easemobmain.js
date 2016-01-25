@@ -916,7 +916,7 @@
         //当前登录人发送的信息在聊天窗口中原样显示
         saveComment();
         var msgtext = msg.replace(/\n/g, '<br>');
-        appendMsg(curUserId, to, msgtext,'',myName);
+        appendMsg(curUserId, to, msgtext,'',myName, currentUser.avatar);
         turnoffFaces_box();
         msgInput.value = "";
         msgInput.focus();
@@ -1367,7 +1367,7 @@
         momogrouplistUL.appendChild(lielem);
     };
     //显示聊天记录的统一处理方法
-    var appendMsg = function(who, contact, message, chattype,realname) {
+    var appendMsg = function(who, contact, message, chattype, realname, avatar) {
         var contactDivId = contact;
         if (chattype && chattype == 'groupchat') {
             contactDivId = groupFlagMark + contact;
@@ -1381,7 +1381,7 @@
             localMsg = message.data;
         }
         var headstr = [ "<p1>" + getLoacalTimeString() + "   <span></span>" + "   </p1>",
-                "<p2>" + realname + "<b></b><br/></p2><br/>" ];
+                "<p2>" + realname + "<b></b><br/></p2><img src=" + avatar + "><br>" ];
         var header = $(headstr.join(''))
         var lineDiv = document.createElement("div");
         for (var i = 0; i < header.length; i++) {
@@ -1462,7 +1462,7 @@
         } else {
             lineDiv.style.textAlign = "left";
         }
-        lineDiv.className = "immediate-information";
+        lineDiv.className = "immediate-information easemobmain-record img-right";
         var create = false;
         if (msgContentDiv == null) {
             msgContentDiv = createContactChatDiv(contactDivId);
@@ -1739,7 +1739,6 @@
                 },
                 success: function(data){
                     obj = data.data.comments;
-                    console.info(obj);
                     for(var i=0; i<obj.length; i++){
                          style = "left";
                         if(obj[i].creator_id == curUserId) style = "right";
@@ -1750,7 +1749,7 @@
                             } else {
                                 str+='<p1>'+obj[i].creator_name+'<span></span></p1>';
                                 str+='<p2>'+obj[i].created_at+'<b></b></p2><br/>';
-                                // str+='<img ng-src='+obj[i].creator_avatar+'><br>';
+                                str+='<img ng-src='+obj[i].creator_avatar+'><br>';
                             }
                             str+='<p3 class="chat-content-p3" className="chat-content-p3">'+obj[i].content+'</p3>';
                         str+='</div>';
