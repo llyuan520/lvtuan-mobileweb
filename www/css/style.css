@@ -85,9 +85,10 @@ a, a:link, a:visited, a:active, a:hover {
 .txt-c-99{
     color: #999;
 }
-.txt-c-66{
+.txt-c-66,.txt-c-66 a,.txt-c-66 a:link{
     color: #666;
 }
+
 .txt-c-33{
     color: #666;
 }
@@ -121,7 +122,9 @@ a, a:link, a:visited, a:active, a:hover {
     padding: 0.7rem 0.6rem 0 0;
     font-size: 12px;
 }
-
+.item p.text-indent{
+    text-indent: 2em;
+}
 .col-66 .praisea, .col-66 .collectiona, .col-66 .messagesa {
     float: left;
     width: 33%;
