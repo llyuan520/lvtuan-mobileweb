@@ -1741,17 +1741,15 @@
                     obj = data.data.comments;
                     for(var i=0; i<obj.length; i++){
                          style = "left";
-                        if(obj[i].creator_id == curUserId) style = "right";
-                        str+='<div class="textbox" style="text-align:'+style+';">';
-                            if (obj[i].creator_id == curUserId) {
-                                str+='<p1>'+obj[i].created_at+'<span></span></p1>';
-                                str+='<p2>'+obj[i].creator_name+'<b></b></p2><br/>';
-                            } else {
-                                str+='<p1>'+obj[i].creator_name+'<span></span></p1>';
-                                str+='<p2>'+obj[i].created_at+'<b></b></p2><br/>';
-                                str+='<img ng-src='+obj[i].creator_avatar+'><br>';
-                            }
-                            str+='<p3 class="chat-content-p3" className="chat-content-p3">'+obj[i].content+'</p3>';
+                        if(obj[i].creator_id == curUserId) {
+                            str+='<div class="easemobmain-record img-right" style="text-align:right;">';
+                        } else {
+                            str+='<div class="easemobmain-record img-left" style="text-align:left;">';
+                        }
+                        str+='<p1>'+obj[i].created_at+'<span></span></p1>';
+                        str+='<p2>'+obj[i].creator_name+'<b></b></p2><br/>';
+                        str+='<img src='+obj[i].creator_avatar+'><br>';
+                        str+='<p3 class="chat-content-p3" className="chat-content-p3">'+obj[i].content+'</p3>';
                         str+='</div>';
                     }
                     if(obj.length == rows_per_page) $this.css('display', 'block');
