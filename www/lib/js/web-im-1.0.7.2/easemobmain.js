@@ -905,10 +905,15 @@
         if (to == null) {
             return;
         }
+        var ext = {
+            realname: currentUser.realname,
+            avatar: currentUser.avatar
+        }
         var options = {
             to : to,
             msg : msg,
-            type : "chat"
+            type : "chat",
+            ext : ext
         };
         // 群组消息和个人消息的判断分支
         //easemobwebim-sdk发送文本消息的方法 to为发送给谁，meg为文本消息对象
@@ -1088,11 +1093,11 @@
         var messageContent = message.data;//文本消息体
         //TODO  根据消息体的to值去定位那个群组的聊天记录
         var room = message.to;
-        if (mestype == 'groupchat') {
-            appendMsg(message.from, message.to, messageContent, mestype,realname);
-        } else {
-            appendMsg(from, from, messageContent,'',realname);
-        }
+        // if (mestype == 'groupchat' || mestype == 'error') {
+            appendMsg(message.from, message.to, messageContent, mestype, message.ext.realname, message.ext.avatar);
+        // } else {
+        //     appendMsg(from, from, messageContent,'',realname);
+        // }
     };
     //easemobwebim-sdk收到表情消息的回调方法的实现，message为表情符号和文本的消息对象，文本和表情符号sdk中做了
     //统一的处理，不需要用户自己区别字符是文本还是表情符号。
@@ -1459,10 +1464,11 @@
         var msgContentDiv = getContactChatDiv(contactDivId);
         if (curUserId == who) {
             lineDiv.style.textAlign = "right";
+            lineDiv.className = "immediate-information easemobmain-record img-right";
         } else {
             lineDiv.style.textAlign = "left";
+            lineDiv.className = "immediate-information easemobmain-record img-left";
         }
-        lineDiv.className = "immediate-information easemobmain-record img-right";
         var create = false;
         if (msgContentDiv == null) {
             msgContentDiv = createContactChatDiv(contactDivId);
