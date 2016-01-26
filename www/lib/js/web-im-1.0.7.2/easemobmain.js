@@ -229,6 +229,7 @@
             },
             //收到文本消息时的回调方法
             onTextMessage : function(message) {
+                console.info('onTextMessage');
                 handleTextMessage(message);
             },
             //收到表情消息时的回调方法
@@ -265,7 +266,8 @@
             },
             //收到群组邀请时的回调方法
             onInviteMessage : function(message) {
-                handleInviteMessage(message);
+                console.info('onInviteMessage');
+                // handleInviteMessage(message);
             },
             //异常时的回调方法
             onError : function(message) {
@@ -1093,11 +1095,12 @@
         var messageContent = message.data;//文本消息体
         //TODO  根据消息体的to值去定位那个群组的聊天记录
         var room = message.to;
-        // if (mestype == 'groupchat' || mestype == 'error') {
+        if (mestype == 'groupchat') {
+            var msgtext = messageContent.replace(/\n/g, '<br>');
             appendMsg(message.from, message.to, messageContent, mestype, message.ext.realname, message.ext.avatar);
-        // } else {
-        //     appendMsg(from, from, messageContent,'',realname);
-        // }
+        } else {
+            appendMsg(message.from, message.from, messageContent, mestype, message.ext.realname, message.ext.avatar);
+        }
     };
     //easemobwebim-sdk收到表情消息的回调方法的实现，message为表情符号和文本的消息对象，文本和表情符号sdk中做了
     //统一的处理，不需要用户自己区别字符是文本还是表情符号。
