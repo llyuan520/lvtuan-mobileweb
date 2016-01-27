@@ -636,7 +636,7 @@ lvtuanApp.controller("groupsiteCtrl",function($scope,$http,$state,$rootScope,$st
 	            	group_avatar: group_avatar
 	            }
 	        }).then(function (response) {
-	        	var file_path = 'http://'+$rootScope.hostName+'/'+response.data.data;
+        		var file_path = 'http://'+$rootScope.hostName+'/file/show?path='+response.data.data;
 	        	$scope.file = file_path;
 	            $timeout(function () {
 	                $scope.result = response.data;
@@ -873,8 +873,9 @@ lvtuanApp.controller("groupcreateCtrl",function($scope,$http,$state,$rootScope,$
             	group_avatar: group_avatar
             }
         }).then(function (response) {
-        	var file_path = 'http://'+$rootScope.hostName+'/'+response.data.data;
+        	var file_path = 'http://'+$rootScope.hostName+'/file/show?path='+response.data.data;
         	$scope.file = file_path;
+        	$scope.group_path = response.data.data;
             $timeout(function () {
                 $scope.result = response.data;
             });
