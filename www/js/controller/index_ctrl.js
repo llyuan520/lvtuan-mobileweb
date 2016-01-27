@@ -120,7 +120,7 @@ lvtuanApp.directive('star', function () {
       }
     },
     link: function (scope, elem, attrs) {
-      elem.css("text-align", "center");
+      //elem.css("text-align", "left");
       var updateStars = function () {
         scope.stars = [];
         for (var i = 0; i < scope.max; i++) {
@@ -2204,7 +2204,7 @@ lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$l
 })
 
 
-//律师个人主页
+//律师个人主页 - 个人介绍
 lvtuanApp.controller("viewCtrl",function($scope,$http,$rootScope,$stateParams,httpWrapper,authService,$ionicLoading){
 	$scope.max = 5;
 	$scope.ratingVal = 5;
@@ -2220,16 +2220,18 @@ lvtuanApp.controller("viewCtrl",function($scope,$http,$rootScope,$stateParams,ht
             title: '个人介绍',
             url: 'selfintro.tpl.html'
         }, {
-            title: '评价',
+        	title: '文章分享',
+            url: 'article.tpl.html'
+        }, {
+            title: '咨询回复',
+            url: 'advisory.tpl.html'
+    	}, {
+            title: '用户评价',
             url: 'evaluate.tpl.html'
         }, {
-            title: '文章',
-            url: 'article.tpl.html'
-        }
-        //, {
-        //    title: '广播',
-        //    url: 'televise.tpl.html'
-    	// }
+            title: '成交记录',
+            url: 'dealrecord.tpl.html'
+    	 }
     ];
 
     $scope.currentTab = 'selfintro.tpl.html'; //默认第一次显示的tpl
@@ -2268,23 +2270,60 @@ lvtuanApp.controller("viewCtrl",function($scope,$http,$rootScope,$stateParams,ht
 	
    }
 
-   //点赞
-	$scope.likes = function(id){
-		$http.post('http://'+$rootScope.hostName+'/like',
-		{
-			item_type : 'user',
-			item_id   : id
-		}).success(function(data) {
+	//关注
+	$scope.follow = function(id){
+		$http.post('http://'+$rootScope.hostName+'/follow',
+			{
+				follow_id   : id
+			},
+			{
+            headers: {
+                'Content-Type': 'application/json' ,
+            	'Authorization': 'bearer ' + $rootScope.token
+            }
+        }).success(function(data) {
         	console.info(data);
-        	var itmes = data.data;
-        	$scope.items.likes_count = itmes.likes_count;
-           layer.show("点赞成功！");
+        	$scope.items.follower_count++;
+        	$scope.items.is_following = true;
+           layer.show("关注成功！");
         });
 	}
+
+	//取消关注
+	$scope.follow_del = function(id){
+		$http.post('http://'+$rootScope.hostName+'/follow/remove',
+			{
+				follow_id   : id
+			},
+			{
+            headers: {
+                'Content-Type': 'application/json' ,
+            	'Authorization': 'bearer ' + $rootScope.token
+            }
+        }).success(function(data) {
+        	console.info(data);
+        	$scope.items.follower_count--;
+        	$scope.items.is_following = false;
+           layer.show("取消成功！");
+        });
+	}
+	
 })
 
-//律师个人主页-律师评价
-lvtuanApp.controller("viewevaluateCtrl",function($scope,$http,$rootScope,$stateParams,httpWrapper){
+//律师个人主页-律师文章
+lvtuanApp.controller("viewarticleCtrl",function($scope,$http,$rootScope,$stateParams,listHelper){
+	//获取律师文章列表
+	listHelper.bootstrap('/lawyer/'+$stateParams.id+'/articles', $scope);
+})
+
+//律师个人主页-咨询回复
+lvtuanApp.controller("advisoryCtrl",function($scope,$http,$rootScope,$stateParams,listHelper){
+	//咨询回复
+	listHelper.bootstrap('/lawyer/'+$stateParams.id+'/questions', $scope);
+})
+
+//律师个人主页-用户评价
+lvtuanApp.controller("evaluateCtrl",function($scope,$http,$rootScope,$stateParams,httpWrapper){
 
 	$scope.max = 5;
 	$scope.readonly = true;
@@ -2302,11 +2341,11 @@ lvtuanApp.controller("viewevaluateCtrl",function($scope,$http,$rootScope,$stateP
 	//获取律师的评价列表
 	var page = 1; //页数
     $scope.moredata = true; 
-    $scope.evaluations = [];	//创建一个数组接收后台的数据
+    $scope.items = [];	//创建一个数组接收后台的数据
     //下拉刷新
 	$scope.doRefresh = function() {
 		page = 1;
-		$scope.evaluations = [];
+		$scope.item = [];
         $scope.loadMore();
     };
 
@@ -2315,16 +2354,16 @@ lvtuanApp.controller("viewevaluateCtrl",function($scope,$http,$rootScope,$stateP
 	}
 	
 	function getEvaluation(){
-		var url = 'http://'+$rootScope.hostName+'/lawyer/'+$stateParams.id+'/articles?page='+page;
+		var url = 'http://'+$rootScope.hostName+'/lawyer/'+$stateParams.id+'/evaluations?page='+page;
 		$http.get(url)
 			.success(function(data) {
 				if(data.data.length > 0){
 					$scope.moredata = true;
 					//用于连接两个或多个数组并返回一个新的数组
-					$scope.evaluations = $scope.evaluations.concat(data.data); 
+					$scope.items = $scope.items.concat(data.data); 
 					$scope.ratingVal = [];
-					for(var i=0; i<$scope.evaluations.length; i++){
-						$scope.ratingVal.push($scope.evaluations[i].evaluate_score);
+					for(var i=0; i<$scope.items.length; i++){
+						$scope.ratingVal.push($scope.items[i].evaluate_score);
 					}
 
 				}else{
@@ -2344,11 +2383,13 @@ lvtuanApp.controller("viewevaluateCtrl",function($scope,$http,$rootScope,$stateP
 	    $scope.loadMore();
 	});
 })
-//律师个人主页-律师文章
-lvtuanApp.controller("viewarticleCtrl",function($scope,$http,$rootScope,$stateParams,listHelper){
-	//获取律师文章列表
-	listHelper.bootstrap('/lawyer/'+$stateParams.id+'/articles', $scope);
+
+//律师个人主页-成交记录
+lvtuanApp.controller("dealrecordCtrl",function($scope,$http,$rootScope,$stateParams,listHelper){
+	//成交记录
+	listHelper.bootstrap('/lawyer/'+$stateParams.id+'/evaluations', $scope);
 })
+
 
 //律师个人主页-律师广播
 lvtuanApp.controller("viewteleviseCtrl",function($scope,$http,$rootScope,listHelper){
