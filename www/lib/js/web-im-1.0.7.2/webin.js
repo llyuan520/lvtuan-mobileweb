@@ -1357,7 +1357,7 @@ var appendMsg = function(who, contact, message, chattype, realname, avatar) {
     }
     var contactLi = getContactLi(contactDivId);
     if (contactLi == null) {
-        createMomogrouplistUL(who, message);
+        //createMomogrouplistUL(who, message);
     }
     // 消息体 {isemotion:true;body:[{type:txt,msg:ssss}{type:emotion,msg:imgdata}]}
     var localMsg = null;
