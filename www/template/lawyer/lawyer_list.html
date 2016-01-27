@@ -63,12 +63,13 @@
 						    <a class="item item-thumbnail-left lawyer-lists" ng-repeat="item in items" ng-click="jumppage(item.id)">
 						      <img class="img-header" src="{{item.avatar}}" style="border-radius: 50px;" />
 						      	<!--<img ng-src="img/icon-header.png"/>-->
-						      <h4 class="clearfix">
-						      	<span class="sp-name fc-nan lawyer-name">{{item.realname}}</span>
-						      	<!-- <span class="sp-level fc-nan">高级律师</span> -->
-						      	<div star rating-value="ratingVal" max="max" on-hover="onHover" on-leave="onLeave" readonly="{{readonly}}" class="star-score"></div>
-						      	<img ng-show="{{item.isDispVipImg}}" class="img-v" src="img/vip.png"/>
-						      </h4>
+						       <div class="row row-no-padding">
+						       		<div class="col col-30 col-center row-no-padding"><h3>{{item.realname}}</h3></div>
+								  	<div class="col col-70 col-center row-no-padding">
+								  		<div star rating-value="ratingVal" max="max" on-hover="onHover" on-leave="onLeave" readonly="{{readonly}}" class="star-score"></div>
+						      			<img ng-show="{{item.isDispVipImg}}" class="img-v" src="img/vip.png"/>
+								  	</div>
+								</div>
 						      <p>
 						      	擅长领域：<label ng-repeat="item in item.work_scope">{{item.value}}</label><br /> 所在区域：{{item.province}} {{item.city}} {{item.district}}<br /> 执业时间：{{item.practice_period}}<br />
 						      	<div class="list-details clearfix">
