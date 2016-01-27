@@ -1382,7 +1382,7 @@ lvtuanApp.controller("infoCtrl",function($scope,$http,$rootScope,$timeout,$ionic
             	'user_id': id
             }
         }).then(function (response) {
-        	var file_path = 'http://'+$rootScope.hostName+'/'+response.data.data.file_path;
+        	var file_path = 'http://'+$rootScope.hostName+'/file/show?path='+response.data.data.file_path;
         	$scope.file = file_path;
             $timeout(function () {
                 $scope.result = response.data;
