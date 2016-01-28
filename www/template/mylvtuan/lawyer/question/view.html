@@ -14,7 +14,7 @@
 					</div>
 				</div>
 				<div class="item" style="padding: 10px 5px;">
-					<a class="item item-thumbnail-left">
+					<a class="item item-thumbnail-left item-borderless">
 				      <img ng-src="{{items.product_img}}">
 				      <h2 class="web-top10">{{items.post_type}}</h2>
 				    </a>
@@ -25,7 +25,7 @@
 					<p class="contents">问题描述：{{items.content}}</p>
   					<p style="text-align: right;" ng-if="items.status_code == 'new'">
   						<button class="button button-small button-positive" ng-click="to_take(item.id)">抢单</button>
-  					</p>
+  					</p>s
   					<p style="text-align: right;" ng-if="items.status_code == 'replied'">
   						<button class="button button-small button-positive" ng-click="ask(item.id)">联系客户</button>
   					</p>

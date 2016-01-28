@@ -9,7 +9,7 @@
 	            </button>
 				<h1 class="title">问律师</h1>
 			</ion-header-bar>
-			<ion-content>	
+			<ion-content class="has-tabs">	
 				<!--评论-->
 				<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 				<div class="list">
@@ -23,11 +23,9 @@
 				</div>
 				<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
 			</ion-content>
-			<div class="tabs" style="background-color:#fff;height: 69px;">
-				<div class="row">
-					<div class="col">
-					 <button class="button button-block button-positive" style="margin-top:0;" ng-click="jumpGo('#/questions')">我要问律师</button>
-					</div>
+			<div class="tabs" style="background-color:#fff;height: 59px;">
+				<div class="row" style="padding: 5px 5%;">
+					<button class="button button-block button-positive" style="margin-top:-2px;margin-bottom:0;" ng-click="jumpGo('#/questions')"><b>我要问律师</b></button>
 				</div>
 			</div>
 		</ion-pane>
