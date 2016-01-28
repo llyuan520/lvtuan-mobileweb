@@ -563,8 +563,8 @@ lvtuanApp.controller("groupviewCtrl",function($scope,$http,$state,$rootScope,$st
 
     });
 	
-	$scope.site = function(){
-		location.href='#/group/site/'+$scope.id;
+	$scope.site = function(id){
+		location.href='#/group/site/'+id;
 	}
 })
 
