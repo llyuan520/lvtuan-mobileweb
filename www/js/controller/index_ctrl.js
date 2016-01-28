@@ -517,7 +517,7 @@ lvtuanApp.controller("groupviewinitCtrl",function($scope,$http,$state,$rootScope
                 };
 
                 localStorage.setItem("easemobParam", JSON.stringify($scope.easemobParam));
-				$state.go("groupview",{id: $scope.easemobParam.group_id});
+				$state.go("groupview",{id: $stateParams.id});
             }
             $ionicLoading.hide();
         })
