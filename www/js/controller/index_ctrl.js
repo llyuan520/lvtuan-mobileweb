@@ -563,8 +563,9 @@ lvtuanApp.controller("groupviewCtrl",function($scope,$http,$state,$rootScope,$st
 
     });
 	
-	$scope.site = function(id){
-		location.href='#/group/site/'+id;
+	$scope.site = function(){
+        var easemobParam = JSON.parse(localStorage.getItem('easemobParam'));
+		location.href='#/group/site/'+easemobParam.id;
 	}
 })
 
