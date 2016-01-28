@@ -563,8 +563,8 @@ lvtuanApp.controller("groupviewCtrl",function($scope,$http,$state,$rootScope,$st
 
     });
 	
-	$scope.site = function(){
-		$state.go('group/site',{id: $scope.id});
+	$scope.site = function(id){
+		$state.go('group/site',{id: id});
 	}
 })
 
