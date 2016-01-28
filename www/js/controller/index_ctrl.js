@@ -564,14 +564,19 @@ lvtuanApp.controller("groupviewCtrl",function($scope,$http,$state,$rootScope,$st
     });
 	
 	$scope.site = function(id){
-		$state.go('group/site',{id: id});
+
+		var easemobParam = JSON.parse(localStorage.getItem('easemobParam'));
+		location.href='#/group/site/'+easemobParam.id;
+		$state.go("group/site",{id: easemobParam.id});
 	}
 })
 
 //圈子设置
 lvtuanApp.controller("groupsiteCtrl",function($scope,$http,$state,$rootScope,$stateParams,$timeout,$ionicPopup,Upload){
 	console.info("圈子设置");
-	$http.get('http://'+$rootScope.hostName+'/group/'+$stateParams.id+'/detail'
+
+	var easemobParam = JSON.parse(localStorage.getItem('easemobParam'));
+	$http.get('http://'+$rootScope.hostName+'/group/'+easemobParam.id+'/detail'
         ).success(function(data) {
         	if (data && data.data) {
 				$scope.group =data.data; 
