@@ -119,7 +119,7 @@ lvtuanApp.directive('star', function () {
       }
     },
     link: function (scope, elem, attrs) {
-      elem.css("text-align", "center");
+      //elem.css("text-align", "left");
       var updateStars = function () {
         scope.stars = [];
         for (var i = 0; i < scope.max; i++) {
@@ -1582,14 +1582,11 @@ lvtuanApp.controller("becomenavCtrl",function($scope,$http,$rootScope,$ionicPopu
 			}
 		})
 	}
-
-
-
 	
 })
 
 //普通用户- 认证为律师的导航 - 从业信息
-lvtuanApp.controller("practitionersCtrl",function($scope,$http,$rootScope,$timeout,$stateParams,$localStorage,Upload,authService) {
+lvtuanApp.controller("practitionersCtrl",function($scope,$http,$rootScope,$timeout,$stateParams,$localStorage,$location,Upload,authService) {
 
 		var currentUser = authService.getUser();
 		$scope.currentUser = currentUser;
@@ -1685,6 +1682,7 @@ lvtuanApp.controller("practitionersCtrl",function($scope,$http,$rootScope,$timeo
 		//获取省市区
 		$scope.getAddress = function(){
 			delete $localStorage.addres;
+			localStorage.setItem("citypicke_goback", $location.path());
 			location.href='#/citypicke/all';
 		}
 		
@@ -2185,7 +2183,7 @@ lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$l
 })
 
 
-//律师个人主页
+//律师个人主页 - 个人介绍
 lvtuanApp.controller("viewCtrl",function($scope,$http,$rootScope,$stateParams,httpWrapper,authService,$ionicLoading){
 	$scope.max = 5;
 	$scope.ratingVal = 5;
@@ -2201,16 +2199,18 @@ lvtuanApp.controller("viewCtrl",function($scope,$http,$rootScope,$stateParams,ht
             title: '个人介绍',
             url: 'selfintro.tpl.html'
         }, {
-            title: '评价',
+        	title: '文章分享',
+            url: 'article.tpl.html'
+        }, {
+            title: '咨询回复',
+            url: 'advisory.tpl.html'
+    	}, {
+            title: '用户评价',
             url: 'evaluate.tpl.html'
         }, {
-            title: '文章',
-            url: 'article.tpl.html'
-        }
-        //, {
-        //    title: '广播',
-        //    url: 'televise.tpl.html'
-    	// }
+            title: '成交记录',
+            url: 'dealrecord.tpl.html'
+    	 }
     ];
 
     $scope.currentTab = 'selfintro.tpl.html'; //默认第一次显示的tpl
@@ -2269,23 +2269,60 @@ lvtuanApp.controller("viewCtrl",function($scope,$http,$rootScope,$stateParams,ht
 	
    }
 
-   //点赞
-	$scope.likes = function(id){
-		$http.post('http://'+$rootScope.hostName+'/like',
-		{
-			item_type : 'user',
-			item_id   : id
-		}).success(function(data) {
+	//关注
+	$scope.follow = function(id){
+		$http.post('http://'+$rootScope.hostName+'/follow',
+			{
+				follow_id   : id
+			},
+			{
+            headers: {
+                'Content-Type': 'application/json' ,
+            	'Authorization': 'bearer ' + $rootScope.token
+            }
+        }).success(function(data) {
         	console.info(data);
-        	var itmes = data.data;
-        	$scope.items.likes_count = itmes.likes_count;
-           layer.show("点赞成功！");
+        	$scope.items.follower_count++;
+        	$scope.items.is_following = true;
+           layer.show("关注成功！");
         });
 	}
+
+	//取消关注
+	$scope.follow_del = function(id){
+		$http.post('http://'+$rootScope.hostName+'/follow/remove',
+			{
+				follow_id   : id
+			},
+			{
+            headers: {
+                'Content-Type': 'application/json' ,
+            	'Authorization': 'bearer ' + $rootScope.token
+            }
+        }).success(function(data) {
+        	console.info(data);
+        	$scope.items.follower_count--;
+        	$scope.items.is_following = false;
+           layer.show("取消成功！");
+        });
+	}
+	
 })
 
-//律师个人主页-律师评价
-lvtuanApp.controller("viewevaluateCtrl",function($scope,$http,$rootScope,$stateParams,httpWrapper){
+//律师个人主页-律师文章
+lvtuanApp.controller("viewarticleCtrl",function($scope,$http,$rootScope,$stateParams,listHelper){
+	//获取律师文章列表
+	listHelper.bootstrap('/lawyer/'+$stateParams.id+'/articles', $scope);
+})
+
+//律师个人主页-咨询回复
+lvtuanApp.controller("advisoryCtrl",function($scope,$http,$rootScope,$stateParams,listHelper){
+	//咨询回复
+	listHelper.bootstrap('/lawyer/'+$stateParams.id+'/questions', $scope);
+})
+
+//律师个人主页-用户评价
+lvtuanApp.controller("evaluateCtrl",function($scope,$http,$rootScope,$stateParams,httpWrapper){
 
 	$scope.max = 5;
 	$scope.readonly = true;
@@ -2303,11 +2340,11 @@ lvtuanApp.controller("viewevaluateCtrl",function($scope,$http,$rootScope,$stateP
 	//获取律师的评价列表
 	var page = 1; //页数
     $scope.moredata = true; 
-    $scope.evaluations = [];	//创建一个数组接收后台的数据
+    $scope.items = [];	//创建一个数组接收后台的数据
     //下拉刷新
 	$scope.doRefresh = function() {
 		page = 1;
-		$scope.evaluations = [];
+		$scope.item = [];
         $scope.loadMore();
     };
 
@@ -2316,16 +2353,16 @@ lvtuanApp.controller("viewevaluateCtrl",function($scope,$http,$rootScope,$stateP
 	}
 	
 	function getEvaluation(){
-		var url = 'http://'+$rootScope.hostName+'/lawyer/'+$stateParams.id+'/articles?page='+page;
+		var url = 'http://'+$rootScope.hostName+'/lawyer/'+$stateParams.id+'/evaluations?page='+page;
 		$http.get(url)
 			.success(function(data) {
 				if(data.data.length > 0){
 					$scope.moredata = true;
 					//用于连接两个或多个数组并返回一个新的数组
-					$scope.evaluations = $scope.evaluations.concat(data.data); 
+					$scope.items = $scope.items.concat(data.data); 
 					$scope.ratingVal = [];
-					for(var i=0; i<$scope.evaluations.length; i++){
-						$scope.ratingVal.push($scope.evaluations[i].evaluate_score);
+					for(var i=0; i<$scope.items.length; i++){
+						$scope.ratingVal.push($scope.items[i].evaluate_score);
 					}
 
 				}else{
@@ -2345,11 +2382,13 @@ lvtuanApp.controller("viewevaluateCtrl",function($scope,$http,$rootScope,$stateP
 	    $scope.loadMore();
 	});
 })
-//律师个人主页-律师文章
-lvtuanApp.controller("viewarticleCtrl",function($scope,$http,$rootScope,$stateParams,listHelper){
-	//获取律师文章列表
-	listHelper.bootstrap('/lawyer/'+$stateParams.id+'/articles', $scope);
+
+//律师个人主页-成交记录
+lvtuanApp.controller("dealrecordCtrl",function($scope,$http,$rootScope,$stateParams,listHelper){
+	//成交记录
+	listHelper.bootstrap('/lawyer/'+$stateParams.id+'/evaluations', $scope);
 })
+
 
 //律师个人主页-律师广播
 lvtuanApp.controller("viewteleviseCtrl",function($scope,$http,$rootScope,listHelper){
@@ -3711,6 +3750,40 @@ lvtuanApp.controller("documentownloadlistCtrl",function($http,$scope,$state,$roo
 
 //小微企服
 lvtuanApp.controller("corporateservicesCtrl",function($http,$scope,$state,$rootScope,$stateParams){
+
+	$scope.counsels = [
+					{	
+						"img"		:'01.png',
+						"title"		:"防范合同风险",
+						"content" 	: "商务合同、法律文书一审再审，专业填坑我最强"
+					},
+					{	
+						"img"		:'02.png',
+						"title"		:"避免劳资纠纷",
+						"content" 	: "从员工入职到离职，全流程风险预警与控制，有效避免劳资纠纷"
+					},
+					{	
+						"img"		:'03.png',
+						"title"		:"维护企业权益",
+						"content" 	: "一旦企业权益受损，务必全力维权，将损失降至最低"
+					},
+					{	
+						"img"		:'04.png',
+						"title"		:"法律风险评估",
+						"content" 	: "定期进行专业的企业法律风险评估，并提供靠谱的整改意见"
+					},
+					{	
+						"img"		:'05.png',
+						"title"		:"节约时间成本",
+						"content" 	: "专业的事交给专业的律师来做，您可以专心管理和经营企业"
+					},
+					{	
+						"img"		:'06.png',
+						"title"		:"案件委托优惠",
+						"content" 	: "个案委托八五折起，您可以省下大笔律师费，用于企业发展"
+					}
+				];
+
     var page = 1; //页数
     $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
     $scope.items = [];	//创建一个数组接收后台的数据
@@ -3745,147 +3818,268 @@ lvtuanApp.controller("corporateservicesCtrl",function($http,$scope,$state,$rootS
 
 //小微企服
 lvtuanApp.controller("corporatelistCtrl",function($scope,$state,$http,$rootScope,$stateParams,$ionicPopup,$timeout,$ionicLoading){
-	$ionicLoading.show();
-	//创建tabs列表
-	$scope.tabs = [{
-            title: '产品详情',
-            url: 'list-detail.tpl.html'
-        }, {
-            title: '评价',
-            url: 'list-evaluate.tpl.html'
-    }];
-    $scope.currentTab = 'list-detail.tpl.html'; //默认第一次显示的tpl
 
-    $scope.onClickTab = function (tab) { //点击tab赋值url
-        $scope.currentTab = tab.url;
-    }
-    
-    $scope.isActiveTab = function(tabUrl) {  //给选中的url的a 标签样式
-        return tabUrl == $scope.currentTab;
-    }
+	$scope.counsels = {
+		"counsels_8800"	:{
+			"id":'1',
+			"title": "企业法律顾问银卡提供的服务",
+            "money": "8800元/年(两年起签)",                         
+            "banner_img": "banner_1.png", 
+			"counsels_arry" :[
+				{	
+					"title"		:'电话咨询',
+					"content" 	: "不限次，无论您遇到什么问题，一个电话随时连线律师。找律师，从未如此简单。"
+				},
+				{	
+					"title"		:"风险诊断",
+					"content" 	: "不限次，企业经营、决策过程中有任何不确定的风险、困惑，我们负责帮您诊断。"
+				},
+				{	
+					"title"		:"文件下载",
+					"content" 	: "不限次，由专业律师团队精心整理、审阅过的海量实用文书，您可免费任意下载。"
+				},
+				{	
+					"title"		:"免费律师函",
+					"content" 	: "2份，一旦企业权益受损，我们将帮您发出律师函，以及时制止不法的侵权行为。"
+				},
+				{	
+					"title"		:"法律文书制作、修改",
+					"content" 	: "5份，企业经营过程中涉及的各类法律文书的制作、修改及审核，包您高枕无忧。"
+				},
+				{	
+					"title"		:"企业管理制度全面规划化",
+					"content" 	: "1次，对企业的管理规章制度进行全方位的合法性审查，并给出专业的规划建议。"
+				},
+				{	
+					"title"		:'律师在所会面',
+					"content" 	: "2次，在律团的办公场所为您面对面地提供直接、高效的法律服务。服务内容任选。"
+				},
+				{	
+					"title"		:"网上法律实务培训",
+					"content" 	: "2次，我们将在网上为您公司的全体员工进行法律实务的专业培训，包括训后咨询。"
+				},
+				{	
+					"title"		:"企业风险评估及整改意见",
+					"content" 	: "1份，对您的企业进行专业、全面的法律风险评估，并且提供靠谱的整改意见。"
+				},
+				{	
+					"title"		:"年终企业法律顾问服务总结报告",
+					"content" 	: "1份，我们将给出服务期内（一年）法律顾问服务的总结性报告，以供分析、参考。"
+				},
+				{	
+					"title"		:"个案委托",
+					"content" 	: "八五折，在法律顾问服务期间，您公司的案件委托一律八五折，不限案件性质及范围。"
+				}
+			]
+		},
+		"counsels_18800"	:{
+			"id":'2',
+			"title": "企业法律顾问金卡提供的服务",
+            "money": "18800元/年(一年起签)",                         
+            "banner_img": "banner_2.png", 
+			"counsels_arry" :[
+				{   
+                    "title"     :'电话咨询',
+                    "content"   :'不限次，无论您遇到什么问题，一个电话随时连线律师。找律师，从未如此简单。',
+                },
+                {   
+                    "title"     :'风险诊断',
+                    "content"   :'不限次，企业经营、决策过程中有任何不确定的风险、困惑，我们负责帮您诊断。',
 
-    //详情
-    $ionicLoading.show();
-    $http.get('http://'+$rootScope.hostName+'/company/product/'+$stateParams.id+'/view')
-    	.success(function(data) {
-        	console.info("详情",data.data);			
-        	$ionicLoading.hide();	
-        	$scope.items = data.data; 
-        	$ionicLoading.hide();
-		})
+                },
+                {   
+                    "title"     :'免费律师函',
+                    "content"   :'4份，一旦企业权益受损，我们将帮您发出律师函，以及时制止不法的侵权行为。',
 
-})
+                },
+                {   
+                    "title"     :'法律文书制作、修改',
+                    "content"   :'10份，企业经营过程中涉及的各类法律文书的制作、修改及审核，包您高枕无忧。',
 
-//评价
-lvtuanApp.controller("corporatelistevaluateCtrl",function($scope,$http,$rootScope,$stateParams){
-	console.info("id",$stateParams.id);
+                },
+                {   
+                    "title"     :'企业管理制度全面规划化',
+                    "content"   :'1次，对企业的管理规章制度进行全方位的合法性审查，并给出专业的规划建议。',
+
+                },
+                {   
+                    "title"     :'律师在所会面',
+                    "content"   :'4次，在律团的办公场所为您面对面地提供直接、高效的法律服务。服务内容任选。',
+
+                },
+                {   
+                    "title"     :'上门法律实务培训',
+                    "content"   :'1次，我们将拜访您的公司并为全体员工进行法律实务的专业培训，包括训后咨询。',
+
+                },
+                {   
+                    "title"     :'企业风险评估及整改意见',
+                    "content"   :'1份，对您的企业进行专业、全面的法律风险评估，并且提供靠谱的整改意见。',
+
+                },
+                {   
+                    "title"     :'年终企业法律顾问服务总结报告',
+                    "content"   :'1份，我们将给出服务期内（一年）法律顾问服务的总结性报告，以供分析、参考。',
+
+                },
+                {   
+                    "title"     :'个案委托',
+                    "content"   :'八五折，在法律顾问服务期间，您公司的案件委托一律八五折，不限案件性质及范围。',
+                }
+			]
+		},
+		"counsels_28800"	:{
+			"id":'3',
+			"title": "企业法律顾问金卡提供的服务",
+            "money": "28800元/年(一年起签)",                         
+            "banner_img": "banner_3.png", 
+			"counsels_arry" :[
+				{   
+                    "title"     :'电话咨',
+                    "content"   :'不限次，无论您遇到什么问题，一个电话随时连线律师。找律师，从未如此简单。',
+                },
+                {   
+                    "title"     :'风险诊断',
+                    "content"   :'不限次，企业经营、决策过程中有任何不确定的风险、困惑，我们负责帮您诊断。',
+
+                },
+                {   
+                    "title"     :'免费律师函',
+                    "content"   :'8份，一旦企业权益受损，我们将帮您发出律师函，以及时制止不法的侵权行为。',
+
+                },
+                {   
+                    "title"     :'法律文书制作、修改',
+                    "content"   :'15份，企业经营过程中涉及的各类法律文书的制作、修改及审核，包您高枕无忧。',
+
+                },
+                {   
+                    "title"     :'企业管理制度全面规划化',
+                    "content"   :'1次，对企业的管理规章制度进行全方位的合法性审查，并给出专业的规划建议。',
+
+                },
+                {   
+                    "title"     :'律师在所会面',
+                    "content"   :'6次，在律团的办公场所为您面对面地提供直接、高效的法律服务。服务内容任选。',
+
+                },
+                {   
+                    "title"     :'上门法律实务培训',
+                    "content"   :'2次，我们将拜访您的公司并为全体员工进行法律实务的专业培训，包括训后咨询。',
+
+                },
+                {   
+                    "title"     :'企业风险评估及整改意见',
+                    "content"   :'1份，对您的企业进行专业、全面的法律风险评估，并且提供靠谱的整改意见。',
+
+                },
+                {   
+                    "title"     :'年终企业法律顾问服务总结报告',
+                    "content"   :'1份，我们将给出服务期内（一年）法律顾问服务的总结性报告，以供分析、参考。',
+
+                },
+                {   
+                    "title"     :'个案委托',
+                    "content"   :'八五折，在法律顾问服务期间，您公司的案件委托一律八五折，不限案件性质及范围。',
+                }
+			]
+		}
+	}
 	
-	 $http.get('http://'+$rootScope.hostName+'/company/product/'+$stateParams.id+'/comments')
-	 	.success(function(data) {
-        	console.info("评价详情",data.data);				
-        	$scope.items = data.data; 
-        	$scope.ratingVal = [];
-			for(var i=0; i<$scope.items.length; i++){
-				$scope.ratingVal.push($scope.items[i].score);
-			}
-		})
-	    $scope.max = 5;
-		$scope.readonly = true;
-		$scope.onHover = function(val){
-			$scope.hoverVal = val;
-		};
-		$scope.onLeave = function(){
-			$scope.hoverVal = null;
-		}
-		$scope.onChange = function(val){
-			$scope.ratingVal = val;
-		}
+	$scope.items = null;
+	switch($stateParams.id) {
+      	case "1":
+      		$scope.items = $scope.counsels.counsels_8800;
+    		break;
+      	case "2":
+    		$scope.items = $scope.counsels.counsels_18800;
+    		break;
+    	case "3":
+    		$scope.items = $scope.counsels.counsels_28800;
+    		break;
+    }
+
 })
 
 //立即购买
-lvtuanApp.controller("corporatebuynowCtrl",function($scope,$http,$rootScope,$stateParams,$ionicLoading){
-	$ionicLoading.show();
-	$http.get('http://'+$rootScope.hostName+'/company/product/'+$stateParams.id+'/view')
-		.success(function(data) {
-        	console.info("详情",data.data);				
-        	$scope.items = data.data; 
-        	$ionicLoading.hide();
-		})
+lvtuanApp.controller("corporatebuynowCtrl",function($scope,$http,$rootScope,$stateParams,$ionicLoading,$localStorage,$location){
+	$scope.user = {};
+	$scope.addres_param = {};
+	$scope.addres = $localStorage.addres || "";
+	$scope.$watch('addres', function(newVal, oldVal) {
+		// 监听变化，并获取参数的最新值
+	    console.log('newVal: ', newVal);   
+	    $localStorage.addres = $scope.addres;
+	    $scope.addres_param = $localStorage.addres;
+	    if($scope.addres_param){
+	    	$scope.user = {
+					address : $scope.addres_param.province.value +" "+ $scope.addres_param.city.value +" "+ $scope.addres_param.district.value
+				}
+	   	 	console.info('address',$scope.address);
+	    }else{
+	    	$scope.user = {
+						address : ""
+					}
+	    }
+	});
+	$scope.$watch(function() {
+	    return angular.toJson($localStorage);
+	}, function() {
+	    $scope.addres = $localStorage.addres;
+	    console.info($scope.addres);
+	});
 
-	getProvince();
-	//获取所在区域 - 省
-	function getProvince(){
-		$ionicLoading.show();
-		$http.get('http://'+$rootScope.hostName+'/area/province')
-		.success(function(data) {
-			$ionicLoading.hide();
-        	console.info(data.data)
-			$scope.provinces = data.data; 	
-			$ionicLoading.hide();
-		})
+	//获取省市区
+	$scope.getAddress = function(){
+		delete $localStorage.addres;
+		localStorage.setItem("citypicke_goback", $location.path());
+		location.href='#/citypicke/all';
 	}
 
-	//获取所在区域 - 市
-	$scope.getCity = function(province){
-		$ionicLoading.show();
-		$http.get('http://'+$rootScope.hostName+'/area/'+province+'/city')
-		.success(function(data) {
-			$ionicLoading.hide();
-        	$scope.citys = data.data; 
-        	$ionicLoading.hide();
-		})
-	}
-
-	//获取所在区域 - 地區
-	$scope.getDistrict = function(city){
-		$ionicLoading.show();
-		$http.get('http://'+$rootScope.hostName+'/area/'+city+'/district')
-		.success(function(data) {
-			$ionicLoading.hide();
-			$scope.districts = data.data; 
-			$ionicLoading.hide();
-		})
-	}
-
+	console.log($stateParams.id);
 
 	$scope.submit = function(user){
 		$ionicLoading.show();
-		$scope.items = {};
+		var param = {};
+		var province =  $scope.addres_param.province.key;
+		var city =  $scope.addres_param.city.key;
+		var district =  $scope.addres_param.district.key;
+
 		if(user.email){
-			$scope.items['email'] = user.email;
+			param['email'] = user.email;
 		}
 		if(user.company_name){
-			$scope.items['company_name'] = user.company_name;
+			param['company_name'] = user.company_name;
 		}
 		if(user.memo){
-			$scope.items['memo'] = user.memo;
+			param['memo'] = user.memo;
 		}
-		if(user.province.key){
-			$scope.items['province'] = user.province.key;
+		if(province){
+			param['province'] = province;
 		}
-		if(user.city.key){
-			$scope.items['city'] = user.city.key;
+		if(city){
+			param['city'] = city;
 		}
-		if(user.district.key){
-			$scope.items['district'] = user.district.key;
+		if(district){
+			param['district'] = district;
 		}
 		if(user.invoice == true){
-			$scope.items['invoice'] = 'Y';
+			param['invoice'] = 'Y';
 		}else{
-			$scope.items['invoice'] = 'N';
+			param['invoice'] = 'N';
 		}
 		if($stateParams.id){
-			$scope.items['product_id'] = $stateParams.id;
+			param['product_id'] = $stateParams.id;
 		}
-		console.info($scope.items);
+		console.info(param);
 		$ionicLoading.show();
-		$http.post('http://'+$rootScope.hostName+'/company/order/submit',$scope.items)
+		$http.post('http://'+$rootScope.hostName+'/company/order/submit',param)
 			.success(function(data) {
 				$ionicLoading.hide();
 	        	console.log(data.data);
-	                $scope.user = {};
-	                $scope.items = {};
-			location.href='#/pay/'+data.data.post.id+'?type=order';
+                $scope.user = {};
+                delete $localStorage.addres;
+				location.href='#/pay/'+data.data.post.id+'?type=order';
 	        });
 		
 	}
@@ -4246,7 +4440,7 @@ lvtuanApp.controller("citypickerCtrl",function($http,$location,$scope,$rootScope
 })
 
 lvtuanApp.controller("citypickeAllCtrl",function($http,$state,$location,$scope,$rootScope,$anchorScroll,$ionicHistory,$stateParams,$ionicLoading,$ionicScrollDelegate,$localStorage){
-	
+
 	//获取地址定位 根据a-z排序显示
 	$ionicLoading.show();
 	$http.get('http://'+$rootScope.hostName+'/area/province/letters')
@@ -4299,7 +4493,10 @@ lvtuanApp.controller("citypickeAllCtrl",function($http,$state,$location,$scope,$
 		    addres: $scope.addres
 		});
 
-		location.href='#/practitioners';
+		$scope.url = localStorage.getItem('citypicke_goback');
+		console.info('#'+$scope.url);
+		location.href='#'+$scope.url;
+
 
 	}
 

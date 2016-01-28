@@ -66,7 +66,7 @@
 					<a class="col padding3" ng-href="#/corporate">
 				  	 	<img ng-src="img/xwqf.png" style="width:35%;height:35%;" /><br/>
 				  	    <b>法律顾问</b><br>
-						<font style="font-size:10px;">为您企业保驾护航</font>
+						<font style="font-size:10px;">为企业保驾护航</font>
 				    </a>
 				</div>
 			</div>
@@ -79,8 +79,8 @@
 	      <ul class="list">
 	      	<!-- <ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher> -->
             <ion-list>
-            	<ion-item class="item item-thumbnail-left i-lawyer-list" ng-repeat="item in items" ng-href="#/lawyer/{{item.id}}">
-		          	<img ng-src="{{item.avatar}}" style="border-radius:50px;" />
+            	<ion-item class="item item-thumbnail-left i-lawyer-list item-avatar" ng-repeat="item in items" ng-href="#/lawyer/{{item.id}}">
+		          	<img ng-src="{{item.avatar}}" class="item-image" />
 					<h2>{{item.realname}}</h2>
 					<p>执业{{item.practice_period}}/{{item.city}}</p>
 					<p>

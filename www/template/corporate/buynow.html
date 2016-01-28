@@ -2,55 +2,26 @@
 		<ion-pane  class="web-body">
 			<ion-header-bar class="bar bar-header bar-light">
 				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-href="#/corporate" ></a>
-				<h1 class="title">小微企服</h1>
+				<h1 class="title">填写信息</h1>
 			</ion-header-bar>
 			<ion-content class="web-body">
 				<form name="myForm" class="css-form" id="myForm" novalidate>
 					<div class="has-header ionic-pseudo">
 				        <div class="list">
-					        <div class="item item-divider">
-					         收件信息(必填)
-					        </div>
-					        <div class="item">
-					          <input placeholder="请输入邮箱" ng-model="user.email" name="email" type="text" required ng-pattern="/^(([0-9a-zA-Z]+)|([0-9a-zA-Z]+[_.0-9a-zA-Z-]*[0-9a-zA-Z]+))@([a-zA-Z0-9-]+[.])+([a-zA-Z]{2} |net|NET|com|COM|gov|GOV|mil|MIL|org|ORG|edu|EDU|int|INT|cn|CN)$/" ng-model-options="{debounce:2000}">
+					        <div class="item item-input padding10">
+					          <input placeholder="请输入邮箱地址" ng-model="user.email" name="email" type="text" required ng-pattern="/^(([0-9a-zA-Z]+)|([0-9a-zA-Z]+[_.0-9a-zA-Z-]*[0-9a-zA-Z]+))@([a-zA-Z0-9-]+[.])+([a-zA-Z]{2} |net|NET|com|COM|gov|GOV|mil|MIL|org|ORG|edu|EDU|int|INT|cn|CN)$/" ng-model-options="{debounce:2000}">
 					          <p class="fc-red" ng-show="myForm.email.$invalid && !myForm.email.$pristine">请输入正确的邮箱！</p>
 					        </div>
-					        <div class="item">
+					        <div class="item item-input padding10">
 					          <input placeholder="请输入企业名称" ng-model="user.company_name" name="company_name" type="text" required>
 					        </div>
-					        <div class="item">
-					          <textarea style="width:100%" placeholder="备注" ng-model="user.memo" name="memo" ></textarea>
+					        <div class="item item-input padding10">
+					          <input placeholder="省、市" ng-model="user.address" name="address" type="text" required ng-click="getAddress()" data-disabled="disabled">
 					        </div>
-					        <div class="item">
-					         	<select style="width: 100%;height: 30px;line-height: 30px" required ng-model="user.province" name="province" ng-options="province as province.value for province in provinces track by province.key" ng-change="getCity(user.province.key)">
-										<option value="">--省份--</option>
-							    </select>
-							</div>
-							<div class="item" ng-show="user.province">
-							    <select style="width: 100%;height: 30px;line-height: 30px" required  ng-model="user.city" name="city" ng-options="city as city.value for city in citys track by city.key" ng-change="getDistrict(user.city.key)">
-										<option value="">--城市--</option>
-							    </select>
-							</div>
-							<div class="item" ng-show="user.city">
-							    <select style="width: 100%;height: 30px;line-height: 30px" required ng-model="user.district" name="district" ng-options="district as district.value for district in districts track by district.key">
-										<option value="">--地区--</option>
-							    </select>
+					        <div class="item item-input padding10">
+					          <textarea placeholder="请输入备注信息" ng-model="user.memo" name="memo" rows="8" ></textarea>
 					        </div>
-					        <div class="item item-divider">
-					         订单信息
-					        </div>
-					        <div class="list">
-					        	<div class="item item-thumbnail-left">
-						          <img ng-src="{{items.picture}}">
-						          <h2>{{items.name}}</h2>
-						          <p>
-						          	<label class="lef">￥ {{items.price}}</label>
-						          	<label class="rig"> x{{items.life}}</label>
-						          </p>
-						        </div>
-						        <div class="item" style="text-align:right">
-						          <label>合计：￥ {{items.sum_price}}</label>
-						        </div>
+					        <div class="list item-borderless">
 						        <div class="item item-checkbox">
 						        	<div class="checkbox">
 								  		<input type="checkbox" name="invoice" ng-model="user.invoice"  ng-false-value="false"> 
@@ -59,7 +30,7 @@
 						        </div>
 					        </div>
 					        <div class="padding">
-						        <button class="button button-block button-positive" type="submit" ng-disabled="myForm.$invalid" ng-click="submit(user)">确认购买</button>
+						        <button class="button button-block button-positive" type="submit" ng-disabled="myForm.$invalid" ng-click="submit(user)">下一步</button>
 							</div>
 						</div>
 	    			</div>

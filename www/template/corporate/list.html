@@ -1,53 +1,36 @@
-<script src="/lib/ionic/js/angular/angular-sanitize.min.js"></script>
 <ion-view hide-tabs="true">
 		<ion-pane  class="web-body">
 			<ion-header-bar class="bar bar-header bar-light">
 				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-href="#/corporate"></a>
-				<h1 class="title">小微企服</h1>
+				<h1 class="title">服务详情</h1>
 			</ion-header-bar>
-			<ion-content class="web-body">
-				<div class="slideBox">
-					<div class="hd tabs">
-					  <a ng-repeat="tab in tabs"  ng-class="{active:isActiveTab(tab.url)}"  ng-click="onClickTab(tab)" class="tab-item" >{{tab.title}}</a></li>
-					</div>
-					<div class="bd">
-							<div ng-include="currentTab"></div>
-					</div>
-				</div>
+			<ion-content class="has-tabs">
+				<ion-list>
+					<ion-item class="item-borderless">
+						<h2 class="txt-c-66 txt-align-c" style="font-size: 18px;"><b>{{items.title}}</b></h2>
+						<div class="height10"></div>
+						<h2 class="txt-align-c txt-c-99">{{items.money}}</h2>
+						<div class="height10"></div>
+						<div class="border_bottom" style="padding-bottom:10px;text-align: center">
+							<img src="img/counsel/{{items.banner_img}}" style="width: 100%;max-width: 429px;max-height: 297px;">
+						</div>
+					</ion-item>
+					<ion-item class="item-borderless row-no-padding" ng-repeat="arry in items.counsels_arry">
+					  	<div class="item item-icon-left item-borderless">
+					  	  <i class="icon bgtag badge-positive">{{$index+1}}</i>
+					  	  <div class="border_bottom" style="padding: 0 0 10px 0px; margin-left: 10px;">
+					  	  	<h2>{{arry.title}}</h2>
+				          	<p class="contents txt-c-66">{{arry.content}}</p>
+					  	  </div>
+				        </div>
+					</ion-item>
+				</ion-list>
 			</ion-content>
+
+			<div class="tabs" style="background-color:#fff;height: 59px;border-top: 1px solid #999 !important;">
+				<div class="row" style="padding: 5px 5%;">
+					<button class="button button-block button-positive" style="margin-top:-2px;margin-bottom:0;" ng-click="jumpGo('#/corporate/buynow/{{items.id}}')"><b>立即购买</b></button>
+				</div>
+			</div>
 		</ion-pane>
 </ion-view>
-
-<script type="text/ng-template" id="list-detail.tpl.html">
-	<div class="ngbindhtml">
-		<ion-list>
-		    <ion-item class="item" >
-					<h2 class="fc-ee" ng-bind-html="items.attribute.introduce"></h2>
-					<br><br>
-					<a class="button button-block button-positive web-wid8c web-top10" ng-href="#/corporate/buynow/{{items.id}}" >立即购买</a>
-		    </ion-item>
-		 </ion-list>
-	</div>
-</script>
-
-<script type="text/ng-template" id="list-evaluate.tpl.html">
-	<div ng-controller="corporatelistevaluateCtrl">
-		<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
-		<ion-list>
-			<ion-item class="item-thumbnail-left" ng-repeat="item in items">
-				<img ng-src="{{item.user.avatar}}"/>
-				<h2>{{item.user.realname}} 
-					<div class="rig" star rating-value="ratingVal[$index]" max="max" on-hover="onHover" on-leave="onLeave" readonly="{{readonly}}"></div>
-					<input type="hidden" name="input" ng-model="max" min="0" max="10" required>
-				</h2>
-				<p class="contents">{{item.comment}}</p>
-				<p>
-					<lablel>产品：{{item.title}}</lablel>
-					<lablel>年限：{{item.qty}}</lablel>
-				</p>
-				<p>{{item.created_at}}</label></p>
-			</ion-item>
-		</ion-list>
-		<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
-	</div>
-</script>

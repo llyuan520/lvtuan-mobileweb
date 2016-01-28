@@ -1,6 +1,6 @@
 <ion-view hide-tabs="true">
 		<ion-pane>
-			<ion-header-bar class="bar bar-header">
+			<ion-header-bar class="bar bar-header bar-light">
 				<button class="button button-clear button-positive" ng-click="jumpGoBack()">  
 	                <i class="icon icon-left ion-ios-arrow-back"></i>  
 	            </button>
@@ -9,42 +9,39 @@
 			</ion-header-bar>
 			
 			<ion-content>
+
 				<form id="questions_form" name="myForm" novalidate ng-controller="graphicCtrl">
-
-					<div class="ist-case-searchtype">	
-						<select required ng-model="user.cat_id" ng-options="value.key as value.value for value in workscopes" style="width:100%;height:50px;line-height:50px;border: none;">
-								<option value="">-- 请选择案例类型 --</option>
-					    </select>
-					</div>
-					<div class="list">
-						<label class="item item-input">
-						  <input ng-model="user.title" name="title" type="text" placeholder="请输入标题" required>
+					<div class="item ist-case-searchtype questions-type">	
+						<div class="select-cnt arrow1 ion-chevron-down border-bottom-colorf2f2">
+							<select required ng-model="user.cat_id" ng-options="value.key as value.value for value in workscopes">
+								<option value="">请选择案例类型</option>
+						    </select>
+						</div>
+						<label class="item-input border-bottom-colorf2f2">
+						  <input ng-model="user.title" name="title" type="text" ng-minlength="1" ng-maxlength="15" placeholder="请输入咨询标题" required>
 						</label>
-						<label class="item item-input">
-				          <textarea ng-model="user.content" name="content" rows="10" placeholder="请输入问题" required ng-minlength="2" ng-maxlength="1000"></textarea>
+						<p ng-cloak class="log-but error ng-cloak" ng-show="myForm.title.$error.minlength">字符不能小于1个字符</p>
+						<p ng-cloak class="log-but error ng-cloak" ng-show="myForm.title.$error.maxlength">字符不能大于15个字符</p>
+						<label class="item-input">
+				          <textarea ng-model="user.content" name="content" rows="6" placeholder="请详细描述您要咨询的问题" ng-minlength="1" ng-maxlength="300" required></textarea>
 				        </label>
-				        <p class="item" ng-show="myForm.content.$error.minlength">
-							<span class="fc-red">字符不能小于2个字符</span>
-						</p>
-						<p class="item" ng-show="myForm.content.$error.maxlength">
-							<span class="fc-red">字符的长度不能超过1000个</span>
-						</p>
+						<p ng-cloak class="log-but error ng-cloak" ng-show="myForm.content.$error.minlength">字符不能小于1个字符</p>
+						<p ng-cloak class="log-but error ng-cloak" ng-show="myForm.content.$error.maxlength">字符不能大于300个字符</p>
 					</div>
-					<div class="item group-site">
-						<label class="name">上传附件：</label>
-
-						<div class="rig" style="width: 92px;">
-							<div ng-disabled="booleans" ng-model="file_paths"  accept="image/*,.doc,.docx"  gf-pattern="'image/*,.doc,.docx'" ngf-max-size="2MB" ngf-select="uploadFiles($files, $invalidFiles)" class="icon-right" style="font-size:4em;padding:0 20px;color:#ccc;float:right" multiple><i class="icon ion-ios-plus-outline"></i></div>
+					<div class="item questions-site">
+						<label class="name" style="line-height: 50px;">请上传附件：</label>
+						<div class="rig">
+							<div ng-disabled="booleans" ng-model="file_paths"  accept="image/*,.doc,.docx"  gf-pattern="'image/*,.doc,.docx'" ngf-max-size="2MB" ngf-select="uploadFiles($files, $invalidFiles)" class="icon-right" multiple><i class="icon ion-ios-plus-outline"></i></div>
 							<input type="hidden" name="file_paths" value="{{file}}" />
 						</div>
-						 <br><br>
-						  <label ng-show="files">文件名称:</label>
-						  <ul>
-						    <li ng-repeat="f in files" style="font:smaller">{{f.name}} {{f.$errorParam}}
-						      <span class="progress" ng-show="f.progress >= 0">
-						        <div style="width:{{f.progress}}%"  
-						            ng-bind="f.progress + '%'"></div>
-						      </span>
+
+						  <ul style="margin-top: 10px;display: inline-block;float: left;width: 100%;">
+						    <li ng-repeat="f in files" style="font:smaller;width: 100%;">
+						    	<span style="width: 100%;float: left;display: inline-block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;height: 20px;">{{f.name}}</span> 
+						    	{{f.$errorParam}}
+							    <!-- <span class="progress" ng-show="f.progress >= 0">
+							        <div style="width:{{f.progress}}%" ng-bind="f.progress + '%'"></div>
+							    </span> -->
 						    </li>
 						    <li ng-repeat="f in errFiles" style="font:smaller">{{f.name}} {{f.$error}} {{f.$errorParam}}</li> 
 						  </ul>

@@ -12,9 +12,9 @@
 			<form name="myForm" class="css-form" id="myForm">
 				<div class="list">
 					<a class="item">
-				    	<div class="row" style="padding: 0;">
-				    		<div class="col col-center" style="padding: 0;">头像</div>
-							<div class="col col-75 col-center" style="padding: 0;">
+				    	<div class="row row-no-padding">
+				    		<div class="col col-center row-no-padding">头像</div>
+							<div class="col col-75 col-center row-no-padding">
 								<div style="float: right;height: 80px;" ng-model="user.avatar" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="6MB" ngf-min-height="100" ngf-select="uploadFiles($file,items.user.id)">
 									<img style="border-radius:50%;" src="{{file}}" ngf-thumbnail="user.avatar || '{{file}}'" width="80" height="80">
 									<!-- <span class="progress" ng-show="progress >= 0 || progress <= 99 ">
@@ -23,35 +23,35 @@
 								</div>
 								<input type="hidden" name="avatar" value="{{file}}" />
 					  		</div>
-					  		<div class="col col-center" style="padding: 0;"><i class="icon ion-chevron-right"></i></div>
+					  		<div class="col col-center row-no-padding"><i class="icon ion-chevron-right"></i></div>
 						</div>
 					</a>
 					<a class="item" ng-href="#/valrealname">
-						<div class="row" style="padding: 0;">
-				    		<div class="col col-center" style="padding: 0;">昵称</div>
+						<div class="row row-no-padding">
+				    		<div class="col col-center row-no-padding">昵称</div>
 							<div class="col col-75 col-center" style="padding: 0;text-align: right;">
 								{{items.user.nikname}}
 					  		</div>
-					  		<div class="col col-center" style="padding: 0;"><i class="icon ion-chevron-right"></i></div>
+					  		<div class="col col-center row-no-padding"><i class="icon ion-chevron-right"></i></div>
 						</div>
 					</a>
 					<a class="item" ng-href="#/valphone">
-					    <div class="row" style="padding: 0;">
-				    		<div class="col col-center" style="padding: 0;">手机</div>
+					    <div class="row row-no-padding">
+				    		<div class="col col-center row-no-padding">手机</div>
 							<div class="col col-75 col-center" style="padding: 0;text-align: right;">
 								{{items.user.phone}}
 					  		</div>
-					  		<div class="col col-center" style="padding: 0;"><i class="icon ion-chevron-right"></i></div>
+					  		<div class="col col-center row-no-padding"><i class="icon ion-chevron-right"></i></div>
 						</div>
 
 					</a>
 					<a class="item" ng-href="#/valemail">
-						<div class="row" style="padding: 0;">
-				    		<div class="col col-center" style="padding: 0;">邮箱</div>
+						<div class="row row-no-padding">
+				    		<div class="col col-center row-no-padding">邮箱</div>
 							<div class="col col-75 col-center" style="padding: 0;text-align: right;">
 								{{items.user.email}}
 					  		</div>
-					  		<div class="col col-center" style="padding: 0;"><i class="icon ion-chevron-right"></i></div>
+					  		<div class="col col-center row-no-padding"><i class="icon ion-chevron-right"></i></div>
 						</div>
 					</a>
 				</div>

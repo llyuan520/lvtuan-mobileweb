@@ -9,15 +9,14 @@
  以像素分割线或者边框描边 #DDDDDD
  页面底色为纯白色 FFFFFF
  * */
-body,
-.ionic-body{
+body, html, .pane, .ionic-body,h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
     font-family: 'Microsoft YaHei';
     color: #333333;
 }
 .scroll-content {
     background-color: #eee;
 }
-.scroll-content.bg-fff{
+.scroll-content.bg-fff,.bg-fff{
     background-color: #fff;
 }
 .content.bottom_50,.pane .bottom_50,.bottom_50{
@@ -33,10 +32,33 @@ body,
 .fc-red,.error,.item p.fc-red,.item p.error{
     color: #FF0000;
 }
-.bar .title {
+/*.bar .title {
     font-size: 1.4rem;
+}*/
+.padding10{
+    padding: 10px;
 }
-
+.border_bottom{
+    border-bottom: 1px solid #ddd;
+}
+.padding_bottom5{
+    padding-bottom: 5px;
+}
+.item-icon-left .icon.bgtag{
+    background-color: #00cafa;
+    color: #fff;
+    z-index: 1;
+    display: inline-block;
+    min-width: 35px;
+    border-radius: 50px;
+    vertical-align: baseline;
+    text-align: center;
+    white-space: nowrap;
+    font-size: 14px;
+    line-height: 35px;
+    height: auto;
+    top: 15px;
+}
 
 /*----------*/
 .bar.bar-light{
@@ -76,7 +98,7 @@ a, a:link, a:visited, a:active, a:hover {
 .a-left{
     text-align: left;
 }
-.a-right{
+.a-right, .textright{
     text-align: right;
 }
 .txt-align-c{
@@ -101,8 +123,12 @@ a, a:link, a:visited, a:active, a:hover {
 .fc-ee{
     color: #999;
 }
+.height10{
+    height: 10px;
+    clear:both;
+}
 
-.item .praise, .item .messages {
+.item .praise, .item .messages, .item .collection {
     display: inline-block;
     width: 10%;
     height: 2rem;
@@ -116,6 +142,11 @@ a, a:link, a:visited, a:active, a:hover {
 }
 .item .messages {
     background: url("../img/messages.png") left 0.7rem no-repeat;
+    background-size: contain;
+    vertical-align: text-bottom;
+}
+.item .collection {
+    background: url("../img/collection.png") left 0.7rem no-repeat;
     background-size: contain;
     vertical-align: text-bottom;
 }
@@ -334,6 +365,17 @@ img.avatar{
 }
 .slideBox .tabs{
     position: relative;
+    background-color: #fff;
+    border-bottom: 1px solid #b2b2b2;
+}
+.slideBox .tabs a{
+    color: #333;
+    font-size: 1.0rem;
+    height: 49px;
+}
+.slideBox .tabs a.active{
+    color: #00cafa;
+    height: 49px;
 }
 
 .item .badge{
@@ -677,6 +719,10 @@ input, select {
     height:50px;
     line-height: 50px;
     margin-left: 1%;
+    padding-right: 2%;
+}
+.border-right{
+    border-right:1px solid #f2f2f2;
 }
 .select-cnt select{
     height:30px;
@@ -686,7 +732,7 @@ input, select {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-  border: solid 1px #ddd;
+  border: none;
   appearance:none;
   -moz-appearance:none;
   -webkit-appearance:none;
@@ -697,9 +743,10 @@ input, select {
     line-height: 40px;
 }
 .select-cnt select {
-  background: url("../img/arrow.png") no-repeat scroll right center transparent;
-  padding-right: 14px;
+  background: url("../img/arrow1.png") no-repeat scroll right center transparent;
+  padding-right: 1rem;
   font-size: 0.8rem;
+  background-size: 1rem;
 }
 .select-cnt.arrow1{
     width:100%;
@@ -897,17 +944,8 @@ input, select {
     height: 143px;
     border-top: 0px;
     padding: 0px;
-    margin: 0px 0 13px 0;
+    margin: 0;
 }
-.view-heard .item-thumbnail-left {
-    background: none;
-    border: 0px;
-    padding-left: 100px;
-    padding-top: 47px;
-    margin: 0px;
-    background: rgba(43,159,230,0.5);
-}
-
 
 .knowledge-love {
     margin: 0 0.7rem 0 0.2rem;
@@ -1145,6 +1183,7 @@ input, select {
 }
 .star-score, .lawyer-name {
     float: left;
+    font-size: 1rem;
 }
 .lawyer-name {
     height: 11px;
@@ -1152,14 +1191,19 @@ input, select {
     line-height: 14px;
 }
 .concern-lawyer {
-    float: right;
-    width: 50px;
-    height: 30px;
     font-size: 14px;
     line-height: 30px;
-    color: #ffffff;
+    padding: 4px 15px 4px 5px;
+    position: absolute;
+    right: 0;
+    top:20px;
+    background: url("../img/concern-lawyer.png") 100% 100% no-repeat;
+    max-width: 100%;
+    min-width: 80px;
+    
 }
 .concern-lawyer p {
+    position: relative;
     float: left;
     width: 30px;
     height: 30px;
@@ -1168,23 +1212,52 @@ input, select {
     font-size: 14px;
     text-align: center;
     border-radius: 30px;
+    margin: 0;
 }
-.concern-lawyer p i {
-    color: #f00;
+.border1{
+    width: 1px;
+    height: 37px;
+    background: #eeeeee;
+    background-color:rgba(238,238,238,0.5);
+    display: inline-block;
+    margin-top: 5px;
 }
 .lawyer-score {
     float: left;
-    padding: 0px 10px 3px 10px;
-    margin-top: 5px;
-    border: 2px solid #ffffff;
     font-size: 14px;
-    border-radius: 15px;
+
+}
+.bg_radius{
+    background: #ffffff;
+    border-radius: 50%;
+    width: 5rem;
+    height: 5rem;
+    position: absolute;
+    bottom: 1.5rem;
+    left: 0.6rem;
+
 }
 
+.bg_transparent{
+    background: #ffffff;
+    position: absolute;
+    background-color:rgba(0,0,0,0.3);
+    bottom: 0;
+}
+
+.bgf2f2f2{
+    background-color:#f2f2f2;
+}
+
+.pading510{
+    padding: 3px 8px;
+    margin-right:5px;
+    font-size: 12px;
+    display: inline-block;
+    margin-bottom: 5px;
+}
 .list .i-lawyer-list a {
     padding-top: 1.5rem;
-    padding-left: 33%;
-    min-height: 8rem;
 }
 .list .i-lawyer-list label {
     font-size: 14px;

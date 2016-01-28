@@ -2,29 +2,53 @@
 		<ion-pane  class="web-body page-background">
 			<ion-header-bar class="bar bar-header bar-light">
 				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-href="#/index"></a>
-				<h1 class="title">小微企服</h1>
+				<h1 class="title">法律顾问</h1>
 			</ion-header-bar>
-			<!-- <ion-content class="web-body web-top10">
-				<div class="basekong40"></div>
-				<img src="img/icon-header.png" style="width:60px;height:60px;border-radius:60px;margin:0px auto;display: block;" />
-				<div class="basekong5"></div>
-				<p class="basetit20">正在开发中<br />敬请期待(第二期)...</p>
-			</ion-content> -->
-			<ion-content  class="web-body page-background">
-				<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
-				<ion-list class="corporate-list">
-					<div style="margin-bottom:5px;">
-						<img src="img/xwqf-banner.jpg" style="width: 100%;">
+			<ion-content class="has-tabs">
+				<ion-list>
+					<div>
+						<img src="img/counsel/xwqf-banner.jpg" style="width: 100%;max-width: 720px;max-height: 375px;">
 					</div>
-					<ion-item class="item-thumbnail-left corporate-items" ng-repeat="item in items" ng-href="#/corporate/list/{{item.id}}">
-						<img id="corporate-pic" ng-src="{{item.picture}}">
-						<h2>{{item.name}}</h2>
-						<p>￥：{{item.price}}元/年</p>
-						<p>{{item.life}}年起签</p>
+					<ion-item class="item-borderless">
+						<h2 class="txt-c-66" style="font-size: 18px;"><b>律团 - </b></h2>
+						<h2 class="txt-c-66" style="font-size: 18px;"><b>中小企业法律顾问</b></h2>
+						<div class="height10"></div>
+						<p class="contents text-indent">专为中小企业打造的一款全能型、贴身管家式的法律服务产品，解决企业在日常经营过程中遇到的各种法律问题。</p>
 					</ion-item>
 				</ion-list>
-				<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
+				<div class="height10"></div>
+				<ion-list>
+					<ion-item class="item-borderless row-no-padding">
+						<div class="height10"></div>
+						<div class="height10"></div>
+						<h2 class="txt-align-c" style="font-size: 18px;">法律顾问带来的好处</h2>
+					  	<div class="item item-avatar item-borderless" ng-repeat="counsel in counsels">
+				          <img src="img/counsel/{{counsel.img}}">
+				          <h2>{{counsel.title}}</h2>
+				          <p class="contents txt-c-66">{{counsel.content}}</p>
+				        </div>
+					</ion-item>
+				</ion-list>
+				<ion-list>
+					<div>
+						<img src="img/counsel/flgw-banner2.jpg" style="width: 100%;">
+					</div>
+				</ion-list>
 			</ion-content>
+			<div class="tabs tabs-color-positive positive-bg" style="line-height: 23px;">
+			  <p class="tab-item" style="color:#fff;border-right: 1px solid #fff;" ng-click="jumpGo('#/corporate/list/1')">
+			  	<b>银卡</b><br>
+			  	<span style="font-size:0.8rem">8800元/年</span>
+			  </p>
+			  <p class="tab-item" style="color:#fff;border-right: 1px solid #fff;" ng-click="jumpGo('#/corporate/list/2')">
+			  	<b>金卡</b><br>
+			  	<span style="font-size:0.8rem">18800元/年</span>
+			  </p>
+			  <p class="tab-item" style="color:#fff" ng-click="jumpGo('#/corporate/list/3')">
+			  	<b>白金卡</b><br>
+			  	<span style="font-size:0.8rem">28800元/年</span>
+			  </p>
+			</div>
 		</ion-pane>
 </ion-view>
 
