@@ -229,43 +229,45 @@
             },
             //收到文本消息时的回调方法
             onTextMessage : function(message) {
+                console.info('onTextMessage');
                 handleTextMessage(message);
             },
             //收到表情消息时的回调方法
             onEmotionMessage : function(message) {
-                handleEmotion(message);
+                // handleEmotion(message);
             },
             //收到图片消息时的回调方法
             onPictureMessage : function(message) {
-                handlePictureMessage(message);
+                // handlePictureMessage(message);
             },
             //收到音频消息的回调方法
             onAudioMessage : function(message) {
-                handleAudioMessage(message);
+                // handleAudioMessage(message);
             },
             //收到位置消息的回调方法
             onLocationMessage : function(message) {
-                handleLocationMessage(message);
+                // handleLocationMessage(message);
             },
             //收到文件消息的回调方法
             onFileMessage : function(message) {
-                handleFileMessage(message);
+                // handleFileMessage(message);
             },
             //收到视频消息的回调方法
             onVideoMessage : function(message) {
-                handleVideoMessage(message);
+                // handleVideoMessage(message);
             },
             //收到联系人订阅请求的回调方法
             onPresence : function(message) {
-                handlePresence(message);
+                // handlePresence(message);
             },
             //收到联系人信息的回调方法
             onRoster : function(message) {
-                handleRoster(message);
+                // handleRoster(message);
             },
             //收到群组邀请时的回调方法
             onInviteMessage : function(message) {
-                handleInviteMessage(message);
+                console.info('onInviteMessage');
+                // handleInviteMessage(message);
             },
             //异常时的回调方法
             onError : function(message) {
@@ -589,7 +591,7 @@
                 user : user,
                 accessToken : token,    
                 //连接时提供appkey
-                appKey : 'gsflowertrees#gsflower' 
+                appKey : AppSettings.easemobAppKey
             });
         } else {
             var user = $("#user_name").val();
@@ -606,7 +608,7 @@
                 user : user,
                 pwd : pass,
                 //连接时提供appkey
-                appKey : 'gsflowertrees#gsflower'  
+                appKey : AppSettings.easemobAppKey
             });         
         }
         return false;
@@ -625,7 +627,7 @@
             password : pass,
             nickname : nickname,
 //            appKey : Easemob.im.config.appkey,
-            appKey : 'gsflowertrees#gsflower',
+            appKey : AppSettings.easemobAppKey,
             success : function(result) {
                 alert("注册成功!");
                 $('#loginmodal').modal('show');
@@ -905,10 +907,15 @@
         if (to == null) {
             return;
         }
+        var ext = {
+            realname: currentUser.realname,
+            avatar: currentUser.avatar
+        }
         var options = {
             to : to,
             msg : msg,
-            type : "chat"
+            type : "chat",
+            ext : ext
         };
         // 群组消息和个人消息的判断分支
         //easemobwebim-sdk发送文本消息的方法 to为发送给谁，meg为文本消息对象
@@ -916,7 +923,7 @@
         //当前登录人发送的信息在聊天窗口中原样显示
         saveComment();
         var msgtext = msg.replace(/\n/g, '<br>');
-        appendMsg(curUserId, to, msgtext,'',myName);
+        appendMsg(curUserId, to, msgtext,'',myName, currentUser.avatar);
         turnoffFaces_box();
         msgInput.value = "";
         msgInput.focus();
@@ -1089,9 +1096,10 @@
         //TODO  根据消息体的to值去定位那个群组的聊天记录
         var room = message.to;
         if (mestype == 'groupchat') {
-            appendMsg(message.from, message.to, messageContent, mestype,realname);
+            var msgtext = messageContent.replace(/\n/g, '<br>');
+            appendMsg(message.from, message.to, messageContent, mestype, message.ext.realname, message.ext.avatar);
         } else {
-            appendMsg(from, from, messageContent,'',realname);
+            appendMsg(message.from, message.from, messageContent, mestype, message.ext.realname, message.ext.avatar);
         }
     };
     //easemobwebim-sdk收到表情消息的回调方法的实现，message为表情符号和文本的消息对象，文本和表情符号sdk中做了
@@ -1367,7 +1375,7 @@
         momogrouplistUL.appendChild(lielem);
     };
     //显示聊天记录的统一处理方法
-    var appendMsg = function(who, contact, message, chattype,realname) {
+    var appendMsg = function(who, contact, message, chattype, realname, avatar) {
         var contactDivId = contact;
         if (chattype && chattype == 'groupchat') {
             contactDivId = groupFlagMark + contact;
@@ -1381,7 +1389,7 @@
             localMsg = message.data;
         }
         var headstr = [ "<p1>" + getLoacalTimeString() + "   <span></span>" + "   </p1>",
-                "<p2>" + realname + "<b></b><br/></p2><br/>" ];
+                "<p2>" + realname + "<b></b><br/></p2><img src=" + avatar + "><br>" ];
         var header = $(headstr.join(''))
         var lineDiv = document.createElement("div");
         for (var i = 0; i < header.length; i++) {
@@ -1459,10 +1467,11 @@
         var msgContentDiv = getContactChatDiv(contactDivId);
         if (curUserId == who) {
             lineDiv.style.textAlign = "right";
+            lineDiv.className = "immediate-information easemobmain-record img-right";
         } else {
             lineDiv.style.textAlign = "left";
+            lineDiv.className = "immediate-information easemobmain-record img-left";
         }
-        lineDiv.className = "immediate-information";
         var create = false;
         if (msgContentDiv == null) {
             msgContentDiv = createContactChatDiv(contactDivId);
@@ -1739,20 +1748,17 @@
                 },
                 success: function(data){
                     obj = data.data.comments;
-                    console.info(obj);
                     for(var i=0; i<obj.length; i++){
                          style = "left";
-                        if(obj[i].creator_id == curUserId) style = "right";
-                        str+='<div class="textbox" style="text-align:'+style+';">';
-                            if (obj[i].creator_id == curUserId) {
-                                str+='<p1>'+obj[i].created_at+'<span></span></p1>';
-                                str+='<p2>'+obj[i].creator_name+'<b></b></p2><br/>';
-                            } else {
-                                str+='<p1>'+obj[i].creator_name+'<span></span></p1>';
-                                str+='<p2>'+obj[i].created_at+'<b></b></p2><br/>';
-                                // str+='<img ng-src='+obj[i].creator_avatar+'><br>';
-                            }
-                            str+='<p3 class="chat-content-p3" className="chat-content-p3">'+obj[i].content+'</p3>';
+                        if(obj[i].creator_id == curUserId) {
+                            str+='<div class="easemobmain-record img-right" style="text-align:right;">';
+                        } else {
+                            str+='<div class="easemobmain-record img-left" style="text-align:left;">';
+                        }
+                        str+='<p1>'+obj[i].created_at+'<span></span></p1>';
+                        str+='<p2>'+obj[i].creator_name+'<b></b></p2>';
+                        str+='<img src='+obj[i].creator_avatar+'><br>';
+                        str+='<p3 class="chat-content-p3" className="chat-content-p3">'+obj[i].content+'</p3>';
                         str+='</div>';
                     }
                     if(obj.length == rows_per_page) $this.css('display', 'block');

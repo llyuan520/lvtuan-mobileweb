@@ -25,7 +25,7 @@
 
 					<div ng-show="is_mine == true" class="rig" style="width: 92px;">
 						<div ng-disabled="booleans" ng-model="group_avatar" accept="image/*" ngf-pattern="'image/*'" ngf-max-size="20MB" ngf-min-height="100" ngf-select="uploadFiles($file)" class="icon-right" style="font-size:4em;padding:0 20px;color:#ccc;float:right"><i class="icon ion-ios-plus-outline"></i></div>
-						<input type="hidden" name="group_avatar" value="{{file}}" />
+						<input type="hidden" name="group_avatar" value="{{file_path}}" />
 					</div>
 					<label class="rig">
 						<img ng-src="{{file}}" ngf-thumbnail="group_avatar || '{{group.group_avatar}}'" width="52" height="50">
@@ -34,7 +34,7 @@
 			</form>
 			<div class="item group-site">
 				<a ng-repeat="member in group.members">
-					<img class="avatar" src="{{member.avatar}}">
+					<img class="avatar" ng-src="{{member.avatar}}">
 					<i ng-if="member.user_id != currentUser.id" ng-show="isclose" class="icon ion-close-circled color999 close" ng-click="del({{member.user_id}},$index)"></i>
 					<br>
 					<p>{{member.realname}}</p>

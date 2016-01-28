@@ -8,7 +8,6 @@
 
     <!-- @if NODE_ENV='dev' -->
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
-    <link href="css/common.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <!-- @endif -->
     
@@ -55,7 +54,7 @@
     -->
 
     <!-- @if NODE_ENV='prod' -->
-    <script src="conf/settings.dev.js"></script>
+    <script src="conf/settings.prod.js"></script>
 
     <script src="lib/js/jquery-1.11.1.js"></script>
     <script src="lib/ionic/js/ionic.bundle.min.js"></script>
@@ -68,7 +67,7 @@
     <script type="text/javascript">
       var templates = angular.module('templates', []);
     </script>
-    <!-- <script src="dist/js/templates.js"></script> -->
+    <script src="dist/js/templates.js"></script>
     
     <script src="js/layer.1.0.js"></script>
     <script src="js/module/auth.js"></script>

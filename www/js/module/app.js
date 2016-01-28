@@ -54,12 +54,12 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
         if (toState.authn) {
             // 如果用户没有登录
             if (!authService.isAuthed()) {
-                sessionStorage.setItem("goback", toState.url);
+                sessionStorage.setItem("goback", $location.path());
                 $rootScope.$broadcast('unauthenticated');
                 event.preventDefault(); 
             } else {
                 // 如果用户没有权限访问
-                sessionStorage.setItem("goback", toState.url);
+                sessionStorage.setItem("goback", $location.path());
                 currentUser = authService.getUser();
                 if (toState.authz && toState.authz == 'lawyer' && !currentUser.is_verified_lawyer) {
                     $rootScope.$broadcast('unauthorized');
@@ -211,6 +211,13 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
               templateUrl: 'template/group/group-attention.html'
           }
       },
+      authn: true,
+      authz: 'lawyer'
+    })
+
+    .state('groupviewinit', { //圈子详情
+      url: '/group/viewinit/:id',
+      controller: 'groupviewinitCtrl',
       authn: true,
       authz: 'lawyer'
     })
@@ -723,6 +730,12 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       url: '/easemobmain/:id',
       templateUrl: 'template/mylvtuan/easemobmain.html',
       controller: 'easemobmainCtrl',
+      authn: true
+  })
+
+  .state('easemobinit', { //准备 - 即时通讯
+      url: '/easemobinit/:id',
+      controller: 'easemobinitCtrl',
       authn: true
   })
   

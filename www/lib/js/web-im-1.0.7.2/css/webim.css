@@ -561,7 +561,8 @@ label.offline {
     padding: 0 17%;
 }
 .easemobmain-record img {
-    width: 15%;
+    width: 3.5rem;
+    height: 3.5rem;
     display: inline-block;
     vertical-align: middle;
     border-radius: 50%;

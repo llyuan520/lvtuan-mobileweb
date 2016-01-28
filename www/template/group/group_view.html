@@ -22,10 +22,11 @@
 	<script src="lib/js/web-im-1.0.7.2/easemob.im.config.js"></script>
 	<script src="lib/js/web-im-1.0.7.2/bootstrap.js"></script>
 	<script>
-		var easemob_id = JSON.parse(localStorage.getItem('easemob_id'));
-		var curChatUserId =	"group--"+easemob_id;
-		var defaultUserId =	"group--"+easemob_id;
-		var curRoomId = easemob_id;
+		var easemobParam = JSON.parse(localStorage.getItem('easemobParam'));
+		var curChatUserId =	"group--"+easemobParam.easemob_id;
+		var defaultUserId =	"group--"+easemobParam.easemob_id;
+		var curRoomId = easemobParam.easemob_id;
+		var easemob_id = easemobParam.easemob_id;
 		console.log(easemob_id,curChatUserId,defaultUserId,curRoomId);
 	</script>
 	<script src="lib/js/web-im-1.0.7.2/webin.js"></script>
