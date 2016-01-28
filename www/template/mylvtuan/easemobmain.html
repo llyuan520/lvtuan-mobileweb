@@ -16,7 +16,7 @@
     <script src="lib/js/web-im-1.0.7.2/easemob.im.config.js"></script>
     <script src="lib/js/web-im-1.0.7.2/bootstrap.js"></script>
     <script type="text/javascript">
-        var easemob = JSON.parse(localStorage.getItem('easemoParam'));
+        var easemob = JSON.parse(localStorage.getItem('easemobParam'));
         console.info(easemob);
         if(easemob != null){
             var jumpUrl = easemob.jumpUrl;
@@ -78,12 +78,12 @@
                                     <a href="javascript:window.close()"><div id="recycle"></div></a>
                                 </div>
                                 <!-- <div id="null-nouser" class="chat01_content"></div> -->
-                                <div id="{{user_name}}-{{easemoParam.curChatUserId}}" class="chat00_content" classname="chat00_content">
+                                <div id="{{user_name}}-{{curChatUserId}}" class="chat00_content" classname="chat00_content">
 
                                     <div style="text-align: center"><a href="javascript:void(0)" id="comments-list" style="text-align: center">查看更多</a></div>
                                     <div id="page" class="loading" style="display: none">加载中...</div>
 
-                                    <div ng-repeat="comment in easemoParam.comments" class="easemobmain-list">
+                                    <div ng-repeat="comment in easemobParam.comments" class="easemobmain-list">
                                         <div ng-if="comment.creator_id == user_name" class="easemobmain-record img-right" style="text-align:right" >
                                             <p1>{{comment.created_at}}<span></span></p1>
                                             <p2>{{comment.creator_name}}<b></b></p2>

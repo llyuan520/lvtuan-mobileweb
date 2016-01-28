@@ -1756,7 +1756,7 @@
                             str+='<div class="easemobmain-record img-left" style="text-align:left;">';
                         }
                         str+='<p1>'+obj[i].created_at+'<span></span></p1>';
-                        str+='<p2>'+obj[i].creator_name+'<b></b></p2><br/>';
+                        str+='<p2>'+obj[i].creator_name+'<b></b></p2>';
                         str+='<img src='+obj[i].creator_avatar+'><br>';
                         str+='<p3 class="chat-content-p3" className="chat-content-p3">'+obj[i].content+'</p3>';
                         str+='</div>';

@@ -215,6 +215,13 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       authz: 'lawyer'
     })
 
+    .state('groupviewinit', { //圈子详情
+      url: '/group/viewinit/:id',
+      controller: 'groupviewinitCtrl',
+      authn: true,
+      authz: 'lawyer'
+    })
+
     .state('groupview', { //圈子详情
       url: '/group/view/:id',
       templateUrl: 'template/group/group_view.html',
@@ -723,6 +730,12 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       url: '/easemobmain/:id',
       templateUrl: 'template/mylvtuan/easemobmain.html',
       controller: 'easemobmainCtrl',
+      authn: true
+  })
+
+  .state('easemobinit', { //准备 - 即时通讯
+      url: '/easemobinit/:id',
+      controller: 'easemobinitCtrl',
       authn: true
   })
   

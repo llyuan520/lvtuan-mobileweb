@@ -158,10 +158,13 @@ lvtuanApp.controller("ionicNavBarDelegateCtrl",function($state,$timeout,$http,$l
 
 //首页
 lvtuanApp.controller("indexCtrl",function($scope,listHelper,locationService){
-	$scope.locations = locationService.getLocation();
-	$scope.city = $scope.locations.city_id;
-
-	listHelper.bootstrap('/lawyer/list_lawyers?is_recommended=1&city_id='+$scope.city, $scope);
+	if (locationService.getLocation()) {
+		$scope.locations = locationService.getLocation();
+		$scope.city = $scope.locations.city_id;
+		listHelper.bootstrap('/lawyer/list_lawyers?is_recommended=1&city_id='+$scope.city, $scope);
+	} else {
+		listHelper.bootstrap('/lawyer/list_lawyers?is_recommended=1', $scope);
+	}
     
 	$scope.mylvteam = function(){
 		location.href='#/mylvteam';
@@ -495,40 +498,62 @@ lvtuanApp.controller("groupAttentionCtrl",function($scope,$http,$state,$rootScop
 })
 
 //圈子详情
-lvtuanApp.controller("groupviewCtrl",function($scope,$http,$state,$rootScope,$stateParams,$ionicLoading){
+lvtuanApp.controller("groupviewinitCtrl",function($scope,$http,$state,$rootScope,$stateParams,$ionicLoading){
 	$ionicLoading.show();
+    localStorage.removeItem("easemobParam");
     $scope.$on('$ionicView.beforeEnter', function() {  
         console.info("圈子详情");
-        $scope.user_name = "";
-        $scope.user_password = "";
-        $("#user_name").val();
-        $("#user_password").val();
         $http.get('http://'+$rootScope.hostName+'/group/'+$stateParams.id+'/chat'
         ).success(function(data) {
             if (data && data.data) {
                 console.info('圈子详情',data.data);
                 var itmes = data.data;
-                $scope.user_name = itmes.user_id;
-                $scope.user_password = itmes.pwd;
-                $scope.id = itmes.id;
-                localStorage.setItem("goup_id", JSON.stringify($scope.id));
-                localStorage.setItem("easemob_id", JSON.stringify(itmes.easemob_id));
-                var time = null;
-                time = setInterval(function() { 
-                    if(getuserpwd(itmes) == true){
-                        clearInterval(time);
-                        login();
-                    }
-                }, 3000); 
+                $scope.easemobParam = {
+                	'user_name' : itmes.user_id,
+                	'user_password' : itmes.pwd,
+                	'id' : itmes.id,
+                	'easemob_id' : itmes.easemob_id,
+                	'group_id' : JSON.stringify(itmes.id),
+                };
+
+                localStorage.setItem("easemobParam", JSON.stringify($scope.easemobParam));
+				$state.go("groupview",{id: $scope.easemobParam.group_id});
             }
             $ionicLoading.hide();
         })
+
+    });
+})
+
+//圈子详情
+lvtuanApp.controller("groupviewCtrl",function($scope,$http,$state,$rootScope,$stateParams,$ionicLoading){
+	$ionicLoading.show();
+    $scope.$on('$ionicView.beforeEnter', function() {  
+        console.info("圈子详情");
+        var easemobParam = JSON.parse(localStorage.getItem('easemobParam'));
+        $("#user_name").val();
+        $("#user_password").val();
+        if (easemobParam != null) {
+	        $scope.user_name = easemobParam.user_name;
+	        $scope.user_password = easemobParam.user_password;
+            $scope.id = easemobParam.id;
+            $scope.easemob_id = easemobParam.easemob_id;
+        }
+
+        var time = null;
+        time = setInterval(function() { 
+            if(getuserpwd(easemobParam) == true){
+                clearInterval(time);
+                login();
+            }
+        }, 3000); 
+        $ionicLoading.hide();
     
-        function getuserpwd(itmes){
+        function getuserpwd(easemobParam){
             var name = $("#user_name").val();
             var pwd = $("#user_password").val();
             if(name != null && pwd != null){
-                if(name == itmes.user_id && pwd == itmes.pwd){
+                if(name == easemobParam.user_name && pwd == easemobParam.user_password){
                     return true;
                 }
             }else{
@@ -546,11 +571,9 @@ lvtuanApp.controller("groupviewCtrl",function($scope,$http,$state,$rootScope,$st
 //圈子设置
 lvtuanApp.controller("groupsiteCtrl",function($scope,$http,$state,$rootScope,$stateParams,$timeout,$ionicPopup,Upload){
 	console.info("圈子设置");
-	$scope.id = JSON.parse(localStorage.getItem('goup_id'));
-	$http.get('http://'+$rootScope.hostName+'/group/'+$scope.id+'/detail'
+	$http.get('http://'+$rootScope.hostName+'/group/'+$stateParams.id+'/detail?ts=dkfdkj'
         ).success(function(data) {
         	if (data && data.data) {
-	        	console.info('圈子设置',data.data)
 				$scope.group =data.data; 
 				$scope.group_name = $scope.group.group_name;
 				$scope.is_mine = $scope.group.is_mine;
@@ -636,8 +659,8 @@ lvtuanApp.controller("groupsiteCtrl",function($scope,$http,$state,$rootScope,$st
 	            	group_avatar: group_avatar
 	            }
 	        }).then(function (response) {
-        		var file_path = 'http://'+$rootScope.hostName+'/file/show?path='+response.data.data;
-	        	$scope.file = file_path;
+	        	$scope.file = response.data.data.file_url;
+	        	$scope.file_path = response.data.data.file_path;
 	            $timeout(function () {
 	                $scope.result = response.data;
 	            });
@@ -873,9 +896,8 @@ lvtuanApp.controller("groupcreateCtrl",function($scope,$http,$state,$rootScope,$
             	group_avatar: group_avatar
             }
         }).then(function (response) {
-        	var file_path = 'http://'+$rootScope.hostName+'/file/show?path='+response.data.data;
-        	$scope.file = file_path;
-        	$scope.group_path = response.data.data;
+        	$scope.file = response.data.data.file_url;
+        	$scope.group_path = response.data.data.file_path;
             $timeout(function () {
                 $scope.result = response.data;
             });
@@ -1660,8 +1682,8 @@ lvtuanApp.controller("practitionersCtrl",function($scope,$http,$rootScope,$timeo
 	            	'user_id': currentUser.id
 	            }
 	        }).then(function (response) {
-	        	var file_path = 'http://'+$rootScope.hostName+'/'+response.data.data.file_path;
-	        	$scope.file = file_path;
+	        	$scope.file = response.data.data.file_url;
+	        	$scope.file_path = response.data.data.file_path;
 	            $timeout(function () {
 	                $scope.result = response.data;
 	            });
@@ -1720,7 +1742,7 @@ lvtuanApp.controller("practitionersCtrl",function($scope,$http,$rootScope,$timeo
 })
 //普通用户- 认证为律师的导航 - 实名认证
 lvtuanApp.controller("verifiedCtrl",function($scope,$http,$rootScope,$timeout,$stateParams,$localStorage,Upload) {
-	//上传执业证书
+	//上传身份证
     $scope.uploadFiles = function (license_file) {
         Upload.upload({
         	headers: {
@@ -1733,8 +1755,8 @@ lvtuanApp.controller("verifiedCtrl",function($scope,$http,$rootScope,$timeout,$s
             	'user_id': currentUser.id
             }
         }).then(function (response) {
-        	var file_path = 'http://'+$rootScope.hostName+'/'+response.data.data.file_path;
-        	$scope.file = file_path;
+        	$scope.file = response.data.data.file_url;
+        	$scope.file_path = response.data.data.file_path;
             $timeout(function () {
                 $scope.result = response.data;
             });
@@ -2919,7 +2941,7 @@ lvtuanApp.controller("orderAllCtrl",function($http,$scope,$rootScope,listHelper,
 	}
 	//联系客户
 	$scope.ask = function(id){
-		location.href='#/easemobmain/'+id;
+		location.href='#/easemobinit/'+id;
 	}
 
 })
@@ -2954,7 +2976,7 @@ lvtuanApp.controller("orderRepliedCtrl",function($http,$rootScope,$scope,listHel
 	listHelper.bootstrap('/center/pay/lawyer/question/replied', $scope);
 	//联系客户
 	$scope.ask = function(id){
-		location.href='#/easemobmain/'+id;
+		location.href='#/easemobinit/'+id;
 	}
 })
 //律师订单 - 已完成
@@ -3018,7 +3040,7 @@ lvtuanApp.controller("orderlawyerDetailCtrl",function($http,$scope,$stateParams,
 	}
 	//联系客户
 	$scope.ask = function(id){
-		location.href='#/easemobmain/'+id;
+		location.href='#/easemobinit/'+id;
 	}
 })
 
@@ -3067,7 +3089,7 @@ lvtuanApp.controller("lawyerquestionRepliedCtrl",function($scope,$rootScope,$htt
 	listHelper.bootstrap('/center/lawyer/question/replied', $scope);
 	//联系客户
 	$scope.ask = function(id){
-		location.href='#/easemobmain/'+id;
+		location.href='#/easemobinit/'+id;
 	}
 })
 //律师的工作 - 咨询 － 已完成
@@ -3110,7 +3132,7 @@ lvtuanApp.controller("lawyerquestionsviewCtrl",function($http,$scope,$stateParam
 	}
 	//联系客户
 	$scope.ask = function(id){
-			location.href='#/easemobmain/'+id;
+			location.href='#/easemobinit/'+id;
 	}
 	//删除
 	$scope.remove = function(id,index){
@@ -3125,9 +3147,9 @@ lvtuanApp.controller("lawyerquestionsviewCtrl",function($http,$scope,$stateParam
 	}
 })
 
-//咨询和订单的一对一咨询 - 即时通讯
-lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$stateParams){
-	localStorage.removeItem('easemoParam'); //清空之前的旧数据
+//咨询和订单的一对一咨询 - 准备 - 即时通讯
+lvtuanApp.controller("easemobinitCtrl",function($scope,$http,$state,$rootScope,$stateParams){
+	localStorage.removeItem('easemobParam'); //清空之前的旧数据
 	$scope.user_name = "";
 	$scope.user_password = "";
 	$("#user_name").val("");
@@ -3135,11 +3157,10 @@ lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$
 	$http.get('http://'+$rootScope.hostName+'/center/question/'+$stateParams.id+'/ask'
     ).success(function(data) {
     	if (data && data.data) {
-	    	console.info('圈子详情',data.data);
 	    	var itmes = data.data;
 	    	$scope.user_name = itmes.easemob_id;
 	    	$scope.user_password = itmes.easemob_pwd;
-	    	$scope.easemoParam = {
+	    	$scope.easemobParam = {
 	    		'jumpUrl'		:'http://'+$rootScope.hostName+'/question/'+itmes.post_id+'/comment',
 	    		'rootUrl'		:'http://'+$rootScope.hostName+'/question/'+itmes.post_id+'/comment_list',
 	    		'curChatUserId' : itmes.user_id,
@@ -3149,26 +3170,39 @@ lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$
 		    	'realname' 		: itmes.realname,
 		    	'user_avatar' 	: itmes.user_avatar,
 		    	'myName' 		: itmes.myName,
-		    	'comments'		: itmes.comments
+		    	'comments'		: itmes.comments,
+		    	'easemob_id'    : itmes.easemob_id,
+		    	'easemob_pwd'   : itmes.easemob_pwd
 	    	};
-
-	    	console.info('easemoParam',$scope.easemoParam);
-	    	$scope.jwtToken = localStorage.getItem('jwtToken');
-	    	console.info($scope.jwtToken);
-	    	localStorage.setItem("easemoParam", JSON.stringify($scope.easemoParam));
-			var time = null;
-			time = setInterval(function() { 
-				if(getuserpwd(itmes) == true){
-	        		if(angular.isDefined(login)){
-	        			login();
-	        			console.info('login()');
-	        			clearInterval(time);
-	        		}
-	        	}
-			}, 1000); 
+	    	localStorage.setItem("easemobParam", JSON.stringify($scope.easemobParam));
+			$state.go("easemobmain",{id: $stateParams.id});
 		}
-
 	})
+})
+
+//咨询和订单的一对一咨询 - 即时通讯
+lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$stateParams){
+    var easemob = JSON.parse(localStorage.getItem('easemobParam'));
+    if(easemob != null){
+		$("#user_name").val("");
+		$("#user_password").val("");
+		$scope.user_name = easemob.easemob_id;
+		$scope.user_password = easemob.easemob_pwd;
+		$scope.curChatUserId = easemob.curChatUserId;
+    }
+
+	$scope.jwtToken = localStorage.getItem('jwtToken');
+	console.info($scope.jwtToken);
+	var time = null;
+	time = setInterval(function() { 
+		if(getuserpwd(easemob) == true){
+    		if(angular.isDefined(login)){
+    			login();
+    			console.info('login()');
+    			clearInterval(time);
+    		}
+    	}
+	}, 1000);
 	
 	function getuserpwd(itmes){
 		var name = $("#user_name").val();
@@ -3229,7 +3263,7 @@ lvtuanApp.controller("questionAllCtrl",function($http,$scope,$rootScope,listHelp
 	}
 	//联系律师
 	$scope.ask = function(id){
-		location.href='#/easemobmain/'+id;
+		location.href='#/easemobinit/'+id;
 	}
 
 	//送心意
@@ -3279,7 +3313,7 @@ lvtuanApp.controller("questionRepliedCtrl",function($http,$scope,$rootScope,list
 	}
 	//联系律师
 	$scope.ask = function(id){
-		location.href='#/easemobmain/'+id;
+		location.href='#/easemobinit/'+id;
 	}
 
 })
@@ -3388,7 +3422,7 @@ lvtuanApp.controller("userquestionviewCtrl",function($http,$scope,$stateParams,$
 	}
 	//联系律师
 	$scope.ask = function(id){
-		location.href='#/easemobmain/'+id;
+		location.href='#/easemobinit/'+id;
 	}
 	//送心意
 	$scope.send = function(id){
@@ -3465,7 +3499,7 @@ lvtuanApp.controller("userorderAllCtrl",function($http,$scope,$rootScope,listHel
 	}
 	//联系律师
 	$scope.ask = function(id){
-		location.href='#/easemobmain/'+id;
+		location.href='#/easemobinit/'+id;
 	}
 
 	//付款
@@ -3532,7 +3566,7 @@ lvtuanApp.controller("userorderRepliedCtrl",function($http,$scope,$rootScope,lis
 	}
 	//联系律师
 	$scope.ask = function(id){
-		location.href='#/easemobmain/'+id;
+		location.href='#/easemobinit/'+id;
 	}
 })
 //用户的订单 - 待评价
