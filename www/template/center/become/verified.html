@@ -20,6 +20,7 @@
 							  </div>
 							</div>
 						</div>
+
 						<div class="item item-input">
 							<div class="row verified-pic">
 								<div class="col col-center">
@@ -27,8 +28,9 @@
 									<span>(认证后将无法修改)</span>
 								</div>
 							  	<div class="col col-60">
-							  		<div ng-if="!currentUser.is_verified_lawyer" ng-model="ID_img" class="button item-note ion-ios-plus-empty button-light" ngf-pattern="'image/*'"  accept="image/*" ngf-max-size="20MB" ngf-min-height="100" ngf-select="uploadFiles($file)"></div>
-									<img ng-src="{{file}}" ngf-thumbnail="file || ''" width="52" height="50">
+							  		<img ng-src="{{file}}" ngf-thumbnail="file || ''" width="52" height="50">
+
+							  		<div class="uploapoto" ng-if="!currentUser.is_verified_lawyer" ng-model="ID_img" ngf-pattern="'image/*'"  accept="image/*" ngf-max-size="20MB" ngf-min-height="100" ngf-select="uploadFiles($file)"></div>
 									<input type="hidden" name="ID_img" value="{{file}}" />
 									<span class="progress" ng-show="progress >= 0">
 				                  		<div style="width:{{progress}}%" ng-bind="progress + '%'"></div>

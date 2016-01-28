@@ -1067,6 +1067,7 @@ input, select {
 
 .emails {
     width: 13%;
+    max-width: 40px;
     background: url("../img/emails.png") center center no-repeat;
     background-size: 90% 26%;
 }
@@ -1398,16 +1399,29 @@ input, select {
 }
 
 /*认证律师*/
+.uploapoto{
+    background: url("../img/add.png") center center no-repeat;
+    width: 20%;
+    max-width: 200px;
+    max-height: 200px;
+    background-size: 60%;
+    position: absolute;
+    right: 5%;
+    display: inline-block;
+    height: 100%;
+    top: 0px;
+}
 .becomenav-content, .becomenav-content .scroll {
     margin-top: 1px;
     background-color: #fff;
 }
 .scroll .list .becomenav-list {
     width: 94%;
-    height: 3.8rem;
     padding: 0 0 0 11%;
     margin: 0 3%;
     border-bottom: 1px #eee solid;
+    height: 50px;
+    line-height: 50px;
 }
 .list .becomenav-list:nth-child(1) {
     background: url("../img/practitioners.png") 1% center no-repeat;
@@ -1446,9 +1460,6 @@ input, select {
 .becomenav-list a {
     font-size: 1.2rem;
     color: #333;
-}
-.becomenav-list .col {
-    padding: 0;
 }
 .becomenav-list .col .item-checkbox {
     width: 100%;
@@ -1507,33 +1518,14 @@ input, select {
     padding-top: 2px;
     background-color: #fff;
 }
-.field-content .scroll {
-    margin-top: 3px;
-}
-.field-content .list {
-    padding: 0;
-    background-color: #fff;
-}
-.field-content .list:nth-child(1) {
-    margin-bottom: 1.6rem;
-}
-.field-content .list .item {
-    padding: 0 0 0.8rem 0;
-    margin: 0;
-}
+
 .field-content .item .errer {
     padding: 0px;
     margin-left: 5%;
     font-family: 'Microsoft YaHei';
     font-size: 1.2rem;
 }
-.field-content .item span {
-    margin-left: 6%;
-    margin-right: 6%;
-}
 .field-content .list span {
-    width: 29%;
-    margin: 0.8rem 1% 0rem;
     background-color: #eee;
     border-radius: 3px;
     text-align: center;
@@ -1547,9 +1539,6 @@ input, select {
 }
 .field-content span.active label {
     color: #fff;
-}
-.field-content .item span:nth-child(2) {
-    margin-left: 4.4%;
 }
 
 .verified .has-header, .tariffset .has-header, .practitioners .has-header {

@@ -1,6 +1,5 @@
 <style type="text/css">
 	.workscope{
-		padding:5%;
 		text-align: center;
 	}
 	.workscope span{
@@ -40,9 +39,9 @@
 		<ion-content class="field-content">
 			<!-- <h4 class="title web-title web-fc666">资格认证 <span class="web-ftcred" style="font-size:14px;">(审核通过后，不可修改)</span></h4> -->
 			<!-- <div class="basekong20"></div> -->
-			<div class="list">
-				<div class="item item-input bg_positive">
-					<label class="errer" ng-show="showscopes.length == 0 ">设置领域可更精确搜索到您，最多三个！</label>
+			<div class="list" style="margin-bottom:0;">
+				<div class="workscope border_bottom">
+					<label style="line-height: 50px;" class="errer" ng-show="showscopes.length == 0 ">设置领域可更精确搜索到您，最多三个！</label>
 					<span ng-repeat="showscope in showscopes">
 						<label data-id="{{showscope.key}}">{{showscope.value}}</label>
 					</span>

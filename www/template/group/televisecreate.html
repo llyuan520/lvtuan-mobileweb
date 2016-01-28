@@ -13,7 +13,7 @@
 				<form id="myForm" name="myForm" novalidate>
 					<div class="list login">
 						<div class="item item-input item-text-wrap">
-							<textarea ng-model="content" name="content" required ng-minlength="2" ng-maxlength="140" placeholder="请输入你的广播"></textarea>
+							<textarea ng-model="content" name="content" rows="5" required ng-minlength="2" ng-maxlength="140" placeholder="请输入你的广播" ng-model-options="{debounce:2000}"></textarea>
 						</div>
 						<p class="item" ng-show="myForm.content.$error.minlength">
 							<span class="fc-red">字符不能小于2个字符</span>
