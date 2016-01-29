@@ -2258,7 +2258,11 @@ lvtuanApp.controller("viewCtrl",function($scope,$http,$rootScope,$stateParams,ht
 		$ionicLoading.hide();
 	});
 
-   $scope.graphic5 = function(id,index){
+   $scope.text_question = function(id){
+		layer.show("对不起，这个功能还在kai f");
+   }
+
+   $scope.phone_question = function(id){
    	sessionStorage.setItem("lawyerId", id);
    	sessionStorage.setItem("index", index);
 	
@@ -2291,10 +2295,12 @@ lvtuanApp.controller("viewCtrl",function($scope,$http,$rootScope,$stateParams,ht
 		//普通用户个人信息
 		location.href='#/graphic';
 	}else{
-		layer.show("律师没有开通该项服务!");
+		layer.show("这项服务现在没有对律师用户开通。律师用户不能发起资讯。");
 	}
 	
    }
+
+
 
 	//关注
 	$scope.follow = function(id){
