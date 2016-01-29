@@ -8,10 +8,8 @@
 				<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 				<ion-list class="messages">
 					<ion-item ng-repeat="item in items">
-						<div class="item">
-							<p><a ng-href="#/message/{{item.id}}">{{item.subject}}</a></p>
-							<p>{{item.created_at}}</p>
-						</div>
+						<p><a ng-href="#/message/{{item.id}}">{{item.subject}}</a></p>
+						<p>{{item.created_at}}</p>
 					</ion-item>
 				</ion-list>
 				<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" icon="ion-loading-c" distance="1%"> </ion-infinite-scroll>
