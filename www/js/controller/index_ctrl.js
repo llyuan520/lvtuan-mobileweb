@@ -1538,13 +1538,15 @@ lvtuanApp.controller("messagesCtrl",function($scope, listHelper) {
 	listHelper.bootstrap('/letter/sys', $scope);
 })
 
-lvtuanApp.controller("viewMessageCtrl",function($scope,$http,$rootScope,$interval,$stateParams){
+lvtuanApp.controller("viewMessageCtrl",function($scope,$http,$rootScope,$interval,$stateParams,$ionicLoading){
 	var id = $stateParams.id;
 	//文库 - 详情
 	var url = 'http://'+$rootScope.hostName+'/letter/sys-letters/'+id;
+	$ionicLoading.show();
 	$http.get(url).success(function(data) {
 		if (data && data.data) {
     		$scope.item = data.data;
+    		$ionicLoading.hide();
     	}
 	})
 })
