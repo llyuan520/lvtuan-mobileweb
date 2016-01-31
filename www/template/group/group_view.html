@@ -27,9 +27,10 @@
 		var defaultUserId =	"group--"+easemobParam.easemob_id;
 		var curRoomId = easemobParam.easemob_id;
 		var easemob_id = easemobParam.easemob_id;
+		var myName = '';
 		console.log(easemob_id,curChatUserId,defaultUserId,curRoomId);
 	</script>
-	<script src="lib/js/web-im-1.0.7.2/webin.js"></script>
+	<script src="lib/js/web-im-1.0.7.2/easemobmain.js"></script>
 	<script src="js/module/adaptive.js"></script>
 	<!--[if lte IE 9]>
 	<script src="lib/js/web-im-1.0.7.2/sdk/jplayer/jquery.jplayer.min.js"></script>
@@ -250,7 +251,7 @@
 				                        <li>
 				                        	<!-- <img ng-src="lib/js/web-im-1.0.7.2/img/send_btn.jpg"
 				                            onclick="sendText()" /> -->
-				                            <span onclick="sendText()">发&nbsp;&nbsp;&nbsp;送</span>
+				                            <span onclick="sendText('groupchat')">发&nbsp;&nbsp;&nbsp;送</span>
 			                            </li>
 				                    </ul>
 				                </div>

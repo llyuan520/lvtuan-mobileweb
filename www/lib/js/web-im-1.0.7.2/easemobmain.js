@@ -17,6 +17,8 @@
     var swfupload = null;
     var flashFilename = '';
     var audioDom = [];
+
+    console.info('easemobmain');
     
     //处理不支持<audio>标签的浏览器，当前只支持MP3
     var playAudioShim = function(dom, url, t) {
@@ -652,13 +654,13 @@
     //设置当前显示的聊天窗口div，如果有联系人则默认选中联系人中的第一个联系人，如没有联系人则当前div为null-nouser
     var setCurrentContact = function(defaultUserId) {
         showContactChatDiv(defaultUserId);
-        if (curChatUserId != null) {
-            hiddenContactChatDiv(curChatUserId);
-        } else {
-            $('#null-nouser').css({
-                "display" : "none"
-            });
-        }
+        // if (curChatUserId != null) {
+        //     hiddenContactChatDiv(curChatUserId);
+        // } else {
+        //     $('#null-nouser').css({
+        //         "display" : "none"
+        //     });
+        // }
         curChatUserId = defaultUserId;
     };
     //构造联系人列表
@@ -747,7 +749,10 @@
             "id" : msgContentDivId,
             "class" : "chat01_content",
             "className" : "chat01_content",
-            "style" : "display:none"
+            "style" : "display:block"
+        });
+        $('#null-nouser').css({
+            "display" : "none"
         });
         return newContent;
     };
@@ -892,7 +897,7 @@
         $('#send-file-warning').html("");
         uploadType = 'audio';
     };
-    var sendText = function() {
+    var sendText = function(chattype) {
         if (textSending) {
             return;
         }
@@ -914,16 +919,18 @@
         var options = {
             to : to,
             msg : msg,
-            type : "chat",
+            type : chattype,
             ext : ext
         };
         // 群组消息和个人消息的判断分支
         //easemobwebim-sdk发送文本消息的方法 to为发送给谁，meg为文本消息对象
         conn.sendTextMessage(options);
         //当前登录人发送的信息在聊天窗口中原样显示
-        saveComment();
+        if (chattype == 'chat') {
+            saveComment();
+        }
         var msgtext = msg.replace(/\n/g, '<br>');
-        appendMsg(curUserId, to, msgtext,'',myName, currentUser.avatar);
+        appendMsg(curUserId, to, msgtext,chattype,myName, currentUser.avatar);
         turnoffFaces_box();
         msgInput.value = "";
         msgInput.focus();
@@ -1095,11 +1102,13 @@
         var messageContent = message.data;//文本消息体
         //TODO  根据消息体的to值去定位那个群组的聊天记录
         var room = message.to;
-        if (mestype == 'groupchat') {
-            var msgtext = messageContent.replace(/\n/g, '<br>');
-            appendMsg(message.from, message.to, messageContent, mestype, message.ext.realname, message.ext.avatar);
-        } else {
-            appendMsg(message.from, message.from, messageContent, mestype, message.ext.realname, message.ext.avatar);
+        if (from != curUserId) {
+            if (mestype == 'groupchat') {
+                var msgtext = messageContent.replace(/\n/g, '<br>');
+                appendMsg(message.from, message.to, messageContent, mestype, message.ext.realname, message.ext.avatar);
+            } else {
+                appendMsg(message.from, message.from, messageContent, mestype, message.ext.realname, message.ext.avatar);
+            }
         }
     };
     //easemobwebim-sdk收到表情消息的回调方法的实现，message为表情符号和文本的消息对象，文本和表情符号sdk中做了

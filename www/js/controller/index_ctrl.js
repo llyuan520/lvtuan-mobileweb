@@ -3197,10 +3197,6 @@ lvtuanApp.controller("easemobinitCtrl",function($scope,$http,$state,$rootScope,$
 lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$stateParams){
     var easemob = JSON.parse(localStorage.getItem('easemobParam'));
     if(easemob != null){
-		$("#user_name").val("");
-		$("#user_password").val("");
-		$scope.user_name = easemob.easemob_id;
-		$scope.user_password = easemob.easemob_pwd;
 		$scope.curChatUserId = easemob.curChatUserId;
     }
 
@@ -3208,27 +3204,17 @@ lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$
 	console.info($scope.jwtToken);
 	var time = null;
 	time = setInterval(function() { 
-		if(getuserpwd(easemob) == true){
-    		if(angular.isDefined(login)){
-    			login();
-    			console.info('login()');
-    			clearInterval(time);
-    		}
-    	}
+        //根据用户名密码登录系统
+        conn.open({
+            apiUrl : Easemob.im.config.apiURL,
+            user : JSON.stringify(easemob.easemob_id),
+            pwd : easemob.easemob_pwd,
+            //连接时提供appkey
+            appKey : AppSettings.easemobAppKey
+        });       
+		console.info('login()');
+		clearInterval(time);
 	}, 1000);
-	
-	function getuserpwd(itmes){
-		var name = $("#user_name").val();
-    	var pwd = $("#user_password").val();
-    	if(name != null && pwd != null){
-    		if(name == itmes.easemob_id && pwd == itmes.easemob_pwd){
-    			return true;
-    		}
-    	}else{
-    		return false;
-    	}
-	}
-
 })
 
 
