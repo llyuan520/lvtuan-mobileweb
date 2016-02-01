@@ -5,33 +5,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <meta name="format-detection" content="telephone=no"/>
-    <link href="/lib/ionic/css/ionic.css" rel="stylesheet">
-
-    <link rel="stylesheet" href="lib/js/web-im-1.0.7.2/css/webim.css" />
-    <script src="lib/js/jquery-1.11.1.js"></script>
-
-    <script src="lib/js/web-im-1.0.7.2/sdk/strophe.js"></script>
-    <script src="lib/js/web-im-1.0.7.2/sdk/json2.js"></script>
-    <script src="lib/js/web-im-1.0.7.2/sdk/easemob.im-1.0.7.js"></script>
-    <script src="lib/js/web-im-1.0.7.2/easemob.im.config.js"></script>
-    <script src="lib/js/web-im-1.0.7.2/bootstrap.js"></script>
-    <script type="text/javascript">
-        var easemob = JSON.parse(localStorage.getItem('easemobParam'));
-        console.info(easemob);
-        if(easemob != null){
-            var jumpUrl = easemob.jumpUrl;
-            var rootUrl = easemob.rootUrl;
-            var curChatUserId = easemob.curChatUserId;
-            var content = easemob.content;
-            var created_at = easemob.created_at.date;
-            var post_id = easemob.post_id;
-            var realname = easemob.realname;
-            var user_avatar = easemob.user_avatar;
-            var myName = easemob.myName;
-        }
-    </script>
-    <script src="lib/js/web-im-1.0.7.2/easemobmain.js"></script>
-
 
     <!--[if lte IE 9]>
     <script src="lib/js/web-im-1.0.7.2/sdk/jplayer/jquery.jplayer.min.js"></script>
@@ -51,20 +24,6 @@
     </ion-header-bar>
     <div hide-tabs class="web-body web-top10 scroll-content ionic-scroll  has-header">
                 <div class="webin" style="height: 100%;">
-                    <div id="loginmodal" class="modal hide in" role="dialog" aria-hidden="true" data-backdrop="static">
-                        <div class="modal-header">
-                        </div>
-                        <div class="modal-body">
-                            <table>
-                                <tr>
-                                    <td width="65%">
-                                        用户名：<input type="text" ng-model="user_name" name="user_name" id="user_name" tabindex="1"/> 
-                                        密码：<input type="password" ng-model="user_password" name="user_password" id="user_password" tabindex="2" />
-                                    </td>
-                                </tr>
-                            </table>    
-                        </div>
-                    </div>
                     
                     <div id="waitLoginmodal" class="modal hide" data-backdrop="static">
                         <img ng-src="lib/js/web-im-1.0.7.2/img/loading.gif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;正在努力加载中...
@@ -78,9 +37,9 @@
                                     <a href="javascript:window.close()"><div id="recycle"></div></a>
                                 </div>
                                 <!-- <div id="null-nouser" class="chat01_content"></div> -->
-                                <div id="{{user_name}}-{{curChatUserId}}" class="chat00_content" classname="chat00_content">
+                                <div id="{{curUserId}}-{{curChatUserId}}" class="chat00_content" classname="chat00_content">
 
-                                    <div style="text-align: center"><a href="javascript:void(0)" id="comments-list" style="text-align: center">查看更多</a></div>
+                                    <div style="text-align: center"><a href="javascript:void(0)" id="comments-list" style="text-align: center" ng-click="loadMore()">查看更多</a></div>
                                     <div id="page" class="loading" style="display: none">加载中...</div>
 
                                     <div ng-repeat="comment in easemobParam.comments" class="easemobmain-list">
@@ -122,12 +81,12 @@
                                 <form id="chatform" style="margin:0;">
                                     <div id="input_content" class="chat02_content">
                                         <input type="hidden" id="chatToken" name="_token" value="{{jwtToken}}" />
-                                        <textarea name="comment" id="talkInputId" style="resize: none;"></textarea>
+                                        <textarea name="comment" id="talkInputId" style="resize: none;" ng-keydown="textKeyDown($event)"></textarea>
                                     </div>
                                     <div class="chat02_bar">
                                         <ul style="width:100%;">
                                             <a href="##" class="easemobmain-sub">
-                                                <li onclick="sendText('chat')">发&nbsp;&nbsp;送</li>
+                                                <li ng-click="sendText()">发&nbsp;&nbsp;送</li>
                                             </a>
                                            <!--  <a href="##" style="float: right"><li >确认完成</li></a>    -->
                                         </ul>

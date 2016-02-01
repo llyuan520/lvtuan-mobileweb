@@ -7,8 +7,10 @@
     <meta name="format-detection" content="telephone=no"/>
 
     
+    <link rel="stylesheet" href="lib/js/web-im-1.0.7.2/css/webim.css" />
     <link href="lib/ionic/css/ionic.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+    <script src="lib/js/jquery-1.11.1.js"></script>
 
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
@@ -46,9 +48,8 @@
     <script src="cordova.js"></script>
     -->
 
-    <script src="conf/settings.prod.js"></script>
+    <script src="conf/settings.dev.js"></script>
 
-    <script src="lib/js/jquery-1.11.1.js"></script>
     <script src="lib/ionic/js/ionic.bundle.min.js"></script>
     <script src="lib/ionic/js/angular/ngStorage.min.js"></script>
 
@@ -62,6 +63,10 @@
       var templates = angular.module('templates', []);
     </script>
     <script src="dist/js/templates.js"></script>
+
+    <script src="lib/js/web-im-1.0.7.2/sdk/strophe.js"></script>
+    <script src="lib/js/web-im-1.0.7.2/sdk/easemob.im-1.0.7.js"></script>
+    <script src="lib/js/web-im-1.0.7.2/easemob.im.config.js"></script>
     
     <script src="js/layer.1.0.js"></script>
     <script src="js/module/auth.js"></script>
@@ -72,6 +77,7 @@
     <script src="js/module/app.js"></script>
     <script src="js/module/location.js"></script>
     <script src="js/module/adaptive.js"></script>
+    <script src="js/module/easemob.js"></script>
 
 
   </body>

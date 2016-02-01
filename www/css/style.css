@@ -961,6 +961,7 @@ input, select {
     position: absolute;
     bottom: 0.1rem;
     width: 100%;
+    text-align: center;
 }
 .grade-a .nav-set {
     padding-top: 0;

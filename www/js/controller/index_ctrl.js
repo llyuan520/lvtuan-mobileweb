@@ -1,4 +1,4 @@
-var lvtuanApp = angular.module('lvtuanApp.Ctrl', ['ionic','ngSanitize','ngFileUpload','listModule','authModule','wxModule','locationModule','ngStorage'])
+var lvtuanApp = angular.module('lvtuanApp.Ctrl', ['ionic','ngSanitize','ngFileUpload','listModule','authModule','wxModule','locationModule','ngStorage','easemobModule'])
 lvtuanApp.constant("HOST", AppSettings.baseApiUrl)
 
 lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $location,$ionicHistory, $http, userService, authService, locationService){
@@ -2954,7 +2954,7 @@ lvtuanApp.controller("orderAllCtrl",function($http,$scope,$rootScope,listHelper,
 	}
 	//联系客户
 	$scope.ask = function(id){
-		location.href='#/easemobinit/'+id;
+		location.href='#/easemobmain/'+id;
 	}
 
 })
@@ -2989,7 +2989,7 @@ lvtuanApp.controller("orderRepliedCtrl",function($http,$rootScope,$scope,listHel
 	listHelper.bootstrap('/center/pay/lawyer/question/replied', $scope);
 	//联系客户
 	$scope.ask = function(id){
-		location.href='#/easemobinit/'+id;
+		location.href='#/easemobmain/'+id;
 	}
 })
 //律师订单 - 已完成
@@ -3053,7 +3053,7 @@ lvtuanApp.controller("orderlawyerDetailCtrl",function($http,$scope,$stateParams,
 	}
 	//联系客户
 	$scope.ask = function(id){
-		location.href='#/easemobinit/'+id;
+		location.href='#/easemobmain/'+id;
 	}
 })
 
@@ -3102,7 +3102,7 @@ lvtuanApp.controller("lawyerquestionRepliedCtrl",function($scope,$rootScope,$htt
 	listHelper.bootstrap('/center/lawyer/question/replied', $scope);
 	//联系客户
 	$scope.ask = function(id){
-		location.href='#/easemobinit/'+id;
+		location.href='#/easemobmain/'+id;
 	}
 })
 //律师的工作 - 咨询 － 已完成
@@ -3145,7 +3145,7 @@ lvtuanApp.controller("lawyerquestionsviewCtrl",function($http,$scope,$stateParam
 	}
 	//联系客户
 	$scope.ask = function(id){
-			location.href='#/easemobinit/'+id;
+			location.href='#/easemobmain/'+id;
 	}
 	//删除
 	$scope.remove = function(id,index){
@@ -3160,61 +3160,118 @@ lvtuanApp.controller("lawyerquestionsviewCtrl",function($http,$scope,$stateParam
 	}
 })
 
-//咨询和订单的一对一咨询 - 准备 - 即时通讯
-lvtuanApp.controller("easemobinitCtrl",function($scope,$http,$state,$rootScope,$stateParams){
-	localStorage.removeItem('easemobParam'); //清空之前的旧数据
-	$scope.user_name = "";
-	$scope.user_password = "";
-	$("#user_name").val("");
-	$("#user_password").val("");
+//咨询和订单的一对一咨询 - 即时通讯
+lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$stateParams,easemobService){
+
 	$http.get('http://'+$rootScope.hostName+'/center/question/'+$stateParams.id+'/ask'
     ).success(function(data) {
     	if (data && data.data) {
-	    	var itmes = data.data;
-	    	$scope.user_name = itmes.easemob_id;
-	    	$scope.user_password = itmes.easemob_pwd;
-	    	$scope.easemobParam = {
-	    		'jumpUrl'		:'http://'+$rootScope.hostName+'/question/'+itmes.post_id+'/comment',
-	    		'rootUrl'		:'http://'+$rootScope.hostName+'/question/'+itmes.post_id+'/comment_list',
-	    		'curChatUserId' : itmes.user_id,
-		    	'content'	 	: itmes.content,
-		    	'created_at' 	: itmes.created_at.date,
-		    	'post_id' 		: itmes.post_id,
-		    	'realname' 		: itmes.realname,
-		    	'user_avatar' 	: itmes.user_avatar,
-		    	'myName' 		: itmes.myName,
-		    	'comments'		: itmes.comments,
-		    	'easemob_id'    : itmes.easemob_id,
-		    	'easemob_pwd'   : itmes.easemob_pwd
-	    	};
-	    	localStorage.setItem("easemobParam", JSON.stringify($scope.easemobParam));
-			$state.go("easemobmain",{id: $stateParams.id});
+	    	var items = data.data;
+			$scope.curChatUserId = items.user_id;
+			$scope.curUserId = items.easemob_id;
+
+			easemobService.init(items.user_id);
+			easemobService.login(items.easemob_id.toString(), items.easemob_pwd);
 		}
 	})
-})
 
-//咨询和订单的一对一咨询 - 即时通讯
-lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$stateParams){
-    var easemob = JSON.parse(localStorage.getItem('easemobParam'));
-    if(easemob != null){
-		$scope.curChatUserId = easemob.curChatUserId;
-    }
+    var page = 1;
+    var rows_per_page = 10;
 
-	$scope.jwtToken = localStorage.getItem('jwtToken');
-	console.info($scope.jwtToken);
-	var time = null;
-	time = setInterval(function() { 
-        //根据用户名密码登录系统
-        conn.open({
-            apiUrl : Easemob.im.config.apiURL,
-            user : JSON.stringify(easemob.easemob_id),
-            pwd : easemob.easemob_pwd,
-            //连接时提供appkey
-            appKey : AppSettings.easemobAppKey
-        });       
-		console.info('login()');
-		clearInterval(time);
-	}, 1000);
+	$scope.loadMore = function() {
+	    var str = '';
+	    var url = 'http://'+$rootScope.hostName+'/question/'+$stateParams.id+'/comment_list?page='+page+'&rows_per_page='+rows_per_page;
+		$http.get(url)
+		.success(function(data) {
+            obj = data.data.comments;
+            for(var i=0; i<obj.length; i++){
+                 style = "left";
+                if(obj[i].creator_id == $scope.curUserId) {
+                    str+='<div class="easemobmain-record img-right" style="text-align:right;">';
+                } else {
+                    str+='<div class="easemobmain-record img-left" style="text-align:left;">';
+                }
+                str+='<p1>'+obj[i].created_at+'<span></span></p1>';
+                str+='<p2>'+obj[i].creator_name+'<b></b></p2>';
+                str+='<img src='+obj[i].creator_avatar+'><br>';
+                str+='<p3 class="chat-content-p3" className="chat-content-p3">'+obj[i].content+'</p3>';
+                str+='</div>';
+            }
+            if(obj.length < rows_per_page) {
+            	$("#comments-list").hide();
+            }
+            $("#page").after(str);
+            $("#page").css('display', 'none');
+            page++;
+		}).error(function(data) {
+            console.info(data);
+            var error =  $.parseJSON(data.responseText);
+            layer.show(error.error_messages);
+            console.info(error);
+		});
+	}
+
+	$scope.sendText = function() {
+		var comment = $('#talkInputId').val();
+		easemobService.sendText("chat");
+		$scope.saveComment(comment);
+	}
+
+	$scope.textKeyDown = function($event) {
+		if ($event.keyCode == 13) {
+	        if ($event.altKey) {
+	            e = $event.target.value;
+	            $(this).val(e + '\n');
+	        } else {
+	            $scope.sendText();
+	            $event.preventDefault();
+	        }
+		}
+	}
+
+	$scope.saveComment = function(comment) {
+        var comment = comment;
+        var creator_id = $scope.curUserId;
+        var url = 'http://'+$rootScope.hostName+'/question/'+$stateParams.id+'/comment';
+
+		$http.post(url,
+			{
+				comment : comment,
+				creator_id	: creator_id
+			}
+		)
+		.success(function(data) {
+            console.info(data);
+		})
+		.error(function(data) {
+            console.info(data);
+            var error =  $.parseJSON(data.responseText);
+            layer.show(error.error_messages);
+            console.info(error);
+		})
+	}
+
+ //    var easemob = JSON.parse(localStorage.getItem('easemobParam'));
+ //    if(easemob != null){
+	// 	$scope.curChatUserId = easemob.curChatUserId;
+	// 	$scope.curUserId = easemob.easemob_id;
+ //    }
+
+	// $scope.jwtToken = localStorage.getItem('jwtToken');
+	// console.info($scope.jwtToken);
+	// var time = null;
+	// time = setInterval(function() { 
+ //        //根据用户名密码登录系统
+ //        conn.open({
+ //            apiUrl : Easemob.im.config.apiURL,
+ //            user : JSON.stringify(easemob.easemob_id),
+ //            pwd : easemob.easemob_pwd,
+ //            //连接时提供appkey
+ //            appKey : AppSettings.easemobAppKey
+ //        });       
+	// 	console.info('login()');
+	// 	clearInterval(time);
+	// }, 1000);
 })
 
 
@@ -3262,7 +3319,7 @@ lvtuanApp.controller("questionAllCtrl",function($http,$scope,$rootScope,listHelp
 	}
 	//联系律师
 	$scope.ask = function(id){
-		location.href='#/easemobinit/'+id;
+		location.href='#/easemobmain/'+id;
 	}
 
 	//送心意
@@ -3312,7 +3369,7 @@ lvtuanApp.controller("questionRepliedCtrl",function($http,$scope,$rootScope,list
 	}
 	//联系律师
 	$scope.ask = function(id){
-		location.href='#/easemobinit/'+id;
+		location.href='#/easemobmain/'+id;
 	}
 
 })
@@ -3421,7 +3478,7 @@ lvtuanApp.controller("userquestionviewCtrl",function($http,$scope,$stateParams,$
 	}
 	//联系律师
 	$scope.ask = function(id){
-		location.href='#/easemobinit/'+id;
+		location.href='#/easemobmain/'+id;
 	}
 	//送心意
 	$scope.send = function(id){
@@ -3498,7 +3555,7 @@ lvtuanApp.controller("userorderAllCtrl",function($http,$scope,$rootScope,listHel
 	}
 	//联系律师
 	$scope.ask = function(id){
-		location.href='#/easemobinit/'+id;
+		location.href='#/easemobmain/'+id;
 	}
 
 	//付款
@@ -3565,7 +3622,7 @@ lvtuanApp.controller("userorderRepliedCtrl",function($http,$scope,$rootScope,lis
 	}
 	//联系律师
 	$scope.ask = function(id){
-		location.href='#/easemobinit/'+id;
+		location.href='#/easemobmain/'+id;
 	}
 })
 //用户的订单 - 待评价
