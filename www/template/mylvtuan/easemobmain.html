@@ -5,7 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <meta name="format-detection" content="telephone=no"/>
-<link rel="stylesheet" href="lib/js/web-im-1.0.7.2/css/webim.css" />
+    <link rel="stylesheet" href="lib/js/web-im-1.0.7.2/css/webimchat.css" />
+
     <!--[if lte IE 9]>
     <script src="lib/js/web-im-1.0.7.2/sdk/jplayer/jquery.jplayer.min.js"></script>
     <script src="lib/js/web-im-1.0.7.2/sdk/swfupload/swfupload.js"></script>
@@ -28,7 +29,7 @@
                     <div id="waitLoginmodal" class="modal hide" data-backdrop="static">
                         <img ng-src="lib/js/web-im-1.0.7.2/img/loading.gif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;正在努力加载中...
                     </div>
-                    <div class="content" id="content" style="display: none;width:100%;">
+                    <div class="chat_content" id="content" style="display: none;width:100%;">
 
                         <!-- 聊天页面 -->
                         <div class="chatRight">
@@ -80,7 +81,6 @@
                                 </div>
                                 <form id="chatform" style="margin:0;">
                                     <div id="input_content" class="chat02_content">
-                                        <input type="hidden" id="chatToken" name="_token" value="{{jwtToken}}" />
                                         <textarea name="comment" id="talkInputId" style="resize: none;" ng-keydown="textKeyDown($event)"></textarea>
                                     </div>
                                     <div class="chat02_bar">
@@ -93,38 +93,6 @@
                                     </div>
                                 </form>
                                 <div style="clear: both;"></div>
-                            </div>
-                            <div id="fileModal" class="modal hide" role="dialog"
-                                aria-hidden="true" data-backdrop="static">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal"
-                                        aria-hidden="true">&times;</button>
-                                    <h3>文件选择框</h3>
-                                </div>
-                                <div class="modal-body">
-                                    <input type='file' id="fileInput" /> <input type='hidden'
-                                        id="sendfiletype" />
-                                    <div id="send-file-warning"></div>
-                                </div>
-                                <div class="modal-footer">
-                                  
-                                    <button id="fileSend" class="btn btn-primary" onclick="sendFile()">发送</button>
-                                    <button id="cancelfileSend" class="btn" data-dismiss="modal">取消</button>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <!-- 群组成员操作界面 -->
-                        <div id="option-room-div-modal" class="alert modal hide"
-                            role="dialog" aria-hidden="true" data-backdrop="static">
-                            <button type="button" class="close" data-dismiss="modal"
-                                aria-hidden="true">&times;</button>
-                            <div class="modal-header">
-                                <h3>群组成员</h3>
-                            </div>
-                            <div class="modal-body">
-                                <div id="room-member-list" style="height: 100px; overflow-y: auto"></div>
                             </div>
                         </div>
                     </div>

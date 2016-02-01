@@ -1,0 +1,456 @@
+.chat_content {
+    /*width: 320px;
+    height: auto;
+    margin: 0 auto;
+    valign: middle;
+    text-align: center;*/
+    position: relative;
+    height: 100%;
+    top: 0%;
+    right: 0;
+    bottom: 0%;
+    left: 0;
+}
+.chat02 {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0 -1px 5px 0 #ddd;
+}
+
+.leftheader {
+    border: 1px #666666 solid;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    z-index: 1000;
+    position: relative;
+    width: 196px;
+    background-color: #5D6978;
+}
+
+.leftheader-font {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+}
+
+.chatRight {
+    position: relative;
+    height: 100%;
+    /*margin-top: -38px;*/
+}
+.group-cen {
+    margin-top: -3.5rem;
+}
+.word-height {
+    height: 100%;
+    padding: 3.5rem 0 4.4rem;
+}
+.chat01_title {
+    display: none;
+    background-color: #5D6978;
+    height: 3.2rem;
+    /*margin-top: -4px;*/
+}
+
+.chat03_title {
+    background-color: #5D6978;
+    height: 30px;
+    position: relative;
+}
+.group-content {
+    height: 100%;
+}
+.group-content .webin {
+    overflow-x: scroll;
+    height: 100%;
+}
+
+/*.talkTo li {
+    line-height: 17px;
+    float: left;
+    padding-left: 6px;
+    margin: 12px 20px;
+    _margin-left: 9px;
+}
+
+.talkTo li a {
+    padding: 4px 11px 4px 7px;
+    _padding-top: 0px;
+    _padding-bottom: 0px;
+    height: 19px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+}*/
+.web-body .bar-header {
+    border-bottom: 1px solid #666;
+}
+
+.chat02_title {
+    display: none;
+    position: relative;
+    background: url('../img/chat_title_bg.jpg') repeat-x 0 0;
+    height: 25px;
+}
+
+.chat02_bar {
+    float: left;
+    height: 4rem;
+    position: relative;
+    width: 25%;
+    padding: 10px 0 4px 5px;
+    margin-bottom: 0px;
+}
+
+.chat02_bar ul {
+    position: relative;
+    height: 100%;
+    margin: 0;
+    /*background: url('../img/wlf_bg.png') no-repeat 10px 8px;*/
+}
+
+.chat02_bar li {
+    position: absolute;
+    width: 95%;
+    height: 100%;
+    padding-left: 5px;
+}
+.chat02_bar li span {
+    display: block;
+    width: 85%;
+    height: 2.8rem;
+    border: 0;
+    background-color: #999;
+    line-height: 2.8rem;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 1.2rem;
+    color: #fff;
+    border-radius: 4px;
+}
+
+.chat01_content {
+    width: 100%;
+    height: 100%;
+    /*padding-right: 17%;*/
+    overflow-x: none;
+    overflow-y: auto;
+}
+
+.chat02_content {
+    float: left;
+    width: 74%;
+    height: 4rem;
+    padding: 10px 0 4px 8px;
+}
+
+.chat02_content textarea {
+    display: block;
+    width: 100%;
+    height: 2.9rem;
+    padding: 0.9rem 0 0 3%;
+    margin: 0;
+    border: 1px solid #999;
+    font-size: 1.2rem;
+    overflow-y: auto;
+    /*line-height: 2.7rem;*/
+    resize: vertical;
+    border-radius: 4px;
+}
+.chat02_bar .easemobmain-sub {
+    display: inline-block;
+    width: 100%;
+    height: 2.8rem;
+    background-color: #999;
+    line-height: 2.8rem;
+    border-radius: 4px;
+}
+.chat02_bar .easemobmain-sub li {
+    position: relative;
+    width: 100%;
+    height: 2.8rem;
+    padding-left: 0;
+    line-height: 2.8rem;
+    text-align: center;
+    font-size: 1.2rem;
+    color: #fff;
+}
+
+.chat-content-p3 {
+    position: relative;
+    display: inline-block;
+    max-width: 90%;
+    padding: 0.6rem;
+    background: #00cafa;
+    color: #fff;
+    font-size: 1rem;
+    white-space: pre-wrap;
+    border-radius: 5px;
+    margin-right: 1%;
+}
+
+.chat02_title_btn {
+    background: url('../img/icon.png') no-repeat 0 0;
+    cursor: pointer;
+    float: left;
+    display: block;
+    width: 15px;
+    height: 15px;
+    margin: 5px 6px;
+}
+
+.ctb01 {
+    background-position: 0 -90px;
+    margin-left: 18px;
+    _margin-left: 8px;
+}
+
+
+.ctb02 {
+    background-position: 0 -457px;
+}
+
+.chat02_title_t {
+    background: url('../img/icon.png') no-repeat 0px -487px;
+    position: absolute;
+    padding-left: 170px;
+    top: 8px;
+    right: 20px;
+    display: block;
+    width: auto;
+    height: 15px;
+}
+
+.chat02_title_t a {
+    color: #333;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+.chat02_title_t a:hover {
+    color: #f60;
+    text-decoration: underline;
+}
+
+.wl_faces_box {
+    background: url('../img/wlf_bg.png') repeat 0 0;
+    position: absolute;
+    width: 100%;
+    height: 225px;
+    bottom: 22px;
+    left: 3px;
+    display: none;
+}
+
+.wl_faces_content {
+    background: #fff;
+    border: 1px #ccc solid;
+    width: 100%;
+    height: 216px;
+    margin: 3px -3px;
+}
+
+.wl_faces_content .title {
+    position: relative;
+    height: 40px;
+    background: url('../img/wlf_title_bg.jpg') repeat-x 0 0;
+}
+
+
+.wl_faces_content .title ul li {
+    position: absolute;
+    display: block;
+}
+
+.wl_faces_content .title ul li.title_name {
+    background: url('../img/wlf_title_btn.jpg') no-repeat 0 0;
+    width: 82px;
+    height: 30px;
+    bottom: 0;
+    _bottom: -2px;
+    left: 15px;
+    text-align: center;
+    line-height: 32px;
+    font-weight: bold;
+    color: #333;
+}
+
+.wl_faces_content .title ul li.wl_faces_close {
+    right: 8px;
+    top: 15px;
+}
+
+.wl_faces_content .title ul li.wl_faces_close span {
+    background: url('../img/icon.png') repeat-x 0 0;
+    cursor: pointer;
+    display: block;
+    width: 15px;
+    height: 15px;
+}
+
+.wl_faces_main {
+    width: 100%;
+}
+
+.wl_faces_main ul {
+    width: 100%;
+    margin: 12px 0px;
+    margin-left: 4px;
+    overflow: hidden;
+    border-top: 1px #CCC solid;
+    border-left: 1px #CCC solid;
+}
+
+.wl_faces_main ul li {
+    float: left;
+    width: 27px;
+    height: 28px;
+    padding: 2px 0px;
+    margin: -1px 0 0 -1px;
+    border-right: 1px #CCC solid;
+    border-bottom: 1px #CCC solid;
+    text-align: center;
+}
+
+.wl_faces_main ul li img {
+    width: 22px;
+    height: 22px;
+}
+
+.wlf_icon {
+    background: url('../img/layer_arrow.png') no-repeat 0 0;
+    position: absolute;
+    width: 22px;
+    height: 9px;
+    bottom: -4px;
+    _bottom: -11px;
+    left: 9px;
+}
+
+label.online {
+    background: url('../img/status.gif') no-repeat 0 0;
+    _background: url('../img/status.gif') no-repeat 0 5px;
+    bottom: 4px;
+    _bottom: 2px;
+}
+
+label.offline {
+    background: url('../img/status.gif') no-repeat 0 -11px;
+    bottom: 4px;
+    _top: 25px;
+    align: center;
+}
+
+.fade {
+    opacity: 0;
+    -webkit-transition: opacity 0.15s linear;
+    -moz-transition: opacity 0.15s linear;
+    -o-transition: opacity 0.15s linear;
+    transition: opacity 0.15s linear;
+}
+.modal-backdrop {
+    *display: none;
+}
+.fade.in {
+    opacity: 1;
+}
+.badgegroup,
+.badge {
+    *margin-top: -30px;
+}
+.accordion-inner {
+    *position: relative;
+}
+/*咨询详情*/
+.easemobmain-record {
+    position: relative;
+    text-align: right;
+    padding: 0 17%;
+}
+.easemobmain-record img {
+    width: 3.5rem;
+    height: 3.5rem;
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -moz-border-radius: 50%;
+}
+.img-right img {
+    position: absolute;
+    top: 5%;
+    right: 1%;
+}
+.img-left img {
+    position: absolute;
+    top: 5%;
+    left: 1%;
+}
+.easemobmain-record p1 {
+    display: inline-block;
+    margin-bottom: 0.8rem;
+}
+.easemobmain-record p2 {
+    display: inline-block;
+    margin-bottom: 0.8rem;
+    margin-left: 0.8rem;
+}
+.easemobmain-list {
+    float: right;
+    width: 100%;
+    margin: 0.8rem 0;
+}
+.chatRight .chat00_content {
+    width:100%;
+    height: 100%;
+    /*padding: 20px;*/
+    display:block;
+    overflow-y: scroll;
+}
+.chatRight .chats {
+    height: 100%;
+    padding-bottom: 57px;
+    background-color: #fff;
+}
+.clearfix:after {
+    content:"\200B";
+    display:block; height:0;
+    clear:both;
+}
+.clearfix { 
+    *zoom:1;
+}
+.chat01_content p2 {
+    text-align: right;
+    margin-bottom: 0.4rem;
+    margin-left: 0.8rem;
+}
+.chat01_content div {
+    float: left;
+    width: 100%;
+    padding-left: 22%;
+    margin: 0.8rem 0;
+}
+.immediate-information, .textbox {
+    display: inline-block;
+    width: 100%;
+    padding: 0 17%;
+    margin: 0.8rem 0;
+}
+.immediate-information p1, .textbox p1 {
+    display: inline-block;
+    margin-bottom: 0.8rem;
+}
+.immediate-information p2, .textbox p2 {
+    display: inline-block;
+    margin-bottom: 0.8rem;
+    margin-left: 0.8rem;
+}
+.chat00_content .loading {
+    text-align: center;
+}

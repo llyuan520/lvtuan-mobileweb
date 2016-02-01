@@ -1,6 +1,6 @@
-var easemobModule = angular.module('easemobModule', []);
+var easemobModule = angular.module('easemobModule', ['ionic']);
 
-function easemobService() {
+function easemobService($ionicLoading) {
 	var self = this;
 	var conn;
     var textSending = false;
@@ -61,13 +61,17 @@ function easemobService() {
 	}
 
 	self.login = function(user, pwd) {
-        conn.open({
-            apiUrl : Easemob.im.config.apiURL,
-            user : user,
-            pwd : pwd,
-            //连接时提供appkey
-            appKey : AppSettings.easemobAppKey
-        });       
+        //启动心跳
+        if (!conn.isOpened()) {
+            $ionicLoading.show();
+            conn.open({
+                apiUrl : Easemob.im.config.apiURL,
+                user : user,
+                pwd : pwd,
+                //连接时提供appkey
+                appKey : AppSettings.easemobAppKey
+            });
+        }
 	}
 
     //处理连接时函数,主要是登录成功后对页面元素做处理
@@ -80,6 +84,7 @@ function easemobService() {
             success : function(roster) {
                 // 页面处理
                 self.showChatUI();
+                $ionicLoading.hide();
             }
         });
         //启动心跳
@@ -207,18 +212,20 @@ function easemobService() {
 
     self.sendText = function(chattype) {
         if (textSending) {
-            return;
+            return false;
         }
         textSending = true;
         var msgInput = document.getElementById(talkInputId);
         var msg = msgInput.value;
         if (msg == null || msg.length == 0) {
-            return;
+            textSending = false;
+            return false;
         }
         var to = curChatUserId;
 
         if (to == null) {
-            return;
+            textSending = false;
+            return false;
         }
         var ext = {
             realname: currentUser.realname,
@@ -241,6 +248,7 @@ function easemobService() {
         setTimeout(function() {
             textSending = false;
         }, 2000);
+        return true;
     };
 
     //显示聊天记录的统一处理方法
