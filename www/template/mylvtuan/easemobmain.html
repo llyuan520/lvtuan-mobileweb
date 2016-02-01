@@ -1,103 +1,94 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>咨询详情</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <meta name="format-detection" content="telephone=no"/>
     <link rel="stylesheet" href="lib/js/web-im-1.0.7.2/css/webimchat.css" />
-
     <!--[if lte IE 9]>
     <script src="lib/js/web-im-1.0.7.2/sdk/jplayer/jquery.jplayer.min.js"></script>
     <script src="lib/js/web-im-1.0.7.2/sdk/swfupload/swfupload.js"></script>
     <![endif]-->
-
     <style>
       body {
         font-family: "Microsoft YaHei","Microsoft JhengHei",STHeiti,MingLiu;
       }
     </style>
+<ion-view hide-tabs="true">
+    <ion-pane>
+        <ion-header-bar class="bar bar-header bar-light">
+            <button ng-if="currentUser.status == 1 || currentUser.status == 2" class="button button-clear button-positive" ng-click="jump('#/userquestion/replied')">  
+                <i class="icon icon-left ion-ios-arrow-back"></i>  
+            </button>
+            <button ng-if="currentUser.status == 3" class="button button-clear button-positive" ng-click="jump('#/lawyerquestion/replied')">  
+                <i class="icon icon-left ion-ios-arrow-back"></i>  
+            </button>
+            <h1 class="title">咨询详情</h1>
+        </ion-header-bar>
+        <div hide-tabs class="web-body web-top10 scroll-content ionic-scroll  has-header">
+            <div class="webin" style="height: 100%;">
+                <div class="chat_content" id="content" style="display: none;width:100%;">
 
-    <ion-header-bar class="bar bar-header bar-light item-icon-right">
-        <a ng-if="currentUser.status == 1 || currentUser.status == 2" class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-click="jump('#/userquestion/replied')"></a>
-        <a ng-if="currentUser.status == 3" class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-click="jump('#/lawyerquestion/replied')"></a>
-        <h1 class="title">咨询详情</h1>
-    </ion-header-bar>
-    <div hide-tabs class="web-body web-top10 scroll-content ionic-scroll  has-header">
-                <div class="webin" style="height: 100%;">
-                    
-                    <div id="waitLoginmodal" class="modal hide" data-backdrop="static">
-                        <img ng-src="lib/js/web-im-1.0.7.2/img/loading.gif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;正在努力加载中...
-                    </div>
-                    <div class="chat_content" id="content" style="display: none;width:100%;">
+                    <!-- 聊天页面 -->
+                    <div class="chatRight">
+                        <div id="chat01" class="chats">
+                            <div class="chat01_title">
+                                <a href="javascript:window.close()"><div id="recycle"></div></a>
+                            </div>
+                            <!-- <div id="null-nouser" class="chat01_content"></div> -->
+                            <div id="{{curUserId}}-{{curChatUserId}}" class="chat00_content" classname="chat00_content">
 
-                        <!-- 聊天页面 -->
-                        <div class="chatRight">
-                            <div id="chat01" class="chats">
-                                <div class="chat01_title">
-                                    <a href="javascript:window.close()"><div id="recycle"></div></a>
-                                </div>
-                                <!-- <div id="null-nouser" class="chat01_content"></div> -->
-                                <div id="{{curUserId}}-{{curChatUserId}}" class="chat00_content" classname="chat00_content">
+                                <div style="text-align: center"><a href="javascript:void(0)" id="comments-list" style="text-align: center" ng-click="loadMore()">查看更多</a></div>
+                                <div id="page" class="loading" style="display: none">加载中...</div>
 
-                                    <div style="text-align: center"><a href="javascript:void(0)" id="comments-list" style="text-align: center" ng-click="loadMore()">查看更多</a></div>
-                                    <div id="page" class="loading" style="display: none">加载中...</div>
-
-                                    <div ng-repeat="comment in easemobParam.comments" class="easemobmain-list">
-                                        <div ng-if="comment.creator_id == user_name" class="easemobmain-record img-right" style="text-align:right" >
-                                            <p1>{{comment.created_at}}<span></span></p1>
-                                            <p2>{{comment.creator_name}}<b></b></p2>
-                                            <img ng-src="{{comment.creator_avatar}}"><br>
-                                            <p3 class="chat-content-p3" className="chat-content-p3">{{comment.content}}</p3>
-                                        </div>
-                                        <div ng-if="comment.creator_id != user_name" class="easemobmain-record img-left" style="text-align:left">
-                                            <p1>{{comment.created_at}}<span></span></p1>
-                                            <p2>{{comment.creator_name}}<b></b></p2>
-                                            <img ng-src="{{comment.creator_avatar}}"><br>
-                                            <p3 class="chat-content-p3" className="chat-content-p3">{{comment.content}}</p3>
-                                        </div>
+                                <div ng-repeat="comment in easemobParam.comments" class="easemobmain-list">
+                                    <div ng-if="comment.creator_id == user_name" class="easemobmain-record img-right" style="text-align:right" >
+                                        <p1>{{comment.created_at}}<span></span></p1>
+                                        <p2>{{comment.creator_name}}<b></b></p2>
+                                        <img ng-src="{{comment.creator_avatar}}"><br>
+                                        <p3 class="chat-content-p3" className="chat-content-p3">{{comment.content}}</p3>
+                                    </div>
+                                    <div ng-if="comment.creator_id != user_name" class="easemobmain-record img-left" style="text-align:left">
+                                        <p1>{{comment.created_at}}<span></span></p1>
+                                        <p2>{{comment.creator_name}}<b></b></p2>
+                                        <img ng-src="{{comment.creator_avatar}}"><br>
+                                        <p3 class="chat-content-p3" className="chat-content-p3">{{comment.content}}</p3>
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="chat02">
-                                <div class="chat02_title">
-                                    <div id="wl_faces_box" class="wl_faces_box">
-                                        <div class="wl_faces_content">
-                                            <div class="title">
-                                                <ul>
-                                                    <li class="title_name">常用表情</li>
-                                                    <li class="wl_faces_close"><span
-                                                        onclick='turnoffFaces_box()'>&nbsp;</span></li>
-                                                </ul>
-                                            </div>
-                                            <div id="wl_faces_main" class="wl_faces_main">
-                                                <ul id="emotionUL">
-                                                </ul>
-                                            </div>
+                        <div class="chat02">
+                            <div class="chat02_title">
+                                <div id="wl_faces_box" class="wl_faces_box">
+                                    <div class="wl_faces_content">
+                                        <div class="title">
+                                            <ul>
+                                                <li class="title_name">常用表情</li>
+                                                <li class="wl_faces_close"><span
+                                                    onclick='turnoffFaces_box()'>&nbsp;</span></li>
+                                            </ul>
                                         </div>
-                                        <div class="wlf_icon"></div>
+                                        <div id="wl_faces_main" class="wl_faces_main">
+                                            <ul id="emotionUL">
+                                            </ul>
+                                        </div>
                                     </div>
+                                    <div class="wlf_icon"></div>
                                 </div>
-                                <form id="chatform" style="margin:0;">
-                                    <div id="input_content" class="chat02_content">
-                                        <textarea name="comment" id="talkInputId" style="resize: none;" ng-keydown="textKeyDown($event)"></textarea>
-                                    </div>
-                                    <div class="chat02_bar">
-                                        <ul style="width:100%;">
-                                            <a href="##" class="easemobmain-sub">
-                                                <li ng-click="sendText()">发&nbsp;&nbsp;送</li>
-                                            </a>
-                                           <!--  <a href="##" style="float: right"><li >确认完成</li></a>    -->
-                                        </ul>
-                                    </div>
-                                </form>
-                                <div style="clear: both;"></div>
                             </div>
+                            <form id="chatform" style="margin:0;">
+                                <div id="input_content" class="chat02_content">
+                                    <textarea name="comment" id="talkInputId" style="resize: none;" ng-keydown="textKeyDown($event)"></textarea>
+                                </div>
+                                <div class="chat02_bar">
+                                    <ul style="width:100%;">
+                                        <a href="##" class="easemobmain-sub">
+                                            <li ng-click="sendText()">发&nbsp;&nbsp;送</li>
+                                        </a>
+                                       <!--  <a href="##" style="float: right"><li >确认完成</li></a>    -->
+                                    </ul>
+                                </div>
+                            </form>
+                            <div style="clear: both;"></div>
                         </div>
                     </div>
                 </div>
-
             </div>
-  </body>
-</html>
+        </div>
+    </ion-pane>
+</ion-view>
