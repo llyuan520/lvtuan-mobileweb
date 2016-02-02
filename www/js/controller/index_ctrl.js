@@ -497,77 +497,46 @@ lvtuanApp.controller("groupAttentionCtrl",function($scope,$http,$state,$rootScop
 	}
 })
 
-//圈子详情
-lvtuanApp.controller("groupviewinitCtrl",function($scope,$http,$state,$rootScope,$stateParams,$ionicLoading){
+lvtuanApp.controller("groupviewCtrl",function($scope,$http,$state,$rootScope,$stateParams,easemobService,$ionicLoading){
 	$ionicLoading.show();
-    localStorage.removeItem("easemobParam");
-    $scope.$on('$ionicView.beforeEnter', function() {  
-        console.info("圈子详情");
-        $http.get('http://'+$rootScope.hostName+'/group/'+$stateParams.id+'/chat'
-        ).success(function(data) {
-            if (data && data.data) {
-                console.info('圈子详情',data.data);
-                var itmes = data.data;
-                $scope.easemobParam = {
-                	'user_name' : itmes.user_id,
-                	'user_password' : itmes.pwd,
-                	'id' : itmes.id,
-                	'easemob_id' : itmes.easemob_id,
-                	'group_id' : JSON.stringify(itmes.id),
-                };
+    $http.get('http://'+$rootScope.hostName+'/group/'+$stateParams.id+'/chat'
+    ).success(function(data) {
+        if (data && data.data) {
+            var items = data.data;
+            var curRoomId = items.easemob_id;
 
-                localStorage.setItem("easemobParam", JSON.stringify($scope.easemobParam));
-				$state.go("groupview",{id: $stateParams.id});
-            }
-            $ionicLoading.hide();
-        })
+			easemobService.init(curRoomId,"groupchat");
+			easemobService.login(items.user_id.toString(),items.pwd);
 
-    });
-})
-
-//圈子详情
-lvtuanApp.controller("groupviewCtrl",function($scope,$http,$state,$rootScope,$stateParams,$ionicLoading){
-	$ionicLoading.show();
-    $scope.$on('$ionicView.beforeEnter', function() {  
-        console.info("圈子详情");
-        var easemobParam = JSON.parse(localStorage.getItem('easemobParam'));
-        $("#user_name").val();
-        $("#user_password").val();
-        if (easemobParam != null) {
-	        $scope.user_name = easemobParam.user_name;
-	        $scope.user_password = easemobParam.user_password;
-            $scope.id = easemobParam.id;
-            $scope.easemob_id = easemobParam.easemob_id;
+            console.info('圈子',items);
         }
-
-        var time = null;
-        time = setInterval(function() { 
-            if(getuserpwd(easemobParam) == true){
-                clearInterval(time);
-                login();
-            }
-        }, 3000); 
-        $ionicLoading.hide();
-    
-        function getuserpwd(easemobParam){
-            var name = $("#user_name").val();
-            var pwd = $("#user_password").val();
-            if(name != null && pwd != null){
-                if(name == easemobParam.user_name && pwd == easemobParam.user_password){
-                    return true;
-                }
-            }else{
-                return false;
-            }
-        }
-
-    });
+        // $ionicLoading.hide();
+    })
 	
 	$scope.site = function(id){
-
 		var easemobParam = JSON.parse(localStorage.getItem('easemobParam'));
 		location.href='#/group/site/'+easemobParam.id;
 		$state.go("group/site",{id: easemobParam.id});
+	}
+
+	$scope.sendText = function() {
+		var result = easemobService.sendText("groupchat");
+		// var comment = $('#talkInputId').val();
+		// if (result) {
+		// 	$scope.saveComment(comment);
+		// }
+	}
+
+	$scope.textKeyDown = function($event) {
+		if ($event.keyCode == 13) {
+	        if ($event.altKey) {
+	            e = $event.target.value;
+	            $(this).val(e + '\n');
+	        } else {
+	            $scope.sendText();
+	            $event.preventDefault();
+	        }
+		}
 	}
 })
 
@@ -3170,7 +3139,7 @@ lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$
 			$scope.curChatUserId = items.user_id;
 			$scope.curUserId = items.easemob_id;
 
-			easemobService.init(items.user_id);
+			easemobService.init(items.user_id,"chat");
 			easemobService.login(items.easemob_id.toString(), items.easemob_pwd);
 		}
 	})

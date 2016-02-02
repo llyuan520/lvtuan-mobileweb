@@ -338,7 +338,6 @@ a:hover {
 
 .chat-content-p3 {
     position: relative;
-    display: inline-block;
     max-width: 90%;
     padding: 0.6rem;
     background: #00cafa;
@@ -622,7 +621,7 @@ label.offline {
 .chat01_content div {
     float: left;
     width: 100%;
-    padding-left: 22%;
+    padding-left: 17%;
     margin: 0.8rem 0;
 }
 .immediate-information, .textbox {
