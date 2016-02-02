@@ -440,8 +440,6 @@ label.offline {
 .immediate-information, .textbox {
     display: inline-block;
     width: 100%;
-    padding: 0 17%;
-    margin: 0.8rem 0;
 }
 .immediate-information p1, .textbox p1 {
     display: inline-block;
