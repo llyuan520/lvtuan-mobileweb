@@ -3213,8 +3213,10 @@ lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$
 
 	$scope.sendText = function() {
 		var comment = $('#talkInputId').val();
-		easemobService.sendText("chat");
-		$scope.saveComment(comment);
+		var result = easemobService.sendText("chat");
+		if (result) {
+			$scope.saveComment(comment);
+		}
 	}
 
 	$scope.textKeyDown = function($event) {
@@ -3245,9 +3247,6 @@ lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$
 		})
 		.error(function(data) {
             console.info(data);
-            var error =  $.parseJSON(data.responseText);
-            layer.show(error.error_messages);
-            console.info(error);
 		})
 	}
 

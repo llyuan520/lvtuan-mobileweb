@@ -1,79 +1,4 @@
-/** custom login button **/
-.flatbtn-blu {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    display: inline-block;
-    outline: 0;
-    border: 0;
-    color: #edf4f9;
-    text-decoration: none;
-    background-color: #4f94cf;
-    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-    font-size: 1.4em;
-    font-weight: bold;
-    padding: 12px 26px 12px 26px;
-    line-height: normal;
-    text-align: center;
-    vertical-align: middle;
-    cursor: pointer;
-    text-transform: uppercase;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-    -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-}
-
-.flatbtn-blu:hover {
-    color: #fff;
-    background-color: #519dde;
-}
-
-.flatbtn-blu:active {
-    -webkit-box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.1);
-    -moz-box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.1);
-    box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.1);
-}
-
-#loginmodal {
-    box-sizing: border-box;
-    padding: 15px 20px 0 50px;
-    background: #f3f6fa;
-}
-
-#loginform label {
-    display: block;
-    font-size: 1.1em;
-    font-weight: bold;
-    color: #7c8291;
-    margin-bottom: 3px;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    border: none;
-    font-size: 12px;
-    /*text-align: left;*/
-}
-
-ul {
-    list-style: none;
-}
-
-a {
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-    color: #f60;
-}
-
-.content {
+.chat_content {
     /*width: 320px;
     height: auto;
     margin: 0 auto;
@@ -92,28 +17,6 @@ a:hover {
     width: 100%;
     box-shadow: 0 -1px 5px 0 #ddd;
 }
-.content_login {
-    width: 320px;
-    height: auto;
-    padding: 25px;
-    margin: 0 auto;
-    valign: middle;
-    text-align: center;
-}
-
-.leftcontact {
-    float: left;
-    width: 196px;
-    border: 1px #666666 solid;
-    height: auto;
-    margin: 0 auto;
-    margin-top: 80px;
-    margin-left: 120px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-    position: relative;
-}
 
 .leftheader {
     border: 1px #666666 solid;
@@ -124,13 +27,6 @@ a:hover {
     position: relative;
     width: 196px;
     background-color: #5D6978;
-}
-
-.login_user_title {
-    display: -moz-inline-box;
-    display: inline-block;
-    width: 65px;
-    overflow: hidden;
 }
 
 .leftheader-font {
@@ -193,15 +89,6 @@ a:hover {
 .web-body .bar-header {
     border-bottom: 1px solid #666;
 }
-.close_btn {
-    background: url('../img/icon.png') no-repeat 0 0;
-    position: absolute;
-    top: 10px;
-    right: 8px;
-    display: block;
-    width: 15px;
-    height: 15px;
-}
 
 .chat02_title {
     display: none;
@@ -246,19 +133,6 @@ a:hover {
     border-radius: 4px;
 }
 
-.chat03_title_t {
-    background: url('../img/icon.png') no-repeat 0px -370px;
-    position: absolute;
-    padding-left: 25px;
-    top: 8px;
-    left: 20px;
-    display: block;
-    width: auto;
-    height: 15px;
-    font-size: 12px;
-    font-weight: bold;
-}
-
 .chat01_content {
     width: 100%;
     height: 100%;
@@ -272,27 +146,6 @@ a:hover {
     width: 74%;
     height: 4rem;
     padding: 10px 0 4px 8px;
-}
-
-.chat03_content_ul {
-    text-align: left;
-    font-size: 12px;
-    color: #333;
-    margin: 0px 0px;
-    overflow-y: auto;
-    position: relative;
-    resize: none;
-}
-
-.chat03_content {
-    height: 480px;
-    text-align: left;
-    font-size: 12px;
-    color: #333;
-    margin: 0px 0px;
-    overflow-y: auto;
-    position: relative;
-    resize: vertical;
 }
 
 .chat02_content textarea {
@@ -327,15 +180,6 @@ a:hover {
     color: #fff;
 }
 
-.chat03_name {
-    color: #333;
-    position: absolute;
-    top: 9px;
-    left: 40px;
-    display: block;
-    height: 480px;
-}
-
 .chat-content-p3 {
     position: relative;
     display: inline-block;
@@ -347,31 +191,6 @@ a:hover {
     white-space: pre-wrap;
     border-radius: 5px;
     margin-right: 1%;
-}
-
-.chat03_content ul {
-    position: relative;
-}
-
-.chat03_content ul li {
-    position: relative;
-    padding: 3px 6px;
-    height: 31px;
-    _padding-bottom: 0px;
-}
-
-.chat03_content ul li.hover {
-    background: #ebeef3;
-}
-
-.chat03_content ul li.choosed {
-    background: #ebeef3;
-}
-
-
-.chat03_content ul img {
-    width: 30px;
-    height: 30px;
 }
 
 .chat02_title_btn {
@@ -510,14 +329,6 @@ a:hover {
     bottom: -4px;
     _bottom: -11px;
     left: 9px;
-}
-
-.chat03_content li label {
-    display: block;
-    position: absolute;
-    width: 9px;
-    height: 9px;
-    left: 27px;
 }
 
 label.online {
