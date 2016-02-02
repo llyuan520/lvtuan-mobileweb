@@ -8,12 +8,16 @@ function easemobService($ionicLoading) {
     var curUserId = null;
     var curChatUserId = null;
     var msgCardDivId = "chat01";
+    var groupFlagMark = "group--";
+
+    self.msgType = null;
 
 	//加载在控制器里面的 微信签权登录
-	self.init = function(userId) {
+	self.init = function(userId,msgType) {
 		curChatUserId = userId.toString();
 
 		self.handleConfig();
+        self.msgType = msgType;
 
         conn = new Easemob.im.Connection();
         //初始化连接
@@ -30,6 +34,7 @@ function easemobService($ionicLoading) {
             },
             //收到文本消息时的回调方法
             onTextMessage : function(message) {
+                console.info('onTextMessage');
                 self.handleTextMessage(message);
             },
             //异常时的回调方法
@@ -111,17 +116,20 @@ function easemobService($ionicLoading) {
 
     //easemobwebim-sdk收到文本消息的回调方法的实现
     self.handleTextMessage = function(message) {
+        console.info(message, self.msgType);
         var from = message.from;//消息的发送者
         var mestype = message.type;//消息发送的类型是群组消息还是个人消息
         var messageContent = message.data;//文本消息体
         //TODO  根据消息体的to值去定位那个群组的聊天记录
-        var room = message.to;
-        if (from != curUserId) {
-            if (mestype == 'groupchat') {
-                var msgtext = messageContent.replace(/\n/g, '<br>');
-                self.appendMsg(message.from, message.to, messageContent, mestype, message.ext.realname, message.ext.avatar);
-            } else {
-                self.appendMsg(message.from, message.from, messageContent, mestype, message.ext.realname, message.ext.avatar);
+        if (self.msgType == mestype) {
+            var room = message.to;
+            if (from != curUserId) {
+                if (mestype == 'groupchat') {
+                    var msgtext = messageContent.replace(/\n/g, '<br>');
+                    self.appendMsg(message.from, message.to, messageContent, mestype, message.ext.realname, message.ext.avatar);
+                } else {
+                    self.appendMsg(message.from, message.from, messageContent, mestype, message.ext.realname, message.ext.avatar);
+                }
             }
         }
     };
@@ -240,6 +248,7 @@ function easemobService($ionicLoading) {
         // 群组消息和个人消息的判断分支
         //easemobwebim-sdk发送文本消息的方法 to为发送给谁，meg为文本消息对象
         conn.sendTextMessage(options);
+        console.info("sent text options", options);
 
         var msgtext = msg.replace(/\n/g, '<br>');
         self.appendMsg(curUserId, to, msgtext,chattype,currentUser.realname,currentUser.avatar);
