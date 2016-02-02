@@ -338,6 +338,7 @@ a:hover {
 
 .chat-content-p3 {
     position: relative;
+    display: inline-block;
     max-width: 90%;
     padding: 0.6rem;
     background: #00cafa;
@@ -346,6 +347,7 @@ a:hover {
     white-space: pre-wrap;
     border-radius: 5px;
     margin-right: 1%;
+    margin-top: -3%;
 }
 
 .chat03_content ul {

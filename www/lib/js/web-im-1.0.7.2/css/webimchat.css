@@ -191,6 +191,7 @@
     white-space: pre-wrap;
     border-radius: 5px;
     margin-right: 1%;
+    margin-top: -3%;
 }
 
 .chat02_title_btn {
@@ -369,7 +370,7 @@ label.offline {
 .easemobmain-record {
     position: relative;
     text-align: right;
-    padding: 0 17%;
+    padding: 1% 17%;
 }
 .easemobmain-record img {
     width: 3.5rem;
