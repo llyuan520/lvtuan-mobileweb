@@ -3161,8 +3161,8 @@ lvtuanApp.controller("lawyerquestionsviewCtrl",function($http,$scope,$stateParam
 })
 
 //咨询和订单的一对一咨询 - 即时通讯
-lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$stateParams,easemobService){
-
+lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$stateParams,easemobService,$ionicLoading){
+	$ionicLoading.show();
 	$http.get('http://'+$rootScope.hostName+'/center/question/'+$stateParams.id+'/ask'
     ).success(function(data) {
     	if (data && data.data) {
@@ -3181,6 +3181,8 @@ lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$
 	$scope.loadMore = function() {
 	    var str = '';
 	    var url = 'http://'+$rootScope.hostName+'/question/'+$stateParams.id+'/comment_list?page='+page+'&rows_per_page='+rows_per_page;
+
+		$ionicLoading.show();
 		$http.get(url)
 		.success(function(data) {
             obj = data.data.comments;
@@ -3203,6 +3205,7 @@ lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$
             $("#page").after(str);
             $("#page").css('display', 'none');
             page++;
+            $ionicLoading.hide();
 		}).error(function(data) {
             console.info(data);
             var error =  $.parseJSON(data.responseText);
