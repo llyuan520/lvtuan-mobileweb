@@ -994,8 +994,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
     .state('corporate/list', { //首页 - 小微企服
       url: '/corporate/list/:id',
       templateUrl: 'template/corporate/list.html',
-      controller: 'corporatelistCtrl',
-      authn: true
+      controller: 'corporatelistCtrl'
     })
     .state('corporate/buynow', { //首页 - 小微企服 - 立即购买
       url: '/corporate/buynow/:id',

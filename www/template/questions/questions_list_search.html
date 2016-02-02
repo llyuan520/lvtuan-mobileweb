@@ -17,7 +17,7 @@
 			<ion-content>	
 				<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 				<div class="list">
-					<a class="item" ng-repeat="item in items">
+					<a class="item" ng-repeat="item in items" ng-href="#/questionsview/{{item.id}}">
 						<span>{{item.title}}</span>
 						<span class="item-note">{{item.post_category}}</span>
 						<br>

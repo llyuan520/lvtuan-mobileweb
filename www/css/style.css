@@ -935,7 +935,9 @@ input, select {
         padding-top: 20%;
     }
 }
-
+.item-input-wrapper{
+    background-color: #fff;
+}
 .item-input-wrapper input {
     width: 100%;
 }
