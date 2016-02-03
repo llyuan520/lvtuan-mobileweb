@@ -1,19 +1,13 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>律团</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <meta name="format-detection" content="telephone=no"/>
-  </head>
-  <body>
-	<link rel="stylesheet" href="lib/js/web-im-1.0.7.2/css/webim.css" />
-    <style>
-      body {
-        font-family: "Microsoft YaHei","Microsoft JhengHei",STHeiti,MingLiu;
-      }
-    </style>
-
+<link rel="stylesheet" href="lib/js/web-im-1.0.7.2/css/webimchat.css" />
+<!--[if lte IE 9]>
+<script src="lib/js/web-im-1.0.7.2/sdk/jplayer/jquery.jplayer.min.js"></script>
+<script src="lib/js/web-im-1.0.7.2/sdk/swfupload/swfupload.js"></script>
+<![endif]-->
+<style>
+  body {
+    font-family: "Microsoft YaHei","Microsoft JhengHei",STHeiti,MingLiu;
+  }
+</style>
 <ion-view hide-tabs="true">
 	<ion-pane  class="web-body">
 	  	<div hide-Tabs class="web-body web-top10 group-content">
@@ -23,138 +17,8 @@
 				<i ng-click="site({{id}})" class="icon ion-more dark"></i>
 			</ion-header-bar>
 
-				<div class="webin">
-					<div id="loginmodal" class="modal in hide" role="dialog" aria-hidden="true" data-backdrop="static">
-				        <div class="modal-header">
-				            <h3>用户登录</h3>
-				        </div>
-				        <div class="modal-body">
-				            <table>
-				                <tr>
-				                    <td width="65%">
-				                        <label for="username">用户名:</label>
-				                        <input type="text" ng-model="user_name" name="user_name" id="user_name" tabindex="1"/>
-				                        <label for="password">密码:</label>
-				                        <input type="password" ng-model="user_password" name="user_password" id="user_password" tabindex="2" />
-				                        <label for="token">令牌:</label>
-				                        <input type="text" name="token" value="" id="token" disabled="disabled" tabindex="3" />
-				                    </td>
-				                </tr>
-				            </table>
-				            <label class="checkbox">
-				                <input type="checkbox" name="usetoken" id="usetoken" tabindex="4" />使用令牌登录
-				            </label>    
-				        </div>
-				        <div class="modal-footer">
-				            <button class="flatbtn-blu" onclick="login()" tabindex="3">登录</button>
-				            <button class="flatbtn-blu" onclick="showRegist()" tabindex="4">注册</button>
-				        </div>
-				    </div>
-
-				    <!-- 注册操作界面 -->
-				    <div id="regist-div-modal" class="alert modal hide" role="dialog"
-				        aria-hidden="true" data-backdrop="static">
-				        <div class="modal-header">
-				            <h3>用户注册</h3>
-				        </div>
-				        <div class="modal-body">
-				            <div id="regist_div" style="overflow-y: auto">
-				                <table>
-				                    <tr>
-				                        <td width="65%"><label>用户名:</label> <input type="text"
-				                            value="" id="regist_username" tabindex="1" /> <label>密码:</label>
-				                            <input type="password" value="" id="regist_password" tabindex="2" />
-				                            <label>昵称:</label> <input type="text" value=""
-				                            id="regist_nickname" tabindex="3" /></td>
-				                    </tr>
-				                </table>
-				            </div>
-				        </div>
-				        <div class="modal-footer">
-				            <button id="confirm-regist-confirmButton" class="btn btn-primary"
-				                onclick="regist()">完成</button>
-				            <button id="confirm-regist-cancelButton" class="btn"
-				                onclick="showlogin()">返回</button>
-				        </div>
-				    </div>
-
-				    <div id="waitLoginmodal" class="modal hide" data-backdrop="static">
-				        <img ng-src="lib/js/web-im-1.0.7.2/img/loading.gif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;正在努力加载中...
-				    </div>
-				    <div class="content hide" id="content">
-				        <div class="leftcontact hide" id="leftcontact">
-				            <div id="headerimg" class="leftheader">
-				                <span> <img ng-src="lib/js/web-im-1.0.7.2/img/head/header2.jpg" alt="logo"
-				                    class="img-circle" width="60px" height="60px"
-				                    style="margin-top: -40px; margin-left: 20px" /></span> <span
-				                    id="login_user" class="login_user_title"> <a
-				                    class="leftheader-font" href="#"></a>
-				                </span> <span>
-				                    <div class="btn-group" style="margin-left: 5px;">
-				                        <button class="btn btn-inverse dropdown-toggle" data-toggle="dropdown">
-				                            <span class="caret"></span>
-				                        </button>
-				                        <ul class="dropdown-menu">
-				                            <li><a href="javascript:;" onclick="showAddFriend()">添加好友</a></li>
-				                            <li><a href="javascript:;" onclick="showDelFriend()">删除好友</a></li>
-				                            <li class="divider"></li>
-				                            <li><a href="javascript:;" onclick="logout();return false;">退出</a></li>
-				                        </ul>
-				                    </div>
-				                </span>
-				            </div>
-				            <div id="leftmiddle">
-				                <!--
-				                <input style="width: 120px; color: #999999; margin-top: 8px;"
-				                    type="text" id="searchfriend" value="搜索"
-				                    onFocus="if(value==defaultValue){value='';this.style.color='#000'}"
-				                    onBlur="if(!value){value=defaultValue;this.style.color='#999'}" />
-				                <button id="searchFriend" style="background: #cccccc">查询</button>
-				            -->
-				            </div>
-				            <div id="contractlist11"
-				                style="height: 492px; overflow-y: auto; overflow-x: auto;">
-				                <div class="accordion" id="accordionDiv">
-				                    <!-- <div class="accordion-group">
-				                        <div class="accordion-heading">
-				                            <a id="accordion1" class="accordion-toggle"
-				                                data-toggle="collapse" data-parent="#accordionDiv"
-				                                href="#collapseOne">我的好友 </a>
-				                        </div>
-				                        <div id="collapseOne" class="accordion-body collapse in">
-				                            <div class="accordion-inner" id="contractlist">
-				                                <ul id="contactlistUL" class="chat03_content_ul"></ul>
-				                            </div>
-				                        </div>
-				                    </div> -->
-				                    <div class="accordion-group">
-				                        <div class="accordion-heading">
-				                            <a id="accordion2" class="accordion-toggle collapsed"
-				                                data-toggle="collapse" data-parent="#accordionDiv"
-				                                href="#collapseTwo">我的群组</a>
-				                        </div>
-				                        <div id="collapseTwo" class="accordion-body collapse">
-				                            <div class="accordion-inner" id="contracgrouplist">
-				                                <ul id="contactgrouplistUL" class="chat03_content_ul"></ul>
-				                            </div>
-				                        </div>
-				                    </div>
-				                    <div class="accordion-group">
-				                        <div class="accordion-heading">
-				                            <a id="accordion3" class="accordion-toggle collapsed"
-				                                data-toggle="collapse" data-parent="#accordionDiv"
-				                                href="#collapseThree">陌生人</a>
-				                        </div>
-				                        <div id="collapseThree" class="accordion-body collapse">
-				                            <div class="accordion-inner" id="momogrouplist">
-				                                <ul id="momogrouplistUL" class="chat03_content_ul"></ul>
-				                            </div>
-				                        </div>
-				                    </div>
-				                </div>
-
-				            </div>
-				        </div>
+				<div class="webin" style="height: 100%;">
+				    <div class="chat_content hide" id="content">
 				        <div id="rightTop" style="height: 3.5rem;"></div>
 				        <!-- 聊天页面 -->
 				        <div class="chatRight group-cen">
@@ -169,7 +33,6 @@
 				                </div>
 				                <div id="null-nouser" class="chat01_content"></div>
 				            </div>
-
 				            <div class="chat02">
 				                <div class="chat02_title">
 				                    <a class="chat02_title_btn ctb01" onclick="showEmotionDialog()"
@@ -208,103 +71,9 @@
 
 				                <div style="clear: both;"></div>
 				            </div>
-				            <div id="fileModal" class="modal hide" role="dialog"
-				                aria-hidden="true" data-backdrop="static">
-				                <div class="modal-header">
-				                    <button type="button" class="close" data-dismiss="modal"
-				                        aria-hidden="true">&times;</button>
-				                    <h3>文件选择框</h3>
-				                </div>
-				                <div class="modal-body">
-				                    <input type='file' id="fileInput" /> <input type='hidden'
-				                        id="sendfiletype" />
-				                    <div id="send-file-warning"></div>
-				                </div>
-				                <div class="modal-footer">
-				                    <button id="fileSend" class="btn btn-primary" onclick="sendFile()">发送</button>
-				                    <button id="cancelfileSend" class="btn" data-dismiss="modal">取消</button>
-				                </div>
-				            </div>
-				        </div>
-
-				        <div id="addFridentModal" class="modal hide" role="dialog"
-				            aria-hidden="true" data-backdrop="static">
-				            <div class="modal-header">
-				                <button type="button" class="close" data-dismiss="modal"
-				                    aria-hidden="true">&times;</button>
-				                <h3>添加好友</h3>
-				            </div>
-				            <div class="modal-body">
-				                <input id="addfridentId" onfocus='clearInputValue("addfridentId")' />
-				                <div id="add-frident-warning"></div>
-				            </div>
-				            <div class="modal-footer">
-				                <button id="addFridend" class="btn btn-primary"
-				                    onclick="startAddFriend()">添加</button>
-				                <button id="cancelAddFridend" class="btn" data-dismiss="modal">取消</button>
-				            </div>
-				        </div>
-
-				        <div id="delFridentModal" class="modal hide" role="dialog"
-				            aria-hidden="true" data-backdrop="static">
-				            <div class="modal-header">
-				                <button type="button" class="close" data-dismiss="modal"
-				                    aria-hidden="true">&times;</button>
-				                <h3>删除好友</h3>
-				            </div>
-				            <div class="modal-body">
-				                <input id="delfridentId" onfocus='clearInputValue("delfridentId")' />
-				                <div id="del-frident-warning"></div>
-				            </div>
-				            <div class="modal-footer">
-				                <button id="delFridend" class="btn btn-primary"
-				                    onclick="directDelFriend()">删除</button>
-				                <button id="canceldelFridend" class="btn" data-dismiss="modal">取消</button>
-				            </div>
-				        </div>
-
-				        <!-- 一般消息通知 -->
-				        <div id="notice-block-div" class="modal hide">
-				            <button type="button" class="close" data-dismiss="alert">&times;</button>
-				            <div class="modal-body">
-				                <h4>Warning!</h4>
-				                <div id="notice-block-body"></div>
-				            </div>
-				        </div>
-
-				        <!-- 确认消息通知 -->
-				        <div id="confirm-block-div-modal" class="modal hide"
-				            role="dialog" aria-hidden="true" data-backdrop="static">
-				            <div class="modal-header">
-				                <h3>订阅通知</h3>
-				            </div>
-				            <div class="modal-body">
-				                <div id="confirm-block-footer-body"></div>
-				            </div>
-				            <div class="modal-footer">
-				                <button id="confirm-block-footer-confirmButton"
-				                    class="btn btn-primary">同意</button>
-				                <button id="confirm-block-footer-cancelButton" class="btn"
-				                    data-dismiss="modal">拒绝</button>
-				            </div>
-				        </div>
-
-				        <!-- 群组成员操作界面 -->
-				        <div id="option-room-div-modal" class="alert modal hide"
-				            role="dialog" aria-hidden="true" data-backdrop="static">
-				            <button type="button" class="close" data-dismiss="modal"
-				                aria-hidden="true">&times;</button>
-				            <div class="modal-header">
-				                <h3>群组成员</h3>
-				            </div>
-				            <div class="modal-body">
-				                <div id="room-member-list" style="height: 100px; overflow-y: auto"></div>
-				            </div>
 				        </div>
 				    </div>
 				</div>
 			</div>
 	</ion-pane>
 </ion-view>
-  </body>
-</html>
