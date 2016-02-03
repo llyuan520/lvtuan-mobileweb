@@ -22,8 +22,8 @@ function easemobService($ionicLoading) {
         conn = new Easemob.im.Connection();
         //初始化连接
         conn.init({
-            https : Easemob.im.config.https,
-            url: Easemob.im.config.xmppURL,
+            https : AppSettings.easemobHttps,
+            url: AppSettings.easemobXmppURL,
             //当连接成功时的回调方法
             onOpened : function() {
                 self.handleOpen(conn);
@@ -46,20 +46,20 @@ function easemobService($ionicLoading) {
 
 	self.handleConfig = function() {
         if(Easemob.im.Helper.getIEVersion() < 10) {
-            Easemob.im.config.https = location.protocol == 'https:' ? true : false;
-            if(!Easemob.im.config.https) {
-                if(Easemob.im.config.xmppURL.indexOf('https') == 0) {
-                    Easemob.im.config.xmppURL = Easemob.im.config.xmppURL.replace(/^https/, 'http');
+            AppSettings.easemobHttps = location.protocol == 'https:' ? true : false;
+            if(!AppSettings.easemobHttps) {
+                if(AppSettings.easemobXmppURL.indexOf('https') == 0) {
+                    AppSettings.easemobXmppURL = AppSettings.easemobXmppURL.replace(/^https/, 'http');
                 }
-                if(Easemob.im.config.apiURL.indexOf('https') == 0) {
-                    Easemob.im.config.apiURL = Easemob.im.config.apiURL.replace(/^https/, 'http');
+                if(AppSettings.easemobApiURL.indexOf('https') == 0) {
+                    AppSettings.easemobApiURL = AppSettings.easemobApiURL.replace(/^https/, 'http');
                 }
             } else {
-                if(Easemob.im.config.xmppURL.indexOf('https') != 0) {
-                    Easemob.im.config.xmppURL = Easemob.im.config.xmppURL.replace(/^http/, 'https');
+                if(AppSettings.easemobXmppURL.indexOf('https') != 0) {
+                    AppSettings.easemobXmppURL = AppSettings.easemobXmppURL.replace(/^http/, 'https');
                 }
-                if(Easemob.im.config.apiURL.indexOf('https') != 0) {
-                    Easemob.im.config.apiURL = Easemob.im.config.apiURL.replace(/^http/, 'https');
+                if(AppSettings.easemobApiURL.indexOf('https') != 0) {
+                    AppSettings.easemobApiURL = AppSettings.easemobApiURL.replace(/^http/, 'https');
                 }
             }
         }
@@ -70,7 +70,7 @@ function easemobService($ionicLoading) {
         if (!conn.isOpened()) {
             $ionicLoading.show();
             conn.open({
-                apiUrl : Easemob.im.config.apiURL,
+                apiUrl : AppSettings.easemobApiURL,
                 user : user,
                 pwd : pwd,
                 //连接时提供appkey

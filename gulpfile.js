@@ -27,11 +27,11 @@ gulp.task('build-dev', function(cb) {
 });
  
 gulp.task('build-prod', function(cb) {
-  runSequence('minifyDevJs', 'minifyLibJs', 'minifyAllJs', 'prod', 'templates', cb);
+  runSequence('minifyMyJs', 'minifyLibJs', 'minifyAllJs', 'prod', 'templates', cb);
 });
 
 gulp.task('build', function(cb) {
-  runSequence('minifyDevJs', 'minifyLibJs', 'minifyAllJs', 'templates', cb);
+  runSequence('minifyMyJs', 'minifyLibJs', 'minifyAllJs', 'templates', cb);
 });
 
 gulp.task('templates', function() {
@@ -72,9 +72,9 @@ gulp.task('minifyCss', function(done) {
     .on('end', done);
 });
 
-gulp.task('minifyDevJs', function(done) {
+gulp.task('minifyMyJs', function(done) {
   gulp.src(['./www/js/**/*.js'])
-    .pipe(concat('dev.js'))
+    .pipe(concat('mine.js'))
     .pipe(ngmin())
     .pipe(uglify({mangle: false}))
     .pipe(rename({
@@ -84,13 +84,16 @@ gulp.task('minifyDevJs', function(done) {
     .on('end', done);
 });
 
+
 gulp.task('minifyLibJs', function(done) {
   gulp.src([
-      './www/lib/ionic/js/ionic.bundle.min.js',
       './www/lib/js/jquery-1.10.2.min.js', 
-      './www/lib/ionic/js/ngCordova/dist/ng-cordova.min.js',
-      './www/lib/js/ng-file-upload-master/dist/ng-file-upload-shim.min.js',
-      './www/lib/js/ng-file-upload-master/dist/ng-file-upload.min.js'
+      './www/lib/ionic/js/ionic.bundle.min.js',
+      './www/lib/ionic/js/angular/ngStorage.min.js',
+      './www/lib/js/strophe.min.js',
+      './www/lib/js/ng-file-upload-all.min.js',
+      './www/lib/js/jweixin-1.0.0.js',
+      './www/lib/js/easemob.im-1.0.7.js',
     ])
     .pipe(ngmin())
     .pipe(concat('lib.js'))

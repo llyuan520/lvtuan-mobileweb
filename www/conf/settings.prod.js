@@ -7,5 +7,8 @@ AppSettings = {
   // appId: 'wx7912c6c84aad82a7',
   // secret: 'd75e1656d3c684f0d974f40ecf11cb3c',
   // 正式账号
-  easemobAppKey: 'lvtuan#lvtuanim'
+  easemobAppKey: 'lvtuan#lvtuanim',
+  easemobXmppURL: 'http://im-api.easemob.com/http-bind/',
+  easemobApiURL: '',
+  easemobHttps: true
 }

@@ -93,7 +93,7 @@
 .chat02_title {
     display: none;
     position: relative;
-    background: url('../img/chat_title_bg.jpg') repeat-x 0 0;
+    /*background: url('../img/chat_title_bg.jpg') repeat-x 0 0;*/
     height: 25px;
 }
 

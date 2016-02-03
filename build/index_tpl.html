@@ -54,26 +54,26 @@
 
     <!-- @if NODE_ENV='prod' -->
     <script src="conf/settings.prod.js"></script>
-
-    <script src="lib/js/jquery-1.10.2.min.js"></script>
-    <script src="lib/ionic/js/ionic.bundle.min.js"></script>
-    <script src="lib/ionic/js/angular/ngStorage.min.js"></script>
-    <script src="lib/js/strophe.min.js"></script>
-
-    <!-- <script src="lib/ionic/js/ngCordova/dist/ng-cordova.js"></script> -->
-    <script src="lib/js/ng-file-upload-master/dist/ng-file-upload-all.min.js"></script>
-    <script src="lib/js/ng-file-upload-master/dist/ng-file-upload.min.js"></script>
-    <script src="lib/js/ng-file-upload-master/dist/ng-file-upload-shim.min.js"></script>
-    <script src="lib/js/jweixin-1.0.0.js"></script>
-
-    <script src="lib/js/easemob.im-1.0.7.js"></script>
-    <script src="lib/js/web-im-1.0.7.2/easemob.im.config.js"></script>
-
+    
+    <script src="dist/js/lib.min.js"></script>
     <script type="text/javascript">
       var templates = angular.module('templates', []);
     </script>
     <script src="dist/js/templates.js"></script>
-    
+    <script src="dist/js/mine.min.js"></script>
+
+    <!--
+    <script src="lib/js/jquery-1.10.2.min.js"></script>
+    <script src="lib/ionic/js/ionic.bundle.min.js"></script>
+    <script src="lib/ionic/js/angular/ngStorage.min.js"></script>
+    <script src="lib/js/strophe.min.js"></script>
+    <script src="lib/js/ng-file-upload-all.min.js"></script>
+    <script src="lib/js/jweixin-1.0.0.js"></script>
+    <script src="lib/js/easemob.im-1.0.7.js"></script>
+    <script type="text/javascript">
+      var templates = angular.module('templates', []);
+    </script>
+    <script src="dist/js/templates.js"></script>
     <script src="js/layer.1.0.js"></script>
     <script src="js/module/auth.js"></script>
     <script src="js/module/weixin.js"></script>
@@ -84,6 +84,7 @@
     <script src="js/module/location.js"></script>
     <script src="js/module/adaptive.js"></script>
     <script src="js/module/easemob.js"></script>
+    -->
     <!-- @endif -->
 
     <!-- @if NODE_ENV='dev' -->
@@ -94,19 +95,15 @@
     <script src="lib/ionic/js/angular/ngStorage.min.js"></script>
     <script src="lib/js/strophe.js"></script>
 
-    <!-- <script src="lib/ionic/js/ngCordova/dist/ng-cordova.js"></script> -->
-    <script src="lib/js/ng-file-upload-master/dist/ng-file-upload-all.js"></script>
-    <script src="lib/js/ng-file-upload-master/dist/ng-file-upload-shim.js"></script>
-    <script src="lib/js/ng-file-upload-master/dist/ng-file-upload.js"></script>
+    <script src="lib/js/ng-file-upload-all.js"></script>
     <script src="lib/js/jweixin-1.0.0.js"></script>
 
     <script src="lib/js/easemob.im-1.0.7.js"></script>
-    <script src="lib/js/web-im-1.0.7.2/easemob.im.config.js"></script>
 
     <script type="text/javascript">
       var templates = angular.module('templates', []);
     </script>
-    <script src="js/layer.1.0.js"></script>
+    <script src="js/utils/layer.1.0.js"></script>
     <script src="js/module/auth.js"></script>
     <script src="js/module/weixin.js"></script>
     <script src="js/module/list.js"></script>

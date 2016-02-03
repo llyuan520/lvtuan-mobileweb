@@ -4,6 +4,14 @@ lvtuanApp.constant("HOST", AppSettings.baseApiUrl)
 lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $location,$ionicHistory, $http, userService, authService, locationService){
 	var self = this;
 
+	// $ImageCacheFactory.Cache([
+ //        "http://mobiledev.wdlst.lvtuan-pc-new/img/banner1-01.png",
+ //        "http://mobiledev.wdlst.lvtuan-pc-new/img/banner1-02.png",
+ //        "http://mobiledev.wdlst.lvtuan-pc-new/img/banner1-03.png"
+ //    ]).then(function(){
+ //        console.log("Images done loading!");
+ //    });
+
 	self.login = function() {
 		userService.login(self.username, self.password)
 	}
@@ -3221,28 +3229,6 @@ lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$
             console.info(data);
 		})
 	}
-
- //    var easemob = JSON.parse(localStorage.getItem('easemobParam'));
- //    if(easemob != null){
-	// 	$scope.curChatUserId = easemob.curChatUserId;
-	// 	$scope.curUserId = easemob.easemob_id;
- //    }
-
-	// $scope.jwtToken = localStorage.getItem('jwtToken');
-	// console.info($scope.jwtToken);
-	// var time = null;
-	// time = setInterval(function() { 
- //        //根据用户名密码登录系统
- //        conn.open({
- //            apiUrl : Easemob.im.config.apiURL,
- //            user : JSON.stringify(easemob.easemob_id),
- //            pwd : easemob.easemob_pwd,
- //            //连接时提供appkey
- //            appKey : AppSettings.easemobAppKey
- //        });       
-	// 	console.info('login()');
-	// 	clearInterval(time);
-	// }, 1000);
 })
 
 
