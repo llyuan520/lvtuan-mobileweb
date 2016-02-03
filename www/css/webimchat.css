@@ -398,7 +398,6 @@ label.offline {
 }
 .easemobmain-record p2 {
     display: inline-block;
-    margin-bottom: 0.8rem;
     margin-left: 0.8rem;
 }
 .easemobmain-list {
@@ -435,7 +434,6 @@ label.offline {
     float: left;
     width: 100%;
     padding-left: 22%;
-    margin: 0.8rem 0;
 }
 .immediate-information, .textbox {
     display: inline-block;
