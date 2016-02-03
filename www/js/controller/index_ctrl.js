@@ -498,7 +498,7 @@ lvtuanApp.controller("groupAttentionCtrl",function($scope,$http,$state,$rootScop
 })
 
 lvtuanApp.controller("groupviewCtrl",function($scope,$http,$state,$rootScope,$stateParams,easemobService,$ionicLoading){
-	$ionicLoading.show();
+	// $ionicLoading.show();
     $http.get('http://'+$rootScope.hostName+'/group/'+$stateParams.id+'/chat'
     ).success(function(data) {
         if (data && data.data) {
@@ -3131,7 +3131,7 @@ lvtuanApp.controller("lawyerquestionsviewCtrl",function($http,$scope,$stateParam
 
 //咨询和订单的一对一咨询 - 即时通讯
 lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$stateParams,easemobService,$ionicLoading){
-	$ionicLoading.show();
+	// $ionicLoading.show();
 	$http.get('http://'+$rootScope.hostName+'/center/question/'+$stateParams.id+'/ask'
     ).success(function(data) {
     	if (data && data.data) {
