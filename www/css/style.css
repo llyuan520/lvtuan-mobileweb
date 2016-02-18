@@ -91,7 +91,7 @@ body, html, .pane, .ionic-body,h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, 
 .clearfix { *zoom:1; }
 
 /*login*/
-a, a:link, a:visited, a:active, a:hover {
+a, a:link, a:visited, a:active, a:hover ,.positive, a.positive{
     text-decoration: none;
     color: #00cafa;
 }
