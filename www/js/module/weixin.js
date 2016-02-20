@@ -5,7 +5,7 @@ function wxService() {
 
 	//加载在控制器里面的 微信签权登录
 	self.getWxAuthUrl = function(path) {
-		var redirect_uri = "http://devm.wdlst.com/#" + path;
+		var redirect_uri = "http://" + AppSettings.baseApiUrl + "/#" + path;
 		var str = "https://open.weixin.qq.com/connect/oauth2/authorize?";
 		str += "appid=" + AppSettings.appId + "&";
 		str += "redirect_uri=" + encodeURIComponent(redirect_uri) + "&";
