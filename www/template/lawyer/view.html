@@ -9,10 +9,10 @@
 			<ion-content class="has-tabs">
 				<div class="list view-heard" style="background:url({{items.bg_img}});background-size:100% 100%;">
 					<div class="concern-lawyer">
-				      	<p ng-click="follow(items.id)">
+				      	<p ng-if="items.is_following == false" ng-click="follow(items.id)">
 				      		<i class="icon ion-android-favorite-outline dark"></i>
 			      		</p>
-				      	<p ng-if="items.is_following == false" ng-click="follow_del(items.id)" style="font-size:14px;width:30px;border-radius:30px;height:30px;float:left;background-color:#ffffff;text-align:center;color: #f00;"><i class="icon ion-android-favorite web-ion-img1-5" style="color:#f00;"></i></p>
+				      	<p ng-if="items.is_following == true" ng-click="follow_del(items.id)" style="font-size:14px;width:30px;border-radius:30px;height:30px;float:left;background-color:#ffffff;text-align:center;color: #f00;"><i class="icon ion-android-favorite web-ion-img1-5" style="color:#f00;"></i></p>
 				      	<label style="color:#000;">&nbsp;&nbsp;{{items.follower_count}}</label>
 				    </div>
 				    <div class="button-bar bg_transparent">
@@ -46,12 +46,14 @@
 						
 					</div>
 				</div>
-			</ion-content>
+			</ion-content>	
 
 			<div class="tabs tabs-color-positive positive-bg" style="padding-top:0;">
-			  <p class="tab-item" ng-click="graphic5(items.id,5)" style="color:#fff;border-right: 1px solid #fff;"><img style="vertical-align: middle;width: 2.5rem;height: 2.1rem;" src="../img/twzx.png">
+			  <p class="tab-item" ng-click="graphic5(items.id,5)" style="color:#fff;border-right: 1px solid #fff;">
+			  	<img style="vertical-align: middle;width: 2.5rem;height: 2.1rem;" src="../img/twzx.png">
 			  	&nbsp;&nbsp;<b>图文咨询</b></p>
-			  <p class="tab-item" ng-click="graphic5(items.id,6)" style="color:#fff"><img style="vertical-align: middle;width: 2.5rem;height: 2.6rem;" src="../img/dhzx.png">
+			  <p class="tab-item" ng-click="graphic5(items.id,6)" style="color:#fff">
+			  	<img style="vertical-align: middle;width: 2.5rem;height: 2.6rem;" src="../img/dhzx.png">
 			  	&nbsp;&nbsp;<b>电话咨询</b></p>
 			</div>
 

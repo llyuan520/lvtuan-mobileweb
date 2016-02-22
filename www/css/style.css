@@ -378,9 +378,9 @@ img.avatar{
     height: 49px;
 }
 
-.item .badge{
+/*.item .badge{
     top: 62px;
-}
+}*/
 .my-integral .badge {
     background-color: #31c27c;
 }
@@ -1068,13 +1068,6 @@ input, select {
     color: #666;
 }
 
-.emails {
-    width: 13%;
-    max-width: 40px;
-    background: url("../img/emails.png") center center no-repeat;
-    background-size: 90% 26%;
-}
-
 
 .item .counts {
     padding-right: 8%;
@@ -1316,6 +1309,10 @@ input, select {
 }
 .center-list .my-follow {
     background: url("../img/my-follow.png") 3% center no-repeat;
+    background-size: 7%;
+}
+.center-list .my-about {
+    background: url("../img/my-about.png") 3% center no-repeat;
     background-size: 7%;
 }
 .center-list .my-set {

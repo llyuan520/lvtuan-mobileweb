@@ -1,3 +1,7 @@
+<style type="text/css">
+	.centerMain .fixdisplay{padding:0 8px;line-height: 100%;max-height: 100%;color: #fff;}
+	.centerMain .fixbadge{top: 2px;position: absolute;left: 55%;font-weight: normal;font-size: 12px;padding: 2px 4px;}
+</style>
 <ion-view hide-tabs="false">
 		<ion-pane  class="web-body">
 			<ion-header-bar class="bar bar-header bar-light headers">
@@ -5,24 +9,67 @@
 				<h1 class="title">我的</h1>
 			</ion-header-bar>
 
-			<ion-content class="web-body web-top10" ng-model="is_lawyer">
+			<ion-content class="web-body web-top10 centerMain" ng-model="is_lawyer">
 
-				<div class="list" style="padding:0;">
-				    <div class="item item-thumbnail-left item-icon-right header-information" >
-				    	<a class="item-thumbnail-left" ng-href="#/info" style="position: absolute;top: 0px;left: 0px;">
-				    		<img ng-src="{{items.user.avatar}}" style="width:100%;border-radius:50%;">
-				    	</a>
-			      		<a style="margin-top: 20px;display: inline-block;" ng-href="#/info">
-			      			<label ng-if="!currentUser.is_verified_lawyer">{{items.user.nikname}}</label>
-			      			<label ng-if="currentUser.is_verified_lawyer">{{items.user.nikname}} <span class="web-font14">律师</span></label>
+				<div class="list view-heard" style="background:url(../img/usercenter-bg.png);background-size:100% 100%;color: #fff;">
 
+					<div class="row" style="height: 75px;">
+					  <div class="col col-20 col-center">
+					  		<div style="background: #ffffff;position: absolute;top: 10px;max-width: 54px;max-height: 54px;width: 100%;height:100%;border-radius: 50%;">
+					  			<img src="{{items.user.avatar}}" style="position: absolute;width: 50px;height: 50px;border-radius: 50%;top: 2px;left:2px;">
+					  		</div>
+					  </div>
+					  <div class="col col-center">
+					  	<a style="color:#fff;" ng-href="#/info">
+			      			<label ng-if="!currentUser.is_verified_lawyer" style="font-size:16px;">{{items.user.realname}}</label>
+			      			<label ng-if="currentUser.is_verified_lawyer">{{items.user.realname}}<span class="web-font14">律师</span></label>
+			      			<br>
+			      			<label>{{items.user.phone}}</label>
 			      		</a>
-					    <a ng-href="#/messages">
-						      <icon  class="icon emails"></icon>
-						</a>
-					    <p  class="web-top5" >{{items.user.phone}}</p>
-				    </div>
+					  </div>
+					  <div class="col col-25 col-center" style="text-align: right;">
+					  	<span class="badge badge-assertive icon-left" style="position: absolute;right: 2%;font-weight: normal;font-size: 12px;padding: 2px 4px;top: 29px;">10</span>
+					  		<div ng-click="jump('#/messages')">
+					  			账号设置
+					  			<div class="height10"></div>
+					  			<img src="../img/emails.png" style="max-width: 31px;max-height: 21px;width: 45%;height: 100%;">
+							</div>
+					  </div>
+					</div>
+
+					
+				    <div class="button-bar bg_transparent" style="height: 57px;">
+					    <div class="button button-clear fixdisplay">
+					    	<span class="badge badge-assertive icon-left fixbadge">10</span>
+					    	<img src="../img/mfzx-iocn.png" width="28" height="26" style="margin-top: 4px;">
+					  	    <div style="width:100%;height:2px;clear:both;"></div>
+					  	    <label>免费咨询</label>
+					    </div>
+					    <div><i class="border1" style="height:57px;margin-top: 0;"></i></div>
+					    <div class="button button-clear fixdisplay">
+					      <span class="badge badge-assertive icon-left fixbadge">10</span>
+					  	  <img src="../img/twzx-iocn.png" width="28" height="26" style="margin-top: 4px;">
+					  	  <div style="width:100%;height:2px;clear:both;"></div>
+					  	  <label>图文咨询</label>
+					    </div>
+					    <div><i class="border1" style="height:57px;margin-top: 0;"></i></div>
+					    <div class="button button-clear fixdisplay">
+					    	<span class="badge badge-assertive icon-left fixbadge">10</span>
+					  	 <img src="../img/dhzx-iocn.png" width="28" height="26" style="margin-top: 4px;">
+					  	  <div style="width:100%;height:2px;clear:both;"></div>
+					  	  <label>电话咨询</label>
+					    </div>
+					    <div><i class="border1" style="height:57px;margin-top: 0;"></i></div>
+					    <div class="button button-clear fixdisplay">
+					    	<span class="badge badge-assertive icon-left fixbadge">10</span>
+					  	  <img src="../img/flgw-iocn.png" width="28" height="26" style="margin-top: 4px;">
+					  	  <div style="width:100%;height:2px;clear:both;"></div>
+					  	  <label>法律顾问</label>
+					    </div>
+					</div>
 				</div>
+
+				<div class="height10"></div>
 				
 				<div ng-if="!currentUser.is_verified_lawyer" class="list center-list" style="padding-bottom: 20px;">
 					<div class="my-order">
@@ -83,6 +130,12 @@
 						    <i class="icon ion-chevron-right"></i>
 						</a>
 					</div>
+					<div class="my-about">
+						<a class="item" ng-href="#/about"> 
+						    关于律团
+						    <i class="icon ion-chevron-right"></i>
+						</a>
+					</div>
 				</div>
 
 				<div ng-if="currentUser.is_verified_lawyer" class="list center-list" style="padding-bottom: 20px;">
@@ -110,12 +163,12 @@
 						    <i class="icon ion-chevron-right"></i>
 						</a>
 					</div>
-					<div class="my-article">
+					<!-- <div class="my-article">
 						<a class="item" ng-href="#/article_lawyer"> 
 					    	我的文章
 					    	<i class="icon ion-chevron-right"></i>
 						</a>
-					</div>
+					</div> -->
 					<div class="my-integral">
 						<a class="item" ng-href="#/listscores">
 					    	我的积分
@@ -145,6 +198,12 @@
 						<a class="item" ng-href="#/site">
 					    	设置
 				    		<i class="icon ion-chevron-right"></i>
+						</a>
+					</div>
+					<div class="my-about">
+						<a class="item" ng-href="#/about"> 
+						    关于律团
+						    <i class="icon ion-chevron-right"></i>
 						</a>
 					</div>
 				</div>
