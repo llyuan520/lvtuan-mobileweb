@@ -8,19 +8,30 @@
 				<div class="has-header ionic-pseudo">
 					<form name="myForm" novalidate>
 						<div class="list">
-							<div class="item item-divider">
+							<div class="item item-divider" style="padding:16px 8px;">
 							  当前可用余额为 {{summoney}} 元
 							</div>
-							<div class="item item-input">
-								<div class="row row-no-padding">
-								  <div class="col col-center">充值金额</div>
+							<div class="item item-input" style="border: none;">
+								<div class="row row-no-padding" style="padding:16px">
+								  <div class="col col-25 col-center" style="text-align:center;border-right:1px solid #ccc;">充值金额</div>
 								  <div class="col col-75 col-center">
-								  	<input id="money" placeholder="请输入充值金额" ng-model="user.money" name="money" type="number" required>
+								  	<input id="money" placeholder="请输入充值金额" name="money" ng-pattern="/^$|^[0-9,]+$/" ng-model="user.money"  ng-minlength="1" required money style="border: none;" ng-model-options="{debounce:2000}" />
 								  </div>
 								</div>
 							</div>
-							<div class="item">
+							<div class="item item-divider" ng-cloak style="padding:16px 8px;border: none;font-size:12px;" ng-show="myForm.money.$invalid && !myForm.money.$pristine">
+							  <p  class="fc-red ng-cloak" >您输入的不是数字!</p>
+							</div>
+							<div class="item item-divider" style="padding:16px 8px;border: none;font-size:12px;">
+							  您充值后的金额将用于平台消费，随时可提现
+							</div>
+							<div class="item" style="border: none;">
+								<img src="../img/weixinbg.png" style="vertical-align: middle;">
 							 	微信支付
+							 	<label class="checkbox" style="float: right;">
+					          		<input type="checkbox" name="name" ng-model="isCheck" ng-false-value="false" >
+					          	</label>
+							 	
 							</div>
 							<button class="button button-block button-positive web-wid8c web-top10" type="submit" ng-disabled="myForm.$invalid" ng-click="submit(user)">充值</button>
 						</div>

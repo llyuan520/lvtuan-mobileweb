@@ -907,27 +907,9 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       controller: 'usermoneyinCtrl',
       authn: true
     })
-    .state('user/record', { //我的律团-充值记录
-      url: '/user/record',
-      templateUrl: 'template/mylvtuan/user/wallet/record.html',
-      controller: 'userrecordCtrl',
-      authn: true
-    })
-    .state('user/moneyout', { //我的律团-充值记录
+    .state('user/moneyout', { //我的律团-提现
       url: '/user/moneyout',
       templateUrl: 'template/mylvtuan/user/wallet/moneyout.html',
-      authn: true
-    })
-    .state('user/withdraw', { //我的律团-提现记录
-      url: '/user/withdraw',
-      templateUrl: 'template/mylvtuan/user/wallet/withdraw.html',
-      controller: 'userwithdrawCtrl',
-      authn: true
-    })
-    .state('user/payall', { //我的律团-收支明细
-      url: '/user/payall',
-      templateUrl: 'template/mylvtuan/user/wallet/payall.html',
-      controller: 'userpayallCtrl',
       authn: true
     })
     

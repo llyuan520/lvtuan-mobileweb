@@ -1,4 +1,4 @@
-var lvtuanApp = angular.module('lvtuanApp.Ctrl', ['ionic','ngSanitize','ngFileUpload','listModule','authModule','wxModule','locationModule','ngStorage','easemobModule'])
+var lvtuanApp = angular.module('lvtuanApp.Ctrl', ['ionic','ngSanitize','ngFileUpload','listModule','authModule','wxModule','locationModule','ngStorage','easemobModule','ngTouch'])
 lvtuanApp.constant("HOST", AppSettings.baseApiUrl)
 
 lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $location,$ionicHistory, $http, userService, authService, locationService){
@@ -4224,7 +4224,7 @@ lvtuanApp.controller("corporatebuynowCtrl",function($scope,$http,$rootScope,$tim
 
 
 //用户律师 - 钱包
-lvtuanApp.controller("userwalletCtrl",function($scope,$http,$rootScope,authService,$ionicLoading){
+lvtuanApp.controller("userwalletCtrl",function($scope,$http,$rootScope,$ionicLoading,authService,listHelper){
 
 	$scope.$on('$ionicView.beforeEnter', function() {  
 		
@@ -4247,13 +4247,38 @@ lvtuanApp.controller("userwalletCtrl",function($scope,$http,$rootScope,authServi
 			.success(function(data) {
 				if (data && data.data) {
 					$scope.items = data.data; 
-					localStorage.setItem("summoney", $scope.items.money);
+					sessionStorage.setItem("summoney", $scope.items.money);
 				}
 				$ionicLoading.hide();
 			})
 		}
 
 	});
+
+
+	//创建tabs列表
+	$scope.tabs = [{
+            title: '最新交易记录',
+            url: 'latest_record.tpl.html'
+        }, {
+        	title: '充值记录',
+            url: 'recharge_record.tpl.html'
+        }, {
+            title: '提现记录',
+            url: 'withdraw_record.tpl.html'
+    	}
+    ];
+
+    $scope.currentTab = 'latest_record.tpl.html'; //默认第一次显示的tpl
+
+    $scope.onClickTab = function (tab) { //点击tab赋值url
+        $scope.currentTab = tab.url;
+    }
+    
+    $scope.isActiveTab = function(tabUrl) {  //给选中的url的a 标签样式
+        return tabUrl == $scope.currentTab;
+    }
+
 })
 
 lvtuanApp.controller("wxCheckOpenIdCtrl",function($scope,$http,$rootScope,$stateParams,authService,wxService){
@@ -4287,13 +4312,14 @@ lvtuanApp.controller("wxAuthPaymentCtrl",function($scope,$http,$rootScope,$state
 })
 
 //用户律师 - 钱包充值
-lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$stateParams,authService,wxService,$ionicLoading){
+lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$stateParams,$ionicLoading,authService,wxService){
 	var self = this;
 	var currentUser = authService.getUser();
 
 	$scope.summoney = sessionStorage.getItem('summoney');
 	var params = null;
 
+	$scope.isCheck = true;
 	$scope.$on('$ionicView.beforeEnter', function() {
 		console.info(sessionStorage.getItem('summoney'));
 		$scope.summoney = sessionStorage.getItem('summoney');
@@ -4363,10 +4389,103 @@ lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$statePa
 	}
 })
 
+
+lvtuanApp.directive("money",function ($filter, $locale) {
+  return {
+    restrict: 'A',
+    require: 'ngModel',
+    link: function (scope, el, attr, ctrl) {
+      // format on init
+      formatMoney();
+
+      function formatMoney() {
+        var value = ctrl.$modelValue;
+
+        // remove all separaters first
+        var groupsep = $locale.NUMBER_FORMATS.GROUP_SEP;
+        var re = new RegExp(groupsep, 'g');
+        value = String(value).replace(re, '');
+
+        // format using angular
+        var currencyFilter = $filter('currency');
+        var value = currencyFilter(value, "");
+
+        // sorry but no cents
+        var decimalsep = $locale.NUMBER_FORMATS.DECIMAL_SEP;
+        value = value.split(decimalsep)[0];
+
+        // render
+        ctrl.$viewValue = value;
+        ctrl.$render();
+      };
+
+      // subscribe on changes
+      scope.$watch(attr.ngModel, function() {
+        formatMoney();
+      });
+    }
+  };
+});
+
 //用户律师 - 充值记录
-lvtuanApp.controller("userrecordCtrl",function($scope,$http,$rootScope,listHelper){
+lvtuanApp.controller("userrecordCtrl",function($scope,$http,$rootScope,$ionicLoading,listHelper){
 	//判断是否是律师
-	listHelper.bootstrap('/wallet/record?type=recharge', $scope);
+
+	var page = 1; //页数
+	var rows_per_page = 5; // 每页的数量
+	if ($scope.rows_per_page) {
+		rows_per_page = $scope.rows_per_page;
+	}
+    $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
+    $scope.items = [];	//创建一个数组接收后台的数据
+
+	 //下拉刷新
+	$scope.doRefresh = function() {
+		page = 1;
+		$scope.items = [];
+        $scope.loadMore();
+        $scope.$broadcast('scroll.refreshComplete');
+    };
+
+    //上拉加载
+	$scope.loadMore = function() {
+		//获取推荐的律师 ?is_recommended=1&page=1&rows_per_page=10
+		geturl();
+	};
+
+	function geturl(){
+		var timestamp=Math.round(new Date().getTime()/1000);
+		// 如果url里面已经有params，预先处理一下
+		var params = 'rows_per_page='+rows_per_page+'&page='+page+'&ts='+timestamp;
+  		var url = 'http://'+$rootScope.hostName+'/wallet/record?type=recharge?'+params;
+	    $ionicLoading.show();
+		$http.get(url)
+			.success(function(data) {
+	        	console.info(data.data)
+	        	if(data && data.data && data.data.length){
+					$scope.items = $scope.items.concat(data.data);
+					console.info($scope.items);
+					if (data.data.length < rows_per_page) {
+						$scope.moredata = false;
+					} else {
+						$scope.moredata = true;
+					}
+				}else{
+					if (page == 1) {
+						layer.show('暂无数据！');
+					}
+					$scope.moredata = false;
+				}
+				page++;
+				$scope.$broadcast('scroll.infiniteScrollComplete');
+				$ionicLoading.hide();
+			})
+	}
+	
+	$scope.$on('$stateChangeSuccess', function() {
+	    $scope.loadMore();
+	});
+
 })
 
 //用户律师 - 提现
@@ -4390,16 +4509,124 @@ lvtuanApp.controller("usermoneyoutCtrl",function($scope,$http,$rootScope){
 	
 })
 //用户律师 - 提现记录
-lvtuanApp.controller("userwithdrawCtrl",function($scope,$http,$rootScope,listHelper){
-	//判断是否是律师
-	listHelper.bootstrap('/wallet/record?type=withdraw', $scope);
+lvtuanApp.controller("userwithdrawCtrl",function($scope,$http,$rootScope,$ionicLoading,listHelper){
+
+
+	var page = 1; //页数
+	var rows_per_page = 5; // 每页的数量
+	if ($scope.rows_per_page) {
+		rows_per_page = $scope.rows_per_page;
+	}
+    $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
+    $scope.items = [];	//创建一个数组接收后台的数据
+
+	 //下拉刷新
+	$scope.doRefresh = function() {
+		page = 1;
+		$scope.items = [];
+        $scope.loadMore();
+        $scope.$broadcast('scroll.refreshComplete');
+    };
+
+    //上拉加载
+	$scope.loadMore = function() {
+		//获取推荐的律师 ?is_recommended=1&page=1&rows_per_page=10
+		geturl();
+	};
+
+	function geturl(){
+		var timestamp=Math.round(new Date().getTime()/1000);
+		// 如果url里面已经有params，预先处理一下
+		var params = 'rows_per_page='+rows_per_page+'&page='+page+'&ts='+timestamp;
+  		var url = 'http://'+$rootScope.hostName+'/wallet/record?type=withdraw?'+params;
+	    $ionicLoading.show();
+		$http.get(url)
+			.success(function(data) {
+	        	console.info(data.data)
+	        	if(data && data.data && data.data.length){
+					$scope.items = $scope.items.concat(data.data);
+					console.info($scope.items);
+					if (data.data.length < rows_per_page) {
+						$scope.moredata = false;
+					} else {
+						$scope.moredata = true;
+					}
+				}else{
+					if (page == 1) {
+						layer.show('暂无数据！');
+					}
+					$scope.moredata = false;
+				}
+				page++;
+				$scope.$broadcast('scroll.infiniteScrollComplete');
+				$ionicLoading.hide();
+			})
+	}
+	
+	$scope.$on('$stateChangeSuccess', function() {
+	    $scope.loadMore();
+	});
+
 })
 
-//用户律师 - 提现记录
-lvtuanApp.controller("userpayallCtrl",function($scope,$http,$rootScope,listHelper){
-	//判断是否是律师
-	$scope.rows_per_page = 15;
-	listHelper.bootstrap('/wallet/record', $scope);
+//用户律师 - 最新交易记录
+lvtuanApp.controller("userpayallCtrl",function($scope,$http,$rootScope,$ionicLoading,listHelper){
+	var page = 1; //页数
+	var rows_per_page = 5; // 每页的数量
+	if ($scope.rows_per_page) {
+		rows_per_page = $scope.rows_per_page;
+	}
+    $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
+    $scope.items = [];	//创建一个数组接收后台的数据
+
+	 //下拉刷新
+	$scope.doRefresh = function() {
+		page = 1;
+		$scope.items = [];
+        $scope.loadMore();
+        $scope.$broadcast('scroll.refreshComplete');
+    };
+
+    //上拉加载
+	$scope.loadMore = function() {
+		//获取推荐的律师 ?is_recommended=1&page=1&rows_per_page=10
+		geturl();
+	};
+
+	function geturl(){
+		var timestamp=Math.round(new Date().getTime()/1000);
+		// 如果url里面已经有params，预先处理一下
+		var params = 'rows_per_page='+rows_per_page+'&page='+page+'&ts='+timestamp;
+  		var url = 'http://'+$rootScope.hostName+'/wallet/record?'+params;
+	    $ionicLoading.show();
+		$http.get(url)
+			.success(function(data) {
+	        	console.info(data.data)
+	        	if(data && data.data && data.data.length){
+					$scope.items = $scope.items.concat(data.data);
+					console.info($scope.items);
+					if (data.data.length < rows_per_page) {
+						$scope.moredata = false;
+					} else {
+						$scope.moredata = true;
+					}
+				}else{
+					if (page == 1) {
+						layer.show('暂无数据！');
+					}
+					$scope.moredata = false;
+				}
+				page++;
+				$scope.$broadcast('scroll.infiniteScrollComplete');
+				$ionicLoading.hide();
+			})
+	}
+	
+	$scope.$on('$stateChangeSuccess', function() {
+	    $scope.loadMore();
+	});
+
+
 })
 
 //用户律师 - 微信支付

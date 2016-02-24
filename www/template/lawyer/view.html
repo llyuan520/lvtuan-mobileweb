@@ -41,9 +41,7 @@
 					  <a ng-repeat="tab in tabs"  ng-class="{active:isActiveTab(tab.url)}"  ng-click="onClickTab(tab)" class="tab-item" >{{tab.title}}</a></li>
 					</div>
 					<div class="bd">
-						
-							<div ng-include="currentTab"></div>
-						
+						<div ng-include="currentTab"></div>
 					</div>
 				</div>
 			</ion-content>	
