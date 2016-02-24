@@ -23,7 +23,7 @@
 			  	<h2 class="title">{{items.title}}</h2>
 		  	</div>
 			<div class="item item-avatar" style="border-color: #fff;">
-				<img src="avatar.jpg">
+				<img src="{{items.creator_avatar}}">
 			  	<span class="item-note">{{items.created_at}}</span>
 			  	<h2>普通用户</h2>
 			    <p class="contents">
@@ -35,28 +35,18 @@
 			</div>
 
 			<div class="chathost" ng-repeat="comment in items.comments">
-				<div class="item item-avatar item-borderless">
+				<div ng-if="comment.from_creator == false" class="item item-avatar item-borderless">
 					<img src="{{comment.owner.avatar}}">
 				  	<h2>{{comment.owner.realname}}</h2>
 				    <p class="contents con_left">{{comment.content}}</p>
 				</div>
 
-				<div class="item item-avatar-right item-borderless">
-					<img src="avatar.jpg">
-				  	<h2 class="right">Pretty</h2>
-				    <p class="contents con_right">Nine Inch NailsNine</p>
+				<div ng-if="comment.from_creator == true" class="item item-avatar-right item-borderless">
+					<img src="{{comment.owner.avatar}}">
+				  	<h2 class="right">{{comment.owner.realname}}</h2>
+				    <p class="contents con_right">{{comment.content}}</p>
 				</div>
 			</div>
-
-			<!-- <ion-list ng-repeat="comment in items.comments">
-            	<ion-item class="item item-thumbnail-left">
-		          	<img ng-src="{{comment.owner.avatar}}"/>
-					<h4 class="fc-nan"><span class="sp-name">{{comment.owner.realname}}</span>律师类型</h4>
-					<p class="content">{{comment.content}}</p>
-					<p>{{comment.created_at}}</p>
-		        </ion-item>
-		        <div class="item-divider divider-h"></div>
-	         </ion-list> -->
 		</ion-content>
 			
 	</ion-pane>

@@ -123,7 +123,7 @@ function easemobService($ionicLoading) {
         //TODO  根据消息体的to值去定位那个群组的聊天记录
         if (self.msgType == mestype) {
             var room = message.to;
-            if (from != curUserId) {
+            if (from != curUserId && from == curChatUserId) {
                 if (mestype == 'groupchat') {
                     var msgtext = messageContent.replace(/\n/g, '<br>');
                     self.appendMsg(message.from, message.to, messageContent, mestype, message.ext.realname, message.ext.avatar);
@@ -312,20 +312,6 @@ function easemobService($ionicLoading) {
             lineDiv.style.textAlign = "left";
             lineDiv.className = "immediate-information easemobmain-record img-left";
         }
-        var create = false;
-        if (msgContentDiv == null) {
-            msgContentDiv = self.createContactChatDiv(contactDivId);
-            create = true;
-        }
-        msgContentDiv.appendChild(lineDiv);
-        if (create) {
-            document.getElementById(msgCardDivId).appendChild(msgContentDiv);
-        }
-        if(type == 'audio' && msg.audioShim) {
-            setTimeout(function(){
-                playAudioShim(d.find('.'+t), data.currentSrc, t);
-            }, 0);
-        }
         msgContentDiv.scrollTop = msgContentDiv.scrollHeight;
         return lineDiv;
     };
@@ -335,22 +321,6 @@ function easemobService($ionicLoading) {
         var time = date.getHours() + ":" + date.getMinutes() + ":"
                 + date.getSeconds();
         return time;
-    };
-
-	//如果当前没有某一个联系人的聊天窗口div就新建一个
-    self.createContactChatDiv = function(chatUserId) {
-        var msgContentDivId = curUserId + "-" + chatUserId;
-        var newContent = document.createElement("div");
-        $(newContent).attr({
-            "id" : msgContentDivId,
-            "class" : "chat01_content",
-            "className" : "chat01_content",
-            "style" : "display:block"
-        });
-        $('#null-nouser').css({
-            "display" : "none"
-        });
-        return newContent;
     };
 }
 					
