@@ -123,7 +123,7 @@ function easemobService($ionicLoading) {
         //TODO  根据消息体的to值去定位那个群组的聊天记录
         if (self.msgType == mestype) {
             var room = message.to;
-            if (from != curUserId) {
+            if (from != curUserId && from == curChatUserId) {
                 if (mestype == 'groupchat') {
                     var msgtext = messageContent.replace(/\n/g, '<br>');
                     self.appendMsg(message.from, message.to, messageContent, mestype, message.ext.realname, message.ext.avatar);
