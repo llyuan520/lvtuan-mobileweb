@@ -14,15 +14,13 @@
 						<div class="input-label">
 			              执业证号
 			            </div>
-			            <label ng-if="currentUser.is_verified_lawyer">{{lvinfo.user.lawyer.license}}</label>
-						<input ng-if="!currentUser.is_verified_lawyer" placeholder="请输入执业证号"  ng-model="license" name="license" type="text" required>
+						<input ng-disabled="currentUser.is_verified_lawyer && items.license" placeholder="请输入执业证号"  ng-model="license" name="license" type="text" required>
 					</div>
 					<div class="item item-input">
 						<div class="input-label">
 			              执业机构
 			            </div>
-			            <label ng-if="currentUser.is_verified_lawyer">{{lvinfo.user.lawyer.company_name}}</label>
-						<input ng-if="!currentUser.is_verified_lawyer" placeholder="请输入执业机构" ng-model="company_name" name="company_name" type="text" required>
+						<input placeholder="请输入执业机构"  ng-model="company_name" name="company_name" type="text" required>
 					</div>
 					<div class="item item-input item-select">
 						<div class="input-label">
@@ -36,7 +34,7 @@
 						<div class="input-label">
 			              执业地址
 			            </div>
-			            <input placeholder="请选择执业地址" ng-model="address" type="text" required ng-click="getAddress()" data-disabled="disabled" >
+			            <input placeholder="请选择执业地址" ng-model="address" type="text" required ng-click="getAddress()" data-disabled="disabled">
 					</div>
 					<div class="item item-input">
 						<div class="input-label">

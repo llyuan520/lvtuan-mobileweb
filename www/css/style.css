@@ -1457,9 +1457,6 @@ input, select {
     width: 94%;
     height: 3.26rem;
     margin: 0 auto;
-    border: none;
-    background-color: #00cafa;
-    color: #fff;
     font-size: 1.4rem;
     border-radius: 3px;
 }
@@ -1643,12 +1640,6 @@ input, select {
 .all-button .all-new button, 
 .all-button .all-complete button:nth-child(2) {
     width: 23%;
-}
-.button.button-positive.activated, .button.button-positive.active{
-    background-color: #00a8ff;
-    color: #fff;
-    border-color: #00a8ff;
-    box-shadow: inset 0 1px 4px #00a8ff;
 }
 
 /*去除高亮*/
