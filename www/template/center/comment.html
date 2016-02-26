@@ -7,18 +7,19 @@
 			<ion-content>
 				<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 				<ion-list>
-					<ion-item class="item-thumbnail-left" ng-repeat="item in items">
-						<img ng-src="{{item.creator_avatar}}" style="border-radius: 50px;vertical-align: middle;"/>
-						<h2>{{item.title}}</h2>
-						<p>{{item.creator_realname}} {{item.created_at}}</p>
-						<div class="reply ion-arrow-up-b">
-							<p>
-								{{item.comment}}
-							</p>
-						</div>
+					<ion-item ng-repeat="item in items">
+						<p class="content">
+							{{item.title}}
+						</p>
+						<p class="contents txt-c-99">
+							{{item.comment}}
+						</p>
+						<p>
+							 <label class="rig txt-c-99">{{item.created_at}}</label>
+						</p>
 					</ion-item>
 				</ion-list>
-				<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" divstance="1%"> </ion-infinite-scroll>
+				<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
 			</ion-content>
 			
 		</ion-pane>

@@ -336,20 +336,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       controller: 'infoCtrl',
       authn: true
     })
-    .state('comment', { //用户-我的评论
-      url: '/comment',
-      cache: 'true',
-      templateUrl: 'template/center/comment.html',
-      controller: 'commentCtrl',
-      authn: true
-    })
-    .state('followed', { //用户-我的关注
-      url: '/followed',
-      cache: 'true',
-      templateUrl: 'template/center/followed.html',
-      controller: 'followedCtrl',
-      authn: true
-    })
+    
     .state('becomenav', { //用户-认证为律师
       url: '/becomenav',
       cache: 'true',
@@ -420,20 +407,22 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
 
 
 /*———————————————————————————— 律师的个人中心 ————————————————————————————*/
-    .state('followed_lawyer', { //律师-我的关注
-      url: '/followed_lawyer',
+    .state('comment', { //用户和律师-我的评论
+      url: '/comment',
       cache: 'true',
-      templateUrl: 'template/center/lawyer/followed.html',
-      controller: 'followedlaywerCtrl',
+      templateUrl: 'template/center/comment.html',
+      controller: 'commentCtrl',
       authn: true
     })
-    .state('comment_lawyer', { //律师-我的评论
-      url: '/comment_lawyer/:id',
-      cache:'false',
-      templateUrl: 'template/center/lawyer/comment.html',
-      controller: 'commentlaywerCtrl',
+    
+    .state('followed', { //用户和律师-我的关注
+      url: '/followed',
+      cache: 'true',
+      templateUrl: 'template/center/followed.html',
+      controller: 'followedCtrl',
       authn: true
     })
+
     .state('article_lawyer', { //律师-我的文章
       url: '/article_lawyer',
       templateUrl: 'template/center/lawyer/article.html',
@@ -485,6 +474,20 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       controller: 'aboutCtrl',
       authn: true
     })
+    .state('applicationsintro', { //应用介绍
+      url: '/applicationsintro',
+      cache: 'true',
+      templateUrl: 'template/center/applicationsintro.html',
+      authn: true
+    })
+    .state('userpact', { //用户协议
+      url: '/userpact',
+      cache: 'true',
+      templateUrl: 'template/center/userpact.html',
+      controller:'userpactCtrl',
+      authn: true
+    })
+
     .state('site', { //设置
       url: '/site',
       cache: 'true',
@@ -513,6 +516,30 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       controller: 'messagesCtrl',
       authn: true
     })
+
+   .state('messages.mymesg', { //我的消息 - 我的消息
+      url: '/mymesg',
+      cache: 'true',
+      views: {
+          'messages-mymesg': {
+              templateUrl: 'template/center/mymesg.html',
+              controller: 'mymesgCtrl'
+          }
+      },
+      authn: true
+    })
+   .state('messages.sysmesg', { //我的消息 - 系统消息
+      url: '/sysmesg',
+      cache: 'true',
+      views: {
+          'messages-sysmesg': {
+              templateUrl: 'template/center/sysmesg.html',
+              controller: 'sysmesgCtrl'
+          }
+      },
+      authn: true
+    })
+
     .state('message_details', { //我的消息-消息详情
       url: '/message/:id',
       cache: 'true',

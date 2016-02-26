@@ -113,7 +113,10 @@ a, a:link, a:visited, a:active, a:hover ,.positive, a.positive{
 .bg-c-white{
     background-color: #FFFFFF;
 }
-.txt-c-99{
+.txt-c-ff{
+    color: #fff;
+}
+.txt-c-99,.item p.txt-c-99{
     color: #999;
 }
 .txt-c-66,.txt-c-66 a,.txt-c-66 a:link{
@@ -128,6 +131,10 @@ a, a:link, a:visited, a:active, a:hover ,.positive, a.positive{
 }
 .fc-ee{
     color: #999;
+}
+.height5{
+    height: 5px;
+    clear:both;
 }
 .height10{
     height: 10px;

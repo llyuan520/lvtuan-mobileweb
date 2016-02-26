@@ -1,16 +1,39 @@
-<ion-view hide-tabs="true">
+<ion-view hide-tabs="true" cache-view="false">
 	<ion-pane>
-		<ion-header-bar class="bar bar-header bar-light">
-			<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back"  ng-href="#/center"></a>
-			<h1 class="title">我的积分</h1>
+		<ion-header-bar class="bar bar-header" style="background-color: #00cafa;">
+			<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-href="#/center" style="color: #fff;" ></a>
+			<h1 class="title" style="color: #fff;">我的积分</h1>
 		</ion-header-bar>
+
 		<ion-content>				
+			<div class="list positive-bg" style="margin-bottom:0;">
+				<div class="col-center txt-align-c" style="height: 90px;">
+			  		<img src="../img/score.png" style="width:15%;margin-top:8px">
+			  		<div class="height5"></div>
+			  		<label class="txt-c-ff">{{currentUser.score}}</label>
+				</div>
+				 <div class="button-bar" style="height: 47px;border-top: 1px solid #fff;border-color: rgba(255,255,255,0.5);">
+				    <div class="button button-clear fixdisplay" ng-click="click()">
+				    	<img src="../img/scores_lottery.png" style="vertical-align: middle;width: 21%;">&nbsp;
+				  	    <label class="txt-c-ff">积分抽奖</label>
+				    </div>
+				    <div><i class="border1" style="height:30px;margin-top: 8px;"></i></div>
+				    <div class="button button-clear fixdisplay" ng-click="click()">
+				  	  <img src="../img/scores_total.png" style="vertical-align: middle;width: 26%;">&nbsp;
+				  	  <label class="txt-c-ff">积分兑换</label>
+				    </div>
+				</div>
+		    </div>
+		    <div class="item item-divider">
+		    	<img src="../img/scores_dateil.png" style="vertical-align: middle;width: 6%;">&nbsp;<label>积分明细</label>
+		    </div>
+
 			<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 			<div class="list web-top10">
-			    <div class="item web-item" ng-repeat="item in items">
-			      <b class="item-note web-ftcred"><font color="red">+ {{item.score}}分</font></b>
-			      <h2>{{item.title}}</h2>
-			      <p>{{item.created_at}}</p>
+			    <div class="item web-item padding10" ng-repeat="item in items">
+			      <label class="item-note web-ftcred"><font color="#333">+ {{item.score}}</font></label>
+			      <p class="contents">{{item.title}}</p>
+			      <p> <label>{{item.created_at}}</label> </p>
 			    </div>
 			</div>
 			<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>

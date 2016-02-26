@@ -1,38 +1,37 @@
 <ion-view hide-tabs="true">
 		<ion-pane>
-			<ion-header-bar class="bar bar-header bar-light">
+			<ion-header-bar class="bar bar-header bar-light" style="border-bottom:none;">
 				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-href="#/center"></a>
 				<h1 class="title">关于律团</h1>
 			</ion-header-bar>
-			<ion-content class="web-body">
-<!--
-				<a class="item web-item item-icon-right web-padd-right40">
-				          公司介绍
+			<ion-content class="bottom_50" style="background-color:#fff">
+				<div class="item" style="text-align: center;padding: 70px 0 30px 0;">
+				    <img src="../img/gylt_logo.png" style="width:30%;">
+				    <div class="height10"></div>
+				    <span class="item-note" style="float: none;">当前版本：v1.0</span>
+				</div>
+				<a class="item web-item item-icon-right web-padd-right40" ng-href="#/applicationsintro">
+				          应用介绍
 				    <i class="icon icon-right ion-ios-arrow-right"></i>
 				</a>
--->
-				<a class="item web-item item-icon-right web-padd-right40" ng-click="showAlert()">
-				    <span class="item-note">www.wdlst.com</span>
-				          公司官网
-				    <i class="icon icon-right ion-ios-arrow-right"></i>
-				</a>
-				<a class="item web-item item-icon-right web-padd-right40" ng-click="showConfirm()">
-				    <span class="item-note">v1.0</span>
-				          软件版本
-				    <i class="icon icon-right ion-ios-arrow-right"></i>
-				</a>
-				<a class="item web-item item-icon-right web-padd-right40"  href="tel:400-810-810">
-				    <span class="item-note">400-810-810</span>
-				          客服电话
-				    <i class="icon icon-right ion-ios-arrow-right"></i>
-				</a>
-<!--
-				<a class="item web-item item-icon-right web-padd-right40">
+				<a class="item web-item item-icon-right web-padd-right40" ng-href="#/userpact">
 				          用户协议
 				    <i class="icon icon-right ion-ios-arrow-right"></i>
 				</a>
--->
+				<a class="item web-item web-padd-right40" ng-click="showConfirm()">
+				    <span class="item-note">律团</span>
+				          微信公众号
+				</a>
+				<a class="item web-item web-padd-right40"  >
+				    <span class="item-note">http://www.wdlst.com</span>
+				          律团官网
+				</a>
 			</ion-content>
-			
+			<div class="tabs tabs-icon-top tabs-color-positive nav-set">
+		        <a href="tel:400-810-810" style="height: 50px;line-height: 50px;font-size:16px;color: #444;" >
+		        	<img src="../img/tel.png" style="width:10%;vertical-align: middle;"> &nbsp;
+		            客服电话：4009-616-580
+		        </a>
+		    </div>
 		</ion-pane>
 </ion-view>

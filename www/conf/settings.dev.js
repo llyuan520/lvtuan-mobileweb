@@ -8,8 +8,20 @@ AppSettings = {
   appId: 'wx7912c6c84aad82a7',
   secret: 'd75e1656d3c684f0d974f40ecf11cb3c',
   // 测试账号
-  easemobAppKey: 'lvtuan#lvtuanim',
+/*  easemobAppKey: 'lvtuan#lvtuanim',
   easemobXmppURL: 'http://im-api.easemob.com/http-bind/',
   easemobApiURL: '',
-  easemobHttps: true
+  easemobHttps: true,*/
+
+  easemobAppKey: 'gsflowertrees#gsflower',
+  easemobXmppURL: 'http://im-api.easemob.com/http-bind/',
+  easemobApiURL: '',
+  easemobHttps: true,
+
+  /*client_id: 'YXA6pU83IG3SEeWDdhlqI_GdpA',
+  client_secret: 'YXA6O9H1_qvxafZFtpo-TWL8gvZ3PG0',
+  org_name: 'gsflowertrees',
+  app_name: 'gsflower',
+  appkey: 'gsflowertrees#gsflower'*/
+
 }
