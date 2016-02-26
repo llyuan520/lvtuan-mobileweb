@@ -312,6 +312,7 @@ function easemobService($ionicLoading) {
             lineDiv.style.textAlign = "left";
             lineDiv.className = "immediate-information easemobmain-record img-left";
         }
+        msgContentDiv.appendChild(lineDiv);
         msgContentDiv.scrollTop = msgContentDiv.scrollHeight;
         return lineDiv;
     };
