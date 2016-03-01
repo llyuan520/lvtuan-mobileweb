@@ -1,0 +1,22 @@
+<ion-view hide-tabs="true">
+	<ion-content>
+		<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+		    <ul class="list">
+		        <li class="item" ng-class="itemcheckbox" ng-repeat="item in items">
+		            <label ng-hide="visible"  class="checkbox" ng-click="messgs_del(item.id,$index)">
+		            	<i class="icon ion-ios-close-outline" style="font-size: 2.5rem;"></i>
+		            </label>
+		            <p class="content txt-c-99">
+						<a ng-href="#/message/{{item.id}}">{{item.subject}}</a>
+					</p>
+					<p class="contents">
+						{{item.message}}
+					</p>
+					<p>
+						 <label class="rig txt-c-99">{{item.created_at}}</label>
+					</p>
+		        </li>
+		    </ul>
+		<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
+	</ion-content>
+</ion-view>

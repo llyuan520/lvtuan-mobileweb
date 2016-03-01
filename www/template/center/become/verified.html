@@ -14,9 +14,7 @@
 							<div class="row verified-name">
 							  <div class="col col-center">真实姓名</div>
 							  <div class="col col-75">
-							  	<label ng-if="currentUser.is_verified_lawyer">{{lvinfo.user.realname}}</label>
-							  	<input ng-if="!currentUser.is_verified_lawyer" placeholder="请输入您的真实姓名" ng-model="realname" name="realname" type="text" required>
-							  	<!-- <strong></strong> -->
+							  	<input ng-disabled="currentUser.is_verified_lawyer && items.realname" placeholder="请输入您的真实姓名" ng-model="realname" name="realname" type="text" required>
 							  </div>
 							</div>
 						</div>

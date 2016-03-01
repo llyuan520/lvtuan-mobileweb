@@ -65,7 +65,7 @@
 					    </div>
 					</div>
 					<div class="submit-examine">
-						<button type="submit" ng-click="submit()">提交审核</button>
+						<button ng-disabled="infochecks.work == false && infochecks.identity == false && infochecks.fee == false && infochecks.workscope == false" type="submit" ng-click="submit()" class="button button-positive">提交审核</button>
 					</div>
 				</div>
 

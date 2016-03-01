@@ -10,51 +10,45 @@
 				<div class="has-header ionic-pseudo">
 					<form name="myForm" role="form" id="myForm" novalidate ng-controller="usermoneyoutCtrl">
 						<div class="list">
-							<div class="item item-divider">
-							  可提现额度 {{summoney}} 元
+							<div class="item item-divider" style="padding:16px 8px;">
+							  可提现额度:{{summoney}} 元 (1.00元起提)
 							</div>
-							<div class="item item-input">
+							<div class="item item-input" style="margin-bottom: 10px;border: none;">
 								<div class="row row-no-padding">
-								  <div class="col col-center">提现金额</div>
-								  <div class="col col-50 col-center">
+								  <div class="col col-center">
 								  	<input id="money" placeholder="请输入提现金额" ng-model="user.money" name="money" type="number" required>
 								  </div>
-								  <div class="col col-center">元</div>
 								</div>
 							</div>
-							<div class="item item-input">
+							<div class="item item-input" style="margin-bottom: 10px;border: none;">
 								<div class="row row-no-padding">
-								  <div class="col col-center">真实姓名</div>
-								  <div class="col col-75 col-center">
+								  <div class="col col-center">
 								  	<input id="money" placeholder="请输入真实姓名" ng-model="user.user_name" name="user_name" type="text" required>
 								  </div>
 								</div>
 							</div>
-							<div class="item item-input">
+							<div class="item item-input" style="margin-bottom: 10px;border: none;">
 								<div class="row row-no-padding">
-								  <div class="col col-center">开户银行</div>
-								  <div class="col col-75 col-center">
+								  <div class="col col-center">
 								  	<input id="money" placeholder="请输入开户银行" ng-model="user.brank_name" name="brank_name" type="text" required>
 								  </div>
 								</div>
 							</div>
-							<div class="item item-input">
+							<div class="item item-input" style="margin-bottom: 10px;border: none;">
 								<div class="row row-no-padding">
-								  <div class="col col-center">银行卡号</div>
-								  <div class="col col-75 col-center">
+								  <div class="col col-center">
 								  	<input id="money" placeholder="请输入银行卡号" ng-model="user.card_id" name="card_id" ng-maxlength="19" type="number" required>
 								  </div>
 								</div>
 							</div>
-							<div class="item item-input">
+							<div class="item item-input" style="margin-bottom: 10px;border: none;">
 								<div class="row row-no-padding">
-								  <div class="col col-center">联系方式</div>
-								  <div class="col col-75 col-center">
+								  <div class="col col-center">
 								  	<input id="money" placeholder="请输入联系方式" ng-model="user.contact_phone" name="contact_phone" type="text" maxlength="11" required>
 								  </div>
 								</div>
 							</div>
-							<button class="button button-block button-positive web-wid8c web-top10" type="submit" ng-disabled="myForm.$invalid" ng-click="submit(user)">立即提现</button>
+							<button class="button button-block button-positive web-wid8c web-top10" type="submit" ng-disabled="myForm.$invalid" ng-click="submit(user)">确认提现</button>
 						</div>
 					</form>
 				</div>

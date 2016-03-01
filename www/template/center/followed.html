@@ -1,20 +1,33 @@
 <ion-view hide-tabs="true">
-		<ion-pane>
-			<ion-header-bar class="bar bar-header bar-light">
-				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-href="#/center"></a>
-				<h1 class="title">我的关注</h1>
-			</ion-header-bar>
-			<ion-content>
-				<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
-				<ion-list>
-					<ion-item class="item-thumbnail-left" ng-repeat="item in items">
-						<img ng-src="{{item.avatar}}" style="border-radius: 50px;vertical-align: middle;"/>
-						<h2><a ng-href="#/lawyer/{{item.id}}">{{item.realname}}</a></h2>
-						<p>{{item.created_at}}</p>
-					</ion-item>
-				</ion-list>
-				<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
-			</ion-content>
-			
-		</ion-pane>
+	<ion-pane>
+		<ion-header-bar class="bar bar-header bar-light">
+			<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-href="#/center"></a>
+			<h1 class="title">我的关注</h1>
+		</ion-header-bar>
+		<ion-content>
+			<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+				<div class="list">
+				    <div class="item item-thumbnail-left lawyer-lists" ng-repeat="item in items">
+				    	<img class="img-header" ng-src="{{item.avatar}}" style="border-radius: 50px;" ng-click="jump('#/lawyer/{{item.id}}')" />
+				       <div class="row row-no-padding">
+				       		<div class="col col-30 col-center row-no-padding">
+				       			<h3><a  ng-href="#/lawyer/{{item.id}}">{{item.realname}}</a></h3>
+				       		</div>
+						  	<div class="col col-70 col-center row-no-padding">
+						  		<div star rating-value="ratingVal[$index]" max="max" on-hover="onHover" on-leave="onLeave" readonly="{{readonly}}" class="star-score"></div>
+				      			<img ng-show="{{item.isDispVipImg}}" class="img-v" src="img/vip.png"/>
+						  	</div>
+						</div>
+				      <p>
+				      	擅长领域：<label ng-repeat="item in item.work_scope">{{item.value}}</label><br /> 所在区域：{{item.province}} {{item.city}} {{item.district}}<br /> 执业时间：{{item.practice_period}}
+				      </p>
+				      <p style="text-align: right;margin-bottom: 5px;">
+				      	<button type="submit" ng-click="follow_del(item.id,$index)" class="button button-small button-positive">取消关注</button>
+				      </p>
+				    </div>
+				</div>
+			<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
+		</ion-content>
+		
+	</ion-pane>
 </ion-view>

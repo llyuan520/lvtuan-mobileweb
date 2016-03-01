@@ -9,22 +9,22 @@
 				<div class="list resetpwd-list">
 					<label class="item item-input web-item-botb0">
 						<span class="ion-ios-unlocked-outline web-wid15"></span>
-						<input required ng-model="user.old_password" name="old_password" ng-minlength="6" ng-maxlength="20" type="password" class="input_text" placeholder="请输入旧密码" ng-model-options="{debounce:2000}">
+						<input required ng-model="user.old_password" name="old_password" ng-minlength="6" ng-maxlength="18" type="password" class="input_text" placeholder="请输入旧密码" ng-model-options="{debounce:2000}">
 					</label>
 					<label class="item item-input web-item-topb0">
 						<span class="ion-ios-locked-outline web-wid20"></span>
-						<input required ng-model="user.new_password" name="new_password" ng-minlength="6" ng-maxlength="20" type="password" class="input_text" placeholder="请输入新密码(6-20位字符)" ng-model-options="{debounce:2000}">
+						<input required ng-model="user.new_password" name="new_password" ng-minlength="6" ng-maxlength="18" type="password" class="input_text" placeholder="请输入新密码(6-18位字符)" ng-model-options="{debounce:2000}">
 					</label>
 					<label class="item item-input web-item-topb0">
 						<span class="ion-ios-locked-outline web-wid20"></span>
-						<input required ng-model="user.new_password_retype" name="new_password_retype" ng-minlength="6" ng-maxlength="20"  type="password" class="input_text" placeholder="请输入新密码(6-20位字符)" ng-model-options="{debounce:2000}">
+						<input required ng-model="user.new_password_retype" name="new_password_retype" ng-minlength="6" ng-maxlength="18"  type="password" class="input_text" placeholder="请再次输入新密码(6-18位字符)" ng-model-options="{debounce:2000}">
 					</label>
 
 					<p style="background-color: #fff;padding: 16px 0 16px 16px;" ng-show="myForm.old_password.$error.minlength || myForm.new_password.$error.minlength || myForm.new_password_retype.$error.minlength">
 						<span class="fc-red">字符不能小于6个字符</span>
 					</p>
 					<p style="background-color: #fff;padding: 16px 0 16px 16px;" ng-show="myForm.old_password.$error.maxlength || myForm.new_password.$error.maxlength || myForm.new_password_retype.$error.maxlength">
-						<span class="fc-red">字符的长度不能超过20个</span>
+						<span class="fc-red">字符的长度不能超过18个</span>
 					</p>
 					<p style="background-color: #fff;padding: 16px 0 16px 16px;" ng-show="myForm.old_password.$required || myForm.new_password.$required || myForm.new_password_retype.$required">
 						<span class="fc-red">密码不能为空</span>

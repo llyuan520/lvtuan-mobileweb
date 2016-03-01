@@ -1,18 +1,23 @@
 <ion-view hide-tabs="true">
-		<ion-pane>
-			<ion-header-bar class="bar bar-header bar-light">
+		<ion-pane  class="web-body">
+			<ion-header-bar class="bar bar-header bar-light headers">
 				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-href="#/center"></a>
 				<h1 class="title">我的消息</h1>
+				<button ng-click="toggle()" class="button button-clear button-positive icon-right" type="submit">
+					<label ng-if="visible">编辑</label>
+					<label ng-if="!visible">取消</label>
+				</button>
 			</ion-header-bar>
-			<ion-content>
-				<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
-				<ion-list class="messages">
-					<ion-item ng-repeat="item in items">
-						<p><a ng-href="#/message/{{item.id}}">{{item.subject}}</a></p>
-						<p>{{item.created_at}}</p>
-					</ion-item>
-				</ion-list>
-				<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" icon="ion-loading-c" distance="1%"> </ion-infinite-scroll>
-			</ion-content>
+
+			<ion-tabs class="tabs-top">
+			    <ion-tab title="我的消息" href="#/messages/mymesg">
+			        <ion-nav-view name="messages-mymesg">我的消息</ion-nav-view>
+			    </ion-tab>
+
+			    <ion-tab title="系统消息" href="#/messages/sysmesg">
+			        <ion-nav-view name="messages-sysmesg">系统消息</ion-nav-view>
+			    </ion-tab>
+			</ion-tabs>
 		</ion-pane>
 </ion-view>
+

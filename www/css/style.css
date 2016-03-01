@@ -35,6 +35,12 @@ body, html, .pane, .ionic-body,h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, 
 /*.bar .title {
     font-size: 1.4rem;
 }*/
+.padding0{
+    padding: 0;
+}
+.padding5{
+    padding: 5px;
+}
 .padding10{
     padding: 10px;
 }
@@ -107,7 +113,10 @@ a, a:link, a:visited, a:active, a:hover ,.positive, a.positive{
 .bg-c-white{
     background-color: #FFFFFF;
 }
-.txt-c-99{
+.txt-c-ff{
+    color: #fff;
+}
+.txt-c-99,.item p.txt-c-99{
     color: #999;
 }
 .txt-c-66,.txt-c-66 a,.txt-c-66 a:link{
@@ -122,6 +131,10 @@ a, a:link, a:visited, a:active, a:hover ,.positive, a.positive{
 }
 .fc-ee{
     color: #999;
+}
+.height5{
+    height: 5px;
+    clear:both;
 }
 .height10{
     height: 10px;
@@ -1451,9 +1464,6 @@ input, select {
     width: 94%;
     height: 3.26rem;
     margin: 0 auto;
-    border: none;
-    background-color: #00cafa;
-    color: #fff;
     font-size: 1.4rem;
     border-radius: 3px;
 }
@@ -1638,12 +1648,6 @@ input, select {
 .all-button .all-complete button:nth-child(2) {
     width: 23%;
 }
-.button.button-positive.activated, .button.button-positive.active{
-    background-color: #00a8ff;
-    color: #fff;
-    border-color: #00a8ff;
-    box-shadow: inset 0 1px 4px #00a8ff;
-}
 
 /*去除高亮*/
 a,button,input{
@@ -1744,3 +1748,4 @@ a,button,input{
     display: block;
     width: 100%;
 }
+

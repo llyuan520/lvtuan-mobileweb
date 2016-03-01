@@ -1,42 +1,33 @@
 <ion-view hide-Tabs="true">
 	<ion-pane>
-		<ion-header-bar class="bar bar-header bar-light">
+		<ion-header-bar class="bar bar-header bar-light headers">
 			<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-href="#/center"></a>
 			<h1 class="title">我的收藏</h1>
+			<button ng-click="toggle()" class="button button-clear button-positive icon-right" type="submit">
+				<label ng-if="visible">编辑</label>
+				<label ng-if="!visible">取消</label>
+			</button>
 		</ion-header-bar>
 
 		<ion-content>
-
 			<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
-			<ion-list>
-				<ion-item style="padding: 5;" ng-repeat="item in items">
-					<div class="row">
-					  <div class="col col-65">
-					  	<img ng-src="{{item.creator_avatar}}" width="40" height="40" style="border-radius: 50px;vertical-align: middle;" />
-					  	<label>{{item.creator_realname}}</label>
-					  </div>
-					  <div class="col" style="text-align: right;">
-					  	{{item.created_at}}
-					  </div>
-					</div>
-					<div ng-if="item.show_img" class="item item-thumbnail-left">
-						<img ng-src='{{item.collect_img}}'/>
-						<p class="content" style="color:#333;font-size:16px">
-							<a ng-if="item.collect_type == 1" href="#/questionsview/{{item.item_id}}">{{item.title}}</a>
-							<a ng-if="item.collect_type == 3" href="#/knowledgeview/{{item.item_id}}">{{item.title}}</a>
+			    <ul class="list">
+			        <li class="item" ng-class="itemcheckbox" ng-repeat="item in items">
+			            <label ng-hide="visible"  class="checkbox" ng-click="collects_del(item.id,$index)">
+			            	<i class="icon ion-ios-close-outline" style="font-size: 2.5rem;"></i>
+			            </label>
+			            <p class="content txt-c-99">
+							{{item.collect_type_str}}
 						</p>
-						<p>{{item.collect_type_str}}</p>
-					</div>
-					<div ng-if="!item.show_img" class="item">
-						<p class="content" style="color:#333;font-size:16px">
-							<a ng-if="item.collect_type == 1" href="#/questionsview/{{item.item_id}}">{{item.title}}</a>
-							<a ng-if="item.collect_type == 3" href="#/knowledgeview/{{item.item_id}}">{{item.title}}</a>
+						<p class="contents">
+							{{item.title}}
 						</p>
-						<p>{{item.collect_type_str}}</p>
-					</div>
-				</ion-item>
-			</ion-list>
-			<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" icon="ion-loading-c" distance="1%"> </ion-infinite-scroll>
+						<p>
+							 <label class="rig txt-c-99">{{item.created_at}}</label>
+						</p>
+			        </li>
+			    </ul>
+			<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
 		</ion-content>
 
 	</ion-pane>
