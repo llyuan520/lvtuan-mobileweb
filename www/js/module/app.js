@@ -472,20 +472,20 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       cache: 'true',
       templateUrl: 'template/center/about.html',
       controller: 'aboutCtrl',
-      authn: true
+      authn: false
     })
     .state('applicationsintro', { //应用介绍
       url: '/applicationsintro',
       cache: 'true',
       templateUrl: 'template/center/applicationsintro.html',
-      authn: true
+      authn: false
     })
     .state('userpact', { //用户协议
       url: '/userpact',
       cache: 'true',
       templateUrl: 'template/center/userpact.html',
       controller:'userpactCtrl',
-      authn: true
+      authn: false
     })
 
     .state('site', { //设置
