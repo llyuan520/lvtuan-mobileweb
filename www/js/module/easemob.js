@@ -312,6 +312,10 @@ function easemobService($ionicLoading) {
             lineDiv.style.textAlign = "left";
             lineDiv.className = "immediate-information easemobmain-record img-left";
         }
+        if (msgContentDiv == null && chattype && chattype == 'groupchat') {
+            msgContentDiv = self.createContactChatDiv(contactDivId);
+            document.getElementById(msgCardDivId).appendChild(msgContentDiv);
+        }
         msgContentDiv.appendChild(lineDiv);
         msgContentDiv.scrollTop = msgContentDiv.scrollHeight;
         return lineDiv;
