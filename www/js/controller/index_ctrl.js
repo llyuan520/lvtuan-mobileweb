@@ -526,20 +526,23 @@ lvtuanApp.controller("groupAttentionCtrl",function($scope,$http,$state,$rootScop
 
 lvtuanApp.controller("groupviewCtrl",function($scope,$http,$state,$rootScope,$stateParams,easemobService,$ionicLoading){
 
-	$ionicLoading.show();
-    $http.get('http://'+$rootScope.hostName+'/group/'+$stateParams.id+'/chat'
-    ).success(function(data) {
-        if (data && data.data) {
-            $scope.items = data.data;
-            var curRoomId = $scope.items.easemob_id;
+	$scope.$on('$ionicView.beforeEnter', function() {  
+		$ionicLoading.show();
+		var timestamp=Math.round(new Date().getTime()/1000);
+	    $http.get('http://'+$rootScope.hostName+'/group/'+$stateParams.id+'/chat?ts='+timestamp
+	    ).success(function(data) {
+	        if (data && data.data) {
+	            $scope.items = data.data;
+	            var curRoomId = $scope.items.easemob_id;
 
-			easemobService.init(curRoomId,"groupchat");
-			easemobService.login($scope.items.user_id.toString(),$scope.items.pwd);
+				easemobService.init(curRoomId,"groupchat");
+				easemobService.login($scope.items.user_id.toString(),$scope.items.pwd);
 
-            console.info('圈子',$scope.items);
-        }
-        $ionicLoading.hide();
-    })
+	            console.info('圈子',$scope.items);
+	        }
+	        $ionicLoading.hide();
+	    })
+	});
 	
 	$scope.site = function(id){
 		location.href='#/group/site/'+id;
@@ -3420,17 +3423,19 @@ lvtuanApp.controller("lawyerquestionsviewCtrl",function($http,$scope,$stateParam
 //咨询和订单的一对一咨询 - 即时通讯
 lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$stateParams,easemobService,$ionicLoading){
 	// $ionicLoading.show();
-	$http.get('http://'+$rootScope.hostName+'/center/question/'+$stateParams.id+'/ask'
-    ).success(function(data) {
-    	if (data && data.data) {
-	    	var items = data.data;
-			$scope.curChatUserId = items.user_id;
-			$scope.curUserId = items.easemob_id;
+	$scope.$on('$ionicView.beforeEnter', function() {  
+		$http.get('http://'+$rootScope.hostName+'/center/question/'+$stateParams.id+'/ask'
+	    ).success(function(data) {
+	    	if (data && data.data) {
+		    	var items = data.data;
+				$scope.curChatUserId = items.user_id;
+				$scope.curUserId = items.easemob_id;
 
-			easemobService.init(items.user_id,"chat");
-			easemobService.login(items.easemob_id.toString(), items.easemob_pwd);
-		}
-	})
+				easemobService.init(items.user_id,"chat");
+				easemobService.login(items.easemob_id.toString(), items.easemob_pwd);
+			}
+		})
+	});
 
     var page = 1;
     var rows_per_page = 10;
