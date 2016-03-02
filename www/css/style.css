@@ -147,7 +147,7 @@ a, a:link, a:visited, a:active, a:hover ,.positive, a.positive{
     background-color: #004799;
 }
 .logo{ background: url("../img/logo.png") left center no-repeat;
-    background-size: 50%;
+    background-size: 50%; 
     vertical-align: text-bottom;
     display: inline-block;
     width: 95px;
