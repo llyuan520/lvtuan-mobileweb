@@ -16,7 +16,24 @@
     bottom: 0;
     width: 100%;
     box-shadow: 0 -1px 5px 0 #ddd;
+    z-index:10;
+    min-height: 57px;
+    max-height: 100%;
+    padding-bottom: 10px;
 }
+
+/*.chat02.activer {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    box-shadow: 0 -1px 5px 0 #ddd;
+    z-index: 9999;
+    min-height: 57px;
+    max-height: 100%;
+    padding-bottom: 10px;
+    height: 57px;
+    background-color: #fff;
+}*/
 
 .leftheader {
     border: 1px #666666 solid;
@@ -149,7 +166,7 @@
 }
 
 .chat02_content textarea {
-    display: block;
+    display: inline-block;
     width: 100%;
     height: 2.9rem;
     padding: 0.9rem 0 0 3%;
