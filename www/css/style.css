@@ -84,7 +84,9 @@ body, html, .pane, .ionic-body,h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, 
 .slider-pager .slider-pager-page {
     color:#00cafa;
 }
-
+.ng-cloak{
+    display: none !important;
+}
 .clear{
     clear:both;
 }
@@ -139,6 +141,17 @@ a, a:link, a:visited, a:active, a:hover ,.positive, a.positive{
 .height10{
     height: 10px;
     clear:both;
+}
+
+.nav-bar-block .headers {
+    background-color: #004799;
+}
+.logo{ background: url("../img/logo.png") left 0.5rem no-repeat;
+    background-size: 4rem;
+    vertical-align: text-bottom;
+    display: inline-block;
+    width: 95px;
+    height: 34px;
 }
 
 .item .praise, .item .messages, .item .collection {
@@ -791,10 +804,9 @@ input, select {
 
     .index .list.list1{
         text-align:center;
-        margin-bottom:10px;
-        background-color: #FFFFFF;
+        margin-bottom:0;
         color: #333;
-        border-top: 1px solid #333;
+
     }
     .index .list.list1 .row.padding1{
         padding: 1.2rem 0;
@@ -802,8 +814,15 @@ input, select {
     .index .list.list1 .row.padding2{
         padding: 0 20% 2% 20%;
     }
+    .index .list.list2{
+        padding: 0;
+         border-width: 1px 0px;
+        border-style: solid;
+        border-color: #dcdcdc;
+        margin-bottom: 5px;
+    }
     .index .list.list2 .row .col.padding3{
-        padding: 12% 0;
+        padding: 15% 0;
         text-align: center;
         margin-bottom: 0;
         background-color: #FFFFFF;
@@ -825,10 +844,8 @@ input, select {
 
     .index .list.list1{
         text-align:center;
-        margin-bottom:10px;
-        background-color: #FFFFFF;
-        color:#333;
-        border-top: 1px solid #333;
+        margin-bottom:0;
+        color: #333;
     }
     .index .list.list1 .row.padding1{
         padding: 1.6rem 0 1.6rem;
@@ -836,8 +853,15 @@ input, select {
     .index .list.list1 .row.padding2{
         padding: 0 20% 1.6rem 20%;
     }
+    .index .list.list2{
+        padding: 0;
+         border-width: 1px 0px;
+        border-style: solid;
+        border-color: #dcdcdc;
+        margin-bottom: 5px;
+    }
     .index .list.list2 .row .col.padding3{
-        padding: 25% 0;
+        padding: 15% 0;
         text-align: center;
         margin-bottom: 0;
         background-color: #FFFFFF;
@@ -858,17 +882,22 @@ input, select {
     }
 
     .index .list.list1{
-        text-align: center;
-        margin-bottom: 10px;
-        background-color: #FFFFFF;
+        text-align:center;
+        margin-bottom:0;
         color: #333;
-        border-top: 1px solid #333;
     }
     .index .list.list1 .row.padding1{
         padding: 1.4rem 0 1.4rem;
     }
     .index .list.list1 .row.padding2{
         padding:0 20% 4% 20%;
+    }
+    .index .list.list2{
+        padding: 0;
+         border-width: 1px 0px;
+        border-style: solid;
+        border-color: #dcdcdc;
+        margin-bottom: 5px;
     }
     .index .list.list2 .row .col.padding3{
         padding: 2rem 0 1.4rem;
@@ -905,17 +934,22 @@ input, select {
 @media only screen and (min-device-width: 414px) and (min-device-height :736px){ 
     .slide1 .slider,.slide1 .slider-slide img{height: 220px;}
     .index .list.list1{
-        text-align: center;
-        margin-bottom: 10px;
-        background-color: #FFFFFF;
+        text-align:center;
+        margin-bottom:0;
         color: #333;
-        border-top: 1px solid #333;
     }
     .index .list.list1 .row.padding1{
         padding: 2rem 0 1.4rem;
     }
     .index .list.list1 .row.padding2{
         padding:0 20% 6% 20%;
+    }
+    .index .list.list2{
+        padding: 0;
+         border-width: 1px 0px;
+        border-style: solid;
+        border-color: #dcdcdc;
+        margin-bottom: 5px;
     }
     .index .list.list2 .row .col.padding3{
         padding: 2.4rem 0 2rem;

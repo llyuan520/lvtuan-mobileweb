@@ -564,6 +564,8 @@ lvtuanApp.controller("groupviewCtrl",function($scope,$http,$state,$rootScope,$st
 	        }
 		}
 	}
+
+
 })
 
 //圈子设置
@@ -3418,7 +3420,8 @@ lvtuanApp.controller("lawyerquestionsviewCtrl",function($http,$scope,$stateParam
 })
 
 //咨询和订单的一对一咨询 - 即时通讯
-lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$stateParams,easemobService,$ionicLoading){
+lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$stateParams,$timeout,$ionicLoading,easemobService){
+
 	// $ionicLoading.show();
 	$http.get('http://'+$rootScope.hostName+'/center/question/'+$stateParams.id+'/ask'
     ).success(function(data) {
@@ -3509,6 +3512,16 @@ lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$
             console.info(data);
 		})
 	}
+
+	/*$scope.textClick = function(){
+		$(".chat02").addClass("activer");
+	}
+
+	$scope.textBlur = function(){
+		$(".chat02").removeClass("activer");
+	}*/
+
+
 })
 
 
