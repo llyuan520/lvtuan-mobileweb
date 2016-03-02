@@ -1008,7 +1008,7 @@ input, select {
 .nav-set a span {
     display: block;
     position: absolute;
-    bottom: 0.1rem;
+    bottom: 0.2rem;
     width: 100%;
     text-align: center;
 }
@@ -1072,7 +1072,6 @@ input, select {
     }
     .tab-item .home, .nav-set a.active i.home, .tab-item .group, .nav-set a.active i.group, .tab-item .knowledge, .nav-set a.active i.knowledge, .tab-item .center, .nav-set a.active i.center {
         width: 39px;
-        height: 2.4rem;
     }
     .tab-item .home {
         background: url("../img/index.png") center center no-repeat;
