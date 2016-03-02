@@ -567,9 +567,9 @@ lvtuanApp.controller("groupviewCtrl",function($scope,$http,$state,$rootScope,$st
 })
 
 //圈子设置
-lvtuanApp.controller("groupsiteCtrl",function($scope,$http,$state,$rootScope,$stateParams,$timeout,$ionicPopup,Upload){
+lvtuanApp.controller("groupsiteCtrl",function($scope,$http,$state,$rootScope,$stateParams,$timeout,$ionicPopup,Upload,$ionicLoading){
 	console.info("圈子设置");
-	ionicLoading.show();
+	$ionicLoading.show();
 	$http.get('http://'+$rootScope.hostName+'/group/'+$stateParams.id+'/detail'
         ).success(function(data) {
         	if (data && data.data) {
@@ -578,7 +578,7 @@ lvtuanApp.controller("groupsiteCtrl",function($scope,$http,$state,$rootScope,$st
 				$scope.is_mine = $scope.group.is_mine;
 				$scope.file = $scope.group.group_avatar;
 			}
-			ionicLoading.hide();
+			$ionicLoading.hide();
 		})
 
 		//删除成员
