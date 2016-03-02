@@ -88,8 +88,8 @@ function easemobService($ionicLoading) {
         conn.getRoster({
             success : function(roster) {
                 // 页面处理
-                self.showChatUI();
                 $ionicLoading.hide();
+                self.showChatUI();
             }
         });
         //启动心跳
