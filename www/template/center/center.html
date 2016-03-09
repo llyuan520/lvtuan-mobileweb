@@ -30,11 +30,7 @@
 			      		</a>
 					  </div>
 					  <div class="col col-25 col-center" style="text-align: right;">
-<<<<<<< Updated upstream
-					  	<span class="badge badge-assertive icon-left" style="position: absolute;right: 2%;font-weight: normal;font-size: 12px;padding: 2px 4px;top: 12px;">{{items.unread_counts.letter}}</span>
-=======
 					  	<span ng-if=" items.unread_counts.letter != '0'" class="badge badge-assertive icon-left" style="position: absolute;right: 2%;font-weight: normal;font-size: 12px;padding: 2px 4px;top: 12px;">{{items.unread_counts.letter}}</span>
->>>>>>> Stashed changes
 					  		<div ng-click="jump('#/messages')">
 					  			<img src="../img/emails.png" style="max-width: 31px;max-height: 21px;width: 45%;height: 100%;">
 							</div>
@@ -43,57 +39,37 @@
 
 					
 				    <div class="button-bar bg_transparent" style="height: 57px;">
-<<<<<<< Updated upstream
-					    <div class="button button-clear fixdisplay">
-					    	<span class="badge badge-assertive icon-left fixbadge">{{items.unread_counts.question}}</span>
-=======
 					    <a class="button button-clear fixdisplay" ng-href="#/question/gratis">
 					    	<span ng-if=" items.unread_counts.question != '0'" class="badge badge-assertive icon-left fixbadge">
 					    		{{items.unread_counts.question}}
 					    	</span>
->>>>>>> Stashed changes
 					    	<img src="../img/mfzx-iocn.png" width="28" height="26" style="margin-top: 4px;">
 					  	    <div style="width:100%;height:2px;clear:both;"></div>
 					  	    <label>免费咨询</label>
 					    </a>
 					    <div><i class="border1" style="height:57px;margin-top: 0;"></i></div>
-<<<<<<< Updated upstream
-					    <div class="button button-clear fixdisplay">
-					      <span class="badge badge-assertive icon-left fixbadge">{{items.unread_counts.pay_text}}</span>
-=======
 					    <a class="button button-clear fixdisplay" ng-href="#/question/paytext">
 					      <span ng-if=" items.unread_counts.pay_text != '0'" class="badge badge-assertive icon-left fixbadge">
 					      	{{items.unread_counts.pay_text}}
 					      </span>
->>>>>>> Stashed changes
 					  	  <img src="../img/twzx-iocn.png" width="28" height="26" style="margin-top: 4px;">
 					  	  <div style="width:100%;height:2px;clear:both;"></div>
 					  	  <label>图文咨询</label>
 					    </a>
 					    <div><i class="border1" style="height:57px;margin-top: 0;"></i></div>
-<<<<<<< Updated upstream
-					    <div class="button button-clear fixdisplay">
-					    	<span class="badge badge-assertive icon-left fixbadge">{{items.unread_counts.pay_phone}}</span>
-=======
 					    <a class="button button-clear fixdisplay" ng-href="#/question/payphone">
 					    	<span ng-if=" items.unread_counts.pay_phone != '0'" class="badge badge-assertive icon-left fixbadge">
 					    		{{items.unread_counts.pay_phone}}
 					    	</span>
->>>>>>> Stashed changes
 					  	 <img src="../img/dhzx-iocn.png" width="28" height="26" style="margin-top: 4px;">
 					  	  <div style="width:100%;height:2px;clear:both;"></div>
 					  	  <label>电话咨询</label>
 					    </a>
 					    <div><i class="border1" style="height:57px;margin-top: 0;"></i></div>
-<<<<<<< Updated upstream
-					    <div class="button button-clear fixdisplay">
-					    	<span class="badge badge-assertive icon-left fixbadge">{{items.unread_counts.pay_company}}</span>
-=======
 					    <a class="button button-clear fixdisplay" ng-href="#/question/paycompany">
 					    	<span ng-if=" items.unread_counts.pay_company != '0' " class="badge badge-assertive icon-left fixbadge">
 					    		{{items.unread_counts.pay_company}}
 					    	</span>
->>>>>>> Stashed changes
 					  	  <img src="../img/flgw-iocn.png" width="28" height="26" style="margin-top: 4px;">
 					  	  <div style="width:100%;height:2px;clear:both;"></div>
 					  	  <label>法律顾问</label>
@@ -141,11 +117,7 @@
 					<div class="my-integral">
 						<a class="item" ng-href="#/listscores">
 						    我的积分
-<<<<<<< Updated upstream
-						  <span class="badge badge-assertive icon-left" style="top:16px;">{{items.score}}</span>
-=======
 						  <span ng-if=" items.score != '0'" class="badge badge-assertive icon-left" style="top:16px;">{{items.score}}</span>
->>>>>>> Stashed changes
 						    <i class="icon ion-chevron-right"></i>
 						</a>
 					</div>
@@ -215,7 +187,7 @@
 					<div class="my-integral">
 						<a class="item" ng-href="#/listscores">
 					    	我的积分
-					    <span class="badge badge-assertive icon-left">{{items.score}}</span>
+					    <span ng-if=" items.score != '0'" class="badge badge-assertive icon-left">{{items.score}}</span>
 					    	<i class="icon ion-chevron-right"></i>
 						</a>
 					</div>

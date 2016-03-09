@@ -1332,6 +1332,7 @@ lvtuanApp.controller("centerCtrl",function($scope,$http,$rootScope,$ionicPopup,$
 				if(data && data.data){
 					//用于连接两个或多个数组并返回一个新的数组
 					$scope.items = data.data; 
+					localStorage.setItem("paymoney", JSON.stringify($scope.items.money));
 					console.info($scope.items);
 				}else{
 					layer.show('暂无数据！');
@@ -4527,6 +4528,8 @@ lvtuanApp.controller("userquestionviewCtrl",function($http,$scope,$stateParams,$
 
 //用户 - 我的咨询 - 送心意
 lvtuanApp.controller("sendmindCtrl",function($scope,$http,$rootScope,$stateParams,$ionicPopup,$ionicLoading,authService,wxService){
+	$scope.mymoney = JSON.parse(localStorage.getItem('paymoney'));
+
 	$scope.user = {
 		radioval : 'qianbao'
 	}
@@ -5685,6 +5688,7 @@ lvtuanApp.controller("userpayallCtrl",function($scope,$http,$rootScope,$ionicLoa
 
 //用户律师 - 微信支付
 lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$ionicPopup,listHelper,authService,wxService,$ionicLoading){
+	$scope.mymoney = JSON.parse(localStorage.getItem('paymoney'));
 	$scope.user = {
 		radioval : 'qianbao'
 	};
