@@ -1,0 +1,30 @@
+<ion-view hide-tabs="true" cache-view="false">
+		<ion-pane  class="web-body">
+			<ion-header-bar align-title="center" class="bar bar-header bar-light">
+				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-href="#/center" ></a>
+				<h1 class="title">我的咨询</h1>
+			</ion-header-bar>
+			<ion-tabs class="tabs-top">
+			    <ion-tab title="待受理" href="#/question/gratis/new">
+			        <ion-nav-view name="question-gratis-new">待受理</ion-nav-view>
+			    </ion-tab>
+
+			    <ion-tab title="待确认" href="#/question/gratis/waitforconfirmation">
+			        <ion-nav-view name="question-gratis-waitforconfirmation">待确认</ion-nav-view>
+			    </ion-tab>
+
+			    <ion-tab title="待评价" href="#/question/gratis/waitforevaluation">
+			        <ion-nav-view name="question-gratis-waitforevaluation">待评价</ion-nav-view>
+			    </ion-tab>
+
+			    <ion-tab title="已完成" href="#/question/gratis/complete">
+			        <ion-nav-view name="question-gratis-complete">已完成</ion-nav-view>
+			    </ion-tab>
+
+			    <ion-tab title="已取消" href="#/question/gratis/cancelled" ng-if="currentUser.status == 1 || currentUser.status == 2">
+			        <ion-nav-view name="question-gratis-cancelled">已取消</ion-nav-view>
+			    </ion-tab>
+			</ion-tabs>
+			
+		</ion-pane>
+</ion-view>

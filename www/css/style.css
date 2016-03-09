@@ -50,6 +50,9 @@ body, html, .pane, .ionic-body,h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, 
 .padding_bottom5{
     padding-bottom: 5px;
 }
+.padding_bottom16{
+    padding-bottom: 16px;
+}
 .item-icon-left .icon.bgtag{
     background-color: #00cafa;
     color: #fff;
@@ -101,7 +104,7 @@ body, html, .pane, .ionic-body,h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, 
 /*login*/
 a, a:link, a:visited, a:active, a:hover ,.positive, a.positive{
     text-decoration: none;
-    color: #00cafa;
+    color: #666;
 }
 .a-left{
     text-align: left;
@@ -490,97 +493,22 @@ ul.rating {
 /*送心意样式*/
 .mind-pic {
     width: 100%;
-    height: 185px;
+    height: 285px;
     padding-top: 15px;
-    background: url("../img/mind-letter.png") 0 0 no-repeat;
-    background-size: 100% 100%;
+    background: #fff url("../img/mind-letter.png") 0 0 no-repeat;
+    background-size: contain;
 }
 .mind-pic div {
-    color: #fff;
     text-align: center;
+    height: 35px;
+    line-height: 35px;
 }
 .mind-pic div span, .mind-pic div strong, .mind-pic div i {
     font-weight: normal;
     font-size: 14px;
 }
-.mind-pic input {
-    display: block;
-    width: 70%;
-    height: 30px;
-    padding-left: 3%;
-    margin: 100px auto 0;
-    border: 1px solid #9b9b9b;
-    font-size: 14px;
-    line-height: 30px;
-}
-.payment-method {
-    width: 100%;
-    height: 28px;
-    padding-left: 3%;
-    background-color: #df0b31;
-    font-size: 16px;
-    line-height: 28px;
-    color: #fff;
-}
-.method dl {
-    padding: 30px 0 5px 6%;
-    margin-bottom: 0px;
-}
-.method dt {
-    float: left;
-    width: 22%;
-    height: 50px;
-}
-.method dt img {
-    display: block;
-    width: 100%;
-    height: 50px;
-}
-.method dd {
-    position: relative;
-    float: left;
-    width: 72%;
-    height: 50px;
-    margin-left: 5%;
-}
-.method dd h2 {
-    float: left;
-    width: 90%;
-    font-size: 16px;
-    color: #666;
-}
-.method dd span {
-    float: left;
-    overflow: hidden;
-    display: block;
-    width: 90%;
-    font-size: 12px;
-    color: #999;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-.method dd i {
-    position: absolute;
-    right: 0;
-    top: 35%;
-    width: 7%;
-    height: 15px;
-    border: 2px solid #666;
-    border-radius: 50%;
-}
-.mind-button {
-    display: block;
-    width: 94%;
-    height: 32px;
-    margin: 30px auto 100px;
-    border: 0;
-    background-color: #df0b31;
-    font-size: 18px;
-    color: #fff;
-}
-.mind-button:hover{
-    color: #fff;
-}
+
+
 /*去除输入金额右边的小箭头*/
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
