@@ -2,9 +2,6 @@
 	.list .col{
 		font-size:14px;
 	}
-	.list .item{
-		    border-color: #fff;
-	}
 	.list .item.item-divider {
 	    padding-top: 12px;
 	    padding-bottom: 12px;
@@ -19,8 +16,6 @@
 			<h1 class="title">我的商品</h1>
 		</ion-header-bar>
 		<ion-content class="web-body">
-
-   
 	    	<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 	    		<ion-list>
 	    			<div ng-repeat="item in items">
@@ -29,9 +24,9 @@
 				    		  	<div class="col">订单号：{{item.order_no}}</div>
 				    		</div>
 					    </div>
-			        	<ion-item>
+			        	<ion-item style="border-color: #fff;">
 			        		<div class="row row-no-padding padding_bottom16">
-				    		  	<div class="col"><label style="font-size: 16px;">{{item.type}}</label></div> 
+				    		  	<div class="col"><label style="font-size: 16px;">{{item.type_name}}</label></div> 
 				     		  	<div class="col" style="text-align:right">
 				     		  		<label>{{item.unit_price}}/次</label>
 				     		  	</div>
@@ -51,8 +46,8 @@
 				    		<div class="row row-no-padding padding_bottom16">
 				    		  	<div class="col">
 				    		  		发票信息：
-				    		  		<label ng-if=" item.invoice == false ">无</label>
-				     		  		<label ng-if=" item.invoice == true ">有</label>
+				    		  		<i ng-if=" item.invoice == false ">无</i>
+				     		  		<i ng-if=" item.invoice == true ">有</i>
 				    		  	</div> 
 				    		</div>
 				    		<div class="row row-no-padding padding_bottom16">
@@ -63,7 +58,7 @@
 				    		</div>
 				        	<p style="text-align: right;">
 			  					<button class="button button-small button-light" ng-click="to_cancel(item.id,$index)">取消订单</button>
-			  					<button class="button button-small button-positive" ng-click="to_payorder(item.id)">支付订单</button>
+			  					<button class="button button-small button-positive" ng-click="to_payorder(item.id,item.type)">支付订单</button>
 			  				</p>
 				        </ion-item>
 				    </div>

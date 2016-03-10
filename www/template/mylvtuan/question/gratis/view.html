@@ -17,7 +17,9 @@
 		    		</div>
 		    		<div class="row row-no-padding padding_bottom16">
 		    		  	<div class="col">咨询标题</div>
-		     		  	<div class="col col-70">{{items.title}}</div>
+		     		  	<div class="col col-70">
+		     		  		<p class="contents">{{items.title}}</p>
+		     		  	</div>
 		    		</div>
 		    		<div class="row row-no-padding" style="border-color: #fff;">
 		    		  	<div class="col">咨询详情</div>
@@ -35,46 +37,47 @@
 		    		</div>
 		        </ion-item>
 
-		        <ion-item class="item" style="border-color: #fff;font-size: 14px;color: #666;" ng-if="items.status == 'replied'">
-		        	<div class="row row-no-padding">
-		    		  	<div class="col">受理律师</div> 
-		     		  	<div class="col col-70">{{items.lawyer_name}}</div>
+		        <ion-item class="item" style="border-color: #fff;font-size: 14px;color: #666;" ng-if="items.status == 'replied'" ng-href="#/lawyer/{{items.lawyer_id}}">
+		        	<div class="row row-no-padding row-center">
+		    		  	<div class="col col-center">受理律师</div> 
+		    		  	<div class="col col-70 col-center">{{items.lawyer_name}}</div>
+		    		  	<i class="icon ion-chevron-right"></i>
 		    		</div>
 		        </ion-item>
+		        <div ng-if=" items.transitions.length > 0 ">
+			        <ion-item class="item" style="margin-top: 10px;margin-bottom: 10px;border-color: #fff;" ng-if="currentUser.status == 1 || currentUser.status == 2">
+						<p ng-if="items.status == 'new'"> 
+							<button class="button button-block button-positive" ng-click="cancel(items.transitions[0].to_cancel)">取消</button>
+						</p>
+						<p ng-if="items.status == 'replied'"> 
+							<button class="button button-block button-positive" ng-click="to_complete(items.transitions[1].to_complete)">确认</button>
+		  					<button class="button button-block button-positive" ng-click="to_ask(items.id)">联系律师</button>
+						</p>
+						<p ng-if="items.status == 'wait_for_evaluation'"> 
+							<button class="button button-block button-positive" ng-click="to_tip(items.id)">送心意</button>
+		  					<button class="button button-block button-positive" ng-click="to_evaluate(items.id)">评价</button>
+						</p>
+						<p ng-if="items.status == 'complete'"> 
+							<a ng-if="currentUser.status == 1 || currentUser.status == 2" class="button button-block button-positive" ng-href="#/questionsview/{{items.id}}">回复详情</a>
+		  					<button class="button button-block button-positive" ng-click="to_remove(items.transitions[0].to_remove)">删除</button>
+						</p>
+						<p ng-if="items.status == 'cancelled'"> 
+							<button class="button button-block button-positive" ng-click="to_remove(items.transitions[0].remove)">删除</button>
+						</p>
+					</ion-item>
 
-		        <ion-item class="item" style="margin-top: 10px;margin-bottom: 10px;border-color: #fff;" ng-if="currentUser.status == 1 || currentUser.status == 2">
-					<p ng-if="items.status == 'new'"> 
-						<button class="button button-block button-positive" ng-click="cancel(item.transitions[0].to_cancel,$index)">取消</button>
-					</p>
-					<p ng-if="items.status == 'replied'"> 
-						<button class="button button-block button-positive" ng-click="to_complete(item.transitions[1].to_complete,$index)">确认</button>
-	  					<button class="button button-block button-positive" ng-click="to_ask(item.id)">联系律师</button>
-					</p>
-					<p ng-if="items.status == 'wait_for_evaluation'"> 
-						<button class="button button-block button-positive" ng-click="to_tip(item.id)">送心意</button>
-	  					<button class="button button-block button-positive" ng-click="to_evaluate(item.id,$index)">评价</button>
-					</p>
-					<p ng-if="items.status == 'complete'"> 
-						<a ng-if="currentUser.status == 1 || currentUser.status == 2" class="button button-block button-positive" ng-href="#/questionsview/{{item.id}}">回复详情</a>
-	  					<button class="button button-block button-positive" ng-click="to_remove(item.transitions[0].to_remove,index)">删除</button>
-					</p>
-					<p ng-if="items.status == 'cancelled'"> 
-						<button class="button button-block button-positive" ng-click="to_remove(item.transitions[0].remove,index)">删除</button>
-					</p>
-				</ion-item>
-
-				<ion-item class="item" style="margin-top: 10px;margin-bottom: 10px;border-color: #fff;" ng-if="currentUser.status == 3">
-					<p ng-if="items.status == 'new'"> 
-						<button class="button button-block button-positive" ng-click="to_take(item.transitions[0].to_take)">抢单</button>
-					</p>
-					<p ng-if="items.status == 'replied'"> 
-						<button class="button button-block button-positive" ng-click="to_ask(item.id)">联系用户</button>
-					</p>
-					<p ng-if="items.status == 'complete'"> 
-	  					<button class="button button-block button-positive" ng-click="to_remove(item.transitions[0].to_remove,index)">删除</button>
-					</p>
-				</ion-item>
-		        
+					<ion-item class="item" style="margin-top: 10px;margin-bottom: 10px;border-color: #fff;" ng-if="currentUser.status == 3">
+						<p ng-if="items.status == 'new'"> 
+							<button class="button button-block button-positive" ng-click="to_take(items.transitions[0].to_take)">抢单</button>
+						</p>
+						<p ng-if="items.status == 'replied'"> 
+							<button class="button button-block button-positive" ng-click="to_ask(items.id)">联系用户</button>
+						</p>
+						<p ng-if="items.status == 'complete'"> 
+		  					<button class="button button-block button-positive" ng-click="to_remove(items.transitions[0].to_remove)">删除</button>
+						</p>
+					</ion-item>
+				</div>
 	         </ion-list>
 	    </ion-content>
 	</ion-pane>

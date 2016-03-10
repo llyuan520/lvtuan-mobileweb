@@ -4,9 +4,8 @@
 			<ion-list>
 	        	<ion-item ng-repeat="item in items">
 		        	<p>
-		        		<a ng-href="#/question/photo/view/{{item.id}}" style="color: #333;">{{item.title}}</a>
+		        		<a  class="display" ng-href="#/question/paycompany/view/{{item.id}}" style="color: #333;">{{item.title}}</a>
 		        	</p>
-		        	<p class="fc-33">{{item.post_category}}</p>
 		        	<p style="text-align: right;">
 	  					<a ng-if="currentUser.status == 1 || currentUser.status == 2" class="button button-small button-positive" ng-href="#/questionsview/{{item.id}}">回复详情</a>
 	  					<button class="button button-small button-positive" ng-click="to_remove(item.transitions[0].to_remove,index)">删除</button>

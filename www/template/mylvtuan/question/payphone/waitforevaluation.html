@@ -4,12 +4,12 @@
     		<ion-list>
 	        	<ion-item ng-repeat="item in items">
 		        	<p>
-		        		<a ng-href="#/question/photo/view/{{item.id}}" style="color: #333;">{{item.title}}</a>
+		        		<a class="display" ng-href="#/question/payphone/view/{{item.id}}" style="color: #333;">{{item.title}}</a>
 		        	</p>
 		        	<p class="fc-33">{{item.post_category}}</p>
 		        	<p style="text-align: right;" ng-if="currentUser.status == 1 || currentUser.status == 2">
 	  					<button class="button button-small button-positive" ng-click="to_tip(item.id)">送心意</button>
-	  					<button class="button button-small button-positive" ng-click="to_evaluate(item.id,$index)">评价</button>
+	  					<button class="button button-small button-positive" ng-click="to_evaluate(item.id)">评价</button>
 	  				</p>
 		        </ion-item>
 	        </ion-list>

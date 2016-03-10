@@ -1069,6 +1069,11 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       authn: true
   })
 
+  .state('confirmCompletion', { //首页 - 我的律团 - 用户的评价
+      url: '/confirmCompletion/:id',
+      templateUrl: 'template/mylvtuan/question/confirm-completion.html',
+      authn: true
+  })
 
 
 
@@ -1126,12 +1131,6 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       url: '/user/question/view/:id',
       templateUrl: 'template/mylvtuan/user/question/view.html',
       controller: 'userquestionviewCtrl',
-      authn: true
-  })
-
-  .state('confirmCompletion', { //首页 - 我的律团 - 用户的咨询
-      url: '/confirmCompletion/:id',
-      templateUrl: 'template/mylvtuan/user/question/confirm-completion.html',
       authn: true
   })
 

@@ -29,6 +29,7 @@ body, html, .pane, .ionic-body,h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, 
 .item h2.fc-ee,.error{
     font-size: 14px;
 }
+.item>p>a.display{width: 100%;display: inline-block;line-height: 25px}
 .fc-red,.error,.item p.fc-red,.item p.error{
     color: #FF0000;
 }
