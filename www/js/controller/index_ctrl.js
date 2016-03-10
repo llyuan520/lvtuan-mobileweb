@@ -4625,14 +4625,12 @@ lvtuanApp.controller("userquestionviewCtrl",function($http,$scope,$stateParams,$
 //用户 - 我的咨询 - 送心意
 lvtuanApp.controller("sendmindCtrl",function($scope,$http,$rootScope,$stateParams,$ionicPopup,$ionicLoading,authService,wxService){
 	$scope.mymoney = JSON.parse(localStorage.getItem('paymoney'));
-
 	$scope.user = {
 		radioval : 'qianbao'
 	}
     //微信支付
     $scope.submit = function(user){
         var currentUser = authService.getUser();
-        console.info($scope.obj);
         if(user.radioval == 'weixin'){
             var attach_params = {};
             attach_params.platform = 'wechat';
