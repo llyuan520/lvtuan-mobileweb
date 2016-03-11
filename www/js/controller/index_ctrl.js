@@ -3940,7 +3940,7 @@ lvtuanApp.controller("documentlistCtrl",function($http,$scope,$state,$rootScope,
 
 	//选择类型
 	$ionicLoading.show();
-	$http.get('http://'+$rootScope.hostName+'/lawyer/workscopes')
+	$http.get('http://'+$rootScope.hostName+'/knowledge/document/categories')
 		.success(function(data) {
 	      if(data.data){
 	        $scope.workscopes = data.data;
