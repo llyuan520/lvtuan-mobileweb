@@ -152,21 +152,24 @@
 	<div ng-controller="evaluateCtrl">
 		<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 		<ion-list>
-			<div class="item">
-	        	<ion-item class="item item-avatar item-borderless" ng-href="#/knowledgeview/{{item.id}}" >
-		          	<img ng-src="{{item.img}}" class="item-image">
+			<div class="item" ng-repeat="item in items">
+	        	<ion-item class="item item-avatar item-borderless" ng-href="#/lawyer/order/comment/{{item.creator_id}}" >
+		          	<img ng-src="{{item.creator_avatar}}" class="item-image">
 					<div class="row row-no-padding">
-					  	<div class="col col-30 row-no-padding"><label class="txt-c-66">张定义</label></div>
-					  	<div class="col col-70 row-no-padding"><label class="txt-c-66">2015-03-09 18:06:20</label></div>
+					  	<div class="col col-30 row-no-padding"><label class="txt-c-66">{{item.creator_realname}}</label></div>
+					  	<div class="col col-70 row-no-padding"><label class="txt-c-66">{{item.evaluate_created_at}}</label></div>
 					</div>
-					<div star rating-value="ratingVal[$index]" max="max" on-hover="onHover" on-leave="onLeave" readonly="{{readonly}}"></div>
+
+					<div showstar rating-value="showstarValue[$index]" max="max" on-hover="onHover" on-leave="onLeave" readonly="{{readonly}}"></div>
 					<input type="hidden" name="input" ng-model="max" min="0" max="5" required>
-					<p class="content">张定义张定义张定义张定义张定义张定义张定义张定义张定义张定义张定义张定义张定义张定义张定义张定义张定义张定义张定义张定义张定义</p>
+
+					<p class="content">
+						{{item.evaluate_comment}}
+					</p>
 		        </ion-item>
-		        <div class="item item-borderless" style="padding:0px 16px">
+		        <div class="item item-borderless" style="padding:0px 16px" ng-if="item.evaluate_tags.length > 1" >
 		        	<p class="contents">
-	                    <span class="bgf2f2f2 pading510">服务态度好</span><span class="bgf2f2f2 pading510">服务态度好</span><span class="bgf2f2f2 pading510">服务态度好</span>
-	                    <span class="bgf2f2f2 pading510">服务态度好</span><span class="bgf2f2f2 pading510">服务态度好</span>
+	                    <span class="bgf2f2f2 pading510" ng-repeat="tags in item.evaluate_tags">{{tags}}</span>
 					</p>
 		        </div>
 		    </div>
