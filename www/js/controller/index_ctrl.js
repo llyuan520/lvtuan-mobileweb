@@ -2865,7 +2865,7 @@ lvtuanApp.controller("questionsCtrl",function($scope,$http,$rootScope,$timeout,$
 			$scope.user['file_paths'] = $scope.file;
 		}
         $ionicLoading.show();
-		httpWrapper.request('http://'+$rootScope.hostName+'/question/create','post',$scope.user,
+		httpWrapper.request('http://'+$rootScope.hostName+'/center/question/create','post',$scope.user,
 			function(data){
 				layer.show("提交成功！");
 				$scope.user = {};
