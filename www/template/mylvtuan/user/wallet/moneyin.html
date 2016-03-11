@@ -1,6 +1,6 @@
 <ion-view hide-tabs="true">
 		<ion-pane>
-			<ion-header-bar class="bar bar-header bar-light">
+			<ion-header-bar align-title="center" class="bar bar-header bar-light">
 				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back"  ng-href="#/user/wallet"></a>
 				<h1 class="title">我的钱包</h1>
 			</ion-header-bar>
@@ -15,12 +15,9 @@
 								<div class="row row-no-padding" style="padding:16px">
 								  <div class="col col-25 col-center" style="text-align:center;border-right:1px solid #ccc;">充值金额</div>
 								  <div class="col col-75 col-center">
-								  	<input id="money" placeholder="请输入充值金额" name="money" ng-pattern="/^$|^[0-9,]+$/" ng-model="user.money"  ng-minlength="1" required money style="border: none;" ng-model-options="{debounce:2000}" />
+								  	<input id="money" placeholder="请输入充值金额" name="money" ng-model="user.money"  ng-minlength="1" required money style="border: none;" ng-model-options="{debounce:2000}" type="number" />
 								  </div>
 								</div>
-							</div>
-							<div class="item item-divider" ng-cloak style="padding:16px 8px;border: none;font-size:12px;" ng-show="myForm.money.$invalid && !myForm.money.$pristine">
-							  <p  class="fc-red ng-cloak" >您输入的不是数字!</p>
 							</div>
 							<div class="item item-divider" style="padding:16px 8px;border: none;font-size:12px;">
 							  您充值后的金额将用于平台消费，随时可提现

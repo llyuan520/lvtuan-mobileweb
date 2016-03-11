@@ -1,6 +1,6 @@
 <ion-view hide-tabs="true">
 		<ion-pane>
-			<ion-header-bar class="bar bar-header bar-light">
+			<ion-header-bar align-title="center" class="bar bar-header bar-light">
 				<button class="button button-clear button-positive" ng-click="jumpGoBack()">  
 	                <i class="icon icon-left ion-ios-arrow-back"></i>  
 	            </button>
@@ -29,7 +29,7 @@
 					<div class="item questions-site">
 						<label class="name" style="line-height: 50px;">请上传附件：</label>
 						<div class="rig">
-							<div ng-disabled="booleans" ng-model="file_paths"  accept="image/*,.doc,.docx"  gf-pattern="'image/*,.doc,.docx'" ngf-max-size="2MB" ngf-select="uploadFiles($files, $invalidFiles)" class="icon-right" multiple><i class="icon ion-ios-plus-outline" style="font-size: 48px;"></i></div>
+							<div ng-disabled="booleans" ng-model="file_paths"  accept="image/*"  gf-pattern="'image/*'" ngf-max-size="2MB" ngf-select="uploadFiles($files, $invalidFiles)" class="icon-right" multiple><i class="icon ion-ios-plus-outline" style="font-size: 48px;"></i></div>
 							<input type="hidden" name="file_paths" value="{{file}}" />
 						</div>
 

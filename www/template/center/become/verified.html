@@ -1,7 +1,7 @@
 <ion-view hide-tabs="true">
 		<ion-pane  class="web-body verified">
 			<form name="verifiedForm" class="css-form" id="verifiedForm" novalidate ng-controller="verifiedCtrl">
-				<ion-header-bar class="bar bar-header bar-light headers">
+				<ion-header-bar align-title="center" class="bar bar-header bar-light headers">
 					<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-href="#/becomenav"></a>
 					<h1 class="title">实名认证</h1>
 					<button ng-if="!currentUser.is_verified_lawyer" ng-click="submit()" class="button button-clear button-positive" type="submit" ng-disabled="verifiedForm.$invalid">保存</button>

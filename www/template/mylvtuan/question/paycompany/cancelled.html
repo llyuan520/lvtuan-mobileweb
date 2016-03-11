@@ -1,0 +1,17 @@
+<ion-view hide-tabs="true" cache-view="false">
+    <ion-content>
+    	<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+    		<ion-list>
+	        	<ion-item ng-repeat="item in items">
+		        	<p>
+		        		<a  class="display" ng-href="#/question/paycompany/view/{{item.id}}" style="color: #333;">{{item.title}}</a>
+		        	</p>
+		        	<p style="text-align: right;">
+	  					<button class="button button-small button-positive" ng-click="to_remove(item.transitions[0].remove,index)">删除</button>
+	  				</p>
+		        </ion-item>
+	        </ion-list>
+		<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
+
+    </ion-content>
+</ion-view>

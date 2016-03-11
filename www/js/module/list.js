@@ -7,6 +7,7 @@ listModule.factory('listHelper', function($http, $rootScope, httpWrapper) {
 	listHelper.bootstrap = function(url, $scope) {
 		var page = 1; //页数
 		var rows_per_page = 5; // 每页的数量
+		$scope.url = url;
 		if ($scope.rows_per_page) {
 			rows_per_page = $scope.rows_per_page;
 		}
@@ -24,10 +25,12 @@ listModule.factory('listHelper', function($http, $rootScope, httpWrapper) {
 		//上拉加载
 		$scope.loadMore = function() {
 			var timestamp=Math.round(new Date().getTime()/1000);
+			console.info($scope.url);
 			// 如果url里面已经有params，预先处理一下
-			var urls = url.split('?');
+			var urls = $scope.url.split('?');
 			var params = 'rows_per_page='+rows_per_page+'&page='+page+'&ts='+timestamp;
 			if (urls.length == 2) {
+				
 				url = urls[0];
 				params = urls[1]+'&'+params;
 			}
