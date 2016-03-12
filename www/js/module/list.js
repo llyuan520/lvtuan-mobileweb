@@ -5,6 +5,10 @@ listModule.factory('listHelper', function($http, $rootScope, httpWrapper) {
 
 	// 这个函数支持下拉刷新和上拉加载
 	listHelper.bootstrap = function(url, $scope) {
+		var str = '<ion-item>'+
+		        	'<p style="text-align:center;font-size:16px;margin:20% 0;">暂无数据！</p>'+
+	        	'</ion-item>';
+		$scope.nodata = false;
 		var page = 1; //页数
 		var rows_per_page = 5; // 每页的数量
 		$scope.url = url;
@@ -47,6 +51,8 @@ listModule.factory('listHelper', function($http, $rootScope, httpWrapper) {
 						}
 					}else{
 						if (page == 1) {
+							$(".list").append(str);
+							$scope.nodata = true;
 							layer.show('暂无数据！');
 						}
 						$scope.moredata = false;

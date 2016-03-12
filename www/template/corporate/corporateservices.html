@@ -7,7 +7,7 @@
 			<ion-content class="has-tabs">
 				<ion-list>
 					<div>
-						<img src="img/counsel/xwqf-banner.jpg" style="width: 100%;max-width: 720px;max-height: 375px;">
+						<img ng-src="img/counsel/xwqf-banner.jpg" style="width: 100%;max-width: 720px;max-height: 375px;">
 					</div>
 					<ion-item class="item-borderless">
 						<h2 class="txt-c-66" style="font-size: 18px;"><b>律团 - </b></h2>
@@ -23,7 +23,7 @@
 						<div class="height10"></div>
 						<h2 class="txt-align-c" style="font-size: 18px;">法律顾问带来的好处</h2>
 					  	<div class="item item-avatar item-borderless" ng-repeat="counsel in counsels">
-				          <img src="img/counsel/{{counsel.img}}">
+				          <img ng-src="img/counsel/{{counsel.img}}">
 				          <h2>{{counsel.title}}</h2>
 				          <p class="contents txt-c-66">{{counsel.content}}</p>
 				        </div>
@@ -31,7 +31,7 @@
 				</ion-list>
 				<ion-list>
 					<div>
-						<img src="img/counsel/flgw-banner2.jpg" style="width: 100%;">
+						<img ng-src="img/counsel/flgw-banner2.jpg" style="width: 100%;">
 					</div>
 				</ion-list>
 			</ion-content>

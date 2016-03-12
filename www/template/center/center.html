@@ -18,7 +18,7 @@
 					  <div class="col col-20 col-center"  style="height: 100%;">
 					  		<div class="infobg">
 					  			<a ng-href="#/info">
-						  			<img src="{{items.avatar}}" style="position: absolute;width: 50px;height: 50px;border-radius: 50%;top: 2px;left:2px;">.
+						  			<img ng-ng-src="{{items.avatar}}" style="position: absolute;width: 50px;height: 50px;border-radius: 50%;top: 2px;left:2px;">.
 						  		</a>
 					  		</div>
 					  </div>
@@ -33,7 +33,7 @@
 					  <div class="col col-25 col-center" style="text-align: right;">
 					  	<span ng-if=" items.unread_counts.letter != '0'" class="badge badge-assertive icon-left" style="position: absolute;right: 2%;font-weight: normal;font-size: 12px;padding: 2px 4px;top: 12px;min-width: 20px;max-width: 100%;">{{items.unread_counts.letter}}</span>
 					  		<div ng-click="jump('#/messages')">
-					  			<img src="../img/emails.png" style="max-width: 31px;max-height: 21px;width: 45%;height: 100%;">
+					  			<img ng-src="../img/emails.png" style="max-width: 31px;max-height: 21px;width: 45%;height: 100%;">
 							</div>
 					  </div>
 					</div>
@@ -44,7 +44,7 @@
 					    	<span ng-if=" items.unread_counts.question != '0'" class="badge badge-assertive icon-left fixbadge">
 					    		{{items.unread_counts.question}}
 					    	</span>
-					    	<img src="../img/mfzx-iocn.png" width="28" height="26" style="margin-top: 4px;">
+					    	<img ng-src="../img/mfzx-iocn.png" width="28" height="26" style="margin-top: 4px;">
 					  	    <div style="width:100%;height:2px;clear:both;"></div>
 					  	    <label>免费咨询</label>
 					    </a>
@@ -53,7 +53,7 @@
 					      <span ng-if=" items.unread_counts.pay_text != '0'" class="badge badge-assertive icon-left fixbadge">
 					      	{{items.unread_counts.pay_text}}
 					      </span>
-					  	  <img src="../img/twzx-iocn.png" width="28" height="26" style="margin-top: 4px;">
+					  	  <img ng-src="../img/twzx-iocn.png" width="28" height="26" style="margin-top: 4px;">
 					  	  <div style="width:100%;height:2px;clear:both;"></div>
 					  	  <label>图文咨询</label>
 					    </a>
@@ -62,7 +62,7 @@
 					    	<span ng-if=" items.unread_counts.pay_phone != '0'" class="badge badge-assertive icon-left fixbadge">
 					    		{{items.unread_counts.pay_phone}}
 					    	</span>
-					  	 <img src="../img/dhzx-iocn.png" width="28" height="26" style="margin-top: 4px;">
+					  	 <img ng-src="../img/dhzx-iocn.png" width="28" height="26" style="margin-top: 4px;">
 					  	  <div style="width:100%;height:2px;clear:both;"></div>
 					  	  <label>电话咨询</label>
 					    </a>
@@ -71,7 +71,7 @@
 					    	<span ng-if=" items.unread_counts.pay_company != '0' " class="badge badge-assertive icon-left fixbadge">
 					    		{{items.unread_counts.pay_company}}
 					    	</span>
-					  	  <img src="../img/flgw-iocn.png" width="28" height="26" style="margin-top: 4px;">
+					  	  <img ng-src="../img/flgw-iocn.png" width="28" height="26" style="margin-top: 4px;">
 					  	  <div style="width:100%;height:2px;clear:both;"></div>
 					  	  <label>法律顾问</label>
 					    </a>

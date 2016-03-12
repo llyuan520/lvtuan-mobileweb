@@ -23,7 +23,7 @@
 			  	<h2 class="title">{{items.title}}</h2>
 		  	</div>
 			<div class="item item-avatar" style="border-color: #fff;">
-				<img src="{{items.creator_avatar}}">
+				<img ng-src="{{items.creator_avatar}}">
 			  	<span class="item-note">{{items.created_at}}</span>
 			  	<h2>普通用户</h2>
 			    <p class="contents">
@@ -36,13 +36,13 @@
 
 			<div class="chathost" ng-repeat="comment in items.comments">
 				<div ng-if="comment.from_creator == false" class="item item-avatar item-borderless">
-					<img src="{{comment.owner.avatar}}">
+					<img ng-src="{{comment.owner.avatar}}">
 				  	<h2>{{comment.owner.realname}}</h2>
 				    <p class="contents con_left">{{comment.content}}</p>
 				</div>
 
 				<div ng-if="comment.from_creator == true" class="item item-avatar-right item-borderless">
-					<img src="{{comment.owner.avatar}}">
+					<img ng-src="{{comment.owner.avatar}}">
 				  	<h2 class="right">{{comment.owner.realname}}</h2>
 				    <p class="contents con_right">{{comment.content}}</p>
 				</div>

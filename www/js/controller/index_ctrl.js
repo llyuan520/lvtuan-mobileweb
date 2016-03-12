@@ -4371,6 +4371,7 @@ lvtuanApp.controller("sendmindCtrl",function($scope,$http,$rootScope,$stateParam
 						}).success(function(data) {
 							console.info(data);
 							$scope.mymoney = data.data.money;
+							localStorage.setItem("paymoney", JSON.stringify(data.data.money));
 							layer.show("送心意成功。");
 							$scope.user = {
 								money:''

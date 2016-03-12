@@ -32,7 +32,7 @@
 		        	<p class="padding_bottom5">咨询附件</p>
 					<div class="row row-no-padding">
 		    		  	<div class="col col-20" ng-repeat="item in items.attachments"  ng-click="lookImg()" style="margin-right: 10px;">
-		    		  		<img src="{{item.url}}" width="60" height="60">
+		    		  		<img ng-src="{{item.url}}" width="60" height="60">
 		    		  	</div>
 		    		</div>
 		        </ion-item>

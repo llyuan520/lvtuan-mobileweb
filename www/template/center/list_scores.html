@@ -8,24 +8,24 @@
 		<ion-content>				
 			<div class="list positive-bg" style="margin-bottom:0;">
 				<div class="col-center txt-align-c" style="height: 90px;">
-			  		<img src="../img/score.png" style="width:15%;margin-top:8px">
+			  		<img ng-src="../img/score.png" style="width:15%;margin-top:8px">
 			  		<div class="height5"></div>
 			  		<label class="txt-c-ff">{{currentUser.score}}</label>
 				</div>
 				 <div class="button-bar" style="height: 47px;border-top: 1px solid #fff;border-color: rgba(255,255,255,0.5);">
 				    <div class="button button-clear fixdisplay" ng-click="click()">
-				    	<img src="../img/scores_lottery.png" style="vertical-align: middle;width: 21%;">&nbsp;
+				    	<img ng-src="../img/scores_lottery.png" style="vertical-align: middle;width: 21%;">&nbsp;
 				  	    <label class="txt-c-ff">积分抽奖</label>
 				    </div>
 				    <div><i class="border1" style="height:30px;margin-top: 8px;"></i></div>
 				    <div class="button button-clear fixdisplay" ng-click="click()">
-				  	  <img src="../img/scores_total.png" style="vertical-align: middle;width: 26%;">&nbsp;
+				  	  <img ng-src="../img/scores_total.png" style="vertical-align: middle;width: 26%;">&nbsp;
 				  	  <label class="txt-c-ff">积分兑换</label>
 				    </div>
 				</div>
 		    </div>
 		    <div class="item item-divider">
-		    	<img src="../img/scores_dateil.png" style="vertical-align: middle;width: 6%;">&nbsp;<label>积分明细</label>
+		    	<img ng-src="../img/scores_dateil.png" style="vertical-align: middle;width: 6%;">&nbsp;<label>积分明细</label>
 		    </div>
 
 			<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
