@@ -135,7 +135,7 @@
 			  	<h2 class="title">{{item.title}}</h2>
 		  	</div>
 			<div class="item item-avatar" style="border-color: #fff;">
-				<img src="avatar.jpg">
+				<img src="{{item.creator_avatar}}">
 			  	<span class="item-note">{{item.created_at}}</span>
 			  	<h2>普通用户</h2>
 			    <p class="content">
@@ -153,7 +153,7 @@
 		<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 		<ion-list>
 			<div class="item" ng-repeat="item in items">
-	        	<ion-item class="item item-avatar item-borderless" ng-href="#/lawyer/order/comment/{{item.creator_id}}" >
+	        	<ion-item class="item item-avatar item-borderless" ng-href="#/lawyer/comment/{{item.creator_id}}" >
 		          	<img ng-src="{{item.creator_avatar}}" class="item-image">
 					<div class="row row-no-padding">
 					  	<div class="col col-30 row-no-padding"><label class="txt-c-66">{{item.creator_realname}}</label></div>

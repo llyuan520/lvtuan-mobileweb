@@ -423,49 +423,6 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       authn: true
     })
 
-    .state('article_lawyer', { //律师-我的文章
-      url: '/article_lawyer',
-      templateUrl: 'template/center/lawyer/article.html',
-      authn: true
-    })
-   .state('article_lawyer.case', { //律师 - 案例分析
-      url: '/case/:class',
-      views: {
-          'article-case': {
-              templateUrl: 'template/center/lawyer/article-case.html',
-              controller: 'caselaywerCtrl'
-          }
-      },
-      authn: true
-    })
-   .state('article_lawyer.advisory', { //律师 - 咨询
-      url: '/advisory/:class',
-      views: {
-          'article-advisory': {
-              templateUrl: 'template/center/lawyer/article-advisory.html',
-              controller: 'caselaywerCtrl'
-          }
-      },
-      authn: true
-    })
-   .state('article_lawyer.lknowledge', { //律师 - 知识
-      url: '/lknowledge/:class',
-      views: {
-          'article-lknowledge': {
-              templateUrl: 'template/center/lawyer/article-lknowledge.html',
-              controller: 'caselaywerCtrl'
-          }
-      },
-      authn: true
-    })
-
-    .state('/lawyer/article/view', { //律师-我的文章 - 文章详情
-      url: '/lawyer/article/view/:id',
-      templateUrl: 'template/center/lawyer/view.html',
-      controller: 'viewarticlelawyerCtrl',
-      authn: true
-    })
-
 /*———————————————————————————— 个人中心公用 ————————————————————————————*/
     .state('about', { //关于律团
       url: '/about',
@@ -617,140 +574,13 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       controller: 'legaladviceCtrl'
     })
 
-/*———————————————————————————— 我的律团- 律师 -公用 ————————————————————————————*/
-/*    .state('lawyerlvtuan', { //首页 - 我的律团 - 律师的工作台
-      url: '/lawyerlvtuan',
-      cache: 'true', 
-      templateUrl: 'template/mylvtuan/lawyer/lawyerlvtuan.html',
-      controller: 'lawyerlvtuanCtrl'
-    })*/
-/*———————————————————————————— 我的律团- 律师订单 -公用 ————————————————————————————*/
-    .state('workbenchlawyer', { //首页 - 我的律团 - 律师的工作台
-      url: '/workbenchlawyer',
-      templateUrl: 'template/mylvtuan/lawyer/workbench-lawyer.html',
-      controller: 'workbenchLawyerCtrl',
-      authn: true
-    })
-    .state('orderlawyer', { //首页 - 我的律团 - 律师的工作
-      url: '/orderlawyer',
-      templateUrl: 'template/mylvtuan/lawyer/order/order-lawyer.html',
-      authn: true
-    })
-   .state('orderlawyer.all', { //律师订单 - 全部
-      url: '/all',
-      cache: 'true',
-      views: {
-          'order-all': {
-              templateUrl: 'template/mylvtuan/lawyer/order/order-all.html',
-              controller: 'orderAllCtrl'
-          }
-      },
-      authn: true
-    })
-   .state('orderlawyer.new', { //律师订单 - 待受理
-      url: '/new',
-      cache: 'true',
-      views: {
-          'order-new': {
-              templateUrl: 'template/mylvtuan/lawyer/order/order-new.html',
-              controller: 'orderNewCtrl'
-          }
-      },
-      authn: true
-    })
-   .state('orderlawyer.replied', { //律师订单 - 待确认
-      url: '/replied',
-      cache: 'true',
-      views: {
-          'order-replied': {
-              templateUrl: 'template/mylvtuan/lawyer/order/order-replied.html',
-              controller: 'orderRepliedCtrl'
-          }
-      },
-      authn: true
-    })
-   .state('orderlawyer.complete', { //律师订单 - 已完成
-      url: '/complete',
-      cache: 'true',
-      views: {
-          'order-complete': {
-              templateUrl: 'template/mylvtuan/lawyer/order/order-complete.html',
-              controller: 'orderCompleteCtrl'
-          }
-      },
-      authn: true
-    })
-   .state('orderlawyerdetail', { //律师订单 - 订单详情
-      url: '/orderlawyerdetail/:id',
-      templateUrl: 'template/mylvtuan/lawyer/order/order-detail.html',
-      controller: 'orderlawyerDetailCtrl',
-      authn: true
-    })
-    .state('/lawyer/order/comment', { //律师订单-我的订单 - 评价详情
-      url: '/lawyer/order/comment/:id',
-      templateUrl: 'template/mylvtuan/lawyer/order/comment.html',
-      controller: 'commentorderlawyerCtrl',
-      authn: true
-    })
+/*———————————————————————————— 我的律团- 我的订单 -公用 ————————————————————————————*/
 
-   .state('lawyerquestion', { //首页 - 我的律团 - 律师的咨询
-      url: '/lawyerquestion',
-      templateUrl: 'template/mylvtuan/lawyer/question/question.html',
-      authn: true
-    })
-  .state('lawyerquestion.new', { //律师的咨询 - 待受理
-      url: '/new',
-      cache: 'true',
-      views: {
-          'question-new': {
-              templateUrl: 'template/mylvtuan/lawyer/question/new.html',
-              controller: 'lawyerquestionNewCtrl'
-          }
-      },
-      authn: true
-    })
-  .state('lawyerquestion.replied', { //律师的咨询 - 待确认
-      url: '/replied',
-      cache: 'true',
-      views: {
-          'question-replied': {
-              templateUrl: 'template/mylvtuan/lawyer/question/replied.html',
-              controller: 'lawyerquestionRepliedCtrl'
-          }
-      },
-      authn: true
-    })
-  .state('lawyerquestion.complete', { //律师的咨询 - 待评价
-      url: '/complete',
-      cache: 'true',
-      views: {
-          'question-complete': {
-              templateUrl: 'template/mylvtuan/lawyer/question/complete.html',
-              controller: 'lawyerquestionCompleteCtrl'
-          }
-      },
-      authn: true
-    })
-  
-  .state('lawyer/questions/view', { // 律师的工作台 - 咨询详情
-      url: '/lawyer/questions/view/:id',
-      cache: 'true', 
-      templateUrl: 'template/mylvtuan/lawyer/question/view.html',
-      controller: 'lawyerquestionsviewCtrl',
-      authn: true
-  })
-
-  .state('queryrefer', { // 律师的工作台 - 咨询参考
-      url: '/queryrefer',
-      cache: 'true', 
-      templateUrl: 'template/mylvtuan/lawyer/queryrefer.html',
-      authn: true
-  })
-  .state('queryreferdetail', { //律师的工作台 - 咨询参考详情
-      url: '/queryreferdetail',
-      cache: 'true', 
-      templateUrl: 'template/mylvtuan/lawyer/queryrefer-detail.html',
-      authn: true
+  .state('/lawyer/comment/', { //我的订单 - 评价详情
+    url: '/lawyer/comment/:id',
+    templateUrl: 'template/lawyer/comment.html',
+    controller: 'commentlawyerCtrl',
+    authn: true
   })
 
   .state('easemobmain', { //咨询和订单的一对一咨询 - 即时通讯
@@ -766,8 +596,8 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       authn: true
   })
   
-/*———————————————————————————— 我的律团- 用户 -公用 ————————————————————————————*/
-  .state('userlvtuan', { //首页 - 我的律团 - 用户的工作台
+/*———————————————————————————— 我的律团 - 公用 ————————————————————————————*/
+  .state('userlvtuan', { //首页 - 我的律团 - 工作台
       url: '/userlvtuan',
       cache: 'true', 
       templateUrl: 'template/mylvtuan/user/userlvtuan.html',
@@ -1075,161 +905,23 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       authn: true
   })
 
-
-
-  .state('userquestion', { //首页 - 我的律团 - 用户的咨询
-      url: '/userquestion',
-      templateUrl: 'template/mylvtuan/user/question/question.html',
-      authn: true
+  .state('wallet', { //我的律团-用户的钱包
+    url: '/wallet',
+    templateUrl: 'template/mylvtuan/wallet/wallet.html',
+    controller: 'userwalletCtrl',
+    authn: true
   })
-  .state('userquestion.new', { //用户的咨询 - 待受理
-      url: '/new',
-      cache: 'true',
-      views: {
-          'question-new': {
-              templateUrl: 'template/mylvtuan/user/question/new.html',
-              controller: 'questionNewCtrl'
-          }
-      },
-      authn: true
+  .state('moneyin', { //我的律团-钱包充值
+    url: '/moneyin',
+    templateUrl: 'template/mylvtuan/wallet/moneyin.html',
+    controller: 'usermoneyinCtrl',
+    authn: true
   })
-  .state('userquestion.all', { //用户的咨询 - 全部
-      url: '/all',
-      cache: 'true',
-      views: {
-          'question-all': {
-              templateUrl: 'template/mylvtuan/user/question/all.html',
-              controller: 'questionAllCtrl'
-          }
-      },
-      authn: true
+  .state('moneyout', { //我的律团-提现
+    url: '/moneyout',
+    templateUrl: 'template/mylvtuan/wallet/moneyout.html',
+    authn: true
   })
-  .state('userquestion.replied', { //用户的咨询 - 处理中
-      url: '/replied',
-      cache: 'true',
-      views: {
-          'question-replied': {
-              templateUrl: 'template/mylvtuan/user/question/replied.html',
-              controller: 'questionRepliedCtrl'
-          }
-      },
-      authn: true
-  })
-  .state('userquestion.waitforconfirmation', { //用户的咨询 - 待确认
-      url: '/waitforconfirmation',
-      cache: 'true',
-      views: {
-          'question-waitforconfirmation': {
-              templateUrl: 'template/mylvtuan/user/question/waitforconfirmation.html',
-              controller: 'questionWaitforconfirmationCtrl'
-          }
-      },
-      authn: true
-  })
-
-  .state('user/question/view', { //首页 - 我的律团 - 用户的咨询
-      url: '/user/question/view/:id',
-      templateUrl: 'template/mylvtuan/user/question/view.html',
-      controller: 'userquestionviewCtrl',
-      authn: true
-  })
-
-  .state('orderuser', { //首页 - 我的律团 - 用户的订单
-      url: '/orderuser',
-      templateUrl: 'template/mylvtuan/user/order/order-user.html',
-      authn: true
-  })
-   .state('orderuser.all', { //用户的订单 - 全部
-      url: '/all',
-      cache: 'true',
-      views: {
-          'order-all': {
-              templateUrl: 'template/mylvtuan/user/order/order-all.html',
-              controller: 'userorderAllCtrl'
-          }
-      },
-      authn: true
-    })
-   .state('orderuser.pending', { //用户的订单 - 待付款
-      url: '/pending',
-      cache: 'true',
-      views: {
-          'order-pending': {
-              templateUrl: 'template/mylvtuan/user/order/order-pending.html',
-              controller: 'userorderPendingCtrl'
-          }
-      },
-      authn: true
-    })
-   .state('orderuser.new', { //用户的订单 - 待受理
-      url: '/new',
-      cache: 'true',
-      views: {
-          'order-new': {
-              templateUrl: 'template/mylvtuan/user/order/order-new.html',
-              controller: 'userorderNewCtrl'
-          }
-      },
-      authn: true
-    })
-   .state('orderuser.replied', { //用户的订单 - 待确认
-      url: '/replied',
-      cache: 'true',
-      views: {
-          'order-replied': {
-              templateUrl: 'template/mylvtuan/user/order/order-replied.html',
-              controller: 'userorderRepliedCtrl'
-          }
-      },
-      authn: true
-    })
-   .state('orderuser.waitforevaluation', { //用户的订单 - 待评价
-      url: '/waitforevaluation',
-      cache: 'true',
-      views: {
-          'order-waitforevaluation': {
-              templateUrl: 'template/mylvtuan/user/order/order-waitforevaluation.html',
-              controller: 'userorderWaitforevaluationCtrl'
-          }
-      },
-      authn: true
-    })
-   .state('orderuser.complete', { //用户的订单 - 已完成
-      url: '/complete',
-      cache: 'true',
-      views: {
-          'order-complete': {
-              templateUrl: 'template/mylvtuan/user/order/order-complete.html',
-              controller: 'userorderCompleteCtrl'
-          }
-      },
-      authn: true
-    })
-
-   .state('userorderdetail', { //用户的订单 - 订单详情
-      url: '/userorderdetail/:id',
-      templateUrl: 'template/mylvtuan/user/order/order-detail.html',
-      controller: 'userOrderDetailCtrl',
-      authn: true
-    })
-
-    .state('user/wallet', { //我的律团-用户的钱包
-      url: '/user/wallet',
-      templateUrl: 'template/mylvtuan/user/wallet/wallet.html',
-      controller: 'userwalletCtrl',
-      authn: true
-    })
-    .state('user/moneyin', { //我的律团-钱包充值
-      url: '/user/moneyin',
-      templateUrl: 'template/mylvtuan/user/wallet/moneyin.html',
-      controller: 'usermoneyinCtrl',
-      authn: true
-    })
-    .state('user/moneyout', { //我的律团-提现
-      url: '/user/moneyout',
-      templateUrl: 'template/mylvtuan/user/wallet/moneyout.html',
-      authn: true
-    })
     
 
 /********************************** 法律讲堂 **********************************/

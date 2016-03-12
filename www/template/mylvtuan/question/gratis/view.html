@@ -55,14 +55,14 @@
 						</p>
 						<p ng-if="items.status == 'wait_for_evaluation'"> 
 							<button class="button button-block button-positive" ng-click="to_tip(items.lawyer_id)">送心意</button>
-		  					<button class="button button-block button-positive" ng-click="to_evaluate(items.id)">评价</button>
+		  					<button class="button button-block button-positive" ng-click="to_evaluate(items.id,items.type)">评价</button>
 						</p>
 						<p ng-if="items.status == 'complete'"> 
 							<a ng-if="currentUser.status == 1 || currentUser.status == 2" class="button button-block button-positive" ng-href="#/questionsview/{{items.id}}">回复详情</a>
 		  					<button class="button button-block button-positive" ng-click="to_remove(items.transitions[0].to_remove)">删除</button>
 						</p>
 						<p ng-if="items.status == 'cancelled'"> 
-							<button class="button button-block button-positive" ng-click="to_remove(items.transitions[0].remove)">删除</button>
+							<button class="button button-block button-positive" ng-click="to_remove(items.transitions[0].to_remove)">删除</button>
 						</p>
 					</ion-item>
 

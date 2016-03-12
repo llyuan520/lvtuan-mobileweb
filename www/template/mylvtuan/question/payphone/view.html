@@ -49,7 +49,7 @@
 		  					<a class="button button-block button-positive" ng-href="tel:{{items.lawyer_phone}}">联系律师</a>
 						</p>
 						<p ng-if="items.status == 'wait_for_evaluation'"> 
-		  					<button class="button button-block button-positive" ng-click="to_evaluate(items.id)">评价</button>
+		  					<button class="button button-block button-positive" ng-click="to_evaluate(items.id,items.type)">评价</button>
 						</p>
 						<p ng-if="items.status == 'complete' || items.status == 'cancelled'"> 
 		  					<button class="button button-block button-positive" ng-click="to_remove(items.transitions[0].to_remove)">删除</button>
