@@ -599,7 +599,6 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
 /*———————————————————————————— 我的律团 - 公用 ————————————————————————————*/
   .state('userlvtuan', { //首页 - 我的律团 - 工作台
       url: '/userlvtuan',
-      cache: 'true', 
       templateUrl: 'template/mylvtuan/user/userlvtuan.html',
       controller: 'userlvtuanCtrl',
       authn: true
@@ -614,7 +613,6 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
   })
   .state('question/gratis.new', { //免费咨询 - 待受理
       url: '/new',
-      cache: 'true',
       views: {
           'question-gratis-new': {
               templateUrl: 'template/mylvtuan/question/gratis/new.html',
@@ -625,7 +623,6 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
   })
   .state('question/gratis.waitforconfirmation', { //免费咨询 - 待确认
       url: '/waitforconfirmation',
-      cache: 'true',
       views: {
           'question-gratis-waitforconfirmation': {
               templateUrl: 'template/mylvtuan/question/gratis/waitforconfirmation.html',
@@ -636,7 +633,6 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
   })
   .state('question/gratis.waitforevaluation', { //免费咨询 - 待评价
       url: '/waitforevaluation',
-      cache: 'true',
       views: {
           'question-gratis-waitforevaluation': {
               templateUrl: 'template/mylvtuan/question/gratis/waitforevaluation.html',
@@ -647,7 +643,6 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
     })
    .state('question/gratis.complete', { //免费咨询 - 已完成
       url: '/complete',
-      cache: 'true',
       views: {
           'question-gratis-complete': {
               templateUrl: 'template/mylvtuan/question/gratis/complete.html',
@@ -659,7 +654,6 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
   
   .state('question/gratis.cancelled', { //免费咨询 - 已取消
       url: '/cancelled',
-      cache: 'true',
       views: {
           'question-gratis-cancelled': {
               templateUrl: 'template/mylvtuan/question/gratis/cancelled.html',
@@ -689,7 +683,6 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
   })
   .state('question/paytext.new', { //图文咨询 - 待受理
       url: '/new',
-      cache: 'true',
       views: {
           'question-paytext-new': {
               templateUrl: 'template/mylvtuan/question/paytext/new.html',
@@ -700,7 +693,6 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
   })
   .state('question/paytext.waitforconfirmation', { //图文咨询 - 待确认
       url: '/waitforconfirmation',
-      cache: 'true',
       views: {
           'question-paytext-waitforconfirmation': {
               templateUrl: 'template/mylvtuan/question/paytext/waitforconfirmation.html',
@@ -711,7 +703,6 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
   })
   .state('question/paytext.waitforevaluation', { //图文咨询 - 待评价
       url: '/waitforevaluation',
-      cache: 'true',
       views: {
           'question-paytext-waitforevaluation': {
               templateUrl: 'template/mylvtuan/question/paytext/waitforevaluation.html',
@@ -722,7 +713,6 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
     })
    .state('question/paytext.complete', { //图文咨询 - 已完成
       url: '/complete',
-      cache: 'true',
       views: {
           'question-paytext-complete': {
               templateUrl: 'template/mylvtuan/question/paytext/complete.html',
@@ -734,7 +724,6 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
   
   .state('question/paytext.cancelled', { //图文咨询 - 已取消
       url: '/cancelled',
-      cache: 'true',
       views: {
           'question-paytext-cancelled': {
               templateUrl: 'template/mylvtuan/question/paytext/cancelled.html',
@@ -760,7 +749,6 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
   })
   .state('question/payphone.new', { //图文咨询 - 待受理
       url: '/new',
-      cache: 'true',
       views: {
           'question-payphone-new': {
               templateUrl: 'template/mylvtuan/question/payphone/new.html',
@@ -771,7 +759,6 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
   })
   .state('question/payphone.waitforconfirmation', { //图文咨询 - 待确认
       url: '/waitforconfirmation',
-      cache: 'true',
       views: {
           'question-payphone-waitforconfirmation': {
               templateUrl: 'template/mylvtuan/question/payphone/waitforconfirmation.html',
@@ -782,7 +769,6 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
   })
   .state('question/payphone.waitforevaluation', { //图文咨询 - 待评价
       url: '/waitforevaluation',
-      cache: 'true',
       views: {
           'question-payphone-waitforevaluation': {
               templateUrl: 'template/mylvtuan/question/payphone/waitforevaluation.html',
@@ -793,7 +779,6 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
     })
    .state('question/payphone.complete', { //图文咨询 - 已完成
       url: '/complete',
-      cache: 'true',
       views: {
           'question-payphone-complete': {
               templateUrl: 'template/mylvtuan/question/payphone/complete.html',
@@ -805,7 +790,6 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
   
   .state('question/payphone.cancelled', { //图文咨询 - 已取消
       url: '/cancelled',
-      cache: 'true',
       views: {
           'question-payphone-cancelled': {
               templateUrl: 'template/mylvtuan/question/payphone/cancelled.html',
@@ -830,7 +814,6 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
   })
   .state('question/paycompany.new', { //图文咨询 - 待受理
       url: '/new',
-      cache: 'true',
       views: {
           'question-paycompany-new': {
               templateUrl: 'template/mylvtuan/question/paycompany/new.html',
@@ -841,7 +824,6 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
   })
   .state('question/paycompany.waitforconfirmation', { //图文咨询 - 待确认
       url: '/waitforconfirmation',
-      cache: 'true',
       views: {
           'question-paycompany-waitforconfirmation': {
               templateUrl: 'template/mylvtuan/question/paycompany/waitforconfirmation.html',
@@ -852,7 +834,6 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
   })
   .state('question/paycompany.waitforevaluation', { //图文咨询 - 待评价
       url: '/waitforevaluation',
-      cache: 'true',
       views: {
           'question-paycompany-waitforevaluation': {
               templateUrl: 'template/mylvtuan/question/paycompany/waitforevaluation.html',
@@ -863,7 +844,6 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
     })
    .state('question/paycompany.complete', { //图文咨询 - 已完成
       url: '/complete',
-      cache: 'true',
       views: {
           'question-paycompany-complete': {
               templateUrl: 'template/mylvtuan/question/paycompany/complete.html',
@@ -875,7 +855,6 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
   
   .state('question/paycompany.cancelled', { //图文咨询 - 已取消
       url: '/cancelled',
-      cache: 'true',
       views: {
           'question-paycompany-cancelled': {
               templateUrl: 'template/mylvtuan/question/paycompany/cancelled.html',

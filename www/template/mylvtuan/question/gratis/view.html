@@ -1,4 +1,4 @@
-<ion-view hide-tabs="true">
+<ion-view hide-tabs="true" cache-view="false">
 	<ion-pane>
 		<ion-header-bar align-title="center" class="bar bar-header bar-light">
 			<button class="button button-clear button-positive" ng-click="jumpGoBack()">  
@@ -47,7 +47,7 @@
 		        <div ng-if=" items.transitions.length > 0 ">
 			        <ion-item class="item" style="margin-top: 10px;margin-bottom: 10px;border-color: #fff;" ng-if="currentUser.status == 1 || currentUser.status == 2">
 						<p ng-if="items.status == 'new'"> 
-							<button class="button button-block button-positive" ng-click="cancel(items.transitions[0].to_cancel)">取消</button>
+							<button class="button button-block button-positive" ng-click="to_cancel(items.transitions[0].to_cancel)">取消</button>
 						</p>
 						<p ng-if="items.status == 'replied'"> 
 							<button class="button button-block button-positive" ng-click="to_complete(items.transitions[1].to_complete)">确认</button>

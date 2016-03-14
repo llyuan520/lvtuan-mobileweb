@@ -55,7 +55,7 @@ body, html, .pane, .ionic-body,h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, 
     padding-bottom: 16px;
 }
 .item-icon-left .icon.bgtag{
-    background-color: #00cafa;
+    background-color: #004799;
     color: #fff;
     z-index: 1;
     display: inline-block;
@@ -86,7 +86,7 @@ body, html, .pane, .ionic-body,h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, 
 }
 
 .slider-pager .slider-pager-page {
-    color:#00cafa;
+    color:#004799;
 }
 .ng-cloak{
     display: none !important;
@@ -103,7 +103,7 @@ body, html, .pane, .ionic-body,h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, 
 .clearfix { *zoom:1; }
 
 /*login*/
-a, a:link, a:visited, a:active, a:hover ,.positive, a.positive{
+a, a:link, a:visited, a:active, a:hover{
     text-decoration: none;
     color: #666;
 }
@@ -233,8 +233,8 @@ a, a:link, a:visited, a:active, a:hover ,.positive, a.positive{
 .ion-chevron-down:before {margin-top: 5px;}
 .tab-item.tab-item-active, .tab-item.active, .tab-item.activated {
     opacity: 1;
-    color:#00cafa;
-    border-bottom: 2px solid #00cafa;
+    color:#004799;
+    border-bottom: 2px solid #004799;
 }
 .item .reply{  
     overflow: visible;
@@ -404,7 +404,7 @@ img.avatar{
     height: 49px;
 }
 .slideBox .tabs a.active{
-    color: #00cafa;
+    color: #004799;
     height: 49px;
 }
 
@@ -953,7 +953,7 @@ input, select {
     margin-top: 2px;
 }
 .nav-set a.active i.home, .nav-set a.active i.group, .nav-set a.active i.knowledge, .nav-set a.active i.center {
-    color: #00cafa;
+    color: #004799;
 }
 .tab-item .home {
     background: url("../img/index.png") center center no-repeat;
@@ -1037,7 +1037,7 @@ input, select {
 }
 
 .nav-set .nav-home.active, .nav-set .nav-circle.active, .nav-set .nav-knowledge.active, .nav-set .nav-my.active {
-    color: #00cafa;
+    color: #004799;
 }
 .nav-set .tab-item {
     color: #666;
@@ -1299,7 +1299,7 @@ input, select {
     background-size: 7%;
 }
 .header-information a label {
-    color: #00cafa;
+    color: #004799;
 }
 
 /*登录头部返回键设置*/
@@ -1346,7 +1346,7 @@ input, select {
 
 /*律师个人主页*/
 .pane .tabs .pic-consultation, .pane .tabs .phone-consultation {
-    color: #00cafa;
+    color: #004799;
 }
 
 /*头部样式*/
@@ -1362,7 +1362,7 @@ input, select {
     display: block;
     height: 44px;
     line-height: 44px;
-    color: #00cafa;
+    color: #004799;
 }
 .headers.bar-light .title {
     font-family: 'Microsoft YaHei';
@@ -1507,7 +1507,7 @@ input, select {
     color: #666;
 }
 .field-content .list span.active {
-    background-color: #00cafa;
+    background-color: #004799;
 }
 .field-content span.active label {
     color: #fff;

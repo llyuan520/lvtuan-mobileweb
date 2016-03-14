@@ -2370,7 +2370,6 @@ lvtuanApp.controller("siteCtrl",function($scope,$http,$rootScope,authService){
 /****************************************************** 找律师 ******************************************************/
 //找律师的列表
 lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$location,$ionicLoading,locationService){
-
 	$scope.locations = locationService.getLocation();
 	$scope.city = $scope.locations.city_id;
 
@@ -3223,7 +3222,6 @@ lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$
 	    	var items = data.data;
 			$scope.curChatUserId = items.user_id;
 			$scope.curUserId = items.easemob_id;
-
 			easemobService.init(items.user_id,"chat");
 			easemobService.login(items.easemob_id.toString(), items.easemob_pwd);
 		}
@@ -4418,7 +4416,7 @@ lvtuanApp.controller("commodityListCtrl",function($scope,$rootScope,listHelper,h
 /*———————————————————————————— 首页 - 法律文书 ————————————————————————————*/
 //首页 - 法律文书
 //法律文书
-lvtuanApp.controller("documentlistCtrl",function($http,$scope,$state,$rootScope,$ionicLoading){
+lvtuanApp.controller("documentlistCtrl",function($http,$scope,$state,$rootScope,$ionicLoading,locationService){
 
 	//选择类型
 	$ionicLoading.show();

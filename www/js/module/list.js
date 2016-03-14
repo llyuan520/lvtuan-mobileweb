@@ -51,7 +51,7 @@ listModule.factory('listHelper', function($http, $rootScope, httpWrapper) {
 						}
 					}else{
 						if (page == 1) {
-							$(".list").append(str);
+							//$(".list").append(str);
 							$scope.nodata = true;
 							layer.show('暂无数据！');
 						}
