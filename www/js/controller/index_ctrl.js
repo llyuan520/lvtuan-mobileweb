@@ -278,17 +278,19 @@ lvtuanApp.controller("loginCtrl",function($state,$scope,$rootScope,$http,userSer
 })
 
 //用户注册
-lvtuanApp.controller("registerCtrl",function($scope,$rootScope,$http,$interval,userService,authService){
+lvtuanApp.controller("registerCtrl",function($scope,$rootScope,$http,$interval,$ionicLoading,userService,authService){
 
 	//获取验证码
 	$scope.phone_disabled = true;
 	$scope.phonecode = function(phone){
+		$ionicLoading.show();
 		var param = 'phone='+phone;
 		$scope.phone_disabled = false;
 		$http.post('http://'+$rootScope.hostName+'/send-code?'+param
 		).success(function(data) {
 			runTiming();
             layer.show("验证码已发送到您的手机！");
+            $ionicLoading.hide();
         });
 	}
 
@@ -327,7 +329,7 @@ lvtuanApp.controller("registerCtrl",function($scope,$rootScope,$http,$interval,u
 		// 	$scope.params.phonecode,
 		// 	"phone"
 		// )
-
+		$ionicLoading.show();
 		$http.post('http://'+$rootScope.hostName+'/register',
 		{
 			username  		: $scope.params.username,
@@ -353,13 +355,14 @@ lvtuanApp.controller("registerCtrl",function($scope,$rootScope,$http,$interval,u
            }else{
            		location.href='#/center';
            }
+           $ionicLoading.hide();
         });
      
 	}
 })
 
 //修改密码
-lvtuanApp.controller("resetpwdCtrl",function($scope,$http,$rootScope){
+lvtuanApp.controller("resetpwdCtrl",function($scope,$http,$rootScope,$ionicLoading){
 	$scope.user = {};
 	$scope.save = function(user){
 		if(user.old_password == user.new_password && user.old_password == user.new_password_retype && user.new_password == user.new_password_retype){
@@ -372,11 +375,13 @@ lvtuanApp.controller("resetpwdCtrl",function($scope,$http,$rootScope){
 			layer.show("两次输入的密码不一致！");
 			return false;
 		}else{
+			$ionicLoading.show();
 			$http.post('http://'+$rootScope.hostName+'/center/reset_pass', $scope.user
   			).success(function(data) {
 	           layer.show("修改成功！");
 	           $scope.user = {}; //清空数据
 	           location.href='#/login';
+	           $ionicLoading.hide();
 	        });
 		}
 
@@ -384,7 +389,7 @@ lvtuanApp.controller("resetpwdCtrl",function($scope,$http,$rootScope){
 })
 
 //忘记密码
-lvtuanApp.controller("forgotpwdCtrl",function($scope,$http,$rootScope){
+lvtuanApp.controller("forgotpwdCtrl",function($scope,$http,$rootScope,$ionicLoading){
 	$scope.user = {};
 	//获取验证码
 	$scope.phonecode = function(phone){
@@ -393,11 +398,13 @@ lvtuanApp.controller("forgotpwdCtrl",function($scope,$http,$rootScope){
 			layer.show("请输入手机号！");
 			return false;
 		}else{
+			$ionicLoading.show();
 			var param = 'phone='+phone;
 			$http.post('http://'+$rootScope.hostName+'/send-code?'+param
 			).success(function(data) {
 				console.info(data)
 	           layer.show("验证码已发送到您的手机！");
+	           $ionicLoading.hide();
 	        });
 	        return true;
 		}
@@ -406,6 +413,7 @@ lvtuanApp.controller("forgotpwdCtrl",function($scope,$http,$rootScope){
 	$scope.submit = function(user){
 		console.info(user);
 		$scope.user = user;
+		$ionicLoading.show();
 		$http.post('http://'+$rootScope.hostName+'/forgotpwd', $scope.user
 			).success(function(data) {
            $scope.user = {}; //清空数据
@@ -413,12 +421,13 @@ lvtuanApp.controller("forgotpwdCtrl",function($scope,$http,$rootScope){
            sessionStorage.setItem("uid", JSON.stringify($scope.uid));
            $("#forgotForm").hide();
            $("#upwdForm").show();
+           $ionicLoading.hide();
         });
 	}
 })
 
 //找回密码
-lvtuanApp.controller("upwdCtrl",function($scope,$http,$rootScope){
+lvtuanApp.controller("upwdCtrl",function($scope,$http,$rootScope,$ionicLoading){
 
 	$scope.user = {};
 	$scope.submit = function(user){
@@ -431,12 +440,14 @@ lvtuanApp.controller("upwdCtrl",function($scope,$http,$rootScope){
 			layer.show("两次输入的密码不一致！");
 			return false;
 		}else{
+			$ionicLoading.show();
 			$http.post('http://'+$rootScope.hostName+'/forgotpwd/resetpwd/'+$scope.uid, $scope.user
   			).success(function(data) {
 	           layer.show("修改成功！");
 	           sessionStorage.removeItem("uid");
 	           $scope.user = {}; //清空数据
 	           location.href='#/login';
+	           $ionicLoading.hide();
 	        });
 		}
 
@@ -3219,13 +3230,18 @@ lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$
 	$http.get('http://'+$rootScope.hostName+'/center/question/'+$stateParams.id+'/ask'
     ).success(function(data) {
     	if (data && data.data) {
-	    	var items = data.data;
-			$scope.curChatUserId = items.user_id;
-			$scope.curUserId = items.easemob_id;
-			easemobService.init(items.user_id,"chat");
-			easemobService.login(items.easemob_id.toString(), items.easemob_pwd);
+	    	$scope.items = data.data;
+			$scope.curChatUserId = $scope.items.user_id;
+			$scope.curUserId = $scope.items.easemob_id;
+			easemobService.init($scope.items.user_id,"chat");
+			easemobService.login($scope.items.easemob_id.toString(), $scope.items.easemob_pwd);
 		}
 	})
+
+    $scope.visible = true;
+    $scope.toggle = function(){
+    	$scope.visible = !$scope.visible;
+    }
 
     var page = 1;
     var rows_per_page = 10;

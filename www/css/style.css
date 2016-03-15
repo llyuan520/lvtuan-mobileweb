@@ -71,9 +71,9 @@ body, html, .pane, .ionic-body,h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, 
 }
 
 /*----------*/
-.bar.bar-light{
+/*.bar.bar-light{
    border-bottom: 1px solid #999;
-}
+}*/
 .nav-bar-title {
     line-height: 2em;
     vertical-align: middle;

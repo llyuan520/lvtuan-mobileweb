@@ -26,7 +26,7 @@
 						<div class="input-label">
 			              执业年限
 			            </div>
-					  	<select class="web-font16" required ng-model="practice_period" name="practice_period" ng-options="period as period.value for period in periods track by period.key">
+					  	<select class="web-font16" required ng-model="practice_period" name="practice_period" ng-options="period as period.value for period in periods track by period.key" style="position: relative;padding: 0px 8% 0.2rem 3%;direction: ltr;">
 								<option value="">--执业年限--</option>
 					    </select>
 					</div>
@@ -45,9 +45,9 @@
 			            <div ng-if="!currentUser.is_verified_lawyer" class="uploapoto" ng-model="license_file" ngf-pattern="'image/*'"  accept="image/*" ngf-max-size="20MB" ngf-min-height="100" ngf-select="uploadFiles($file)" ></div>
 
 						<input ng-if="!currentUser.is_verified_lawyer" type="hidden" name="license_file" value="{{file_path}}" />
-						<span class="progress" ng-show="progress > 0">
+						<!-- <span class="progress" ng-show="progress > 0">
 		                  <div style="width:{{progress}}%" ng-bind="progress + '%'"></div>
-		                </span>
+		                </span> -->
 					</div>
 				</div>
 			</ion-content>
