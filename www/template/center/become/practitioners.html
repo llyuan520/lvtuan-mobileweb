@@ -40,7 +40,7 @@
 						<div class="input-label">
 			              执业证书
 			            </div>
-			            <img ng-src="{{file}}" ngf-thumbnail="file || ''" width="52" height="50">
+			            <img ng-if=" file != '' " ng-src="{{file}}" ngf-thumbnail="file || ''" width="52" height="50">
 
 			            <div ng-if="!currentUser.is_verified_lawyer" class="uploapoto" ng-model="license_file" ngf-pattern="'image/*'"  accept="image/*" ngf-max-size="20MB" ngf-min-height="100" ngf-select="uploadFiles($file)" ></div>
 

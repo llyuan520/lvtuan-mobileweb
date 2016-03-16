@@ -68,11 +68,10 @@
 
 					<ion-item class="item" style="margin-top: 10px;margin-bottom: 10px;border-color: #fff;" ng-if="currentUser.status == 3">
 						<p ng-if="items.status == 'new'"> 
-							<button class="button button-block button-positive" ng-click="to_refuse(items.transitions[1].to_refuse)">拒绝</button>
-		  					<button class="button button-block button-positive" ng-click="to_accept(items.transitions[0].to_accept)">受理</button>
+							<button class="button button-small button-positive" ng-click="to_take(items.transitions[0].to_take)">抢单</button>
 						</p>
 						<p ng-if="items.status == 'replied'"> 
-							<a class="button button-block button-positive" ng-href="tel:400-888-6633">联系用户</a>
+							<a class="button button-small button-positive" ng-href="tel:{{items.creator_phone}}">联系用户</a>
 						</p>
 						<p ng-if=" items.status == 'complete' || items.status == 'cancelled' "> 
 		  					<button class="button button-block button-positive" ng-click="to_remove(items.transitions[0].to_remove)">删除</button>

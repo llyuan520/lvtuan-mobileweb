@@ -1,6 +1,7 @@
 var httpModule = angular.module('httpModule', ['authModule']);
 
 httpModule.factory('httpWrapper', function($http, $rootScope) {
+	
 	var httpRequest = {};
 
 	httpRequest.get = function(url, successCallback) {
@@ -111,7 +112,12 @@ httpModule.factory('APIInterceptor', ['$log', '$q', '$rootScope', 'authService',
 
 	    // optional method
 	   'responseError': function(response) {
+	   	console.info(response);
 		    switch(response.status) {
+		      	case 0:
+		      		$rootScope.code0 = true;
+		      		$rootScope.moredata = false;
+	        		break;
 		      	case 401:
 		      	case 403:
 	        		$rootScope.$broadcast('unauthorized');

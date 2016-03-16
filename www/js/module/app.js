@@ -89,7 +89,6 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
         /*$window.location.href = '/login';*/
         //window.location.reload();
     });
-
 })
 
 .config(function($httpProvider) {

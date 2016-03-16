@@ -8,10 +8,10 @@
 		        	</p>
 		        	<p style="text-align: right;" ng-if="currentUser.status == 1 || currentUser.status == 2">
 	  					<button class="button button-small button-positive" ng-click="to_complete(item.transitions[1].to_complete,$index)">确认</button>
-	  					<button class="button button-small button-positive" ng-click="to_ask(item.id)">联系律师</button>
+	  					<a class="button button-small button-positive" ng-href="tel:{{item.lawyer_phone}}">联系律师</a>
 	  				</p>
 	  				<p style="text-align: right;" ng-if="currentUser.status == 3">
-	  					<button class="button button-small button-positive" ng-click="to_ask(item.id)">联系用户</button>
+	  					<a class="button button-small button-positive" ng-href="tel:{{item.creator_phone}}">联系用户</a>
 	  				</p>
 		        </ion-item>
 	         </ion-list>

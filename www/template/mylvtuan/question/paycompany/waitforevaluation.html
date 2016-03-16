@@ -7,8 +7,7 @@
 		        		<a  class="display" ng-href="#/question/paycompany/view/{{item.id}}" style="color: #333;">{{item.title}}</a>
 		        	</p>
 		        	<p style="text-align: right;" ng-if="currentUser.status == 1 || currentUser.status == 2">
-	  					<button class="button button-small button-positive" ng-click="to_tip(item.id)">送心意</button>
-	  					<button class="button button-small button-positive" ng-click="to_evaluate(item.id,$index,item.type)">评价</button>
+	  					<button class="button button-small button-positive" ng-click="to_evaluate(item.id,item.type)">评价</button>
 	  				</p>
 		        </ion-item>
 	        </ion-list>
