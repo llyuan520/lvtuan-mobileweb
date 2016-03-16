@@ -62,10 +62,6 @@ lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $loca
 		window.location.reload();
 	}
 
-	$scope.reinfinite = function(){
-      	window.location.reload();
-    }
-
 	var $body = $('body');    
 	document.title = '律团';    
 	// hack在微信等webview中无法修改document.title的情况    
@@ -506,7 +502,7 @@ lvtuanApp.controller("groupTeleviseCtrl",function($scope,$http,$rootScope,listHe
 
 //圈子 - 推荐关注
 lvtuanApp.controller("groupAttentionCtrl",function($scope,$http,$state,$rootScope){
-	$scope.page = 1; //页数
+	var page = 1; //页数
 	var rows_per_page = 5; // 每页的数量
 	if ($scope.rows_per_page) {
 		rows_per_page = $scope.rows_per_page;
@@ -518,7 +514,7 @@ lvtuanApp.controller("groupAttentionCtrl",function($scope,$http,$state,$rootScop
 	$scope.q = '';
 	$scope.$watch('q', function(newVal, oldVal) {
 		if(newVal !== oldVal){
-			$scope.page = 1;
+			var page = 1;
 			$scope.items = [];
 			getParams();
     	}
@@ -526,7 +522,7 @@ lvtuanApp.controller("groupAttentionCtrl",function($scope,$http,$state,$rootScop
 
 	//下拉刷新
 	$scope.doRefresh = function() {
-		$scope.page = 1;
+		var page = 1;
 		$scope.items = [];
         $scope.loadMore();
         $scope.$broadcast('scroll.refreshComplete');
@@ -546,9 +542,9 @@ lvtuanApp.controller("groupAttentionCtrl",function($scope,$http,$state,$rootScop
     function geturl(param){
 		var url;
 		if(param.q){
-	  		url = 'http://'+$rootScope.hostName+'/group/recommend?q='+param.q+'&rows_per_page='+rows_per_page+'&page='+$scope.page;
+	  		url = 'http://'+$rootScope.hostName+'/group/recommend?q='+param.q+'&rows_per_page='+rows_per_page+'&page='+page;
 	    }else{
-	    	url = 'http://'+$rootScope.hostName+'/group/recommend?rows_per_page='+rows_per_page+'&page='+$scope.page;
+	    	url = 'http://'+$rootScope.hostName+'/group/recommend?rows_per_page='+rows_per_page+'&page='+page;
 	    }
 		$http.get(url)
 			.success(function(data) {
@@ -575,9 +571,9 @@ lvtuanApp.controller("groupAttentionCtrl",function($scope,$http,$state,$rootScop
 
 	//加入关注
 	$scope.groupjoin = function(id,index){
-		$scope.page = 1;
+		var page = 1;
 		var id = id;
-		$http.post('http://'+$rootScope.hostName+'/group/'+id+'/join?rows_per_page='+rows_per_page+'&page='+$scope.page++,
+		$http.post('http://'+$rootScope.hostName+'/group/'+id+'/join?rows_per_page='+rows_per_page+'&page='+page++,
 			{},
 	        {
 		        cache: true,
@@ -784,13 +780,13 @@ lvtuanApp.controller("groupaddCtrl",function($scope,$http,$state,$rootScope,$sta
 
 	console.info("添加成员");
 	console.info( $stateParams.id);
-	$scope.page = 1; //页数
+	var page = 1; //页数
     $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
 	$scope.items = [];	//创建一个数组接收后台的数据
 
     //下拉刷新
 	$scope.doRefresh = function() {
-		$scope.page = 1;
+		var page = 1;
 		$scope.items = [];
         $scope.loadMore();
     };
@@ -862,13 +858,13 @@ lvtuanApp.controller("groupaddCtrl",function($scope,$http,$state,$rootScope,$sta
 //创建圈子
 lvtuanApp.controller("groupcreateCtrl",function($scope,$http,$state,$rootScope,$timeout,$ionicLoading,Upload){
 	console.info("创建圈子");
-	$scope.page = 1; //页数
+	var page = 1; //页数
     $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
 	$scope.items = [];	//创建一个数组接收后台的数据
 
     //下拉刷新
 	$scope.doRefresh = function() {
-		$scope.page = 1;
+		var page = 1;
 		$scope.items = [];
         $scope.loadMore();
     };
@@ -1773,7 +1769,7 @@ lvtuanApp.controller("commentCtrl",function($scope, listHelper) {
 
 //普通用户-我的关注
 lvtuanApp.controller("followedCtrl",function($scope,$rootScope,$http) {
-	$scope.page = 1; //页数
+	var page = 1; //页数
 	var rows_per_page = 5; // 每页的数量
 	if ($scope.rows_per_page) {
 		rows_per_page = $scope.rows_per_page;
@@ -1783,7 +1779,7 @@ lvtuanApp.controller("followedCtrl",function($scope,$rootScope,$http) {
 
     //下拉刷新
 	$scope.doRefresh = function() {
-		$scope.page = 1;
+		var page = 1;
 		$scope.items = [];
         $scope.loadMore();
         $scope.$broadcast('scroll.refreshComplete');
@@ -1791,7 +1787,7 @@ lvtuanApp.controller("followedCtrl",function($scope,$rootScope,$http) {
 
     //上拉加载
 	$scope.loadMore = function() {
-		$http.get('http://'+$rootScope.hostName+'/center/mylawyer/followed?rows_per_page='+rows_per_page+'&page='+$scope.page)
+		$http.get('http://'+$rootScope.hostName+'/center/mylawyer/followed?rows_per_page='+rows_per_page+'&page='+page)
 			.success(function(data) {
 	        	console.info(data.data)
 	        	if(data && data.data && data.data.length){
@@ -2441,7 +2437,7 @@ lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$l
 			})
 	}
 
-	$scope.page = 1; //页数
+	var page = 1; //页数
 	var rows_per_page = 5; // 每页的数量
 	if ($scope.rows_per_page) {
 		rows_per_page = $scope.rows_per_page;
@@ -2451,7 +2447,7 @@ lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$l
 
 	//根据地区查找律师
 	$scope.searchCity = function(){
-		$scope.page = 1;
+		var page = 1;
 		$scope.items = [];
 	    getParams();
 	}
@@ -2460,7 +2456,7 @@ lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$l
 	$scope.q = '';
 	$scope.$watch('q', function(newVal, oldVal) {
 		if(newVal !== oldVal){
-			$scope.page = 1;
+			var page = 1;
 			$scope.items = [];
 			getParams();
     	}
@@ -2495,7 +2491,7 @@ lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$l
 
     //下拉刷新
 	$scope.doRefresh = function() {
-		$scope.page = 1;
+		var page = 1;
 		$scope.items = [];
         $scope.loadMore();
         $scope.$broadcast('scroll.refreshComplete');
@@ -2510,9 +2506,9 @@ lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$l
 	function geturl(param){
 		var url;
 		if(param != ""){
-	  		url = 'http://'+$rootScope.hostName+'/lawyer/list_lawyers?'+param+'&rows_per_page='+rows_per_page+'&page='+$scope.page;
+	  		url = 'http://'+$rootScope.hostName+'/lawyer/list_lawyers?'+param+'&rows_per_page='+rows_per_page+'&page='+page;
 	    }else{
-	    	url = 'http://'+$rootScope.hostName+'/lawyer/list_lawyers?rows_per_page='+rows_per_page+'&page='+$scope.page;
+	    	url = 'http://'+$rootScope.hostName+'/lawyer/list_lawyers?rows_per_page='+rows_per_page+'&page='+page;
 	    }
 	    $ionicLoading.show();
 		$http.get(url)
@@ -2685,12 +2681,12 @@ lvtuanApp.controller("evaluateCtrl",function($scope,$http,$rootScope,$stateParam
 	}
 
 	//获取律师的评价列表
-	$scope.page = 1; //页数
+	var page = 1; //页数
     $scope.moredata = true; 
     $scope.items = [];	//创建一个数组接收后台的数据
     //下拉刷新
 	$scope.doRefresh = function() {
-		$scope.page = 1;
+		var page = 1;
 		$scope.item = [];
         $scope.loadMore();
     };
@@ -2947,7 +2943,7 @@ lvtuanApp.controller("questionslistCtrl",function($http,$scope,$state,$rootScope
 //问律师搜索
 lvtuanApp.controller("questionslistsearchCtrl",function($http,$scope,$state,$rootScope,$ionicLoading){
 	
-	$scope.page = 1; //页数
+	var page = 1; //页数
 	var rows_per_page = 5; // 每页的数量
 	if ($scope.rows_per_page) {
 		rows_per_page = $scope.rows_per_page;
@@ -2959,7 +2955,7 @@ lvtuanApp.controller("questionslistsearchCtrl",function($http,$scope,$state,$roo
 	$scope.q = '';
 	$scope.$watch('q', function(newVal, oldVal) {
 		if(newVal !== oldVal){
-			$scope.page = 1;
+			var page = 1;
 			$scope.items = [];
 	        $scope.loadMore();
 	    }
@@ -2967,7 +2963,7 @@ lvtuanApp.controller("questionslistsearchCtrl",function($http,$scope,$state,$roo
 
 	//下拉刷新
 	$scope.doRefresh = function() {
-		$scope.page = 1;
+		var page = 1;
 		$scope.items = [];
         $scope.loadMore();
         $scope.$broadcast('scroll.refreshComplete');
@@ -2979,7 +2975,7 @@ lvtuanApp.controller("questionslistsearchCtrl",function($http,$scope,$state,$roo
 		var params = layer.getParams("#searchForm");
 		var url = "";
 		if(params.q != ""){
-			url = 'http://'+$rootScope.hostName+'/question/list_questions?q='+params.q+'&rows_per_page='+rows_per_page+'&page='+$scope.page;
+			url = 'http://'+$rootScope.hostName+'/question/list_questions?q='+params.q+'&rows_per_page='+rows_per_page+'&page='+page;
 			$ionicLoading.show();
 			$http.get(url)
 				.success(function(data) {
@@ -3073,12 +3069,12 @@ lvtuanApp.controller("questionsviewsCtrl",function($http,$scope,$state,$rootScop
 
 //法律咨询
 lvtuanApp.controller("legaladviceCtrl",function($http,$scope,$rootScope){
-	$scope.page = 1; //页数
+	var page = 1; //页数
     $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
     $scope.knowledges = [];	//创建一个数组接收后台的数据
 
     $scope.search = function(){
-    	$scope.page = 1; //页数
+    	var page = 1; //页数
     	$scope.knowledges = [];	//创建一个数组接收后台的数据
     	getparamq();
     }
@@ -3091,9 +3087,9 @@ lvtuanApp.controller("legaladviceCtrl",function($http,$scope,$rootScope){
     function getUrlq(param){
     	var url = "";
     	if(param.q){
-    		url +='http://'+$rootScope.hostName+'/knowledge/article/list_articles?q='+param.q+'&page='+$scope.page++;
+    		url +='http://'+$rootScope.hostName+'/knowledge/article/list_articles?q='+param.q+'&page='+page++;
     	}else{
-    		url +='http://'+$rootScope.hostName+'/knowledge/article/list_articles?page='+$scope.page++;
+    		url +='http://'+$rootScope.hostName+'/knowledge/article/list_articles?page='+page++;
     	}
     	$http.get(url)
     		.success(function(data) {
@@ -3122,7 +3118,7 @@ lvtuanApp.controller("legaladviceCtrl",function($http,$scope,$rootScope){
 
 	 //下拉刷新
 	$scope.doRefresh = function() {
-		$scope.page = 1;
+		var page = 1;
 		$scope.knowledges = [];
         getparamq();
     };
@@ -3253,7 +3249,7 @@ lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$
     	$scope.visible = !$scope.visible;
     }
 
-    $scope.page = 1;
+    var page = 1;
     var rows_per_page = 10;
 
 	$scope.loadMore = function() {
@@ -4484,7 +4480,7 @@ lvtuanApp.controller("documentlistCtrl",function($http,$scope,$state,$rootScope,
 		return value;
 	}
 
-	$scope.page = 1; //页数
+	var page = 1; //页数
 	var rows_per_page = 5; // 每页的数量
 	if ($scope.rows_per_page) {
 		rows_per_page = $scope.rows_per_page;
@@ -4493,7 +4489,7 @@ lvtuanApp.controller("documentlistCtrl",function($http,$scope,$state,$rootScope,
     $scope.items = [];	//创建一个数组接收后台的数据
     //下拉刷新
 	$scope.doRefresh = function() {
-		$scope.page = 1;
+		var page = 1;
 		$scope.items = [];
         $scope.loadMore();
         $scope.$broadcast('scroll.refreshComplete');
@@ -4511,7 +4507,7 @@ lvtuanApp.controller("documentlistCtrl",function($http,$scope,$state,$rootScope,
 	};
 
 	$scope.ngClick_list = function(key){
-		$scope.page = 1;
+		var page = 1;
 		$scope.items = [];
 		sessionStorage.setItem("key", JSON.stringify(key));
 		getParams(key);
@@ -4520,7 +4516,7 @@ lvtuanApp.controller("documentlistCtrl",function($http,$scope,$state,$rootScope,
 	
 	function getParams(key){
 		$ionicLoading.show();
-		var url = 'http://'+$rootScope.hostName+'/knowledge/document/list_documents?cat_id='+key+'&rows_per_page='+rows_per_page+'&page='+$scope.page;
+		var url = 'http://'+$rootScope.hostName+'/knowledge/document/list_documents?cat_id='+key+'&rows_per_page='+rows_per_page+'&page='+page;
 		$http.get(url)
 			.success(function(data) {
 	        	console.info(data.data)
@@ -4547,7 +4543,7 @@ lvtuanApp.controller("documentlistCtrl",function($http,$scope,$state,$rootScope,
 })
 //法律文书 - 搜索
 lvtuanApp.controller("documentlistsearchCtrl",function($http,$scope,$state,$rootScope,$ionicLoading){
-	$scope.page = 1; //页数
+	var page = 1; //页数
 	var rows_per_page = 5; // 每页的数量
 	if ($scope.rows_per_page) {
 		rows_per_page = $scope.rows_per_page;
@@ -4559,7 +4555,7 @@ lvtuanApp.controller("documentlistsearchCtrl",function($http,$scope,$state,$root
 	$scope.q = '';
 	$scope.$watch('q', function(newVal, oldVal) {
 		if(newVal !== oldVal){
-			$scope.page = 1;
+			var page = 1;
 			$scope.items = [];
 	        $scope.loadMore();
 	    }
@@ -4567,7 +4563,7 @@ lvtuanApp.controller("documentlistsearchCtrl",function($http,$scope,$state,$root
 
 	//下拉刷新
 	$scope.doRefresh = function() {
-		$scope.page = 1;
+		var page = 1;
 		$scope.items = [];
         $scope.loadMore();
         $scope.$broadcast('scroll.refreshComplete');
@@ -4578,7 +4574,7 @@ lvtuanApp.controller("documentlistsearchCtrl",function($http,$scope,$state,$root
 		var params = layer.getParams("#searchForm");
 		var url = "";
 		if(params.q != ""){
-			url = 'http://'+$rootScope.hostName+'/knowledge/document/list_documents?q='+params.q+'&rows_per_page='+rows_per_page+'&page='+$scope.page;
+			url = 'http://'+$rootScope.hostName+'/knowledge/document/list_documents?q='+params.q+'&rows_per_page='+rows_per_page+'&page='+page;
 			$ionicLoading.show();
 			$http.get(url)
 				.success(function(data) {
@@ -4657,12 +4653,12 @@ lvtuanApp.controller("corporateservicesCtrl",function($http,$scope,$state,$rootS
 					}
 				];
 
-    $scope.page = 1; //页数
+    var page = 1; //页数
     $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
     $scope.items = [];	//创建一个数组接收后台的数据
     //下拉刷新
 	$scope.doRefresh = function() {
-		$scope.page = 1;
+		var page = 1;
 		$scope.items = [];
         $scope.loadMore();
     };

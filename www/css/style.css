@@ -1724,4 +1724,6 @@ a,button,input{
 }
 .nodate label{
     color: #999;
+    height: 25px;
+    line-height: 25px;
 }

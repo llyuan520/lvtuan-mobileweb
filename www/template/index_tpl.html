@@ -80,10 +80,6 @@
 				<i class="nodate-iocn"></i><br>
 				<label>暂无数据！</label>
 			</div>
-			<div ng-if="code0 == true" class="nodate">
-				<i class="nodate-iocn"></i><br>
-				<label ng-click="reinfinite()">点击屏幕，重新加载...</label>
-			</div>
 	      	<!-- <ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher> -->
             <ion-list>
             	<ion-item class="item item-thumbnail-left i-lawyer-list item-avatar" ng-repeat="item in items" ng-href="#/lawyer/{{item.id}}">
