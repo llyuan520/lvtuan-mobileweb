@@ -4,7 +4,7 @@
 			<button align-title="center" class="button button-clear button-positive" ng-click="jumpGoBack()">  
                 <i class="icon icon-left ion-ios-arrow-back"></i>  
             </button>
-			<h1 class="title">创建圈子</h1>
+			<h1 class="title">创建律圈</h1>
 			<button ng-click="createSubmit()" class="button button-clear button-positive" type="button">保存</button>
 		</ion-header-bar>
 
@@ -13,7 +13,7 @@
 				<form id="createGroup_form">
 					<div class="list login">
 						<div class="item item-input item-text-wrap">
-							<input type="text" name="group_name" ng-model="group_name" required="required" placeholder="圈子名称" />
+							<input type="text" name="group_name" ng-model="group_name" required="required" placeholder="律圈名称" />
 						</div>
 						<div class="item item-input" style="padding-left: 3%;">
 							
@@ -25,7 +25,9 @@
 				            </label>
 							<label ng-show="!group_avatar" class="txt-c-99" style="width: 80%;">上传群头像</label>
 
-							<div ng-disabled="booleans" ng-model="group_avatar" accept="image/*" ngf-pattern="'image/*'" ngf-max-size="20MB" ngf-min-height="100" ngf-select="uploadFiles($file)" class="icon-right" style="font-size:40px;padding:0 20px;color:#ccc;float:right"><i class="icon ion-ios-plus-outline"></i></div>
+							<div ng-disabled="booleans" ng-model="group_avatar" accept="image/*" ngf-pattern="'image/*'" ngf-max-size="20MB" ngf-min-height="100" ngf-select="uploadFiles($file)" class="icon-right" style="font-size:40px;padding-right: 3%;color:#ccc;float:right;text-align: right;">
+								<img src="../img/groupadd.png" style="width:42%;">
+							</div>
 							<input type="hidden" name="group_avatar" value="{{group_path}}" />
 							
 						</div>

@@ -168,8 +168,8 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       controller: 'wxLoginCtrl'
     })
 
-/********************************** 圈子 **********************************/
-    .state('group', { //圈子
+/********************************** 律圈 **********************************/
+    .state('group', { //律圈
       url: '/group',
       cache: 'true',
       /*abstract:true,*/
@@ -179,7 +179,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       authz: 'lawyer'
     })
 
-    .state('group.list', { //圈子 - 列表
+    .state('group.list', { //律圈 - 列表
       url: '/list',
       cache: 'true',
       views: {
@@ -191,38 +191,38 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       authn: true,
       authz: 'lawyer'
     })
-   .state('group.televise', { //圈子 - 广播
+   .state('group.televise', { //律圈 - 广播
       url: '/televise',
       cache: 'true',
       views: {
           'group-televise': {
-              templateUrl: 'template/group/group-televise.html',
-              controller: 'groupTeleviseCtrl'
+              templateUrl: 'template/group/group-televise.html'
           }
       },
       authn: true,
       authz: 'lawyer'
     })
-    .state('group.attention', { //圈子 - 关注
+    .state('group.attention', { //律圈 - 关注
       url: '/attention',
       cache: 'true',
       views: {
           'group-attention': {
-              templateUrl: 'template/group/group-attention.html'
+              templateUrl: 'template/group/group-attention.html',
+              controller: 'groupAttentionCtrl'
           }
       },
       authn: true,
       authz: 'lawyer'
     })
 
-    .state('groupviewinit', { //圈子详情
+    .state('groupviewinit', { //律圈详情
       url: '/group/viewinit/:id',
       controller: 'groupviewinitCtrl',
       authn: true,
       authz: 'lawyer'
     })
 
-    .state('groupview', { //圈子详情
+    .state('groupview', { //律圈详情
       url: '/group/view/:id',
       templateUrl: 'template/group/group_view.html',
       controller: 'groupviewCtrl',
@@ -237,7 +237,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       authz: 'lawyer'
     })
 
-    .state('groupcreate', { //创建圈子
+    .state('groupcreate', { //创建律圈
       url: '/groupcreate',
       templateUrl: 'template/group/create.html',
       controller: 'groupcreateCtrl',
@@ -253,14 +253,14 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       authz: 'lawyer'
     })
     
-    .state('group/site', { //圈子设置
+    .state('group/site', { //律圈设置
       url: '/group/site/:id',
       templateUrl: 'template/group/group-site.html',
       controller: 'groupsiteCtrl',
       authn: true,
       authz: 'lawyer'
     })
-    .state('group/add', { //圈子设置
+    .state('group/add', { //律圈设置
       url: '/group/add/:id',
       templateUrl: 'template/group/group-add.html',
       controller: 'groupaddCtrl',
@@ -522,13 +522,6 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       url: '/graphic/:type',
       cache: 'true',
       templateUrl: 'template/lawyer/graphic.html',
-      authn: true
-    })
-    .state('special', { //专业咨询
-      url: '/special',
-      cache: 'true',
-      templateUrl: 'template/lawyer/special.html',
-      controller: 'specialCtrl',
       authn: true
     })
     

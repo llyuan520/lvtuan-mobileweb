@@ -1,13 +1,14 @@
 <ion-view hide-tabs="false">
 		<ion-pane  class="web-body">
 			<ion-header-bar align-title="center" class="bar bar-header bar-light headers">
-				<!-- <a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-href="#/index"></a> -->
-				<h1 class="title">圈子</h1>
+				<h1 class="title">律圈</h1>
+				 <a class="button icon-right button-clear button-positive button-small" ng-if="path == '/group/list'" ng-href="#/groupcreate"><i class="icon ion-android-add"></i></a>
+				 <a class="button icon-right button-clear button-positive button-small" ng-if="path == '/group/televise'" ng-href="#/televisecreate"><i class="icon ion-android-add"></i></a>
 			</ion-header-bar>
 			
 			<ion-tabs class="tabs-top">
-			    <ion-tab title="圈子" href="#/group/list">
-			        <ion-nav-view name="group-list">圈子</ion-nav-view>
+			    <ion-tab title="律圈" href="#/group/list">
+			        <ion-nav-view name="group-list">律圈</ion-nav-view>
 			    </ion-tab>
 
 			    <ion-tab title="推荐关注" href="#/group/attention">

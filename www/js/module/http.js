@@ -73,7 +73,7 @@ httpModule.factory('APIInterceptor', ['$log', '$q', '$rootScope', 'authService',
 				} else {
 					if (config.url.indexOf(HOST + '/group') > -1
 						|| config.url.indexOf(HOST + '/microblog') > -1) {
-						// 动态和圈子一定要律师才可以访问
+						// 动态和律圈一定要律师才可以访问
 						user = authService.getUser();
 						if (!user.is_verified_lawyer) {
 							$rootScope.$broadcast('unauthorized');

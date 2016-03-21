@@ -465,9 +465,9 @@ lvtuanApp.controller("wxLoginCtrl",function($scope,$http,$rootScope,wxService){
 	window.location.replace(wxService.getWxAuthUrl('/wxauth'));
 })
 
-/****************************************************** 圈子 ******************************************************/
-//圈子
-lvtuanApp.controller("groupCtrl",function($scope,$http,$state,$rootScope){
+/****************************************************** 律圈 ******************************************************/
+//律圈
+lvtuanApp.controller("groupCtrl",function($scope,$http,$state,$rootScope,$location){
 	//跳转到登陆页面
 	$scope.jumplogin = function(){
 		console.info($rootScope.is_lawyer);
@@ -475,12 +475,12 @@ lvtuanApp.controller("groupCtrl",function($scope,$http,$state,$rootScope){
 	}
 
 })
-//圈子 - 列表
+//律圈 - 列表
 lvtuanApp.controller("groupListCtrl",function($scope,listHelper){
 	listHelper.bootstrap('/group/list/mine', $scope);
 })
-//圈子 - 广播
-lvtuanApp.controller("groupTeleviseCtrl",function($scope,$http,$rootScope,listHelper) {
+//律圈 - 广播
+lvtuanApp.controller("groupTeleviseCtrl",function($scope,$http,$rootScope,$location,listHelper) {
 
 	listHelper.bootstrap('/microblog/list/all', $scope);
 
@@ -500,7 +500,7 @@ lvtuanApp.controller("groupTeleviseCtrl",function($scope,$http,$rootScope,listHe
 
 })
 
-//圈子 - 推荐关注
+//律圈 - 推荐关注
 lvtuanApp.controller("groupAttentionCtrl",function($scope,$http,$state,$rootScope){
 	var page = 1; //页数
 	var rows_per_page = 5; // 每页的数量
@@ -516,7 +516,7 @@ lvtuanApp.controller("groupAttentionCtrl",function($scope,$http,$state,$rootScop
 		if(newVal !== oldVal){
 			var page = 1;
 			$scope.items = [];
-			getParams();
+			getParam();
     	}
 	});
 
@@ -531,10 +531,10 @@ lvtuanApp.controller("groupAttentionCtrl",function($scope,$http,$state,$rootScop
     //上拉加载
 	$scope.loadMore = function() {
 		//获取推荐的律师 ?is_recommended=1&page=1&rows_per_page=10
-		getParams();
+		getParam();
 	};
 
-    function getParams(){
+    function getParam(){
     	var param = layer.getParams("#search_form");
     	geturl(param)
     }
@@ -613,7 +613,7 @@ lvtuanApp.controller("groupviewCtrl",function($scope,$http,$state,$rootScope,$st
 			easemobService.init(curRoomId,"groupchat");
 			easemobService.login($scope.items.user_id.toString(),$scope.items.pwd);
 
-            console.info('圈子',$scope.items);
+            console.info('律圈',$scope.items);
         }
         $ionicLoading.hide();
     })
@@ -645,9 +645,9 @@ lvtuanApp.controller("groupviewCtrl",function($scope,$http,$state,$rootScope,$st
 
 })
 
-//圈子设置
+//律圈设置
 lvtuanApp.controller("groupsiteCtrl",function($scope,$http,$state,$rootScope,$stateParams,$timeout,$ionicPopup,Upload,$ionicLoading){
-	console.info("圈子设置");
+	console.info("律圈设置");
 	$ionicLoading.show();
 	$http.get('http://'+$rootScope.hostName+'/group/'+$stateParams.id+'/detail'
         ).success(function(data) {
@@ -707,7 +707,7 @@ lvtuanApp.controller("groupsiteCtrl",function($scope,$http,$state,$rootScope,$st
 		$scope.edit = function(id){
 			var params =  layer.getParams("#myForm");
 			if(params.group_name == ""){
-				layer.show("圈子名称不能为空！");
+				layer.show("律圈名称不能为空！");
 			}else{
 				$http.post('http://'+$rootScope.hostName+'/group/'+$stateParams.id+'/edit',{
 	  					'group_name'	: params.group_name,
@@ -724,13 +724,13 @@ lvtuanApp.controller("groupsiteCtrl",function($scope,$http,$state,$rootScope,$st
 			}
 		}
 		
-		//修改圈子头像
+		//修改律圈头像
 	    $scope.uploadFiles = function (group_avatar) {
 	   		if(group_avatar) {
 		    	$scope.upload(group_avatar);
 		    }
 	    };
-	    // 圈子头像上传图片
+	    // 律圈头像上传图片
 	    $scope.upload = function (group_avatar) {
 	    	Upload.upload({
 	            url: 'http://'+$rootScope.hostName+'/group/uploadImage',
@@ -822,9 +822,9 @@ lvtuanApp.controller("groupaddCtrl",function($scope,$http,$state,$rootScope,$sta
 	}
 })
 
-//创建圈子
+//创建律圈
 lvtuanApp.controller("groupcreateCtrl",function($scope,$http,$state,$rootScope,$timeout,$ionicLoading,Upload,listHelper){
-	console.info("创建圈子");
+	console.info("创建律圈");
 
 	listHelper.bootstrap('/group/create', $scope);
 
@@ -857,15 +857,15 @@ lvtuanApp.controller("groupcreateCtrl",function($scope,$http,$state,$rootScope,$
 		}
 	}
 
-	//创建圈子
+	//创建律圈
 	$scope.createSubmit = function(){
 		var members =  $scope.selIds;
 		var params = getParams("#createGroup_form");
   		if(params.group_name == ""){
-  			layer.show("请输入圈子名称!");
+  			layer.show("请输入律圈名称!");
   			return false;
   		}else if(params.group_avatar == ""){
-  			layer.show("请上传圈子头像!");
+  			layer.show("请上传律圈头像!");
   			return false;
   		}else{
   			$ionicLoading.show();
@@ -886,13 +886,13 @@ lvtuanApp.controller("groupcreateCtrl",function($scope,$http,$state,$rootScope,$
 	}
 
 
-	//圈子上传图片
+	//律圈上传图片
    $scope.uploadFiles = function (group_avatar) {
    		 if(group_avatar) {
 	        $scope.upload(group_avatar);
 	      }
     };
-    // 圈子上传图片
+    // 律圈上传图片
     $scope.upload = function (group_avatar) {
     	Upload.upload({
         	headers: {
@@ -2571,7 +2571,7 @@ lvtuanApp.controller("evaluateCtrl",function($scope,$http,$rootScope,$stateParam
 //律师个人主页-成交记录
 lvtuanApp.controller("dealrecordCtrl",function($scope,$http,$rootScope,$stateParams,listHelper){
 	//成交记录
-	listHelper.bootstrap('/lawyer/'+$stateParams.id+'/evaluations', $scope);
+	listHelper.bootstrap('/lawyer/'+$stateParams.id+'/deals', $scope);
 })
 
 
@@ -2684,11 +2684,7 @@ lvtuanApp.controller("graphicCtrl",function($scope,$http,$rootScope,$timeout,$st
 	}
 
 })
-//找律师-专业咨询
-lvtuanApp.controller("specialCtrl",function($scope,$http,$rootScope){
-	console.info("专业咨询");
 
-})
 /****************************************************** 问律师 ******************************************************/
 
 //问律师
