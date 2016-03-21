@@ -28,6 +28,11 @@
 		    	<img ng-src="../img/scores_dateil.png" style="vertical-align: middle;width: 6%;">&nbsp;<label>积分明细</label>
 		    </div>
 
+		    <div ng-if="nodata == false" class="nodate">
+				<i class="nodate-iocn"></i><br>
+				<label>暂无数据！</label>
+			</div>
+			
 			<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 			<div class="list web-top10">
 			    <div class="item web-item padding10" ng-repeat="item in items">

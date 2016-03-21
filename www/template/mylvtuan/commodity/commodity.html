@@ -16,6 +16,11 @@
 			<h1 class="title">我的商品</h1>
 		</ion-header-bar>
 		<ion-content class="web-body">
+			<div ng-if="nodata == false" class="nodate">
+				<i class="nodate-iocn"></i><br>
+				<label>暂无数据！</label>
+			</div>
+			
 	    	<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 	    		<ion-list>
 	    			<div ng-repeat="item in items">

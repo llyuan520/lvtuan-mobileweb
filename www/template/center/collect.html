@@ -10,6 +10,10 @@
 		</ion-header-bar>
 
 		<ion-content>
+			<div ng-if="nodata == false" class="nodate">
+				<i class="nodate-iocn"></i><br>
+				<label>暂无数据！</label>
+			</div>
 			<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 			    <ul class="list">
 			        <li class="item" ng-class="itemcheckbox" ng-repeat="item in items">

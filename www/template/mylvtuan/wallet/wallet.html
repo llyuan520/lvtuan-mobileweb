@@ -47,6 +47,11 @@
 <!-- 最新交易记录 -->
 <script type="text/ng-template" id="latest_record.tpl.html">
 <div ng-controller="userpayallCtrl">
+	<div ng-if="nodata == false" class="nodate">
+		<i class="nodate-iocn"></i><br>
+		<label>暂无数据！</label>
+	</div>
+
 	<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 	<div class="list">
     	<ion-item class="item padding5" ng-repeat="item in items">
@@ -75,6 +80,11 @@
 <!-- 充值记录 -->
 <script type="text/ng-template" id="recharge_record.tpl.html">
 <div ng-controller="userrecordCtrl">
+	<div ng-if="nodata == false" class="nodate">
+		<i class="nodate-iocn"></i><br>
+		<label>暂无数据！</label>
+	</div>
+
 	<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 	<div class="list">
     	<ion-item class="item padding5" ng-repeat="item in items">
@@ -103,6 +113,11 @@
 <!-- 提现记录 -->
 <script type="text/ng-template" id="withdraw_record.tpl.html">
 <div ng-controller="userwithdrawCtrl">
+	<div ng-if="nodata == false" class="nodate">
+		<i class="nodate-iocn"></i><br>
+		<label>暂无数据！</label>
+	</div>
+	
 	<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 	<div class="list">
     	<ion-item class="item padding5" ng-repeat="item in items">

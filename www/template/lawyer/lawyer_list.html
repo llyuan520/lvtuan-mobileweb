@@ -58,6 +58,11 @@
 					        </div>
 						</div>
 						
+						<div ng-if="nodata == false" class="nodate">
+							<i class="nodate-iocn"></i><br>
+							<label>暂无数据！</label>
+						</div>
+
 						<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 						<div class="list">
 						    <a class="item item-thumbnail-left lawyer-lists" ng-repeat="item in items" ng-click="jumppage(item.id)">
@@ -66,7 +71,7 @@
 						       <div class="row row-no-padding">
 						       		<div class="col col-30 col-center row-no-padding"><h3>{{item.realname}}</h3></div>
 								  	<div class="col col-70 col-center row-no-padding">
-								  		<div star rating-value="ratingVal[$index]" max="max" on-hover="onHover" on-leave="onLeave" readonly="{{readonly}}" class="star-score"></div>
+								  		<div star rating-value="ratingVal[$index] = item.average_evaluate_score" max="max" on-hover="onHover" on-leave="onLeave" readonly="{{readonly}}" class="star-score"></div>
 						      			<img ng-show="{{item.isDispVipImg}}" class="img-v" ng-src="img/vip.png"/>
 								  	</div>
 								</div>

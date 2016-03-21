@@ -103,6 +103,11 @@
 			</div>
 
 			<ion-content  class="scroll2">	
+				<div ng-if="nodata == false" class="nodate">
+					<i class="nodate-iocn"></i><br>
+					<label>暂无数据！</label>
+				</div>
+
 				<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 				<div class="border-bottom" ng-repeat="item in items">
 					<div class="row">

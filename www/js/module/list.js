@@ -5,7 +5,7 @@ listModule.factory('listHelper', function($http, $rootScope, httpWrapper) {
 
 	// 这个函数支持下拉刷新和上拉加载
 	listHelper.bootstrap = function(url, $scope) {
-		
+
 		var page = 1; //页数
 		var rows_per_page = 5; // 每页的数量
 		$scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
@@ -49,9 +49,9 @@ listModule.factory('listHelper', function($http, $rootScope, httpWrapper) {
 						}
 					}else{
 						if (page == 1) {
-							$scope.moredata = false;
+							$  = false;
 							$scope.nodata = false;
-							layer.show('暂无数据！');
+							//layer.show('暂无数据！');
 						}
 						
 						$scope.moredata = false;

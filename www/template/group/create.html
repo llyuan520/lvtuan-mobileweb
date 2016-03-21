@@ -18,7 +18,7 @@
 						<div class="item item-input" style="padding-left: 3%;">
 							
 							<label ng-show="group_avatar" style="width: 80%;">
-								<img ng-src="{{file}}" ngf-thumbnail="group_avatar || '/thumb.jpg'" width="52" height="50">
+								<img ng-src="{{file}}" ngf-thumbnail="group_avatar || ' '" width="52" height="50">
 								<span class="progress" ng-show="progress >= 0">
 				                  <div style="width:{{progress}}%" ng-bind="progress + '%'"></div>
 				                </span>
@@ -31,6 +31,12 @@
 						</div>
 					</div>	
 				</form>	
+
+				
+				<div ng-if="nodata == false" class="nodate">
+					<i class="nodate-iocn"></i><br>
+					<label>暂无数据！</label>
+				</div>
 				<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 				<ul class="list">
 			        <li class="item item-avatar" ng-repeat="item in items">

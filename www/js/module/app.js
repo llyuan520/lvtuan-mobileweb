@@ -567,13 +567,6 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       authn: true
     })
 
-/********************************** 法律咨询 **********************************/
-    .state('legaladvice', { //首页-法律咨询
-      url: '/legaladvice',
-      templateUrl: 'template/legaladvice.html',
-      controller: 'legaladviceCtrl'
-    })
-
 /*———————————————————————————— 我的律团- 我的订单 -公用 ————————————————————————————*/
 
   .state('/lawyer/comment/', { //我的订单 - 评价详情
