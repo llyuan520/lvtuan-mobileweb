@@ -1,0 +1,84 @@
+<ion-view hide-tabs="true" cache-view="false">
+	<ion-pane>
+		<ion-header-bar align-title="center" class="bar bar-header bar-light">
+			<button class="button button-clear button-positive" ng-click="jumpGoBack()">  
+                <i class="icon icon-left ion-ios-arrow-back"></i>  
+            </button>
+			<h1 class="title">咨询详情</h1>
+		</ion-header-bar>
+		<ion-content class="web-body">
+			<ion-list>
+
+				<ion-item class="item" style="margin-bottom: 10px;border-color: #fff;color: #666;font-size: 14px;">
+					<div class="row row-no-padding padding_bottom16">
+		    		  	<div class="col">订单编号</div> 
+		     		  	<div class="col col-70">{{items.order_no}}</div>
+		    		</div>
+					<div class="row row-no-padding padding_bottom16">
+		    		  	<div class="col">受理时间</div> 
+		     		  	<div class="col col-70">{{items.created_at}}</div>
+		    		</div>
+		    		<div class="row row-no-padding padding_bottom16">
+		    		  	<div class="col">订单名称</div>
+		    		  	<div class="col col-70">
+		    		  		<p class="contents">{{items.title}}</p>
+		    		  	</div>
+		    		</div>
+		    		<div class="row row-no-padding padding_bottom16">
+		    		  	<div class="col">邮箱地址</div>
+		    		  	<div class="col col-70">
+		    		  		<p class="contents">{{items.email}}</p>
+		    		  	</div>
+		    		</div>
+		    		<div class="row row-no-padding padding_bottom16">
+		    		  	<div class="col">企业信息</div>
+		    		  	<div class="col col-70">
+		    		  		<p class="contents">{{items.company_name}}</p>
+		    		  	</div>
+		    		</div>
+		    		<div class="row row-no-padding padding_bottom16">
+		    		  	<div class="col">企业地址</div>
+		    		  	<div class="col col-70">
+		    		  		<p class="contents">{{items.province}} {{items.city}} {{items.district}}</p>
+		    		  	</div>
+		    		</div>
+		    		<div class="row row-no-padding" style="border-color: #fff;">
+		    		  	<div class="col">备注信息</div>
+		     		  	<div class="col col-70">
+		     		  		<p class="contents">{{items.memo}}</p>
+		     		  	</div>
+		    		</div>
+				</ion-item>
+		        <div ng-if=" items.transitions.length > 0 ">
+			        <ion-item class="item" style="margin-top: 10px;margin-bottom: 10px;border-color: #fff;" ng-if="currentUser.status == 1 || currentUser.status == 2">
+						<p ng-if="items.status == 'new'"> 
+							<button class="button button-block button-positive" ng-click="to_cancel(items.transitions[0].to_cancel)">取消</button>
+						</p>
+						<p ng-if="items.status == 'replied'"> 
+							<button class="button button-block button-positive" ng-click="to_complete(items.transitions[1].to_complete)">确认</button>
+		  					<a class="button button-block button-positive" ng-href="tel:{{items.lawyer_phone}}">联系律师</a>
+						</p>
+						<p ng-if="items.status == 'wait_for_evaluation'"> 
+		  					<button class="button button-block button-positive" ng-click="to_evaluate(items.id,item.type)">评价</button>
+						</p>
+						<p ng-if="items.status == 'complete' || items.status == 'cancelled'"> 
+		  					<button class="button button-block button-positive" ng-click="to_remove(items.transitions[0].to_remove)">删除</button>
+						</p>
+					</ion-item>
+
+					<ion-item class="item" style="margin-top: 10px;margin-bottom: 10px;border-color: #fff;" ng-if="currentUser.status == 3">
+						<p ng-if="items.status == 'new'"> 
+							<button class="button button-small button-positive" ng-click="to_take(items.transitions[0].to_take)">抢单</button>
+						</p>
+						<p ng-if="items.status == 'replied'"> 
+							<a class="button button-small button-positive" ng-href="tel:{{items.creator_phone}}">联系用户</a>
+						</p>
+						<p ng-if=" items.status == 'complete' || items.status == 'cancelled' "> 
+		  					<button class="button button-block button-positive" ng-click="to_remove(items.transitions[0].to_remove)">删除</button>
+						</p>
+					</ion-item>
+				</div>
+	         </ion-list>
+	    </ion-content>
+	</ion-pane>
+</ion-view>

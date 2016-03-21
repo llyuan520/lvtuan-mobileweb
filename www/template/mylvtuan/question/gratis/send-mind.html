@@ -1,0 +1,57 @@
+<ion-view hide-tabs="true" cache-view="false">
+    <ion-pane>
+        <ion-header-bar align-title="center" class="bar bar-header bar-light">
+            <button class="button button-clear button-positive" ng-click="jumpGoBack()">  
+                <i class="icon icon-left ion-ios-arrow-back"></i>  
+            </button>
+            <h1 class="title">我的咨询-送心意</h1>
+        </ion-header-bar>
+        <ion-content class="web-body">
+            <form novalidate name="myForm" id="myForm" ng-controller="sendmindCtrl" ng-cloak class="ng-cloak">
+                <div class="mind-pic" style="margin-bottom: 10px;">
+                    <div class="row row-no-padding" style="margin-top: 200px;">
+                        <div class="col col-30 col-center" style="color: #666;">请输入金额</div> 
+                        <div class="col col-center">
+                            <label class="item-input-wrapper" style="background-color: #eee;">
+                                <input style="background-color: #eee;font-size: 14px;" id="money" placeholder="请输入整数" name="money" ng-model="user.money"  ng-minlength="1" ng-maxlength="1000000" required money style="border: none;" ng-model-options="{debounce:2000}" type="number" />
+                            </label>
+                        </div>
+                        <div class="col col-15 col-center" style="color: #666;">元</div>
+                    </div>
+                </div>
+                <ion-item class="item" style="margin-bottom: 10px;border-color: #fff;color: #666;">
+                    <div class="row row-no-padding padding_bottom16" style="font-size: 14px;">
+                        <div class="col">请选择支付方式</div> 
+                    </div>
+                    <div class="row row-no-padding padding_bottom16">
+                        <div class="col col-center"><img ng-src="../img/weixinbg.png" style="width: 80%"></div> 
+                        <div class="col col-70 col-center">
+                            微信支付
+                        </div>
+                        <div class="col col-center">
+                            <label class="checkbox">
+                                <input ng-model="user.radioval" name="name" type="radio" value="weixin">
+                            </label>
+                        </div> 
+                    </div>
+                    <div class="row row-no-padding padding_bottom16">
+                        <div class="col col-center"><img ng-src="../img/qianbao.png" style="width: 80%"></div>
+                        <div class="col col-70 col-center">
+                            律团余额({{mymoney}}元)<label style="font-size: 12px;" ng-if="mymoney == 0">(余额不足)</label>
+                        </div>
+                        <div class="col col-center">
+                            <label class="checkbox">
+                                <input ng-model="user.radioval" name="name" type="radio" value="qianbao">
+                            </label>
+                        </div> 
+                    </div>
+                    <div class="row row-no-padding padding_bottom16" style="font-size: 14px;">
+                        <div class="col">
+                             <button class="button button-block button-positive" type="button" ng-disabled="myForm.$invalid" ng-click="submit(user)" >支付</button>
+                        </div> 
+                    </div>
+                </ion-item>
+            </form>
+        </ion-content>
+    </ion-pane>
+</ion-view>

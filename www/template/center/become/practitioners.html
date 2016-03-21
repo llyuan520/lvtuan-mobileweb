@@ -1,7 +1,7 @@
 <ion-view hide-tabs="true">
 	<form name="practitionForm" class="css-form" id="practitionForm" novalidate ng-controller="practitionersCtrl">
 		<ion-pane  class="web-body practitioners">
-			<ion-header-bar class="bar bar-header bar-light headers">
+			<ion-header-bar align-title="center" class="bar bar-header bar-light headers">
 				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-href="#/becomenav"></a>
 				<h1 class="title">从业信息</h1>
 				<button ng-click="submit()" class="button button-clear button-positive" type="submit" ng-disabled="practitionForm.$invalid">保存</button>
@@ -26,7 +26,7 @@
 						<div class="input-label">
 			              执业年限
 			            </div>
-					  	<select class="web-font16" required ng-model="practice_period" name="practice_period" ng-options="period as period.value for period in periods track by period.key">
+					  	<select class="web-font16" required ng-model="practice_period" name="practice_period" ng-options="period as period.value for period in periods track by period.key" style="position: relative;padding: 0px 8% 0.2rem 3%;direction: ltr;">
 								<option value="">--执业年限--</option>
 					    </select>
 					</div>
@@ -40,14 +40,14 @@
 						<div class="input-label">
 			              执业证书
 			            </div>
-			            <img ng-src="{{file}}" ngf-thumbnail="file || ''" width="52" height="50">
+			            <img ng-if=" file != '' " ng-src="{{file}}" ngf-thumbnail="file || ''" width="52" height="50">
 
 			            <div ng-if="!currentUser.is_verified_lawyer" class="uploapoto" ng-model="license_file" ngf-pattern="'image/*'"  accept="image/*" ngf-max-size="20MB" ngf-min-height="100" ngf-select="uploadFiles($file)" ></div>
 
 						<input ng-if="!currentUser.is_verified_lawyer" type="hidden" name="license_file" value="{{file_path}}" />
-						<span class="progress" ng-show="progress > 0">
+						<!-- <span class="progress" ng-show="progress > 0">
 		                  <div style="width:{{progress}}%" ng-bind="progress + '%'"></div>
-		                </span>
+		                </span> -->
 					</div>
 				</div>
 			</ion-content>

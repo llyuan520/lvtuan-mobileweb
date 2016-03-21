@@ -38,7 +38,7 @@
 				<div class="col col-center" style="text-align: left;line-height: 22px;">
 					<b style="font-size:18px;color:#ff2f5f;">免费咨询</b><br>
 					<font style="font-size:12px;color:#666;">24小时有问必答</font><br>
-					<a class="button button-small" ng-href="#/questionslist" style="border-color:#666;background-color:#004799;color:#fff;min-height: 22px;line-height: 22px;margin-bottom: 0;margin-top:0;border-radius:0;margin-top:10px;padding: 2px 8px 1px;">
+					<a class="button button-small" ng-href="#/questionslist" style="border-color:#004799;background-color:#004799;color:#fff;min-height: 22px;line-height: 22px;margin-bottom: 0;margin-top:0;border-radius:0;margin-top:10px;padding: 2px 8px 1px;">
 					  立即咨询
 					</a>
 				</div>
@@ -76,7 +76,11 @@
 				<div class="title" style="margin-top:0;margin-bottom:5px;font-size: 14px;padding-left:10px;">推荐律师</div>
 		    </div>
 	      <ul class="list">
-	      	<!-- <ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher> -->
+	      	<div ng-if="nodata == false" class="nodate">
+				<i class="nodate-iocn"></i><br>
+				<label>暂无数据！</label>
+			</div>
+	      	<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
             <ion-list>
             	<ion-item class="item item-thumbnail-left i-lawyer-list item-avatar" ng-repeat="item in items" ng-href="#/lawyer/{{item.id}}">
 		          	<img ng-src="{{item.avatar}}" class="item-image" />

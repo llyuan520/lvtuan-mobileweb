@@ -1,5 +1,10 @@
 <ion-view>
     <ion-content>
+        <div ng-if="nodata == false" class="nodate">
+            <i class="nodate-iocn"></i><br>
+            <label>暂无数据！</label>
+        </div>
+        
     	<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 		<ion-list>
         	<ion-item class="item item-thumbnail-left item-complex item-text-wrap"  ng-repeat="item in items" ng-href="#/knowledgeview/{{item.id}}">

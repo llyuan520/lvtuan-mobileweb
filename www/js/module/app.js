@@ -89,7 +89,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
         /*$window.location.href = '/login';*/
         //window.location.reload();
     });
-
+    
 })
 
 .config(function($httpProvider) {
@@ -423,49 +423,6 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       authn: true
     })
 
-    .state('article_lawyer', { //律师-我的文章
-      url: '/article_lawyer',
-      templateUrl: 'template/center/lawyer/article.html',
-      authn: true
-    })
-   .state('article_lawyer.case', { //律师 - 案例分析
-      url: '/case/:class',
-      views: {
-          'article-case': {
-              templateUrl: 'template/center/lawyer/article-case.html',
-              controller: 'caselaywerCtrl'
-          }
-      },
-      authn: true
-    })
-   .state('article_lawyer.advisory', { //律师 - 咨询
-      url: '/advisory/:class',
-      views: {
-          'article-advisory': {
-              templateUrl: 'template/center/lawyer/article-advisory.html',
-              controller: 'caselaywerCtrl'
-          }
-      },
-      authn: true
-    })
-   .state('article_lawyer.lknowledge', { //律师 - 知识
-      url: '/lknowledge/:class',
-      views: {
-          'article-lknowledge': {
-              templateUrl: 'template/center/lawyer/article-lknowledge.html',
-              controller: 'caselaywerCtrl'
-          }
-      },
-      authn: true
-    })
-
-    .state('/lawyer/article/view', { //律师-我的文章 - 文章详情
-      url: '/lawyer/article/view/:id',
-      templateUrl: 'template/center/lawyer/view.html',
-      controller: 'viewarticlelawyerCtrl',
-      authn: true
-    })
-
 /*———————————————————————————— 个人中心公用 ————————————————————————————*/
     .state('about', { //关于律团
       url: '/about',
@@ -562,7 +519,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
     })
 
     .state('graphic', { //图文咨询
-      url: '/graphic',
+      url: '/graphic/:type',
       cache: 'true',
       templateUrl: 'template/lawyer/graphic.html',
       authn: true
@@ -610,147 +567,13 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       authn: true
     })
 
-/********************************** 法律咨询 **********************************/
-    .state('legaladvice', { //首页-法律咨询
-      url: '/legaladvice',
-      templateUrl: 'template/legaladvice.html',
-      controller: 'legaladviceCtrl'
-    })
+/*———————————————————————————— 我的律团- 我的订单 -公用 ————————————————————————————*/
 
-/*———————————————————————————— 我的律团- 律师 -公用 ————————————————————————————*/
-/*    .state('lawyerlvtuan', { //首页 - 我的律团 - 律师的工作台
-      url: '/lawyerlvtuan',
-      cache: 'true', 
-      templateUrl: 'template/mylvtuan/lawyer/lawyerlvtuan.html',
-      controller: 'lawyerlvtuanCtrl'
-    })*/
-/*———————————————————————————— 我的律团- 律师订单 -公用 ————————————————————————————*/
-    .state('workbenchlawyer', { //首页 - 我的律团 - 律师的工作台
-      url: '/workbenchlawyer',
-      templateUrl: 'template/mylvtuan/lawyer/workbench-lawyer.html',
-      controller: 'workbenchLawyerCtrl',
-      authn: true
-    })
-    .state('orderlawyer', { //首页 - 我的律团 - 律师的工作
-      url: '/orderlawyer',
-      templateUrl: 'template/mylvtuan/lawyer/order/order-lawyer.html',
-      authn: true
-    })
-   .state('orderlawyer.all', { //律师订单 - 全部
-      url: '/all',
-      cache: 'true',
-      views: {
-          'order-all': {
-              templateUrl: 'template/mylvtuan/lawyer/order/order-all.html',
-              controller: 'orderAllCtrl'
-          }
-      },
-      authn: true
-    })
-   .state('orderlawyer.new', { //律师订单 - 待受理
-      url: '/new',
-      cache: 'true',
-      views: {
-          'order-new': {
-              templateUrl: 'template/mylvtuan/lawyer/order/order-new.html',
-              controller: 'orderNewCtrl'
-          }
-      },
-      authn: true
-    })
-   .state('orderlawyer.replied', { //律师订单 - 待确认
-      url: '/replied',
-      cache: 'true',
-      views: {
-          'order-replied': {
-              templateUrl: 'template/mylvtuan/lawyer/order/order-replied.html',
-              controller: 'orderRepliedCtrl'
-          }
-      },
-      authn: true
-    })
-   .state('orderlawyer.complete', { //律师订单 - 已完成
-      url: '/complete',
-      cache: 'true',
-      views: {
-          'order-complete': {
-              templateUrl: 'template/mylvtuan/lawyer/order/order-complete.html',
-              controller: 'orderCompleteCtrl'
-          }
-      },
-      authn: true
-    })
-   .state('orderlawyerdetail', { //律师订单 - 订单详情
-      url: '/orderlawyerdetail/:id',
-      templateUrl: 'template/mylvtuan/lawyer/order/order-detail.html',
-      controller: 'orderlawyerDetailCtrl',
-      authn: true
-    })
-    .state('/lawyer/order/comment', { //律师订单-我的订单 - 评价详情
-      url: '/lawyer/order/comment/:id',
-      templateUrl: 'template/mylvtuan/lawyer/order/comment.html',
-      controller: 'commentorderlawyerCtrl',
-      authn: true
-    })
-
-   .state('lawyerquestion', { //首页 - 我的律团 - 律师的咨询
-      url: '/lawyerquestion',
-      templateUrl: 'template/mylvtuan/lawyer/question/question.html',
-      authn: true
-    })
-  .state('lawyerquestion.new', { //律师的咨询 - 待受理
-      url: '/new',
-      cache: 'true',
-      views: {
-          'question-new': {
-              templateUrl: 'template/mylvtuan/lawyer/question/new.html',
-              controller: 'lawyerquestionNewCtrl'
-          }
-      },
-      authn: true
-    })
-  .state('lawyerquestion.replied', { //律师的咨询 - 待确认
-      url: '/replied',
-      cache: 'true',
-      views: {
-          'question-replied': {
-              templateUrl: 'template/mylvtuan/lawyer/question/replied.html',
-              controller: 'lawyerquestionRepliedCtrl'
-          }
-      },
-      authn: true
-    })
-  .state('lawyerquestion.complete', { //律师的咨询 - 待评价
-      url: '/complete',
-      cache: 'true',
-      views: {
-          'question-complete': {
-              templateUrl: 'template/mylvtuan/lawyer/question/complete.html',
-              controller: 'lawyerquestionCompleteCtrl'
-          }
-      },
-      authn: true
-    })
-  
-  .state('lawyer/questions/view', { // 律师的工作台 - 咨询详情
-      url: '/lawyer/questions/view/:id',
-      cache: 'true', 
-      templateUrl: 'template/mylvtuan/lawyer/question/view.html',
-      controller: 'lawyerquestionsviewCtrl',
-      authn: true
-  })
-
-  .state('queryrefer', { // 律师的工作台 - 咨询参考
-      url: '/queryrefer',
-      cache: 'true', 
-      templateUrl: 'template/mylvtuan/lawyer/queryrefer.html',
-      authn: true
-  })
-  .state('queryreferdetail', { //律师的工作台 - 咨询参考详情
-      url: '/queryreferdetail',
-      cache: 'true', 
-      templateUrl: 'template/mylvtuan/lawyer/queryrefer-detail.html',
-      authn: true
+  .state('/lawyer/comment/', { //我的订单 - 评价详情
+    url: '/lawyer/comment/:id',
+    templateUrl: 'template/lawyer/comment.html',
+    controller: 'commentlawyerCtrl',
+    authn: true
   })
 
   .state('easemobmain', { //咨询和订单的一对一咨询 - 即时通讯
@@ -766,179 +589,311 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       authn: true
   })
   
-/*———————————————————————————— 我的律团- 用户 -公用 ————————————————————————————*/
-  .state('userlvtuan', { //首页 - 我的律团 - 用户的工作台
+/*———————————————————————————— 我的律团 - 公用 ————————————————————————————*/
+  .state('userlvtuan', { //首页 - 我的律团 - 工作台
       url: '/userlvtuan',
-      cache: 'true', 
       templateUrl: 'template/mylvtuan/user/userlvtuan.html',
       controller: 'userlvtuanCtrl',
       authn: true
   })
-  .state('userquestion', { //首页 - 我的律团 - 用户的咨询
-      url: '/userquestion',
-      templateUrl: 'template/mylvtuan/user/question/question.html',
+
+
+  //首页 - 我的 - 免费咨询
+  .state('question/gratis', { //首页 - 我的 - 免费咨询
+      url: '/question/gratis',
+      templateUrl: 'template/mylvtuan/question/gratis/question.html',
       authn: true
   })
-  .state('userquestion.new', { //用户的咨询 - 待受理
+  .state('question/gratis.new', { //免费咨询 - 待受理
       url: '/new',
-      cache: 'true',
       views: {
-          'question-new': {
-              templateUrl: 'template/mylvtuan/user/question/new.html',
-              controller: 'questionNewCtrl'
+          'question-gratis-new': {
+              templateUrl: 'template/mylvtuan/question/gratis/new.html',
+              controller: 'questionGratisNewCtrl'
           }
       },
       authn: true
   })
-  .state('userquestion.all', { //用户的咨询 - 全部
-      url: '/all',
-      cache: 'true',
-      views: {
-          'question-all': {
-              templateUrl: 'template/mylvtuan/user/question/all.html',
-              controller: 'questionAllCtrl'
-          }
-      },
-      authn: true
-  })
-  .state('userquestion.replied', { //用户的咨询 - 处理中
-      url: '/replied',
-      cache: 'true',
-      views: {
-          'question-replied': {
-              templateUrl: 'template/mylvtuan/user/question/replied.html',
-              controller: 'questionRepliedCtrl'
-          }
-      },
-      authn: true
-  })
-  .state('userquestion.waitforconfirmation', { //用户的咨询 - 待确认
+  .state('question/gratis.waitforconfirmation', { //免费咨询 - 待确认
       url: '/waitforconfirmation',
-      cache: 'true',
       views: {
-          'question-waitforconfirmation': {
-              templateUrl: 'template/mylvtuan/user/question/waitforconfirmation.html',
-              controller: 'questionWaitforconfirmationCtrl'
+          'question-gratis-waitforconfirmation': {
+              templateUrl: 'template/mylvtuan/question/gratis/waitforconfirmation.html',
+              controller: 'questionGratisWaitforconfirmationCtrl'
           }
       },
       authn: true
   })
-
-  .state('user/question/view', { //首页 - 我的律团 - 用户的咨询
-      url: '/user/question/view/:id',
-      templateUrl: 'template/mylvtuan/user/question/view.html',
-      controller: 'userquestionviewCtrl',
-      authn: true
-  })
-
-  .state('confirmCompletion', { //首页 - 我的律团 - 用户的咨询
-      url: '/confirmCompletion/:id',
-      templateUrl: 'template/mylvtuan/user/question/confirm-completion.html',
-      authn: true
-  })
-
-  .state('orderuser', { //首页 - 我的律团 - 用户的订单
-      url: '/orderuser',
-      templateUrl: 'template/mylvtuan/user/order/order-user.html',
-      authn: true
-  })
-   .state('orderuser.all', { //用户的订单 - 全部
-      url: '/all',
-      cache: 'true',
-      views: {
-          'order-all': {
-              templateUrl: 'template/mylvtuan/user/order/order-all.html',
-              controller: 'userorderAllCtrl'
-          }
-      },
-      authn: true
-    })
-   .state('orderuser.pending', { //用户的订单 - 待付款
-      url: '/pending',
-      cache: 'true',
-      views: {
-          'order-pending': {
-              templateUrl: 'template/mylvtuan/user/order/order-pending.html',
-              controller: 'userorderPendingCtrl'
-          }
-      },
-      authn: true
-    })
-   .state('orderuser.new', { //用户的订单 - 待受理
-      url: '/new',
-      cache: 'true',
-      views: {
-          'order-new': {
-              templateUrl: 'template/mylvtuan/user/order/order-new.html',
-              controller: 'userorderNewCtrl'
-          }
-      },
-      authn: true
-    })
-   .state('orderuser.replied', { //用户的订单 - 待确认
-      url: '/replied',
-      cache: 'true',
-      views: {
-          'order-replied': {
-              templateUrl: 'template/mylvtuan/user/order/order-replied.html',
-              controller: 'userorderRepliedCtrl'
-          }
-      },
-      authn: true
-    })
-   .state('orderuser.waitforevaluation', { //用户的订单 - 待评价
+  .state('question/gratis.waitforevaluation', { //免费咨询 - 待评价
       url: '/waitforevaluation',
-      cache: 'true',
       views: {
-          'order-waitforevaluation': {
-              templateUrl: 'template/mylvtuan/user/order/order-waitforevaluation.html',
-              controller: 'userorderWaitforevaluationCtrl'
+          'question-gratis-waitforevaluation': {
+              templateUrl: 'template/mylvtuan/question/gratis/waitforevaluation.html',
+              controller: 'questionGratisWaitforevaluationCtrl'
           }
       },
       authn: true
     })
-   .state('orderuser.complete', { //用户的订单 - 已完成
+   .state('question/gratis.complete', { //免费咨询 - 已完成
       url: '/complete',
-      cache: 'true',
       views: {
-          'order-complete': {
-              templateUrl: 'template/mylvtuan/user/order/order-complete.html',
-              controller: 'userorderCompleteCtrl'
+          'question-gratis-complete': {
+              templateUrl: 'template/mylvtuan/question/gratis/complete.html',
+              controller: 'questionGratisCompleteCtrl'
           }
       },
       authn: true
     })
-
-   .state('send/mind', { //用户的订单 - 订单详情
+  
+  .state('question/gratis.cancelled', { //免费咨询 - 已取消
+      url: '/cancelled',
+      views: {
+          'question-gratis-cancelled': {
+              templateUrl: 'template/mylvtuan/question/gratis/cancelled.html',
+              controller: 'questionGratisCancelledCtrl'
+          }
+      },
+      authn: true
+  })
+  .state('question/gratis/view', { //免费咨询 - 咨询详情
+      url: '/question/gratis/view/:id',
+      templateUrl: 'template/mylvtuan/question/gratis/view.html',
+      controller: 'questionGratisViewCtrl',
+      authn: true
+  })
+  .state('question/gratis/send/mind', { //免费咨询 - 咨询详情 - 送心意
       url: '/send/mind/:id',
-      templateUrl: 'template/mylvtuan/user/question/send-mind.html',
+      templateUrl: 'template/mylvtuan/question/gratis/send-mind.html',
       authn: true
     })
 
-   .state('userorderdetail', { //用户的订单 - 订单详情
-      url: '/userorderdetail/:id',
-      templateUrl: 'template/mylvtuan/user/order/order-detail.html',
-      controller: 'userOrderDetailCtrl',
-      authn: true
-    })
 
-    .state('user/wallet', { //我的律团-用户的钱包
-      url: '/user/wallet',
-      templateUrl: 'template/mylvtuan/user/wallet/wallet.html',
-      controller: 'userwalletCtrl',
+  //首页 - 我的 - 图文咨询
+  .state('question/paytext', { //首页 - 我的 - 图文咨询
+      url: '/question/paytext',
+      templateUrl: 'template/mylvtuan/question/paytext/question.html',
+      authn: true
+  })
+  .state('question/paytext.new', { //图文咨询 - 待受理
+      url: '/new',
+      views: {
+          'question-paytext-new': {
+              templateUrl: 'template/mylvtuan/question/paytext/new.html',
+              controller: 'questionPaytextNewCtrl'
+          }
+      },
+      authn: true
+  })
+  .state('question/paytext.waitforconfirmation', { //图文咨询 - 待确认
+      url: '/waitforconfirmation',
+      views: {
+          'question-paytext-waitforconfirmation': {
+              templateUrl: 'template/mylvtuan/question/paytext/waitforconfirmation.html',
+              controller: 'questionPaytextWaitforconfirmationCtrl'
+          }
+      },
+      authn: true
+  })
+  .state('question/paytext.waitforevaluation', { //图文咨询 - 待评价
+      url: '/waitforevaluation',
+      views: {
+          'question-paytext-waitforevaluation': {
+              templateUrl: 'template/mylvtuan/question/paytext/waitforevaluation.html',
+              controller: 'questionPaytextWaitforevaluationCtrl'
+          }
+      },
       authn: true
     })
-    .state('user/moneyin', { //我的律团-钱包充值
-      url: '/user/moneyin',
-      templateUrl: 'template/mylvtuan/user/wallet/moneyin.html',
-      controller: 'usermoneyinCtrl',
+   .state('question/paytext.complete', { //图文咨询 - 已完成
+      url: '/complete',
+      views: {
+          'question-paytext-complete': {
+              templateUrl: 'template/mylvtuan/question/paytext/complete.html',
+              controller: 'questionPaytextCompleteCtrl'
+          }
+      },
       authn: true
     })
-    .state('user/moneyout', { //我的律团-提现
-      url: '/user/moneyout',
-      templateUrl: 'template/mylvtuan/user/wallet/moneyout.html',
+  
+  .state('question/paytext.cancelled', { //图文咨询 - 已取消
+      url: '/cancelled',
+      views: {
+          'question-paytext-cancelled': {
+              templateUrl: 'template/mylvtuan/question/paytext/cancelled.html',
+              controller: 'questionPaytextCancelledCtrl'
+          }
+      },
+      authn: true
+  })
+  .state('question/paytext/view', { //图文咨询 - 咨询详情
+      url: '/question/paytext/view/:id',
+      templateUrl: 'template/mylvtuan/question/paytext/view.html',
+      controller: 'questionPaytextViewCtrl',
+      authn: true
+  })
+
+
+
+ //首页 - 我的 - 电话咨询
+  .state('question/payphone', { //首页 - 我的 - 电话咨询
+      url: '/question/payphone',
+      templateUrl: 'template/mylvtuan/question/payphone/question.html',
+      authn: true
+  })
+  .state('question/payphone.new', { //图文咨询 - 待受理
+      url: '/new',
+      views: {
+          'question-payphone-new': {
+              templateUrl: 'template/mylvtuan/question/payphone/new.html',
+              controller: 'questionPayphoneNewCtrl'
+          }
+      },
+      authn: true
+  })
+  .state('question/payphone.waitforconfirmation', { //图文咨询 - 待确认
+      url: '/waitforconfirmation',
+      views: {
+          'question-payphone-waitforconfirmation': {
+              templateUrl: 'template/mylvtuan/question/payphone/waitforconfirmation.html',
+              controller: 'questionPayphoneWaitforconfirmationCtrl'
+          }
+      },
+      authn: true
+  })
+  .state('question/payphone.waitforevaluation', { //图文咨询 - 待评价
+      url: '/waitforevaluation',
+      views: {
+          'question-payphone-waitforevaluation': {
+              templateUrl: 'template/mylvtuan/question/payphone/waitforevaluation.html',
+              controller: 'questionPayphoneWaitforevaluationCtrl'
+          }
+      },
       authn: true
     })
+   .state('question/payphone.complete', { //图文咨询 - 已完成
+      url: '/complete',
+      views: {
+          'question-payphone-complete': {
+              templateUrl: 'template/mylvtuan/question/payphone/complete.html',
+              controller: 'questionPayphoneCompleteCtrl'
+          }
+      },
+      authn: true
+    })
+  
+  .state('question/payphone.cancelled', { //图文咨询 - 已取消
+      url: '/cancelled',
+      views: {
+          'question-payphone-cancelled': {
+              templateUrl: 'template/mylvtuan/question/payphone/cancelled.html',
+              controller: 'questionPayphoneCancelledCtrl'
+          }
+      },
+      authn: true
+  })
+  .state('question/payphone/view', { //图文咨询 - 咨询详情
+      url: '/question/payphone/view/:id',
+      templateUrl: 'template/mylvtuan/question/payphone/view.html',
+      controller: 'questionPayphoneViewCtrl',
+      authn: true
+  })
+
+
+  //首页 - 我的 - 法律顾问
+  .state('question/paycompany', { //首页 - 我的 - 法律顾问
+      url: '/question/paycompany',
+      templateUrl: 'template/mylvtuan/question/paycompany/question.html',
+      authn: true
+  })
+  .state('question/paycompany.new', { //图文咨询 - 待受理
+      url: '/new',
+      views: {
+          'question-paycompany-new': {
+              templateUrl: 'template/mylvtuan/question/paycompany/new.html',
+              controller: 'questionPaycompanyNewCtrl'
+          }
+      },
+      authn: true
+  })
+  .state('question/paycompany.waitforconfirmation', { //图文咨询 - 待确认
+      url: '/waitforconfirmation',
+      views: {
+          'question-paycompany-waitforconfirmation': {
+              templateUrl: 'template/mylvtuan/question/paycompany/waitforconfirmation.html',
+              controller: 'questionPaycompanyWaitforconfirmationCtrl'
+          }
+      },
+      authn: true
+  })
+  .state('question/paycompany.waitforevaluation', { //图文咨询 - 待评价
+      url: '/waitforevaluation',
+      views: {
+          'question-paycompany-waitforevaluation': {
+              templateUrl: 'template/mylvtuan/question/paycompany/waitforevaluation.html',
+              controller: 'questionPaycompanyWaitforevaluationCtrl'
+          }
+      },
+      authn: true
+    })
+   .state('question/paycompany.complete', { //图文咨询 - 已完成
+      url: '/complete',
+      views: {
+          'question-paycompany-complete': {
+              templateUrl: 'template/mylvtuan/question/paycompany/complete.html',
+              controller: 'questionPaycompanyCompleteCtrl'
+          }
+      },
+      authn: true
+    })
+  
+  .state('question/paycompany.cancelled', { //图文咨询 - 已取消
+      url: '/cancelled',
+      views: {
+          'question-paycompany-cancelled': {
+              templateUrl: 'template/mylvtuan/question/paycompany/cancelled.html',
+              controller: 'questionPaycompanyCancelledCtrl'
+          }
+      },
+      authn: true
+  })
+  .state('question/paycompany/view', { //图文咨询 - 咨询详情
+      url: '/question/paycompany/view/:id',
+      templateUrl: 'template/mylvtuan/question/paycompany/view.html',
+      controller: 'questionPaycompanyViewCtrl',
+      authn: true
+  })
+
+  //我的商品
+  .state('commodity', { //我的商品 - 列表
+      url: '/commodity',
+      templateUrl: 'template/mylvtuan/commodity/commodity.html',
+      controller: 'commodityListCtrl',
+      authn: true
+  })
+
+  .state('confirmCompletion', { //首页 - 我的律团 - 用户的评价
+      url: '/confirmCompletion/:id',
+      templateUrl: 'template/mylvtuan/question/confirm-completion.html',
+      authn: true
+  })
+
+  .state('wallet', { //我的律团-用户的钱包
+    url: '/wallet',
+    templateUrl: 'template/mylvtuan/wallet/wallet.html',
+    controller: 'userwalletCtrl',
+    authn: true
+  })
+  .state('moneyin', { //我的律团-钱包充值
+    url: '/moneyin',
+    templateUrl: 'template/mylvtuan/wallet/moneyin.html',
+    controller: 'usermoneyinCtrl',
+    authn: true
+  })
+  .state('moneyout', { //我的律团-提现
+    url: '/moneyout',
+    templateUrl: 'template/mylvtuan/wallet/moneyout.html',
+    authn: true
+  })
     
 
 /********************************** 法律讲堂 **********************************/

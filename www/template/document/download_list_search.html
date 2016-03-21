@@ -18,7 +18,7 @@
 <ion-view hide-tabs="true">
 	<form id="searchForm" name="searchForm" ng-controller="documentlistsearchCtrl">
 		<ion-pane>
-			<ion-header-bar align-title="left" class="bar bar-header bar-light">
+			<ion-header-bar align-title="center" class="bar bar-header bar-light">
 				<!--搜索你想要的内容  -->
 				<div class="item item-input-inset" style="border-radius: 4px;margin-left: 1%;"> 
 					<label class="item-input-wrapper">
@@ -32,6 +32,11 @@
 			</ion-header-bar>
 			
 			<ion-content class="bg-fff">	
+				<div ng-if="nodata == false" class="nodate">
+					<i class="nodate-iocn"></i><br>
+					<label>暂无数据！</label>
+				</div>
+		
 				<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 				<div class="border-bottom" ng-repeat="item in items">
 					<div class="row">

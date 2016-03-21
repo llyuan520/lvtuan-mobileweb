@@ -3,8 +3,8 @@
 .css-form .item-input{padding: 6px 0 5px 0px;}
 </style>
 <ion-view hide-tabs="true">
-		<ion-pane  class="web-body">
-			<ion-header-bar class="bar bar-header bar-light">
+		<ion-pane class="web-body">
+			<ion-header-bar align-title="center" class="bar bar-header bar-light">
 				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back"  ng-href="#/center"></a>
 				<h1 class="title">我的资料</h1>
 			</ion-header-bar>
@@ -16,7 +16,7 @@
 				    		<div class="col col-center row-no-padding">头像</div>
 							<div class="col col-75 col-center row-no-padding">
 								<div style="float: right;height: 80px;" ng-model="user.avatar" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="6MB" ngf-min-height="100" ngf-select="uploadFiles($file,items.user.id)">
-									<img style="border-radius:50%;" src="{{file}}" ngf-thumbnail="user.avatar || '{{file}}'" width="80" height="80">
+									<img style="border-radius:50%;" ng-src="{{file}}" ngf-thumbnail="user.avatar || '{{file}}'" width="80" height="80">
 									<!-- <span class="progress" ng-show="progress >= 0 || progress <= 99 ">
 								      <div style="width:{{progress}}%" ng-bind="progress + '%'"></div>
 								    </span> -->

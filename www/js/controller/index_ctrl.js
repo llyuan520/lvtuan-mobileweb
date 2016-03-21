@@ -56,6 +56,12 @@ lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $loca
 		window.history.back();
 	}
 
+	$scope.jumpGoBack_rel = function(){
+		//$ionicHistory.goBack();
+		window.history.back();
+		window.location.reload();
+	}
+
 	var $body = $('body');    
 	document.title = '律团';    
 	// hack在微信等webview中无法修改document.title的情况    
@@ -151,6 +157,64 @@ lvtuanApp.directive('star', function () {
     }
   };
 });
+
+//显示星星
+lvtuanApp.directive('showstar', function () {
+  return {
+    template: '<ul class="rating" ng-mouseleave="leave()">' +
+        '<li ng-repeat="star in stars" ng-class="star" ng-click="click($index + 1)" ng-mouseover="over($index + 1)">' +
+        '\u2605' +
+        '</li>' +
+        '</ul>',
+    scope: {
+      ratingValue: '=',
+      max: '=',
+      readonly: '@',
+      onHover: '=',
+      onLeave: '='
+    },
+    controller: function($scope){
+    	
+      $scope.showstarValue = $scope.showstarValue || 0;
+      $scope.max = $scope.max || 5;
+      $scope.click = function(val){
+        if ($scope.readonly && $scope.readonly === 'true') {
+          return;
+        }
+        $scope.showstarValue = val;
+      };
+      $scope.over = function(val){
+        $scope.onHover(val);
+      };
+      $scope.leave = function(){
+        $scope.onLeave();
+      }
+    },
+    link: function (scope, elem, attrs) {
+      //elem.css("text-align", "left");
+      var updateStars = function () {
+        scope.stars = [];
+        for (var i = 0; i < scope.max; i++) {
+          scope.stars.push({
+            filled: i < scope.ratingValue
+          });
+        }
+      };
+      updateStars();
+ 
+      scope.$watch('showstarValue', function (oldVal, newVal) {
+        if (newVal) {
+          updateStars();
+        }
+      });
+      scope.$watch('max', function (oldVal, newVal) {
+        if (newVal) {
+          updateStars();
+        }
+      });
+    }
+  };
+});
 //设置加载动画
 lvtuanApp.constant("$ionicLoadingConfig",{
   content: '<ion-spinner icon="ios"></ion-spinner>',animation: 'fade-in',showBackdrop: true,maxWidth: 200,showDelay: 0 
@@ -214,17 +278,19 @@ lvtuanApp.controller("loginCtrl",function($state,$scope,$rootScope,$http,userSer
 })
 
 //用户注册
-lvtuanApp.controller("registerCtrl",function($scope,$rootScope,$http,$interval,userService,authService){
+lvtuanApp.controller("registerCtrl",function($scope,$rootScope,$http,$interval,$ionicLoading,userService,authService){
 
 	//获取验证码
 	$scope.phone_disabled = true;
 	$scope.phonecode = function(phone){
+		$ionicLoading.show();
 		var param = 'phone='+phone;
 		$scope.phone_disabled = false;
 		$http.post('http://'+$rootScope.hostName+'/send-code?'+param
 		).success(function(data) {
 			runTiming();
             layer.show("验证码已发送到您的手机！");
+            $ionicLoading.hide();
         });
 	}
 
@@ -263,7 +329,7 @@ lvtuanApp.controller("registerCtrl",function($scope,$rootScope,$http,$interval,u
 		// 	$scope.params.phonecode,
 		// 	"phone"
 		// )
-
+		$ionicLoading.show();
 		$http.post('http://'+$rootScope.hostName+'/register',
 		{
 			username  		: $scope.params.username,
@@ -289,13 +355,14 @@ lvtuanApp.controller("registerCtrl",function($scope,$rootScope,$http,$interval,u
            }else{
            		location.href='#/center';
            }
+           $ionicLoading.hide();
         });
      
 	}
 })
 
 //修改密码
-lvtuanApp.controller("resetpwdCtrl",function($scope,$http,$rootScope){
+lvtuanApp.controller("resetpwdCtrl",function($scope,$http,$rootScope,$ionicLoading){
 	$scope.user = {};
 	$scope.save = function(user){
 		if(user.old_password == user.new_password && user.old_password == user.new_password_retype && user.new_password == user.new_password_retype){
@@ -308,11 +375,13 @@ lvtuanApp.controller("resetpwdCtrl",function($scope,$http,$rootScope){
 			layer.show("两次输入的密码不一致！");
 			return false;
 		}else{
+			$ionicLoading.show();
 			$http.post('http://'+$rootScope.hostName+'/center/reset_pass', $scope.user
   			).success(function(data) {
 	           layer.show("修改成功！");
 	           $scope.user = {}; //清空数据
 	           location.href='#/login';
+	           $ionicLoading.hide();
 	        });
 		}
 
@@ -320,7 +389,7 @@ lvtuanApp.controller("resetpwdCtrl",function($scope,$http,$rootScope){
 })
 
 //忘记密码
-lvtuanApp.controller("forgotpwdCtrl",function($scope,$http,$rootScope){
+lvtuanApp.controller("forgotpwdCtrl",function($scope,$http,$rootScope,$ionicLoading){
 	$scope.user = {};
 	//获取验证码
 	$scope.phonecode = function(phone){
@@ -329,11 +398,13 @@ lvtuanApp.controller("forgotpwdCtrl",function($scope,$http,$rootScope){
 			layer.show("请输入手机号！");
 			return false;
 		}else{
+			$ionicLoading.show();
 			var param = 'phone='+phone;
 			$http.post('http://'+$rootScope.hostName+'/send-code?'+param
 			).success(function(data) {
 				console.info(data)
 	           layer.show("验证码已发送到您的手机！");
+	           $ionicLoading.hide();
 	        });
 	        return true;
 		}
@@ -342,6 +413,7 @@ lvtuanApp.controller("forgotpwdCtrl",function($scope,$http,$rootScope){
 	$scope.submit = function(user){
 		console.info(user);
 		$scope.user = user;
+		$ionicLoading.show();
 		$http.post('http://'+$rootScope.hostName+'/forgotpwd', $scope.user
 			).success(function(data) {
            $scope.user = {}; //清空数据
@@ -349,12 +421,13 @@ lvtuanApp.controller("forgotpwdCtrl",function($scope,$http,$rootScope){
            sessionStorage.setItem("uid", JSON.stringify($scope.uid));
            $("#forgotForm").hide();
            $("#upwdForm").show();
+           $ionicLoading.hide();
         });
 	}
 })
 
 //找回密码
-lvtuanApp.controller("upwdCtrl",function($scope,$http,$rootScope){
+lvtuanApp.controller("upwdCtrl",function($scope,$http,$rootScope,$ionicLoading){
 
 	$scope.user = {};
 	$scope.submit = function(user){
@@ -367,12 +440,14 @@ lvtuanApp.controller("upwdCtrl",function($scope,$http,$rootScope){
 			layer.show("两次输入的密码不一致！");
 			return false;
 		}else{
+			$ionicLoading.show();
 			$http.post('http://'+$rootScope.hostName+'/forgotpwd/resetpwd/'+$scope.uid, $scope.user
   			).success(function(data) {
 	           layer.show("修改成功！");
 	           sessionStorage.removeItem("uid");
 	           $scope.user = {}; //清空数据
 	           location.href='#/login';
+	           $ionicLoading.hide();
 	        });
 		}
 
@@ -439,7 +514,7 @@ lvtuanApp.controller("groupAttentionCtrl",function($scope,$http,$state,$rootScop
 	$scope.q = '';
 	$scope.$watch('q', function(newVal, oldVal) {
 		if(newVal !== oldVal){
-			page = 1;
+			var page = 1;
 			$scope.items = [];
 			getParams();
     	}
@@ -447,7 +522,7 @@ lvtuanApp.controller("groupAttentionCtrl",function($scope,$http,$state,$rootScop
 
 	//下拉刷新
 	$scope.doRefresh = function() {
-		page = 1;
+		var page = 1;
 		$scope.items = [];
         $scope.loadMore();
         $scope.$broadcast('scroll.refreshComplete');
@@ -484,7 +559,9 @@ lvtuanApp.controller("groupAttentionCtrl",function($scope,$http,$state,$rootScop
 					}
 				}else{
 					if (page == 1) {
-						layer.show('暂无数据！');
+						$scope.moredata = false;
+						$scope.nodata = false;
+						//layer.show('暂无数据！');
 					}
 					$scope.moredata = false;
 				}
@@ -495,7 +572,7 @@ lvtuanApp.controller("groupAttentionCtrl",function($scope,$http,$state,$rootScop
 
 	//加入关注
 	$scope.groupjoin = function(id,index){
-		page = 1;
+		var page = 1;
 		var id = id;
 		$http.post('http://'+$rootScope.hostName+'/group/'+id+'/join?rows_per_page='+rows_per_page+'&page='+page++,
 			{},
@@ -703,46 +780,12 @@ lvtuanApp.controller("groupsiteCtrl",function($scope,$http,$state,$rootScope,$st
 	
 })
 //添加成员
-lvtuanApp.controller("groupaddCtrl",function($scope,$http,$state,$rootScope,$stateParams){
+lvtuanApp.controller("groupaddCtrl",function($scope,$http,$state,$rootScope,$stateParams,listHelper){
 
 	console.info("添加成员");
 	console.info( $stateParams.id);
-	var page = 1; //页数
-    $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
-	$scope.items = [];	//创建一个数组接收后台的数据
 
-    //下拉刷新
-	$scope.doRefresh = function() {
-		page = 1;
-		$scope.items = [];
-        $scope.loadMore();
-    };
-
-    //上拉加载 - 广播
-	$scope.loadMore = function() {
-
-		$http.get('http://'+$rootScope.hostName+'/group/'+$stateParams.id+'/addmember'
-	        ).success(function(data) {
-				if(data.data.length > 0){
-					if(data.data.length > 9){
-						$scope.moredata = true;
-					}else{
-						$scope.moredata = false;
-					}
-					//用于连接两个或多个数组并返回一个新的数组
-					$scope.items = $scope.items.concat(data.data); 
-				}else{
-					layer.show("暂无数据！")
-					$scope.moredata = false;
-					return false;
-				}
-			})
-		    .finally(function() {
-	            $scope.$broadcast('scroll.refreshComplete');
-	            $scope.$broadcast('scroll.infiniteScrollComplete');
-	        });
-	};
-
+	listHelper.bootstrap('/group/'+$stateParams.id+'/addmember', $scope);
 
 	//数组删除的方法
 	Array.prototype.remove = function(index){
@@ -775,57 +818,18 @@ lvtuanApp.controller("groupaddCtrl",function($scope,$http,$state,$rootScope,$sta
 
 	$scope.createSubmit = function(){
 		$http.post('http://'+$rootScope.hostName+'/group/'+$stateParams.id+'/addmember',{
-  					'members'	: $scope.selIds
-		        }).success(function(data) {
+  				'members'	: $scope.selIds
+		    }).success(function(data) {
 		    	location.href='#/group/site/'+$stateParams.id;
 		    });
 	}
 })
 
 //创建圈子
-lvtuanApp.controller("groupcreateCtrl",function($scope,$http,$state,$rootScope,$timeout,$ionicLoading,Upload){
+lvtuanApp.controller("groupcreateCtrl",function($scope,$http,$state,$rootScope,$timeout,$ionicLoading,Upload,listHelper){
 	console.info("创建圈子");
-	var page = 1; //页数
-    $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
-	$scope.items = [];	//创建一个数组接收后台的数据
 
-    //下拉刷新
-	$scope.doRefresh = function() {
-		page = 1;
-		$scope.items = [];
-        $scope.loadMore();
-    };
-
-    //上拉加载 - 广播
-	$scope.loadMore = function() { ///lawyer/list_lawyers
-		$http.get('http://'+$rootScope.hostName+'/group/create?page='+page++,
-	        {
-	        cache: true,
-	        headers: {
-	            'Content-Type': 'application/json' , 
-	            'Authorization': 'bearer ' + $rootScope.token
-	       		}
-	        }).success(function(data) {
-				if(data.data.length > 0){
-					if(data.data.length > 9){
-						$scope.moredata = true;
-					}else{
-						$scope.moredata = false;
-					}
-					//用于连接两个或多个数组并返回一个新的数组
-					$scope.items = $scope.items.concat(data.data); 
-				}else{
-					layer.show("暂无数据！")
-					$scope.moredata = false;
-					return false;
-				}
-			})
-		    .finally(function() {
-	            $scope.$broadcast('scroll.refreshComplete');
-	            $scope.$broadcast('scroll.infiniteScrollComplete');
-	        });
-	};
-
+	listHelper.bootstrap('/group/create', $scope);
 
 	//数组删除的方法
 	Array.prototype.remove = function(index){
@@ -1335,6 +1339,7 @@ lvtuanApp.controller("centerCtrl",function($scope,$http,$rootScope,$ionicPopup,$
 				if(data && data.data){
 					//用于连接两个或多个数组并返回一个新的数组
 					$scope.items = data.data; 
+					localStorage.setItem("paymoney", JSON.stringify($scope.items.money));
 					console.info($scope.items);
 				}else{
 					layer.show('暂无数据！');
@@ -1694,50 +1699,9 @@ lvtuanApp.controller("commentCtrl",function($scope, listHelper) {
 })
 
 //普通用户-我的关注
-lvtuanApp.controller("followedCtrl",function($scope,$rootScope,$http) {
-	var page = 1; //页数
-	var rows_per_page = 5; // 每页的数量
-	if ($scope.rows_per_page) {
-		rows_per_page = $scope.rows_per_page;
-	}
-    $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
-    $scope.items = [];	//创建一个数组接收后台的数据
+lvtuanApp.controller("followedCtrl",function($scope,$rootScope,$http,listHelper) {
 
-    //下拉刷新
-	$scope.doRefresh = function() {
-		page = 1;
-		$scope.items = [];
-        $scope.loadMore();
-        $scope.$broadcast('scroll.refreshComplete');
-    };
-
-    //上拉加载
-	$scope.loadMore = function() {
-		$http.get('http://'+$rootScope.hostName+'/center/mylawyer/followed?rows_per_page='+rows_per_page+'&page='+page)
-			.success(function(data) {
-	        	console.info(data.data)
-	        	if(data && data.data && data.data.length){
-					$scope.items = $scope.items.concat(data.data);
-					$scope.ratingVal = [];
-					for(var i=0; i<$scope.items.length; i++){
-						$scope.ratingVal.push($scope.items[i].average_evaluate_score);
-					}
-					console.info($scope.items);
-					if (data.data.length < rows_per_page) {
-						$scope.moredata = false;
-					} else {
-						$scope.moredata = true;
-					}
-				}else{
-					if (page == 1) {
-						layer.show('暂无数据！');
-					}
-					$scope.moredata = false;
-				}
-				page++;
-				$scope.$broadcast('scroll.infiniteScrollComplete');
-			})
-	};
+	listHelper.bootstrap('/center/mylawyer/followed', $scope);
 
 	//取消关注
 	$scope.follow_del = function(id,index){
@@ -1757,8 +1721,6 @@ lvtuanApp.controller("followedCtrl",function($scope,$rootScope,$http) {
         });
 	}
 	
-
-	//listHelper.bootstrap('/center/mylawyer/followed', $scope);
 })
 
 
@@ -1814,6 +1776,7 @@ lvtuanApp.controller("practitionersCtrl",function($scope,$http,$rootScope,$timeo
 		})
 
 		//获取执业地址
+		$scope.file = "";
 		$scope.address = "";
 		$scope.addres_param = {};
 		$scope.addres = $localStorage.addres || "";
@@ -1938,7 +1901,7 @@ lvtuanApp.controller("practitionersCtrl",function($scope,$http,$rootScope,$timeo
 			$scope.file = items.license_file;
 			$scope.file_path = items.license_file;
 			var param = items.practice_period;
-			$scope.address = items.province +' '+ items.city +' '+ items.district;
+			$scope.address = items.province +''+ items.city +''+ items.district;
 			periods(param);
 		}
 })
@@ -2222,35 +2185,6 @@ lvtuanApp.controller("caseCtrl",function($scope,$http,$rootScope,$stateParams,$l
 
 })
 
-/*———————————————————————————— 律师的个人中心 ————————————————————————————*/
-
-//律师的文章 - 案例分析、咨询、知识
-lvtuanApp.controller("caselaywerCtrl",function($scope, listHelper, $stateParams){
-	listHelper.bootstrap('/center/lawyer/blog/list?class='+$stateParams.class, $scope);
-})
-
-//律师的文章 - 文章详情
-lvtuanApp.controller("viewarticlelawyerCtrl",function($scope,$http,$rootScope,$stateParams,$ionicLoading,$timeout,$ionicPopup){
-	init();
-	function init(){
-		$ionicLoading.show();
-		$http.get('http://'+$rootScope.hostName+'/lawyer/article/'+$stateParams.id+'/view')
-			.success(function(data) {
-	        	console.info(data.data);
-				if(data.data){
-					 $timeout(function () {
-					    $ionicLoading.hide();
-					    $scope.items = data.data; 
-					  });
-					return true;
-				}else{
-					layer.show('暂无数据！');
-					return false;
-				}
-			})
-	}
-})
-
 /*———————————————————————————— 个人中心公用 ————————————————————————————*/
 //个人中心公用-关于律团
 lvtuanApp.controller("aboutCtrl",function($scope,$timeout,$ionicPopup){
@@ -2336,8 +2270,7 @@ lvtuanApp.controller("siteCtrl",function($scope,$http,$rootScope,authService){
 
 /****************************************************** 找律师 ******************************************************/
 //找律师的列表
-lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$location,$ionicLoading,locationService){
-
+lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$location,$ionicLoading,locationService,listHelper){
 	$scope.locations = locationService.getLocation();
 	$scope.city = $scope.locations.city_id;
 
@@ -2391,6 +2324,7 @@ lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$l
 			})
 	}
 
+
 	var page = 1; //页数
 	var rows_per_page = 5; // 每页的数量
 	if ($scope.rows_per_page) {
@@ -2401,7 +2335,7 @@ lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$l
 
 	//根据地区查找律师
 	$scope.searchCity = function(){
-		page = 1;
+		var page = 1;
 		$scope.items = [];
 	    getParams();
 	}
@@ -2410,7 +2344,7 @@ lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$l
 	$scope.q = '';
 	$scope.$watch('q', function(newVal, oldVal) {
 		if(newVal !== oldVal){
-			page = 1;
+			var page = 1;
 			$scope.items = [];
 			getParams();
     	}
@@ -2445,7 +2379,7 @@ lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$l
 
     //下拉刷新
 	$scope.doRefresh = function() {
-		page = 1;
+		var page = 1;
 		$scope.items = [];
         $scope.loadMore();
         $scope.$broadcast('scroll.refreshComplete');
@@ -2470,10 +2404,6 @@ lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$l
 	        	console.info(data.data)
 	        	if(data && data.data && data.data.length){
 					$scope.items = $scope.items.concat(data.data);
-					$scope.ratingVal = [];
-					for(var i=0; i<$scope.items.length; i++){
-						$scope.ratingVal.push($scope.items[i].average_evaluate_score);
-					}
 					console.info($scope.items);
 					if (data.data.length < rows_per_page) {
 						$scope.moredata = false;
@@ -2482,7 +2412,9 @@ lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$l
 					}
 				}else{
 					if (page == 1) {
-						layer.show('暂无数据！');
+						$scope.moredata = false;
+						$scope.nodata = false;
+						//layer.show('暂无数据！');
 					}
 					$scope.moredata = false;
 				}
@@ -2492,6 +2424,7 @@ lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$l
 			})
 	}
 	
+
 	$scope.jumppage = function(id){
 		//$location.path('/lawyer/'+id);
 		location.href='#/lawyer/'+id;
@@ -2548,9 +2481,9 @@ lvtuanApp.controller("viewCtrl",function($scope,$http,$rootScope,$stateParams,ht
 		$ionicLoading.hide();
 	});
 
-   $scope.graphic5 = function(id,index){
+   $scope.graphic5 = function(id,type){
    	sessionStorage.setItem("lawyerId", id);
-   	sessionStorage.setItem("index", index);
+   	/*sessionStorage.setItem("type", type);*/
 
    	var currentUser = authService.getUser();
    	if(currentUser == null){
@@ -2559,7 +2492,7 @@ lvtuanApp.controller("viewCtrl",function($scope,$http,$rootScope,$stateParams,ht
    	}
 	if(currentUser.status == 1 || currentUser.status == 2){
 		//普通用户个人信息
-		location.href='#/graphic';
+		location.href='#/graphic/'+type;
 	}else{
 		layer.show("律师没有开通该项服务!");
 	}
@@ -2619,7 +2552,7 @@ lvtuanApp.controller("advisoryCtrl",function($scope,$http,$rootScope,$stateParam
 })
 
 //律师个人主页-用户评价
-lvtuanApp.controller("evaluateCtrl",function($scope,$http,$rootScope,$stateParams,httpWrapper){
+lvtuanApp.controller("evaluateCtrl",function($scope,$http,$rootScope,$stateParams,listHelper){
 
 	$scope.max = 5;
 	$scope.readonly = true;
@@ -2630,54 +2563,12 @@ lvtuanApp.controller("evaluateCtrl",function($scope,$http,$rootScope,$stateParam
 		$scope.hoverVal = null;
 	}
 	$scope.onChange = function(val){
-		$scope.ratingVal = val;
+		$scope.showstarValue = val;
 	}
 
-	console.info("律师评价");
 	//获取律师的评价列表
-	var page = 1; //页数
-    $scope.moredata = true; 
-    $scope.items = [];	//创建一个数组接收后台的数据
-    //下拉刷新
-	$scope.doRefresh = function() {
-		page = 1;
-		$scope.item = [];
-        $scope.loadMore();
-    };
+	listHelper.bootstrap('/lawyer/'+$stateParams.id+'/evaluations', $scope);
 
-    $scope.loadMore = function(){
-		getEvaluation();
-	}
-	
-	function getEvaluation(){
-		var url = 'http://'+$rootScope.hostName+'/lawyer/'+$stateParams.id+'/evaluations?page='+page;
-		$http.get(url)
-			.success(function(data) {
-				if(data.data.length > 0){
-					$scope.moredata = true;
-					//用于连接两个或多个数组并返回一个新的数组
-					$scope.items = $scope.items.concat(data.data); 
-					$scope.ratingVal = [];
-					for(var i=0; i<$scope.items.length; i++){
-						$scope.ratingVal.push($scope.items[i].evaluate_score);
-					}
-
-				}else{
-					layer.show("暂无数据！")
-					$scope.moredata = false;
-					return false;
-				}
-				page++;
-			})
-		    .finally(function() {
-	            $scope.$broadcast('scroll.refreshComplete');
-	            $scope.$broadcast('scroll.infiniteScrollComplete');
-	        });
-	}
-
-	$scope.$on('$stateChangeSuccess', function() {
-	    $scope.loadMore();
-	});
 })
 
 //律师个人主页-成交记录
@@ -2732,6 +2623,7 @@ lvtuanApp.controller("graphicCtrl",function($scope,$http,$rootScope,$timeout,$st
 	        	layer.show("最多只能上传2个文件或者图片！");
 	        	return false;
 	        }else{
+	        	$ionicLoading.show();
 	        	$scope.files = files;
         		$scope.errFiles = errFiles;
 		        angular.forEach(files, function(file) {
@@ -2745,12 +2637,13 @@ lvtuanApp.controller("graphicCtrl",function($scope,$http,$rootScope,$timeout,$st
 		            });
 
 		            file.upload.then(function (response) {
-		            	var file_name = 'http://'+$rootScope.hostName+'/'+response.data.data.file_name;
-			 			$scope.file.push(file_name);
+		            	var file_path = response.data.data.file_path;
+			 			$scope.file.push(file_path);
 						$scope.file = $scope.file;
 		                $timeout(function () {
 		                    file.result = response.data;
 		                });
+		                $ionicLoading.hide();
 		            }, function (response) {
 		            	var status = response.status
 		                if (response.status > 0)
@@ -2759,12 +2652,13 @@ lvtuanApp.controller("graphicCtrl",function($scope,$http,$rootScope,$timeout,$st
 		                file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
 		                $scope.progress = file.progress;
 		            });
+
 		        });
 		}
     }
-    $scope.type = $stateParams.id;
+    $scope.type = $stateParams.type;
+    localStorage.setItem("type", JSON.stringify($scope.type));
     var lawyerId = sessionStorage.getItem("lawyerId");
-    var index = sessionStorage.getItem("index");
     $scope.user = {};
     //提交问题
 	$scope.submit = function(user){
@@ -2772,21 +2666,20 @@ lvtuanApp.controller("graphicCtrl",function($scope,$http,$rootScope,$timeout,$st
 		if($scope.file.length > 0){
 			$scope.user['file_paths'] = $scope.file;
 		}
-		if(index){
-			$scope.user['type'] = index;
-		}
 		if(lawyerId){
 			$scope.user['lawyer_id'] = lawyerId;
 		}
+
+		console.info($scope.user);
         $ionicLoading.show();
-		httpWrapper.request('http://'+$rootScope.hostName+'/center/pay/question/create','post',$scope.user,
+		httpWrapper.request('http://'+$rootScope.hostName+'/center/question/create/'+$scope.type,'post',$scope.user,
 			function(data){
 				layer.show("提交成功！");
 				$scope.user = {};
 				$scope.files = {};
         		$scope.errFiles = {};
-        		location.href='#/pay/'+data.data.data.id+'?type=question';
-			$ionicLoading.hide()
+        		location.href='#/pay/'+data.data.data+'?type=question';
+				$ionicLoading.hide()
 			},function(data){
 				console.info(data);
 			}
@@ -2842,8 +2735,8 @@ lvtuanApp.controller("questionsCtrl",function($scope,$http,$rootScope,$timeout,$
 		            });
 
 		            file.upload.then(function (response) {
-		            	var file_name = 'http://'+$rootScope.hostName+'/'+response.data.data.file_name;
-			 			$scope.file.push(file_name);
+		            	var file_path = response.data.data.file_path;
+			 			$scope.file.push(file_path);
 						$scope.file = $scope.file;
 		                $timeout(function () {
 		                    file.result = response.data;
@@ -2868,7 +2761,7 @@ lvtuanApp.controller("questionsCtrl",function($scope,$http,$rootScope,$timeout,$
 			$scope.user['file_paths'] = $scope.file;
 		}
         $ionicLoading.show();
-		httpWrapper.request('http://'+$rootScope.hostName+'/question/create','post',$scope.user,
+		httpWrapper.request('http://'+$rootScope.hostName+'/center/question/create/question','post',$scope.user,
 			function(data){
 				layer.show("提交成功！");
 				$scope.user = {};
@@ -2907,7 +2800,7 @@ lvtuanApp.controller("questionslistsearchCtrl",function($http,$scope,$state,$roo
 	$scope.q = '';
 	$scope.$watch('q', function(newVal, oldVal) {
 		if(newVal !== oldVal){
-			page = 1;
+			var page = 1;
 			$scope.items = [];
 	        $scope.loadMore();
 	    }
@@ -2915,7 +2808,7 @@ lvtuanApp.controller("questionslistsearchCtrl",function($http,$scope,$state,$roo
 
 	//下拉刷新
 	$scope.doRefresh = function() {
-		page = 1;
+		var page = 1;
 		$scope.items = [];
         $scope.loadMore();
         $scope.$broadcast('scroll.refreshComplete');
@@ -2941,7 +2834,9 @@ lvtuanApp.controller("questionslistsearchCtrl",function($http,$scope,$state,$roo
 						}
 					}else{
 						if (page == 1) {
-							layer.show('暂无数据！');
+							$scope.moredata = false;
+							$scope.nodata = false;
+							//layer.show('暂无数据！');
 						}
 						$scope.moredata = false;
 					}
@@ -3018,68 +2913,6 @@ lvtuanApp.controller("questionsviewsCtrl",function($http,$scope,$state,$rootScop
 
 /*———————————————————————————— 首页八模块 ————————————————————————————*/
 
-//法律咨询
-lvtuanApp.controller("legaladviceCtrl",function($http,$scope,$rootScope){
-	var page = 1; //页数
-    $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
-    $scope.knowledges = [];	//创建一个数组接收后台的数据
-
-    $scope.search = function(){
-    	page = 1; //页数
-    	$scope.knowledges = [];	//创建一个数组接收后台的数据
-    	getparamq();
-    }
-
-    function getparamq(){
-    	var param = layer.getParams("#search_form");
-    	getUrlq(param)
-    }
-
-    function getUrlq(param){
-    	var url = "";
-    	if(param.q){
-    		url +='http://'+$rootScope.hostName+'/knowledge/article/list_articles?q='+param.q+'&page='+page++;
-    	}else{
-    		url +='http://'+$rootScope.hostName+'/knowledge/article/list_articles?page='+page++;
-    	}
-    	$http.get(url)
-    		.success(function(data) {
-				console.info('法规',data.data)
-				if(data.data.length > 0){
-					if(data.data.length > 9){
-						$scope.moredata = true;
-					}else{
-						$scope.moredata = false;
-					}
-					//用于连接两个或多个数组并返回一个新的数组
-					$scope.knowledges = $scope.knowledges.concat(data.data); 
-				}else{
-					layer.show("暂无数据！")
-					$scope.moredata = false;
-					return false;
-				}
-
-			})
-		    .finally(function() {
-	            $scope.$broadcast('scroll.refreshComplete');
-	            $scope.$broadcast('scroll.infiniteScrollComplete');
-	        });
-
-    }
-
-	 //下拉刷新
-	$scope.doRefresh = function() {
-		page = 1;
-		$scope.knowledges = [];
-        getparamq();
-    };
-
-    //上拉加载 - 法规
-	$scope.loadMore = function() {
-		getparamq();
-	};
-})
-
 //法律讲堂
 lvtuanApp.controller("lawlectureCtrl",function($http,$scope,$state,$rootScope){
 	console.info("法律讲堂");
@@ -3155,173 +2988,10 @@ lvtuanApp.controller("talentviewCtrl",function($http,$scope,$state,$rootScope,$s
 })
 
 
-//首页 - 我的律团 - 律师的工作台
-/*lvtuanApp.controller("lawyerlvtuanCtrl",function($http,$scope,$state,$rootScope){
-	console.info("律师的律团");
-})*/
 /*———————————————————————————— 我的律团 - 律师的律团 ————————————————————————————*/
-//律师的工作 - 律师的订单
-lvtuanApp.controller("workbenchLawyerCtrl",function($http,$scope,$state,$rootScope){
-	//律师个人信息
-	$http.get('http://'+$rootScope.hostName+'/center/lawyer/info')
-		.success(function(data) {
-			if(data && data.data){
-				$scope.items = data.data; 
-			}else{
-				layer.show('暂无数据！');
-				return false;
-			}
-		})
-
-})
-//律师订单 - 全部
-lvtuanApp.controller("orderAllCtrl",function($http,$scope,$rootScope,listHelper,httpWrapper){
-	listHelper.bootstrap('/center/pay/lawyer/question/all', $scope);
-	//删除
-	$scope.remove = function(id,index){
-		httpWrapper.request('http://'+$rootScope.hostName+'/center/lawyer/question/'+id+'/remove','post',null,
-			function(data){
-				$scope.items.splice(index, 1);
-				layer.show("删除成功！");
-			},function(data){
-				console.info(data);
-			}
-		);
-	}
-	//受理
-	$scope.accept = function(id,index){
-		httpWrapper.request('http://'+$rootScope.hostName+'/center/pay/lawyer/question/'+id+'/accept','post',null,
-			function(data){
-				$scope.items.splice(index, 1);
-				layer.show("受理成功！");
-			},function(data){
-				console.info(data);
-			}
-		);
-	}
-	//拒绝
-	$scope.refuse = function(id,index){
-		httpWrapper.request('http://'+$rootScope.hostName+'/center/pay/lawyer/question/'+id+'/refuse','post',null,
-			function(data){
-				$scope.items.splice(index, 1);
-				layer.show("拒绝成功！");
-			},function(data){
-				console.info(data);
-			}
-		);
-	}
-	//查看评价
-	$scope.comment = function(id){
-		location.href='#/lawyer/order/comment/'+id;
-	}
-	//联系客户
-	$scope.ask = function(id){
-		location.href='#/easemobmain/'+id;
-	}
-
-})
-//律师订单 - 待受理
-lvtuanApp.controller("orderNewCtrl",function($scope,$rootScope,listHelper,httpWrapper){
-	listHelper.bootstrap('/center/pay/lawyer/question/new', $scope);
-	//受理
-	$scope.accept = function(id,index){
-		httpWrapper.request('http://'+$rootScope.hostName+'/center/pay/lawyer/question/'+id+'/accept','post',null,
-			function(data){
-				$scope.items.splice(index, 1);
-				layer.show("受理成功！");
-			},function(data){
-				console.info(data);
-			}
-		);
-	}
-	//拒绝
-	$scope.refuse = function(id,index){
-		httpWrapper.request('http://'+$rootScope.hostName+'/center/pay/lawyer/question/'+id+'/refuse','post',null,
-			function(data){
-				$scope.items.splice(index, 1);
-				layer.show("拒绝成功！");
-			},function(data){
-				console.info(data);
-			}
-		);
-	}
-})
-//律师订单 - 待确认
-lvtuanApp.controller("orderRepliedCtrl",function($http,$rootScope,$scope,listHelper){
-	listHelper.bootstrap('/center/pay/lawyer/question/replied', $scope);
-	//联系客户
-	$scope.ask = function(id){
-		location.href='#/easemobmain/'+id;
-	}
-})
-//律师订单 - 已完成
-lvtuanApp.controller("orderCompleteCtrl",function($http,$scope,$rootScope,listHelper,httpWrapper){
-	listHelper.bootstrap('/center/pay/lawyer/question/complete', $scope);
-	//查看评价
-	$scope.comment = function(id){
-		location.href='#/lawyer/order/comment/'+id;
-	}
-	//删除
-	$scope.remove = function(id,index){
-		httpWrapper.request('http://'+$rootScope.hostName+'/center/lawyer/question/'+id+'/remove','post',null,
-			function(data){
-				$scope.items.splice(index, 1);
-				layer.show("删除成功！");
-			},function(data){
-				console.info(data);
-			}
-		);
-	}
-})
-//律师订单 - 详情
-lvtuanApp.controller("orderlawyerDetailCtrl",function($http,$scope,$stateParams,$rootScope,httpWrapper){
-	httpWrapper.get('http://'+$rootScope.hostName+'/center/pay/lawyer/question/'+$stateParams.id+'/view', function(data){
-		$scope.item = data.data;
-		console.info($scope.item);
-	});
-	//删除
-	$scope.remove = function(id){
-		httpWrapper.request('http://'+$rootScope.hostName+'/center/lawyer/question/'+id+'/remove','post',null,
-			function(data){
-				layer.show("删除成功！");
-			},function(data){
-				console.info(data);
-			}
-		);
-	}
-	//受理
-	$scope.accept = function(id){
-		httpWrapper.request('http://'+$rootScope.hostName+'/center/pay/lawyer/question/'+id+'/accept','post',null,
-			function(data){
-				layer.show("受理成功！");
-			},function(data){
-				console.info(data);
-			}
-		);
-	}
-	//拒绝
-	$scope.refuse = function(id){
-		httpWrapper.request('http://'+$rootScope.hostName+'/center/pay/lawyer/question/'+id+'/refuse','post',null,
-			function(data){
-				layer.show("拒绝成功！");
-			},function(data){
-				console.info(data);
-			}
-		);
-	}
-	//查看评价
-	$scope.comment = function(id){
-		location.href='#/lawyer/order/comment/'+id;
-	}
-	//联系客户
-	$scope.ask = function(id){
-		location.href='#/easemobmain/'+id;
-	}
-})
-
 
 //律师订单 - 评价详情
-lvtuanApp.controller("commentorderlawyerCtrl",function($http,$scope,$stateParams,$rootScope,httpWrapper){
+lvtuanApp.controller("commentlawyerCtrl",function($http,$scope,$stateParams,$rootScope,httpWrapper){
 
 	$scope.max = 5;
 	$scope.ratingVal = 5;
@@ -3342,103 +3012,26 @@ lvtuanApp.controller("commentorderlawyerCtrl",function($http,$scope,$stateParams
 });
 
 
-
-
-//律师的工作 - 咨询 － 待受理
-lvtuanApp.controller("lawyerquestionNewCtrl",function($scope,$rootScope,listHelper,httpWrapper){
-	listHelper.bootstrap('/center/lawyer/question/new', $scope);
-	//抢单
-	$scope.to_take = function(id){
-		httpWrapper.request('http://'+$rootScope.hostName+'/question/'+id+'/to_take','post',null,
-			function(data){
-				layer.show("抢单成功！");
-				location.href='#/lawyerquestion/replied';
-			},function(data){
-				console.info(data);
-			}
-		);
-	}
-})
-//律师的工作 - 咨询 － 待确认
-lvtuanApp.controller("lawyerquestionRepliedCtrl",function($scope,$rootScope,$http,listHelper,httpWrapper){
-	listHelper.bootstrap('/center/lawyer/question/replied', $scope);
-	//联系客户
-	$scope.ask = function(id){
-		location.href='#/easemobmain/'+id;
-	}
-})
-//律师的工作 - 咨询 － 已完成
-lvtuanApp.controller("lawyerquestionCompleteCtrl",function($scope,$rootScope,listHelper,httpWrapper){
-	listHelper.bootstrap('/center/lawyer/question/complete', $scope);
-	//查看评价
-	$scope.comment = function(id){
-		location.href='#/lawyer/order/comment/'+id;
-	}
-	//删除
-	$scope.remove = function(id,index){
-		httpWrapper.request('http://'+$rootScope.hostName+'/center/lawyer/question/'+id+'/remove','post',null,
-			function(data){
-				$scope.items.splice(index, 1);
-				layer.show("删除成功！");
-			},function(data){
-				console.info(data);
-			}
-		);
-	}
-})
-
-//律师的工作 - 咨询 - 详情
-lvtuanApp.controller("lawyerquestionsviewCtrl",function($http,$scope,$stateParams,$rootScope,httpWrapper){
-
-	httpWrapper.get('http://'+$rootScope.hostName+'/center/lawyer/question/'+$stateParams.id+'/view', function(data){
-		$scope.items = data.data;
-		console.info($scope.items);
-	});
-	//抢单
-	$scope.to_take = function(id){
-		httpWrapper.request('http://'+$rootScope.hostName+'/question/'+id+'/to_take','post',null,
-			function(data){
-				layer.show("抢单成功！");
-				location.href='#/lawyerquestion/replied';
-			},function(data){
-				console.info(data);
-			}
-		);
-	}
-	//联系客户
-	$scope.ask = function(id){
-			location.href='#/easemobmain/'+id;
-	}
-	//删除
-	$scope.remove = function(id,index){
-		httpWrapper.request('http://'+$rootScope.hostName+'/center/lawyer/question/'+id+'/remove','post',null,
-			function(data){
-				$scope.items.splice(index, 1);
-				layer.show("删除成功！");
-			},function(data){
-				console.info(data);
-			}
-		);
-	}
-})
-
 //咨询和订单的一对一咨询 - 即时通讯
-lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$stateParams,$timeout,$ionicLoading,easemobService){
+lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$stateParams,$timeout,$ionicLoading,easemobService,httpWrapper){
 
-	// $ionicLoading.show();
-	$scope.$on('$ionicView.beforeEnter', function() {  
-		$http.get('http://'+$rootScope.hostName+'/center/question/'+$stateParams.id+'/ask'
-	    ).success(function(data) {
-	    	if (data && data.data) {
-		    	var items = data.data;
-				$scope.curChatUserId = items.user_id;
-				$scope.curUserId = items.easemob_id;
+	$ionicLoading.show();
+	$http.get('http://'+$rootScope.hostName+'/center/question/'+$stateParams.id+'/ask'
+    ).success(function(data) {
+    	if (data && data.data) {
+	    	$scope.items = data.data;
+	    	console.info($scope.items);
+			$scope.curChatUserId = $scope.items.user_id;
+			$scope.curUserId = $scope.items.easemob_id;
+			easemobService.init($scope.items.user_id,"chat");
+			easemobService.login($scope.items.easemob_id.toString(), $scope.items.easemob_pwd);
+		}
+	})
 
-				easemobService.init(items.user_id,"chat");
-				easemobService.login(items.easemob_id.toString(), items.easemob_pwd);
-			}
-		})
-	});
+    $scope.visible = true;
+    $scope.toggle = function(){
+    	$scope.visible = !$scope.visible;
+    }
 
     var page = 1;
     var rows_per_page = 10;
@@ -3531,17 +3124,99 @@ lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$
 
 
 /*———————————————————————————— 我的律团 - 用户的律团 ————————————————————————————*/
-//首页 - 我的律团 - 用户的工作台
-lvtuanApp.controller("userlvtuanCtrl",function($scope,$rootScope){
-	console.info("律师的律团");
+
+//首页 - 我的 - 免费咨询
+//咨询 - 待受理
+lvtuanApp.controller("questionGratisNewCtrl",function($scope,$rootScope,listHelper,httpWrapper){
+	console.info("待受理");
+	listHelper.bootstrap('/center/question/list?type=question&status=new', $scope);
+
+	//取消
+	$scope.to_cancel = function(url,index){
+		httpWrapper.request(url,'post',null,
+			function(data){
+				$scope.items.splice(index, 1);
+				layer.show("取消成功！");
+			},function(data){
+				console.info(data);
+			}
+		);
+	}
+
+	//抢单
+	$scope.to_take = function(url){
+		httpWrapper.request(url,'post',null,
+			function(data){
+				layer.show("抢单成功！");
+				location.href='#/question/gratis/waitforconfirmation';
+			},function(data){
+				console.info(data);
+			}
+		);
+	}
 })
 
-//用户的工作 - 咨询 － 全部
-lvtuanApp.controller("questionAllCtrl",function($http,$scope,$rootScope,listHelper,httpWrapper){
-	listHelper.bootstrap('/center/question/all', $scope);
+//咨询 - 待确认
+lvtuanApp.controller("questionGratisWaitforconfirmationCtrl",function($scope,$rootScope,$ionicPopup,listHelper,httpWrapper){
+	console.info("待确认");
+	listHelper.bootstrap('/center/question/list?type=question&status=replied', $scope);
+
+	//确认
+	$scope.to_complete = function(url,index){
+		var confirmPopup = $ionicPopup.confirm({
+	           title: '律师已经解答您的问题？',
+	           cancelText: '取消',
+	           okText: '确认',
+	        });
+
+			confirmPopup.then(function(res) {
+               if(res) {
+                    httpWrapper.request(url,'post',null,
+						function(data){
+							$scope.items.splice(index, 1);
+							layer.show("确认成功！");
+						},function(data){
+							console.info(data);
+						}
+					);
+               }else{
+                 return false;
+               }
+            });
+	}
+
+	//联系客户
+	$scope.to_ask = function(id){
+		location.href='#/easemobmain/'+id;
+	}
+})
+
+//咨询 - 待评价
+lvtuanApp.controller("questionGratisWaitforevaluationCtrl",function($scope,$rootScope,listHelper,httpWrapper){
+	console.info("待评价");
+	listHelper.bootstrap('/center/question/list?type=question&status=wait_for_evaluation', $scope);
+
+	//送心意
+	$scope.to_tip = function(id){
+		location.href='#/send/mind/'+id;
+	}
+
+	//评价
+	$scope.to_evaluate = function(id,index,type){
+		//$scope.items.splice(index, 1);
+		localStorage.setItem("type", JSON.stringify(type));
+		location.href='#/confirmCompletion/'+id;
+	}
+})
+
+//咨询 - 已完成
+lvtuanApp.controller("questionGratisCompleteCtrl",function($scope,$rootScope,listHelper,httpWrapper){
+	console.info("已完成");
+	listHelper.bootstrap('/center/question/list?type=question&status=complete', $scope);
+
 	//删除
-	$scope.remove = function(id,index){
-		httpWrapper.request('http://'+$rootScope.hostName+'/center/question/'+id+'/remove','post',null,
+	$scope.to_remove = function(url,index){
+		httpWrapper.request(url,'post',null,
 			function(data){
 				$scope.items.splice(index, 1);
 				layer.show("删除成功！");
@@ -3550,53 +3225,149 @@ lvtuanApp.controller("questionAllCtrl",function($http,$scope,$rootScope,listHelp
 			}
 		);
 	}
-	//取消
-	$scope.cancel = function(id,index){
-		httpWrapper.request('http://'+$rootScope.hostName+'/center/question/'+id+'/cancel','post',null,
+
+})
+
+//咨询 - 已取消
+lvtuanApp.controller("questionGratisCancelledCtrl",function($scope,$rootScope,listHelper,httpWrapper){
+	console.info("已取消");
+	listHelper.bootstrap('/center/question/list?type=question&status=cancelled', $scope);
+	
+	//删除
+	$scope.to_remove = function(url,index){
+		httpWrapper.request(url,'post',null,
 			function(data){
-				$scope.items[index] = data.data.data;
-				layer.show("取消成功！");
-			},function(data){
-				console.info(data);
-			}
-		);
-	}
-	//确认
-	$scope.complete = function(id,index){
-		httpWrapper.request('http://'+$rootScope.hostName+'/center/question/'+id+'/to_complete','post',null,
-			function(data){
-				layer.show("确认成功！");
 				$scope.items.splice(index, 1);
+				layer.show("删除成功！");
 			},function(data){
 				console.info(data);
 			}
 		);
 	}
-	//联系律师
-	$scope.ask = function(id){
-		location.href='#/easemobmain/'+id;
+})
+
+//咨询 - 咨询详情
+lvtuanApp.controller("questionGratisViewCtrl",function($scope,$rootScope,$ionicLoading,$stateParams,$ionicPopup,httpWrapper){
+	console.info("咨询详情");
+
+	$ionicLoading.show();
+	//$scope.arry = [];
+	httpWrapper.get('http://'+$rootScope.hostName+'/center/question/'+$stateParams.id+'/view', function(data){
+		$scope.items = data.data;
+
+		/*for (var i = 0; i < $scope.items.attachments.length; i++) {
+			if($scope.items.attachments[i].type == 'image'){
+				$scope.arry.push($scope.items.attachments[i].url);
+			}
+		};*/
+		console.info($scope.items);
+		$ionicLoading.hide();
+	});
+
+
+	//确认
+	$scope.to_complete = function(url,index){
+		var confirmPopup = $ionicPopup.confirm({
+	           title: '律师已经解答您的问题？',
+	           cancelText: '取消',
+	           okText: '确认',
+	        });
+
+			confirmPopup.then(function(res) {
+               if(res) {
+                    httpWrapper.request(url,'post',null,
+						function(data){
+							$scope.items.splice(index, 1);
+							layer.show("确认成功！");
+						},function(data){
+							console.info(data);
+						}
+					);
+               }else{
+                 return false;
+               }
+            });
 	}
 
+	//联系客户
+	$scope.to_ask = function(id){
+		location.href='#/easemobmain/'+id;
+	}
 	//送心意
-	$scope.send = function(id){
+	$scope.to_tip = function(id){
 		location.href='#/send/mind/'+id;
 	}
 
 	//评价
-	$scope.evaluate = function(id,index){
-		$scope.items.splice(index, 1);
+	$scope.to_evaluate = function(id,type){
+		localStorage.setItem("type", JSON.stringify(type));
 		location.href='#/confirmCompletion/'+id;
+	}
+	//取消
+	$scope.to_cancel = function(url){
+		httpWrapper.request(url,'post',null,
+			function(data){
+				layer.show("取消成功！");
+			},function(data){
+				console.info(data);
+			}
+		);
+	}
+
+	//抢单
+	$scope.to_take = function(url){
+		httpWrapper.request(url,'post',null,
+			function(data){
+				layer.show("抢单成功！");
+				location.href='#/question/gratis/waitforconfirmation';
+			},function(data){
+				console.info(data);
+			}
+		);
+	}
+
+	//删除
+	$scope.to_remove = function(url){
+		httpWrapper.request(url,'post',null,
+			function(data){
+				layer.show("删除成功！");
+			},function(data){
+				console.info(data);
+			}
+		);
+	}
+
+	//调用微信查看图片的接口
+	$scope.lookImg = function(){
+		console.info($scope.arry[0]);
+		/*wx.ready(function () {
+		    // 在这里调用 API
+		});*/
+		if (window.WeixinJSBridge) {  
+            if($scope.items.attachments.length > 0){  
+                WeixinJSBridge.invoke('imagePreview', {
+	                	'current':$scope.items.attachments[0], // 当前显示图片的http链接
+	                	'urls': $scope.items.attachments // 需要预览的图片http链接列表
+                });  
+                return;  
+            }  
+
+        }  
+          
 	}
 
 })
 
-//用户的工作 - 咨询 － 待受理
-lvtuanApp.controller("questionNewCtrl",function($scope,$rootScope,$http,listHelper,httpWrapper){
-	listHelper.bootstrap('/center/question/new', $scope);
+
+//首页 - 我的 - 付费 图文咨询
+//咨询 - 待受理
+lvtuanApp.controller("questionPaytextNewCtrl",function($scope,$rootScope,listHelper,httpWrapper){
+	console.info("待受理");
+	listHelper.bootstrap('/center/question/list?type=pay_text&status=new', $scope);
 
 	//取消
-	$scope.cancel = function(id,index){
-		httpWrapper.request('http://'+$rootScope.hostName+'/center/question/'+id+'/cancel','post',null,
+	$scope.to_cancel = function(url,index){
+		httpWrapper.request(url,'post',null,
 			function(data){
 				$scope.items.splice(index, 1);
 				layer.show("取消成功！");
@@ -3605,254 +3376,850 @@ lvtuanApp.controller("questionNewCtrl",function($scope,$rootScope,$http,listHelp
 			}
 		);
 	}
-})
 
-//用户的工作 - 咨询 － 待确认
-lvtuanApp.controller("questionRepliedCtrl",function($http,$scope,$rootScope,listHelper,httpWrapper){
-	listHelper.bootstrap('/center/question/replied', $scope);
-	//确认
-	$scope.complete = function(id,index){
-		httpWrapper.request('http://'+$rootScope.hostName+'/center/question/'+id+'/to_complete','post',null,
+	//拒绝
+	$scope.to_refuse = function(url,index){
+		httpWrapper.request(url,'post',null,
 			function(data){
-				layer.show("确认成功！");
 				$scope.items.splice(index, 1);
-				location.href='#/userquestion/waitforconfirmation';
+				layer.show("拒绝成功！");
 			},function(data){
 				console.info(data);
 			}
 		);
 	}
-	//联系律师
-	$scope.ask = function(id){
-		location.href='#/easemobmain/'+id;
-	}
 
+	//受理
+	$scope.to_accept = function(url){
+		httpWrapper.request(url,'post',null,
+			function(data){
+				layer.show("受理成功！");
+				location.href='#/question/paytext/waitforconfirmation';
+			},function(data){
+				console.info(data);
+			}
+		);
+	}
 })
 
-//用户的工作 - 咨询 － 待评价
-lvtuanApp.controller("questionWaitforconfirmationCtrl",function($scope,$rootScope,listHelper,httpWrapper){
-	listHelper.bootstrap('/center/question/waitforevaluation', $scope);
+//咨询 - 待确认
+lvtuanApp.controller("questionPaytextWaitforconfirmationCtrl",function($scope,$rootScope,$ionicPopup,listHelper,httpWrapper){
+	console.info("待确认");
+	listHelper.bootstrap('/center/question/list?type=pay_text&status=replied', $scope);
+
+	//确认
+	$scope.to_complete = function(url,index){
+		var confirmPopup = $ionicPopup.confirm({
+	           title: '律师已经解答您的问题？',
+	           cancelText: '取消',
+	           okText: '确认',
+	        });
+			confirmPopup.then(function(res) {
+               if(res) {
+                    httpWrapper.request(url,'post',null,
+						function(data){
+							$scope.items.splice(index, 1);
+							layer.show("确认成功！");
+							location.href='#/question/paytext/waitforevaluation';
+						},function(data){
+							console.info(data);
+						}
+					);
+               }else{
+                 return false;
+               }
+            });
+	}
+
+	//联系用户
+	$scope.to_ask = function(id){
+		location.href='#/easemobmain/'+id;
+	}
+})
+
+//咨询 - 待评价
+lvtuanApp.controller("questionPaytextWaitforevaluationCtrl",function($scope,$rootScope,listHelper,httpWrapper){
+	console.info("待评价");
+	listHelper.bootstrap('/center/question/list?type=pay_text&status=wait_for_evaluation', $scope);
+
 	//评价
-	$scope.evaluate = function(id,index){
-		$scope.items.splice(index, 1);
+	$scope.to_evaluate = function(id,index,type){
+		//$scope.items.splice(index, 1);
+		localStorage.setItem("type", JSON.stringify(type));
 		location.href='#/confirmCompletion/'+id;
 	}
 })
 
+//咨询 - 已完成
+lvtuanApp.controller("questionPaytextCompleteCtrl",function($scope,$rootScope,listHelper,httpWrapper){
+	console.info("已完成");
+	listHelper.bootstrap('/center/question/list?type=pay_text&status=complete', $scope);
+
+	//删除
+	$scope.to_remove = function(url,index){
+		httpWrapper.request(url,'post',null,
+			function(data){
+				$scope.items.splice(index, 1);
+				layer.show("删除成功！");
+			},function(data){
+				console.info(data);
+			}
+		);
+	}
+
+})
+
+//咨询 - 已取消
+lvtuanApp.controller("questionPaytextCancelledCtrl",function($scope,$rootScope,listHelper,httpWrapper){
+	console.info("已取消");
+	listHelper.bootstrap('/center/question/list?type=pay_text&status=cancelled', $scope);
+	
+	//删除
+	$scope.to_remove = function(url,index){
+		httpWrapper.request(url,'post',null,
+			function(data){
+				$scope.items.splice(index, 1);
+				layer.show("删除成功！");
+			},function(data){
+				console.info(data);
+			}
+		);
+	}
+})
+
+//咨询 - 咨询详情
+lvtuanApp.controller("questionPaytextViewCtrl",function($scope,$rootScope,$ionicLoading,$stateParams,$ionicPopup,httpWrapper){
+	console.info("咨询详情");
+
+	$ionicLoading.show();
+	httpWrapper.get('http://'+$rootScope.hostName+'/center/question/'+$stateParams.id+'/view', function(data){
+		$scope.items = data.data;
+		console.info($scope.items);
+		$ionicLoading.hide();
+	});
+
+	//取消
+	$scope.to_cancel = function(url){
+		httpWrapper.request(url,'post',null,
+			function(data){
+				layer.show("取消成功！");
+			},function(data){
+				console.info(data);
+			}
+		);
+	}
+
+	//拒绝
+	$scope.to_refuse = function(url){
+		httpWrapper.request(url,'post',null,
+			function(data){
+				layer.show("拒绝成功！");
+			},function(data){
+				console.info(data);
+			}
+		);
+	}
+
+	//受理
+	$scope.to_accept = function(url){
+		httpWrapper.request(url,'post',null,
+			function(data){
+				layer.show("受理成功！");
+				location.href='#/question/paytext/waitforconfirmation';
+			},function(data){
+				console.info(data);
+			}
+		);
+	}
+
+	//确认
+	$scope.to_complete = function(url){
+		var confirmPopup = $ionicPopup.confirm({
+	           title: '律师已经解答您的问题？',
+	           cancelText: '取消',
+	           okText: '确认',
+	        });
+			confirmPopup.then(function(res) {
+               if(res) {
+                    httpWrapper.request(url,'post',null,
+						function(data){
+							layer.show("确认成功！");
+							location.href='#/question/paytext/waitforevaluation';
+						},function(data){
+							console.info(data);
+						}
+					);
+               }else{
+                 return false;
+               }
+            });
+	}
+
+	//联系用户
+	$scope.to_ask = function(id){
+		location.href='#/easemobmain/'+id;
+	}
+
+	//评价
+	$scope.to_evaluate = function(id){
+		location.href='#/confirmCompletion/'+id;
+	}
+
+	//删除
+	$scope.to_remove = function(url){
+		httpWrapper.request(url,'post',null,
+			function(data){
+				layer.show("删除成功！");
+			},function(data){
+				console.info(data);
+			}
+		);
+	}
+
+	//调用微信查看图片的接口
+	$scope.lookImg = function(){
+		console.info($scope.arry[0]);
+		/*wx.ready(function () {
+		    // 在这里调用 API
+		});*/
+		if (window.WeixinJSBridge) {  
+            if($scope.items.attachments.length > 0){  
+                WeixinJSBridge.invoke('imagePreview', {
+	                	'current':$scope.items.attachments[0], // 当前显示图片的http链接
+	                	'urls': $scope.items.attachments // 需要预览的图片http链接列表
+                });  
+                return;  
+            }  
+
+        }  
+          
+	}
+})
+
+
+//首页 - 我的 - 付费 电话咨询
+//咨询 - 待受理
+lvtuanApp.controller("questionPayphoneNewCtrl",function($scope,$rootScope,listHelper,httpWrapper){
+	console.info("待受理");
+	listHelper.bootstrap('/center/question/list?type=pay_phone&status=new', $scope);
+
+	//取消
+	$scope.to_cancel = function(url,index){
+		httpWrapper.request(url,'post',null,
+			function(data){
+				$scope.items.splice(index, 1);
+				layer.show("取消成功！");
+			},function(data){
+				console.info(data);
+			}
+		);
+	}
+
+	//拒绝
+	$scope.to_refuse = function(url,index){
+		httpWrapper.request(url,'post',null,
+			function(data){
+				$scope.items.splice(index, 1);
+				layer.show("拒绝成功！");
+			},function(data){
+				console.info(data);
+			}
+		);
+	}
+
+	//受理
+	$scope.to_accept = function(url){
+		httpWrapper.request(url,'post',null,
+			function(data){
+				layer.show("受理成功！");
+				location.href='#/question/payphone/waitforconfirmation';
+			},function(data){
+				console.info(data);
+			}
+		);
+	}
+})
+
+//咨询 - 待确认
+lvtuanApp.controller("questionPayphoneWaitforconfirmationCtrl",function($scope,$rootScope,$ionicPopup,listHelper,httpWrapper){
+	console.info("待确认");
+	listHelper.bootstrap('/center/question/list?type=pay_phone&status=replied', $scope);
+
+	//确认
+	$scope.to_complete = function(url,index){
+		var confirmPopup = $ionicPopup.confirm({
+	           title: '律师已经解答您的问题？',
+	           cancelText: '取消',
+	           okText: '确认',
+	        });
+			confirmPopup.then(function(res) {
+               if(res) {
+                    httpWrapper.request(url,'post',null,
+						function(data){
+							$scope.items.splice(index, 1);
+							layer.show("确认成功！");
+							location.href='#/question/payphone/waitforevaluation';
+						},function(data){
+							console.info(data);
+						}
+					);
+               }else{
+                 return false;
+               }
+            });
+	}
+
+})
+
+//咨询 - 待评价
+lvtuanApp.controller("questionPayphoneWaitforevaluationCtrl",function($scope,$rootScope,listHelper,httpWrapper){
+	console.info("待评价");
+	listHelper.bootstrap('/center/question/list?type=pay_phone&status=wait_for_evaluation', $scope);
+
+	//评价
+	$scope.to_evaluate = function(id,type){
+		localStorage.setItem("type", JSON.stringify(type));
+		location.href='#/confirmCompletion/'+id;
+	}
+})
+
+//咨询 - 已完成
+lvtuanApp.controller("questionPayphoneCompleteCtrl",function($scope,$rootScope,listHelper,httpWrapper){
+	console.info("已完成");
+	listHelper.bootstrap('/center/question/list?type=pay_phone&status=complete', $scope);
+
+	//删除
+	$scope.to_remove = function(url,index){
+		httpWrapper.request(url,'post',null,
+			function(data){
+				$scope.items.splice(index, 1);
+				layer.show("删除成功！");
+			},function(data){
+				console.info(data);
+			}
+		);
+	}
+
+})
+
+//咨询 - 已取消
+lvtuanApp.controller("questionPayphoneCancelledCtrl",function($scope,$rootScope,listHelper,httpWrapper){
+	console.info("已取消");
+	listHelper.bootstrap('/center/question/list?type=pay_phone&status=cancelled', $scope);
+	
+	//删除
+	$scope.to_remove = function(url,index){
+		httpWrapper.request(url,'post',null,
+			function(data){
+				$scope.items.splice(index, 1);
+				layer.show("删除成功！");
+			},function(data){
+				console.info(data);
+			}
+		);
+	}
+})
+
+//咨询 - 咨询详情
+lvtuanApp.controller("questionPayphoneViewCtrl",function($scope,$rootScope,$ionicLoading,$stateParams,$ionicPopup,httpWrapper){
+	console.info("咨询详情");
+
+	$ionicLoading.show();
+	httpWrapper.get('http://'+$rootScope.hostName+'/center/question/'+$stateParams.id+'/view', function(data){
+		$scope.items = data.data;
+		console.info($scope.items);
+		$ionicLoading.hide();
+	});
+
+	//取消
+	$scope.to_cancel = function(url){
+		httpWrapper.request(url,'post',null,
+			function(data){
+				layer.show("取消成功！");
+			},function(data){
+				console.info(data);
+			}
+		);
+	}
+
+	//拒绝
+	$scope.to_refuse = function(url){
+		httpWrapper.request(url,'post',null,
+			function(data){
+				layer.show("拒绝成功！");
+			},function(data){
+				console.info(data);
+			}
+		);
+	}
+
+	//受理
+	$scope.to_accept = function(url){
+		httpWrapper.request(url,'post',null,
+			function(data){
+				layer.show("受理成功！");
+				location.href='#/question/payphone/waitforconfirmation';
+			},function(data){
+				console.info(data);
+			}
+		);
+	}
+
+	//确认
+	$scope.to_complete = function(url){
+		var confirmPopup = $ionicPopup.confirm({
+	           title: '律师已经解答您的问题？',
+	           cancelText: '取消',
+	           okText: '确认',
+	        });
+			confirmPopup.then(function(res) {
+               if(res) {
+                    httpWrapper.request(url,'post',null,
+						function(data){
+							layer.show("确认成功！");
+							location.href='#/question/payphone/waitforevaluation';
+						},function(data){
+							console.info(data);
+						}
+					);
+               }else{
+                 return false;
+               }
+            });
+	}
+
+	//评价
+	$scope.to_evaluate = function(id,type){
+		localStorage.setItem("type", JSON.stringify(type));
+		location.href='#/confirmCompletion/'+id;
+	}
+
+	//删除
+	$scope.to_remove = function(url,index){
+		httpWrapper.request(url,'post',null,
+			function(data){
+				$scope.items.splice(index, 1);
+				layer.show("删除成功！");
+			},function(data){
+				console.info(data);
+			}
+		);
+	}
+
+})
+
+
+//首页 - 我的 - 付费 法律顾问
+//咨询 - 待受理
+lvtuanApp.controller("questionPaycompanyNewCtrl",function($scope,$rootScope,listHelper,httpWrapper){
+  console.info("待受理");
+  listHelper.bootstrap('/center/question/list?type=pay_company&status=new', $scope);
+
+  //取消
+  $scope.to_cancel = function(url,index){
+    httpWrapper.request(url,'post',null,
+      function(data){
+        $scope.items.splice(index, 1);
+        layer.show("取消成功！");
+      },function(data){
+        console.info(data);
+      }
+    );
+  }
+
+  //抢单
+  $scope.to_take = function(url,index){
+    httpWrapper.request(url,'post',null,
+      function(data){
+        layer.show("抢单成功！");
+        $scope.items.splice(index, 1);
+        location.href='#/question/paycompany/waitforconfirmation';
+      },function(data){
+        console.info(data);
+      }
+    );
+  }
+
+})
+
+//咨询 - 待确认
+lvtuanApp.controller("questionPaycompanyWaitforconfirmationCtrl",function($scope,$rootScope,$ionicPopup,listHelper,httpWrapper){
+  console.info("待确认");
+  listHelper.bootstrap('/center/question/list?type=pay_company&status=replied', $scope);
+
+  //确认
+  $scope.to_complete = function(url,index){
+    var confirmPopup = $ionicPopup.confirm({
+             title: '律师已经与您签署《法律顾问协议》？',
+             cancelText: '取消',
+             okText: '确认',
+          });
+
+  		confirmPopup.then(function(res) {
+               if(res) {
+                    httpWrapper.request(url,'post',null,
+			            function(data){
+			              $scope.items.splice(index, 1);
+			              layer.show("确认成功！");
+			              location.href='#/question/paycompany/waitforevaluation';
+			            },function(data){
+			              console.info(data);
+			            }
+			          );
+               }else{
+                 return false;
+               }
+            });
+  }
+
+
+})
+
+//咨询 - 待评价
+lvtuanApp.controller("questionPaycompanyWaitforevaluationCtrl",function($scope,$rootScope,listHelper,httpWrapper){
+  console.info("待评价");
+  listHelper.bootstrap('/center/question/list?type=pay_company&status=wait_for_evaluation', $scope);
+
+    //评价
+	$scope.to_evaluate = function(id,type){
+		//$scope.items.splice(index, 1);
+		localStorage.setItem("type", JSON.stringify(type));
+		location.href='#/confirmCompletion/'+id;
+	}
+})
+
+//咨询 - 已完成
+lvtuanApp.controller("questionPaycompanyCompleteCtrl",function($scope,$rootScope,listHelper,httpWrapper){
+  console.info("已完成");
+  listHelper.bootstrap('/center/question/list?type=pay_company&status=complete', $scope);
+
+  //删除
+  $scope.to_remove = function(url,index){
+    httpWrapper.request(url,'post',null,
+      function(data){
+        $scope.items.splice(index, 1);
+        layer.show("删除成功！");
+      },function(data){
+        console.info(data);
+      }
+    );
+  }
+
+})
+
+//咨询 - 已取消
+lvtuanApp.controller("questionPaycompanyCancelledCtrl",function($scope,$rootScope,listHelper,httpWrapper){
+  console.info("已取消");
+  listHelper.bootstrap('/center/question/list?type=pay_company&status=cancelled', $scope);
+  
+  //删除
+  $scope.to_remove = function(url,index){
+    httpWrapper.request(url,'post',null,
+      function(data){
+        $scope.items.splice(index, 1);
+        layer.show("删除成功！");
+      },function(data){
+        console.info(data);
+      }
+    );
+  }
+})
+
+//咨询 - 咨询详情
+lvtuanApp.controller("questionPaycompanyViewCtrl",function($scope,$rootScope,$ionicLoading,$stateParams,$ionicPopup,httpWrapper){
+	console.info("咨询详情");
+
+	$ionicLoading.show();
+	httpWrapper.get('http://'+$rootScope.hostName+'/center/question/'+$stateParams.id+'/view', function(data){
+		$scope.items = data.data;
+		console.info($scope.items);
+		$ionicLoading.hide();
+	});
+
+	//取消
+	$scope.to_cancel = function(url,index){
+	httpWrapper.request(url,'post',null,
+	  function(data){
+	    $scope.items.splice(index, 1);
+	    layer.show("取消成功！");
+	  },function(data){
+	    console.info(data);
+	  }
+	);
+	}
+
+	//抢单
+	$scope.to_take = function(url,index){
+	httpWrapper.request(url,'post',null,
+	  function(data){
+	    layer.show("抢单成功！");
+	    $scope.items.splice(index, 1);
+	    location.href='#/question/paycompany/waitforconfirmation';
+	  },function(data){
+	    console.info(data);
+	  }
+	);
+	}
+
+	//确认
+	$scope.to_complete = function(url){
+		var confirmPopup = $ionicPopup.confirm({
+	           title: '律师已经与您签署《法律顾问协议》？',
+	           cancelText: '取消',
+	           okText: '确认',
+	        });
+
+			confirmPopup.then(function(res) {
+               if(res) {
+                    httpWrapper.request(url,'post',null,
+					  function(data){
+					    layer.show("确认成功！");
+					    location.href='#/question/paycompany/waitforevaluation';
+					  },function(data){
+					    console.info(data);
+					  }
+					);
+               }else{
+                 return false;
+               }
+            });
+	}
+
+	//评价
+	$scope.to_evaluate = function(id,type){
+	//$scope.items.splice(index, 1);
+	localStorage.setItem("type", JSON.stringify(type));
+	location.href='#/confirmCompletion/'+id;
+	}
+
+	//删除
+	$scope.to_remove = function(url,index){
+	httpWrapper.request(url,'post',null,
+	  function(data){
+	    $scope.items.splice(index, 1);
+	    layer.show("删除成功！");
+	  },function(data){
+	    console.info(data);
+	  }
+	);
+	}
+  
+
+})
+
+
 //用户的工作 - 咨询 － 评价
-lvtuanApp.controller("confirmCompletionCtrl",['$scope','$http','$rootScope','$stateParams','listHelper','httpWrapper',
-	function($scope,$http,$rootScope,$stateParams,listHelper,httpWrapper){
-		listHelper.bootstrap('/center/question/waitforevaluation', $scope);
+lvtuanApp.controller("confirmCompletionCtrl",['$scope','$http','$rootScope','$stateParams','$ionicLoading','httpWrapper',
+	function($scope,$http,$rootScope,$stateParams,$ionicLoading,httpWrapper){
+		//数组删除的方法
+		Array.prototype.remove = function(index){
+		    if(isNaN(index) || index > this.length){
+		          return false;
+		    }
+		    for(var i=0,n=0;i<this.length;i++){
+		          if(this[i] != this[index]){
+		              this[n++] = this[i];
+		          }
+		    }
+		    this.length -= 1;
+		}
 
-		  $scope.max = 5;
-		  $scope.ratingVal = 5;
-		  $scope.readonly = false;
-		  $scope.onHover = function(val){
-		    $scope.hoverVal = val;
-		  };
-		  $scope.onLeave = function(){
-		    $scope.hoverVal = null;
-		  }
-		  $scope.onChange = function(val){
-		    $scope.ratingVal = val;
-		    console.info(val);
-		  }
+		$scope.type = JSON.parse(localStorage.getItem('type'));
 
-		  //anglarjs 想要input双向绑定，必须先把值初始化一次; 页面input不能清空就是这个问题
-		  $scope.user = {
-		  	evaluate_comment : ""
-		  }
+		$ionicLoading.show();
+		httpWrapper.get('http://'+$rootScope.hostName+'/evaluate/tags', function(data){
+			$scope.items = data.data;
+			console.info($scope.items);
+			$ionicLoading.hide();
+		});
+
+		$scope.evaluates = [
+							{
+								title:'差',
+								value:1
+							},{
+								title:'一般',
+								value:2
+							},{
+								title:'满意',
+								value:3
+							},{
+								title:'很满意',
+								value:4
+							},{
+								title:'推荐',
+								value:5
+							}
+						]
+
+		//anglarjs 想要input双向绑定，必须先把值初始化一次; 页面input不能清空就是这个问题
+		$scope.user = {
+			evaluate_score	: 5,
+			evaluate_comment : ""
+		}
+		$scope.active = 5;
+
+		$scope.evaluate_click = function(val){
+			$scope.active = false;
+			$scope.active = val;
+		}	
+
+		$scope.inShowtags = function(key){
+			var value = false;
+			for(var i=0; i<$scope.tag_arry.length; i++){
+				if($scope.tag_arry[i] == key){
+					value = true;
+				}
+			}
+			return value;
+		}
+
+		$scope.tag_arry = [];
+		$scope.click_tag = function(key,val){
+			if($scope.tag_arry.length < 1){
+				$scope.tag_arry.push(key);
+			}else{
+				for(var i=0; i<$scope.tag_arry.length; i++){
+					if($scope.tag_arry[i] == key){
+						$scope.tag_arry.remove(i);
+						console.info('01',$scope.tag_arry);
+						return false;
+					}
+					continue;
+				}
+
+				$scope.tag_arry.push(key);
+				console.info('1',$scope.tag_arry);
+				return false;
+
+			}
+		}
 
 		  //提交
-		  $scope.submit = function(){
-		  	var data = {};
-		  	if($scope.ratingVal){
-		  		data["evaluate_score"] = $scope.ratingVal;
-		  	}
-		  	if($scope.user.evaluate_comment){
-		  		data["evaluate_comment"] = $scope.user.evaluate_comment;
-		  	}
-		  	data = data;
-		  	httpWrapper.request('http://'+$rootScope.hostName+'/center/question/'+$stateParams.id+'/to_evaluate','post',data,
+		  $scope.submit = function(user){
+			if($scope.tag_arry.length > 1){
+				user['evaluate_tags'] = $scope.tag_arry;
+			}
+		  	httpWrapper.request('http://'+$rootScope.hostName+'/center/question/'+$stateParams.id+'/evaluate','post',user,
 			function(data){
 				layer.show("评价成功！");
-				$scope.user = {};
-				location.href='#/userquestion/waitforconfirmation';
+				$scope.user = {
+				  	evaluate_score	: 5,
+				  	evaluate_comment : ""
+				  }
+				switch($scope.type) {
+					case "pay_text":
+						location.href='#/question/paytext/complete';
+						break;
+					case "pay_phone":
+						location.href='#/question/payphone/complete';
+						break;
+					case "pay_company":
+						location.href='#/question/paycompany/complete';
+						break;
+					default:
+						window.history.back();
+						window.location.reload()
+				}
+
 			},function(data){
 				console.info(data);
 			})
 		  }
 
-		  //取消
-		  $scope.cancel = function(){
-		 	$scope.ratingVal = 5;
-		  	$scope.user = {
-			  	evaluate_comment : ""
-			}
-		  }
 }])
 
-//用户 - 我的咨询 - 详情
-lvtuanApp.controller("userquestionviewCtrl",function($http,$scope,$stateParams,$rootScope,httpWrapper){
-	httpWrapper.get('http://'+$rootScope.hostName+'/center/question/'+$stateParams.id+'/view', function(data){
-		$scope.items = data.data;
-	});
-
-	//删除
-	$scope.remove = function(id){
-		httpWrapper.request('http://'+$rootScope.hostName+'/center/question/'+id+'/remove','post',null,
-			function(data){
-				$scope.items.splice(index, 1);
-				layer.show("删除成功！");
-			},function(data){
-				console.info(data);
-			}
-		);
-	}
-	//取消
-	$scope.cancel = function(id){
-		httpWrapper.request('http://'+$rootScope.hostName+'/center/question/'+id+'/cancel','post',null,
-			function(data){
-				$scope.items[index] = data.data.data;
-				layer.show("取消成功！");
-			},function(data){
-				console.info(data);
-			}
-		);
-	}
-	//确认
-	$scope.to_complete = function(id){
-		httpWrapper.request('http://'+$rootScope.hostName+'/center/question/'+id+'/to_complete','post',null,
-			function(data){
-				layer.show("确认成功！");
-				location.href='#/userquestion/waitforconfirmation';
-			},function(data){
-				console.info(data);
-			}
-		);
-	}
-	//联系律师
-	$scope.ask = function(id){
-		location.href='#/easemobmain/'+id;
-	}
-	//送心意
-	$scope.send = function(id){
-		location.href='#/send/mind/'+id;
-	}
-	//评价
-	$scope.evaluate = function(id,index){
-		$scope.items.splice(index, 1);
-		location.href='#/confirmCompletion/'+id;
-	}
-})
 
 //用户 - 我的咨询 - 送心意
-lvtuanApp.controller("sendmindCtrl",function($http,$scope,$rootScope,$stateParams){
-	$scope.submit = function(){
-		var money = $scope.user.money;
-		if(money <= 0){
-			layer.show("金额不能小于0！");
-			return false
-		}
-		if(money > 1000000){
-			layer.show("金额不能大于1000000！");
-			return false
-		}
-
-		$http.post('http://'+$rootScope.hostName+'/wallet/reward',
-			{
-				user_id : $stateParams.id,
-				money	: money
-			}
-		)
-		.success(function(data) {
-			layer.show("送心意成功。");
-			$scope.user = {};
-		})
+lvtuanApp.controller("sendmindCtrl",function($scope,$http,$rootScope,$stateParams,$ionicPopup,$ionicLoading,authService,wxService){
+	$scope.mymoney = JSON.parse(localStorage.getItem('paymoney'));
+	$scope.user = {
+		radioval : 'qianbao'
 	}
+    //微信支付
+    $scope.submit = function(user){
+        var currentUser = authService.getUser();
+        if(user.radioval == 'weixin'){
+            var attach_params = {};
+            attach_params.platform = 'wechat';
+            attach_params.type = $stateParams.type;
+            attach_params.item_id = $stateParams.id;
+            attach_params.user_id = currentUser.id;
+            attach_params.money = $scope.item.price;
+            attach_str = JSON.stringify(attach_params);
+            var timestamp=Math.round(new Date().getTime()/1000);
+            $ionicLoading.show();
+            $http.get('http://'+$rootScope.hostName+'/payment/jsapiparams/'+wxService.getOpenId()+'/'+attach_str+'?ts='+timestamp,{
+	            }).success(function(data) {
+		            $ionicLoading.hide();
+		            console.info(data);
+		            if (data && data.data && data.data.params) {
+		                    self.params = data.data.params;
+		                    WeixinJSBridge.invoke(
+		                            'getBrandWCPayRequest',
+		                            self.params,
+		                            function(res){
+		                                    WeixinJSBridge.log(res.err_msg);
+		                                    switch(res.err_msg) {
+		                                            case "get_brand_wcpay_request:ok":
+		                                                    $ionicLoading.show();
+		                                                    location.href='#/question/gratis/new';
+		                                                    break;
+		                                            case "get_brand_wcpay_request:fail":
+		                                                    layer.show("支付失败，请稍候再试。");
+		                                                    break;
+		                                            case "get_brand_wcpay_request:cancel":
+		                                                    layer.show("您已取消支付。");
+		                                                    break;
+		                                    }
+		                            }
+		                    );
+		            }
+		        });
+            }else if (user.radioval == 'qianbao') {
+                var confirmPopup = $ionicPopup.confirm({
+	                title: '是否立即付款？',
+	                cancelText: '取消',
+	                okText: '确认',
+	            });
+            	confirmPopup.then(function(res) {
+	                if(res) {
+	                    $http.post('http://'+$rootScope.hostName+'/wallet/reward', 
+	                    {
+							user_id : $stateParams.id,
+							money	: user.money
+						}).success(function(data) {
+							console.info(data);
+							$scope.mymoney = data.data.money;
+							localStorage.setItem("paymoney", JSON.stringify(data.data.money));
+							layer.show("送心意成功。");
+							$scope.user = {
+								money:''
+							};
+	                        location.href='#/question/gratis/waitforevaluation';
+	                    });
+	                }else{
+	                 	return false;
+	                }
+            	});
+            } else {
+					layer.show("请先选择支付方式");
+				}
+    }
 })
-//用户的订单 - 全部
-lvtuanApp.controller("userorderAllCtrl",function($http,$scope,$rootScope,listHelper,httpWrapper){
-	listHelper.bootstrap('/center/pay/question/all', $scope);
 
-	//删除
-	$scope.remove = function(id,index){
-		httpWrapper.request('http://'+$rootScope.hostName+'/center/question/'+id+'/remove','post',null,
-			function(data){
-				$scope.items.splice(index, 1);
-				layer.show("删除成功！");
-			},function(data){
-				console.info(data);
-			}
-		);
-	}
-	//取消
-	$scope.cancel = function(id,index){
+
+
+//我的商品 - 列表
+lvtuanApp.controller("commodityListCtrl",function($scope,$rootScope,listHelper,httpWrapper){
+	console.info("我的商品");
+	listHelper.bootstrap('/center/order/list', $scope);
+
+	//取消订单
+	$scope.to_cancel = function(id,index){
 		httpWrapper.request('http://'+$rootScope.hostName+'/center/question/'+id+'/cancel','post',null,
 			function(data){
-				$scope.items[index] = data.data.data;
-				layer.show("取消成功！");
-			},function(data){
-				console.info(data);
-			}
-		);
-	}
-	//确认
-	$scope.complete = function(id,index){
-		httpWrapper.request('http://'+$rootScope.hostName+'/center/question/'+id+'/to_complete','post',null,
-			function(data){
-				layer.show("确认成功！");
 				$scope.items.splice(index, 1);
-			},function(data){
-				console.info(data);
-			}
-		);
-	}
-	//联系律师
-	$scope.ask = function(id){
-		location.href='#/easemobmain/'+id;
-	}
-
-	//付款
-	$scope.pay = function(id){
-		location.href='#/pay/'+id+'?type=question';
-	}
-
-	//评价
-	$scope.evaluate = function(id,index){
-		$scope.items.splice(index, 1);
-		location.href='#/confirmCompletion/'+id;
-	}
-
-})
-
-//用户的订单 - 待付款
-lvtuanApp.controller("userorderPendingCtrl",function($http,$scope,$rootScope,listHelper,httpWrapper){
-	listHelper.bootstrap('/center/pay/question/waitpay', $scope);
-	//删除
-	$scope.remove = function(id,index){
-		httpWrapper.request('http://'+$rootScope.hostName+'/center/question/'+id+'/remove','post',null,
-			function(data){
-				$scope.items.splice(index, 1);
-				layer.show("删除成功！");
-			},function(data){
-				console.info(data);
-			}
-		);
-	}
-	//付款
-	$scope.pay = function(id){
-		location.href='#/pay/'+id+'?type=question';
-	}
-})
-//用户的订单 - 待受理
-lvtuanApp.controller("userorderNewCtrl",function($scope,$rootScope,listHelper,httpWrapper){
-	listHelper.bootstrap('/center/pay/question/new', $scope);
-	//取消
-	$scope.cancel = function(id,index){
-		httpWrapper.request('http://'+$rootScope.hostName+'/center/question/'+id+'/cancel','post',null,
-			function(data){
-				$scope.items[index] = data.data.data;
 				layer.show("取消成功！");
 			},function(data){
 				console.info(data);
@@ -3860,90 +4227,26 @@ lvtuanApp.controller("userorderNewCtrl",function($scope,$rootScope,listHelper,ht
 		);
 	}
 
-})
-//用户的订单 - 待确认
-lvtuanApp.controller("userorderRepliedCtrl",function($http,$scope,$rootScope,listHelper,httpWrapper){
-	listHelper.bootstrap('/center/pay/question/replied', $scope);
-	//确认
-	$scope.complete = function(id,index){
-		httpWrapper.request('http://'+$rootScope.hostName+'/center/question/'+id+'/to_complete','post',null,
-			function(data){
-				layer.show("确认成功！");
-				$scope.items.splice(index, 1);
-			},function(data){
-				console.info(data);
-			}
-		);
-	}
-	//联系律师
-	$scope.ask = function(id){
-		location.href='#/easemobmain/'+id;
-	}
-})
-//用户的订单 - 待评价
-lvtuanApp.controller("userorderWaitforevaluationCtrl",function($scope,listHelper){
-	listHelper.bootstrap('/center/pay/question/waitforevaluation', $scope);
-	//评价
-	$scope.evaluate = function(id,index){
-		$scope.items.splice(index, 1);
-		location.href='#/confirmCompletion/'+id;
+	//支付订单
+	$scope.to_payorder = function(id,type){
+		localStorage.setItem("type", JSON.stringify(type));
+		location.href='#/pay/'+id+'?type=order';
 	}
 })
 
-
-//用户的订单 - 订单详情
-lvtuanApp.controller("userOrderDetailCtrl",function($http,$scope,$state,$rootScope,$stateParams){
-	$http.get('http://'+$rootScope.hostName+'/center/pay/question/'+$stateParams.id+'/view')
-		.success(function(data) {
-			if(data && data.data){
-				$scope.item = data.data; 
-				return true;
-			}else{
-				layer.show('暂无数据！');
-				return false;
-			}
-		})
-
-	//删除
-	$scope.remove = function(id){
-		httpWrapper.request('http://'+$rootScope.hostName+'/center/question/'+id+'/remove','post',null,
-			function(data){
-				layer.show("删除成功！");
-				location.href='#/orderuser/pending';
-			},function(data){
-				console.info(data);
-			}
-		);
-	}
-	//付款
-	$scope.pay = function(id){
-		location.href='#/pay/'+id+'?type=question';
-	}    
-
-	//取消
-	$scope.cancel = function(id){
-		httpWrapper.request('http://'+$rootScope.hostName+'/center/question/'+id+'/cancel','post',null,
-			function(data){
-				layer.show("取消成功！");
-				location.href='#/orderuser/new';
-			},function(data){
-				console.info(data);
-			}
-		);
-	}
-})
 
 /*———————————————————————————— 首页 - 法律文书 ————————————————————————————*/
 //首页 - 法律文书
 //法律文书
-lvtuanApp.controller("documentlistCtrl",function($http,$scope,$state,$rootScope,$ionicLoading){
+lvtuanApp.controller("documentlistCtrl",function($http,$scope,$state,$rootScope,$ionicLoading,locationService){
 
 	//选择类型
 	$ionicLoading.show();
 	$http.get('http://'+$rootScope.hostName+'/knowledge/document/categories')
 		.success(function(data) {
-	      if(data.data){
+	      if(data.data.length > 0){
 	        $scope.workscopes = data.data;
+	        console.info($scope.workscopes)
 	        sessionStorage.setItem("key", JSON.stringify($scope.workscopes[0].key));
 	        getParams($scope.workscopes[0].key);
 	        $ionicLoading.hide();
@@ -3970,7 +4273,7 @@ lvtuanApp.controller("documentlistCtrl",function($http,$scope,$state,$rootScope,
     $scope.items = [];	//创建一个数组接收后台的数据
     //下拉刷新
 	$scope.doRefresh = function() {
-		page = 1;
+		var page = 1;
 		$scope.items = [];
         $scope.loadMore();
         $scope.$broadcast('scroll.refreshComplete');
@@ -3979,11 +4282,16 @@ lvtuanApp.controller("documentlistCtrl",function($http,$scope,$state,$rootScope,
     //上拉加载
 	$scope.loadMore = function() {
 		$scope.key = JSON.parse(sessionStorage.getItem('key'));
-		getParams($scope.key);
+		if($scope.key != null){
+			getParams($scope.key);
+		}else{
+			$scope.moredata = false;
+		}
+		
 	};
 
 	$scope.ngClick_list = function(key){
-		page = 1;
+		var page = 1;
 		$scope.items = [];
 		sessionStorage.setItem("key", JSON.stringify(key));
 		getParams(key);
@@ -4006,7 +4314,9 @@ lvtuanApp.controller("documentlistCtrl",function($http,$scope,$state,$rootScope,
 					}
 				}else{
 					if (page == 1) {
-						layer.show('暂无数据！');
+						$scope.moredata = false;
+						$scope.nodata = false;
+						//layer.show('暂无数据！');
 					}
 					$scope.moredata = false;
 				}
@@ -4031,7 +4341,7 @@ lvtuanApp.controller("documentlistsearchCtrl",function($http,$scope,$state,$root
 	$scope.q = '';
 	$scope.$watch('q', function(newVal, oldVal) {
 		if(newVal !== oldVal){
-			page = 1;
+			var page = 1;
 			$scope.items = [];
 	        $scope.loadMore();
 	    }
@@ -4039,7 +4349,7 @@ lvtuanApp.controller("documentlistsearchCtrl",function($http,$scope,$state,$root
 
 	//下拉刷新
 	$scope.doRefresh = function() {
-		page = 1;
+		var page = 1;
 		$scope.items = [];
         $scope.loadMore();
         $scope.$broadcast('scroll.refreshComplete');
@@ -4064,7 +4374,9 @@ lvtuanApp.controller("documentlistsearchCtrl",function($http,$scope,$state,$root
 						}
 					}else{
 						if (page == 1) {
-							layer.show('暂无数据！');
+							$scope.moredata = false;
+							$scope.nodata = false;
+							//layer.show('暂无数据！');
 						}
 						$scope.moredata = false;
 					}
@@ -4128,36 +4440,6 @@ lvtuanApp.controller("corporateservicesCtrl",function($http,$scope,$state,$rootS
 						"content" 	: "个案委托八五折起，您可以省下大笔律师费，用于企业发展"
 					}
 				];
-
-    var page = 1; //页数
-    $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
-    $scope.items = [];	//创建一个数组接收后台的数据
-    //下拉刷新
-	$scope.doRefresh = function() {
-		page = 1;
-		$scope.items = [];
-        $scope.loadMore();
-    };
-	//上拉加载
-	$scope.loadMore = function() {
-	$http.get('http://'+$rootScope.hostName+'/company/product/list?page='+page++)
-		.success(function(data) {
-        	console.info("待确认",data.data);
-			if(data.data.length > 0){
-				if(data.data.length > 9){
-					$scope.moredata = true;
-				}else{
-					$scope.moredata = false;
-				}
-				$scope.items = data.data; 
-				return true;
-			}else{
-				$scope.moredata = false;
-				layer.show('暂无数据！');
-				return false;
-			}
-		})
-	};
 
 })
 
@@ -4410,11 +4692,12 @@ lvtuanApp.controller("corporatebuynowCtrl",function($scope,$http,$rootScope,$tim
 		}
 		console.info(param);
 		$ionicLoading.show();
-		$http.post('http://'+$rootScope.hostName+'/company/order/submit',param)
+		$http.post('http://'+$rootScope.hostName+'/center/question/create/pay_company',param)
 			.success(function(data) {
 				$ionicLoading.hide();
 	        	console.log(data.data);
-				location.href='#/pay/'+data.data.post.id+'?type=order';
+	        	localStorage.setItem("type", JSON.stringify('pay_company'));
+				location.href='#/pay/'+data.data+'?type=order';
 	        });
 		
 	}
@@ -4627,63 +4910,7 @@ lvtuanApp.directive("money",function ($filter, $locale) {
 
 //用户律师 - 充值记录
 lvtuanApp.controller("userrecordCtrl",function($scope,$http,$rootScope,$ionicLoading,listHelper){
-	//判断是否是律师
-
-	var page = 1; //页数
-	var rows_per_page = 5; // 每页的数量
-	if ($scope.rows_per_page) {
-		rows_per_page = $scope.rows_per_page;
-	}
-    $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
-    $scope.items = [];	//创建一个数组接收后台的数据
-
-	 //下拉刷新
-	$scope.doRefresh = function() {
-		page = 1;
-		$scope.items = [];
-        $scope.loadMore();
-        $scope.$broadcast('scroll.refreshComplete');
-    };
-
-    //上拉加载
-	$scope.loadMore = function() {
-		//获取推荐的律师 ?is_recommended=1&page=1&rows_per_page=10
-		geturl();
-	};
-
-	function geturl(){
-		var timestamp=Math.round(new Date().getTime()/1000);
-		// 如果url里面已经有params，预先处理一下
-		var params = 'rows_per_page='+rows_per_page+'&page='+page+'&ts='+timestamp;
-  		var url = 'http://'+$rootScope.hostName+'/wallet/record?type=recharge?'+params;
-	    $ionicLoading.show();
-		$http.get(url)
-			.success(function(data) {
-	        	console.info(data.data)
-	        	if(data && data.data && data.data.length){
-					$scope.items = $scope.items.concat(data.data);
-					console.info($scope.items);
-					if (data.data.length < rows_per_page) {
-						$scope.moredata = false;
-					} else {
-						$scope.moredata = true;
-					}
-				}else{
-					if (page == 1) {
-						layer.show('暂无数据！');
-					}
-					$scope.moredata = false;
-				}
-				page++;
-				$scope.$broadcast('scroll.infiniteScrollComplete');
-				$ionicLoading.hide();
-			})
-	}
-	
-	$scope.$on('$stateChangeSuccess', function() {
-	    $scope.loadMore();
-	});
-
+	listHelper.bootstrap('/wallet/record?type=recharge', $scope);
 })
 
 //用户律师 - 提现
@@ -4707,215 +4934,114 @@ lvtuanApp.controller("usermoneyoutCtrl",function($scope,$http,$rootScope){
 	
 })
 //用户律师 - 提现记录
-lvtuanApp.controller("userwithdrawCtrl",function($scope,$http,$rootScope,$ionicLoading,listHelper){
-
-
-	var page = 1; //页数
-	var rows_per_page = 5; // 每页的数量
-	if ($scope.rows_per_page) {
-		rows_per_page = $scope.rows_per_page;
-	}
-    $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
-    $scope.items = [];	//创建一个数组接收后台的数据
-
-	 //下拉刷新
-	$scope.doRefresh = function() {
-		page = 1;
-		$scope.items = [];
-        $scope.loadMore();
-        $scope.$broadcast('scroll.refreshComplete');
-    };
-
-    //上拉加载
-	$scope.loadMore = function() {
-		//获取推荐的律师 ?is_recommended=1&page=1&rows_per_page=10
-		geturl();
-	};
-
-	function geturl(){
-		var timestamp=Math.round(new Date().getTime()/1000);
-		// 如果url里面已经有params，预先处理一下
-		var params = 'rows_per_page='+rows_per_page+'&page='+page+'&ts='+timestamp;
-  		var url = 'http://'+$rootScope.hostName+'/wallet/record?type=withdraw?'+params;
-	    $ionicLoading.show();
-		$http.get(url)
-			.success(function(data) {
-	        	console.info(data.data)
-	        	if(data && data.data && data.data.length){
-					$scope.items = $scope.items.concat(data.data);
-					console.info($scope.items);
-					if (data.data.length < rows_per_page) {
-						$scope.moredata = false;
-					} else {
-						$scope.moredata = true;
-					}
-				}else{
-					if (page == 1) {
-						layer.show('暂无数据！');
-					}
-					$scope.moredata = false;
-				}
-				page++;
-				$scope.$broadcast('scroll.infiniteScrollComplete');
-				$ionicLoading.hide();
-			})
-	}
-	
-	$scope.$on('$stateChangeSuccess', function() {
-	    $scope.loadMore();
-	});
-
+lvtuanApp.controller("userwithdrawCtrl",function($scope,$http,$rootScope,listHelper){
+	listHelper.bootstrap('/wallet/record?type=withdraw', $scope);
 })
 
 //用户律师 - 最新交易记录
 lvtuanApp.controller("userpayallCtrl",function($scope,$http,$rootScope,$ionicLoading,listHelper){
-	var page = 1; //页数
-	var rows_per_page = 5; // 每页的数量
-	if ($scope.rows_per_page) {
-		rows_per_page = $scope.rows_per_page;
-	}
-    $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
-    $scope.items = [];	//创建一个数组接收后台的数据
-
-	 //下拉刷新
-	$scope.doRefresh = function() {
-		page = 1;
-		$scope.items = [];
-        $scope.loadMore();
-        $scope.$broadcast('scroll.refreshComplete');
-    };
-
-    //上拉加载
-	$scope.loadMore = function() {
-		//获取推荐的律师 ?is_recommended=1&page=1&rows_per_page=10
-		geturl();
-	};
-
-	function geturl(){
-		var timestamp=Math.round(new Date().getTime()/1000);
-		// 如果url里面已经有params，预先处理一下
-		var params = 'rows_per_page='+rows_per_page+'&page='+page+'&ts='+timestamp;
-  		var url = 'http://'+$rootScope.hostName+'/wallet/record?'+params;
-	    $ionicLoading.show();
-		$http.get(url)
-			.success(function(data) {
-	        	console.info(data.data)
-	        	if(data && data.data && data.data.length){
-					$scope.items = $scope.items.concat(data.data);
-					console.info($scope.items);
-					if (data.data.length < rows_per_page) {
-						$scope.moredata = false;
-					} else {
-						$scope.moredata = true;
-					}
-				}else{
-					if (page == 1) {
-						layer.show('暂无数据！');
-					}
-					$scope.moredata = false;
-				}
-				page++;
-				$scope.$broadcast('scroll.infiniteScrollComplete');
-				$ionicLoading.hide();
-			})
-	}
-	
-	$scope.$on('$stateChangeSuccess', function() {
-	    $scope.loadMore();
-	});
-
-
+	listHelper.bootstrap('/wallet/record', $scope);
 })
 
 //用户律师 - 微信支付
-lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$ionicPopup,listHelper,authService,wxService,$ionicLoading){
-	$scope.user = {};
-        $ionicLoading.show();
-        $http.get('http://'+$rootScope.hostName+'/center/pay/question/'+$stateParams.id+'/view')
-        .success(function(data) {
-                $ionicLoading.hide();
-                if(data && data.data){
-                        $scope.item = data.data;
-                        console.info($scope.item);
-                        return true;
-                }else{
-                        layer.show('暂无数据！');
-                        return false;
-                }
-        })
+lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$ionicPopup,$ionicLoading,listHelper,httpWrapper,authService,wxService){
+	$scope.type = JSON.parse(localStorage.getItem('type'));
+	$scope.mymoney = JSON.parse(localStorage.getItem('paymoney'));
+	$scope.user = {
+		radioval : 'qianbao'
+	};
+    $ionicLoading.show();
+    $http.get('http://'+$rootScope.hostName+'/center/pay/question/'+$stateParams.id+'/view')
+    .success(function(data) {
+            $ionicLoading.hide();
+            if(data && data.data){
+                    $scope.item = data.data;
+                    console.info($scope.item);
+                    return true;
+            }else{
+                    layer.show('暂无数据！');
+                    return false;
+            }
+    })
 
-        $scope.obj = "";
-        $scope.change = function(val){
-            $scope.obj = val;
-        }
-            //微信支付
-        $scope.pay = function(user){
-            var currentUser = authService.getUser();
-            console.info($scope.obj);
-            if(user.radioval == 'weixin'){
-                var attach_params = {};
-                attach_params.platform = 'wechat';
-	            attach_params.type = $stateParams.type;
-	            attach_params.item_id = $stateParams.id;
-	            attach_params.user_id = currentUser.id;
-	            attach_params.money = $scope.item.price;
-	            attach_str = JSON.stringify(attach_params);
-	            var timestamp=Math.round(new Date().getTime()/1000);
-	            $ionicLoading.show();
-	            $http.get('http://'+$rootScope.hostName+'/payment/jsapiparams/'+wxService.getOpenId()+'/'+attach_str+'?ts='+timestamp,{
-	            }).success(function(data) {
-                $ionicLoading.hide();
-                console.info(data);
-                if (data && data.data && data.data.params) {
-                        self.params = data.data.params;
-                        WeixinJSBridge.invoke(
-                                'getBrandWCPayRequest',
-                                self.params,
-                                function(res){
-                                        WeixinJSBridge.log(res.err_msg);
-                                        switch(res.err_msg) {
-                                                case "get_brand_wcpay_request:ok":
-                                                        $ionicLoading.show();
-                                                        location.href='#/orderuser/new';
-                                                        break;
-                                                case "get_brand_wcpay_request:fail":
-                                                        layer.show("支付失败，请稍候再试。");
-                                                        break;
-                                                case "get_brand_wcpay_request:cancel":
-                                                        layer.show("您已取消支付。");
-                                                        break;
-                                        }
-                                }
-                        );
-                }
-            });
-                }else if (user.radioval == 'qianbao') {
-                        var confirmPopup = $ionicPopup.confirm({
-                   title: '是否立即付款？',
-                   cancelText: '取消',
-                   okText: '确认',
-                 });
-                 confirmPopup.then(function(res) {
-                   if(res) {
-                        $http.post('http://'+$rootScope.hostName+'/center/question/'+$stateParams.id+'/wallet/pay',{},
-                        {
-                            headers: {
-                                'Content-Type': 'application/json' ,
-                                'Authorization': 'bearer ' + $rootScope.token,
+        //微信支付
+    $scope.pay = function(user){
+        var currentUser = authService.getUser();
+        if(user.radioval == 'weixin'){
+            var attach_params = {};
+            attach_params.platform = 'wechat';
+            attach_params.type = $stateParams.type;
+            attach_params.item_id = $stateParams.id;
+            attach_params.user_id = currentUser.id;
+            attach_params.money = $scope.item.price;
+            attach_str = JSON.stringify(attach_params);
+            var timestamp=Math.round(new Date().getTime()/1000);
+            $ionicLoading.show();
+            $http.get('http://'+$rootScope.hostName+'/payment/jsapiparams/'+wxService.getOpenId()+'/'+attach_str+'?ts='+timestamp,{
+            }).success(function(data) {
+            $ionicLoading.hide();
+            console.info(data);
+            if (data && data.data && data.data.params) {
+                    self.params = data.data.params;
+                    WeixinJSBridge.invoke(
+                            'getBrandWCPayRequest',
+                            self.params,
+                            function(res){
+                                    WeixinJSBridge.log(res.err_msg);
+                                    switch(res.err_msg) {
+                                            case "get_brand_wcpay_request:ok":
+                                                    $ionicLoading.show();
+                                                    location.href='#/question/paytext/new';
+                                                    break;
+                                            case "get_brand_wcpay_request:fail":
+                                                    layer.show("支付失败，请稍候再试。");
+                                                    break;
+                                            case "get_brand_wcpay_request:cancel":
+                                                    layer.show("您已取消支付。");
+                                                    break;
+                                    }
                             }
-                        }).success(function(data) {
-                            $scope.items = data.data;
-                            layer.show("付款成功！");
-                            location.href='#/orderuser/new';
-                        });
-                   }else{
-                     return false;
-                   }
-                 });
-                } else {
-			layer.show("请先选择支付方式");
-		}
-        }
+                    );
+            }
+        });
+            }else if (user.radioval == 'qianbao') {
+                var confirmPopup = $ionicPopup.confirm({
+               title: '是否立即付款？',
+               cancelText: '取消',
+               okText: '确认',
+             });
+             confirmPopup.then(function(res) {
+               if(res) { 
+
+	               	httpWrapper.request('http://'+$rootScope.hostName+'/center/question/'+$stateParams.id+'/pay/wallet','post',null,
+						function(data){
+	                        $scope.items = data.data;
+	                        layer.show("付款成功！");
+	                        switch($scope.type) {
+								case "pay_text":
+									location.href='#/question/paytext/new';
+									break;
+								case "pay_phone":
+									location.href='#/question/payphone/new';
+									break;
+								case "pay_company":
+									location.href='#/question/paycompany/new';
+									break;
+							}
+	                        
+						},function(data){
+							console.info(data);
+						}
+					);
+
+               }else{
+                 return false;
+               }
+             });
+            } else {
+		layer.show("请先选择支付方式");
+	}
+    }
 
 })
 

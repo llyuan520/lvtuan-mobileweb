@@ -1,6 +1,6 @@
 <ion-view hide-Tabs="true">
 	<ion-pane>
-		<ion-header-bar class="bar bar-header bar-light headers">
+		<ion-header-bar align-title="center" class="bar bar-header bar-light">
 			<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-href="#/center"></a>
 			<h1 class="title">我的收藏</h1>
 			<button ng-click="toggle()" class="button button-clear button-positive icon-right" type="submit">
@@ -10,6 +10,10 @@
 		</ion-header-bar>
 
 		<ion-content>
+			<div ng-if="nodata == false" class="nodate">
+				<i class="nodate-iocn"></i><br>
+				<label>暂无数据！</label>
+			</div>
 			<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 			    <ul class="list">
 			        <li class="item" ng-class="itemcheckbox" ng-repeat="item in items">

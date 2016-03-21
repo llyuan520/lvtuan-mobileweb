@@ -1,12 +1,12 @@
 <ion-view hide-tabs="true">
-	<div class="bar bar-header bar-light login-header">
+	<div class=" bar-light login-header" style="margin:0;padding:0;border-bottom:0;">
 		<a onclick="window.history.back();">取消</a>
 	</div>
     <ion-pane>
     	<div class="bg_div"></div> 
 		<div class="log-header">
 			<h1>律团</h1>
-			<h4>wdlst.com</h4>
+			<h4>elvtuan.com</h4>
 		</div>
 		<div class="log-content">
 			<form novalidate rol="form" name="loginForm" id="loginForm" ng-controller="loginCtrl" ng-cloak class="ng-cloak">
@@ -36,9 +36,9 @@
 					<a ng-href="#/forgotpwd" class="lef">忘记密码？</a>
 					<a ng-href="#/register" class="rig">还没有账号？快去注册吧。</a>
 				</div>
-				<div class="login login-img2">
+				<div class="login login-img2" style="text-align: center;">
 					<a ng-href="#/wxlogin" class="width weixin"></a>
-					<a ng-href="#" class="width qq" onclick="alert('开发中')"></a>
+					<!-- <a ng-href="#" class="width qq" onclick="alert('开发中')"></a> -->
 				</div>
 				<div class="log-but login-img">
 					<label>第三方登录</label>

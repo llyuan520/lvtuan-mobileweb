@@ -5,7 +5,7 @@
 </style>
 <ion-view hide-tabs="true">
 	<ion-pane>
-		<ion-header-bar class="bar bar-header bar-light">
+		<ion-header-bar align-title="center" class="bar bar-header bar-light">
 			<button class="button button-clear button-positive" ng-click="jumpGoBack()">  
                 <i class="icon icon-left ion-ios-arrow-back"></i>  
             </button>
@@ -15,11 +15,11 @@
 			<ion-list>
 	        	<ion-item class="item">
 	        		<p class="contents"> <b>{{items.title}}</b></p>
-	        		<p class="web-paddingtb5" style="margin:0px;">
+	        		<p class="web-paddingtb5" style="margin-bottom: 10px;">
 				      <label class="lef">{{items.author.author_name}}</label>
 				      <label class="rig">{{items.created_at}}</label>
 				    </p>
-				    <img class="full-image" src="{{items.img}}" style="max-height:150px;">
+				    <img class="full-image" ng-src="{{items.img}}" style="max-height:150px;">
 				    <p class="contents ngbindhtml" ng-bind-html="items.content"></p>
 		        </ion-item>
 	         </ion-list>

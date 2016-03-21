@@ -9,6 +9,11 @@
 					</div>
 				</div>
 			  	<div class="list">
+			  		<div ng-if="nodata == false" class="nodate">
+						<i class="nodate-iocn"></i><br>
+						<label>暂无数据！</label>
+					</div>
+					
 			  		<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 				    <a class="item item-thumbnail-left" style="padding-left:95px;" ng-repeat="item in items">
 				      <img ng-src="{{item.group_avatar}}" style="left:6px;border-radius:5px;">

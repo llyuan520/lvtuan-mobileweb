@@ -3,7 +3,7 @@
 		<div class="bg_div"></div> 
 		<div class="log-header">
 			<h1>律团</h1>
-			<h4>wdlst.com</h4>
+			<h4>elvtuan.com</h4>
 		</div>
 		<div class="log-content">
 			<form novalidate name="forgotForm" id="forgotForm" ng-controller="forgotpwdCtrl" ng-cloak class="ng-cloak">
@@ -13,7 +13,7 @@
 							<i class="ion-android-phone-portrait phone-size"></i>
 						</div>
 						<div class="ion-wap ion-clo">
-							<input type="text" name="username" ng-model="user.username" required ng-pattern="/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/" placeholder="请输入手机号码">
+							<input type="text" name="username" ng-model="user.username" required ng-pattern="/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/" placeholder="请输入手机号码" ng-model-options="{debounce:2000}">
 						</div>
 						<p ng-cloak class="log-but ion-wap ng-cloak" ng-show="forgotForm.username.$invalid && !forgotForm.username.$pristine">请输入合法的手机号码</p>
 					</div>
@@ -22,7 +22,7 @@
 							<i class="ion-email phone-size"></i>
 						</div>
 						<div class="ion-wap ion-clo1">
-							<input type="text" ng-model="user.code" name="code" placeholder="请输入验证码" required>
+							<input type="text" ng-model="user.code" name="code" placeholder="请输入验证码" required ng-model-options="{debounce:2000}">
 						</div>
 						<div class="ion-wap ion-row2">
 							<button ng-click="phonecode(user.username)">获取验证码</button>
@@ -30,7 +30,7 @@
 					</div>
 				</div>
 				<div class="log-but">
-					<button ng-disabled="forgotForm.$invalid" ng-click="submit(user)" class="button button-block button-positive btn-login-button" type="button">下一步</button>
+					<button ng-disabled="forgotForm.$invalid" ng-click="submit(user)" class="button button-block" type="button">下一步</button>
 				</div>
 			</form>
 			<form novalidate name="upwdForm" id="upwdForm" ng-controller="upwdCtrl" ng-cloak class="ng-cloak" style="display: none;">
@@ -40,7 +40,7 @@
 							<i class="ion-android-lock phone-size"></i>
 						</div>
 						<div class="ion-wap ion-clo">
-							<input type="password" ng-model="user.password_1" name="password_1" placeholder="输入新密码(6-18位字符)" ng-minlength="6" ng-maxlength="18" ng-pattern="/^[\@A-Za-z0-9\!\#\$\%\^\&\*\.\~]{6,18}$/" required>
+							<input type="password" ng-model="user.password_1" name="password_1" placeholder="输入新密码(6-18位字符)" ng-minlength="6" ng-maxlength="18" ng-pattern="/^[\@A-Za-z0-9\!\#\$\%\^\&\*\.\~]{6,18}$/" required ng-model-options="{debounce:2000}">
 						</div>
 						<p ng-cloak class="log-but ion-wap ng-cloak" ng-show="upwdForm.password_1.$error.minlength">字符不能小于6个字符</p>
 						<p ng-cloak class="log-but ion-wap ng-cloak" ng-show="upwdForm.password_1.$error.maxlength">字符的长度不能超过18个</p>
@@ -51,7 +51,7 @@
 							<i class="ion-android-lock phone-size"></i>
 						</div>
 						<div class="ion-wap ion-clo">
-							<input type="password" ng-model="user.password_2" name="password_2" placeholder="再次输入新密码" ng-minlength="6" ng-maxlength="18" ng-pattern="/^[\@A-Za-z0-9\!\#\$\%\^\&\*\.\~]{6,18}$/" required>
+							<input type="password" ng-model="user.password_2" name="password_2" placeholder="再次输入新密码" ng-minlength="6" ng-maxlength="18" ng-pattern="/^[\@A-Za-z0-9\!\#\$\%\^\&\*\.\~]{6,18}$/" required ng-model-options="{debounce:2000}">
 						</div>
 						<p ng-cloak class="log-but ion-wap ng-cloak" ng-show="upwdForm.password_2.$error.minlength">字符不能小于6个字符</p>
 						<p ng-cloak class="log-but ion-wap ng-cloak" ng-show="upwdForm.password_2.$error.maxlength">字符的长度不能超过18个</p>
@@ -59,7 +59,7 @@
 					</div>
 				</div>
 				<div class="log-but">
-					<button ng-disabled="upwdForm.$invalid" ng-click="submit(user)" class="button button-block button-positive btn-login-button" type="button">提交</button>
+					<button ng-disabled="upwdForm.$invalid" ng-click="submit(user)" class="button button-block" type="button">提交</button>
 				</div>
 			</form>
 		</div>

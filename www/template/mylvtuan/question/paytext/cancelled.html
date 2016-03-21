@@ -1,0 +1,23 @@
+<ion-view hide-tabs="true" cache-view="false">
+    <ion-content>
+    	<div ng-if="nodata == false" class="nodate">
+			<i class="nodate-iocn"></i><br>
+			<label>暂无数据！</label>
+		</div>
+		
+    	<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+    		<ion-list>
+	        	<ion-item ng-repeat="item in items">
+		        	<p>
+		        		<a class="display" ng-href="#/question/paytext/view/{{item.id}}" style="color: #333;">{{item.title}}</a>
+		        	</p>
+		        	<p class="fc-33">{{item.post_category}}</p>
+		        	<p style="text-align: right;">
+	  					<button class="button button-small button-positive" ng-click="to_remove(item.transitions[0].to_remove,$index)">删除</button>
+	  				</p>
+		        </ion-item>
+	        </ion-list>
+		<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
+
+    </ion-content>
+</ion-view>

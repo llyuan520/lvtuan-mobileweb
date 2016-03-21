@@ -70,14 +70,14 @@
     border-right-color: #eee;
     border-right-style: solid;
     top:8px;
-    right: -12%;
+    right: -13%;
     position: absolute;
 }
 
 </style>
 <ion-view hide-tabs="true">
 		<ion-pane  class="web-body">
-			<ion-header-bar class="bar bar-header bar-light">
+			<ion-header-bar align-title="center" class="bar bar-header bar-light">
 				<button class="button button-clear button-positive pull-left" ng-click="jumpGo('#/index')">  
 	                <i class="icon icon-left ion-ios-arrow-back"></i>  
 	            </button>
@@ -89,7 +89,7 @@
 				
 			<div class="main">
 				<div class="wsfb">
-					<img src="../img/wsfb.png" width="48" height="58">
+					<img ng-src="../img/wsfb.png" width="48" height="58">
 					<h5>文书范本</h5>
 				</div>
 				<div class="scroll1">
@@ -103,6 +103,11 @@
 			</div>
 
 			<ion-content  class="scroll2">	
+				<div ng-if="nodata == false" class="nodate">
+					<i class="nodate-iocn"></i><br>
+					<label>暂无数据！</label>
+				</div>
+
 				<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 				<div class="border-bottom" ng-repeat="item in items">
 					<div class="row">

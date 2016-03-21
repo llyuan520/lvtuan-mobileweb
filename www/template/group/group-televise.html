@@ -3,6 +3,11 @@
 </a>
 <ion-view cache-view="false">
     <ion-content>
+    	<div ng-if="nodata == false" class="nodate">
+			<i class="nodate-iocn"></i><br>
+			<label>暂无数据！</label>
+		</div>
+		
 		<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 		<ion-list>
 			<div class="item televise-lists" ng-repeat="item in items" >

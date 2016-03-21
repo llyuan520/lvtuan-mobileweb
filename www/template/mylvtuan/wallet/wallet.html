@@ -1,0 +1,144 @@
+<ion-view hide-tabs="true" cache-view="false">
+		<ion-pane>
+			<ion-header-bar align-title="center" class="bar bar-header bar-light">
+				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-href="#/center"></a>
+				<h1 class="title">我的钱包</h1>
+			</ion-header-bar>
+			<ion-content>
+				<div class="list positive-bg" style="margin-bottom:0;">
+					<div class="row" style="height: 105px;">
+					  <div class="col col-25 col-center">
+					  		<div style="background:url('../img/wallet.png') 0 0 no-repeat;background-size: 50%;position: absolute;top: 30px;width: 100%;height: 100%;"></div>
+					  </div>
+					  <div class="col col-center">
+					  	<a style="color:#fff;" ng-href="#/info">
+			      			<label style="font-size:16px;">账户余额</label>
+			      			<br>
+			      			<label style="font-size:20px;">{{items.money}}</label>  <font size="1">元</font>
+			      		</a>
+					  </div>
+					  <div class="col col-25 col-center" style="text-align: right;">
+					  		<button class="button button-small button-light" style="padding: 0 12px;border-color: #fff;color: #004799;" ng-click="jumpGo('#/moneyin')">充值</button>
+					  		<div class="height10"></div>
+					  		<button class="button button-small button-light" style="padding: 0 12px;border-color: #fff;color: #004799;" ng-click="jumpGo('#/moneyout')">提现</button>
+					  </div>
+					</div>
+			    </div>
+			    <div class="item item-divider">
+			    	<img ng-rc="../img/meny.png" style="vertical-align: middle;width: 6%;"> 交易记录
+			    </div>
+			    
+		        <div class="slideBox">
+					<div class="hd tabs">
+					  <a ng-repeat="tab in tabs"  ng-class="{active:isActiveTab(tab.url)}"  ng-click="onClickTab(tab)" class="tab-item" >{{tab.title}}</a>
+					</div>
+					<div class="bd">
+						<div ng-include="currentTab" ></div>
+					</div>
+				</div>
+
+			
+
+			   
+			</ion-content>
+		</ion-pane>
+</ion-view>
+
+<!-- 最新交易记录 -->
+<script type="text/ng-template" id="latest_record.tpl.html">
+<div ng-controller="userpayallCtrl">
+	<div ng-if="nodata == false" class="nodate">
+		<i class="nodate-iocn"></i><br>
+		<label>暂无数据！</label>
+	</div>
+
+	<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+	<div class="list">
+    	<ion-item class="item padding5" ng-repeat="item in items">
+			<div class="row">
+			    <div class="col">
+                    {{item.type}}
+                </div>
+			    <div class="col textright">
+                    {{item.direction}} ￥{{item.sum}}
+                </div>
+			</div>
+			<div class="row">
+			    <div class="col">
+                    {{item.created_at.date}}
+                </div>
+			    <div class="col textright">
+                    {{item.status}}
+                </div>
+			</div>
+        </ion-item>
+    </div>
+    <ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
+</div>
+</script>
+
+<!-- 充值记录 -->
+<script type="text/ng-template" id="recharge_record.tpl.html">
+<div ng-controller="userrecordCtrl">
+	<div ng-if="nodata == false" class="nodate">
+		<i class="nodate-iocn"></i><br>
+		<label>暂无数据！</label>
+	</div>
+
+	<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+	<div class="list">
+    	<ion-item class="item padding5" ng-repeat="item in items">
+    		<div class="row">
+			    <div class="col">
+                    {{item.type}}
+                </div>
+			    <div class="col textright">
+                    {{item.direction}} ￥{{item.sum}}
+                </div>
+			</div>
+			<div class="row">
+			    <div class="col">
+                    {{item.created_at.date}}
+                </div>
+			    <div class="col textright">
+                    {{item.status}}
+                </div>
+			</div>
+        </ion-item>
+    </div>
+	<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" divstance="1%"> </ion-infinite-scroll>
+</div>
+</script>
+
+<!-- 提现记录 -->
+<script type="text/ng-template" id="withdraw_record.tpl.html">
+<div ng-controller="userwithdrawCtrl">
+	<div ng-if="nodata == false" class="nodate">
+		<i class="nodate-iocn"></i><br>
+		<label>暂无数据！</label>
+	</div>
+	
+	<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+	<div class="list">
+    	<ion-item class="item padding5" ng-repeat="item in items">
+		    <div class="row">
+			    <div class="col">
+                    {{item.type}}
+                </div>
+			    <div class="col textright">
+                    {{item.direction}} ￥{{item.sum}}
+                </div>
+			</div>
+			<div class="row">
+			    <div class="col">
+                    {{item.created_at.date}}
+                </div>
+			    <div class="col textright">
+                    {{item.status}}
+                </div>
+			</div>
+        </ion-item>
+    </div>
+	<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" divstance="1%"> </ion-infinite-scroll>
+</div>
+</script>

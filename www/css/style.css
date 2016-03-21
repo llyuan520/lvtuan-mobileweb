@@ -29,6 +29,7 @@ body, html, .pane, .ionic-body,h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, 
 .item h2.fc-ee,.error{
     font-size: 14px;
 }
+.item>p>a.display{width: 100%;display: inline-block;line-height: 25px}
 .fc-red,.error,.item p.fc-red,.item p.error{
     color: #FF0000;
 }
@@ -50,8 +51,11 @@ body, html, .pane, .ionic-body,h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, 
 .padding_bottom5{
     padding-bottom: 5px;
 }
+.padding_bottom16{
+    padding-bottom: 16px;
+}
 .item-icon-left .icon.bgtag{
-    background-color: #00cafa;
+    background-color: #004799;
     color: #fff;
     z-index: 1;
     display: inline-block;
@@ -65,11 +69,10 @@ body, html, .pane, .ionic-body,h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, 
     height: auto;
     top: 15px;
 }
-
 /*----------*/
-.bar.bar-light{
+/*.bar.bar-light{
    border-bottom: 1px solid #999;
-}
+}*/
 .nav-bar-title {
     line-height: 2em;
     vertical-align: middle;
@@ -82,7 +85,7 @@ body, html, .pane, .ionic-body,h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, 
 }
 
 .slider-pager .slider-pager-page {
-    color:#00cafa;
+    color:#004799;
 }
 .ng-cloak{
     display: none !important;
@@ -99,9 +102,9 @@ body, html, .pane, .ionic-body,h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, 
 .clearfix { *zoom:1; }
 
 /*login*/
-a, a:link, a:visited, a:active, a:hover ,.positive, a.positive{
+a, a:link, a:visited, a:active, a:hover{
     text-decoration: none;
-    color: #00cafa;
+    color: #666;
 }
 .a-left{
     text-align: left;
@@ -229,8 +232,8 @@ a, a:link, a:visited, a:active, a:hover ,.positive, a.positive{
 .ion-chevron-down:before {margin-top: 5px;}
 .tab-item.tab-item-active, .tab-item.active, .tab-item.activated {
     opacity: 1;
-    color:#00cafa;
-    border-bottom: 2px solid #00cafa;
+    color:#004799;
+    border-bottom: 2px solid #004799;
 }
 .item .reply{  
     overflow: visible;
@@ -400,7 +403,7 @@ img.avatar{
     height: 49px;
 }
 .slideBox .tabs a.active{
-    color: #00cafa;
+    color: #004799;
     height: 49px;
 }
 
@@ -490,97 +493,22 @@ ul.rating {
 /*送心意样式*/
 .mind-pic {
     width: 100%;
-    height: 185px;
+    height: 285px;
     padding-top: 15px;
-    background: url("../img/mind-letter.png") 0 0 no-repeat;
-    background-size: 100% 100%;
+    background: #fff url("../img/mind-letter.png") 0 0 no-repeat;
+    background-size: contain;
 }
 .mind-pic div {
-    color: #fff;
     text-align: center;
+    height: 35px;
+    line-height: 35px;
 }
 .mind-pic div span, .mind-pic div strong, .mind-pic div i {
     font-weight: normal;
     font-size: 14px;
 }
-.mind-pic input {
-    display: block;
-    width: 70%;
-    height: 30px;
-    padding-left: 3%;
-    margin: 100px auto 0;
-    border: 1px solid #9b9b9b;
-    font-size: 14px;
-    line-height: 30px;
-}
-.payment-method {
-    width: 100%;
-    height: 28px;
-    padding-left: 3%;
-    background-color: #df0b31;
-    font-size: 16px;
-    line-height: 28px;
-    color: #fff;
-}
-.method dl {
-    padding: 30px 0 5px 6%;
-    margin-bottom: 0px;
-}
-.method dt {
-    float: left;
-    width: 22%;
-    height: 50px;
-}
-.method dt img {
-    display: block;
-    width: 100%;
-    height: 50px;
-}
-.method dd {
-    position: relative;
-    float: left;
-    width: 72%;
-    height: 50px;
-    margin-left: 5%;
-}
-.method dd h2 {
-    float: left;
-    width: 90%;
-    font-size: 16px;
-    color: #666;
-}
-.method dd span {
-    float: left;
-    overflow: hidden;
-    display: block;
-    width: 90%;
-    font-size: 12px;
-    color: #999;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-.method dd i {
-    position: absolute;
-    right: 0;
-    top: 35%;
-    width: 7%;
-    height: 15px;
-    border: 2px solid #666;
-    border-radius: 50%;
-}
-.mind-button {
-    display: block;
-    width: 94%;
-    height: 32px;
-    margin: 30px auto 100px;
-    border: 0;
-    background-color: #df0b31;
-    font-size: 18px;
-    color: #fff;
-}
-.mind-button:hover{
-    color: #fff;
-}
+
+
 /*去除输入金额右边的小箭头*/
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -1024,7 +952,7 @@ input, select {
     margin-top: 2px;
 }
 .nav-set a.active i.home, .nav-set a.active i.group, .nav-set a.active i.knowledge, .nav-set a.active i.center {
-    color: #00cafa;
+    color: #004799;
 }
 .tab-item .home {
     background: url("../img/index.png") center center no-repeat;
@@ -1108,7 +1036,7 @@ input, select {
 }
 
 .nav-set .nav-home.active, .nav-set .nav-circle.active, .nav-set .nav-knowledge.active, .nav-set .nav-my.active {
-    color: #00cafa;
+    color: #004799;
 }
 .nav-set .tab-item {
     color: #666;
@@ -1370,7 +1298,7 @@ input, select {
     background-size: 7%;
 }
 .header-information a label {
-    color: #00cafa;
+    color: #004799;
 }
 
 /*登录头部返回键设置*/
@@ -1389,6 +1317,7 @@ input, select {
     background-size: 90%;
     color: #fff;
     line-height: 3rem;
+    z-index: 2;
 }
 
 /*问律师页面样式修改*/
@@ -1417,7 +1346,7 @@ input, select {
 
 /*律师个人主页*/
 .pane .tabs .pic-consultation, .pane .tabs .phone-consultation {
-    color: #00cafa;
+    color: #004799;
 }
 
 /*头部样式*/
@@ -1433,7 +1362,7 @@ input, select {
     display: block;
     height: 44px;
     line-height: 44px;
-    color: #00cafa;
+    color: #004799;
 }
 .headers.bar-light .title {
     font-family: 'Microsoft YaHei';
@@ -1578,7 +1507,7 @@ input, select {
     color: #666;
 }
 .field-content .list span.active {
-    background-color: #00cafa;
+    background-color: #004799;
 }
 .field-content span.active label {
     color: #fff;
@@ -1782,3 +1711,20 @@ a,button,input{
     width: 100%;
 }
 
+.nodate{
+    margin: 30% auto;
+    text-align: center;
+}
+.nodate-iocn{
+    background-image: url(../img/nodate-iocn.png);
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 80px;
+    height: 39px;
+
+}
+.nodate label{
+    color: #999;
+    height: 25px;
+    line-height: 25px;
+}

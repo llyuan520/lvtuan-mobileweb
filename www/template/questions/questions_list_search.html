@@ -1,7 +1,7 @@
 <ion-view hide-tabs="true">
 	<form id="searchForm" name="searchForm" ng-controller="questionslistsearchCtrl">
 		<ion-pane>
-			<ion-header-bar align-title="left" class="bar bar-header bar-light">
+			<ion-header-bar align-title="center" align-title="left" class="bar bar-header bar-light">
 				<!--搜索你想要的内容  -->
 				<div class="item item-input-inset" style="border-radius: 4px;margin-left: 1%;"> 
 					<label class="item-input-wrapper">
@@ -10,11 +10,16 @@
 					</label>
 				</div>
 				<button class="button button-clear pull-right" ng-click="jumpGo('#/questionslist')">  
-					<span class="positive">取消</span>
+					<span class="button-clear">取消</span>
 				</button>
 			</ion-header-bar>
 			
 			<ion-content>	
+				<div ng-if="nodata == false" class="nodate">
+					<i class="nodate-iocn"></i><br>
+					<label>暂无数据！</label>
+				</div>
+		
 				<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 				<div class="list">
 					<a class="item" ng-repeat="item in items" ng-href="#/questionsview/{{item.id}}">
