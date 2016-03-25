@@ -4946,7 +4946,7 @@ lvtuanApp.controller("userpayallCtrl",function($scope,$http,$rootScope,$ionicLoa
 })
 
 //用户律师 - 微信支付
-lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$ionicPopup,$location,$ionicLoading,authService,wxService,listHelper,httpWrapper){
+lvtuanApp.controller(".",function($scope,$http,$rootScope,$stateParams,$ionicPopup,$location,$ionicLoading,authService,wxService,listHelper,httpWrapper){
 
 	$scope.type = JSON.parse(localStorage.getItem('type'));
 	$scope.mymoney = JSON.parse(localStorage.getItem('paymoney'));
@@ -5012,56 +5012,73 @@ lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$io
 				}
 
 			}
+
+		function main(openid){
+	    	var currentUser = authService.getUser();
+	    	var param = {};
+	    		param.order_no = $scope.item.order_no;
+				param.device = 'wechat';
+				param.channel = user.radioval;
+				param.amount = $scope.item.price * 100;
+				param.subject = $scope.item.type;
+				param.body = $scope.item.title;
+				param.open_id = openid;
+				param.metadata = {};
+				param.metadata.pay_type = $stateParams.type;
+				if($stateParams.type != null){
+	        		if($stateParams.type == 'order' ){
+	        			param.metadata.question_id = $scope.item.post_id;
+	        		}
+	        		if($stateParams.type == 'wallet_recharge' ){
+	        			param.metadata.user_id = currentUser.id;
+	        		}
+	        	}
+	        	console.info(param);
+
+	    	$http.post('http://'+$rootScope.hostName+'/payment_gateway/charge',param)
+			.success(function(data) {
+	        	console.log(data);
+
+	        	pingpp.createPayment(data, function(result, error){
+				    if (result == "success") {
+				        // 只有微信公众账号 wx_pub 支付成功的结果会在这里返回，其他的 wap 支付结果都是在 extra 中对应的 URL 跳转。
+				        $ionicLoading.show();
+	                    location.href='#/question/gratis/new';
+				    } else if (result == "fail") {
+				        // charge 不正确或者微信公众账号支付失败时会在此处返回
+				        layer.show("支付失败，请稍候再试。");
+				    } else if (result == "cancel") {
+				        // 微信公众账号支付取消支付
+				        layer.show("您已取消支付。");
+				    }
+				});
+
+	        	/*WeixinJSBridge.invoke(
+			       'getBrandWCPayRequest', 
+			       data,
+			       function(res){     
+			            WeixinJSBridge.log(res.err_msg);
+	                    switch(res.err_msg) {
+	                            case "get_brand_wcpay_request:ok":
+	                                    $ionicLoading.show();
+	                                    location.href='#/question/gratis/new';
+	                                    break;
+	                            case "get_brand_wcpay_request:fail":
+	                                    layer.show("支付失败，请稍候再试。");
+	                                    break;
+	                            case "get_brand_wcpay_request:cancel":
+	                                    layer.show("您已取消支付。");
+	                                    break;
+	                    }
+			       }
+			   ); */
+
+	        });
+	    }
     }
 
 
-    function main(openid){
-    	var currentUser = authService.getUser();
-    	var param = {};
-    		param.order_no = $scope.item.order_no;
-			param.device = 'wechat';
-			param.channel = user.radioval;
-			param.amount = $scope.item.price * 100;
-			param.subject = $scope.item.type;
-			param.body = $scope.item.title;
-			param.open_id = openid;
-			param.metadata = {};
-			param.metadata.pay_type = $stateParams.type;
-			if($stateParams.type != null){
-        		if($stateParams.type == 'order' ){
-        			param.metadata.question_id = $scope.item.post_id;
-        		}
-        		if($stateParams.type == 'wallet_recharge' ){
-        			param.metadata.user_id = currentUser.id;
-        		}
-        	}
-        	console.info(param);
-
-    	$http.post('http://'+$rootScope.hostName+'/payment_gateway/charge',param)
-		.success(function(data) {
-        	console.log(data);
-        	WeixinJSBridge.invoke(
-		       'getBrandWCPayRequest', 
-		       data,
-		       function(res){     
-		            WeixinJSBridge.log(res.err_msg);
-                    switch(res.err_msg) {
-                            case "get_brand_wcpay_request:ok":
-                                    $ionicLoading.show();
-                                    location.href='#/question/gratis/new';
-                                    break;
-                            case "get_brand_wcpay_request:fail":
-                                    layer.show("支付失败，请稍候再试。");
-                                    break;
-                            case "get_brand_wcpay_request:cancel":
-                                    layer.show("您已取消支付。");
-                                    break;
-                    }
-		       }
-		   ); 
-
-        });
-    }
+    
 
 })
 
