@@ -113,12 +113,6 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       controller: 'indexCtrl'
     })
 
-    .state('mylvteam', { //我的律师团
-      url: '/mylvteam',
-      cache: 'true', 
-      templateUrl: 'template/mylvteam.html'
-    })
-
 /********************************** 用户登录 **********************************/
     .state('login', { //登录
       url: '/login',
@@ -963,7 +957,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       templateUrl: 'template/pay.html',
       authn: true
     })
-    .state('citypicker', { //首页 - 微信支付
+    .state('citypicker', { //首页 - 选择地址
       url: '/citypicker/:id',
       templateUrl: 'template/citypicker.html',
       controller: 'citypickerCtrl'

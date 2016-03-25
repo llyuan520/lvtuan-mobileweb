@@ -26,3 +26,4 @@ function wxService() {
 }
 					
 wxModule.service('wxService', wxService);
+
