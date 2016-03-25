@@ -4761,13 +4761,14 @@ lvtuanApp.controller("userwalletCtrl",function($scope,$http,$rootScope,$ionicLoa
 
 })
 
-lvtuanApp.controller("wxCheckOpenIdCtrl",function($scope,$http,$rootScope,$stateParams,authService,wxService){
+lvtuanApp.controller("wxCheckOpenIdCtrl",function($scope,$http,$rootScope,$stateParams,$ionicHistory,authService,wxService){
 	$scope.$on('$ionicView.beforeEnter', function() {
 		if (!wxService.getOpenId()) {
 			window.location.replace(wxService.getWxAuthUrl('/wxauthpayment'));
-		} else {
+		} /*else {
 			location.href = "#/user/moneyin";
-		}
+			location.href = $ionicHistory.goBack();;
+		}*/
 	})
 })
 
@@ -4963,6 +4964,7 @@ lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$io
                     return false;
             }
     })
+
         //微信支付
     $scope.wap_pay = function(user){
             if (user.radioval == 'qianbao') {
@@ -4999,65 +5001,64 @@ lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$io
 		               }
              		});
             } else {
-            	
-            	
 
-            	$scope.$on('$ionicView.beforeEnter', function() {
-					if (!wxService.getOpenId()) {
-						window.location.replace(wxService.getWxAuthUrl('/wxauthpayment'));
-					} else {
-						location.href = $location.absUrl();
-					}
-				})
-
-            	var currentUser = authService.getUser();
-            	var arr = [];
-            	var param = {};
-            		param.order_no = $scope.item.order_no;
-    				param.device = 'wechat';
-        			param.channel = user.radioval;
-        			param.amount = $scope.item.price * 100;
-        			param.subject = $scope.item.type;
-        			param.body = $scope.item.title;
-        			param.open_id = wxService.getOpenId();
-        			param.metadata = {};
-        			param.metadata.pay_type = $stateParams.type;
-        			if($stateParams.type != null){
-	            		if($stateParams.type == 'order' ){
-	            			param.metadata.question_id = $scope.item.post_id;
-	            		}
-	            		if($stateParams.type == 'wallet_recharge' ){
-	            			param.metadata.user_id = currentUser.id;
-	            		}
-	            	}
-	            	console.info(param);
-
-	        	$http.post('http://'+$rootScope.hostName+'/payment_gateway/charge',param)
-				.success(function(data) {
-		        	console.log(data);
-		        	WeixinJSBridge.invoke(
-				       'getBrandWCPayRequest', 
-				       data,
-				       function(res){     
-				            WeixinJSBridge.log(res.err_msg);
-                            switch(res.err_msg) {
-                                    case "get_brand_wcpay_request:ok":
-                                            $ionicLoading.show();
-                                            location.href='#/question/gratis/new';
-                                            break;
-                                    case "get_brand_wcpay_request:fail":
-                                            layer.show("支付失败，请稍候再试。");
-                                            break;
-                                    case "get_brand_wcpay_request:cancel":
-                                            layer.show("您已取消支付。");
-                                            break;
-                            }
-				       }
-				   ); 
-
-		        });
+				if (!wxService.getOpenId()) {
+					window.location.replace(wxService.getWxAuthUrl('/wxauthpayment'));
+					main(wxService.getOpenId());
+				} else {
+					main(wxService.getOpenId());
+				}
 
 			}
+    }
+
+
+    function main(openid){
+    	var currentUser = authService.getUser();
+    	var param = {};
+    		param.order_no = $scope.item.order_no;
+			param.device = 'wechat';
+			param.channel = user.radioval;
+			param.amount = $scope.item.price * 100;
+			param.subject = $scope.item.type;
+			param.body = $scope.item.title;
+			param.open_id = openid;
+			param.metadata = {};
+			param.metadata.pay_type = $stateParams.type;
+			if($stateParams.type != null){
+        		if($stateParams.type == 'order' ){
+        			param.metadata.question_id = $scope.item.post_id;
+        		}
+        		if($stateParams.type == 'wallet_recharge' ){
+        			param.metadata.user_id = currentUser.id;
+        		}
+        	}
+        	console.info(param);
+
+    	$http.post('http://'+$rootScope.hostName+'/payment_gateway/charge',param)
+		.success(function(data) {
+        	console.log(data);
+        	WeixinJSBridge.invoke(
+		       'getBrandWCPayRequest', 
+		       data,
+		       function(res){     
+		            WeixinJSBridge.log(res.err_msg);
+                    switch(res.err_msg) {
+                            case "get_brand_wcpay_request:ok":
+                                    $ionicLoading.show();
+                                    location.href='#/question/gratis/new';
+                                    break;
+                            case "get_brand_wcpay_request:fail":
+                                    layer.show("支付失败，请稍候再试。");
+                                    break;
+                            case "get_brand_wcpay_request:cancel":
+                                    layer.show("您已取消支付。");
+                                    break;
+                    }
+		       }
+		   ); 
+
+        });
     }
 
 })
