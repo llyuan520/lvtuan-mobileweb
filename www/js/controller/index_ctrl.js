@@ -4945,7 +4945,7 @@ lvtuanApp.controller("userpayallCtrl",function($scope,$http,$rootScope,$ionicLoa
 })
 
 //用户律师 - 微信支付
-lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$ionicPopup,$ionicLoading,authService,wxService,listHelper,httpWrapper){
+lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$ionicPopup,$location,$ionicLoading,authService,wxService,listHelper,httpWrapper){
 
 	$scope.type = JSON.parse(localStorage.getItem('type'));
 	$scope.mymoney = JSON.parse(localStorage.getItem('paymoney'));
@@ -4965,7 +4965,6 @@ lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$io
                     return false;
             }
     })
-
         //微信支付
     $scope.wap_pay = function(user){
             if (user.radioval == 'qianbao') {
@@ -5003,12 +5002,13 @@ lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$io
              		});
             } else {
             	
+            	
 
             	$scope.$on('$ionicView.beforeEnter', function() {
 					if (!wxService.getOpenId()) {
 						window.location.replace(wxService.getWxAuthUrl('/wxauthpayment'));
 					} else {
-						location.href = $location.path();
+						location.href = $location.absUrl();
 					}
 				})
 
