@@ -54,12 +54,12 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
         if (toState.authn) {
             // 如果用户没有登录
             if (!authService.isAuthed()) {
-                sessionStorage.setItem("goback", $location.path());
+                sessionStorage.setItem("goback", $location.absUrl());
                 $rootScope.$broadcast('unauthenticated');
                 event.preventDefault(); 
             } else {
                 // 如果用户没有权限访问
-                sessionStorage.setItem("goback", $location.path());
+                sessionStorage.setItem("goback", $location.absUrl());
                 currentUser = authService.getUser();
                 if (toState.authz && toState.authz == 'lawyer' && !currentUser.is_verified_lawyer) {
                     $rootScope.$broadcast('unauthorized');
