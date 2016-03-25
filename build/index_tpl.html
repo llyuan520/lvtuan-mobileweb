@@ -26,13 +26,13 @@
     </style>
   </head>
   <body ng-controller="MainController">
-  	<ion-nav-view></ion-nav-view>
+    <ion-nav-view></ion-nav-view>
     <div class="tabs tabs-icon-top tabs-color-positive nav-set" ng-class="{'tabs-item-hide': $root.hideTabs}"  hide-tabs="false">
         <a ng-class="{active: path == '/index'}" ng-href="#/index" class="tab-item ng-cloak nav-home">
             <i class="icon home"></i>
             <span>首页</span>
         </a>
-        <a ng-class="{active: path == '/group/list'}"  ng-href="#/group/list" class="tab-item ng-cloak nav-circle">
+        <a ng-hide="currentUser.status == 1 || currentUser.status == 2" ng-class="{active: path == '/group/list' ||  path == '/group/televise' ||  path == '/group/attention' }"  ng-href="#/group/list" class="tab-item ng-cloak nav-circle">
             <i class="icon group"></i>
             <span>律圈</span>
         </a>
@@ -75,6 +75,7 @@
     </script>
     <script src="dist/js/templates.js"></script>
     <script src="js/utils/layer.1.0.js"></script>
+    <script src="js/utils/pingpp.js"></script>
     <script src="js/module/auth.js"></script>
     <script src="js/module/weixin.js"></script>
     <script src="js/module/list.js"></script>

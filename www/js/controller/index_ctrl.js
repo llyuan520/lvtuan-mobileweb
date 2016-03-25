@@ -4944,7 +4944,7 @@ lvtuanApp.controller("userpayallCtrl",function($scope,$http,$rootScope,$ionicLoa
 })
 
 //用户律师 - 微信支付
-lvtuanApp.controller(".",function($scope,$http,$rootScope,$stateParams,$ionicPopup,$location,$ionicLoading,authService,wxService,listHelper,httpWrapper){
+lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$ionicPopup,$location,$ionicLoading,authService,wxService,listHelper,httpWrapper){
 
 	$scope.type = JSON.parse(localStorage.getItem('type'));
 	$scope.mymoney = JSON.parse(localStorage.getItem('paymoney'));
@@ -5050,26 +5050,6 @@ lvtuanApp.controller(".",function($scope,$http,$rootScope,$stateParams,$ionicPop
 				        layer.show("您已取消支付。");
 				    }
 				});
-
-	        	/*WeixinJSBridge.invoke(
-			       'getBrandWCPayRequest', 
-			       data,
-			       function(res){     
-			            WeixinJSBridge.log(res.err_msg);
-	                    switch(res.err_msg) {
-	                            case "get_brand_wcpay_request:ok":
-	                                    $ionicLoading.show();
-	                                    location.href='#/question/gratis/new';
-	                                    break;
-	                            case "get_brand_wcpay_request:fail":
-	                                    layer.show("支付失败，请稍候再试。");
-	                                    break;
-	                            case "get_brand_wcpay_request:cancel":
-	                                    layer.show("您已取消支付。");
-	                                    break;
-	                    }
-			       }
-			   ); */
 
 	        });
 	    }
