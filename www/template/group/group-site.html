@@ -4,8 +4,8 @@
 			<button class="button button-clear button-positive" ng-click="jumpGoBack()">  
                 <i class="icon icon-left ion-ios-arrow-back"></i>  
             </button>
-			<h1 ng-show="is_mine == true" class="title">圈子设置</h1>
-			<h1 ng-show="is_mine == false" class="title">圈子详情</h1>
+			<h1 ng-show="is_mine == true" class="title">律圈设置</h1>
+			<h1 ng-show="is_mine == false" class="title">律圈详情</h1>
 			<button ng-show="is_mine == true" ng-click="edit()" class="button button-clear button-positive" type="button">保存</button>
 		</ion-header-bar>
 
@@ -13,9 +13,9 @@
 		<ion-content style="margin-bottom: 0px;">
 			<form name="myForm" id="myForm">
 				<div class="item group-site" style="padding:16px 5px;line-height: 34px;">
-					<label>圈子名称：</label>
+					<label>律圈名称：</label>
 					<label class="rig color999">
-						<input ng-show="is_mine == true" type="text" name="group_name" ng-model="group_name" placeholder="圈子名称" />
+						<input ng-show="is_mine == true" type="text" name="group_name" ng-model="group_name" placeholder="律圈名称" />
 						<input ng-show="is_mine == false" type="text" name="group_name" ng-model="group_name" disabled="disabled" style="background-color: #fff;" />
 						
 					</label>

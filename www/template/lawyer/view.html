@@ -204,30 +204,17 @@
 
     	<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 	  	<ion-list>
-        	<ion-item class="item" style="line-height: 25px;">
+        	<ion-item class="item" style="line-height: 25px;"  ng-repeat="item in items">
 				<div class="row row-no-padding">
-					<div class="col col-30 row-no-padding"><label class="txt-c-66">张定义</label></div>
-				  	<div class="col col-70 row-no-padding textright"><label class="txt-c-66">产品类型：图文咨询</label></div>
+					<div class="col col-30 row-no-padding"><label class="txt-c-66">{{item.creator_name}}</label></div>
+				  	<div class="col col-70 row-no-padding textright"><label class="txt-c-66">产品类型：{{item.type}}</label></div>
 				</div>
 				<div class="row row-no-padding">
-					<div class="col col-30 row-no-padding"><label class="txt-c-66">购买数量：1次</label></div>
-				  	<div class="col col-70 row-no-padding textright"><label class="txt-c-66">价格：100.00元</label></div>
+					<div class="col col-30 row-no-padding"><label class="txt-c-66">购买数量：{{item.qty}}次</label></div>
+				  	<div class="col col-70 row-no-padding textright"><label class="txt-c-66">价格：{{item.sum}}元</label></div>
 				</div>
 				<div class="row row-no-padding">
-					<div class="col row-no-padding"><label class="txt-c-66">付款时间：2015-03-09 18:06:20</label></div>
-				</div>
-	        </ion-item>
-	        <ion-item class="item" style="line-height: 25px;">
-				<div class="row row-no-padding">
-					<div class="col col-30 row-no-padding"><label class="txt-c-66">张定义</label></div>
-				  	<div class="col col-70 row-no-padding textright"><label class="txt-c-66">产品类型：图文咨询</label></div>
-				</div>
-				<div class="row row-no-padding">
-					<div class="col col-30 row-no-padding"><label class="txt-c-66">购买数量：1次</label></div>
-				  	<div class="col col-70 row-no-padding textright"><label class="txt-c-66">价格：100.00元</label></div>
-				</div>
-				<div class="row row-no-padding">
-					<div class="col row-no-padding"><label class="txt-c-66">付款时间：2015-03-09 18:06:20</label></div>
+					<div class="col row-no-padding"><label class="txt-c-66">付款时间：{{item.updated_at}}</label></div>
 				</div>
 	        </ion-item>
          </ion-list>
