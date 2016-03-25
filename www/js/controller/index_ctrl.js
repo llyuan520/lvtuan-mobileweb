@@ -231,16 +231,6 @@ lvtuanApp.controller("ionicNavBarDelegateCtrl",function($state,$timeout,$http,$l
 //首页
 lvtuanApp.controller("indexCtrl",function($scope,listHelper,locationService){
 
-	//调用百度统计
-	var _hmt = _hmt || [];
-	(function() {
-	  var hm = document.createElement("script");
-	  hm.src = "//hm.baidu.com/hm.js?c0584669042d7959d1f12ec0a1dd7e1d";
-	  var s = document.getElementsByTagName("script")[0]; 
-	  s.parentNode.insertBefore(hm, s);
-	})();
-
-
 	if (locationService.getLocation()) {
 		$scope.locations = locationService.getLocation();
 		$scope.city = $scope.locations.city_id;
@@ -257,16 +247,6 @@ lvtuanApp.controller("indexCtrl",function($scope,listHelper,locationService){
 
 //用户登陆
 lvtuanApp.controller("loginCtrl",function($state,$scope,$rootScope,$http,userService){
-
-	//调用百度统计
-	var _hmt = _hmt || [];
-	(function() {
-	  var hm = document.createElement("script");
-	  hm.src = "//hm.baidu.com/hm.js?c0584669042d7959d1f12ec0a1dd7e1d";
-	  var s = document.getElementsByTagName("script")[0]; 
-	  s.parentNode.insertBefore(hm, s);
-	})();
-
 
 	var format_email = /^(([0-9a-zA-Z]+)|([0-9a-zA-Z]+[_.0-9a-zA-Z-]*[0-9a-zA-Z]+))@([a-zA-Z0-9-]+[.])+([a-zA-Z]{2} |net|NET|com|COM|gov|GOV|mil|MIL|org|ORG|edu|EDU|int|INT|cn|CN)$/;
 	var format_mobile = /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/; 
@@ -301,14 +281,6 @@ lvtuanApp.controller("loginCtrl",function($state,$scope,$rootScope,$http,userSer
 
 //用户注册
 lvtuanApp.controller("registerCtrl",function($scope,$rootScope,$http,$interval,$ionicLoading,userService,authService){
-	//调用百度统计
-	var _hmt = _hmt || [];
-	(function() {
-	  var hm = document.createElement("script");
-	  hm.src = "//hm.baidu.com/hm.js?c0584669042d7959d1f12ec0a1dd7e1d";
-	  var s = document.getElementsByTagName("script")[0]; 
-	  s.parentNode.insertBefore(hm, s);
-	})();
 
 	//获取验证码
 	$scope.phone_disabled = true;
@@ -2301,15 +2273,6 @@ lvtuanApp.controller("siteCtrl",function($scope,$http,$rootScope,authService){
 //找律师的列表
 lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$location,$ionicLoading,locationService,listHelper){
 
-	//调用百度统计
-	var _hmt = _hmt || [];
-	(function() {
-	  var hm = document.createElement("script");
-	  hm.src = "//hm.baidu.com/hm.js?c0584669042d7959d1f12ec0a1dd7e1d";
-	  var s = document.getElementsByTagName("script")[0]; 
-	  s.parentNode.insertBefore(hm, s);
-	})();
-
 	$scope.locations = locationService.getLocation();
 	$scope.city = $scope.locations.city_id;
 
@@ -2474,15 +2437,6 @@ lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$l
 
 //律师个人主页 - 个人介绍
 lvtuanApp.controller("viewCtrl",function($scope,$http,$rootScope,$stateParams,httpWrapper,authService,$ionicLoading){
-
-	//调用百度统计
-	var _hmt = _hmt || [];
-	(function() {
-	  var hm = document.createElement("script");
-	  hm.src = "//hm.baidu.com/hm.js?c0584669042d7959d1f12ec0a1dd7e1d";
-	  var s = document.getElementsByTagName("script")[0]; 
-	  s.parentNode.insertBefore(hm, s);
-	})();
 
 	$scope.max = 5;
 	$scope.ratingVal = 5;
@@ -2654,15 +2608,6 @@ lvtuanApp.controller("viewteleviseCtrl",function($scope,$http,$rootScope,listHel
 //找律师-图文咨询
 lvtuanApp.controller("graphicCtrl",function($scope,$http,$rootScope,$timeout,$stateParams,$ionicLoading,listHelper,httpWrapper,Upload){
 
-	//调用百度统计
-	var _hmt = _hmt || [];
-	(function() {
-	  var hm = document.createElement("script");
-	  hm.src = "//hm.baidu.com/hm.js?c0584669042d7959d1f12ec0a1dd7e1d";
-	  var s = document.getElementsByTagName("script")[0]; 
-	  s.parentNode.insertBefore(hm, s);
-	})();
-
 	//选择类型
    $ionicLoading.show(); 
 	$http.get('http://'+$rootScope.hostName+'/lawyer/workscopes')
@@ -2752,15 +2697,6 @@ lvtuanApp.controller("graphicCtrl",function($scope,$http,$rootScope,$timeout,$st
 //问律师
 lvtuanApp.controller("questionsCtrl",function($scope,$http,$rootScope,$timeout,$stateParams,$state,$ionicLoading,httpWrapper,Upload){
 
-	//调用百度统计
-	var _hmt = _hmt || [];
-	(function() {
-	  var hm = document.createElement("script");
-	  hm.src = "//hm.baidu.com/hm.js?c0584669042d7959d1f12ec0a1dd7e1d";
-	  var s = document.getElementsByTagName("script")[0]; 
-	  s.parentNode.insertBefore(hm, s);
-	})();
-
     $ionicLoading.show();
 	$http.get('http://'+$rootScope.hostName+'/lawyer/workscopes')
 		.success(function(data) {
@@ -2846,32 +2782,12 @@ lvtuanApp.controller("questionsCtrl",function($scope,$http,$rootScope,$timeout,$
 //问律师列表
 lvtuanApp.controller("questionslistCtrl",function($http,$scope,$state,$rootScope,listHelper){
 
-	//调用百度统计
-	var _hmt = _hmt || [];
-	(function() {
-	  var hm = document.createElement("script");
-	  hm.src = "//hm.baidu.com/hm.js?c0584669042d7959d1f12ec0a1dd7e1d";
-	  var s = document.getElementsByTagName("script")[0]; 
-	  s.parentNode.insertBefore(hm, s);
-	})();
-
-
 	listHelper.bootstrap('/question/list_questions', $scope);
 
 })
 
 //问律师搜索
 lvtuanApp.controller("questionslistsearchCtrl",function($http,$scope,$state,$rootScope,$ionicLoading){
-
-	//调用百度统计
-	var _hmt = _hmt || [];
-	(function() {
-	  var hm = document.createElement("script");
-	  hm.src = "//hm.baidu.com/hm.js?c0584669042d7959d1f12ec0a1dd7e1d";
-	  var s = document.getElementsByTagName("script")[0]; 
-	  s.parentNode.insertBefore(hm, s);
-	})();
-
 	
 	var page = 1; //页数
 	var rows_per_page = 5; // 每页的数量
@@ -4493,15 +4409,6 @@ lvtuanApp.controller("documentownloadlistCtrl",function($http,$scope,$state,$roo
 //法律顾问
 lvtuanApp.controller("corporateservicesCtrl",function($http,$scope,$state,$rootScope,$stateParams){
 
-	//调用百度统计
-	var _hmt = _hmt || [];
-	(function() {
-	  var hm = document.createElement("script");
-	  hm.src = "//hm.baidu.com/hm.js?c0584669042d7959d1f12ec0a1dd7e1d";
-	  var s = document.getElementsByTagName("script")[0]; 
-	  s.parentNode.insertBefore(hm, s);
-	})();
-
 	$scope.counsels = [
 					{	
 						"img"		:'01.png',
@@ -4539,15 +4446,6 @@ lvtuanApp.controller("corporateservicesCtrl",function($http,$scope,$state,$rootS
 
 //法律顾问
 lvtuanApp.controller("corporatelistCtrl",function($scope,$state,$http,$rootScope,$stateParams,$ionicPopup,$ionicLoading){
-
-	//调用百度统计
-	var _hmt = _hmt || [];
-	(function() {
-	  var hm = document.createElement("script");
-	  hm.src = "//hm.baidu.com/hm.js?c0584669042d7959d1f12ec0a1dd7e1d";
-	  var s = document.getElementsByTagName("script")[0]; 
-	  s.parentNode.insertBefore(hm, s);
-	})();
 
 	$scope.counsels = {
 		"counsels_8800"	:{
@@ -4733,15 +4631,6 @@ lvtuanApp.controller("corporatelistCtrl",function($scope,$state,$http,$rootScope
 
 //立即购买
 lvtuanApp.controller("corporatebuynowCtrl",function($scope,$http,$rootScope,$timeout,$stateParams,$ionicLoading,$localStorage,$location){
-	
-	//调用百度统计
-	var _hmt = _hmt || [];
-	(function() {
-	  var hm = document.createElement("script");
-	  hm.src = "//hm.baidu.com/hm.js?c0584669042d7959d1f12ec0a1dd7e1d";
-	  var s = document.getElementsByTagName("script")[0]; 
-	  s.parentNode.insertBefore(hm, s);
-	})();
 
 	delete $localStorage.addres;
 
@@ -5058,15 +4947,6 @@ lvtuanApp.controller("userpayallCtrl",function($scope,$http,$rootScope,$ionicLoa
 //用户律师 - 微信支付
 lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$ionicPopup,$ionicLoading,authService,wxService,listHelper,httpWrapper){
 
-	//调用百度统计
-	var _hmt = _hmt || [];
-	(function() {
-	  var hm = document.createElement("script");
-	  hm.src = "//hm.baidu.com/hm.js?c0584669042d7959d1f12ec0a1dd7e1d";
-	  var s = document.getElementsByTagName("script")[0]; 
-	  s.parentNode.insertBefore(hm, s);
-	})();
-
 	$scope.type = JSON.parse(localStorage.getItem('type'));
 	$scope.mymoney = JSON.parse(localStorage.getItem('paymoney'));
 	$scope.user = {
@@ -5124,7 +5004,7 @@ lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$io
             } else {
             	var currentUser = authService.getUser();
 
-
+            	var arr = [];
             	var param = {};
             		param.order_no = $scope.item.order_no;
     				param.device = 'wechat';
@@ -5133,17 +5013,17 @@ lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$io
         			param.subject = $scope.item.type;
         			param.body = $scope.item.title;
         			param.open_id = wxService.getOpenId();
-        			param.metadata = [];
-        			param.metadata['pay_type'] = $stateParams.type;
-        			
+        			param.metadata = {};
+        			param.metadata.pay_type = $stateParams.type;
         			if($stateParams.type != null){
 	            		if($stateParams.type == 'order' ){
-	            			param.metadata['question_id'] = $scope.item.post_id;
+	            			param.metadata.question_id = $scope.item.post_id;
 	            		}
 	            		if($stateParams.type == 'wallet_recharge' ){
-	            			param.metadata['user_id'] = currentUser.id;
+	            			param.metadata.user_id = currentUser.id;
 	            		}
 	            	}
+	            	console.info(param);
 
 	        	$http.post('http://'+$rootScope.hostName+'/payment_gateway/charge',param)
 				.success(function(data) {
