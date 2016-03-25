@@ -5122,7 +5122,7 @@ lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$io
             } else {
             	var currentUser = authService.getUser();
 
-
+            	var arr = [];
             	var param = {};
             		param.order_no = $scope.item.order_no;
     				param.device = 'wechat';
@@ -5132,16 +5132,18 @@ lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$io
         			param.body = $scope.item.title;
         			param.open_id = wxService.getOpenId();
         			param.metadata = [];
-        			param.metadata['pay_type'] = $stateParams.type;
-        			
+        			arr['pay_type'] = $stateParams.type;
         			if($stateParams.type != null){
 	            		if($stateParams.type == 'order' ){
-	            			param.metadata['question_id'] = $scope.item.post_id;
+	            			arr['question_id'] = $scope.item.post_id;
 	            		}
 	            		if($stateParams.type == 'wallet_recharge' ){
-	            			param.metadata['user_id'] = currentUser.id;
+	            			arr['user_id'] = currentUser.id;
 	            		}
 	            	}
+	            	param.metadata.push(arr);
+
+	            	console.info(param);
 
 	        	$http.post('http://'+$rootScope.hostName+'/payment_gateway/charge',param)
 				.success(function(data) {
