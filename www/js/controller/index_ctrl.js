@@ -5000,8 +5000,17 @@ lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$io
 		               }
              		});
             } else {
-            	var currentUser = authService.getUser();
+            	
 
+            	$scope.$on('$ionicView.beforeEnter', function() {
+					if (!wxService.getOpenId()) {
+						window.location.replace(wxService.getWxAuthUrl('/wxauthpayment'));
+					} else {
+						location.href = $location.path();
+					}
+				})
+
+            	var currentUser = authService.getUser();
             	var arr = [];
             	var param = {};
             		param.order_no = $scope.item.order_no;
