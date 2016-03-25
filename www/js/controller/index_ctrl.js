@@ -605,20 +605,22 @@ lvtuanApp.controller("groupAttentionCtrl",function($scope,$http,$state,$rootScop
 
 lvtuanApp.controller("groupviewCtrl",function($scope,$http,$state,$rootScope,$stateParams,easemobService,$ionicLoading){
 
-	$ionicLoading.show();
-    $http.get('http://'+$rootScope.hostName+'/group/'+$stateParams.id+'/chat'
-    ).success(function(data) {
-        if (data && data.data) {
-            $scope.items = data.data;
-            var curRoomId = $scope.items.easemob_id;
+	$scope.$on('$ionicView.beforeEnter', function() {  
+		$ionicLoading.show();
+		var timestamp=Math.round(new Date().getTime()/1000);
+	    $http.get('http://'+$rootScope.hostName+'/group/'+$stateParams.id+'/chat?ts='+timestamp
+	    ).success(function(data) {
+	        if (data && data.data) {
+	            $scope.items = data.data;
+	            var curRoomId = $scope.items.easemob_id;
 
-			easemobService.init(curRoomId,"groupchat");
-			easemobService.login($scope.items.user_id.toString(),$scope.items.pwd);
-
-            console.info('律圈',$scope.items);
-        }
-        $ionicLoading.hide();
-    })
+				easemobService.init(curRoomId,"groupchat");
+				easemobService.login($scope.items.user_id.toString(),$scope.items.pwd);
+                    console.info('圈子',$scope.items);
+                }
+                $ionicLoading.hide();
+            })
+        });
 	
 	$scope.site = function(id){
 		location.href='#/group/site/'+id;

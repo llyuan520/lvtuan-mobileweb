@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="format-detection" content="telephone=no"/>
 
+    
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-    
 
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
@@ -46,23 +46,29 @@
     <script src="cordova.js"></script>
     -->
 
-
-    <script src="conf/settings.dev.js"></script>
-
-    <script src="lib/js/jquery-1.10.2.js"></script>
-    <script src="lib/ionic/js/ionic.bundle.js"></script>
-    <script src="lib/ionic/js/angular/ngStorage.min.js"></script>
-    <script src="lib/js/strophe.js"></script>
-    <script src="lib/js/ng-file-upload-all.js"></script>
-    <script src="lib/js/jweixin-1.0.0.js"></script>
-
-    <script src="lib/js/easemob.im-1.0.7.js"></script>
-
+    <script src="conf/settings.prod.js"></script>
+    
+    <!--
+    <script src="dist/js/lib.min.js"></script>
     <script type="text/javascript">
       var templates = angular.module('templates', []);
     </script>
+    <script src="dist/js/templates.js"></script>
+    <script src="dist/js/mine.min.js"></script>
+    -->
+
+    <script src="lib/js/jquery-1.10.2.min.js"></script>
+    <script src="lib/ionic/js/ionic.bundle.min.js"></script>
+    <script src="lib/ionic/js/angular/ngStorage.min.js"></script>
+    <script src="lib/js/strophe.min.js"></script>
+    <script src="lib/js/ng-file-upload-all.min.js"></script>
+    <script src="lib/js/jweixin-1.0.0.js"></script>
+    <script src="lib/js/easemob.im-1.0.7.js"></script>
+    <script type="text/javascript">
+      var templates = angular.module('templates', []);
+    </script>
+    <script src="dist/js/templates.js"></script>
     <script src="js/utils/layer.1.0.js"></script>
-    <script src="js/utils/pingpp.js"></script>
     <script src="js/module/auth.js"></script>
     <script src="js/module/weixin.js"></script>
     <script src="js/module/list.js"></script>
@@ -72,6 +78,7 @@
     <script src="js/module/location.js"></script>
     <script src="js/module/adaptive.js"></script>
     <script src="js/module/easemob.js"></script>
-    
+
+
   </body>
 </html>
