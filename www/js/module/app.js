@@ -138,6 +138,12 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       templateUrl: 'template/home/forgotpwd.html'
     })
 
+    .state('boundphone', { //绑定手机
+      url: '/boundphone',
+      cache: 'true',
+      templateUrl: 'template/home/boundphone.html'
+    })
+
     .state('wxauth', {
       url: '/wxauth?code&state',
       cache: 'true',
@@ -324,7 +330,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       authn: true
     })
     .state('info', { //用户-个人资料
-      url: '/info',
+      url: '/info/:id',
       cache: 'true',
       templateUrl: 'template/center/info.html',
       controller: 'infoCtrl',
