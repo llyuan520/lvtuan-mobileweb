@@ -1728,3 +1728,21 @@ a,button,input{
     height: 25px;
     line-height: 25px;
 }
+
+
+
+.positive, a.positive {color: #004799; }
+.positive-bg {background-color: #004799; }
+.bar {border: none;background-image: linear-gradient(0deg, #004799, #004799 50%, transparent 50%);background-position: bottom;background-size: 100% 1px;background-repeat: no-repeat; }
+.bar.bar-light {border-color: #004799;background-color: #004799;background-image: linear-gradient(0deg, #004799, #004799 50%, transparent 50%);color: #fff;border-bottom: 1px solid #004799;}
+.bar.bar-light .title {color: #fff; }
+.bar.bar-light.bar-footer {background-image: linear-gradient(180deg, #004799, #004799 50%, transparent 50%); }
+.tabs-striped .tab-item.tab-item-active, .tabs-striped .tab-item.active, .tabs-striped .tab-item.activated {border-color: #004799; }
+.tabs-striped.tabs-light .tab-item.tab-item-active, .tabs-striped.tabs-light .tab-item.active, .tabs-striped.tabs-light .tab-item.activated {color: #444;border-color: #004799; }
+.tabs-striped.tabs-stable .tab-item.tab-item-active, .tabs-striped.tabs-stable .tab-item.active, .tabs-striped.tabs-stable .tab-item.activated {color: #444;border-color: #004799; }
+.tabs-color-positive .tab-item.tab-item-active, .tabs-color-positive .tab-item.active, .tabs-color-positive .tab-item.activated {color: #004799;border: 0 solid #004799; }
+.button.button-positive {border-color: #004799;background-color: #004799;color: #fff; }
+.button.button-positive:hover {color: #fff;text-decoration: none; }
+.button.button-positive.active, .button.button-positive.activated {border-color: #004799;background-color: #004799;}
+.button.button-positive.button-clear {color: #fff; }
+.button-small {padding: 2px 16px 1px;min-width: 28px;min-height: 30px;font-size: 12px;line-height: 26px; }

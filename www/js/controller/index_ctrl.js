@@ -456,6 +456,44 @@ lvtuanApp.controller("upwdCtrl",function($scope,$http,$rootScope,$ionicLoading){
 	}
 })
 
+//绑定手机
+lvtuanApp.controller("boundphoneCtrl",function($scope,$http,$rootScope,$ionicLoading){
+	$scope.user = {};
+	//获取验证码
+	$scope.phonecode = function(phone){
+		console.info(phone);
+		if(phone == undefined){
+			layer.show("请输入手机号！");
+			return false;
+		}else{
+			$ionicLoading.show();
+			var param = 'phone='+phone;
+			$http.post('http://'+$rootScope.hostName+'/send-code?'+param
+			).success(function(data) {
+				console.info(data)
+	           layer.show("验证码已发送到您的手机！");
+	           $ionicLoading.hide();
+	        });
+	        return true;
+		}
+	}
+	//用户必须绑定手机号才能回到主页
+	$scope.submit = function(user){
+		console.info(user);
+		/*$scope.user = user;
+		$ionicLoading.show();
+		$http.post('http://'+$rootScope.hostName+'/forgotpwd', $scope.user
+			).success(function(data) {
+           $scope.user = {}; //清空数据
+           $scope.uid = data.data.uid;
+           sessionStorage.setItem("uid", JSON.stringify($scope.uid));
+           $("#forgotForm").hide();
+           $("#upwdForm").show();
+           $ionicLoading.hide();
+        });*/
+	}
+})
+
 /****************************************************** 微信 ******************************************************/
 lvtuanApp.controller("wxAuthCtrl",function($scope,$stateParams,wxService,userService){
 	// 获取code和state，通过后端进行登录
@@ -892,9 +930,10 @@ lvtuanApp.controller("groupcreateCtrl",function($scope,$http,$state,$rootScope,$
 
 	//律圈上传图片
    $scope.uploadFiles = function (group_avatar) {
-   		 if(group_avatar) {
+   		$ionicLoading.show();
+   		if(group_avatar) {
 	        $scope.upload(group_avatar);
-	      }
+	    }
     };
     // 律圈上传图片
     $scope.upload = function (group_avatar) {
@@ -913,6 +952,7 @@ lvtuanApp.controller("groupcreateCtrl",function($scope,$http,$state,$rootScope,$
             $timeout(function () {
                 $scope.result = response.data;
             });
+            $ionicLoading.hide();
         }, function (response) {
             if (response.status > 0) {
              	var errorMsg = response.status + ': ' + response.data;
@@ -1370,7 +1410,7 @@ lvtuanApp.controller("centerCtrl",function($scope,$http,$rootScope,$ionicPopup,$
 })
 
 //律师-普通用户-个人资料
-lvtuanApp.controller("infoCtrl",function($scope,$http,$rootScope,$timeout,$ionicLoading,Upload,authService){
+lvtuanApp.controller("infoCtrl",function($scope,$http,$rootScope,$timeout,$ionicLoading,$stateParams,Upload,authService){
 
 	$scope.$on('$ionicView.beforeEnter', function() {  
 		//判断是否是律师
@@ -1393,7 +1433,7 @@ lvtuanApp.controller("infoCtrl",function($scope,$http,$rootScope,$timeout,$ionic
 					if(data && data.data){
 						//用于连接两个或多个数组并返回一个新的数组
 						$scope.items = data.data; 
-						$scope.file = $scope.items.user.avatar;
+						$scope.file = $scope.items.avatar;
 						localStorage.setItem("userinfo", JSON.stringify($scope.items));
 					}else{
 						layer.show('暂无数据！');
@@ -1405,23 +1445,24 @@ lvtuanApp.controller("infoCtrl",function($scope,$http,$rootScope,$timeout,$ionic
 	})
 
 	//我的资料个人头像
-   $scope.uploadFiles = function (avatar,id) {
+   $scope.uploadFiles = function (avatar) {
    		$ionicLoading.show();
    		 if(avatar) {
-	        $scope.upload(avatar,id);
+	        $scope.upload(avatar);
 	      }
     };
+
     // 我的资料个人头像上传图片
-    $scope.upload = function (avatar,id) {
+    $scope.upload = function (avatar) {
     	Upload.upload({
         	headers: {
 	            'Content-Type': 'application/json' , 
 	            'Authorization': 'bearer ' + $rootScope.token
        		},
-            url: 'http://'+$rootScope.hostName+'/center/customer/update_user_image',
+            url: 'http://'+$rootScope.hostName+'/center/update_user_image',
             data: {
             	upload_file: avatar,
-            	'user_id': id
+            	'user_id': $stateParams.id
             }
         }).then(function (response) {
         	var file_path = 'http://'+$rootScope.hostName+'/file/show?path='+response.data.data.file_path;

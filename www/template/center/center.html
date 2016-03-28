@@ -17,13 +17,13 @@
 					<div class="row" style="height: 75px;">
 					  <div class="col col-20 col-center"  style="height: 100%;">
 					  		<div class="infobg">
-					  			<a ng-href="#/info">
-						  			<img ng-ng-src="{{items.avatar}}" style="position: absolute;width: 50px;height: 50px;border-radius: 50%;top: 2px;left:2px;">.
+					  			<a ng-href="#/info/{{items.id}}">
+						  			<img ng-src="{{items.avatar}}" style="position: absolute;width: 50px;height: 50px;border-radius: 50%;top: 2px;left:2px;">.
 						  		</a>
 					  		</div>
 					  </div>
 					  <div class="col col-center">
-					  	<a style="color:#fff;" ng-href="#/info">
+					  	<a style="color:#fff;" ng-href="#/info/{{items.id}}">
 			      			<label ng-if="!currentUser.is_verified_lawyer" style="font-size:16px;">{{items.realname}}</label>
 			      			<label ng-if="currentUser.is_verified_lawyer">{{items.realname}}<span class="web-font14">律师</span></label>
 			      			<br>
