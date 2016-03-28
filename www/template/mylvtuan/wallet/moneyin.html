@@ -26,11 +26,10 @@
 								<img ng-src="../img/weixinbg.png" style="vertical-align: middle;">
 							 	微信支付
 							 	<label class="checkbox" style="float: right;">
-					          		<input type="checkbox" name="name" ng-model="isCheck" ng-false-value="false" >
+					          		<input type="radio" name="name" ng-model="user.radioval" value="wx_pub" required>
 					          	</label>
-							 	
 							</div>
-							<button class="button button-block button-positive web-wid8c web-top10" type="submit" ng-disabled="myForm.$invalid" ng-click="submit(user)">充值</button>
+							<button class="button button-block button-positive web-wid8c web-top10" type="submit" ng-disabled="myForm.$invalid" ng-click="wap_pay(user)">充值</button>
 						</div>
 					</form>
 				</div>
