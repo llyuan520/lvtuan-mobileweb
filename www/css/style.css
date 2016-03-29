@@ -1746,3 +1746,4 @@ a,button,input{
 .button.button-positive.active, .button.button-positive.activated {border-color: #004799;background-color: #004799;}
 .button.button-positive.button-clear {color: #fff; }
 .button-small {padding: 2px 16px 1px;min-width: 28px;min-height: 30px;font-size: 12px;line-height: 26px; }
+.button-clear.button-clear{color: #fff;}

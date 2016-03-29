@@ -5,28 +5,29 @@
                 <i class="icon icon-left ion-ios-arrow-back"></i>  
             </button>
 			<h1 class="title">创建律圈</h1>
-			<button ng-click="createSubmit()" class="button button-clear button-positive" type="button">保存</button>
+			<button ng-click="createSubmit()" class="button button-clear button-positive" type="button">
+				确定<label ng-if="selIds.length > 0">({{selIds.length}})</label>
+			</button>
 		</ion-header-bar>
 
 
 		<ion-content style="margin-bottom: 0px;">
-				<form id="createGroup_form">
+				<form novalidate name="Form" id="createGroup_form"  ng-cloak class="ng-cloak">
 					<div class="list login">
-						<div class="item item-input item-text-wrap">
-							<input type="text" name="group_name" ng-model="group_name" required="required" placeholder="律圈名称" />
+						<div class="item item-input" style="padding-left: 3%;">
+							<div class="input-label txt-c-99" style="font-size: 14px;">
+				              律圈名称
+				            </div>
+							<input style="text-align: right;width: 100%;padding-right: 4%;" type="text" name="group_name" ng-model="group_name" required="required" placeholder="请输入律圈名称" ng-minlength="1" ng-maxlength="14" />
+						</div>
+						<div class="item item-input" style="padding-left: 3%;height: 47px;" ng-if="Form.group_name.$error.maxlength">
+							<label class="error">律圈名称字符的长度不能超过14个</label>
 						</div>
 						<div class="item item-input" style="padding-left: 3%;">
-							
-							<label ng-show="group_avatar" style="width: 80%;">
-								<img ng-src="{{file}}" ngf-thumbnail="group_avatar || ' '" width="52" height="50">
-								<!-- <span class="progress" ng-show="progress >= 0">
-				                  <div style="width:{{progress}}%" ng-bind="progress + '%'"></div>
-				                </span> -->
-				            </label>
-							<label ng-show="!group_avatar" class="txt-c-99" style="width: 80%;">上传群头像</label>
-
+							<label class="txt-c-99" style="width: 80%;">上传群头像</label>
 							<div ng-disabled="booleans" ng-model="group_avatar" accept="image/*" ngf-pattern="'image/*'" ngf-max-size="20MB" ngf-min-height="100" ngf-select="uploadFiles($file)" class="icon-right" style="font-size:40px;padding-right: 3%;color:#ccc;float:right;text-align: right;">
-								<img src="../img/groupadd.png" style="width:42%;">
+								<img ng-show="!group_avatar" src="../img/groupadd.png" style="width:42%;">
+								<img ng-if="group_avatar" ng-src="{{file}}" ngf-thumbnail="group_avatar || ' '" width="52" height="50">
 							</div>
 							<input type="hidden" name="group_avatar" value="{{group_path}}" />
 							

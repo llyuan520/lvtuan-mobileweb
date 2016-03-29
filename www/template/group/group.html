@@ -2,8 +2,14 @@
 		<ion-pane  class="web-body">
 			<ion-header-bar align-title="center" class="bar bar-header bar-light headers">
 				<h1 class="title">律圈</h1>
-				 <a class="button icon-right button-clear button-positive button-small" ng-if="path == '/group/list'" ng-href="#/groupcreate"><i class="icon ion-android-add"></i></a>
-				 <a class="button icon-right button-clear button-positive button-small" ng-if="path == '/group/televise'" ng-href="#/televisecreate"><i class="icon ion-android-add"></i></a>
+
+				<a class="button icon-right button-clear button-positive button-small" ng-href="{{url}}">
+					<i ng-if=" url == '#/groupcreate' " class="icon ion-android-add"></i>
+					<i ng-if=" url == '#/group/attention/search' " class="icon ion-ios-search-strong"></i>
+					<i ng-if=" url == '#/televisecreate' " class="icon ion-android-add"></i>
+				</a>
+
+				
 			</ion-header-bar>
 			
 			<ion-tabs class="tabs-top">
