@@ -1,12 +1,12 @@
 <ion-view hide-tabs="true">
-	<form id="searchForm" name="searchForm" ng-controller="questionslistsearchCtrl">
+	<form novalidate id="searchForm" name="searchForm" ng-controller="questionslistsearchCtrl">
 		<ion-pane>
 			<ion-header-bar align-title="center" align-title="left" class="bar bar-header bar-light">
 				<!--搜索你想要的内容  -->
 				<div class="item item-input-inset" style="border-radius: 4px;margin-left: 1%;"> 
 					<label class="item-input-wrapper">
 						<i class="icon ion-ios-search placeholder-icon" style="font-size: 1.8rem;"></i>
-				    	<input ng-model="q" type="search" name="q" placeholder="搜索" class="search" ng-model-options="{debounce:2000}" >
+				    	<input ng-model="q" type="search" name="q" placeholder="搜索" class="search" ng-model-options="{debounce:2000}" required >
 					</label>
 				</div>
 				<button class="button button-clear pull-right" ng-click="jumpGo('#/questionslist')">  

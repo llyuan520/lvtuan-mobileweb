@@ -1,0 +1,46 @@
+<ion-view hide-tabs="true">
+	<form novalidate id="searchForm" name="searchForm" ng-controller="groupAttentionSearchCtrl">
+		<ion-pane>
+			<ion-header-bar align-title="center" align-title="left" class="bar bar-header bar-light">
+				<!--搜索你想要的内容  -->
+				<div class="item item-input-inset" style="border-radius: 4px;margin-left: 1%;"> 
+					<label class="item-input-wrapper">
+						<i class="icon ion-ios-search placeholder-icon" style="font-size: 1.8rem;"></i>
+				    	<input ng-model="q" type="search" name="q" placeholder="搜索" class="search" ng-model-options="{debounce:2000}" required >
+					</label>
+				</div>
+				<button class="button button-clear pull-right" ng-click="jumpGo('#/group/attention')">  
+					<span class="button-clear">取消</span>
+				</button>
+			</ion-header-bar>
+			
+			<ion-content>	
+				<div ng-if="nodata == false" class="nodate">
+					<i class="nodate-iocn"></i><br>
+					<label>暂无数据！</label>
+				</div>
+		
+				<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+				<div class="list">
+					<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+				    <a class="item item-thumbnail-left" style="padding-left:95px;" ng-repeat="item in items">
+				      <img ng-src="{{item.group_avatar}}" style="left:6px;border-radius:5px;">
+				      <h2 style="line-height:30px;">
+				      	<span class="item-note">
+				      		<button class="button button-small button-outline button-stable bar-positive" style="color:#373737;padding: 0 20px;" ng-click="groupjoin({{item.group_id}} ,$index )">关注</button>
+				      	</span>
+				      	<span class="group-title">{{item.group_name}}</span>
+				      </h2>
+				      <p>【{{item.post_count}}条新消息】</p>
+				      <p>{{item.group_intro}}</p>
+				      <p>
+				      	<label>关注:&nbsp;{{item.member_cnt}}</label>
+					  </p>
+				    </a>
+				    <ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%" > </ion-infinite-scroll>
+				</div>
+				<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
+			</ion-content>
+		</ion-pane>
+	</form>
+</ion-view>

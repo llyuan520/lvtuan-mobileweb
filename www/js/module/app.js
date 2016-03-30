@@ -196,7 +196,8 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       cache: 'true',
       views: {
           'group-televise': {
-              templateUrl: 'template/group/group-televise.html'
+              templateUrl: 'template/group/group-televise.html',
+              controller: 'groupTeleviseCtrl'
           }
       },
       authn: true,
@@ -211,6 +212,13 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
               controller: 'groupAttentionCtrl'
           }
       },
+      authn: true,
+      authz: 'lawyer'
+    })
+
+    .state('group/attention/search', { //律圈 关注 搜索
+      url: '/group/attention/search',
+      templateUrl: 'template/group/attention-search.html',
       authn: true,
       authz: 'lawyer'
     })
@@ -260,10 +268,17 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       authn: true,
       authz: 'lawyer'
     })
-    .state('group/add', { //律圈设置
+    .state('group/add', { //律圈添加成员
       url: '/group/add/:id',
       templateUrl: 'template/group/group-add.html',
       controller: 'groupaddCtrl',
+      authn: true,
+      authz: 'lawyer'
+    })
+    .state('group/del', { //律圈删除成员
+      url: '/group/del/:id',
+      templateUrl: 'template/group/group-del.html',
+      controller: 'groupdelCtrl',
       authn: true,
       authz: 'lawyer'
     })

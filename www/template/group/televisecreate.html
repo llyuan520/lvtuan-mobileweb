@@ -4,8 +4,8 @@
 			<button class="button button-clear button-positive" ng-click="jumpGoBack()">  
                 <i class="icon icon-left ion-ios-arrow-back"></i>  
             </button>
-			<h1 class="title">创建广播</h1>
-			<button ng-click="createSubmit()" class="button button-clear button-positive" type="button">保存</button>
+			<h1 class="title">添加广播</h1>
+			<button ng-click="createSubmit()" class="button button-clear button-positive" type="button">发送</button>
 		</ion-header-bar>
 
 
@@ -13,7 +13,7 @@
 				<form id="myForm" name="myForm" novalidate>
 					<div class="list login">
 						<div class="item item-input item-text-wrap">
-							<textarea ng-model="content" name="content" rows="5" required ng-minlength="2" ng-maxlength="140" placeholder="请输入你的广播" ng-model-options="{debounce:2000}"></textarea>
+							<textarea ng-model="content" name="content" rows="5" required ng-minlength="2" ng-maxlength="140" placeholder="这一刻的想法..." ng-model-options="{debounce:2000}"></textarea>
 						</div>
 						<p class="item" ng-if="myForm.content.$error.minlength">
 							<span class="fc-red">字符不能小于2个字符</span>

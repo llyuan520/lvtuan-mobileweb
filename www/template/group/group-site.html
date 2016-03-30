@@ -4,53 +4,59 @@
 			<button class="button button-clear button-positive" ng-click="jumpGoBack()">  
                 <i class="icon icon-left ion-ios-arrow-back"></i>  
             </button>
-			<h1 ng-show="is_mine == true" class="title">律圈设置</h1>
-			<h1 ng-show="is_mine == false" class="title">律圈详情</h1>
-			<button ng-show="is_mine == true" ng-click="edit()" class="button button-clear button-positive" type="button">保存</button>
+			<h1 ng-if="is_mine == true" class="title">律圈设置</h1>
+			<h1 ng-if="is_mine == false" class="title">律圈详情</h1>
+			<button ng-click="edit()" class="button button-clear button-positive" type="button">保存</button>
 		</ion-header-bar>
 
 
 		<ion-content style="margin-bottom: 0px;">
-			<form name="myForm" id="myForm">
-				<div class="item group-site" style="padding:16px 5px;line-height: 34px;">
-					<label>律圈名称：</label>
-					<label class="rig color999">
-						<input ng-show="is_mine == true" type="text" name="group_name" ng-model="group_name" placeholder="律圈名称" />
-						<input ng-show="is_mine == false" type="text" name="group_name" ng-model="group_name" disabled="disabled" style="background-color: #fff;" />
-						
-					</label>
-				</div>
-				<div class="item group-site">
-					<label class="name">群头像：</label>
-
-					<div ng-show="is_mine == true" class="rig" style="width: 92px;">
-						<div ng-disabled="booleans" ng-model="group_avatar" accept="image/*" ngf-pattern="'image/*'" ngf-max-size="20MB" ngf-min-height="100" ngf-select="uploadFiles($file)" class="icon-right" style="font-size:4em;padding:0 20px;color:#ccc;float:right"><i class="icon ion-ios-plus-outline"></i></div>
-						<input type="hidden" name="group_avatar" value="{{file_path}}" />
-					</div>
-					<label class="rig">
-						<img ng-src="{{file}}" ngf-thumbnail="group_avatar || '{{group.group_avatar}}'" width="52" height="50">
-					</label>
-				</div>
-			</form>
 			<div class="item group-site">
-				<a ng-repeat="member in group.members">
-					<img class="avatar" ng-src="{{member.avatar}}">
-					<i ng-if="member.user_id != currentUser.id" ng-show="isclose" class="icon ion-close-circled color999 close" ng-click="del({{member.user_id}},$index)"></i>
+				<a ng-repeat="item in items.members">
+					<img class="avatar" ng-src="{{item.avatar}}">
+					<!-- <i ng-if="item.user_id != currentUser.id" ng-if="isclose" class="icon ion-close-circled color999 close" ng-click="del({{item.user_id}},$index)"></i> -->
 					<br>
-					<p>{{member.realname}}</p>
+					<p>{{item.realname}}</p>
 				</a>
 				
-				<a ng-show="is_mine == true" ng-href="#/group/add/{{group.id}}">
+				<a ng-href="#/group/add/{{items.id}}">
 					<i class="icon ion-ios-plus-outline color999"></i>
 				</a>
-				<a ng-show="is_mine == true"  ng-click="isclose = !isclose" >
+				<a ng-if="is_mine == true" ng-href="#/group/del/{{items.id}}" >
 					<i class="icon ion-ios-minus-outline color999"></i>
 				</a>
 			</div>
+
+			<form novalidate name="myForm" id="myForm"  ng-cloak class="ng-cloak">
+				<div class="list login">
+					<div class="item item-input" style="padding-left: 3%;">
+						<div class="input-label txt-c-99" style="font-size: 14px;">
+			              律圈名称
+			            </div>
+			            <input style="text-align: right;width: 100%;padding-right: 6%;" type="text" name="group_name" ng-model="group_name" placeholder="律圈名称" ng-minlength="1" ng-maxlength="14" />
+					</div>
+					<div class="item item-input" style="padding-left: 3%;height: 47px;" ng-if="Form.group_name.$error.maxlength">
+						<label class="error">律圈名称字符的长度不能超过14个</label>
+					</div>
+					<div class="item item-input" style="padding-left: 3%;">
+						<label class="txt-c-99" style="width: 80%;">律圈头像</label>
+
+						<div class="rig" style="width: 92px;text-align: right;padding-right: 4%;">
+							<div ng-model="group_avatar" accept="image/*" ngf-pattern="'image/*'" ngf-max-size="20MB" ngf-min-height="100" ngf-select="uploadFiles($file)" class="icon-right" style="font-size:40px">
+								<!-- <img ng-show="group_avatar" src="../img/groupadd.png" style="width:42%;"> -->
+								<img ng-src="{{file}}" ngf-thumbnail="group_avatar || '{{items.group_avatar}}'" width="52" height="50">
+							</div>
+							<input type="hidden" name="group_avatar" value="{{file_path}}" />
+						</div>
+
+						
+					</div>
+				</div>	
+			</form>
 			
 			<div class="item group-site">
-				<button ng-show="is_mine == true" class="button button-full button-positive web-wid8c web-top30" ng-click="logoutGroup()">解散该群</button>
-				<button ng-show="is_mine == false" class="button button-full button-positive web-wid8c web-top30" ng-click="quitGroup()">退出该群</button>
+				<button ng-if="is_mine == true" class="button button-full button-positive web-wid8c web-top30" ng-click="logoutGroup()">删除并退出</button>
+				<button ng-if="is_mine == false" class="button button-full button-positive web-wid8c web-top30" ng-click="quitGroup()">退出</button>
 			</div>
 				
 		</ion-content>
