@@ -651,8 +651,7 @@ lvtuanApp.controller("groupAttentionSearchCtrl",function($http,$scope,$state,$ro
 
     //上拉加载
 	$scope.loadMore = function() {
-		//获取推荐的律师 ?is_recommended=1&page=1&rows_per_page=10
-		var params = layer.getParams("#searchForm");
+		var params = layer.getParams("#searchForm"); 
 		var url = "";
 		if(params.q != ""){
 			url = 'http://'+$rootScope.hostName+'/group/recommend?q='+params.q+'&rows_per_page='+rows_per_page+'&page='+page;

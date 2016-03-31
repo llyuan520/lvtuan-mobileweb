@@ -661,8 +661,8 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       },
       authn: true
   })
-  .state('question/view', { //免费咨询 - 咨询详情
-      url: '/question/view/:id',
+  .state('question/question/view', { //免费咨询 - 咨询详情
+      url: '/question/question/view/:id',
       templateUrl: 'template/mylvtuan/question/gratis/view.html',
       controller: 'questionGratisViewCtrl',
       authn: true
