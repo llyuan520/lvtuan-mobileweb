@@ -1,33 +1,42 @@
-<ion-view hide-tabs="true">
-	<ion-pane  class="web-body">
-		<ion-header-bar align-title="center" class="bar bar-header bar-light">
-			<button class="button button-clear button-positive" ng-click="jumpGoBack()">  
-                <i class="icon icon-left ion-ios-arrow-back"></i>  
-            </button>
-			<h1 class="title">添加成员</h1>
-			<button ng-click="createSubmit()" class="button button-clear button-positive" type="button">
-				确定<label ng-if="selIds.length > 0">({{selIds.length}})</label>
-			</button>
-		</ion-header-bar>
+<ion-view hide-tabs="true" cache-view="false">
+	<form id="groupAddform" name="groupAddform" ng-controller="groupaddCtrl">
+		<ion-pane  class="web-body">
+			<ion-header-bar align-title="center" class="bar bar-header bar-light">
+				<button class="button button-clear button-positive" ng-click="clearGoBack()">  
+	                取消
+	            </button>
+				<h1 class="title">添加成员</h1>
+				<button ng-click="createSubmit()" class="button button-clear button-positive" type="button">
+					确定<label ng-if="selIds.length > 0">({{selIds.length}})</label>
+				</button>
+			</ion-header-bar>
 
 
-		<ion-content style="margin-bottom: 0px;">
-			<div ng-if="nodata == false" class="nodate">
-				<i class="nodate-iocn"></i><br>
-				<label>暂无数据！</label>
-			</div>
-			<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
-			<ul class="list">
-		        <li class="item item-avatar" ng-repeat="item in items">
-		        	<img ng-src="{{item.avatar}}" style="left:6px;border-radius:50px;" width="40px" height="40px">
-		          	<h2 style="line-height: 40px;float: left;">{{item.realname}} 律师</h2>
-		          	<label class="checkbox" style="float: right;">
-		          		<input type="checkbox" value="{{item.follow_id}}" name="name{{$index+1}}" ng-model="isCheck[$index]" ng-true-value="{{item.follow_id}}"  ng-false-value="false"  ng-change="checkItem(isCheck[$index],{{item.follow_id}})" >
-		          	</label>
-		        </li>
-		    </ul>
-			<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
-			
-		</ion-content>
-	</ion-pane>
+			<ion-content style="margin-bottom: 0px;">
+				<!--搜索你想要的内容  -->
+				<div class="item-input-inset web-body"> 
+					<div class="item-input-wrapper">
+						<i class="icon ion-ios-search placeholder-icon" style="font-size: 1.8rem;"></i>
+				    	<input id="search" ng-model="q" type="search" name="q" placeholder="通过姓名搜索" class="search" ng-model-options="{debounce:2000}" >
+					</div>
+				</div>
+
+				<div ng-if="nodata == false" class="nodate">
+					<i class="nodate-iocn"></i><br>
+					<label>暂无数据！</label>
+				</div>
+				<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+				<ul class="list">
+			        <li class="item item-avatar" ng-repeat="item in items">
+			        	<img ng-src="{{item.avatar}}" style="left:6px;border-radius:50px;" width="40px" height="40px">
+			          	<h2 style="line-height: 40px;float: left;">{{item.realname}} 律师</h2>
+			          	<label class="checkbox" style="float: right;">
+			          		<input type="checkbox" value="{{item.follow_id}}" name="name{{$index+1}}" ng-model="isCheck[$index]" ng-change="checkItem(isCheck[$index],{{item.follow_id}})" ng-checked="ischecked(item.follow_id,selIds)">
+			          	</label>
+			        </li>
+			    </ul>
+				<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
+			</ion-content>
+		</ion-pane>
+	</form>
 </ion-view>

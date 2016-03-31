@@ -18,7 +18,7 @@ listModule.factory('listHelper', function($http, $rootScope, httpWrapper) {
     
 	    //下拉刷新
 		$scope.doRefresh = function() {
-			var page = 1;
+			page = 1;
 			$scope.items = [];
 	        $scope.loadMore();
 	        $scope.$broadcast('scroll.refreshComplete');
@@ -36,6 +36,7 @@ listModule.factory('listHelper', function($http, $rootScope, httpWrapper) {
 				url = urls[0];
 				params = urls[1]+'&'+params;
 			}
+			console.info('http://'+$rootScope.hostName+url+'?'+params);
 			httpWrapper.get(
 				'http://'+$rootScope.hostName+url+'?'+params, 
 				function(data) {

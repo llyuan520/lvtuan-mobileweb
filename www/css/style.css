@@ -13,6 +13,7 @@ body, html, .pane, .ionic-body,h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, 
     font-family: 'Microsoft YaHei';
     color: #333333;
 }
+input{-webkit-user-modify: read-write-plaintext-only;}
 .scroll-content {
     background-color: #eee;
 }
@@ -1747,3 +1748,5 @@ a,button,input{
 .button.button-positive.button-clear {color: #fff; }
 .button-small {padding: 2px 16px 1px;min-width: 28px;min-height: 30px;font-size: 12px;line-height: 26px; }
 .button-clear.button-clear{color: #fff;}
+.item-complex .item-content, .item-radio .item-content{padding: 8px 8px 16px 106px;}
+.badges{position: absolute;background-color: #ef473a;color: #fff;z-index: 1;display: inline-block;padding: 3px 7px;min-width: 10px;border-radius: 10px;vertical-align: baseline;text-align: center;white-space: nowrap;font-weight: 500;font-size: 14px;line-height: 16px;}
