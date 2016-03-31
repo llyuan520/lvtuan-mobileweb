@@ -4399,8 +4399,8 @@ lvtuanApp.controller("sendmindCtrl",function($scope,$http,$rootScope,$stateParam
 				param.open_id = openid;
 				param.metadata = {};
 				param.metadata.pay_type = 'wallet_reward';
-				param.metadata.user_id = currentUser.id;
-				param.metadata.from_user_id = $stateParams.id;
+				param.metadata.user_id = $stateParams.id;
+				param.metadata.from_user_id = currentUser.id;
 
 	        	console.info(param);
 
