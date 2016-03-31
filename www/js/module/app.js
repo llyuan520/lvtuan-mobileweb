@@ -271,14 +271,12 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
     .state('group/add', { //律圈添加成员
       url: '/group/add/:id',
       templateUrl: 'template/group/group-add.html',
-      controller: 'groupaddCtrl',
       authn: true,
       authz: 'lawyer'
     })
     .state('group/del', { //律圈删除成员
       url: '/group/del/:id',
       templateUrl: 'template/group/group-del.html',
-      controller: 'groupdelCtrl',
       authn: true,
       authz: 'lawyer'
     })
@@ -663,8 +661,8 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       },
       authn: true
   })
-  .state('question/gratis/view', { //免费咨询 - 咨询详情
-      url: '/question/gratis/view/:id',
+  .state('question/view', { //免费咨询 - 咨询详情
+      url: '/question/view/:id',
       templateUrl: 'template/mylvtuan/question/gratis/view.html',
       controller: 'questionGratisViewCtrl',
       authn: true
@@ -733,8 +731,8 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       },
       authn: true
   })
-  .state('question/paytext/view', { //图文咨询 - 咨询详情
-      url: '/question/paytext/view/:id',
+  .state('question/pay_text/view', { //图文咨询 - 咨询详情
+      url: '/question/pay_text/view/:id',
       templateUrl: 'template/mylvtuan/question/paytext/view.html',
       controller: 'questionPaytextViewCtrl',
       authn: true
@@ -748,7 +746,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       templateUrl: 'template/mylvtuan/question/payphone/question.html',
       authn: true
   })
-  .state('question/payphone.new', { //图文咨询 - 待受理
+  .state('question/payphone.new', { //电话咨询 - 待受理
       url: '/new',
       views: {
           'question-payphone-new': {
@@ -758,7 +756,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       },
       authn: true
   })
-  .state('question/payphone.waitforconfirmation', { //图文咨询 - 待确认
+  .state('question/payphone.waitforconfirmation', { //电话咨询 - 待确认
       url: '/waitforconfirmation',
       views: {
           'question-payphone-waitforconfirmation': {
@@ -768,7 +766,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       },
       authn: true
   })
-  .state('question/payphone.waitforevaluation', { //图文咨询 - 待评价
+  .state('question/payphone.waitforevaluation', { //电话咨询 - 待评价
       url: '/waitforevaluation',
       views: {
           'question-payphone-waitforevaluation': {
@@ -778,7 +776,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       },
       authn: true
     })
-   .state('question/payphone.complete', { //图文咨询 - 已完成
+   .state('question/payphone.complete', { //电话咨询 - 已完成
       url: '/complete',
       views: {
           'question-payphone-complete': {
@@ -789,7 +787,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       authn: true
     })
   
-  .state('question/payphone.cancelled', { //图文咨询 - 已取消
+  .state('question/payphone.cancelled', { //电话咨询 - 已取消
       url: '/cancelled',
       views: {
           'question-payphone-cancelled': {
@@ -799,8 +797,8 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       },
       authn: true
   })
-  .state('question/payphone/view', { //图文咨询 - 咨询详情
-      url: '/question/payphone/view/:id',
+  .state('question/pay_phone/view', { //电话咨询 - 咨询详情
+      url: '/question/pay_phone/view/:id',
       templateUrl: 'template/mylvtuan/question/payphone/view.html',
       controller: 'questionPayphoneViewCtrl',
       authn: true
@@ -813,7 +811,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       templateUrl: 'template/mylvtuan/question/paycompany/question.html',
       authn: true
   })
-  .state('question/paycompany.new', { //图文咨询 - 待受理
+  .state('question/paycompany.new', { //法律顾问 - 待受理
       url: '/new',
       views: {
           'question-paycompany-new': {
@@ -823,7 +821,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       },
       authn: true
   })
-  .state('question/paycompany.waitforconfirmation', { //图文咨询 - 待确认
+  .state('question/paycompany.waitforconfirmation', { //法律顾问 - 待确认
       url: '/waitforconfirmation',
       views: {
           'question-paycompany-waitforconfirmation': {
@@ -833,7 +831,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       },
       authn: true
   })
-  .state('question/paycompany.waitforevaluation', { //图文咨询 - 待评价
+  .state('question/paycompany.waitforevaluation', { //法律顾问 - 待评价
       url: '/waitforevaluation',
       views: {
           'question-paycompany-waitforevaluation': {
@@ -843,7 +841,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       },
       authn: true
     })
-   .state('question/paycompany.complete', { //图文咨询 - 已完成
+   .state('question/paycompany.complete', { //法律顾问 - 已完成
       url: '/complete',
       views: {
           'question-paycompany-complete': {
@@ -854,7 +852,7 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       authn: true
     })
   
-  .state('question/paycompany.cancelled', { //图文咨询 - 已取消
+  .state('question/paycompany.cancelled', { //法律顾问 - 已取消
       url: '/cancelled',
       views: {
           'question-paycompany-cancelled': {
@@ -864,8 +862,8 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
       },
       authn: true
   })
-  .state('question/paycompany/view', { //图文咨询 - 咨询详情
-      url: '/question/paycompany/view/:id',
+  .state('question/pay_company/view', { //法律顾问 - 咨询详情
+      url: '/question/pay_company/view/:id',
       templateUrl: 'template/mylvtuan/question/paycompany/view.html',
       controller: 'questionPaycompanyViewCtrl',
       authn: true

@@ -7,14 +7,13 @@
 		
 		<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 		<ion-list>
-        	<ion-item class="item item-thumbnail-left" ng-repeat="item in items" ng-href="#/group/view/{{item.group_id}}">
+        	<ion-item class="item item-thumbnail-left" ng-repeat="item in items " ng-href="#/group/view/{{item.group_id}}">
         		<img ng-src="{{item.group_avatar}}" style="left:6px;border-radius:5px;">
+        		<span class="badges badge-assertive" style="top: 3px;left: 75px;right:none;">{{item.member_cnt}}</span>
 				<h2 style="line-height:30px;">
-					<span class="item-note">{{item.created_at}}</span>{{item.group_name}}
+					<span class="item-note"> {{item.updated_at | formatdate}}</span>{{item.group_name}}
 				</h2>
-				<p>【{{item.member_cnt}}条新消息】</p>
 				<p>
-					<span class="badge badge-assertive" style="top:40px;">{{item.member_cnt}}</span>
 					{{item.group_intro}}
 				</p>
 	        </ion-item> 
