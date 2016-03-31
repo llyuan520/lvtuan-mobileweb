@@ -891,14 +891,16 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
     controller: 'userwalletCtrl',
     authn: true
   })
+
+  // 注意：不要更改支付相关的url, 因为 /wallet 已经在微信公众号上面配置为支付授权目录
   .state('moneyin', { //我的律团-钱包充值
-    url: '/moneyin',
+    url: '/wallet/moneyin',
     templateUrl: 'template/mylvtuan/wallet/moneyin.html',
     controller: 'usermoneyinCtrl',
     authn: true
   })
   .state('moneyout', { //我的律团-提现
-    url: '/moneyout',
+    url: '/wallet/moneyout',
     templateUrl: 'template/mylvtuan/wallet/moneyout.html',
     authn: true
   })
