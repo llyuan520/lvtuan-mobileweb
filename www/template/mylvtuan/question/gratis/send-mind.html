@@ -8,17 +8,12 @@
         </ion-header-bar>
         <ion-content class="web-body">
             <form novalidate name="myForm" id="myForm" ng-controller="sendmindCtrl" ng-cloak class="ng-cloak">
-                <div class="mind-pic" style="margin-bottom: 10px;">
-                    <div class="row row-no-padding" style="margin-top: 200px;">
-                        <div class="col col-30 col-center" style="color: #666;">请输入金额</div> 
-                        <div class="col col-center">
-                            <label class="item-input-wrapper" style="background-color: #eee;">
-                                <input style="background-color: #eee;font-size: 14px;" id="money" placeholder="请输入整数" name="money" ng-model="user.money"  ng-minlength="1" ng-maxlength="1000000" required money style="border: none;" ng-model-options="{debounce:2000}" type="number" />
-                            </label>
-                        </div>
-                        <div class="col col-15 col-center" style="color: #666;">元</div>
-                    </div>
-                </div>
+                <ion-item class="item" style="margin-bottom: 10px;border-color: #fff;color: #ff;">
+                    
+                        <label class="item-input-wrapper" style="background-color: #ff;">
+                            <input style="background-color: #fff;font-size: 14px;" id="money" placeholder="请输入金额 (金额必须是整数)" name="money" ng-model="user.money"  ng-minlength="1" ng-maxlength="1000000" required money style="border: none;" ng-model-options="{debounce:2000}" type="number" />
+                        </label>
+                </ion-item>
                 <ion-item class="item" style="margin-bottom: 10px;border-color: #fff;color: #666;">
                     <div class="row row-no-padding padding_bottom16" style="font-size: 14px;">
                         <div class="col">请选择支付方式</div> 
@@ -47,7 +42,7 @@
                     </div>
                     <div class="row row-no-padding padding_bottom16" style="font-size: 14px;">
                         <div class="col">
-                             <button class="button button-block button-positive" type="button" ng-disabled="myForm.$invalid" ng-click="wap_pay(user)" >支付</button>
+                             <button class="button button-block button-positive" type="button" ng-disabled="myForm.$invalid" ng-click="wap_pay(user)" >提交</button>
                         </div> 
                     </div>
                 </ion-item>

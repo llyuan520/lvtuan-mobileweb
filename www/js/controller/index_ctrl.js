@@ -242,7 +242,6 @@ lvtuanApp.controller("indexCtrl",function($scope,$location,listHelper,locationSe
 	$scope.mylvteam = function(){
 		$location.path('/mylvteam');
 	}
-	
 })
 
 //用户登陆
@@ -4472,7 +4471,7 @@ lvtuanApp.controller("confirmCompletionCtrl",['$scope','$http','$rootScope','$st
 lvtuanApp.controller("sendmindCtrl",function($scope,$http,$rootScope,$stateParams,$ionicPopup,$location,$ionicLoading,authService,wxService){
 	$scope.mymoney = JSON.parse(localStorage.getItem('paymoney'));
 	$scope.user = {
-		radioval : 'qianbao'
+		radioval : 'wx_pub'
 	}
 
 	//微信支付
@@ -5280,7 +5279,7 @@ lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$io
 	$scope.type = JSON.parse(localStorage.getItem('type'));
 	$scope.mymoney = JSON.parse(localStorage.getItem('paymoney'));
 	$scope.user = {
-		radioval : 'qianbao'
+		radioval : 'wx_pub'
 	};
     $ionicLoading.show();
     $http.get('http://'+$rootScope.hostName+'/center/pay/question/'+$stateParams.id+'/view')
