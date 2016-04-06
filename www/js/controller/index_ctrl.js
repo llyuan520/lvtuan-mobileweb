@@ -5171,6 +5171,7 @@ lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$statePa
 				param.subject = '充值';
 				param.body = '充值到钱包';
 				param.open_id = openid;
+				param.current_user_id = currentUser.id;
 				param.metadata = {};
 				param.metadata.pay_type = 'wallet_recharge';
 				param.metadata.user_id = currentUser.id;
