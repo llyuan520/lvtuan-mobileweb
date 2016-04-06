@@ -4526,6 +4526,7 @@ lvtuanApp.controller("sendmindCtrl",function($scope,$http,$rootScope,$stateParam
 				param.subject = '免费咨询';
 				param.body = '送心意';
 				param.open_id = openid;
+				param.current_user_id = currentUser.id;
 				param.metadata = {};
 				param.metadata.pay_type = 'wallet_reward';
 				param.metadata.user_id = $stateParams.id;
@@ -5352,6 +5353,7 @@ lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$io
 				param.subject = $scope.item.type;
 				param.body = $scope.item.title;
 				param.open_id = openid;
+				param.current_user_id = currentUser.id;
 				param.metadata = {};
 				param.metadata.pay_type = $stateParams.type;
 				if($stateParams.type != null){
