@@ -14,21 +14,25 @@
 		<ion-content style="margin-bottom: 0px;">
 				<form novalidate name="Form" id="createGroup_form"  ng-cloak class="ng-cloak">
 					<div class="list login">
-						<div class="item item-input" style="padding-left: 3%;">
+						<div class="item item-input" style="padding: 10px">
 							<div class="input-label txt-c-99" style="font-size: 14px;">
 				              律圈名称
 				            </div>
-							<input style="text-align: right;width: 100%;padding-right: 4%;" type="text" name="group_name" ng-model="group_name" required="required" placeholder="请输入律圈名称" ng-minlength="1" ng-maxlength="14" />
+							<input style="width: 100%;padding-right: 2%;" type="text" name="group_name" ng-model="group_name" required="required" placeholder="请输入律圈名称" ng-minlength="1" ng-maxlength="14" />
 						</div>
-						<div class="item item-input" style="padding-left: 3%;height: 47px;" ng-if="Form.group_name.$error.maxlength">
+						<div class="item item-input" style="padding: 10px;height: 47px;" ng-if="Form.group_name.$error.maxlength">
 							<label class="error">律圈名称字符的长度不能超过14个</label>
 						</div>
-						<div class="item item-input" style="padding-left: 3%;">
+						<div class="item item-input" style="padding: 10px">
 							<label class="txt-c-99" style="width: 80%;">上传群头像</label>
-							<div ng-disabled="booleans" ng-model="group_avatar" accept="image/*" ngf-pattern="'image/*'" ngf-max-size="20MB" ngf-min-height="100" ngf-select="uploadFiles($file)" class="icon-right" style="font-size:40px;padding-right: 3%;color:#ccc;float:right;text-align: right;">
+							<div ng-disabled="booleans" ng-model="group_avatar" accept="image/*" ngf-pattern="'image/*'" ngf-max-size="20MB" ngf-min-height="100" ngf-select="uploadFiles($file)" class="icon-right" width="52" height="50" style="font-size:40px;color:#ccc;float:right;text-align: right;">
 								<img ng-show="!group_avatar" src="../img/groupadd.png" style="width:42%;">
 								<img ng-if="group_avatar" ng-src="{{file}}" ngf-thumbnail="group_avatar || ' '" width="52" height="50">
 							</div>
+							<br>
+							<!-- <span class="progress" ng-show="progress >= 0 || progress <= 99 ">
+						      <div style="width:{{progress}}%" ng-bind="progress + '%'"></div>
+						    </span> -->
 							<input type="hidden" name="group_avatar" value="{{group_path}}" />
 							
 						</div>
@@ -42,7 +46,7 @@
 				</div>
 				<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 				<ul class="list">
-			        <li class="item item-avatar" ng-repeat="item in items">
+			        <li class="item item-avatar" ng-repeat="item in items" ng-hide="currentUser.id == item.id">
 			        	<img ng-src="{{item.avatar}}" style="left:6px;border-radius:50px;" width="40px" height="40px">
 			          	<h2 style="line-height: 40px;float: left;">{{item.realname}} 律师</h2>
 			          	<label class="checkbox" style="float: right;">

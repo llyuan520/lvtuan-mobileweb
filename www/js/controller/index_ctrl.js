@@ -890,8 +890,10 @@ lvtuanApp.controller("groupsiteCtrl",function($scope,$http,$state,$rootScope,$st
 })
 
 //添加成员 
-lvtuanApp.controller("groupaddCtrl",function($scope,$http,$location,$ionicLoading,$timeout,$stateParams,$rootScope){
+lvtuanApp.controller("groupaddCtrl",function($scope,$http,$location,$ionicLoading,$timeout,$stateParams,$rootScope,authService){
 
+	var currentUser = authService.getUser();
+		$scope.currentUser = currentUser;
 	var timestamp=Math.round(new Date().getTime()/1000);
 	var page = 1; //页数
 	var rows_per_page = 5; // 每页的数量
@@ -950,7 +952,6 @@ lvtuanApp.controller("groupaddCtrl",function($scope,$http,$location,$ionicLoadin
 	        	console.info(data.data)
 	        	if(data && data.data && data.data.length){
 					$scope.items = $scope.items.concat(data.data);
-					console.info($scope.items);
 					if (data.data.length < rows_per_page) {
 						$scope.moredata = false;
 					} else {
@@ -1009,10 +1010,25 @@ lvtuanApp.controller("groupaddCtrl",function($scope,$http,$location,$ionicLoadin
 })
 
 //删除成员
-lvtuanApp.controller("groupdelCtrl",function($scope,$http,$location,$ionicLoading,$timeout,$stateParams,$ionicPopup,$rootScope,$timeout){ 
+lvtuanApp.controller("groupdelCtrl",function($scope,$http,$location,$ionicLoading,$timeout,$stateParams,$ionicPopup,$rootScope,$timeout,authService){ 
 
 	console.info("删除成员");
 	console.info( $stateParams.id);
+	var currentUser = authService.getUser();
+		$scope.currentUser = currentUser;
+
+	//数组删除的方法
+	Array.prototype.remove = function(index){
+	    if(isNaN(index) || index > this.length){
+	          return false;
+	    }
+	    for(var i=0,n=0;i<this.length;i++){
+	          if(this[i] != this[index]){
+	              this[n++] = this[i];
+	          }
+	    }
+	    this.length -= 1;
+	}
 
 	var timestamp=Math.round(new Date().getTime()/1000);
 	var page = 1; //页数
@@ -1072,7 +1088,7 @@ lvtuanApp.controller("groupdelCtrl",function($scope,$http,$location,$ionicLoadin
 	        	console.info(data.data)
 	        	if(data && data.data && data.data.length){
 					$scope.items = $scope.items.concat(data.data);
-					console.info($scope.items);
+
 					if (data.data.length < rows_per_page) {
 						$scope.moredata = false;
 					} else {
@@ -1159,8 +1175,10 @@ lvtuanApp.controller("groupdelCtrl",function($scope,$http,$location,$ionicLoadin
 
 
 //创建律圈
-lvtuanApp.controller("groupcreateCtrl",function($scope,$http,$state,$rootScope,$timeout,$ionicLoading,$location, Upload,listHelper){
+lvtuanApp.controller("groupcreateCtrl",function($scope,$http,$state,$rootScope,$timeout,$ionicLoading,$location, Upload,listHelper,authService){
 	console.info("创建律圈");
+	var currentUser = authService.getUser();
+	$scope.currentUser = currentUser;
 
 	listHelper.bootstrap('/group/create', $scope);
 
@@ -1245,8 +1263,9 @@ lvtuanApp.controller("groupcreateCtrl",function($scope,$http,$state,$rootScope,$
         	$scope.group_path = response.data.data.file_path;
             $timeout(function () {
                 $scope.result = response.data;
+                $ionicLoading.hide();
             });
-            $ionicLoading.hide();
+            
         }, function (response) {
             if (response.status > 0) {
              	var errorMsg = response.status + ': ' + response.data;
@@ -1256,6 +1275,7 @@ lvtuanApp.controller("groupcreateCtrl",function($scope,$http,$state,$rootScope,$
         }, function (evt) {
         	var progres = parseInt(100.0 * evt.loaded / evt.total);
         	$scope.progress = progres;
+        	$ionicLoading.hide();
             
         });
     };
@@ -2553,19 +2573,6 @@ lvtuanApp.controller("aboutCtrl",function($scope,$timeout,$ionicPopup){
 		$timeout(function() {
 		  myPopup.close(); //close the popup after 3 seconds for some reason
 		}, 3000);
-		};
-		$scope.showConfirm = function() {
-		 var confirmPopup = $ionicPopup.confirm({
-		   title: '温馨提示',
-		   template: '系统检测到有最新版本，点击确定进行下载。'
-		 });
-		 confirmPopup.then(function(res) {
-		   if(res) {
-		     console.log('You are sure');
-		   } else {
-		     console.log('You are not sure');
-		   }
-		 });
 		};
 		$scope.showAlert = function() {
 		 var alertPopup = $ionicPopup.alert({
