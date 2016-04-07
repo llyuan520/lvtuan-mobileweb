@@ -3019,7 +3019,7 @@ lvtuanApp.controller("graphicCtrl",function($scope,$http,$rootScope,$timeout,$st
 				$scope.user = {};
 				$scope.files = {};
         		$scope.errFiles = {};
-        		location.href='#/pay/'+data.data.data+'?type=question';
+        		location.href='#/pay/'+data.data.data+'?type=order';
 				$ionicLoading.hide()
 			},function(data){
 				console.info(data);
