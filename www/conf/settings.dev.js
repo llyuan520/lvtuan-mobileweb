@@ -14,7 +14,8 @@ AppSettings = {
   easemobApiURL: '',
   easemobHttps: true,*/
 
-  easemobAppKey: 'gsflowertrees#gsflower',
+  // easemobAppKey: 'gsflowertrees#gsflower',
+  easemobAppKey: 'lvtuan#test',
   easemobXmppURL: 'http://im-api.easemob.com/http-bind/',
   easemobApiURL: '',
   easemobHttps: true,
