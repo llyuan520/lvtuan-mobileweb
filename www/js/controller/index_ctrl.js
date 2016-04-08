@@ -3018,7 +3018,7 @@ lvtuanApp.controller("graphicCtrl",function($scope,$http,$rootScope,$timeout,$st
 				$scope.user = {};
 				$scope.files = {};
         		$scope.errFiles = {};
-        		location.href='#/pay/'+data.data.data+'?type=question';
+        		location.href='#/pay/'+data.data.data+'?type=order';
 				$ionicLoading.hide()
 			},function(data){
 				console.info(data);
@@ -4525,10 +4525,11 @@ lvtuanApp.controller("sendmindCtrl",function($scope,$http,$rootScope,$stateParam
 				param.subject = '免费咨询';
 				param.body = '送心意';
 				param.open_id = openid;
+				param.current_user_id = currentUser.id;
 				param.metadata = {};
 				param.metadata.pay_type = 'wallet_reward';
-				param.metadata.user_id = currentUser.id;
-				param.metadata.from_user_id = $stateParams.id;
+				param.metadata.user_id = $stateParams.id;
+				param.metadata.from_user_id = currentUser.id;
 
 	        	console.info(param);
 
@@ -5169,6 +5170,7 @@ lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$statePa
 				param.subject = '充值';
 				param.body = '充值到钱包';
 				param.open_id = openid;
+				param.current_user_id = currentUser.id;
 				param.metadata = {};
 				param.metadata.pay_type = 'wallet_recharge';
 				param.metadata.user_id = currentUser.id;
@@ -5351,6 +5353,7 @@ lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$io
 				param.subject = $scope.item.type;
 				param.body = $scope.item.title;
 				param.open_id = openid;
+				param.current_user_id = currentUser.id;
 				param.metadata = {};
 				param.metadata.pay_type = $stateParams.type;
 				if($stateParams.type != null){
