@@ -288,7 +288,7 @@ function easemobService($ionicLoading) {
             var type = msg.type;
             var data = msg.data;
 
-            var eletext = "<p3>" + data + "</p3>";
+            var eletext = "<p3 style='text-align: left'>" + data + "</p3>";
             var ele = $(eletext);
             ele[0].setAttribute("class", "chat-content-p3");
             ele[0].setAttribute("className", "chat-content-p3");

@@ -1,5 +1,17 @@
+<style type="text/css">
+.customize .item-complex .item-content{
+    padding: 8px 8px 16px 93px;
+}
+.customize .item-thumbnail-left .item-content, .customize .item-thumbnail-left{
+	min-height: 80px;
+}
+.customize .item-thumbnail-left .item-content>img:first-child{
+	max-width: 60px;
+    max-height: 60px;
+}
+</style>
 <ion-view cache-view="false">
-    <ion-content>
+    <ion-content class="customize">
     	<div ng-if="nodata == false" class="nodate">
 			<i class="nodate-iocn"></i><br>
 			<label>暂无数据！</label>
@@ -9,7 +21,7 @@
 		<ion-list>
         	<ion-item class="item item-thumbnail-left" ng-repeat="item in items " ng-href="#/group/view/{{item.group_id}}">
         		<img ng-src="{{item.group_avatar}}" style="left:6px;border-radius:5px;">
-        		<span class="badges badge-assertive" style="top: 3px;left: 75px;right:none;">{{item.member_cnt}}</span>
+        		<span class="badges badge-assertive" style="top: 3px;left: 54px;right:none;">{{item.member_cnt}}</span>
 				<h2 style="line-height:30px;">
 					<span class="item-note"> {{item.updated_at | formatdate}}</span>{{item.group_name}}
 				</h2>

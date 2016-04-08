@@ -120,7 +120,11 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
         	//window.history.back();
 	//		window.location.reload();
         	var goback = sessionStorage.getItem("goback");
-			location.href='#'+goback;
+			if(goback == null){
+				location.href='#/index';
+			}else{
+				location.href= goback;
+			}
 			sessionStorage.removeItem("goback");
 			// window.location.reload();
     	}
@@ -156,10 +160,13 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
         	}
   			$ionicLoading.hide();
 
-	    	//location.href='#/index';
 			// window.location.reload();
 			var goback = sessionStorage.getItem("goback");
-			location.href='#'+goback;
+			if(goback == null){
+				location.href='#/index';
+			}else{
+				location.href= goback;
+			}
 			sessionStorage.removeItem(goback);
     	}
     ).catch(function(response) {

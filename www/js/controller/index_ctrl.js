@@ -506,12 +506,23 @@ lvtuanApp.controller("wxLoginCtrl",function($scope,$http,$rootScope,wxService){
 
 /****************************************************** 律圈 ******************************************************/
 //律圈
-lvtuanApp.controller("groupCtrl",function($scope,$http,$state,$rootScope,$location){
+lvtuanApp.controller("groupCtrl",function($scope,$http,$state,$rootScope,$location,$ionicPopup){
 	//跳转到登陆页面
 	$scope.jumplogin = function(){
 		console.info($rootScope.is_lawyer);
     	$location.path('/login');
 	}
+
+	//  alert（警告） 对话框
+	$scope.showAlert = function() {
+	 var alertPopup = $ionicPopup.alert({
+	   title: '提示',
+	   template: '研发中...'
+	 });
+	 alertPopup.then(function(res) {
+	   //console.log('Thank you for not eating my delicious ice cream cone');
+	 });
+	};
 
 })
 //律圈 - 列表
@@ -561,7 +572,8 @@ lvtuanApp.filter("formatdate", function() {
 
 
 //律圈 - 广播
-lvtuanApp.controller("groupTeleviseCtrl",function($scope,$http,$rootScope,listHelper) {
+lvtuanApp.controller("groupTeleviseCtrl",function($scope,$http,$rootScope,$ionicPopup,listHelper) {
+
 	$rootScope.url = '#/televisecreate'
 
 	listHelper.bootstrap('/microblog/list/all', $scope);
@@ -890,8 +902,10 @@ lvtuanApp.controller("groupsiteCtrl",function($scope,$http,$state,$rootScope,$st
 })
 
 //添加成员 
-lvtuanApp.controller("groupaddCtrl",function($scope,$http,$location,$ionicLoading,$timeout,$stateParams,$rootScope){
+lvtuanApp.controller("groupaddCtrl",function($scope,$http,$location,$ionicLoading,$timeout,$stateParams,$rootScope,authService){
 
+	var currentUser = authService.getUser();
+		$scope.currentUser = currentUser;
 	var timestamp=Math.round(new Date().getTime()/1000);
 	var page = 1; //页数
 	var rows_per_page = 5; // 每页的数量
@@ -950,7 +964,6 @@ lvtuanApp.controller("groupaddCtrl",function($scope,$http,$location,$ionicLoadin
 	        	console.info(data.data)
 	        	if(data && data.data && data.data.length){
 					$scope.items = $scope.items.concat(data.data);
-					console.info($scope.items);
 					if (data.data.length < rows_per_page) {
 						$scope.moredata = false;
 					} else {
@@ -1009,10 +1022,25 @@ lvtuanApp.controller("groupaddCtrl",function($scope,$http,$location,$ionicLoadin
 })
 
 //删除成员
-lvtuanApp.controller("groupdelCtrl",function($scope,$http,$location,$ionicLoading,$timeout,$stateParams,$ionicPopup,$rootScope,$timeout){ 
+lvtuanApp.controller("groupdelCtrl",function($scope,$http,$location,$ionicLoading,$timeout,$stateParams,$ionicPopup,$rootScope,$timeout,authService){ 
 
 	console.info("删除成员");
 	console.info( $stateParams.id);
+	var currentUser = authService.getUser();
+		$scope.currentUser = currentUser;
+
+	//数组删除的方法
+	Array.prototype.remove = function(index){
+	    if(isNaN(index) || index > this.length){
+	          return false;
+	    }
+	    for(var i=0,n=0;i<this.length;i++){
+	          if(this[i] != this[index]){
+	              this[n++] = this[i];
+	          }
+	    }
+	    this.length -= 1;
+	}
 
 	var timestamp=Math.round(new Date().getTime()/1000);
 	var page = 1; //页数
@@ -1072,7 +1100,7 @@ lvtuanApp.controller("groupdelCtrl",function($scope,$http,$location,$ionicLoadin
 	        	console.info(data.data)
 	        	if(data && data.data && data.data.length){
 					$scope.items = $scope.items.concat(data.data);
-					console.info($scope.items);
+
 					if (data.data.length < rows_per_page) {
 						$scope.moredata = false;
 					} else {
@@ -1159,8 +1187,10 @@ lvtuanApp.controller("groupdelCtrl",function($scope,$http,$location,$ionicLoadin
 
 
 //创建律圈
-lvtuanApp.controller("groupcreateCtrl",function($scope,$http,$state,$rootScope,$timeout,$ionicLoading,$location, Upload,listHelper){
+lvtuanApp.controller("groupcreateCtrl",function($scope,$http,$state,$rootScope,$timeout,$ionicLoading,$location, Upload,listHelper,authService){
 	console.info("创建律圈");
+	var currentUser = authService.getUser();
+	$scope.currentUser = currentUser;
 
 	listHelper.bootstrap('/group/create', $scope);
 
@@ -1245,8 +1275,9 @@ lvtuanApp.controller("groupcreateCtrl",function($scope,$http,$state,$rootScope,$
         	$scope.group_path = response.data.data.file_path;
             $timeout(function () {
                 $scope.result = response.data;
+                $ionicLoading.hide();
             });
-            $ionicLoading.hide();
+            
         }, function (response) {
             if (response.status > 0) {
              	var errorMsg = response.status + ': ' + response.data;
@@ -1256,6 +1287,7 @@ lvtuanApp.controller("groupcreateCtrl",function($scope,$http,$state,$rootScope,$
         }, function (evt) {
         	var progres = parseInt(100.0 * evt.loaded / evt.total);
         	$scope.progress = progres;
+        	$ionicLoading.hide();
             
         });
     };
@@ -2553,19 +2585,6 @@ lvtuanApp.controller("aboutCtrl",function($scope,$timeout,$ionicPopup){
 		$timeout(function() {
 		  myPopup.close(); //close the popup after 3 seconds for some reason
 		}, 3000);
-		};
-		$scope.showConfirm = function() {
-		 var confirmPopup = $ionicPopup.confirm({
-		   title: '温馨提示',
-		   template: '系统检测到有最新版本，点击确定进行下载。'
-		 });
-		 confirmPopup.then(function(res) {
-		   if(res) {
-		     console.log('You are sure');
-		   } else {
-		     console.log('You are not sure');
-		   }
-		 });
 		};
 		$scope.showAlert = function() {
 		 var alertPopup = $ionicPopup.alert({
@@ -4484,6 +4503,7 @@ lvtuanApp.controller("sendmindCtrl",function($scope,$http,$rootScope,$stateParam
 		            });
 	            	confirmPopup.then(function(res) {
 		                if(res) {
+		                	$ionicLoading.show();
 		                    $http.post('http://'+$rootScope.hostName+'/wallet/reward', 
 		                    {
 								user_id : $stateParams.id,
@@ -4497,6 +4517,7 @@ lvtuanApp.controller("sendmindCtrl",function($scope,$http,$rootScope,$stateParam
 									money:''
 								};
 		                        location.href='#/question/gratis/waitforevaluation';
+		                        $ionicLoading.hide();
 		                    });
 		                }else{
 		                 	return false;
@@ -4532,21 +4553,23 @@ lvtuanApp.controller("sendmindCtrl",function($scope,$http,$rootScope,$stateParam
 				param.metadata.from_user_id = currentUser.id;
 
 	        	console.info(param);
-
+	        $ionicLoading.show();
 	    	$http.post('http://'+$rootScope.hostName+'/payment_gateway/charge',param)
 			.success(function(data) {
 	        	console.log(data);
 	        	pingpp.createPayment(data, function(result, error){
 				    if (result == "success") {
 				        // 只有微信公众账号 wx_pub 支付成功的结果会在这里返回，其他的 wap 支付结果都是在 extra 中对应的 URL 跳转。
-				        $ionicLoading.show();
 	                    location.href='#/question/gratis/new';
+	                    $ionicLoading.hide();
 				    } else if (result == "fail") {
 				        // charge 不正确或者微信公众账号支付失败时会在此处返回
 				        layer.show("支付失败，请稍候再试。");
+				        $ionicLoading.hide();
 				    } else if (result == "cancel") {
 				        // 微信公众账号支付取消支付
 				        layer.show("您已取消支付。");
+				        $ionicLoading.hide();
 				    }
 				});
 
@@ -5176,24 +5199,26 @@ lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$statePa
 				param.metadata.user_id = currentUser.id;
 
 	        	console.info(param);
-
+	        $ionicLoading.show();
 	    	$http.post('http://'+$rootScope.hostName+'/payment_gateway/charge',param)
 			.success(function(data) {
 	        	console.log(data);
 	        	pingpp.createPayment(data, function(result, error){
 				    if (result == "success") {
 				        // 只有微信公众账号 wx_pub 支付成功的结果会在这里返回，其他的 wap 支付结果都是在 extra 中对应的 URL 跳转。
-				        $ionicLoading.show();
 	                    location.href='#/user/wallet';
 					    sessionStorage.setItem('summoney', sessionStorage.getItem('summoney')+user.money);
 						layer.show("充值成功。");
+						$ionicLoading.hide();
 				    } else if (result == "fail") {
 				        // charge 不正确或者微信公众账号支付失败时会在此处返回
 				        layer.show("支付失败，请稍候再试。");
+				        $ionicLoading.hide();
 				    } else if (result == "cancel") {
 				        // 微信公众账号支付取消支付
 				        layer.show("您已取消支付。");
 				        $state.go("user/wallet");
+				        $ionicLoading.hide();
 				    }
 				});
 
@@ -5307,6 +5332,7 @@ lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$io
 	        		});
              		confirmPopup.then(function(res) {
 		               if(res) { 
+		               		$ionicLoading.show();
 			               	httpWrapper.request('http://'+$rootScope.hostName+'/center/question/'+$stateParams.id+'/pay/wallet','post',null,
 								function(data){
 			                        $scope.items = data.data;
@@ -5314,12 +5340,15 @@ lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$io
 			                        switch($scope.type) {
 										case "pay_text":
 											location.href='#/question/paytext/new';
+											$ionicLoading.hide();
 											break;
 										case "pay_phone":
 											location.href='#/question/payphone/new';
+											$ionicLoading.hide();
 											break;
 										case "pay_company":
 											location.href='#/question/paycompany/new';
+											$ionicLoading.hide();
 											break;
 									}
 			                        
@@ -5365,7 +5394,7 @@ lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$io
 	        		}
 	        	}
 	        	console.info(param);
-
+	        $ionicLoading.show();
 	    	$http.post('http://'+$rootScope.hostName+'/payment_gateway/charge',param)
 			.success(function(data) {
 	        	console.log(data);
@@ -5373,14 +5402,16 @@ lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$io
 	        	pingpp.createPayment(data, function(result, error){
 				    if (result == "success") {
 				        // 只有微信公众账号 wx_pub 支付成功的结果会在这里返回，其他的 wap 支付结果都是在 extra 中对应的 URL 跳转。
-				        $ionicLoading.show();
 	                    location.href='#/question/gratis/new';
+	                    $ionicLoading.hide();
 				    } else if (result == "fail") {
 				        // charge 不正确或者微信公众账号支付失败时会在此处返回
 				        layer.show("支付失败，请稍候再试。");
+				        $ionicLoading.hide();
 				    } else if (result == "cancel") {
 				        // 微信公众账号支付取消支付
 				        layer.show("您已取消支付。");
+				        $ionicLoading.hide();
 				    }
 				});
 
