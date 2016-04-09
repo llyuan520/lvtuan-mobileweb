@@ -759,6 +759,7 @@ lvtuanApp.controller("groupviewCtrl",function($scope,$http,$state,$rootScope,$st
 
 	$scope.sendText = function() {
 		var result = easemobService.sendText("groupchat");
+		console.log(result);
 		// var comment = $('#talkInputId').val();
 		// if (result) {
 		// 	$scope.saveComment(comment);
