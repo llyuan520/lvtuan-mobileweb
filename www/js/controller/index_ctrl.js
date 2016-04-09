@@ -745,6 +745,10 @@ lvtuanApp.controller("groupviewCtrl",function($scope,$http,$state,$rootScope,$st
 	            $scope.group_name = $scope.items.group_name.length > 9 ? $scope.items.group_name.substring(0, 9) + '...' : $scope.items.group_name;
 
 	            var curRoomId = $scope.items.easemob_id;
+	            
+				$scope.curChatUserId = curRoomId;
+				$scope.curUserId = $scope.items.user_id;
+
 				easemobService.init(curRoomId,"groupchat");
 				easemobService.login($scope.items.user_id.toString(),$scope.items.pwd);
                     console.info('圈子',$scope.items);
