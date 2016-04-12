@@ -853,8 +853,8 @@ lvtuanApp.controller("groupsiteCtrl",function($scope,$http,$state,$rootScope,$st
 		
 		//修改律圈头像
 	    $scope.uploadFiles = function (group_avatar) {
-	    	$ionicLoading.show();
 	   		if(group_avatar) {
+	   			$ionicLoading.show();
 		    	$scope.upload(group_avatar);
 		    }
 	    };
@@ -1259,8 +1259,8 @@ lvtuanApp.controller("groupcreateCtrl",function($scope,$http,$state,$rootScope,$
 
 	//律圈上传图片
    $scope.uploadFiles = function (group_avatar) {
-   		$ionicLoading.show();
    		if(group_avatar) {
+   			$ionicLoading.show();
 	        $scope.upload(group_avatar);
 	    }
     };
@@ -1292,8 +1292,6 @@ lvtuanApp.controller("groupcreateCtrl",function($scope,$http,$state,$rootScope,$
         }, function (evt) {
         	var progres = parseInt(100.0 * evt.loaded / evt.total);
         	$scope.progress = progres;
-        	$ionicLoading.hide();
-            
         });
     };
 
@@ -1777,8 +1775,8 @@ lvtuanApp.controller("infoCtrl",function($scope,$http,$rootScope,$timeout,$ionic
 
 	//我的资料个人头像
    $scope.uploadFiles = function (avatar) {
-   		$ionicLoading.show();
    		 if(avatar) {
+   		 	$ionicLoading.show();
 	        $scope.upload(avatar);
 	      }
     };

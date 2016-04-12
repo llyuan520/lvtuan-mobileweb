@@ -29,27 +29,41 @@
 
 			<form novalidate name="myForm" id="myForm"  ng-cloak class="ng-cloak">
 				<div class="list login">
-					<div class="item item-input" style="padding-left: 3%;">
-						<div class="input-label txt-c-99" style="font-size: 14px;">
-			              律圈名称
-			            </div>
-			            <input style="text-align: right;width: 100%;padding-right: 6%;" type="text" name="group_name" ng-model="group_name" placeholder="律圈名称" ng-minlength="1" ng-maxlength="14" />
+					<div class="item item-input" style="padding: 10px">
+						<div class="row item-borderless row-no-padding">
+						  <div class="col col-30 col-center">
+						  	<label class="txt-c-99">律圈名称</label>
+						  </div>
+						  <div class="col col-center">
+						  	<input style="text-align: right;width: 100%;padding-right: 0%;" type="text" name="group_name" ng-model="group_name" placeholder="律圈名称" ng-minlength="1" ng-maxlength="14" />
+						  </div>
+						</div>
 					</div>
 					<div class="item item-input" style="padding-left: 3%;height: 47px;" ng-if="Form.group_name.$error.maxlength">
 						<label class="error">律圈名称字符的长度不能超过14个</label>
 					</div>
-					<div class="item item-input" style="padding-left: 3%;">
-						<label class="txt-c-99" style="width: 80%;">律圈头像</label>
-
-						<div class="rig" style="width: 92px;text-align: right;padding-right: 4%;">
-							<div ng-model="group_avatar" accept="image/*" ngf-pattern="'image/*'" ngf-max-size="20MB" ngf-min-height="100" ngf-select="uploadFiles($file)" class="icon-right" style="font-size:40px">
-								<!-- <img ng-show="group_avatar" src="../img/groupadd.png" style="width:42%;"> -->
-								<img ng-src="{{file}}" ngf-thumbnail="group_avatar || '{{items.group_avatar}}'" width="52" height="50">
-							</div>
-							<input type="hidden" name="group_avatar" value="{{file_path}}" />
+					<div class="item item-input" style="padding: 10px">
+						<div class="row item-borderless row-no-padding">
+						  <div class="col col-30 col-center">
+						  	<label class="txt-c-99">律圈头像</label>
+						  </div>
+						  <div class="col col-60 col-center">
+						  	<div ng-model="group_avatar" accept="image/*" ngf-pattern="'image/*'" ngf-max-size="20MB" ngf-min-height="100" ngf-select="uploadFiles($file)" class="icon-right" width="52" height="52px" style="color:#ccc;float:right;text-align: right;">
+						  			<div style="width:52px; height:52px;overflow: hidden;">
+						  				<img ng-src="{{file}}" ngf-thumbnail="group_avatar || '{{items.group_avatar}}'"  width="52" height="52">
+								  	</div>
+									
+								</div>
+								<br>
+								<!-- <span class="progress" ng-show="progress >= 0 || progress <= 99 ">
+							      <div style="width:{{progress}}%" ng-bind="progress + '%'"></div>
+							    </span> -->
+								<input type="hidden" name="group_avatar" value="{{file_path}}" />
+						  </div>
+						  <div class="col clo-10 col-center">
+						  	<i class="icon ion-chevron-right" style="font-size: 20px;"></i>
+						  </div>
 						</div>
-
-						
 					</div>
 				</div>	
 			</form>

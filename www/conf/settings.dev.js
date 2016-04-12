@@ -1,6 +1,6 @@
 AppSettings = {
-  baseApiUrl: 'dev.wdlst.lvtuan-pc-new',
-  // baseApiUrl: '192.168.1.43',
+  //baseApiUrl: 'dev.wdlst.lvtuan-pc-new',
+   baseApiUrl: '192.168.1.43',
   baseMobileUrl: 'mobiledev.wdlst.lvtuan-pc-new',
   // 律团服务号
   // appId: 'wxf2c36d3bee50e935',

@@ -123,7 +123,11 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
 			if(goback == null){
 				location.href='#/index';
 			}else{
-				location.href= goback;
+				/*if(user.status == 1 || user.status == 2){
+					location.href='#/index';
+    			}else{*/
+    				location.href= goback;
+    			//}
 			}
 			sessionStorage.removeItem("goback");
 			// window.location.reload();
@@ -165,7 +169,12 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
 			if(goback == null){
 				location.href='#/index';
 			}else{
-				location.href= goback;
+				if(user.status == 1 || user.status == 2){
+					location.href='#/index';
+					alert('微信登录');
+    			}else{
+    				location.href= goback;
+    			}
 			}
 			sessionStorage.removeItem(goback);
     	}
