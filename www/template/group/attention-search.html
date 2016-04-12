@@ -1,3 +1,19 @@
+<style type="text/css">
+.customize .item-complex .item-content{
+    padding: 8px 8px 8px 93px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-right: 8px;
+    padding-left: 8px;
+}
+.customize .item-thumbnail-left .item-content, .customize .item-thumbnail-left{
+	min-height: 80px;
+}
+.customize .item-thumbnail-left>img:first-child{
+	max-width: 60px;
+    max-height: 60px;
+}
+</style>
 <ion-view hide-tabs="true">
 	<form novalidate id="searchForm" name="searchForm" ng-controller="groupAttentionSearchCtrl">
 		<ion-pane>
@@ -14,32 +30,34 @@
 				</button>
 			</ion-header-bar>
 			
-			<ion-content>	
-				<div ng-if="nodata == false" class="nodate">
-					<i class="nodate-iocn"></i><br>
-					<label>暂无数据！</label>
-				</div>
-		
-				<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+			<ion-content class="customize">
+
 				<div class="list">
-					<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
-				    <a class="item item-thumbnail-left" style="padding-left:95px;" ng-repeat="item in items">
-				      <img ng-src="{{item.group_avatar}}" style="left:6px;border-radius:5px;">
-				      <h2 style="line-height:30px;">
-				      	<span class="item-note">
-				      		<button class="button button-small button-outline button-stable bar-positive" style="color:#373737;padding: 0 20px;" ng-click="groupjoin({{item.group_id}} ,$index )">关注</button>
-				      	</span>
-				      	<span class="group-title">{{item.group_name}}</span>
-				      </h2>
-				      <p>【{{item.post_count}}条新消息】</p>
-				      <p>{{item.group_intro}}</p>
-				      <p>
-				      	<label>关注:&nbsp;{{item.member_cnt}}</label>
-					  </p>
-				    </a>
+			  		<div ng-if="nodata == false" class="nodate">
+						<i class="nodate-iocn"></i><br>
+						<label>暂无数据！</label>
+					</div>
+					
+			  		<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+			  		<ion-list>
+			        	<ion-item class="item item-thumbnail-left" ng-repeat="item in items">
+			        		<img ng-src="{{item.group_avatar}}" style="left:6px;border-radius:5px;">
+							<div class="row item-borderless row-no-padding">
+							  <div class="col col-center" style="height: 60px;line-height: 60px;">
+							  	<h2><a ng-href="#/group/view/{{item.group_id}}">{{item.group_name}}</a></h2>
+							  	<p>{{item.member_cnt}} 人</p>
+							  </div>
+							  <div class="col col-center">
+							  	 <span class="item-note">
+						      		<button class="button button-small button-outline button-stable bar-positive" style="color:#373737;padding: 0 20px;" ng-click="groupjoin({{item.group_id}} ,$index )">关注</button>
+						      	</span>
+							  </div>
+							</div>
+						 
+				        </ion-item> 
+			         </ion-list>
 				    <ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%" > </ion-infinite-scroll>
 				</div>
-				<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
 			</ion-content>
 		</ion-pane>
 	</form>

@@ -595,16 +595,15 @@ lvtuanApp.controller("groupTeleviseCtrl",function($scope,$http,$rootScope,$ionic
 })
 
 //律圈 - 推荐关注
-lvtuanApp.controller("groupAttentionCtrl",function($scope,$http,$state,$rootScope,listHelper){
+lvtuanApp.controller("groupAttentionCtrl",function($scope,$http,$state,$rootScope,$ionicLoading,listHelper){
 	$rootScope.url = '#/group/attention/search'
 
 	listHelper.bootstrap('/group/recommend', $scope);
 
 	//加入关注
 	$scope.groupjoin = function(id,index){
-		var page = 1;
-		var id = id;
-		$http.post('http://'+$rootScope.hostName+'/group/'+id+'/join?rows_per_page='+rows_per_page+'&page='+page++,
+		$ionicLoading.show();
+		$http.post('http://'+$rootScope.hostName+'/group/'+id+'/join',
 			{},
 	        {
 		        cache: true,
@@ -618,16 +617,13 @@ lvtuanApp.controller("groupAttentionCtrl",function($scope,$http,$state,$rootScop
 					$scope.items.splice(index, 1);
 
 					layer.show("已关注 加入成功！");
+					$ionicLoading.hide();
 				}else{
 					layer.show("暂无数据！");
 					$scope.moredata = false;
 					return false;
 				}
 			})
-		    .finally(function() {
-	            $scope.$broadcast('scroll.refreshComplete');
-	            $scope.$broadcast('scroll.infiniteScrollComplete');
-	        });
 	}
 })
 
