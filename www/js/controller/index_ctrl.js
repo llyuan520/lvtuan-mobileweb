@@ -1192,10 +1192,8 @@ lvtuanApp.controller("groupdelCtrl",function($scope,$http,$location,$ionicLoadin
 
 
 //创建律圈
-lvtuanApp.controller("groupcreateCtrl",function($scope,$http,$state,$rootScope,$timeout,$ionicLoading,$location, Upload,listHelper,authService){
+lvtuanApp.controller("groupcreateCtrl",function($scope,$http,$state,$rootScope,$timeout,$ionicLoading,$location, Upload,listHelper){
 	console.info("创建律圈");
-	var currentUser = authService.getUser();
-	$scope.currentUser = currentUser;
 
 	listHelper.bootstrap('/group/create', $scope);
 
