@@ -1,10 +1,6 @@
 <style type="text/css">
-.customize .item-complex .item-content{
+.customize .item-thumbnail-left, .customize .item-thumbnail-left .item-content{
     padding: 8px 8px 8px 93px;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    padding-right: 8px;
-    padding-left: 8px;
 }
 .customize .item-thumbnail-left .item-content, .customize .item-thumbnail-left{
 	min-height: 80px;
@@ -27,11 +23,11 @@
 	        	<ion-item class="item item-thumbnail-left" ng-repeat="item in items">
 	        		<img ng-src="{{item.group_avatar}}" style="left:6px;border-radius:5px;">
 					<div class="row item-borderless row-no-padding">
-					  <div class="col col-center" style="height: 60px;line-height: 60px;">
+					  <div class="col col-65 col-center" style="height: 60px;line-height: 60px;">
 					  	<h2><a ng-href="#/group/view/{{item.group_id}}">{{item.group_name}}</a></h2>
 					  	<p>{{item.member_cnt}} 人</p>
 					  </div>
-					  <div class="col col-center">
+					  <div class="col col-35 col-center">
 					  	 <span class="item-note">
 				      		<button class="button button-small button-outline button-stable bar-positive" style="color:#373737;padding: 0 20px;" ng-click="groupjoin({{item.group_id}} ,$index )">关注</button>
 				      	</span>
