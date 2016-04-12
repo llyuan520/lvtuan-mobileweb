@@ -1,8 +1,4 @@
 <style type="text/css">
-.customize .item-thumbnail-left, .customize .item-thumbnail-left .item-content{
-    padding: 8px 8px 8px 93px;
-}
-
 .customize .item-thumbnail-left .item-content, .customize .item-thumbnail-left{
 	min-height: 80px;
 }
@@ -37,7 +33,7 @@
 					
 			  		<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 			  		<ion-list>
-			        	<ion-item class="item item-thumbnail-left" ng-repeat="item in items">
+			        	<ion-item class="item item-thumbnail-left" ng-repeat="item in items" style="padding: 8px 8px 8px 93px;">
 			        		<img ng-src="{{item.group_avatar}}" style="left:6px;border-radius:5px;">
 							<div class="row item-borderless row-no-padding">
 							  <div class="col col-65 col-center" style="height: 60px;line-height: 60px;">
