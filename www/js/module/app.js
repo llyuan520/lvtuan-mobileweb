@@ -327,6 +327,13 @@ angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
         controller: 'knowledgeViewCtrl'
     })
 
+    .state('knowledge/view', { //给安卓用的文章-详情页面
+        url: '/knowledge/view/:id',
+        cache: 'true',
+        templateUrl: 'template/knowledge/knowledges-android-view.html',
+        controller: 'knowledgeAndroidViewCtrl'
+    })
+
     .state('comments/view', { //评论-详情
         url: '/comments/view/:id',
         cache: 'true',

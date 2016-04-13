@@ -1,0 +1,22 @@
+<style type="text/css">
+	.ngbindhtml img{
+		width: 100%;
+	}
+</style>
+<ion-view hide-tabs="true">
+	<ion-pane>
+		<ion-content>
+			<ion-list>
+	        	<ion-item class="item">
+	        		<p class="contents"> <b>{{items.title}}</b></p>
+	        		<p class="web-paddingtb5" style="margin-bottom: 10px;">
+				      <label class="lef">{{items.author.author_name}}</label>
+				      <label class="rig">{{items.created_at}}</label>
+				    </p>
+				    <img class="full-image" ng-src="{{items.img}}" style="max-height:150px;">
+				    <p class="contents ngbindhtml" ng-bind-html="items.content"></p>
+		        </ion-item>
+	         </ion-list>
+	    </ion-content>
+	</ion-pane>
+</ion-view>
