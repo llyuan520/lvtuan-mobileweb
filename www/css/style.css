@@ -13,7 +13,6 @@ body, html, .pane, .ionic-body,h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, 
     font-family: 'Microsoft YaHei';
     color: #333333;
 }
-input{-webkit-user-modify: read-write-plaintext-only;}
 .scroll-content {
     background-color: #eee;
 }
@@ -490,6 +489,23 @@ ul.rating {
 }
 .group-site label.name{
     line-height: 60px;
+}
+/*送心意样式*/
+.mind-pic {
+    width: 100%;
+    height: 285px;
+    padding-top: 15px;
+    background: #fff url("../img/mind-letter.png") 0 0 no-repeat;
+    background-size: contain;
+}
+.mind-pic div {
+    text-align: center;
+    height: 35px;
+    line-height: 35px;
+}
+.mind-pic div span, .mind-pic div strong, .mind-pic div i {
+    font-weight: normal;
+    font-size: 14px;
 }
 
 
@@ -1712,24 +1728,3 @@ a,button,input{
     height: 25px;
     line-height: 25px;
 }
-
-
-
-.positive, a.positive {color: #004799; }
-.positive-bg {background-color: #004799; }
-.bar {border: none;background-image: linear-gradient(0deg, #004799, #004799 50%, transparent 50%);background-position: bottom;background-size: 100% 1px;background-repeat: no-repeat; }
-.bar.bar-light {border-color: #004799;background-color: #004799;background-image: linear-gradient(0deg, #004799, #004799 50%, transparent 50%);color: #fff;border-bottom: 1px solid #004799;}
-.bar.bar-light .title {color: #fff; }
-.bar.bar-light.bar-footer {background-image: linear-gradient(180deg, #004799, #004799 50%, transparent 50%); }
-.tabs-striped .tab-item.tab-item-active, .tabs-striped .tab-item.active, .tabs-striped .tab-item.activated {border-color: #004799; }
-.tabs-striped.tabs-light .tab-item.tab-item-active, .tabs-striped.tabs-light .tab-item.active, .tabs-striped.tabs-light .tab-item.activated {color: #444;border-color: #004799; }
-.tabs-striped.tabs-stable .tab-item.tab-item-active, .tabs-striped.tabs-stable .tab-item.active, .tabs-striped.tabs-stable .tab-item.activated {color: #444;border-color: #004799; }
-.tabs-color-positive .tab-item.tab-item-active, .tabs-color-positive .tab-item.active, .tabs-color-positive .tab-item.activated {color: #004799;border: 0 solid #004799; }
-.button.button-positive {border-color: #004799;background-color: #004799;color: #fff; }
-.button.button-positive:hover {color: #fff;text-decoration: none; }
-.button.button-positive.active, .button.button-positive.activated {border-color: #004799;background-color: #004799;}
-.button.button-positive.button-clear {color: #fff; }
-.button-small {padding: 2px 16px 1px;min-width: 28px;min-height: 30px;font-size: 12px;line-height: 26px; }
-.button-clear.button-clear{color: #fff;}
-.item-complex .item-content, .item-radio .item-content{padding: 8px 8px 16px 106px;}
-.badges{position: absolute;background-color: #ef473a;color: #fff;z-index: 1;display: inline-block;padding: 3px 7px;min-width: 10px;border-radius: 10px;vertical-align: baseline;text-align: center;white-space: nowrap;font-weight: 500;font-size: 14px;line-height: 16px;}

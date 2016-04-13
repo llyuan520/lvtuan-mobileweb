@@ -224,3 +224,19 @@ this.stopDefault = function(e)
   return this;
 }());
 
+
+
+
+// .container 设置了 overflow 属性, 导致 Android 手机下输入框获取焦点时, 输入法挡住输入框的 bug
+// 解决方法:
+// 0. .container 去掉 overflow 属性, 但此 demo 下会引发别的问题
+//    Android 手机下, input 或 textarea 元素聚焦时, 主动滚一把
+if (/Android/gi.test(navigator.userAgent)) {
+    window.addEventListener('resize', function () {
+        if (document.activeElement.tagName == 'INPUT' || document.activeElement.tagName == 'TEXTAREA') {
+            window.setTimeout(function () {
+                document.activeElement.scrollIntoViewIfNeeded();
+            }, 0);
+        }
+    })
+}
