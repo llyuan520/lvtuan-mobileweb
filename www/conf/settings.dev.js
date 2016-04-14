@@ -1,6 +1,6 @@
 AppSettings = {
   //baseApiUrl: 'dev.wdlst.lvtuan-pc-new',
-   baseApiUrl: '192.168.1.43',
+   baseApiUrl: 'test.elvtuan.com',
   baseMobileUrl: 'mobiledev.wdlst.lvtuan-pc-new',
   // 律团服务号
   // appId: 'wxf2c36d3bee50e935',
@@ -15,7 +15,7 @@ AppSettings = {
   easemobHttps: true,*/
 
   // easemobAppKey: 'gsflowertrees#gsflower',
-  easemobAppKey: 'lvtuan#test',
+  easemobAppKey: 'lvtuan#lvtuanimtest',
   easemobXmppURL: 'http://im-api.easemob.com/http-bind/',
   easemobApiURL: '',
   easemobHttps: true,

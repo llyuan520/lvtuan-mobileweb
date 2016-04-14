@@ -1742,6 +1742,7 @@ lvtuanApp.controller("centerCtrl",function($scope,$http,$rootScope,$ionicPopup,$
 	          myPopup.close(); // 3秒后关闭弹窗
 	       }, 3000);*/
 	}
+
 })
 
 //律师-普通用户-个人资料
@@ -3492,16 +3493,18 @@ lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$
 
 //首页 - 我的 - 免费咨询
 //咨询 - 待受理
-lvtuanApp.controller("questionGratisNewCtrl",function($scope,$rootScope,listHelper,httpWrapper){
+lvtuanApp.controller("questionGratisNewCtrl",function($scope,$rootScope,$ionicLoading,listHelper,httpWrapper){
 	console.info("待受理");
 	listHelper.bootstrap('/center/question/list?type=question&status=new', $scope);
 
 	//取消
 	$scope.to_cancel = function(url,index){
+		$ionicLoading.show();
 		httpWrapper.request(url,'post',null,
 			function(data){
 				$scope.items.splice(index, 1);
 				layer.show("取消成功！");
+				$ionicLoading.hide();
 			},function(data){
 				console.info(data);
 			}
@@ -3510,10 +3513,12 @@ lvtuanApp.controller("questionGratisNewCtrl",function($scope,$rootScope,listHelp
 
 	//抢单
 	$scope.to_take = function(url){
+		$ionicLoading.show();
 		httpWrapper.request(url,'post',null,
 			function(data){
 				layer.show("抢单成功！");
 				location.href='#/question/gratis/waitforconfirmation';
+				$ionicLoading.hide();
 			},function(data){
 				console.info(data);
 			}
