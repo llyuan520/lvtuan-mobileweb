@@ -160,25 +160,25 @@ a, a:link, a:visited, a:active, a:hover{
 
 .item .praise, .item .messages, .item .collection {
     display: inline-block;
-    width: 10%;
-    height: 2rem;
+    width: 20px;
+    height: 20px;
     margin: 0;
     margin-right: 10px;
 }
 .item .praise {
-    background: url("../img/praise.png") left 0.5rem no-repeat;
-    background-size: contain;
-    vertical-align: text-bottom;
+    background: url("../img/praise.png") left center no-repeat;
+    background-size: 20px;
+    vertical-align: middle;
 }
 .item .messages {
-    background: url("../img/messages.png") left 0.7rem no-repeat;
-    background-size: contain;
-    vertical-align: text-bottom;
+    background: url("../img/messages.png") left center no-repeat;
+    background-size: 20px;
+    vertical-align: middle;
 }
 .item .collection {
-    background: url("../img/collection.png") left 0.7rem no-repeat;
-    background-size: contain;
-    vertical-align: text-bottom;
+    background: url("../img/collection.png") left center no-repeat;
+    background-size: 20px;
+    vertical-align: middle;
 }
 
 .item p label{
@@ -192,32 +192,32 @@ a, a:link, a:visited, a:active, a:hover{
 .col-66 .praisea, .col-66 .collectiona, .col-66 .messagesa {
     float: left;
     width: 33%;
-    height: 2.25rem;
-    line-height: 2.25rem;
+    height: 27px;
+    line-height: 27px;
 }
 .col-66 a label, .col-66 i label {
     display: block;
-    line-height: 2.25rem;
+    line-height: 27px;
 }
 .col-66 .tpraisea {
     background: url("../img/praises.png") center center no-repeat;
-    background-size: 37%;
+    background-size: 20px;
 }
 .col-66 .tcollectiona {
     background: url("../img/collections.png") center center no-repeat;
-    background-size: 37%;
+    background-size: 20px;
 }
 .col-66 .fpraisea {
     background: url("../img/praise.png") center center no-repeat;
-    background-size: 37%;
+    background-size: 20px;
 }
 .col-66 .fcollectiona {
     background: url("../img/collection.png") center center no-repeat;
-    background-size: 37%;
+    background-size: 20px;
 }
 .col-66 .messages {
     background: url("../img/messages.png") center center no-repeat;
-    background-size: 35%;
+    background-size: 20px;
 }
 .col-66 .messagesa {
     font-size: 1.4rem;
@@ -1046,8 +1046,8 @@ input, select {
 
 .item .counts {
     padding-right: 8%;
-    font-size: 1rem;
     padding-right: 10%;
+    vertical-align: middle;
 }
 
 .televise-praise, .televise-comments, .televise-share {
@@ -1367,7 +1367,6 @@ input, select {
 }
 .headers.bar-light .title {
     font-family: 'Microsoft YaHei';
-    font-size: 1.4rem;
 }
 .headers.bar-light button.button-clear {
     font-family: 'Microsoft YaHei';
