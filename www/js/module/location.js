@@ -22,7 +22,7 @@ function locationService($http) {
 		    wx.getLocation({
 		    	success: function (res) {
 
-					$http.get("http://" + AppSettings.baseApiUrl + "/common/addressCode/" + res.latitude + "," + res.longitude)
+					$http.get("http://" + AppSettings.baseApiUrl + "/area/addresscode/" + res.latitude + "/" + res.longitude)
 					.success(function(data) {
 						if (data) {
 							locations = data;

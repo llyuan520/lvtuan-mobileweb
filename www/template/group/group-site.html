@@ -48,7 +48,7 @@
 						  	<label class="txt-c-99">律圈头像</label>
 						  </div>
 						  <div class="col col-60 col-center">
-						  	<div ng-model="group_avatar" accept="image/*" ngf-pattern="'image/*'" ngf-max-size="20MB" ngf-min-height="100" ngf-select="uploadFiles($file)" class="icon-right" width="52" height="52px" style="color:#ccc;float:right;text-align: right;">
+						  	<div ng-model="group_avatar" accept="image/*" ngf-pattern="'image/*'" ngf-max-size="2MB" ngf-min-height="100" ngf-select="uploadFiles($file,$invalidFiles)" class="icon-right" width="52" height="52px" style="color:#ccc;float:right;text-align: right;">
 						  			<div style="width:52px; height:52px;overflow: hidden;">
 						  				<img ng-src="{{file}}" ngf-thumbnail="group_avatar || '{{items.group_avatar}}'"  width="52" height="52">
 								  	</div>

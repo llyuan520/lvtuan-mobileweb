@@ -1,4 +1,4 @@
-angular.module('lvtuanApp', ['ionic', 'lvtuanApp.Ctrl', 'templates'])
+angular.module('lvtuanApp', ['ionic', 'app', 'templates'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {

@@ -15,9 +15,9 @@
 				<label>暂无数据！</label>
 			</div>
 			<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
-			    <ul class="list">
-			        <li class="item" ng-class="itemcheckbox" ng-repeat="item in items">
-			            <label ng-hide="visible"  class="checkbox" ng-click="collects_del(item.id,$index)">
+				<div class="list">
+			        <a class="item" ng-class="itemcheckbox" ng-repeat="item in items" ng-href="#/questionsview/{{item.item_id}}">
+						<label ng-hide="visible"  class="checkbox" ng-click="collects_del(item.id,$index)" style="top:40%;">
 			            	<i class="icon ion-ios-close-outline" style="font-size: 2.5rem;"></i>
 			            </label>
 			            <p class="content txt-c-99">
@@ -29,8 +29,8 @@
 						<p>
 							 <label class="rig txt-c-99">{{item.created_at}}</label>
 						</p>
-			        </li>
-			    </ul>
+			        </a>
+			    </div>
 			<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
 		</ion-content>
 

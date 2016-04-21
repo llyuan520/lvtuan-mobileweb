@@ -7,7 +7,7 @@
 		<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 		    <ul class="list">
 		        <li class="item" ng-class="itemcheckbox" ng-repeat="item in items">
-		            <label ng-hide="visible"  class="checkbox" ng-click="messgs_del(item.id,$index)">
+		            <label ng-hide="visible"  class="checkbox" ng-click="messgs_del(item.id,$index)" style="top: 40%;">
 		            	<i class="icon ion-ios-close-outline" style="font-size: 2.5rem;"></i>
 		            </label>
 		            <p class="content txt-c-99">
