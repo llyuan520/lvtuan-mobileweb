@@ -268,7 +268,7 @@ a, a:link, a:visited, a:active, a:hover{
     -webkit-box-orient: vertical;
     white-space:normal;
 }
-.item p.contents,.item p.contents p,.ngbindhtml .item p{
+.contents, .item p.contents,.item p.contents p,.ngbindhtml .item p{
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -643,7 +643,7 @@ input::-webkit-outer-spin-button {
 }
 .login-img{
     text-align: center;
-    padding-top: 20%;
+    padding-top: 20px;
 }
 .login .qq,.login .weixin {
     width: 49%;
@@ -669,7 +669,7 @@ input, select {
     -webkit-appearance: none; /*去除input默认样式*/
 }
 .select-cnt {            
-    width: 24%;
+    width: 33%;
     position: relative;            
     height:50px;
     line-height: 50px;
@@ -760,10 +760,9 @@ input, select {
 
     .log-header{padding-top: 15%;}
     .login .width{height:50px;}
-    .login .weixin,.login .qq{background-size: 35%;}
+    .login .weixin,.login .qq{background-size: 50px;}
     .log-content{padding-top: 5%;}
-    .login-img{padding-top: 9%;}
-    .login-img2{padding-top: 9%;}
+    .login-img,.login-img2{padding-top: 20px;}
 }
 /*5-5s*/
 @media only screen and (min-device-width: 320px) and (min-device-height :568px){ 
@@ -799,10 +798,9 @@ input, select {
 
     .log-header{padding-top: 15%;}
     .login .width{height:50px;}
-    .login .weixin,.login .qq{background-size: 35%;}
+    .login .weixin,.login .qq{background-size: 50px;}
     .log-content{padding-top: 8%;}
-    .login-img{padding-top: 10%;}
-    .login-img2{padding-top: 10%;}
+    .login-img,.login-img2{padding-top: 20px;}
 }
 /*6*/
 @media only screen and (min-device-width: 375px) and (min-device-height :557px){ 
@@ -846,17 +844,12 @@ input, select {
     .login .width{
         height: 80px;
     }
-    .login .weixin,.login .qq{
-        background-size: 35%;
-    }
+    .login .weixin,.login .qq{background-size: 50px;}
     .log-content{
         padding-top: 8%;
     }
-    .login-img{
-        padding-top: 10%;
-    }
-    .login-img2{
-        padding-top: 10%;
+    .login-img,.login-img2{
+        padding-top: 20px;
     }
 }
 /*6 plus*/
@@ -898,17 +891,12 @@ input, select {
     .login .width{
         height:104px;
     }
-    .login .weixin,.login .qq{
-        background-size: 35%;
-    }
+    .login .weixin,.login .qq{background-size: 50px;}
     .log-content{
         padding-top: 8%;
     }
-    .login-img{
-        padding-top: 10%;
-    }
-    .login-img2{
-        padding-top: 20%;
+    .login-img,.login-img2{
+        padding-top: 20px;
     }
 }
 .item-input-wrapper{

@@ -849,15 +849,26 @@ lvtuanApp.controller("groupsiteCtrl",function($scope,$http,$state,$rootScope,$st
 		}
 		
 		//修改律圈头像
-	    $scope.uploadFiles = function (group_avatar) {
-	   		if(group_avatar) {
-	   			$ionicLoading.show();
-		    	$scope.upload(group_avatar);
+		$scope.uploadFiles = function (group_avatar,errFiles) {
+		    $scope.errFiles = errFiles;
+		    if($scope.errFiles.length > 0){
+		       for(var i=0; i<$scope.errFiles.length; i++){
+		       if($scope.errFiles[i].$error == 'maxSize'){
+		          layer.show("图片大小不能超过2MB!");
+		          return false;
+		       }
+		      }
+		    }else{
+		       if(group_avatar) {
+		          $ionicLoading.show();
+		         $scope.upload(group_avatar);
+		       }
 		    }
-	    };
-	    // 律圈头像上传图片
-	    $scope.upload = function (group_avatar) {
-	    	Upload.upload({
+		};
+
+		// 律圈头像上传图片
+		$scope.upload = function (group_avatar) {
+		 	Upload.upload({
 	            url: 'http://'+$rootScope.hostName+'/group/uploadImage',
 	            data: {
 	            	group_avatar: group_avatar
@@ -879,7 +890,7 @@ lvtuanApp.controller("groupsiteCtrl",function($scope,$http,$state,$rootScope,$st
 	        	var progres = parseInt(100.0 * evt.loaded / evt.total);
 	        	$scope.progress = progres;
 	        });
-	    };
+		};
 
 	    //退出该群
 	    $scope.quitGroup = function(){
@@ -1253,42 +1264,53 @@ lvtuanApp.controller("groupcreateCtrl",function($scope,$http,$state,$rootScope,$
 
 
 	//律圈上传图片
-   $scope.uploadFiles = function (group_avatar) {
-   		if(group_avatar) {
-   			$ionicLoading.show();
-	        $scope.upload(group_avatar);
+	$scope.uploadFiles = function (group_avatar,errFiles) {
+	    $scope.errFiles = errFiles;
+	    if($scope.errFiles.length > 0){
+	       for(var i=0; i<$scope.errFiles.length; i++){
+	       if($scope.errFiles[i].$error == 'maxSize'){
+	          layer.show("图片大小不能超过2MB!");
+	          return false;
+	       }
+	      }
+	    }else{
+	       if(group_avatar) {
+	          $ionicLoading.show();
+	         $scope.upload(group_avatar);
+	       }
 	    }
-    };
-    // 律圈上传图片
-    $scope.upload = function (group_avatar) {
-    	Upload.upload({
-        	headers: {
+	};
+
+	// 律圈上传图片
+	$scope.upload = function (group_avatar) {
+	    Upload.upload({
+	    	headers: {
 	            'Content-Type': 'application/json' , 
 	            'Authorization': 'bearer ' + $rootScope.token
-       		},
-            url: 'http://'+$rootScope.hostName+'/group/uploadImage',
-            data: {
-            	group_avatar: group_avatar
-            }
-        }).then(function (response) {
-        	$scope.file = response.data.data.file_url;
-        	$scope.group_path = response.data.data.file_path;
-            $timeout(function () {
-                $scope.result = response.data;
-                $ionicLoading.hide();
-            });
-            
-        }, function (response) {
-            if (response.status > 0) {
-             	var errorMsg = response.status + ': ' + response.data;
-        		console.info('errorMsg',errorMsg);
-        		layer.show(errorMsg);
-            }
-        }, function (evt) {
-        	var progres = parseInt(100.0 * evt.loaded / evt.total);
-        	$scope.progress = progres;
-        });
-    };
+	   		},
+	        url: 'http://'+$rootScope.hostName+'/group/uploadImage',
+	        data: {
+	        	group_avatar: group_avatar
+	        }
+	    }).then(function (response) {
+	    	$scope.file = response.data.data.file_url;
+	    	$scope.group_path = response.data.data.file_path;
+	        $timeout(function () {
+	            $scope.result = response.data;
+	            $ionicLoading.hide();
+	        });
+	        
+	    }, function (response) {
+	        if (response.status > 0) {
+	         	var errorMsg = response.status + ': ' + response.data;
+	    		console.info('errorMsg',errorMsg);
+	    		layer.show(errorMsg);
+	        }
+	    }, function (evt) {
+	    	var progres = parseInt(100.0 * evt.loaded / evt.total);
+	    	$scope.progress = progres;
+	    });
+	};
 
 })
 
@@ -1307,6 +1329,14 @@ lvtuanApp.controller("televisecreateCtrl",function($scope,$http,$state,$rootScop
 	        }else{
 	        	$scope.files = files;
 		        $scope.errFiles = errFiles;
+
+		        for(var i=0; i<$scope.errFiles.length; i++){
+		        	if($scope.errFiles[i].$error == 'maxSize'){
+	        			layer.show("图片大小不能超过2MB!");
+	        			return false;
+	        		}
+		        }
+
 		        angular.forEach(files, function(file) {
 		            file.upload = Upload.upload({
 		            	headers: {
@@ -1491,12 +1521,12 @@ lvtuanApp.controller("knowledgesCtrl",function($scope,$http,$rootScope,listHelpe
 	listHelper.bootstrap('/news/list_news', $scope);
 })
 
-//知识-文库
+//知识 - 学知识
 lvtuanApp.controller("documentsCtrl",function($scope,$http,$rootScope,listHelper){
 	listHelper.bootstrap('/knowledge/article/list_articles', $scope);
 })
 
-//知识-案例
+//知识 - 搜案例
 lvtuanApp.controller("casesCtrl",function($scope,$http,$rootScope,listHelper){
 	listHelper.bootstrap('/case/list_case', $scope);
 })
@@ -1782,11 +1812,21 @@ lvtuanApp.controller("infoCtrl",function($scope,$http,$rootScope,$timeout,$ionic
 	})
 
 	//我的资料个人头像
-   $scope.uploadFiles = function (avatar) {
-   		 if(avatar) {
-   		 	$ionicLoading.show();
-	        $scope.upload(avatar);
-	      }
+   $scope.uploadFiles = function (avatar,errFiles) {
+   		$scope.errFiles = errFiles;
+   		if($scope.errFiles.length > 0){
+   			for(var i=0; i<$scope.errFiles.length; i++){
+	        	if($scope.errFiles[i].$error == 'maxSize'){
+	    			layer.show("图片大小不能超过2MB!");
+	    			return false;
+	    		}
+	        }
+   		}else{
+   			if(avatar) {
+	   		 	$ionicLoading.show();
+		        $scope.upload(avatar);
+		      }
+   		}
     };
 
     // 我的资料个人头像上传图片
@@ -1830,7 +1870,7 @@ lvtuanApp.controller("valrealnameCtrl",function($scope,$http,$rootScope,$ionicLo
 	$scope.userinfo = JSON.parse(localStorage.getItem('userinfo'));
     console.info($scope.userinfo)
 	$scope.user = {
-			nikname:$scope.userinfo.user.nikname
+			nikname:$scope.userinfo.nikname
 		};
 
 
@@ -1861,7 +1901,7 @@ lvtuanApp.controller("valphoneCtrl",function($scope,$http,$rootScope,$ionicLoadi
 	var currentUser = authService.getUser();
 	$scope.userinfo = JSON.parse(localStorage.getItem('userinfo'));
 	$scope.user = {
-			phone:$scope.userinfo.user.phone 
+			phone:$scope.userinfo.phone 
 		};
 
 	//获取验证码
@@ -1914,7 +1954,7 @@ lvtuanApp.controller("valemailCtrl",function($scope,$http,$rootScope,$ionicLoadi
 	var currentUser = authService.getUser();
 	$scope.userinfo = JSON.parse(localStorage.getItem('userinfo'));
 	$scope.user = {
-			email:$scope.userinfo.user.email 
+			email:$scope.userinfo.email 
 		};
 
 	//获取验证码
@@ -1984,55 +2024,48 @@ lvtuanApp.controller("messagesCtrl",function($scope) {
 })
 
 //普通用户和律师的我的消息
-lvtuanApp.controller("mymesgCtrl",function($scope, listHelper) {
-	listHelper.bootstrap('/letter/users', $scope);
+lvtuanApp.controller("mymesgCtrl",function($scope, $http, $rootScope, $ionicLoading, listHelper) {
+	listHelper.bootstrap('/letter/users', $scope); 
 	//删除消息
 	$scope.messgs_del = function(id,index){
-		$http.post('http://'+$rootScope.hostName+'/collect/delete',
+		$ionicLoading.show();
+		$http.post('http://'+$rootScope.hostName+'/letter/'+id+'/delete',
 			{
 				collect_type : 3,
 				item_id   : id
-			},
-			{
-            headers: {
-                'Content-Type': 'application/json' ,
-            	'Authorization': 'bearer ' + $rootScope.token
-            }
         }).success(function(data) {
         	$scope.items.splice(index, 1);
-            layer.show("已取消收藏！");
+        	$ionicLoading.hide();
+            layer.show("删除消息成功！");
         });
 	}
 })
 
 //普通用户和律师的系统消息
-lvtuanApp.controller("sysmesgCtrl",function($scope, listHelper) {
+lvtuanApp.controller("sysmesgCtrl",function($scope, $http, $rootScope, $ionicLoading, listHelper) {
 	listHelper.bootstrap('/letter/sys', $scope);
 	//删除消息
 	$scope.messgs_del = function(id,index){
-		$http.post('http://'+$rootScope.hostName+'/collect/delete',
+		$ionicLoading.show();
+		$http.post('http://'+$rootScope.hostName+'/letter/'+id+'/delete',
 			{
 				collect_type : 3,
 				item_id   : id
-			},
-			{
-            headers: {
-                'Content-Type': 'application/json' ,
-            	'Authorization': 'bearer ' + $rootScope.token
-            }
         }).success(function(data) {
         	$scope.items.splice(index, 1);
-            layer.show("已取消收藏！");
+        	$ionicLoading.hide();
+            layer.show("删除系统消息成功！");
         });
 	}
+
 })
+
+
 
 //我的消息-消息详情
 lvtuanApp.controller("viewMessageCtrl",function($scope,$http,$rootScope,$interval,$stateParams,$ionicLoading){
-	var id = $stateParams.id;
-	var url = 'http://'+$rootScope.hostName+'/letter/sys-letters/'+id;
 	$ionicLoading.show();
-	$http.get(url).success(function(data) {
+	$http.get('http://'+$rootScope.hostName+'/letter/sys-letters/'+$stateParams.id).success(function(data) {
 		if (data && data.data) {
     		$scope.item = data.data;
     		$ionicLoading.hide();
@@ -2166,9 +2199,15 @@ lvtuanApp.controller("practitionersCtrl",function($scope,$http,$rootScope,$timeo
 		    $scope.addres_param = $localStorage.addres;
 		    if($scope.addres_param){
 		    	$scope.address = $scope.addres_param.province.value +" "+ $scope.addres_param.city.value +" "+ $scope.addres_param.district.value;
+		    	$scope.province =  $scope.addres_param.province.key;
+				$scope.city =  $scope.addres_param.city.key;
+				$scope.district =  $scope.addres_param.district.key;
 		   	 	console.info('address',$scope.address);
 		    }else{
 		    	$scope.address = "";
+		    	$scope.province = "";
+				$scope.city =  "";
+				$scope.district =  "";
 		    }
 		});
 		$scope.$watch(function() {
@@ -2197,38 +2236,57 @@ lvtuanApp.controller("practitionersCtrl",function($scope,$http,$rootScope,$timeo
 			    	}
 				})
 		}
-		
+			
 		//上传执业证书
-	    $scope.uploadFiles = function (license_file) {
-	        Upload.upload({
-	        	headers: {
-		            'Content-Type': 'application/json' , 
-		            'Authorization': 'bearer ' + $rootScope.token
-	       		},
-	            url: 'http://'+$rootScope.hostName+'/file/upload/user',
-	            data: {
-	            	upload_file: license_file,
-	            	'user_id': currentUser.id
-	            }
-	        }).then(function (response) {
-	        	$scope.file = response.data.data.file_url;
-	        	$scope.file_path = response.data.data.file_path;
-	            $timeout(function () {
-	                $scope.result = response.data;
-	            });
-	        }, function (response) {
-	            if (response.status > 0) {
-	             	var errorMsg = response.status + ': ' + response.data;
-	        		console.info('errorMsg',errorMsg);
-	        		layer.show(errorMsg);
-	            }
-	        }, function (evt) {
-	        	var progres = parseInt(100.0 * evt.loaded / evt.total);
-	        	$scope.progress = progres;
-	            
-	        });
+	   $scope.uploadFiles = function (license_file,errFiles) {
+	   		$scope.errFiles = errFiles;
+	   		if($scope.errFiles.length > 0){
+	   			for(var i=0; i<$scope.errFiles.length; i++){
+		        	if($scope.errFiles[i].$error == 'maxSize'){
+		    			layer.show("图片大小不能超过2MB!");
+		    			return false;
+		    		}
+		        }
+	   		}else{
+	   			if(license_file) {
+		   		 	$ionicLoading.show();
+			        $scope.upload(license_file);
+			      }
+	   		}
 	    };
-		
+
+	    // 上传执业证书
+	    $scope.upload = function (license_file) {
+	    	Upload.upload({
+	        	headers: {
+			            'Content-Type': 'application/json' , 
+			            'Authorization': 'bearer ' + $rootScope.token
+		       		},
+		            url: 'http://'+$rootScope.hostName+'/file/upload/user',
+		            data: {
+		            	upload_file: license_file,
+		            	'user_id': currentUser.id
+		            }
+		        }).then(function (response) {
+		        	$scope.file = response.data.data.file_url;
+		        	$scope.file_path = response.data.data.file_path;
+		            $timeout(function () {
+		                $scope.result = response.data;
+		            });
+		        }, function (response) {
+		            if (response.status > 0) {
+		             	var errorMsg = response.status + ': ' + response.data;
+		        		console.info('errorMsg',errorMsg);
+		        		layer.show(errorMsg);
+		            }
+		        }, function (evt) {
+		        	var progres = parseInt(100.0 * evt.loaded / evt.total);
+		        	$scope.progress = progres;
+		            
+		        });
+	    };
+
+
 		//获取省市区
 		$scope.getAddress = function(){
 			delete $localStorage.addres;
@@ -2240,7 +2298,8 @@ lvtuanApp.controller("practitionersCtrl",function($scope,$http,$rootScope,$timeo
 		$scope.submit = function(){
 			
 			var param = layer.getParams("#practitionForm");
-			var province =  $scope.addres_param.province.key;
+
+			/*var province =  $scope.addres_param.province.key;
 			var city =  $scope.addres_param.city.key;
 			var district =  $scope.addres_param.district.key;
 			if(province){
@@ -2252,25 +2311,27 @@ lvtuanApp.controller("practitionersCtrl",function($scope,$http,$rootScope,$timeo
 			if(district){
 				param['district'] = district;
 			}
-			
+			*/
 			if(param.license_file.length < 1){
 				layer.show("请上传执业证书！");
 				return false;
-			}else{
+			}
+			/*else{
 				var license_file = param.license_file.split('=');
 				if(license_file[1]){
 					param['license_file'] = license_file[1];
 				}else{
 					param['license_file'] = param.license_file;
 				}
-			}
+			}*/
 			
+			console.info(param);
 			$ionicLoading.show();
 			$http.post('http://'+$rootScope.hostName+'/center/becomelawyer/work', param
 			).success(function(data) {
 	           layer.show("添加成功！");
 	           $location.path('/becomenav');
-	           $ionicLoading.hode();
+	           $ionicLoading.hide();
 	        });
 		}	
 
@@ -2314,35 +2375,54 @@ lvtuanApp.controller("verifiedCtrl",function($scope,$http,$rootScope,$timeout,$s
 	})
 	
 	//上传身份证
-    $scope.uploadFiles = function (license_file) {
-        Upload.upload({
-        	headers: {
+	$scope.uploadFiles = function (license_file,errFiles) {
+	    $scope.errFiles = errFiles;
+	    if($scope.errFiles.length > 0){
+	       for(var i=0; i<$scope.errFiles.length; i++){
+	       if($scope.errFiles[i].$error == 'maxSize'){
+	          layer.show("图片大小不能超过2MB!");
+	          return false;
+	       }
+	      }
+	    }else{
+	       if(license_file) {
+	          $ionicLoading.show();
+	         $scope.upload(license_file);
+	       }
+	    }
+	};
+
+	// 上传执业证书
+	$scope.upload = function (license_file) {
+	 Upload.upload({
+	   headers: {
 	            'Content-Type': 'application/json' , 
 	            'Authorization': 'bearer ' + $rootScope.token
-       		},
-            url: 'http://'+$rootScope.hostName+'/file/upload/user',
-            data: {
-            	upload_file: license_file,
-            	'user_id': currentUser.id
-            }
-        }).then(function (response) {
-        	$scope.file = response.data.data.file_url;
-        	$scope.file_path = response.data.data.file_path;
-            $timeout(function () {
-                $scope.result = response.data;
-            });
-        }, function (response) {
-            if (response.status > 0) {
-             	var errorMsg = response.status + ': ' + response.data;
-        		console.info('errorMsg',errorMsg);
-        		layer.show(errorMsg);
-            }
-        }, function (evt) {
-        	var progres = parseInt(100.0 * evt.loaded / evt.total);
-        	$scope.progress = progres;
-            
-        });
-    };
+	   		},
+	        url: 'http://'+$rootScope.hostName+'/file/upload/user',
+	        data: {
+	        	upload_file: license_file,
+	        	'user_id': currentUser.id
+	        }
+	    }).then(function (response) {
+	    	$scope.file = response.data.data.file_url;
+	    	$scope.file_path = response.data.data.file_path;
+	        $timeout(function () {
+	            $scope.result = response.data;
+	        });
+	    }, function (response) {
+	        if (response.status > 0) {
+	         	var errorMsg = response.status + ': ' + response.data;
+	    		console.info('errorMsg',errorMsg);
+	    		layer.show(errorMsg);
+	        }
+	    }, function (evt) {
+	    	var progres = parseInt(100.0 * evt.loaded / evt.total);
+	    	$scope.progress = progres;
+	        
+	    });
+	};
+
 
     //提交
 	$scope.submit = function(){
@@ -2350,14 +2430,16 @@ lvtuanApp.controller("verifiedCtrl",function($scope,$http,$rootScope,$timeout,$s
 		if(param.ID_img.length < 1){
 			layer.show("请上传执业证书！");
 			return false;
-		}else{
-			var ID_img = param.ID_img.split('=');
-			if(ID_img[1]){
-				param['ID_img'] = ID_img[1];
-			}else{
-				param['ID_img'] = param.ID_img;
-			}
 		}
+		// else{
+		// 	var ID_img = param.ID_img.split('=');
+		// 	if(ID_img[1]){
+		// 		param['ID_img'] = ID_img[1];
+		// 	}else{
+		// 		param['ID_img'] = param.ID_img;
+		// 	}
+		// }
+
 		console.log(param);
 		$ionicLoading.show();
 		$http.post('http://'+$rootScope.hostName+'/center/becomelawyer/identity', param
@@ -2661,7 +2743,6 @@ lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$l
 				];
 	getDistrict();
 	getWorkscopes();
-	getPractisePeriods();
 
 	//获取所在区域
 	function getDistrict(){
@@ -2681,16 +2762,6 @@ lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$l
 				$ionicLoading.hide();
 			})
 	}
-	//律师的从业年限
-	function getPractisePeriods(){
-		$ionicLoading.show();
-		$http.get('http://'+$rootScope.hostName+'/lawyer/practiseperiods')
-			.success(function(data) {
-				$scope.periods = data.data; 
-				$ionicLoading.hide();
-			})
-	}
-
 
 	var page = 1; //页数
 	var rows_per_page = 5; // 每页的数量
@@ -2730,9 +2801,6 @@ lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$l
 	  	if(params.cat_id){
 	  		param.push('cat_id=' + params.cat_id);
 	  	}
-	  	if(params.experience){
-	  		param.push('experience=' + params.experience);
-	  	}
 	  	if(params.order_by){
 	  		param.push('order_by=' + params.order_by);
 	  	}
@@ -2759,6 +2827,7 @@ lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$l
 	};
 
 	function geturl(param){
+		$scope.nodata = true;
 		var url;
 		if(param != ""){
 	  		url = 'http://'+$rootScope.hostName+'/lawyer/list_lawyers?'+param+'&rows_per_page='+rows_per_page+'&page='+page;
@@ -2863,7 +2932,7 @@ lvtuanApp.controller("viewCtrl",function($scope,$http,$rootScope,$stateParams,ht
 		//普通用户个人信息
 		location.href='#/graphic/'+type;
 	}else{
-		layer.show("律师没有开通该项服务!");
+		layer.show("您是律师用户，无此服务!");
 	}
 	
    }
@@ -2996,6 +3065,14 @@ lvtuanApp.controller("graphicCtrl",function($scope,$http,$rootScope,$timeout,$st
 	        	$ionicLoading.show();
 	        	$scope.files = files;
         		$scope.errFiles = errFiles;
+
+        		for(var i=0; i<$scope.errFiles.length; i++){
+		        	if($scope.errFiles[i].$error == 'maxSize'){
+	        			layer.show("图片大小不能超过6MB!");
+	        			return false;
+	        		}
+		        }
+
 		        angular.forEach(files, function(file) {
 		            file.upload = Upload.upload({
 		            	headers: {
@@ -3085,13 +3162,23 @@ lvtuanApp.controller("questionsCtrl",function($scope,$http,$rootScope,$timeout,$
     	}
 
         if(files && files.length > 2){
-	        	layer.show("最多只能上传2个文件或者图片！");
+	        	layer.show("最多只能上传2个图片！");
 	        	return false;
 	        }else{
-	        	$ionicLoading.show();
+	        	//$ionicLoading.show();
 	        	$scope.files = files;
         		$scope.errFiles = errFiles;
+
+		        for(var i=0; i<$scope.errFiles.length; i++){
+		        	if($scope.errFiles[i].$error == 'maxSize'){
+	        			layer.show("图片大小不能超过2MB!");
+	        			return false;
+	        		}
+		        }
+        		
 		        angular.forEach(files, function(file) {
+
+
 		            file.upload = Upload.upload({
 		            	headers: {
 				            'Content-Type': 'application/json' , 
@@ -3101,14 +3188,16 @@ lvtuanApp.controller("questionsCtrl",function($scope,$http,$rootScope,$timeout,$
 		                data: {files: file}
 		            });
 
+
 		            file.upload.then(function (response) {
+		            	
 		            	var file_path = response.data.data.file_path;
 			 			$scope.file.push(file_path);
 						$scope.file = $scope.file;
 		                $timeout(function () {
 		                    file.result = response.data;
 		                });
-		                $ionicLoading.hide();
+		               // $ionicLoading.hide();
 		            }, function (response) {
 		            	var status = response.status
 		                if (response.status > 0)
@@ -3146,9 +3235,19 @@ lvtuanApp.controller("questionsCtrl",function($scope,$http,$rootScope,$timeout,$
 })
 
 //问律师列表
-lvtuanApp.controller("questionslistCtrl",function($http,$scope,$state,$rootScope,listHelper){
+lvtuanApp.controller("questionslistCtrl",function($http,$scope,$state,$rootScope,listHelper,authService){
 
 	listHelper.bootstrap('/question/list_questions', $scope);
+
+	var currentUser = authService.getUser();
+	$scope.questions_btn = function(){
+		if(currentUser.status == 1 || currentUser.status == 2){
+			//普通用户个人信息
+			location.href='#/questions';
+		}else{
+			layer.show("您是律师用户，无此服务!");
+		}
+	}
 
 })
 
@@ -4846,7 +4945,17 @@ lvtuanApp.controller("corporateservicesCtrl",function($http,$scope,$state,$rootS
 })
 
 //法律顾问
-lvtuanApp.controller("corporatelistCtrl",function($scope,$state,$http,$rootScope,$stateParams,$ionicPopup,$ionicLoading){
+lvtuanApp.controller("corporatelistCtrl",function($scope,$state,$http,$rootScope,$stateParams,$ionicPopup,$ionicLoading,authService){
+
+	var currentUser = authService.getUser();
+	$scope.buynow_btn = function(id){
+		if(currentUser.status == 1 || currentUser.status == 2){
+			//普通用户个人信息
+			location.href='#/corporate/buynow/'+id;
+		}else{
+			layer.show("您是律师用户，无此服务!");
+		}
+	}
 
 	$scope.counsels = {
 		"counsels_8800"	:{

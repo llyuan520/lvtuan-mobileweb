@@ -34,15 +34,18 @@
 						</div>
 
 						  <ul style="margin-top: 10px;display: inline-block;float: left;width: 100%;">
-						    <li ng-repeat="f in files" style="font:smaller;width: 100%;">
-						    	<span style="width: 100%;float: left;display: inline-block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;height: 20px;">{{f.name}}</span> 
+						    <li class="contents" ng-repeat="f in files" style="font:smaller;width: 100%;">
+						    	{{f.name}}
 						    	{{f.$errorParam}}
 						     <!--  <span class="progress" ng-show="f.progress >= 0">
 						        <div style="width:{{f.progress}}%"  
 						            ng-bind="f.progress + '%'"></div>
 						      </span> -->
 						    </li>
-						    <li ng-repeat="f in errFiles" style="font:smaller">{{f.name}} {{f.$error}} {{f.$errorParam}}</li> 
+						    <li class="contents" ng-repeat="f in errFiles" style="font:smaller;width: 100%;">
+						    	 <!-- {{f.name}} {{f.$error}} {{f.$errorParam}} -->
+						    	{{f.name}} {{f.$errorParam}}
+						    </li> 
 						  </ul>
 						<!-- <label class="rig">
 							<img ng-src="{{file}}" ngf-thumbnail="upload_file || '{{group.group_avatar}}'" width="52" height="50">

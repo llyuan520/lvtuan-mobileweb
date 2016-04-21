@@ -35,6 +35,9 @@
 			              执业地址
 			            </div>
 			            <input placeholder="请选择执业地址" ng-model="address" type="text" required ng-click="getAddress()" data-disabled="disabled">
+			            <input type="hidden" ng-model="province" name="province" value="{{province}}" /> 
+			            <input type="hidden" ng-model="city" name="city" value="{{city}}" /> 
+			            <input type="hidden" ng-model="district" name="district" value="{{city}}" /> 
 					</div>
 					<div class="item item-input">
 						<div class="input-label">
@@ -42,7 +45,7 @@
 			            </div>
 			            <img ng-if=" file != '' " ng-src="{{file}}" ngf-thumbnail="file || ''" width="52" height="50">
 
-			            <div ng-if="!currentUser.is_verified_lawyer" class="uploapoto" ng-model="license_file" ngf-pattern="'image/*'"  accept="image/*" ngf-max-size="20MB" ngf-min-height="100" ngf-select="uploadFiles($file)" ></div>
+			            <div ng-if="!currentUser.is_verified_lawyer" class="uploapoto" ng-model="license_file" ngf-pattern="'image/*'"  accept="image/*" ngf-max-size="2MB" ngf-min-height="100" ngf-select="uploadFiles($file, $invalidFiles)" ></div>
 
 						<input ng-if="!currentUser.is_verified_lawyer" type="hidden" name="license_file" value="{{file_path}}" />
 						<!-- <span class="progress" ng-show="progress > 0">

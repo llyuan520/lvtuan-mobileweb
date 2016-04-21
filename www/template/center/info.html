@@ -15,7 +15,7 @@
 				    	<div class="row row-no-padding">
 				    		<div class="col col-center row-no-padding">头像</div>
 							<div class="col col-75 col-center row-no-padding">
-								<div style="float: right;height: 80px;" ng-model="user.avatar" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="6MB" ngf-min-height="100" ngf-select="uploadFiles($file,items.user.id)">
+								<div style="float: right;height: 80px;" ng-model="user.avatar"  ngf-select="uploadFiles($file,$invalidFiles)" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="2MB" ngf-min-height="100">
 									<img style="border-radius:50%;" ng-src="{{file}}" ngf-thumbnail="user.avatar || '{{file}}'" width="80" height="80">
 									<!-- <span class="progress" ng-show="progress >= 0 || progress <= 99 ">
 								      <div style="width:{{progress}}%" ng-bind="progress + '%'"></div>

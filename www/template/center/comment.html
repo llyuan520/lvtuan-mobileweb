@@ -11,10 +11,10 @@
 				</div>
 				
 				<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
-				<ion-list>
-					<ion-item ng-repeat="item in items">
+				 <div class="list">
+			        <a class="item" ng-repeat="item in items" ng-href="#/knowledgeview/{{item.article_id}}">
 						<p class="content">
-							{{item.title}}
+							 {{item.title}}
 						</p>
 						<p class="contents txt-c-99">
 							{{item.comment}}
@@ -22,8 +22,8 @@
 						<p>
 							 <label class="rig txt-c-99">{{item.created_at}}</label>
 						</p>
-					</ion-item>
-				</ion-list>
+			        </a>
+			    </div>
 				<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
 			</ion-content>
 			

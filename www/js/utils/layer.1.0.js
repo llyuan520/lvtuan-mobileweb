@@ -9,7 +9,7 @@ var layer = (function(){
       data = msg(data);
     }
     if(angular.isUndefined($("#hintShow").html())) {
-      var div = $("<div id='hintShow' style='width:100%;text-align:center;padding:12px 0px;background:black;opacity:0.7;color:#fff;position: fixed;top:0;left:0;display:none;z-index:9999;'>"+data+"</div>");
+      var div = $("<div id='hintShow' style='width:100%;text-align:center;padding:12px 0px;background:#ff2f5f;opacity:1;color:#fff;position: fixed;top:0;left:0;display:none;z-index:9999;'>"+data+"</div>");
       div.appendTo($("body")).fadeIn("slow");
       time = setInterval(function(){
         clearInterval(time);
@@ -20,7 +20,9 @@ var layer = (function(){
       $("#hintShow").bind('click',function(){
         div.remove();
       });
-    }   
+    }else{
+      return false;
+    }  
   } 
   
   //获取url中的参数
@@ -231,7 +233,7 @@ this.stopDefault = function(e)
 // 解决方法:
 // 0. .container 去掉 overflow 属性, 但此 demo 下会引发别的问题
 //    Android 手机下, input 或 textarea 元素聚焦时, 主动滚一把
-if (/Android/gi.test(navigator.userAgent)) {
+/*if (/Android/gi.test(navigator.userAgent)) {
     window.addEventListener('resize', function () {
         if (document.activeElement.tagName == 'INPUT' || document.activeElement.tagName == 'TEXTAREA') {
             window.setTimeout(function () {
@@ -239,4 +241,4 @@ if (/Android/gi.test(navigator.userAgent)) {
             }, 0);
         }
     })
-}
+}*/

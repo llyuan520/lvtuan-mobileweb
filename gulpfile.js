@@ -84,7 +84,6 @@ gulp.task('minifyMyJs', function(done) {
     .on('end', done);
 });
 
-
 gulp.task('minifyLibJs', function(done) {
   gulp.src([
       './www/lib/js/jquery-1.10.2.min.js', 

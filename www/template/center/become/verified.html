@@ -28,7 +28,7 @@
 							  	<div class="col col-60">
 							  		<img ng-src="{{file}}" ngf-thumbnail="file || ''" width="52" height="50">
 
-							  		<div class="uploapoto" ng-if="!currentUser.is_verified_lawyer" ng-model="ID_img" ngf-pattern="'image/*'"  accept="image/*" ngf-max-size="20MB" ngf-min-height="100" ngf-select="uploadFiles($file)"></div>
+							  		<div class="uploapoto" ng-if="!currentUser.is_verified_lawyer" ng-model="ID_img" ngf-pattern="'image/*'"  accept="image/*" ngf-max-size="2MB" ngf-min-height="100" ngf-select="uploadFiles($file,$invalidFiles)"></div>
 									<input type="hidden" name="ID_img" value="{{file_path}}" />
 									<span class="progress" ng-show="progress >= 0">
 				                  		<div style="width:{{progress}}%" ng-bind="progress + '%'"></div>
