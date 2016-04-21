@@ -13,7 +13,7 @@
 		        	</p>
 		        	<p class="fc-33">{{item.post_category}}</p>
 		        	<p style="text-align: right;" ng-if="currentUser.status == 1 || currentUser.status == 2">
-	  					<button class="button button-small button-positive" ng-click="to_cancel(item.transitions[0].to_cancel,$index)">取消</button>
+	  					<button class="button button-small button-positive" ng-click="to_cancel(item.transitions[0].to_cancel,item)">取消</button>
 	  				</p>
 	  				<p style="text-align: right;" ng-if="currentUser.status == 3">
 	  					<button class="button button-small button-positive" ng-click="to_take(item.transitions[0].to_take)">抢单</button>
