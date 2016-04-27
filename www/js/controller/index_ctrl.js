@@ -1,4 +1,4 @@
-var lvtuanApp = angular.module('app', ['ionic','ngSanitize','ngFileUpload','listModule','authModule','wxModule','locationModule','ngStorage','easemobModule'])
+var lvtuanApp = angular.module('app', ['ionic','ngSanitize','ngFileUpload','listModule','authModule','wxModule','locationModule','ngStorage','easemobModule','angular-jwt'])
 lvtuanApp.constant("HOST", AppSettings.baseApiUrl)
 
 lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $location,$ionicHistory, $http, userService, authService, locationService){
@@ -730,7 +730,11 @@ lvtuanApp.controller("groupAttentionSearchCtrl",function($http,$scope,$state,$ro
 	}
 })
 
-lvtuanApp.controller("groupviewCtrl",function($scope,$http,$state,$rootScope,$stateParams,easemobService,$ionicLoading){
+lvtuanApp.controller("groupviewCtrl",function($scope,$http,$state,$rootScope,$stateParams,$ionicLoading,easemobService,authService){
+
+	var currentUser = authService.getUser();
+		currentUser.associate_id = $stateParams.id;
+		localStorage.setItem('currentUser', JSON.stringify(currentUser));
 
 	$scope.$on('$ionicView.beforeEnter', function() {  
 		$ionicLoading.show();
@@ -3479,7 +3483,11 @@ lvtuanApp.controller("commentlawyerCtrl",function($http,$scope,$stateParams,$roo
 
 
 //咨询和订单的一对一咨询 - 即时通讯
-lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$stateParams,$timeout,$ionicLoading,easemobService,httpWrapper){
+lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$stateParams,$timeout,$ionicLoading,easemobService,httpWrapper,authService){
+
+	var currentUser = authService.getUser();
+		currentUser.associate_id = $stateParams.id;
+		localStorage.setItem('currentUser', JSON.stringify(currentUser));
 
 	$ionicLoading.show();
 	$http.get('http://'+$rootScope.hostName+'/center/question/'+$stateParams.id+'/ask'

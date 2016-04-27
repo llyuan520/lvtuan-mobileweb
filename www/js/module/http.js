@@ -115,6 +115,8 @@ httpModule.factory('APIInterceptor', ['$log', '$q', '$rootScope', 'authService',
 	   	console.info(response);
 		    switch(response.status) {
 		      	case 401:
+		      		$rootScope.$broadcast('unauthenticated');
+	        		break;
 		      	case 403:
 	        		$rootScope.$broadcast('unauthorized');
 	        		break;

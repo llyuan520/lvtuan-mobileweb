@@ -235,10 +235,13 @@ function easemobService($ionicLoading) {
             textSending = false;
             return false;
         }
+        var currentUser = JSON.parse(localStorage.getItem('currentUser'));
         var ext = {
             realname: currentUser.realname,
-            avatar: currentUser.avatar
+            avatar: currentUser.avatar,
+            associate_id: currentUser.associate_id
         }
+
         var options = {
             to : to,
             msg : msg,
