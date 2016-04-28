@@ -769,6 +769,50 @@ lvtuanApp.controller("groupviewCtrl",function($scope,$http,$state,$rootScope,$st
 		location.href='#/group/site/'+id;
 	}
 
+    var page = 1;
+    var rows_per_page = 10;
+
+	$scope.loadMore = function() {
+	    var str = '';
+	    var url = 'http://'+$rootScope.hostName+'/group/'+$stateParams.id+'/records?page='+page+'&rows_per_page='+rows_per_page;
+
+		$ionicLoading.show();
+		$http.get(url)
+		.success(function(data) {
+            obj = data.data;
+            console.info(obj);
+        	for(var i=0; i<obj.length; i++){
+	                style = "left";
+	                if(obj[i].from != $scope.curUserId) {
+	                    str+='<div class="easemobmain-record img-right" style="text-align:right;">';
+	                    str+='<p1>'+obj[i].created_at+'<span></span></p1>';
+	                	str+='<p2>'+obj[i].sender_realname+'<b></b></p2>';
+	                } else {
+	                    str+='<div class="easemobmain-record img-left" style="text-align:left;">';
+	                    str+='<p1>'+obj[i].sender_realname+'<span></span></p1>';
+	                	str+='<p2>'+obj[i].created_at+'<b></b></p2>';
+	                }
+	                
+	                str+='<img src='+obj[i].sender_avatar+'><br>';
+	                str+='<p3 class="chat-content-p3" className="chat-content-p3">'+obj[i].content+'</p3>';
+	                str+='</div>';
+            }
+            
+            if(obj.length < rows_per_page) {
+            	$("#comments-list").hide();
+            }
+            $("#page").after(str);
+            $("#page").css('display', 'none');
+            page++;
+            $ionicLoading.hide();
+		}).error(function(data) {
+            console.info(data);
+            var error =  $.parseJSON(data.responseText);
+            layer.show(error.error_messages);
+            console.info(error);
+		});
+	}
+
 	$scope.sendText = function() {
 		var result = easemobService.sendText("groupchat");
 		console.log(result);
@@ -777,19 +821,6 @@ lvtuanApp.controller("groupviewCtrl",function($scope,$http,$state,$rootScope,$st
 			$scope.saveComment(comment);
 		}*/
 	}
-
-	/*$scope.textKeyDown = function($event) {
-		if ($event.keyCode == 13) {
-	        if ($event.altKey) {
-	            e = $event.target.value;
-	            $(this).val(e + '\n');
-	        } else {
-	            $scope.sendText();
-	            $event.preventDefault();
-	        }
-		}
-	}*/
-
 
 })
 
@@ -3540,25 +3571,42 @@ lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$
             if($scope.arry.length > 0) {
             	for(var i=0; i<obj.length; i++){
             		//判断是否有重复的数据
-            		if($.inArray(parseInt(obj[i].id),$scope.arry) >-1  == true){
-            			obj.splice(obj.indexOf(obj[i].id), 1);
-            			console.info(obj);
-            		}else{
-		                style = "left";
-		                if(obj[i].creator_id == $scope.curUserId) {
-		                    str+='<div class="easemobmain-record img-right" style="text-align:right;">';
-		                } else {
-		                    str+='<div class="easemobmain-record img-left" style="text-align:left;">';
-		                }
-		                str+='<p1>'+obj[i].created_at+'<span></span></p1>';
-		                str+='<p2>'+obj[i].creator_name+'<b></b></p2>';
-		                str+='<img src='+obj[i].creator_avatar+'><br>';
-		                str+='<p3 class="chat-content-p3" className="chat-content-p3">'+obj[i].content+'</p3>';
-		                str+='</div>';
+            		for(var j=0; j<$scope.arry.length;j++){
+            			if(obj[i].id == $scope.arry[j]){
+            				console.info(obj[i].id,$scope.arry[j]);
+            				continue;
+            			}else{
+            				console.info(obj[i].id);
+            				style = "left";
+			                if(obj[i].creator_id == $scope.curUserId) {
+			                    str+='<div class="easemobmain-record img-right" style="text-align:right;">';
+			                } else {
+			                    str+='<div class="easemobmain-record img-left" style="text-align:left;">';
+			                }
+			                str+='<p1>'+obj[i].created_at+'<span></span></p1>';
+			                str+='<p2>'+obj[i].creator_name+'<b></b></p2>';
+			                str+='<img src='+obj[i].creator_avatar+'><br>';
+			                str+='<p3 class="chat-content-p3" className="chat-content-p3">'+obj[i].content+'</p3>';
+			                str+='</div>';
+            			}
             		}
 	            }
+            }else{
+            	for(var i=0; i<obj.length; i++){
+	                style = "left";
+	                if(obj[i].creator_id == $scope.curUserId) {
+	                    str+='<div class="easemobmain-record img-right" style="text-align:right;">';
+	                } else {
+	                    str+='<div class="easemobmain-record img-left" style="text-align:left;">';
+	                }
+	                str+='<p1>'+obj[i].created_at+'<span></span></p1>';
+	                str+='<p2>'+obj[i].creator_name+'<b></b></p2>';
+	                str+='<img src='+obj[i].creator_avatar+'><br>';
+	                str+='<p3 class="chat-content-p3" className="chat-content-p3">'+obj[i].content+'</p3>';
+	                str+='</div>';
+	            }
             }
-            
+
             if(obj.length < rows_per_page) {
             	$("#comments-list").hide();
             }
@@ -3566,6 +3614,7 @@ lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$
             $("#page").css('display', 'none');
             page++;
             $ionicLoading.hide();
+
 		}).error(function(data) {
             console.info(data);
             var error =  $.parseJSON(data.responseText);
@@ -3581,21 +3630,6 @@ lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$
 			$scope.saveComment(comment);
 		}
 	}
-
-	/*$scope.textKeyDown = function($event) {
-		if ($event.keyCode == 13) {
-			alert($event.altKey);
-			alert($event.target.value);
-			alert(e + '\n');
-	        if ($event.altKey) {
-	            e = $event.target.value;
-	            $(this).val(e + '\n');
-	        } else {
-	            $scope.sendText();
-	            $event.preventDefault();
-	        }
-		}
-	}*/
 
 	$scope.saveComment = function(comment) {
         var comment = comment;
