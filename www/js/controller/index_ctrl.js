@@ -731,7 +731,14 @@ lvtuanApp.controller("groupAttentionSearchCtrl",function($http,$scope,$state,$ro
 })
 
 lvtuanApp.controller("groupviewCtrl",function($scope,$http,$state,$rootScope,$stateParams,$ionicLoading,easemobService,authService){
-
+	
+	$scope.$on('$locationChangeSuccess', function(newState,oldState) {  
+		if(newState != oldState){
+			window.location.reload();
+		}else{
+			return false;
+		}	
+	})
 	var currentUser = authService.getUser();
 		currentUser.associate_id = $stateParams.id;
 		localStorage.setItem('currentUser', JSON.stringify(currentUser));
@@ -771,7 +778,7 @@ lvtuanApp.controller("groupviewCtrl",function($scope,$http,$state,$rootScope,$st
 		}*/
 	}
 
-	$scope.textKeyDown = function($event) {
+	/*$scope.textKeyDown = function($event) {
 		if ($event.keyCode == 13) {
 	        if ($event.altKey) {
 	            e = $event.target.value;
@@ -781,7 +788,7 @@ lvtuanApp.controller("groupviewCtrl",function($scope,$http,$state,$rootScope,$st
 	            $event.preventDefault();
 	        }
 		}
-	}
+	}*/
 
 
 })
@@ -3484,6 +3491,13 @@ lvtuanApp.controller("commentlawyerCtrl",function($http,$scope,$stateParams,$roo
 
 //咨询和订单的一对一咨询 - 即时通讯
 lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$stateParams,$timeout,$ionicLoading,easemobService,httpWrapper,authService){
+	$scope.$on('$locationChangeSuccess', function(newState,oldState) {  
+		if(newState != oldState){
+			window.location.reload();
+		}else{
+			return false;
+		}	
+	})
 
 	var currentUser = authService.getUser();
 		currentUser.associate_id = $stateParams.id;
@@ -3568,8 +3582,11 @@ lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$
 		}
 	}
 
-	$scope.textKeyDown = function($event) {
+	/*$scope.textKeyDown = function($event) {
 		if ($event.keyCode == 13) {
+			alert($event.altKey);
+			alert($event.target.value);
+			alert(e + '\n');
 	        if ($event.altKey) {
 	            e = $event.target.value;
 	            $(this).val(e + '\n');
@@ -3578,7 +3595,7 @@ lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$
 	            $event.preventDefault();
 	        }
 		}
-	}
+	}*/
 
 	$scope.saveComment = function(comment) {
         var comment = comment;
