@@ -1702,7 +1702,9 @@ lvtuanApp.controller("knowledgeViewCtrl",function($scope,$http,$rootScope,$state
 
 //给安卓用的文章-详情页面
 lvtuanApp.controller("knowledgeAndroidViewCtrl",function($scope,$http,$rootScope,$stateParams,$ionicPopup,$ionicPopup,$ionicLoading){
-	$ionicLoading.show();
+	 $ionicLoading.show({
+	    showBackdrop: false
+	  });
 	$http.get('http://'+$rootScope.hostName+'/knowledge/'+$stateParams.id+'/view').success(function(data) {
         	console.info(data.data)
         	$scope.items = data.data;
