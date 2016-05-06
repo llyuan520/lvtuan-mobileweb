@@ -1,4 +1,18 @@
 <style type="text/css">
+.scrollArea {
+    overflow: auto;
+    background-color: #eee;
+     position: absolute;
+    top: 44px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin-top: -1px;
+    padding-top: 1px;
+    margin-bottom: -1px;
+    width: auto;
+    height: auto;
+  }
 .citypicker{
 	/*position: fixed;
     top: 0;
@@ -23,7 +37,7 @@
     text-align: center;
 }
 .navbar li{
-	height: 1.3rem;
+	height: 1.4rem;
     line-height: 2rem;
     font-size: 1.1rem;
 }
@@ -40,7 +54,8 @@
 				<!-- <button ng-click="createSubmit()" class="button button-clear button-positive" type="button">保存</button> -->
 			</ion-header-bar>
 
-			<ion-content delegate-handle="mainScroll" style="margin-bottom:0;">
+			<!-- bug 如果是页面用了ionic的<ion-content> 这个代码，那么页面的点击事件执行后，滚动条就会失效 -->
+			<div class="scrollArea">
 				<div class="citypicker">
 					<div class="province">
 						<div class="list" id="{{key}}" ng-repeat="(key, value) in provinces">
@@ -60,7 +75,7 @@
 						</div>
 					</div>
 				</div>
-		</ion-content>
+			</div>
 		<ul class="navbar">
 			<li ng-repeat="(key, value) in str" ng-click="goto(value)">{{value}}</li>
 		</ul>

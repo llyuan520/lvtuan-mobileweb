@@ -1440,7 +1440,7 @@ input, select {
     height: 1.74rem;
     margin-top: 20%;
 }
-.not-selected {
+/*.not-selected {
     float: right;
     width: 60%;
     height: 3.8rem;
@@ -1453,7 +1453,7 @@ input, select {
     height: 3.8rem;
     background: url("../img/button-blue.png") right center no-repeat;
     background-size: 43%;
-}
+}*/
 
 /*经历案例*/
 .scroll .list .case-list {

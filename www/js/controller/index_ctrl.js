@@ -243,7 +243,11 @@ lvtuanApp.controller("indexCtrl",function($scope,$location,listHelper,locationSe
 	$scope.mylvteam = function(){
 		$location.path('/mylvteam');
 	}
+
+
 })
+
+
 
 //用户登陆
 lvtuanApp.controller("loginCtrl",function($state,$scope,$rootScope,$http,userService){
@@ -5620,10 +5624,8 @@ lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$io
 	    }
     }
 
-
-    
-
 })
+
 
 
 lvtuanApp.controller("citypickerCtrl",function($http,$location,$scope,$rootScope,$anchorScroll,$ionicHistory,$stateParams,$ionicLoading,$ionicScrollDelegate,locationService){
@@ -5639,9 +5641,20 @@ lvtuanApp.controller("citypickerCtrl",function($http,$location,$scope,$rootScope
 
 	//设置
 	$scope.goto = function (id) {
-        $location.hash(id);
-        $anchorScroll();  //设置页内跳转锚点
+		var newHash = id;
+		if ($location.hash() !== newHash) {
+          // set the $location.hash to `newHash` and
+          // $anchorScroll will automatically scroll to it
+          $location.hash(id);
+        } else {
+          // call $anchorScroll() explicitly,
+          // since $location.hash hasn't changed
+          $anchorScroll();
+        }
+       /* $location.hash(id);
+        $anchorScroll(); */ //设置页内跳转锚点
     }
+
 
     $scope.province_city_id = null;
     $scope.province_city_name = null;
@@ -5720,10 +5733,18 @@ lvtuanApp.controller("citypickeAllCtrl",function($http,$state,$location,$scope,$
 
 	$scope.str = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
 
-	//设置
+	//设置 bug 如果是页面用了ionic的<ion-content> 这个代码，那么页面的点击事件执行后，滚动条就会失效
 	$scope.goto = function (id) {
-        $location.hash(id);
-        $anchorScroll();  //设置页内跳转锚点
+        var newHash = id;
+		if ($location.hash() !== newHash) {
+          // set the $location.hash to `newHash` and
+          // $anchorScroll will automatically scroll to it
+          $location.hash(id);
+        } else {
+          // call $anchorScroll() explicitly,
+          // since $location.hash hasn't changed
+          $anchorScroll();
+        }
     }
 
     $scope.province = null;
