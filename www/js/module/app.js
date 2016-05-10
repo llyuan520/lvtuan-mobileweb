@@ -551,7 +551,7 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates'])
       cache: 'true', 
       templateUrl: 'template/questions/questions.html',
       controller: 'questionsCtrl',
-      authn: true
+      authn: false
     })
     .state('questionslist', { //问律师列表
       cache: 'true', 
@@ -572,12 +572,6 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates'])
       templateUrl: 'template/questions/view.html',
       controller: 'questionsviewsCtrl',
       authn: false
-    })
-    .state('questions/help', { //咨询帮助
-      cache: 'true', 
-      url: '/questions/help',
-      templateUrl: 'template/questions/questions_help.html',
-      authn: true
     })
 
 /*———————————————————————————— 我的律团- 我的订单 -公用 ————————————————————————————*/

@@ -3199,83 +3199,54 @@ lvtuanApp.controller("questionsCtrl",function($scope,$http,$rootScope,$timeout,$
           $ionicLoading.hide();
 	    });
 	
-	//用来存储上传的值
-	$scope.file = [];
-    $scope.uploadFiles = function(files, errFiles) {
-    	
-    	if(files == null && $scope.file != null){
-    		$scope.file = $scope.file;
-    		$scope.files = $scope.files; 
-    		return false;
-    	}
-
-        if(files && files.length > 2){
-	        	layer.show("最多只能上传2个图片！");
-	        	return false;
-	        }else{
-	        	//$ionicLoading.show();
-	        	$scope.files = files;
-        		$scope.errFiles = errFiles;
-
-		        for(var i=0; i<$scope.errFiles.length; i++){
-		        	if($scope.errFiles[i].$error == 'maxSize'){
-	        			layer.show("图片大小不能超过2MB!");
-	        			return false;
-	        		}
-		        }
-        		
-		        angular.forEach(files, function(file) {
-
-
-		            file.upload = Upload.upload({
-		            	headers: {
-				            'Content-Type': 'application/json' , 
-				            'Authorization': 'bearer ' + $rootScope.token
-			       		},
-			       		url: 'http://'+$rootScope.hostName+'/question/upfiles',
-		                data: {files: file}
-		            });
-
-
-		            file.upload.then(function (response) {
-		            	
-		            	var file_path = response.data.data.file_path;
-			 			$scope.file.push(file_path);
-						$scope.file = $scope.file;
-		                $timeout(function () {
-		                    file.result = response.data;
-		                });
-		               // $ionicLoading.hide();
-		            }, function (response) {
-		            	var status = response.status
-		                if (response.status > 0)
-		                    $scope.errorMsg = response.status + ': ' + response.data;
-		            }, function (evt) {
-		                file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
-		                $scope.progress = file.progress;
-		            });
-		        });
-		}
+	$scope.visible = true;
+	$scope.rgba = true;
+	$scope.name ="选择咨询类别";
+	$scope.key = "";
+    $scope.toggle = function () {
+        $scope.visible = !$scope.visible;
+        $scope.rgba = !$scope.rgba;
     }
+	$scope.inShowscopes = function(key) {
+		var value = false;
+		if (key == $scope.key) {
+			value = true;
+		}
+		return value;
+	}
+	
+	$scope.getval = function(key,val){
+    	$scope.visible = !$scope.visible;
+    	$scope.rgba = !$scope.rgba;
+		$scope.name = val;
+		$scope.key = key;
+    }
+
     $scope.user = {};
     //提交问题
 	$scope.submit = function(user){
-		$scope.user = user;
-		if($scope.file.length > 0){
-			$scope.user['file_paths'] = $scope.file;
+		if($scope.key.length < 1){
+			layer.show("请选择咨询类别！");
+			return false;
 		}
+		$scope.user = user;
+		$scope.user['cat_id'] = $scope.key;
+
         $ionicLoading.show();
 		httpWrapper.request('http://'+$rootScope.hostName+'/center/question/create/question','post',$scope.user,
 			function(data){
 				layer.show("提交成功！");
 				$scope.user = {};
-				$scope.files = {};
         		$scope.errFiles = {};
                 $ionicLoading.hide();
 			},function(data){
 	        	console.info(data.error_messages);
-	        	var errMsg = JSON.stringify(data.error_messages.content[0]);
-	        	layer.show(errMsg);
+	        	if(data.error_messages != undefined){
+	        		var errMsg = JSON.stringify(data.error_messages.content[0]);
+	        		layer.show(errMsg);
+	        	}
+	        	
+	        	
 			}
 		);
 	}
@@ -3283,19 +3254,94 @@ lvtuanApp.controller("questionsCtrl",function($scope,$http,$rootScope,$timeout,$
 })
 
 //问律师列表
-lvtuanApp.controller("questionslistCtrl",function($http,$scope,$state,$rootScope,listHelper,authService){
+lvtuanApp.controller("questionslistCtrl",function($http,$scope,$state,$rootScope,$ionicLoading,listHelper,authService){
 
 	listHelper.bootstrap('/question/list_questions', $scope);
 
-	var currentUser = authService.getUser();
-	$scope.questions_btn = function(){
-		if(currentUser.status == 1 || currentUser.status == 2){
-			//普通用户个人信息
-			location.href='#/questions';
-		}else{
-			layer.show("您是律师用户，无此服务!");
-		}
+	$scope.orders = [
+					{
+						"key"	:"most_popular",
+						"value" : "人气最高"
+					},
+					{
+						"key"	:"best_evaluated",
+						"value" : "评分最好"
+					},
+					{
+						"key"	:"experience",
+						"value" : "执业年限"
+					},
+					{
+						"key"	:"pay_reply_count",
+						"value" : "接单数"
+					}
+				];
+
+	getWorkscopes();
+
+
+	//获取法律专长
+	function getWorkscopes(){
+		$ionicLoading.show();
+		$http.get('http://'+$rootScope.hostName+'/lawyer/workscopes')
+			.success(function(data) {
+				$scope.workscopes = data.data;
+				if($scope.workscopes.length > 0){
+					$scope.showscopes = $scope.workscopes;
+				}
+				$ionicLoading.hide();
+			})
 	}
+
+	$scope.visible = true;
+	$scope.visible1 = true;
+	$scope.rgba = true;
+	$scope.name ="咨询类别";
+	$scope.name1 ="筛选";
+	$scope.scopes_key = "";
+	$scope.orders_key = "";
+    $scope.toggle = function () {
+        $scope.visible = !$scope.visible;
+        $scope.rgba = !$scope.rgba;
+    }
+
+    $scope.toggle1 = function () {
+        $scope.visible1 = !$scope.visible1;
+        $scope.rgba = !$scope.rgba;
+    }
+
+	$scope.inShowscopes = function(key) {
+		var value = false;
+		$scope.key = $scope.scopes_key;
+		if (key == $scope.key) {
+			value = true;
+		}
+		return value;
+	}
+	$scope.inorders = function(key) {
+		var value = false;
+		$scope.key = $scope.orders_key;
+		if (key == $scope.key) {
+			value = true;
+		}
+		return value;
+	}
+	
+
+	$scope.getval = function(key,val){
+    	$scope.visible = !$scope.visible;
+    	$scope.rgba = !$scope.rgba;
+		$scope.name = val;
+		$scope.scopes_key = key;
+    }
+
+    $scope.getval1 = function(key,val){
+		$scope.visible1 = !$scope.visible1;
+		$scope.rgba = !$scope.rgba;
+		$scope.name1 = val;
+		$scope.orders_key = key;
+    }
+
 
 })
 

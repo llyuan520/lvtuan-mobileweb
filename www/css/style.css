@@ -3,7 +3,7 @@
  页面上所用的蓝色：#32a9f2
  页面所用的黑色字体：#333333
  页面上所用灰色字体是：#999999
- 页面衬托用灰色底板：#eeeeee
+ 页面衬托用灰色底板：#f0f1f3
  字体统一是：微软雅黑
  蓝色按钮上的字体为白色：#FFFFFF
  以像素分割线或者边框描边 #DDDDDD
@@ -15,7 +15,7 @@ body, html, .pane, .ionic-body,h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, 
 }
 input{-webkit-user-modify: read-write-plaintext-only;}
 .scroll-content {
-    background-color: #eee;
+    background-color: #f0f1f3;
 }
 .scroll-content.bg-fff,.bg-fff{
     background-color: #fff;
@@ -25,7 +25,7 @@ input{-webkit-user-modify: read-write-plaintext-only;}
     margin-bottom: 50px;
 }
 .item-input {
-     padding: 6px 0 5px 0px;
+    padding: 2px 0 1px 0px
 }
 .item h2.fc-ee,.error{
     font-size: 14px;
@@ -56,7 +56,7 @@ input{-webkit-user-modify: read-write-plaintext-only;}
     padding-bottom: 16px;
 }
 .item-icon-left .icon.bgtag{
-    background-color: #004799;
+    background-color: #48b4ff;
     color: #fff;
     z-index: 1;
     display: inline-block;
@@ -86,7 +86,7 @@ input{-webkit-user-modify: read-write-plaintext-only;}
 }
 
 .slider-pager .slider-pager-page {
-    color:#004799;
+    color:#48b4ff;
 }
 .ng-cloak{
     display: none !important;
@@ -105,7 +105,7 @@ input{-webkit-user-modify: read-write-plaintext-only;}
 /*login*/
 a, a:link, a:visited, a:active, a:hover{
     text-decoration: none;
-    color: #666;
+    color: #b5b5b5;
 }
 .a-left{
     text-align: left;
@@ -126,11 +126,11 @@ a, a:link, a:visited, a:active, a:hover{
     color: #999;
 }
 .txt-c-66,.txt-c-66 a,.txt-c-66 a:link{
-    color: #666;
+    color: #b5b5b5;
 }
 
 .txt-c-33{
-    color: #666;
+    color: #b5b5b5;
 }
 .fc-33{
     color: #333;
@@ -148,7 +148,7 @@ a, a:link, a:visited, a:active, a:hover{
 }
 
 .nav-bar-block .headers {
-    background-color: #004799;
+    background-color: #48b4ff;
 }
 .logo{ background: url("../img/logo.png") 5px center no-repeat;
     background-size: 50%; 
@@ -233,20 +233,20 @@ a, a:link, a:visited, a:active, a:hover{
 .ion-chevron-down:before {margin-top: 5px;}
 .tab-item.tab-item-active, .tab-item.active, .tab-item.activated {
     opacity: 1;
-    color:#004799;
-    border-bottom: 2px solid #004799;
+    color:#48b4ff;
+    border-bottom: 2px solid #48b4ff;
 }
 .item .reply{  
     overflow: visible;
     position: relative;
     padding: 2px 10px;
     margin-top: 10px;
-    background-color: #EEEEEE;
+    background-color: #f0f1f3;
 }
 .ion-arrow-up-b:before {
     position: absolute;
     top: -9px;
-    color: #eee;
+    color: #f0f1f3;
 }
 
 .messages .ion-chevron-right:before {
@@ -292,7 +292,7 @@ img.avatar{
     position: absolute;
     top: -1px;
     width: 100%;
-    /*background-color: #eeeeee;*/
+    /*background-color: #f0f1f3;*/
 }
 .corporate-list .corporate-items a {
     padding: 20px 30px 20px 134px;
@@ -404,7 +404,7 @@ img.avatar{
     height: 49px;
 }
 .slideBox .tabs a.active{
-    color: #004799;
+    color: #48b4ff;
     height: 49px;
 }
 
@@ -574,6 +574,7 @@ input::-webkit-outer-spin-button {
     background-color: rgba(225,225,225,0); color: #fff;width: 100%;
     border-color: #fff;
     box-shadow: inset 0 1px 4px rgba(225,225,225,.1);
+    margin-top:3px;
 }
 .login .ion-wap input::-webkit-input-placeholder {
     color:#fff;
@@ -620,7 +621,6 @@ input::-webkit-outer-spin-button {
 .ion-row2 button{
     border: 0;
     padding: 0;
-    margin: 0;
     height: 34px;
     line-height: 34px;
 }
@@ -671,8 +671,8 @@ input, select {
 .select-cnt {            
     width: 33%;
     position: relative;            
-    height:50px;
-    line-height: 50px;
+    height:45px;
+    line-height: 45px;
     margin-left: 1%;
     padding-right: 2%;
 }
@@ -682,7 +682,7 @@ input, select {
 .select-cnt select{
     height:30px;
     line-height: 30px;
-    color:#666;
+    color:#b5b5b5;
     width:100%;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -700,7 +700,7 @@ input, select {
 .select-cnt select {
   background: url("../img/arrow1.png") no-repeat scroll right center transparent;
   padding-right: 1rem;
-  font-size: 0.8rem;
+  font-size: 14px;
   background-size: 1rem;
 }
 .select-cnt.arrow1{
@@ -708,7 +708,7 @@ input, select {
 }
 .select-cnt.arrow1 select {
  background: none;
-  background-size: 20px;*/
+  background-size: 20px;
   padding-right: 24px;
   font-size: 01.2rem;
 }
@@ -941,7 +941,7 @@ input, select {
     margin-top: 2px;
 }
 .nav-set a.active i.home, .nav-set a.active i.group, .nav-set a.active i.knowledge, .nav-set a.active i.center {
-    color: #004799;
+    color: #48b4ff;
 }
 .tab-item .home {
     background: url("../img/index.png") center center no-repeat;
@@ -1025,10 +1025,10 @@ input, select {
 }
 
 .nav-set .nav-home.active, .nav-set .nav-circle.active, .nav-set .nav-knowledge.active, .nav-set .nav-my.active {
-    color: #004799;
+    color: #48b4ff;
 }
 .nav-set .tab-item {
-    color: #666;
+    color: #b5b5b5;
 }
 
 
@@ -1177,7 +1177,7 @@ input, select {
 .border1{
     width: 1px;
     height: 37px;
-    background: #eeeeee;
+    background: #f0f1f3;
     background-color:rgba(238,238,238,0.5);
     display: inline-block;
     margin-top: 5px;
@@ -1230,11 +1230,11 @@ input, select {
     background-color: #fff;
 }
 .center-list .item {
-    color: #666666;
+    color: #b5b5b5666;
     padding-left: 0;
     margin: 0;
     border-width: 0 0 1px 0;
-    border-bottom: 1px #eee solid;
+    border-bottom: 1px #f0f1f3 solid;
 }
 .border-bottom-colorf2f2{
     border-bottom: 1px #f2f2f2 solid;
@@ -1287,7 +1287,7 @@ input, select {
     background-size: 7%;
 }
 .header-information a label {
-    color: #004799;
+    color: #48b4ff;
 }
 
 /*登录头部返回键设置*/
@@ -1335,7 +1335,7 @@ input, select {
 
 /*律师个人主页*/
 .pane .tabs .pic-consultation, .pane .tabs .phone-consultation {
-    color: #004799;
+    color: #48b4ff;
 }
 
 /*头部样式*/
@@ -1351,7 +1351,7 @@ input, select {
     display: block;
     height: 44px;
     line-height: 44px;
-    color: #004799;
+    color: #48b4ff;
 }
 .headers.bar-light .title {
     font-family: 'Microsoft YaHei';
@@ -1382,7 +1382,7 @@ input, select {
     width: 94%;
     padding: 0 0 0 11%;
     margin: 0 3%;
-    border-bottom: 1px #eee solid;
+    border-bottom: 1px #f0f1f3 solid;
     height: 50px;
     line-height: 50px;
 }
@@ -1459,7 +1459,7 @@ input, select {
 .scroll .list .case-list {
     height: 4.1rem;
     margin: 0px 0 0 0;
-    background-color: #eee;
+    background-color: #f0f1f3;
 }
 .scroll .list .case-content {
     margin: 0;
@@ -1486,16 +1486,16 @@ input, select {
     font-size: 1.2rem;
 }
 .field-content .list span {
-    background-color: #eee;
+    background-color: #f0f1f3;
     border-radius: 3px;
     text-align: center;
 }
 .field-content .list label {
     font-size: 1.2rem;
-    color: #666;
+    color: #b5b5b5;
 }
 .field-content .list span.active {
-    background-color: #004799;
+    background-color: #48b4ff;
 }
 .field-content span.active label {
     color: #fff;
@@ -1517,7 +1517,7 @@ input, select {
 .tariffset-content div:nth-child(3) {
     padding-right: 0;
     font-family: 'Microsoft YaHei', Arial;
-    color: #666;
+    color: #b5b5b5;
 }
 .col-14 {
     -webkit-box-flex: 0;
@@ -1633,7 +1633,7 @@ a,button,input{
     padding: 16px 0 16px 16%;
     margin: 0;
     border: none;
-    border-bottom: 1px #eee solid;
+    border-bottom: 1px #f0f1f3 solid;
 }
 .help-content .item img {
     position: absolute;
@@ -1649,7 +1649,7 @@ a,button,input{
     margin-bottom: 0.6rem;
     font-size: 1.2rem;
     font-family: 'Microsoft YaHei';
-    color: #666;
+    color: #b5b5b5;
 }
 .help-content .item p {
     font-size: 0.8rem;
@@ -1677,7 +1677,7 @@ a,button,input{
     margin-bottom: 0.6rem;
     font-size: 1.22rem;
     line-height: 1.26rem;
-    color: #666;
+    color: #b5b5b5;
 }
 .download-content .item p {
     line-height: 1.2rem;
@@ -1719,21 +1719,57 @@ a,button,input{
 
 
 
-.positive, a.positive {color: #004799; }
-.positive-bg {background-color: #004799; }
-.bar {border: none;background-image: linear-gradient(0deg, #004799, #004799 50%, transparent 50%);background-position: bottom;background-size: 100% 1px;background-repeat: no-repeat; }
-.bar.bar-light {border-color: #004799;background-color: #004799;background-image: linear-gradient(0deg, #004799, #004799 50%, transparent 50%);color: #fff;border-bottom: 1px solid #004799;}
+.positive, a.positive {color: #48b4ff; }
+.positive-bg {background-color: #48b4ff; }
+.bar {border: none;background-image: linear-gradient(0deg, #48b4ff, #48b4ff 50%, transparent 50%);background-position: bottom;background-size: 100% 1px;background-repeat: no-repeat; }
+.bar.bar-light {border-color: #48b4ff;background-color: #48b4ff;background-image: linear-gradient(0deg, #48b4ff, #48b4ff 50%, transparent 50%);color: #fff;border-bottom: 1px solid #48b4ff;}
 .bar.bar-light .title {color: #fff; }
-.bar.bar-light.bar-footer {background-image: linear-gradient(180deg, #004799, #004799 50%, transparent 50%); }
-.tabs-striped .tab-item.tab-item-active, .tabs-striped .tab-item.active, .tabs-striped .tab-item.activated {border-color: #004799; }
-.tabs-striped.tabs-light .tab-item.tab-item-active, .tabs-striped.tabs-light .tab-item.active, .tabs-striped.tabs-light .tab-item.activated {color: #444;border-color: #004799; }
-.tabs-striped.tabs-stable .tab-item.tab-item-active, .tabs-striped.tabs-stable .tab-item.active, .tabs-striped.tabs-stable .tab-item.activated {color: #444;border-color: #004799; }
-.tabs-color-positive .tab-item.tab-item-active, .tabs-color-positive .tab-item.active, .tabs-color-positive .tab-item.activated {color: #004799;border: 0 solid #004799; }
-.button.button-positive {border-color: #004799;background-color: #004799;color: #fff; }
+.bar.bar-light.bar-footer {background-image: linear-gradient(180deg, #48b4ff, #48b4ff 50%, transparent 50%); }
+.tabs-striped .tab-item.tab-item-active, .tabs-striped .tab-item.active, .tabs-striped .tab-item.activated {border-color: #48b4ff; }
+.tabs-striped.tabs-light .tab-item.tab-item-active, .tabs-striped.tabs-light .tab-item.active, .tabs-striped.tabs-light .tab-item.activated {color: #444;border-color: #48b4ff; }
+.tabs-striped.tabs-stable .tab-item.tab-item-active, .tabs-striped.tabs-stable .tab-item.active, .tabs-striped.tabs-stable .tab-item.activated {color: #444;border-color: #48b4ff; }
+.tabs-color-positive .tab-item.tab-item-active, .tabs-color-positive .tab-item.active, .tabs-color-positive .tab-item.activated {color: #48b4ff;border: 0 solid #48b4ff; }
+.button.button-positive {border-color: #48b4ff;background-color: #48b4ff;color: #fff; }
 .button.button-positive:hover {color: #fff;text-decoration: none; }
-.button.button-positive.active, .button.button-positive.activated {border-color: #004799;background-color: #004799;}
+.button.button-positive.active, .button.button-positive.activated {border-color: #48b4ff;background-color: #48b4ff;}
 .button.button-positive.button-clear {color: #fff; }
 .button-small {padding: 2px 16px 1px;min-width: 28px;min-height: 30px;font-size: 12px;line-height: 26px; }
 .button-clear.button-clear{color: #fff;}
 .item-complex .item-content, .item-radio .item-content{padding: 8px 8px 16px 106px;}
 .badges{position: absolute;background-color: #ef473a;color: #fff;z-index: 1;display: inline-block;padding: 3px 7px;min-width: 10px;border-radius: 10px;vertical-align: baseline;text-align: center;white-space: nowrap;font-weight: 500;font-size: 14px;line-height: 16px;}
+
+
+/* 免费咨询 */
+.font12{font-size: 12px;}
+.cb5b5b5{color: #b5b5b5}
+.cf7861e{color: #f7861e}
+.mt10{margin-top: 10px;}
+.mb10{margin-bottom:10px;}
+.card, .list-inset{margin: 14px 10px;}
+.drop-down-arrow{    background: url("../img/drop-down-arrow.png") no-repeat scroll 93% 88% transparent;
+padding-right: 1rem;
+font-size: 14px;
+background-size: 1rem;
+}
+.baclass{background-color: #fff;position: absolute;z-index: 999;width: 100%;height: 270px;margin-top: 1px;}
+.baclass ul li{height: 45px;line-height: 45px;padding-left: 10px;}
+.baclass ul li.active{background-color: #f0f1f3;}
+.bar.transparent{background: transparent;}
+
+/* 发布提问 */
+.main{margin: 14px 10px;}
+.main .item-input{background-color: #fff;border-radius: 10px;}
+button.button{border-radius: 10px;}
+.button{min-height: 35px;line-height: 35px;}
+.button.button-block, .button.button-full {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+textarea {height: auto; }
+/*input[placeholder], [placeholder], *[placeholder] { 
+    color:#b5b5b5 !important; 
+} */
+textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"]
+{
+    color: #3d3d3d;
+}
