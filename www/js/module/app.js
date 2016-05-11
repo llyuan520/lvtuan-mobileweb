@@ -574,6 +574,22 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates'])
       authn: false
     })
 
+    .state('questions/comment', { //问律师评价
+      cache: 'true', 
+      url: '/questions/comment/:id',
+      templateUrl: 'template/questions/comment.html',
+      controller: 'questionsCommentCtrl',
+      authn: false
+    })
+
+    .state('questions/areward', { //问律师评价
+      cache: 'true', 
+      url: '/questions/areward/:id',
+      templateUrl: 'template/questions/areward.html',
+      controller: 'questionsArewardCtrl',
+      authn: false
+    })
+
 /*———————————————————————————— 我的律团- 我的订单 -公用 ————————————————————————————*/
 
   .state('/lawyer/comment/', { //我的订单 - 评价详情

@@ -11,7 +11,7 @@
  * */
 body, html, .pane, .ionic-body,h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{
     font-family: 'Microsoft YaHei';
-    color: #333333;
+    color: #3b3b3b;
 }
 input{-webkit-user-modify: read-write-plaintext-only;}
 .scroll-content {
@@ -105,7 +105,7 @@ input{-webkit-user-modify: read-write-plaintext-only;}
 /*login*/
 a, a:link, a:visited, a:active, a:hover{
     text-decoration: none;
-    color: #b5b5b5;
+    color: #3b3b3b;
 }
 .a-left{
     text-align: left;
@@ -269,6 +269,7 @@ a, a:link, a:visited, a:active, a:hover{
     white-space:normal;
 }
 .contents, .item p.contents,.item p.contents p,.ngbindhtml .item p{
+    color: #7f7f7f;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -1733,6 +1734,10 @@ a,button,input{
 .button.button-positive:hover {color: #fff;text-decoration: none; }
 .button.button-positive.active, .button.button-positive.activated {border-color: #48b4ff;background-color: #48b4ff;}
 .button.button-positive.button-clear {color: #fff; }
+.button.button-cff2f5f {border-color: #ff2f5f;background-color: #ff2f5f;color: #fff; }
+.button.button-cff2f5f:hover {color: #fff;text-decoration: none; }
+.button.button-cff2f5f.active, .button.button-cff2f5f.activated {border-color: #ff2f5f;background-color: #ff2f5f;}
+.button.button-cff2f5f.button-clear {color: #fff; }
 .button-small {padding: 2px 16px 1px;min-width: 28px;min-height: 30px;font-size: 12px;line-height: 26px; }
 .button-clear.button-clear{color: #fff;}
 .item-complex .item-content, .item-radio .item-content{padding: 8px 8px 16px 106px;}
@@ -1741,10 +1746,13 @@ a,button,input{
 
 /* 免费咨询 */
 .font12{font-size: 12px;}
-.cb5b5b5{color: #b5b5b5}
+.font14{font-size: 14px;}
+.c48b4ff{color:#48b4ff;}
+.cb5b5b5, .item p.cb5b5b5{color: #b5b5b5}
 .cf7861e{color: #f7861e}
 .mt10{margin-top: 10px;}
-.mb10{margin-bottom:10px;}
+.mb10,.card .item h2{margin-bottom:10px;}
+
 .card, .list-inset{margin: 14px 10px;}
 .drop-down-arrow{    background: url("../img/drop-down-arrow.png") no-repeat scroll 93% 88% transparent;
 padding-right: 1rem;
@@ -1773,3 +1781,19 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
 {
     color: #3d3d3d;
 }
+
+
+/*咨询参考*/
+.hederpading{width: 100%;text-align: right;padding: 16px 10px 0;height: 49px;}
+.comment{background: url("../img/comment.png") no-repeat scroll center center transparent;}
+.comment_s{background: url("../img/comment_s.png") no-repeat scroll center center transparent;}
+.collect{background: url("../img/collect.png") no-repeat scroll center center transparent;}
+.collect_s{background: url("../img/collect_s.png") no-repeat scroll center center transparent;}
+.comment, .comment_s, .collect, .collect_s, .hederpading span{display: inline-block;width: 48px;height: 33px;background-size: 70%;}
+.like{background: url("../img/like.png") no-repeat scroll center top transparent;}
+.like_s{background: url("../img/like_s.png") no-repeat scroll center top transparent;}
+.gift{background: url("../img/gift.png") no-repeat scroll center top transparent;}
+.gift_s{background: url("../img/gift_s.png") no-repeat scroll center top transparent;}
+.like, .like_s{display: inline-block;width: 48px;height: 19px;background-size: 40%;}
+.gift, .gift_s{display: inline-block;width: 48px;height: 19px;background-size: 50%;}
+.card .carditem{padding: 10px 10px 0;border: 1px solid #ebebeb;margin: 1px 16px 16px;border-radius: 10px;}

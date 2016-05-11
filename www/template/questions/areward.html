@@ -1,0 +1,23 @@
+<ion-view hide-Tabs="true" cache-view="false" view-title="打赏">
+	<ion-pane>
+		<ion-content>
+			<form id="myForm" name="myForm" novalidate>
+				<div class="main">
+					<div style="text-align: center;">
+						<p>
+							<img style="max-width: 40px;max-height: 40px;width: 100%;height: 100%;border-radius: 50%;" src="http://www.runoob.com/try/demo_source/mcfly.jpg">
+						</p>
+						<p>陈刚律师</p>
+					</div>
+					<div class="cb5b5b5" style="width: 80%;margin: 0 auto;border: 1px solid #dedede;height: 45px;line-height: 45px;border-radius: 10px;background-color: #fff;    font-weight: bold;font-size: 16px;">
+						<label style="padding-left:10px;">￥</label> <label>{{number}}</label>
+						<div class="item-note" ng-click="mathRandom()" style="width: 30px;height: 30px;margin-top: 6px;margin-right: 10px;"><img width="30" height="30" src="../img/sieve.png"></div>
+					</div>
+	            </div>
+	            <div style="background-color: #fff;padding:5px 10px;margin-top:50px;">
+					<button class="button button-block button-cff2f5f" type="submit" ng-disabled="myForm.$invalid" ng-click="submit(user)" >去打赏</button>
+				</div>
+			</form>
+		</ion-content>
+	</ion-pane>
+</ion-view>

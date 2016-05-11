@@ -3419,11 +3419,12 @@ lvtuanApp.controller("questionslistsearchCtrl",function($http,$scope,$state,$roo
 })
 
 //问律师详情
-lvtuanApp.controller("questionsviewsCtrl",function($http,$scope,$state,$rootScope,$stateParams,$ionicLoading){
+lvtuanApp.controller("questionsviewsCtrl",function($http,$scope,$rootScope,$stateParams,$ionicLoading){
+	$scope.id = $stateParams.id;
 	init()
 	//获取律师的个人信息
 	function init(){ 
-		var url = 'http://'+$rootScope.hostName+'/question/'+$stateParams.id;
+		var url = 'http://'+$rootScope.hostName+'/question/'+$scope.id;
 		$ionicLoading.show();
 		$http.get(url)
 			.success(function(data) {
@@ -3469,6 +3470,25 @@ lvtuanApp.controller("questionsviewsCtrl",function($http,$scope,$state,$rootScop
            layer.show("取消成功！");
         });
 	}
+
+})
+
+//咨询评论
+lvtuanApp.controller("questionsCommentCtrl",function($http,$scope,$rootScope,$stateParams,$ionicLoading){
+	console.info($stateParams.id);
+})
+
+//送心意
+lvtuanApp.controller("questionsArewardCtrl",function($http,$scope,$rootScope,$stateParams,$ionicLoading){
+	console.info($stateParams.id);
+	var num_arr = [5,10,15,20,30,40];
+	$scope.number = num_arr[0];
+	//产生随机数
+	$scope.mathRandom = function(){
+		var index = parseInt((Math.random() * num_arr.length));
+		$scope.number =	num_arr[index];
+	}
+
 })
 
 /*———————————————————————————— 首页八模块 ————————————————————————————*/

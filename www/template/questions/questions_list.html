@@ -42,7 +42,7 @@
 				<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 				<div class="card" ng-repeat="item in items" style="border-radius: 10px;">
 				  <div class="item item-text-wrap">
-				  	<h2>{{item.title}}</h2>
+				  	<h2><a ng-href="#/questionsview/{{item.id}}">{{item.title}}</a></h2>
 				  	<p class="font12 mt10">
 				  		<span class="subdued cb5b5b5">回答</span>
 				  		<label class="cf7861e">10</label>
