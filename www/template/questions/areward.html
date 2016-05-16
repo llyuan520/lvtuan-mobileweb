@@ -1,17 +1,102 @@
+<style type="text/css">
+.animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+@-webkit-keyframes bounceInUp {
+  from, 60%, 75%, 90%, to {
+    -webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  }
+  
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 3000px, 0);
+    transform: translate3d(0, 3000px, 0);
+  }
+  
+  60% {
+    opacity: 1;
+    -webkit-transform: translate3d(0, -20px, 0);
+    transform: translate3d(0, -20px, 0);
+  }
+  
+  75% {
+    -webkit-transform: translate3d(0, 10px, 0);
+    transform: translate3d(0, 10px, 0);
+  }
+  
+  90% {
+    -webkit-transform: translate3d(0, -5px, 0);
+    transform: translate3d(0, -5px, 0);
+  }
+  
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+  
+@keyframes bounceInUp {
+  from, 60%, 75%, 90%, to {
+    -webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  }
+  
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 3000px, 0);
+    transform: translate3d(0, 3000px, 0);
+  }
+  
+  60% {
+    opacity: 1;
+    -webkit-transform: translate3d(0, -20px, 0);
+    transform: translate3d(0, -20px, 0);
+  }
+  
+  75% {
+    -webkit-transform: translate3d(0, 10px, 0);
+    transform: translate3d(0, 10px, 0);
+  }
+  
+  90% {
+    -webkit-transform: translate3d(0, -5px, 0);
+    transform: translate3d(0, -5px, 0);
+  }
+  
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+  
+.bounceInUp {
+  -webkit-animation-name: bounceInUp;
+  animation-name: bounceInUp;
+}
+</style>
+
 <ion-view hide-Tabs="true" cache-view="false" view-title="打赏">
 	<ion-pane>
 		<ion-content>
 			<form id="myForm" name="myForm" novalidate>
-				<div class="main">
+				<div class="main" style="margin-top:20%;">
 					<div style="text-align: center;">
 						<p>
 							<img style="max-width: 40px;max-height: 40px;width: 100%;height: 100%;border-radius: 50%;" src="http://www.runoob.com/try/demo_source/mcfly.jpg">
 						</p>
 						<p>陈刚律师</p>
 					</div>
-					<div class="cb5b5b5" style="width: 80%;margin: 0 auto;border: 1px solid #dedede;height: 45px;line-height: 45px;border-radius: 10px;background-color: #fff;    font-weight: bold;font-size: 16px;">
-						<label style="padding-left:10px;">￥</label> <label>{{number}}</label>
-						<div class="item-note" ng-click="mathRandom()" style="width: 30px;height: 30px;margin-top: 6px;margin-right: 10px;"><img width="30" height="30" src="../img/sieve.png"></div>
+
+					<div style="width: 80%;margin: 0 auto;">
+						<div class="item item-input">
+						    <span class="input-label cb5b5b5" style="width: 15%;padding: 7px 10px 7px 10px;">￥</span>
+						    <input class="main animated bounceInUp" ng-model="user.number" type="number" value="{{number}}"  style="color: #b5b5b5;">
+						    <span ng-click="mathRandom()" class="input-label" style="display: inline-block;width: 17%;padding: 7px 10px 7px 10px;"><img class="item-note" width="30" height="30" src="../img/sieve.png"></span>
+						</div>
 					</div>
 	            </div>
 	            <div style="background-color: #fff;padding:5px 10px;margin-top:50px;">

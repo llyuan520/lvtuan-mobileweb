@@ -1,10 +1,11 @@
 <ion-view hide-Tabs="true" view-title="发布提问">
 		<ion-pane>
 			<ion-content>
-				<form id="questions_form" name="myForm" novalidate>
+				<form id="questions_form" name="myForm" novalidate ng-controller="questionsCtrl">
 					<div class="row row-center row-no-padding" style="background-color: #fff;text-align: center;height: 45px;line-height: 45px;color:#7f7f7f;padding-bottom: 1px;box-shadow: 0 1px 3px rgba(0,0,0,.3);">
 						<div class="col drop-down-arrow" style="border-right:1px solid #e5e5e5;text-align: center;" ng-click="toggle()">
-							{{name}}
+							<label ng-if="!key">{{name}}</label>
+							<label ng-if="key" class="c48b4ff">{{name}}</label>
 						</div>
 					</div>
 					<div ng-hide="rgba" style="background-color: rgba(0,0,0,.1);position: fixed;top: 44px;left: 0;z-index: 10;width: 100%;height: 100%;"></div>
@@ -18,14 +19,14 @@
 				    </ion-content>
 				    <div class="main">
 					    <label class="item-input mb10">
-						  <input ng-model="user.title" name="title" type="text" ng-minlength="2" ng-maxlength="30" placeholder="咨询标题：(2-30字)" required>
+						  <input ng-model="title" name="title" type="text" ng-minlength="2" ng-maxlength="30" placeholder="咨询标题：(2-30字)" required>
 						</label>
 						<label class="item-input mb10">
-				          <textarea ng-model="user.content" name="content" rows="8" placeholder="详情描述：(10-300字)" ng-minlength="10" ng-maxlength="300" required></textarea>
+				          <textarea ng-model="content" name="content" rows="8" placeholder="详情描述：(10-300字)" ng-minlength="10" ng-maxlength="300" required></textarea>
 				        </label>
 					</div>
 					<div style="background-color: #fff;padding:5px 10px;margin-top:50px;">
-						<button class="button button-block button-positive" type="submit" ng-disabled="myForm.$invalid" ng-click="submit(user)" >提交</button>
+						<button class="button button-block button-positive" type="submit" ng-disabled="myForm.$invalid" ng-click="submit()" >提交</button>
 					</div>
 				</form>
 			</ion-content>

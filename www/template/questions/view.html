@@ -3,9 +3,9 @@
 		<ion-content>
 			<div class="hederpading">
 				<!-- 未评价  -->
-				<a ng-if="items.is_collect == false" ng-href="#/questions/comment/{{id}}"><i class="comment"></i></a>
+				<span ng-if="items.can_reply == false" ng-click="isUser(items.id)"><i class="comment"></i></span>
 				<!-- 评价 -->
-				<a ng-if="items.is_collect == true" ng-href="#/questions/comment/{{id}}"><i class="comment_s"></i></a>
+				<span ng-if="items.can_reply == true" ng-click="isUser(items.id)"><i class="comment_s"></i></span>
 
 				<!-- 未收藏  -->
 				<span ng-if="items.is_collect == false"  ng-click="collects(items.id)" ><i class="collect"></i></span>
@@ -20,42 +20,42 @@
 				    </p>
 				  	<p class="mt10">
 				  		<span class="subdued cb5b5b5">回答</span>
-				  		<font class="cf7861e">10</font>
+				  		<font class="cf7861e">{{items.post_extra.comments_count}}</font>
 				  		<font class="cb5b5b5">·</font>
 					  	<span class="subdued cb5b5b5">关注</span>
-					  	<font class="cf7861e">10</font>
+					  	<font class="cf7861e">{{items.post_extra.collects_count}}</font>
 					  	<span class="item-note cb5b5b5">{{items.created_at}}</span>
 				  	</p>
 				</div>
 			</div>
-			<div class="card" style="border-radius: 10px;box-shadow:none;">
+			<div class="card" style="border-radius: 10px;box-shadow:none;" ng-repeat="comment in items.comments">
 				<div class="item item-avatar" style="border-color:#fff;border-style: none;border-width:0;padding-bottom: 11px;">
-					<img src="http://www.runoob.com/try/demo_source/mcfly.jpg">
+					<img ng-src="{{comment.creator_avatar}}">
 					<div style="width: 50%;float: left;">
-					  <h2 class="c48b4ff" style="margin-bottom: 5px;">陈刚律师</h2>
-					  <p class="cb5b5b5">执业10年</p>
+					  <h2 class="c48b4ff" style="margin-bottom: 5px;">{{comment.creator_name}}律师</h2>
+					  <p class="cb5b5b5">执业{{comment.creator_practice_period}}</p>
 					</div>
 					<div style="float: right;">
 						<div class="row row-no-padding">
 						  <div class="col txt-align-c font14 cb5b5b5">
 							  	<!-- 未收藏  -->
-								<span ng-if="items.is_collect == false"  ng-click="collects(items.id)" >
+								<span ng-if="items.is_collect == false"  ng-click="a(comment.creator_id,$index)" >
 									<i class="like"></i>
 								</span>
 								<!-- 收藏 -->
-								<span ng-if="items.is_collect == true"  ng-click="collects_del(items.id)" >
+								<span ng-if="items.is_collect == true"  ng-click="a(comment.creator_id,$index)" >
 									<i class="like_s"></i>
 								</span>
 								<br>
-								521
+								520
 						  </div>
 						  <div class="col txt-align-c font14 cb5b5b5">
 							  	<!-- 未打赏  -->
-								<a ng-if="items.is_collect == false"  ng-href="#/questions/areward/{{items.id}}" >
+								<a ng-if="items.is_collect == false"  ng-href="#/questions/areward/{{comment.creator_id}}" >
 									<i class="gift"></i>
 								</a>
 								<!-- 打赏 -->
-								<a ng-if="items.is_collect == true"  ng-href="#/questions/areward/{{items.id}}" >
+								<a ng-if="items.is_collect == true"  ng-href="#/questions/areward/{{comment.creator_id}}" >
 									<i class="gift_s"></i>
 								</a>
 								<br>
@@ -64,64 +64,15 @@
 						</div>
 					</div>
 		        </div>
-
 		        <div class="carditem">
 			        <p class="contents">
-				    	{{items.content}}
+				    	{{comment.content}}
 				    </p>
 				  	<p class="mt10">
-					  	<span class="cb5b5b5">{{items.created_at}}</span>
+					  	<span class="cb5b5b5">{{comment.created_at}}</span>
 				  	</p>
 		        </div>
 			</div>
-
-			<div class="card" style="border-radius: 10px;box-shadow:none;">
-				<div class="item item-avatar" style="border-color:#fff;border-style: none;border-width:0;padding-bottom: 11px;">
-					<img src="http://www.runoob.com/try/demo_source/mcfly.jpg">
-					<div style="width: 50%;float: left;">
-					  <h2 class="c48b4ff" style="margin-bottom: 5px;">陈刚律师</h2>
-					  <p class="cb5b5b5">执业10年</p>
-					</div>
-					<div style="float: right;">
-						<div class="row row-no-padding">
-						  <div class="col txt-align-c font14 cb5b5b5">
-							  	<!-- 未收藏  -->
-								<span ng-if="items.is_collect == false"  ng-click="collects(items.id)" >
-									<i class="like"></i>
-								</span>
-								<!-- 收藏 -->
-								<span ng-if="items.is_collect == true"  ng-click="collects_del(items.id)" >
-									<i class="like_s"></i>
-								</span>
-								<br>
-								521
-						  </div>
-						  <div class="col txt-align-c font14 cb5b5b5">
-							  	<!-- 未收藏  -->
-								<span ng-if="items.is_collect == false"  ng-click="collects(items.id)" >
-									<i class="gift"></i>
-								</span>
-								<!-- 收藏 -->
-								<span ng-if="items.is_collect == true"  ng-click="collects_del(items.id)" >
-									<i class="gift_s"></i>
-								</span>
-								<br>
-								打赏
-						  </div>
-						</div>
-					</div>
-		        </div>
-
-		        <div class="carditem">
-			        <p class="contents">
-				    	{{items.content}}
-				    </p>
-				  	<p class="mt10">
-					  	<span class="cb5b5b5">{{items.created_at}}</span>
-				  	</p>
-		        </div>
-			</div>
-
 		</ion-content>
 	</ion-pane>
 </ion-view>

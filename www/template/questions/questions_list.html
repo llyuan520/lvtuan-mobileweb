@@ -10,29 +10,14 @@
 
 				<div class="row row-center row-no-padding" style="background-color: #fff;text-align: center;height: 45px;line-height: 45px;color:#7f7f7f;padding-bottom: 1px;box-shadow: 0 1px 3px rgba(0,0,0,.3);">
 					<div class="col drop-down-arrow" style="border-right:1px solid #e5e5e5;text-align: center;" ng-click="toggle()">
-						{{name}}
+						<label ng-if="!scopes_key">{{workscope}}</label>
+						<label ng-if="scopes_key" class="c48b4ff">{{workscope}}</label>
 					</div>
 					<div class="col drop-down-arrow" style="text-align: center;" ng-click="toggle1()">
-						{{name1}}
+						<label ng-if="!orders_key">{{order}}</label>
+						<label ng-if="orders_key" class="c48b4ff">{{order}}</label>
 					</div>
 				</div>
-				<div ng-hide="rgba" style="background-color: rgba(0,0,0,.1);position: fixed;top: 100px;left: 0;z-index: 10;width: 100%;height: 100%;"></div>
-				
-		        <ion-content class="scroll-content ionic-scroll baclass" ng-hide="visible" style="top:100px;">
-		        	<div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
-						<ul>
-					  		<li ng-repeat="workscope in workscopes" ng-class="{ 'active':inShowscopes(workscope.key) }" ng-click="getval(workscope.key,workscope.value)">{{workscope.value}}</li>
-					  	</ul>
-			        </div>
-			    </ion-content>
-			    <ion-content class="scroll-content ionic-scroll baclass" ng-hide="visible1" style="top:100px;">
-		        	<div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
-						<ul>
-					  		<li  ng-repeat="order in orders" ng-class="{ 'active':inorders(order.key) }" ng-click="getval1(order.key,order.value)">{{order.value}}</li>
-					  	</ul>
-			        </div>
-			    </ion-content>
-				
 
 				<div ng-if="nodata == false" class="nodate">
 					<i class="nodate-iocn"></i><br>
@@ -43,13 +28,13 @@
 				<div class="card" ng-repeat="item in items" style="border-radius: 10px;">
 				  <div class="item item-text-wrap">
 				  	<h2><a ng-href="#/questionsview/{{item.id}}">{{item.title}}</a></h2>
-				  	<p class="font12 mt10">
+				  	<p class="mt10">
 				  		<span class="subdued cb5b5b5">回答</span>
-				  		<label class="cf7861e">10</label>
+				  		<label class="cf7861e">{{item.comments_count}}</label>
 				  		<label class="cb5b5b5">·</label>
 					  	<span class="subdued cb5b5b5">关注</span>
-					  	<label class="cf7861e">10</label>
-					  	<span class="font12 cb5b5b5">{{item.created_at}}</span>
+					  	<label class="cf7861e">{{item.collects_count}}</label>
+					  	<span class="cb5b5b5">{{item.created_at}}</span>
 				  	</p>
 				  </div>
 				</div>
@@ -58,8 +43,25 @@
 
 			<div class="tabs" style="background-color:#fff;height: 59px;">
 				<div class="row" style="padding: 5px 10px;">
-					<button class="button button-block button-positive" style="border-radius: 10px;" ng-click="jumpGo('#/questions')">+<b>发布提问</b></button>
+					<button class="button button-block button-positive" style="border-radius: 10px;" ng-click="jumpGoQuestions()">+<b>发布提问</b></button>
 				</div>
 			</div>
 		</ion-pane>
 </ion-view>
+
+<!-- 一个ion-view控制器里面不能放多个ion-content -->
+<div ng-hide="masklayer" style="background-color: rgba(0,0,0,.1);position: fixed;top: 100px;left: 0;z-index: 10;width: 100%;height: 100%;"></div>
+<ion-content class="scroll-content ionic-scroll baclass" ng-hide="visible" style="top:100px;">
+	<div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
+		<ul>
+	  		<li ng-repeat="workscope in workscopes" ng-class="{ 'active':inShowscopes(workscope.key) }" ng-click="getWorkscopeVal(workscope.key,workscope.value)">{{workscope.value}}</li>
+	  	</ul>
+    </div>
+</ion-content>
+<ion-content class="scroll-content ionic-scroll baclass" ng-hide="visible1" style="top:100px;">
+	<div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
+		<ul>
+	  		<li  ng-repeat="order in orders" ng-class="{ 'active':inorders(order.key) }" ng-click="getOrderVal(order.key,order.value)">{{order.value}}</li>
+	  	</ul>
+    </div>
+</ion-content>

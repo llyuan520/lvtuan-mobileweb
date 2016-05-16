@@ -17,7 +17,6 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates'])
 
 //声明全局的方法和变量
 .run(['$rootScope','$timeout','$location','$ionicLoading',function($rootScope,$timeout,$location,$ionicLoading,$ionicHistory,$window){
-  
  /*$timeout(function() {
       localStorage.removeItem('is_lawyer');
   }, 600);*/
@@ -35,31 +34,38 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates'])
   };
 
   //localStorage.removeItem('is_lawyer');
+
   var hostName = AppSettings.baseApiUrl;
   localStorage.setItem("hostName", JSON.stringify(hostName));
   $rootScope.hostName = JSON.parse(localStorage.getItem('hostName'));
+
+  var hostPath = 'apitest.elvtuan.com';
+  localStorage.setItem("hostPath", JSON.stringify(hostPath));
+  $rootScope.hostPath = JSON.parse(localStorage.getItem('hostPath'));
 
   //回到首页
   $rootScope.goHome = function(){
     layer.goHome();
   }
 
+/*  $rootScope.$on('$ionicView.beforeEnter', function() {  
+    sessionStorage.setItem("goback", $location.absUrl());
+  })*/
+
 }])
 
 .run(function($rootScope, $location, $state, authService, locationService) {
 
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
-
+      sessionStorage.setItem("goback", $location.absUrl());
         // 如果这个state需要登录才可以访问
         if (toState.authn) {
             // 如果用户没有登录
             if (!authService.isAuthed()) {
-                sessionStorage.setItem("goback", $location.absUrl());
                 $rootScope.$broadcast('unauthenticated');
                 event.preventDefault(); 
             } else {
                 // 如果用户没有权限访问
-                sessionStorage.setItem("goback", $location.absUrl());
                 currentUser = authService.getUser();
                 if (toState.authz && toState.authz == 'lawyer' && !currentUser.is_verified_lawyer) {
                     $rootScope.$broadcast('unauthorized');
@@ -526,11 +532,18 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates'])
     })
 
 /********************************** 找律师 **********************************/
-    .state('lawyerlist', { //找律师列表
-      url: '/lawyerlist',
+    .state('lawyer/list', { //找律师列表
+      url: '/lawyer/list',
       cache: 'true',
-      templateUrl: 'template/lawyer/lawyer_list.html'
+      templateUrl: 'template/lawyer/lawyer_list.html',
+      controller: 'lawyerlistCtrl'
     })
+    .state('lawyer/list/search', { //找律师列表
+      url: '/lawyer/list/search',
+      cache: 'true',
+      templateUrl: 'template/lawyer/lawyer_list_search.html'
+    })
+    
     .state('lawyer', { //律师个人主页
       url: '/lawyer/:id',
       cache: 'true',
@@ -550,7 +563,6 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates'])
       url: '/questions',
       cache: 'true', 
       templateUrl: 'template/questions/questions.html',
-      controller: 'questionsCtrl',
       authn: false
     })
     .state('questionslist', { //问律师列表
@@ -578,7 +590,6 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates'])
       cache: 'true', 
       url: '/questions/comment/:id',
       templateUrl: 'template/questions/comment.html',
-      controller: 'questionsCommentCtrl',
       authn: false
     })
 

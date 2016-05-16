@@ -13,6 +13,9 @@
     width: auto;
     height: auto;
   }
+html.no-overflowscrolling .scrollArea {
+    height: auto;
+}
 .citypicker{
 	/*position: fixed;
     top: 0;
@@ -53,9 +56,9 @@
 				<h1 class="title">选择地址</h1>
 				<!-- <button ng-click="createSubmit()" class="button button-clear button-positive" type="button">保存</button> -->
 			</ion-header-bar>
-
+			
 			<!-- bug 如果是页面用了ionic的<ion-content> 这个代码，那么页面的点击事件执行后，滚动条就会失效 -->
-			<div class="scrollArea">
+			<div class="scrollArea scroll-bar-indicator">
 				<div class="citypicker">
 					<div class="province">
 						<div class="list" id="{{key}}" ng-repeat="(key, value) in provinces">
