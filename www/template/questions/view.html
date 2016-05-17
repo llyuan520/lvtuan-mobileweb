@@ -38,12 +38,12 @@
 					<div style="float: right;">
 						<div class="row row-no-padding">
 						  <div class="col txt-align-c font14 cb5b5b5">
-							  	<!-- 未收藏  -->
-								<span ng-if="items.is_collect == false"  ng-click="a(comment.creator_id,$index)" >
+							  	<!-- 未点赞  -->
+								<span ng-if="items.is_collect == false"  ng-click="likes(comment.creator_id,$index)" >
 									<i class="like"></i>
 								</span>
-								<!-- 收藏 -->
-								<span ng-if="items.is_collect == true"  ng-click="a(comment.creator_id,$index)" >
+								<!-- 点赞 -->
+								<span ng-if="items.is_collect == true"  ng-click="likes_del()" >
 									<i class="like_s"></i>
 								</span>
 								<br>
@@ -51,13 +51,9 @@
 						  </div>
 						  <div class="col txt-align-c font14 cb5b5b5">
 							  	<!-- 未打赏  -->
-								<a ng-if="items.is_collect == false"  ng-href="#/questions/areward/{{comment.creator_id}}" >
-									<i class="gift"></i>
-								</a>
-								<!-- 打赏 -->
-								<a ng-if="items.is_collect == true"  ng-href="#/questions/areward/{{comment.creator_id}}" >
+								<span ng-click="areward(items.id)">
 									<i class="gift_s"></i>
-								</a>
+								</span>
 								<br>
 								打赏
 						  </div>

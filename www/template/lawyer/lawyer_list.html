@@ -54,7 +54,7 @@
 								<span class="item-note cb5b5b5" style="font-size: 13px;"> {{item.question_count}}人咨询</span>
 							</p>
 							<p>
-								<label ng-repeat="item in item.work_scope">{{item.value}}</label>
+								<label ng-repeat="item in item.work_scope" class="radius10">{{item.value}}</label>
 							</p>
 				          
 				        </div>
@@ -85,8 +85,7 @@
 <ion-content class="scroll-content ionic-scroll baclass" ng-hide="period_cont" style="top:100px;">
 	<div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
 		<ul>
-	  		<li  ng-repeat="period in periods" ng-class="{ 'active':inPeriods(period.key) }" ng-click="getPeriodsVal(period.key,period.value)">
-	  			{{period.value}}</li>
+	  		<li  ng-repeat="period in periods" ng-class="{ 'active':inPeriods(period.key) }" ng-click="getPeriodsVal(period.key,period.value)">{{period.value}}</li>
 	  	</ul>
     </div>
 </ion-content>

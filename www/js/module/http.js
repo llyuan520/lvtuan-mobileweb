@@ -59,7 +59,13 @@ httpModule.factory('APIInterceptor', ['$log', '$q', '$rootScope', 'authService',
 			}
 			config.headers.Accept = 'application/json';
 			config.cache = true;
-
+			
+			//需要手动跳去登录页面
+			if(config.url.indexOf(HOST + '/center/question/insert/question') > -1){
+        		return config;
+        	}
+			
+			//控制接口的访问权限
 			if (config.url.indexOf(HOST + '/center') > -1 
 				|| config.url.indexOf(HOST + '/group') > -1
 				|| config.url.indexOf(HOST + '/microblog') > -1) {

@@ -183,6 +183,11 @@ a, a:link, a:visited, a:active, a:hover{
 
 .item p label{
     text-align: center;
+    padding: 0 0.6rem 0 0;
+    font-size: 12px;
+}
+.item p label.radius10{
+    text-align: center;
     padding: 3px 6px;
     font-size: 12px;
     background-color: #f5f5f5;
@@ -575,6 +580,9 @@ input::-webkit-outer-spin-button {
 .log-but{
     width: 100%;
 }
+.log-but.top8{
+    margin-top: 8%;
+}
 .login .ion-wap input,.ion-row2 button {
     background-color: rgba(225,225,225,0); color: #fff;width: 100%;
     border-color: #fff;
@@ -600,6 +608,9 @@ input::-webkit-outer-spin-button {
     border-bottom: 1px solid #599ad2;
     float: left;
     padding: 2% 4%;
+}
+.line-height{
+    line-height:37px;
 }
 .log-but .item {
     background-color: #fff;
@@ -1753,7 +1764,7 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
 .comment, .comment_s, .collect, .collect_s, .hederpading span{display: inline-block;width: 48px;height: 33px;background-size: 70%;}
 .like{background: url("../img/like.png") no-repeat scroll center top transparent;}
 .like_s{background: url("../img/like_s.png") no-repeat scroll center top transparent;}
-.gift{background: url("../img/gift.png") no-repeat scroll center top transparent;}
+/*.gift{background: url("../img/gift.png") no-repeat scroll center top transparent;}*/
 .gift_s{background: url("../img/gift_s.png") no-repeat scroll center top transparent;}
 .like, .like_s{display: inline-block;width: 48px;height: 19px;background-size: 40%;}
 .gift, .gift_s{display: inline-block;width: 48px;height: 19px;background-size: 50%;}

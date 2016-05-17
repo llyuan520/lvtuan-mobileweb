@@ -561,7 +561,7 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates'])
 /********************************** 问律师 **********************************/
     .state('questions', { //问律师
       url: '/questions',
-      cache: 'true', 
+      cache: 'false', 
       templateUrl: 'template/questions/questions.html',
       authn: false
     })
