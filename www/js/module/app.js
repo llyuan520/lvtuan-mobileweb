@@ -57,7 +57,6 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates'])
 .run(function($rootScope, $location, $state, authService, locationService) {
 
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
-      sessionStorage.setItem("goback", $location.absUrl());
         // 如果这个state需要登录才可以访问
         if (toState.authn) {
             // 如果用户没有登录
@@ -81,6 +80,7 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates'])
     });
 
     $rootScope.$on('unauthorized', function() {
+      sessionStorage.setItem("goback", $location.absUrl());
         layer.show('您没有权限访问这个链接！');
         $location.path('/login');
         $state.transitionTo("login");
@@ -89,6 +89,7 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates'])
     });
 
     $rootScope.$on('unauthenticated', function() {
+      sessionStorage.setItem("goback", $location.absUrl());
         layer.show('请先登录！');
         // $location.path('/login');
         $state.transitionTo("login");

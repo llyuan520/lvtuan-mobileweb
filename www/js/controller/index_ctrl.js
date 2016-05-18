@@ -258,7 +258,7 @@ lvtuanApp.controller("loginCtrl",function($state,$scope,$rootScope,$http,userSer
 
 	$scope.submit = function(user){
 		$scope.post_id = JSON.parse(localStorage.getItem('post_id'));
-		if($scope.post_id != ''){
+		if($scope.post_id != null){
 			$scope.post_id_status = true;
 			localStorage.setItem("post_id_status", JSON.stringify($scope.post_id_status));
 		} 
@@ -291,6 +291,7 @@ lvtuanApp.controller("loginCtrl",function($state,$scope,$rootScope,$http,userSer
 
 //用户注册
 lvtuanApp.controller("registerCtrl",function($scope,$rootScope,$http,$interval,$ionicLoading,$location,userService,authService){
+
 	//获取验证码
 	$scope.phone_disabled = true;
 	$scope.phonecode = function(phone){
@@ -341,9 +342,8 @@ lvtuanApp.controller("registerCtrl",function($scope,$rootScope,$http,$interval,$
 		// 	"phone"
 		// )
 		$ionicLoading.show();
-
 		$scope.post_id = JSON.parse(localStorage.getItem('post_id'));
-		if($scope.post_id != ''){
+		if($scope.post_id != null){
 			$scope.post_id_status = true;
 			localStorage.setItem("post_id_status", JSON.stringify($scope.post_id_status));
 		} 
@@ -369,6 +369,7 @@ lvtuanApp.controller("registerCtrl",function($scope,$rootScope,$http,$interval,$
 	    		authService.saveToken(token);
 	    		console.log('JWT:', token); 
 	    	}
+
 	    	var goback = sessionStorage.getItem("goback");
 			var srt = goback.split("#");
 			if(goback == null || srt[1] == '/login'){
@@ -2775,6 +2776,8 @@ lvtuanApp.controller("siteCtrl",function($scope,$http,$rootScope,$location,authS
 	console.info("设置");
 	$scope.logout = function(){
 		authService.logout();
+		localStorage.removeItem('post_id_status');
+		localStorage.removeItem('post_id');
 		$location.path('/login');
 	}
 
@@ -3869,12 +3872,12 @@ lvtuanApp.controller("questionsviewsCtrl",function($http,$scope,$rootScope,$stat
 	$scope.likes = function(id,index){
 		$http.post('http://'+$rootScope.hostName+'/like',
 		{
-			item_type : 'post',
+			item_type : 'comment',
 			item_id   : id
 		}).success(function(data) {
         	console.info(data);
-        	var itmes = data.data;
-        	/*$scope.items.collects_count = $scope.items.collects_count + 1;*/
+        	var likes_count = data.data.likes_count;
+        	//$scope.items.comments[index].likes_count = likes_count;
             layer.show("点赞成功！");
         });
 	}
@@ -4190,9 +4193,9 @@ lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$
 
 //首页 - 我的 - 免费咨询
 //咨询 - 待受理
-lvtuanApp.controller("questionGratisNewCtrl",function($scope,$rootScope,$ionicLoading,listHelper,httpWrapper){
+lvtuanApp.controller("questionGratisNewCtrl",function($scope,$rootScope,$ionicLoading,listHelper_hostPath,httpWrapper){
 	console.info("待受理");
-	listHelper.bootstrap('/center/question/list?type=question&status=new', $scope);
+	listHelper_hostPath.bootstrap('/user/question?type=question', $scope);
 
 	//取消
 	$scope.to_cancel = function(url,item){

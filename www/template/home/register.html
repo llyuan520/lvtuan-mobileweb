@@ -13,7 +13,7 @@
 							<i class="ion-android-phone-portrait phone-size"></i>
 						</div>
 						<div class="ion-wap ion-clo">
-							<input type="text" name="username" ng-model="user.username" required ng-pattern="/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/" placeholder="手机号码">
+							<input type="text" name="username" ng-model="user.username" required ng-pattern="/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/" placeholder="手机号码" ng-model-options="{debounce:2000}">
 						</div>
 						<p class="log-but ion-wap line-height" ng-if="registerForm.username.$invalid && !registerForm.username.$pristine">请输入合法的手机号码</p>
 					</div>
