@@ -61,6 +61,7 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates'])
         if (toState.authn) {
             // 如果用户没有登录
             if (!authService.isAuthed()) {
+                sessionStorage.setItem("goback", $location.absUrl());
                 $rootScope.$broadcast('unauthenticated');
                 event.preventDefault(); 
             } else {
@@ -533,20 +534,35 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates'])
     })
 
 /********************************** 找律师 **********************************/
+    .state('one-questions', { //一对一咨询
+      url: '/one-questions',
+      cache: 'true',
+      templateUrl: 'template/lawyer/one_questions.html',
+      controller: 'lawyerOneQuestionsCtrl'
+    })
+
+    .state('all-evaluate', { //律师的所有评价
+      url: '/all-evaluate',
+      cache: 'true',
+      templateUrl: 'template/lawyer/all_evaluate.html',
+      controller: 'lawyerAllEvaluateCtrl'
+    })
+
     .state('lawyer/list', { //找律师列表
-      url: '/lawyer/list',
+      url: '/lawyer/list/:type',
       cache: 'true',
       templateUrl: 'template/lawyer/lawyer_list.html',
       controller: 'lawyerlistCtrl'
     })
+
     .state('lawyer/list/search', { //找律师列表
       url: '/lawyer/list/search',
       cache: 'true',
       templateUrl: 'template/lawyer/lawyer_list_search.html'
     })
     
-    .state('lawyer', { //律师个人主页
-      url: '/lawyer/:id',
+    .state('lawyer/view', { //律师个人主页
+      url: '/lawyer/view/:id',
       cache: 'true',
       templateUrl: 'template/lawyer/view.html',
       controller: 'viewCtrl'
@@ -631,6 +647,43 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates'])
       controller: 'userlvtuanCtrl',
       authn: true
   })
+
+  //用户 - 我的 - 咨询管理
+  .state('user/question/list', { //用户 - 咨询管理
+      url: '/user/question/list',
+      templateUrl: 'template/mylvtuan/user/question_list.html',
+      controller: 'userQuestionListCtrl',
+      authn: true
+  })
+
+
+  //律师 - 我的 - 咨询管理
+  .state('lawyer/question', { //律师 - 咨询管理
+      url: '/lawyer/question',
+      templateUrl: 'template/mylvtuan/lawyer/question.html',
+      authn: true
+  })
+  .state('lawyer/question.not', { //咨询管理 - 未参与
+      url: '/not',
+      views: {
+          'lawyer-question-not': {
+              templateUrl: 'template/mylvtuan/lawyer/not.html',
+              controller: 'lawyerQuestionNotCtrl'
+          }
+      },
+      authn: true
+  })
+  .state('lawyer/question.already', { //咨询管理 - 已参与
+      url: '/already',
+      views: {
+          'lawyer-question-already': {
+              templateUrl: 'template/mylvtuan/lawyer/already.html',
+              controller: 'lawyerQuestionAlreadyCtrl'
+          }
+      },
+      authn: true
+  })
+
 
 
   //首页 - 我的 - 免费咨询

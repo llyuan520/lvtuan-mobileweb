@@ -13,10 +13,10 @@
 			<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 				<div class="list">
 				    <div class="item item-thumbnail-left lawyer-lists" ng-repeat="item in items">
-				    	<img class="img-header" ng-src="{{item.avatar}}" style="border-radius: 50px;" ng-click="jump('#/lawyer/{{item.id}}')" />
+				    	<img class="img-header" ng-src="{{item.avatar}}" style="border-radius: 50px;" ng-click="jump('#/lawyer/view/{{item.id}}')" />
 				       <div class="row row-no-padding">
 				       		<div class="col col-30 col-center row-no-padding">
-				       			<h3><a  ng-href="#/lawyer/{{item.id}}">{{item.realname}}</a></h3>
+				       			<h3><a  ng-href="#/lawyer/view/{{item.id}}">{{item.realname}}</a></h3>
 				       		</div>
 						  	<div class="col col-70 col-center row-no-padding">
 						  		<div star rating-value="ratingVal[$index] = item.average_evaluate_score " max="max" on-hover="onHover" on-leave="onLeave" readonly="{{readonly}}" class="star-score"></div>

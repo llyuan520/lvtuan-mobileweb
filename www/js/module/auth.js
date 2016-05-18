@@ -84,8 +84,11 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
 			if(goback == null){
 				location.href='#/index';
 			}else{
-				
-    			location.href= goback;
+				/*if(user.status == 1 || user.status == 2){
+					location.href='#/index';
+    			}else{*/
+    				location.href= goback;
+    			//}
 			}
 			sessionStorage.removeItem("goback");
 	    	//location.href='#/index';
@@ -130,9 +133,7 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
         	//window.history.back();
 	//		window.location.reload();
         	var goback = sessionStorage.getItem("goback");
-        	console.info(goback);
-        	var srt = goback.split("#");
-			if(goback == null || srt[1] == '/login'){
+			if(goback == null){
 				location.href='#/index';
 			}else{
 				/*if(user.status == 1 || user.status == 2){

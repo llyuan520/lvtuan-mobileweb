@@ -1713,10 +1713,13 @@ a,button,input{
 .button-clear.button-clear{color: #fff;}
 .item-complex .item-content, .item-radio .item-content{padding: 8px 8px 16px 106px;}
 .badges{position: absolute;background-color: #ef473a;color: #fff;z-index: 1;display: inline-block;padding: 3px 7px;min-width: 10px;border-radius: 10px;vertical-align: baseline;text-align: center;white-space: nowrap;font-weight: 500;font-size: 14px;line-height: 16px;}
+.tabs-top > .tabs, .tabs.tabs-top{top: 0px;}
+.has-tabs-top {top: 49px;}
+.box_shadow .tabs{background-color: #fff;text-align: center;height: 45px;line-height: 45px;color: #7f7f7f;padding-bottom: 1px;box-shadow: 0 1px 3px rgba(0,0,0,.3);}
 
 
 /* 免费咨询 */
-.font12{font-size: 12px;}
+.font12, .item p.font12{font-size: 12px;}
 .font14{font-size: 14px;}
 .c48b4ff{color:#48b4ff;}
 .cff4670{color:#ff4670;}
@@ -1724,6 +1727,7 @@ a,button,input{
 .cf7861e{color: #f7861e}
 .mt10{margin-top: 10px;}
 .mb10,.card .item h2{margin-bottom:10px;}
+.hr{border-bottom: 1px solid #ededed;height: 1px;}
 
 .card, .list-inset{margin: 14px 10px;}
 .drop-down-arrow{    background: url("../img/drop-down-arrow.png") no-repeat scroll 93% 88% transparent;
@@ -1769,3 +1773,4 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
 .like, .like_s{display: inline-block;width: 48px;height: 19px;background-size: 40%;}
 .gift, .gift_s{display: inline-block;width: 48px;height: 19px;background-size: 50%;}
 .card .carditem{padding: 10px 10px 0;border: 1px solid #ebebeb;margin: 1px 16px 16px;border-radius: 10px;}
+.item p label.label{text-align: center;padding: 3px 6px;font-size: 12px;background-color: #f5f5f5;margin: 0 8px 8px 0;border-radius: 10px;display: inline-block;}

@@ -1,16 +1,31 @@
 <ion-view hide-tabs="false">
+	
+	<ion-header-bar align-title="center" class="bar bar-header bar-light">
+		<button class="button button-clear button-positive" >  
+            <i class="logo"></i>  
+        </button>
+		<h1 class="title" style="text-indent: -9999px;"></h1>
+		<div class="buttons button-clear">
+			<a ng-href="#/citypicker/index" class="button-clear" style="line-height: 34px;color:#fff;">
+				{{currentLocation.city_name}} &nbsp;<i class="icon ion-arrow-down-b"></i>
+			</a>
+		</div>
+		<!-- <button class="button button-clear button-positive" >  
+            <i class="logo"></i>  
+        </button> -->
+	</ion-header-bar>
 
-	<ion-nav-bar class="headers" style="background-color: #004799;"></ion-nav-bar>
+	<!-- <ion-nav-bar class="headers" style="background-color: #004799;"></ion-nav-bar>
 	<ion-nav-buttons side="left">
 		<i class="logo"></i>
 	</ion-nav-buttons>
-	<!-- <ion-nav-title>律团</ion-nav-title> -->
+	<ion-nav-title>律团</ion-nav-title>
 	<ion-nav-buttons side="right">
 		<a ng-href="#/citypicker/index" class="button-clear" style="line-height: 34px;color:#fff;">
 			{{currentLocation.city_name}} &nbsp;<i class="icon ion-arrow-down-b"></i>
 		</a>
 
-	</ion-nav-buttons>
+	</ion-nav-buttons> -->
 	<!-- <ion-nav-buttons ng-model="currentUser.user_group_id" side="right" >
 		<a ng-if="currentUser.user_group_id == null" ng-href="#/login" class="button button-icon">
 			<img ng-src="../img/13.png"/>
@@ -49,7 +64,7 @@
 		<div class="list list2">
 			<div class="row">
 				<div class="col">
-					<a class="col padding3" ng-href="#/lawyer/list">
+					<a class="col padding3" ng-href="#/one-questions">
 				  	 	<img ng-src="img/zyzx.png" style="width:35%;height:35%;" /><br/>
 				  	    <font style="font-size: 14px;">专业咨询</font><br>
 						<font style="font-size: 12px;">一对一付费服务</font>
@@ -84,7 +99,7 @@
 				<label>暂无数据！</label>
 			</div>
             <ion-list>
-            	<ion-item class="item item-thumbnail-left i-lawyer-list item-avatar" ng-repeat="item in items" ng-href="#/lawyer/{{item.id}}">
+            	<ion-item class="item item-thumbnail-left i-lawyer-list item-avatar" ng-repeat="item in items" ng-href="#/lawyer/view/{{item.id}}">
 		          	<img ng-src="{{item.avatar}}" class="item-image" />
 					<h2>{{item.realname}}</h2>
 					<p>执业{{item.practice_period}}/{{item.city}}</p>

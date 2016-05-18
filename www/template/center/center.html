@@ -18,7 +18,7 @@
 					  <div class="col col-20 col-center"  style="height: 100%;">
 					  		<div class="infobg">
 					  			<a ng-href="#/info/{{items.id}}">
-						  			<img ng-src="{{items.avatar}}" style="position: absolute;width: 50px;height: 50px;border-radius: 50%;top: 2px;left:2px;">.
+						  			<img ng-src="{{items.avatar}}" style="position: absolute;width: 50px;height: 50px;border-radius: 50%;top: 2px;left:2px;">
 						  		</a>
 					  		</div>
 					  </div>
@@ -39,8 +39,46 @@
 					</div>
 
 					
-				    <div class="button-bar bg_transparent" style="height: 57px;">
-					    <a class="button button-clear fixdisplay" ng-href="#/question/gratis">
+				    <div ng-if="!currentUser.is_verified_lawyer" class="button-bar bg_transparent" style="height: 57px;">
+					    <a class="button button-clear fixdisplay" ng-href="#/user/question/list">
+					    	<span ng-if=" items.unread_counts.question != '0'" class="badge badge-assertive icon-left fixbadge">
+					    		{{items.unread_counts.question}}
+					    	</span>
+					    	<img ng-src="../img/mfzx-iocn.png" width="28" height="26" style="margin-top: 4px;">
+					  	    <div style="width:100%;height:2px;clear:both;"></div>
+					  	    <label>免费咨询</label>
+					    </a>
+					    <div><i class="border1" style="height:57px;margin-top: 0;"></i></div>
+					    <a class="button button-clear fixdisplay" ng-href="#/question/paytext">
+					      <span ng-if=" items.unread_counts.pay_text != '0'" class="badge badge-assertive icon-left fixbadge">
+					      	{{items.unread_counts.pay_text}}
+					      </span>
+					  	  <img ng-src="../img/twzx-iocn.png" width="28" height="26" style="margin-top: 4px;">
+					  	  <div style="width:100%;height:2px;clear:both;"></div>
+					  	  <label>图文咨询</label>
+					    </a>
+					    <div><i class="border1" style="height:57px;margin-top: 0;"></i></div>
+					    <a class="button button-clear fixdisplay" ng-href="#/question/payphone">
+					    	<span ng-if=" items.unread_counts.pay_phone != '0'" class="badge badge-assertive icon-left fixbadge">
+					    		{{items.unread_counts.pay_phone}}
+					    	</span>
+					  	 <img ng-src="../img/dhzx-iocn.png" width="28" height="26" style="margin-top: 4px;">
+					  	  <div style="width:100%;height:2px;clear:both;"></div>
+					  	  <label>电话咨询</label>
+					    </a>
+					    <div><i class="border1" style="height:57px;margin-top: 0;"></i></div>
+					    <a class="button button-clear fixdisplay" ng-href="#/question/paycompany">
+					    	<span ng-if=" items.unread_counts.pay_company != '0' " class="badge badge-assertive icon-left fixbadge">
+					    		{{items.unread_counts.pay_company}}
+					    	</span>
+					  	  <img ng-src="../img/flgw-iocn.png" width="28" height="26" style="margin-top: 4px;">
+					  	  <div style="width:100%;height:2px;clear:both;"></div>
+					  	  <label>法律顾问</label>
+					    </a>
+					</div>
+
+					<div ng-if="currentUser.is_verified_lawyer" class="button-bar bg_transparent" style="height: 57px;">
+					    <a class="button button-clear fixdisplay" ng-href="#/lawyer/question">
 					    	<span ng-if=" items.unread_counts.question != '0'" class="badge badge-assertive icon-left fixbadge">
 					    		{{items.unread_counts.question}}
 					    	</span>

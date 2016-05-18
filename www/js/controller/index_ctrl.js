@@ -1,6 +1,12 @@
 var lvtuanApp = angular.module('app', ['ionic','ngSanitize','ngFileUpload','listModule','authModule','wxModule','locationModule','ngStorage','easemobModule','angular-jwt'])
 lvtuanApp.constant("HOST", AppSettings.baseApiUrl)
 
+lvtuanApp.config(function($ionicConfigProvider) {
+  $ionicConfigProvider.views.maxCache(5);
+  // note that you can also chain configs
+  $ionicConfigProvider.tabs.position("top");
+});
+
 lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $location,$ionicHistory, $http, userService, authService, locationService){
 	var self = this;
 
@@ -371,8 +377,7 @@ lvtuanApp.controller("registerCtrl",function($scope,$rootScope,$http,$interval,$
 	    	}
 
 	    	var goback = sessionStorage.getItem("goback");
-			var srt = goback.split("#");
-			if(goback == null || srt[1] == '/login'){
+			if(goback == null){
 				location.href='#/index';
 			}else{
 				
@@ -2786,7 +2791,8 @@ lvtuanApp.controller("siteCtrl",function($scope,$http,$rootScope,$location,authS
 
 /****************************************************** 找律师 ******************************************************/
 //找律师的列表
-lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$location,$ionicLoading,locationService,listHelper){
+lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$location,$stateParams,$ionicLoading,locationService,listHelper){
+	console.info($stateParams.type);
 
 	$scope.masklayer = true;
 	$scope.locations = locationService.getLocation();
@@ -3060,6 +3066,37 @@ lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$l
 
 	}
 
+})
+
+//一对一咨询
+lvtuanApp.controller("lawyerOneQuestionsCtrl",function($http,$scope,$state,$rootScope,$ionicLoading){
+	$scope.visible = true;
+	$scope.visible1 = false;
+	$scope.one_question_val = null;
+	$scope.toggle = function(val){
+		$scope.one_question_val = val;
+		if(val == 'paytext'){
+			$scope.visible = true;
+			$scope.visible1 = false;
+		}else{
+			$scope.visible1 = true;
+			$scope.visible = false;
+		}
+	}
+
+	$scope.jumpGoQuestionsList = function(){
+		if($scope.one_question_val == null){
+			$scope.one_question_val = 'paytext';
+		}else{
+			$scope.one_question_val = $scope.one_question_val;
+		}
+		location.href='#/lawyer/list/'+$scope.one_question_val;
+	}
+})
+
+//律师的全部评价
+lvtuanApp.controller("lawyerAllEvaluateCtrl",function($http,$scope,$state,$rootScope,$ionicLoading){
+	console.info('律师的全部评价');
 })
 
 //律师一对一搜索
@@ -4191,10 +4228,41 @@ lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$
 
 /*———————————————————————————— 我的律团 - 用户的律团 ————————————————————————————*/
 
-//首页 - 我的 - 免费咨询
+
+/*———————————————————————————— 用户 - 我的 - 咨询管理 ————————————————————————————*/
+//用户 - 咨询管理
+lvtuanApp.controller("userQuestionListCtrl",function($scope,$rootScope,$ionicLoading,listHelper_hostPath,httpWrapper){
+
+	listHelper_hostPath.bootstrap('/user/question?type=question', $scope);
+})
+
+
+
+/*———————————————————————————— 律师 - 我的 - 咨询管理 ————————————————————————————*/
+
+//咨询管理 - 未参与
+lvtuanApp.controller("lawyerQuestionNotCtrl",function($scope,$rootScope,$ionicLoading,listHelper_hostPath,httpWrapper){
+	console.info('未参与');
+	listHelper_hostPath.bootstrap('/user/question?type=question', $scope);
+})
+
+//咨询管理 - 已参与
+lvtuanApp.controller("lawyerQuestionAlreadyCtrl",function($scope,$rootScope,$ionicLoading,listHelper_hostPath,httpWrapper){
+	console.info('已参与');
+	listHelper_hostPath.bootstrap('/user/question?type=question', $scope);
+})
+
+
+
+
+
+
+
+
+
 //咨询 - 待受理
 lvtuanApp.controller("questionGratisNewCtrl",function($scope,$rootScope,$ionicLoading,listHelper_hostPath,httpWrapper){
-	console.info("待受理");
+
 	listHelper_hostPath.bootstrap('/user/question?type=question', $scope);
 
 	//取消
@@ -4225,7 +4293,6 @@ lvtuanApp.controller("questionGratisNewCtrl",function($scope,$rootScope,$ionicLo
 		);
 	}
 })
-
 //咨询 - 待确认
 lvtuanApp.controller("questionGratisWaitforconfirmationCtrl",function($scope,$rootScope,$ionicPopup,listHelper,httpWrapper){
 	console.info("待确认");
@@ -5391,6 +5458,7 @@ lvtuanApp.controller("documentlistCtrl",function($http,$scope,$state,$rootScope,
 	        	console.info(data.data)
 	        	if(data && data.data && data.data.length){
 					$scope.items = $scope.items.concat(data.data);
+					sessionStorage.removeItem('key');
 					console.info($scope.items);
 					if (data.data.length < rows_per_page) {
 						$scope.moredata = false;
