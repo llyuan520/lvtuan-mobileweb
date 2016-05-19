@@ -1,7 +1,24 @@
 <ion-view hide-tabs="true" view-title="全部评价">
 		<ion-pane>
-			<ion-content class="has-tabs">
-				
+			<ion-content>
+				<div style="display: inline-block;width: 100%;background-color: #fff;">
+					<div class="radiuscf label-list">
+						<div class="row row-no-padding">
+				    		<div class="col col-center row-no-padding">
+				    			<span class="labels" ng-class="{ 'active':inEvaluate('1') }" ng-click="click_evaluate('1')">全部</span>
+				    		</div>
+				    		<div class="col col-center row-no-padding">
+				    			<span class="labels" ng-class="{ 'active':inEvaluate('2') }" ng-click="click_evaluate('2')">好评 480</span>
+				    		</div>
+				    		<div class="col col-center row-no-padding" style="text-align: right;">
+				    			<span class="labels" ng-class="{ 'active':inEvaluate('3') }" ng-click="click_evaluate('3')">中评 18</span>
+				    		</div>
+				    		<div class="col col-center row-no-padding" style="text-align: right;">
+				    			<span class="labels" ng-class="{ 'active':inEvaluate('4') }" ng-click="click_evaluate('4')">差评 2</span>
+				    		</div>
+				    	</div>
+				    </div>
+				</div>
 				<div class="card" style="border-radius: 10px;">
 					<div class="item item-text-wrap" style="border-width: 0px;">
 						<div class="row row-no-padding mb10">
@@ -22,7 +39,6 @@
 							<label class="label">专业程度高</label>
 							<label class="label">主动热情</label>
 							<label class="label">解答详细</label>
-				  			
 						</p>
 						<div class="hr" style="margin: 11px 0 1px 0;"></div>
 						<div class="item item-avatar" style="border-color:#fff;border-style: none;border-width:0;padding-bottom: 11px;padding-left: 55px;">
@@ -34,7 +50,6 @@
 							  </h2>
 							  <p class="cb5b5b5">
 							  	执业3-5年 
-							  	<span class="item-note">图文咨询</span>
 							  </p>
 							</div>
 				        </div>
@@ -73,7 +88,6 @@
 							  </h2>
 							  <p class="cb5b5b5">
 							  	执业3-5年 
-							  	<span class="item-note">图文咨询</span>
 							  </p>
 							</div>
 				        </div>
