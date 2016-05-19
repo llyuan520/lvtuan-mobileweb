@@ -636,8 +636,7 @@ lvtuanApp.controller("groupAttentionCtrl",function($scope,$http,$state,$rootScop
 	        {
 		        cache: true,
 		        headers: {
-		            'Accept': 'application/json' , 
-		            'Authorization': 'bearer ' + $rootScope.token
+		            'Accept': 'application/json'
 		       	}
 	        }).success(function(data) {
 				if(data && data.data){
@@ -735,8 +734,7 @@ lvtuanApp.controller("groupAttentionSearchCtrl",function($http,$scope,$state,$ro
 	        {
 		        cache: true,
 		        headers: {
-		            'Accept': 'application/json' , 
-		            'Authorization': 'bearer ' + $rootScope.token
+		            'Accept': 'application/json'
 		       	}
 	        }).success(function(data) {
 				if(data && data.data){
@@ -881,8 +879,7 @@ lvtuanApp.controller("groupsiteCtrl",function($scope,$http,$state,$rootScope,$st
 			        {
 			        cache: true,
 			        headers: {
-			            'Content-Type': 'application/json' , 
-			            'Authorization': 'bearer ' + $rootScope.token
+			            'Content-Type': 'application/json' 
 			       		}
 			        }).success(function(data) {
 			        	layer.show(data.data);
@@ -907,8 +904,7 @@ lvtuanApp.controller("groupsiteCtrl",function($scope,$http,$state,$rootScope,$st
 			        },
 			        {
 			        headers: {
-			            'Content-Type': 'application/json' , 
-			        	'Authorization': 'bearer ' + $rootScope.token,
+			            'Content-Type': 'application/json'
 			        }
 			    }).success(function(data) {
 			       layer.show("修改成功！");
@@ -1354,8 +1350,7 @@ lvtuanApp.controller("groupcreateCtrl",function($scope,$http,$state,$rootScope,$
 	$scope.upload = function (group_avatar) {
 	    Upload.upload({
 	    	headers: {
-	            'Content-Type': 'application/json' , 
-	            'Authorization': 'bearer ' + $rootScope.token
+	            'Content-Type': 'application/json' 
 	   		},
 	        url: 'http://'+$rootScope.hostName+'/group/uploadImage',
 	        data: {
@@ -1409,8 +1404,7 @@ lvtuanApp.controller("televisecreateCtrl",function($scope,$http,$state,$rootScop
 		        angular.forEach(files, function(file) {
 		            file.upload = Upload.upload({
 		            	headers: {
-					            'Content-Type': 'application/json' , 
-					            'Authorization': 'bearer ' + $rootScope.token
+					            'Content-Type': 'application/json'
 				       		},
 		                url: 'http://'+$rootScope.hostName+'/microblog/uploadImage',
 		                data: {microBlogImage: file}
@@ -1625,8 +1619,7 @@ lvtuanApp.controller("knowledgeViewCtrl",function($scope,$http,$rootScope,$state
 			},
 			{
             headers: {
-                'Content-Type': 'application/json' ,
-            	'Authorization': 'bearer ' + $rootScope.token
+                'Content-Type': 'application/json'
             }
         }).success(function(data) {
         	var itmes = data.data;
@@ -1647,8 +1640,7 @@ lvtuanApp.controller("knowledgeViewCtrl",function($scope,$http,$rootScope,$state
 			},
 			{
             headers: {
-                'Content-Type': 'application/json' ,
-            	'Authorization': 'bearer ' + $rootScope.token
+                'Content-Type': 'application/json'
             }
         }).success(function(data) {
         	$scope.items.collects_count = $scope.items.collects_count + 1;
@@ -1668,8 +1660,7 @@ lvtuanApp.controller("knowledgeViewCtrl",function($scope,$http,$rootScope,$state
 			},
 			{
             headers: {
-                'Content-Type': 'application/json' ,
-            	'Authorization': 'bearer ' + $rootScope.token
+                'Content-Type': 'application/json'
             }
         }).success(function(data) {
         	$scope.items.collects_count = $scope.items.collects_count - 1 ;
@@ -1904,8 +1895,7 @@ lvtuanApp.controller("infoCtrl",function($scope,$http,$rootScope,$timeout,$ionic
     $scope.upload = function (avatar) {
     	Upload.upload({
         	headers: {
-	            'Content-Type': 'application/json' , 
-	            'Authorization': 'bearer ' + $rootScope.token
+	            'Content-Type': 'application/json'
        		},
             url: 'http://'+$rootScope.hostName+'/center/update_user_image',
             data: {
@@ -2164,8 +2154,7 @@ lvtuanApp.controller("collectCtrl",function($scope, $http, $rootScope, listHelpe
 			},
 			{
             headers: {
-                'Content-Type': 'application/json' ,
-            	'Authorization': 'bearer ' + $rootScope.token
+                'Content-Type': 'application/json'
             }
         }).success(function(data) {
         	$scope.items.splice(index, 1);
@@ -2194,8 +2183,7 @@ lvtuanApp.controller("followedCtrl",function($scope,$rootScope,$http,listHelper)
 			},
 			{
             headers: {
-                'Content-Type': 'application/json' ,
-            	'Authorization': 'bearer ' + $rootScope.token
+                'Content-Type': 'application/json'
             }
         }).success(function(data) {
         	console.info(data);
@@ -2330,8 +2318,7 @@ lvtuanApp.controller("practitionersCtrl",function($scope,$http,$rootScope,$timeo
 	    $scope.upload = function (license_file) {
 	    	Upload.upload({
 	        	headers: {
-			            'Content-Type': 'application/json' , 
-			            'Authorization': 'bearer ' + $rootScope.token
+			            'Content-Type': 'application/json'
 		       		},
 		            url: 'http://'+$rootScope.hostName+'/file/upload/user',
 		            data: {
@@ -2467,8 +2454,7 @@ lvtuanApp.controller("verifiedCtrl",function($scope,$http,$rootScope,$timeout,$s
 	$scope.upload = function (license_file) {
 	 Upload.upload({
 	   headers: {
-	            'Content-Type': 'application/json' , 
-	            'Authorization': 'bearer ' + $rootScope.token
+	            'Content-Type': 'application/json'
 	   		},
 	        url: 'http://'+$rootScope.hostName+'/file/upload/user',
 	        data: {
@@ -3248,8 +3234,7 @@ lvtuanApp.controller("viewCtrl",function($scope,$http,$rootScope,$stateParams,ht
 			},
 			{
             headers: {
-                'Content-Type': 'application/json' ,
-            	'Authorization': 'bearer ' + $rootScope.token
+                'Content-Type': 'application/json'
             }
         }).success(function(data) {
         	console.info(data);
@@ -3267,8 +3252,7 @@ lvtuanApp.controller("viewCtrl",function($scope,$http,$rootScope,$stateParams,ht
 			},
 			{
             headers: {
-                'Content-Type': 'application/json' ,
-            	'Authorization': 'bearer ' + $rootScope.token
+                'Content-Type': 'application/json'
             }
         }).success(function(data) {
         	console.info(data);
@@ -3331,8 +3315,7 @@ lvtuanApp.controller("viewteleviseCtrl",function($scope,$http,$rootScope,listHel
 			},
 			{
             headers: {
-                'Content-Type': 'application/json' ,
-            	'Authorization': 'bearer ' + $rootScope.token
+                'Content-Type': 'application/json'
             }
         }).success(function(data) {
         	console.info(data);
@@ -3379,8 +3362,7 @@ lvtuanApp.controller("graphicCtrl",function($scope,$http,$rootScope,$timeout,$st
 		        angular.forEach(files, function(file) {
 		            file.upload = Upload.upload({
 		            	headers: {
-				            'Content-Type': 'application/json' , 
-				            'Authorization': 'bearer ' + $rootScope.token
+				            'Content-Type': 'application/json'
 			       		},
 			       		url: 'http://'+$rootScope.hostName+'/question/upfiles',
 		                data: {files: file}
@@ -3874,8 +3856,7 @@ lvtuanApp.controller("questionsviewsCtrl",function($http,$scope,$rootScope,$stat
 			},
 			{
             headers: {
-                'Content-Type': 'application/json' ,
-            	'Authorization': 'bearer ' + $rootScope.token
+                'Content-Type': 'application/json'
             }
         }).success(function(data) {
         	console.info(data);
@@ -3895,8 +3876,7 @@ lvtuanApp.controller("questionsviewsCtrl",function($http,$scope,$rootScope,$stat
 			},
 			{
             headers: {
-                'Content-Type': 'application/json' ,
-            	'Authorization': 'bearer ' + $rootScope.token
+                'Content-Type': 'application/json'
             }
         }).success(function(data) {
         	$scope.items.is_collect = false;

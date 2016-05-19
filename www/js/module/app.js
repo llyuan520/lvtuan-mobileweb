@@ -1,4 +1,4 @@
-angular.module('lvtuanApp', ['ionic', 'app', 'templates'])
+angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -81,6 +81,7 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates'])
     });
 
     $rootScope.$on('unauthorized', function() {
+      console.info('unauthorized');
       sessionStorage.setItem("goback", $location.absUrl());
         layer.show('您没有权限访问这个链接！');
         $location.path('/login');
@@ -90,6 +91,7 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates'])
     });
 
     $rootScope.$on('unauthenticated', function() {
+      console.info('unauthenticated');
       sessionStorage.setItem("goback", $location.absUrl());
         layer.show('请先登录！');
         // $location.path('/login');
@@ -100,10 +102,46 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates'])
     
 })
 
-.config(function($httpProvider) {
+.config(function($httpProvider, jwtInterceptorProvider) {
+  jwtInterceptorProvider.tokenGetter = ['jwtHelper', 'authService', '$http', 'config', '$rootScope', function(jwtHelper, authService, $http, config, $rootScope) {
+    // Skip authentication for any requests ending in .html
+    if (config.url.substr(config.url.length - 5) == '.html') {
+      return null;
+    }
+
+    var token = authService.getToken();
+    if (token) {
+      if (jwtHelper.isTokenExpired(token)) {
+        console.info("refreshing the token : " + token);
+        // This is a promise of a JWT token
+        return $http({
+          url: 'http://' + AppSettings.baseApiUrl + '/refresh_token',
+          skipAuthorization: true,
+          method: 'POST',
+          headers: {
+            'Authorization': 'bearer ' + token
+          }
+        }).then(
+          function(response) {
+            console.info('2 response: ', response);
+            var token = response.data.data.token;
+            authService.saveToken(token);
+            return token;
+          }, 
+          function(reason) {
+            $rootScope.$broadcast('unauthenticated');
+          }
+        );
+      } else {
+        console.info("returning the token : " + token);
+        return token;
+      }
+    }
+  }];
+
+  $httpProvider.interceptors.push('jwtInterceptor');
   $httpProvider.interceptors.push('APIInterceptor');
 })
-
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 

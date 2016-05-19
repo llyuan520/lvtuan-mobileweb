@@ -36,8 +36,7 @@ function authService($window) {
 		var token = self.getToken();
 		var user = self.getUser();
 		if(token && user) {
-			var params = self.parseJwt(token);
-			return Math.round(new Date().getTime() / 1000) <= params.exp;
+			return true;
 		} else {
 			return false;
 		}

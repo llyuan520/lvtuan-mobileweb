@@ -9,8 +9,7 @@ httpModule.factory('httpWrapper', function($http, $rootScope) {
 	    {
 	        cache: true,
 	        headers: {
-	            'Content-Type': 'application/json' , 
-	            'Authorization': 'bearer ' + $rootScope.token
+	            'Content-Type': 'application/json'
 	   		}
 	    }).success(
 	    	successCallback ? successCallback : function successCallback(data) {}
@@ -27,8 +26,7 @@ httpModule.factory('httpWrapper', function($http, $rootScope) {
 			data : data,
 	        cache: true,
 	        headers: {
-	            'Content-Type': 'application/json' , 
-	            'Authorization': 'bearer ' + $rootScope.token
+	            'Content-Type': 'application/json'
 	   		}
 		}).then(
 			successCallback ? successCallback : function successCallback(response) {}, 
@@ -52,11 +50,6 @@ httpModule.factory('APIInterceptor', ['$log', '$q', '$rootScope', 'authService',
   		  if(config.url.indexOf(HOST) > -1) {
 
 	      	// $rootScope.show();
-
-			var token = authService.getToken();
-			if(token) {
-				config.headers.Authorization = 'Bearer ' + token;
-			}
 			config.headers.Accept = 'application/json';
 			config.cache = true;
 			
