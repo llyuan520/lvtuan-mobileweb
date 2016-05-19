@@ -1729,7 +1729,7 @@ a,button,input{
 .mb10,.card .item h2{margin-bottom:10px;}
 .hr{border-bottom: 1px solid #ededed;height: 1px;}
 
-.card, .list-inset{margin: 14px 10px;}
+.card, .list-inset, .radiuscf{margin: 14px 10px;}
 .drop-down-arrow{    background: url("../img/drop-down-arrow.png") no-repeat scroll 93% 88% transparent;
 padding-right: 1rem;
 font-size: 14px;
@@ -1749,6 +1749,9 @@ button.button{border-radius: 10px;}
     margin-top: 5px;
     margin-bottom: 5px;
 }
+input.readonly[readonly]{  
+    background-color: #fff;  
+} 
 textarea {height: auto; }
 /*input[placeholder], [placeholder], *[placeholder] { 
     color:#b5b5b5 !important; 
@@ -1774,3 +1777,8 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
 .gift, .gift_s{display: inline-block;width: 48px;height: 19px;background-size: 50%;}
 .card .carditem{padding: 10px 10px 0;border: 1px solid #ebebeb;margin: 1px 16px 16px;border-radius: 10px;}
 .item p label.label{text-align: center;padding: 3px 6px;font-size: 12px;background-color: #f5f5f5;margin: 0 8px 8px 0;border-radius: 10px;display: inline-block;}
+
+.label-list span.labels{font-size: 12px;background-color: #f0f1f3;display: inline-block;padding: 5px 10px;border-radius: 10px;border: 1px solid #f0f1f3;color: #7f7f7f;min-width: 66px;max-width: 100%;text-align: center;}
+.label-list span.labels.active{background-color: #48b4ff;color: #fff;border: 1px solid #48b4ff;}
+
+

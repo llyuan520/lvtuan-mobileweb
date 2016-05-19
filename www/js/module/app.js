@@ -611,11 +611,10 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates'])
     })
 
     .state('questions/areward', { //问律师评价
-      cache: 'true', 
       url: '/questions/areward/:id',
       templateUrl: 'template/questions/areward.html',
       controller: 'questionsArewardCtrl',
-      authn: false
+      authn: true
     })
 
 /*———————————————————————————— 我的律团- 我的订单 -公用 ————————————————————————————*/
@@ -686,74 +685,7 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates'])
 
 
 
-  //首页 - 我的 - 免费咨询
-  .state('question/gratis', { //首页 - 我的 - 免费咨询
-      url: '/question/gratis',
-      templateUrl: 'template/mylvtuan/question/gratis/question.html',
-      authn: true
-  })
-  .state('question/gratis.new', { //免费咨询 - 待受理
-      url: '/new',
-      views: {
-          'question-gratis-new': {
-              templateUrl: 'template/mylvtuan/question/gratis/new.html',
-              controller: 'questionGratisNewCtrl'
-          }
-      },
-      authn: true
-  })
-  .state('question/gratis.waitforconfirmation', { //免费咨询 - 待确认
-      url: '/waitforconfirmation',
-      views: {
-          'question-gratis-waitforconfirmation': {
-              templateUrl: 'template/mylvtuan/question/gratis/waitforconfirmation.html',
-              controller: 'questionGratisWaitforconfirmationCtrl'
-          }
-      },
-      authn: true
-  })
-  .state('question/gratis.waitforevaluation', { //免费咨询 - 待评价
-      url: '/waitforevaluation',
-      views: {
-          'question-gratis-waitforevaluation': {
-              templateUrl: 'template/mylvtuan/question/gratis/waitforevaluation.html',
-              controller: 'questionGratisWaitforevaluationCtrl'
-          }
-      },
-      authn: true
-    })
-   .state('question/gratis.complete', { //免费咨询 - 已完成
-      url: '/complete',
-      views: {
-          'question-gratis-complete': {
-              templateUrl: 'template/mylvtuan/question/gratis/complete.html',
-              controller: 'questionGratisCompleteCtrl'
-          }
-      },
-      authn: true
-    })
-  
-  .state('question/gratis.cancelled', { //免费咨询 - 已取消
-      url: '/cancelled',
-      views: {
-          'question-gratis-cancelled': {
-              templateUrl: 'template/mylvtuan/question/gratis/cancelled.html',
-              controller: 'questionGratisCancelledCtrl'
-          }
-      },
-      authn: true
-  })
-  .state('question/question/view', { //免费咨询 - 咨询详情
-      url: '/question/question/view/:id',
-      templateUrl: 'template/mylvtuan/question/gratis/view.html',
-      controller: 'questionGratisViewCtrl',
-      authn: true
-  })
-  .state('question/gratis/send/mind', { //免费咨询 - 咨询详情 - 送心意
-      url: '/send/mind/:id',
-      templateUrl: 'template/mylvtuan/question/gratis/send-mind.html',
-      authn: true
-    })
+
 
 
   //首页 - 我的 - 图文咨询

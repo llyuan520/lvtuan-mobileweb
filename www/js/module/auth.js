@@ -81,7 +81,7 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
         	}
 
         	var goback = sessionStorage.getItem("goback");
-			if(goback == null){
+			if(goback == null || goback=="" || goback=="undefined"){
 				location.href='#/index';
 			}else{
 				/*if(user.status == 1 || user.status == 2){
@@ -133,7 +133,7 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
         	//window.history.back();
 	//		window.location.reload();
         	var goback = sessionStorage.getItem("goback");
-			if(goback == null){
+			if(goback == null || goback=="" || goback=="undefined"){
 				location.href='#/index';
 			}else{
 				/*if(user.status == 1 || user.status == 2){
@@ -179,7 +179,7 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
 
 			// window.location.reload();
 			var goback = sessionStorage.getItem("goback");
-			if(goback == null){
+			if(goback == null || goback=="" || goback=="undefined"){
 				location.href='#/index';
 			}else{
 				if(user.status == 1 || user.status == 2){
