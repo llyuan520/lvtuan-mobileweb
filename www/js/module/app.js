@@ -593,8 +593,8 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
       controller: 'lawyerlistCtrl'
     })
 
-    .state('lawyer/list/search', { //找律师列表
-      url: '/lawyer/list/search',
+    .state('lawyer-list/search', { //找律师列表
+      url: '/lawyer-list/search',
       cache: 'true',
       templateUrl: 'template/lawyer/lawyer_list_search.html'
     })
@@ -652,6 +652,13 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
       url: '/questions/areward/:id',
       templateUrl: 'template/questions/areward.html',
       controller: 'questionsArewardCtrl',
+      authn: true
+    })
+
+    .state('questions/order/pay', { //订单支付
+      url: '/questions/order/pay/:id',
+      templateUrl: 'template/questions/order_pay.html',
+      controller: 'questionsOrderPpayCtrl',
       authn: true
     })
 

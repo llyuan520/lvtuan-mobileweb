@@ -22,7 +22,7 @@
 				  		<span class="subdued cb5b5b5">回答</span>
 				  		<font class="cf7861e">{{items.post_extra.comments_count}}</font>
 				  		<font class="cb5b5b5">·</font>
-					  	<span class="subdued cb5b5b5">关注</span>
+					  	<span class="subdued cb5b5b5">收藏</span>
 					  	<font class="cf7861e">{{items.post_extra.collects_count}}</font>
 					  	<span class="item-note cb5b5b5">{{items.created_at}}</span>
 				  	</p>
@@ -30,28 +30,28 @@
 			</div>
 			<div class="card" style="border-radius: 10px;box-shadow:none;" ng-repeat="comment in items.comments">
 				<div class="item item-avatar" style="border-color:#fff;border-style: none;border-width:0;padding-bottom: 11px;">
-					<img ng-src="{{comment.creator_avatar}}">
+					<a class="item-image" ng-href="#/lawyer/view/{{comment.creator_id}}"><img ng-src="{{comment.creator_avatar}}"></a>
 					<div style="width: 50%;float: left;">
-					  <h2 class="c48b4ff" style="margin-bottom: 5px;">{{comment.creator_name}}律师</h2>
+						<h2 class="c48b4ff" style="margin-bottom: 5px;"><a ng-href="#/lawyer/view/{{comment.creator_id}}">{{comment.creator_name}}律师</a></h2>
 					  <p class="cb5b5b5">执业{{comment.creator_practice_period}}</p>
 					</div>
 					<div style="float: right;">
 						<div class="row row-no-padding">
 						  <div class="col txt-align-c font14 cb5b5b5">
 							  	<!-- 未点赞  -->
-								<span ng-if="items.is_collect == false"  ng-click="likes(comment.creator_id,$index)" >
+								<span ng-if="comment.is_liked == false"  ng-click="likes(comment.id,$index)" >
 									<i class="like"></i>
 								</span>
 								<!-- 点赞 -->
-								<span ng-if="items.is_collect == true"  ng-click="likes_del()" >
+								<span ng-if="comment.is_liked == true"  ng-click="likes_del()" >
 									<i class="like_s"></i>
 								</span>
 								<br>
-								520
+								{{comment.like_count}}
 						  </div>
 						  <div class="col txt-align-c font14 cb5b5b5">
 							  	<!-- 未打赏  -->
-								<span ng-click="areward(items.id)">
+								<span ng-click="areward(comment.creator_id)">
 									<i class="gift_s"></i>
 								</span>
 								<br>

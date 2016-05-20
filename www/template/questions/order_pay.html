@@ -1,0 +1,57 @@
+<ion-view hide-Tabs="true" cache-view="false" view-title="订单支付">
+	<ion-pane>
+		<ion-content>
+			<form id="myForm" name="myForm" novalidate>
+          <div class="card" style="border-radius: 10px;box-shadow:none;">
+              <div class="item item-text-wrap">
+                <h3 class="mb10 c48b4ff">您的订单已经提交，请尽快完成支付！</h3>
+                <p class="mt10">
+                    订单编号：0123456789
+                </p>
+                <p class="">
+                  订单金额：100
+                </p>
+                <p class="contents">
+                  订单信息：律师打赏
+                </p>
+            </div>
+          </div>
+          <div class="radiuscf" style="font-size: 16px;">
+            请选择支付方式
+          </div>
+          <div class="card" style="border-radius: 10px;box-shadow:none;">
+              <div class="item item-text-wrap">
+                <div class="row row-no-padding padding_bottom16">
+                    <div class="col col-center"><img ng-src="../img/weixinbg.png" style="width: 80%"></div> 
+                    <div class="col col-70 col-center">
+                        微信支付<br>
+                        <span class="font12 cb5b5b5"> 推荐安装微信客户端用户使用</span>
+                    </div>
+                    <div class="col col-center">
+                        <label class="checkbox">
+                            <input ng-model="user.radioval" name="name" type="radio" value="wx_pub">
+                        </label>
+                    </div> 
+                </div>
+                <div class="row row-no-padding padding_bottom16">
+                    <div class="col col-center"><img ng-src="../img/qianbao.png" style="width: 80%"></div>
+                    <div class="col col-70 col-center">
+                        钱包支付<br>
+                        <span class="font12 cb5b5b5">余额：{{mymoney}}元<label style="font-size: 12px;" ng-if="mymoney == 0">余额不足</label></span>
+                    </div>
+                    <div class="col col-center">
+                        <label class="checkbox">
+                            <input ng-model="user.radioval" name="name" type="radio" value="qianbao">
+                        </label>
+                    </div> 
+                </div>
+            </div>
+          </div>
+					
+	      <div style="background-color: #fff;padding:5px 10px;margin-top:10px;">
+					<button class="button button-block button-cff2f5f" type="submit" ng-disabled="myForm.$invalid" ng-click="wap_pay(user)" >确认支付</button>
+				</div>
+			</form>
+		</ion-content>
+	</ion-pane>
+</ion-view>

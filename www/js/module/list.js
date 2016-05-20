@@ -7,7 +7,7 @@ listModule.factory('listHelper', function($http, $rootScope, httpWrapper) {
 	listHelper.bootstrap = function(url, $scope) {
 
 		var page = 1; //页数
-		var size = 5; // 每页的数量
+		var size = 10; // 每页的数量
 		$scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
 		$scope.url = url;
 		if ($scope.size) {
@@ -77,7 +77,7 @@ listModule.factory('listHelper_hostPath', function($http, $rootScope, httpWrappe
 	listHelper_hostPath.bootstrap = function(url, $scope) {
 
 		var page = 1; //页数
-		var size = 5; // 每页的数量
+		var size = 10; // 每页的数量
 		$scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
 		$scope.url = url;
 		if ($scope.size) {

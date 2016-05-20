@@ -5,7 +5,7 @@
 					<div class="item-input-inset" style="border-radius: 10px;">
 					  <label class="item-input-wrapper">
 					  	<i class="icon ion-ios-search placeholder-icon"></i>
-					    <input type="search" placeholder="请输入姓名进行搜索" ng-click="jumpGo('#/lawyer/list/search')">
+					    <input type="search" placeholder="请输入姓名进行搜索" ng-click="jumpGo('#/lawyer-list/search')">
 					  </label>
 					</div>
 
@@ -36,7 +36,7 @@
 					</div>
 
 					<div class="card" ng-repeat="item in items" style="border-radius: 10px;">
-						<div class="item item-avatar">
+						<a class="item item-avatar" ng-href="#/lawyer/view/{{item.id}}">
 				            <img ng-src="{{item.avatar}}">
 				            <div class="row row-no-padding">
 					       		<div class="col col-70 col-center row-no-padding">
@@ -57,7 +57,7 @@
 								<label ng-repeat="item in item.work_scope" class="radius10">{{item.value}}</label>
 							</p>
 				          
-				        </div>
+				        </a>
 					</div>
 					<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
 	
