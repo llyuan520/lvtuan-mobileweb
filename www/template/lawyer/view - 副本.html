@@ -1,0 +1,223 @@
+<ion-view hide-tabs="true">
+		<ion-pane  class="web-body">
+			<ion-header-bar align-title="center" class="bar bar-header bar-light">
+				<button class="button button-clear button-positive" ng-click="jumpGoBack()">  
+	                <i class="icon icon-left ion-ios-arrow-back"></i>  
+	            </button>
+				<h1 class="title">律师主页</h1>
+			</ion-header-bar>
+			<ion-content class="has-tabs">
+				<div class="list view-heard" style="background:url( {{items.bg_img}} );background-size:100% 100%;">
+					<div class="concern-lawyer">
+				      	<p ng-if="items.is_following == false" ng-click="follow(items.id)">
+				      		<i class="icon ion-android-favorite-outline dark"></i>
+			      		</p>
+				      	<p ng-if="items.is_following == true" ng-click="follow_del(items.id)" style="font-size:14px;width:30px;border-radius:30px;height:30px;float:left;background-color:#ffffff;text-align:center;color: #f00;"><i class="icon ion-android-favorite web-ion-img1-5" style="color:#f00;"></i></p>
+				      	<label style="color:#000;">&nbsp;&nbsp;{{items.follower_count}}</label>
+				    </div>
+				    <div class="button-bar bg_transparent">
+				    	<div class="bg_radius">
+					  		<img class="avatar" ng-src="{{items.avatar}}" spinner-on-load style="width: 5rem;height: 5rem;">
+					  	</div>
+					    <div class="button button-clear" style="padding:0 8px 0 6rem;line-height: 100%;text-align: left;color:#00cafa;">
+					    	<label>{{items.realname}}</label>&nbsp;&nbsp
+					    	<label>律师</label>
+					  		<div style="width:100%;height:2px;clear:both;"></div>
+					  		<div class="web-listtext web-fc666 lawyer-score">
+						      	<div star rating-value="ratingVal" max="max" on-hover="onHover" on-leave="onLeave" readonly="{{readonly}}"></div>
+						    </div>
+					    </div>
+					    <div><i class="border1"></i></div>
+					    <div class="button button-clear" style="padding:0 8px;line-height: 100%;color: #fff;">
+					  	  <label>收到心意：{{items.reward_count}}</label>
+					  	  <div style="width:100%;height:2px;clear:both;"></div>
+					  	  <label>完成单数：{{items.task_count}}</label>
+					    </div>
+					</div>
+				</div>
+
+				<div class="slideBox">
+					<div class="hd tabs">
+					  <a ng-repeat="tab in tabs"  ng-class="{active:isActiveTab(tab.url)}"  ng-click="onClickTab(tab)" class="tab-item" >{{tab.title}}</a></li>
+					</div>
+					<div class="bd">
+						<div ng-include="currentTab"></div>
+					</div>
+				</div>
+			</ion-content>	
+
+			<div class="tabs tabs-color-positive positive-bg" style="padding-top:0;">
+			  <p class="tab-item" ng-click="graphic5(items.id,'pay_text')" style="color:#fff;border-right: 1px solid #fff;">
+			  	<img style="vertical-align: middle;width: 2.5rem;height: 2.1rem;" ng-src="../img/twzx.png">
+			  	&nbsp;&nbsp;<b>图文咨询</b></p>
+			  <p class="tab-item" ng-click="graphic5(items.id,'pay_phone')" style="color:#fff">
+			  	<img style="vertical-align: middle;width: 2.5rem;height: 2.6rem;" ng-src="../img/dhzx.png">
+			  	&nbsp;&nbsp;<b>电话咨询</b></p>
+			</div>
+
+		</ion-pane>
+</ion-view>
+
+<!-- 律师个人主页 - 个人介绍 -->
+<script type="text/ng-template" id="selfintro.tpl.html">
+	<div class="bg-fff padding10">
+		<h4 class="border_bottom padding_bottom5">基本信息</h4>
+		<div class="row">
+		  <div class="col">从业机构：</div>
+		  <div class="col col-70">{{items.company_name}}</div>
+		</div>
+		<div class="row">
+		  <div class="col">律师证号：</div>
+		  <div class="col col-70">{{items.license_id}}</div>
+		</div>
+		<div class="row">
+		  <div class="col">执业地域：</div>
+		  <div class="col col-70">{{items.city}}&nbsp;&nbsp;{{items.province}}</div>
+		</div>
+		<div class="row">
+		  <div class="col">擅长领域：</div>
+		  <div class="col col-70"><label ng-repeat="item in items.work_scope">{{item.value}} &nbsp;</label></div>
+		</div>
+		<div class="row">
+		  <div class="col">执业年限：</div>
+		  <div class="col col-70">{{items.practice_period}}</div>
+		</div>
+
+		<h4 class="border_bottom padding_bottom5">收费标准</h4>
+		<div class="row">
+		  <div class="col">图文咨询：</div>
+		  <div class="col col-70">{{items.text_reply_fee}}元/次</div>
+		</div>
+		<div class="row">
+		  <div class="col">电话咨询：</div>
+		  <div class="col col-70">{{items.phone_reply_fee}}元/次</div>
+		</div>
+		<h4 class="border_bottom padding_bottom5">个人简历</h4>
+		<div class="row">
+		  <div class="col">{{ items.introduce == '' || items.introduce == null ? '未填写' : items.introduce }}</div>
+		</div>
+		<h4 class="border_bottom padding_bottom5">执业经历</h4>
+		<div class="row">
+		  <div class="col">{{ items.experience == '' || items.experience == null ? '未填写' : items.experience }}</div>
+		</div>
+		<h4 class="border_bottom padding_bottom5">成功案列</h4>
+		<div class="row">
+		  <div class="col">{{ items.signature == '' || items.signature == null ? '未填写' : items.signature }}</div>
+		</div>
+	</div>
+</script>
+
+<!-- 律师个人主页 - 文章分享 -->
+<script type="text/ng-template" id="article.tpl.html">
+    <div ng-controller="viewarticleCtrl">
+    	<div ng-if="nodata == false" class="nodate">
+			<i class="nodate-iocn"></i><br>
+			<label>暂无数据！</label>
+		</div>
+		
+    	<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+    	<ion-list>
+        	<ion-item class="item item-thumbnail-left item-complex item-text-wrap" ng-repeat="item in items" ng-href="#/knowledgeview/{{item.id}}">
+	          	<img ng-src="{{item.img}}" style="left:6px;border-radius:5px;">
+				<h2>{{item.title}}</h2>
+				<p class="content_txt1">{{item.info}}</p>
+				<p>
+                    <i class="collection knowledge-stars"></i><span class="counts">{{item.collects_count}}</span>
+                    <i class="messages knowledge-love"></i><span class="counts">{{item.comments}}</span>
+				</p>
+	        </ion-item>
+         </ion-list>
+         <ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
+	</div>
+</script>
+
+<!-- 律师个人主页 - 咨询回复 -->
+<script type="text/ng-template" id="advisory.tpl.html">
+    <div ng-controller="advisoryCtrl">
+    	<div ng-if="nodata == false" class="nodate">
+			<i class="nodate-iocn"></i><br>
+			<label>暂无数据！</label>
+		</div>
+
+    	<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+	  	<div ng-repeat="item in items" class="item">
+			<div class="item" style="border-color: #fff;">
+				<span  class="item-note" style="font-size: 2rem;margin-top: -5px;"><i class="icon ion-ios-star-outline"></i></span>
+			  	<h2 class="title">{{item.title}}</h2>
+		  	</div>
+			<div class="item item-avatar" style="border-color: #fff;">
+				<img ng-src="{{item.creator_avatar}}">
+			  	<span class="item-note">{{item.created_at}}</span>
+			  	<h2>普通用户</h2>
+			    <p class="content">
+			    	{{item.content}}
+			    </p>
+			</div>
+		</div>
+		<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%" > </ion-infinite-scroll>
+	</div>
+</script>
+
+<!-- 律师个人主页 - 用户评价 -->
+<script type="text/ng-template" id="evaluate.tpl.html">
+	<div ng-controller="evaluateCtrl">
+		<div ng-if="nodata == false" class="nodate">
+			<i class="nodate-iocn"></i><br>
+			<label>暂无数据！</label>
+		</div>
+
+		<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+		<ion-list>
+			<div class="item" ng-repeat="item in items">
+	        	<ion-item class="item item-avatar item-borderless" ng-href="#/lawyer/comment/{{item.creator_id}}" >
+		          	<img ng-src="{{item.creator_avatar}}" class="item-image">
+					<div class="row row-no-padding">
+					  	<div class="col col-30 row-no-padding"><label class="txt-c-66">{{item.creator_realname}}</label></div>
+					  	<div class="col col-70 row-no-padding"><label class="txt-c-66">{{item.evaluate_created_at}}</label></div>
+					</div>
+
+					<div showstar rating-value=" showstarValue[$index] = item.evaluate_score " max="max" on-hover="onHover" on-leave="onLeave" readonly="{{readonly}}"></div>
+					<input type="hidden" name="input" ng-model="max" min="0" max="5" required>
+
+					<p class="content">
+						{{item.evaluate_comment}}
+					</p>
+		        </ion-item>
+		        <div class="item item-borderless" style="padding:0px 16px" ng-if="item.evaluate_tags.length > 1" >
+		        	<p class="contents">
+	                    <span class="bgf2f2f2 pading510" ng-repeat="tags in item.evaluate_tags">{{tags.value}}</span>
+					</p>
+		        </div>
+		    </div>
+         </ion-list>
+         <ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%" > </ion-infinite-scroll>
+	</div>
+</script>
+
+<!-- 律师个人主页 - 成交记录 -->
+<script type="text/ng-template" id="dealrecord.tpl.html">
+    <ul class="list" ng-controller="dealrecordCtrl">
+    	<div ng-if="nodata == false" class="nodate">
+			<i class="nodate-iocn"></i><br>
+			<label>暂无数据！</label>
+		</div>
+
+    	<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+	  	<ion-list>
+        	<ion-item class="item" style="line-height: 25px;"  ng-repeat="item in items">
+				<div class="row row-no-padding">
+					<div class="col col-30 row-no-padding"><label class="txt-c-66">{{item.creator_name}}</label></div>
+				  	<div class="col col-70 row-no-padding textright"><label class="txt-c-66">产品类型：{{item.type}}</label></div>
+				</div>
+				<div class="row row-no-padding">
+					<div class="col col-30 row-no-padding"><label class="txt-c-66">购买数量：{{item.qty}}次</label></div>
+				  	<div class="col col-70 row-no-padding textright"><label class="txt-c-66">价格：{{item.sum}}元</label></div>
+				</div>
+				<div class="row row-no-padding">
+					<div class="col row-no-padding"><label class="txt-c-66">付款时间：{{item.updated_at}}</label></div>
+				</div>
+	        </ion-item>
+         </ion-list>
+		<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%" > </ion-infinite-scroll>
+	</ul>
+</script>

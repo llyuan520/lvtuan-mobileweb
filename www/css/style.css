@@ -1123,28 +1123,9 @@ input, select {
     line-height: 14px;
 }
 .concern-lawyer {
-    font-size: 14px;
-    line-height: 30px;
-    padding: 4px 15px 4px 5px;
     position: absolute;
     right: 0;
     top:20px;
-    background: url("../img/concern-lawyer.png") 100% 100% no-repeat;
-    max-width: 100%;
-    min-width: 80px;
-    
-}
-.concern-lawyer p {
-    position: relative;
-    float: left;
-    width: 30px;
-    height: 30px;
-    margin-right: 0.5rem;
-    background-color: #ffffff;
-    font-size: 14px;
-    text-align: center;
-    border-radius: 30px;
-    margin: 0;
 }
 .border1{
     width: 1px;
@@ -1725,6 +1706,8 @@ a,button,input{
 .cff4670{color:#ff4670;}
 .cb5b5b5, .item p.cb5b5b5{color: #b5b5b5}
 .cf7861e{color: #f7861e}
+.c7f7f7f{color: #7f7f7f;}
+.cf7861b{color: #f7861b;}
 .mt10{margin-top: 10px;}
 .mb10,.card .item h2{margin-bottom:10px;}
 .hr{border-bottom: 1px solid #ededed;height: 1px;}
@@ -1768,7 +1751,9 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
 .comment_s{background: url("../img/comment_s.png") no-repeat scroll center center transparent;}
 .collect{background: url("../img/collect.png") no-repeat scroll center center transparent;}
 .collect_s{background: url("../img/collect_s.png") no-repeat scroll center center transparent;}
-.comment, .comment_s, .collect, .collect_s, .hederpading span{display: inline-block;width: 48px;height: 33px;background-size: 70%;}
+.following{background: url("../img/following.png") no-repeat scroll center center transparent;}
+.following_s{background: url("../img/following_s.png") no-repeat scroll center center transparent;}
+.comment, .comment_s, .collect, .collect_s, .hederpading span, .following, .following_s, .concern-lawyer span{display: inline-block;width: 48px;height: 33px;background-size: 70%;}
 .like{background: url("../img/like.png") no-repeat scroll center top transparent;}
 .like_s{background: url("../img/like_s.png") no-repeat scroll center top transparent;}
 /*.gift{background: url("../img/gift.png") no-repeat scroll center top transparent;}*/
@@ -1782,4 +1767,14 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
 .label-list span.labels.active{background-color: #48b4ff;color: #fff;border: 1px solid #48b4ff;}
 .card .item-avatar .item-image img{max-width: 40px;max-height: 40px;width: 100%;height: 100%;border-radius: 50%;}
 
+/*律师主页*/
+.lawyer-content-top{    position: absolute;width: 100%;bottom: -20px;z-index: 6;text-align: center;}
+.lawyer-content-top h2{color: #fff;text-shadow: 2px 2px 2px #000, 0px 0px 10px #000, 0px 0px 20px #ccc;font-weight: bold;}
+.lawyer-content-top ul{width: 80%;background-color: #fff;display: inline-block;padding: 10px;border-radius: 20px;color: #ff2f5f;box-shadow: 0 5px 5px rgba(229,229,229,.7);}
+.lawyer-content-top ul li{float: left;width: 33%;height: 15px;line-height: 15px;border-right: 1px solid #ff2f5f;}
+.lawyer-content-top ul li:last-child{border-right:none;}
+.lawyer-content-center{background-color: #fff;}
+.lawyer-zgd{padding-bottom: 20px;}
+.lawyer-company-name{height: 70px;line-height: 88px;text-align: center;font-size: 16px;width: 90%;margin: 0 auto}
+.lawyer-zgd img{width: 70%;vertical-align: middle;}
 

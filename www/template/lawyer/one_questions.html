@@ -2,8 +2,8 @@
 		<ion-pane>
 			<ion-content class="has-tabs">
 				<div class="one_div">
-					<img ng-show="visible" ng-src="../img/banner1-01.png" style="height:100%;width:100%;display: inherit;" />
-					<img ng-show="visible1" ng-src="../img/banner1-02.png" style="height:100%;width:100%;display: inherit;" />
+					<img ng-if="visible" ng-src="../img/questionstext.png" style="height:100%;width:100%;display: inherit;" />
+					<img ng-if="!visible" ng-src="../img/questionsphone.png" style="height:100%;width:100%;display: inherit;" />
 				</div> 
 				<div class="list" style="margin-bottom: 10px;">
 					<div class="item" style="border-width: 0px;border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;">
@@ -16,7 +16,7 @@
    				    			<button class="button button-block"  ng-class="{true: 'button-cff2f5f', false: 'button-light'}[visible]" style="border-radius: 10px;min-height: 30px;line-height:30px;font-size: 12px;" ng-click="toggle('paytext')">图文咨询</button>
    				    		</div>
    				    		<div class="col col-40 col-center row-no-padding" style="margin-left: 2%;">
-   				    			<button class="button button-block" ng-class="{true: 'button-cff2f5f', false: 'button-light'}[visible1]" style="border-radius: 10px;min-height: 30px;line-height:30px;font-size: 12px;" ng-click="toggle('payphone')">电话咨询</button>
+   				    			<button class="button button-block" ng-class="{true: 'button-cff2f5f', false: 'button-light'}[!visible]" style="border-radius: 10px;min-height: 30px;line-height:30px;font-size: 12px;" ng-click="toggle('payphone')">电话咨询</button>
    				    		</div>
    				    		<div class="col col-center row-no-padding" style="margin-left: 2%;">
    				    		</div>
@@ -24,8 +24,8 @@
 					</div>
 				</div>
 				<div class="card" style="border-radius: 10px; box-shadow: none;">
-					<img ng-show="visible" ng-src="../img/one/paytext.png" style="height:100%;width:100%;display: inherit;" />
-					<img ng-show="visible1" ng-src="../img/one/payphone.png" style="height:100%;width:100%;display: inherit;" />
+					<img ng-if="visible" ng-src="../img/one/paytext.png" style="height:100%;width:100%;display: inherit;" />
+					<img ng-if="!visible" ng-src="../img/one/payphone.png" style="height:100%;width:100%;display: inherit;" />
 				</div>
 				<div class="card" style="border-radius: 10px; box-shadow: none;">
 					<img ng-src="../img/one/fwlc.png" style="height:100%;width:100%;display: inherit;" />
@@ -39,7 +39,7 @@
 							用户评价
 							<a ng-href="#/all-evaluate" class="item-note" style="color: #48b4ff;">>></a>
 						</h3>
-						<div class="hr"></div>
+						<div class="hr mb10"></div>
 						<p>
 							<span class="subdued cb5b5b5 font12">评价数：<font color="f7861e">500</font></span>
 				  			

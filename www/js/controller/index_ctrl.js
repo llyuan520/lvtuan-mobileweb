@@ -656,7 +656,7 @@ lvtuanApp.controller("groupAttentionCtrl",function($scope,$http,$state,$rootScop
 
 //律圈 - 推荐关注 - 搜索
 lvtuanApp.controller("groupAttentionSearchCtrl",function($http,$scope,$state,$rootScope,$ionicLoading){
-	
+	angular.element('.search').trigger('focus');
 	var page = 1; //页数
 	var rows_per_page = 5; // 每页的数量
 	if ($scope.rows_per_page) {
@@ -3057,15 +3057,12 @@ lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$l
 //一对一咨询
 lvtuanApp.controller("lawyerOneQuestionsCtrl",function($http,$scope,$state,$rootScope,$ionicLoading){
 	$scope.visible = true;
-	$scope.visible1 = false;
 	$scope.one_question_val = null;
 	$scope.toggle = function(val){
 		$scope.one_question_val = val;
 		if(val == 'paytext'){
 			$scope.visible = true;
-			$scope.visible1 = false;
 		}else{
-			$scope.visible1 = true;
 			$scope.visible = false;
 		}
 	}
@@ -3100,6 +3097,7 @@ lvtuanApp.controller("lawyerAllEvaluateCtrl",function($http,$scope,$state,$rootS
 //律师一对一搜索
 //问律师搜索
 lvtuanApp.controller("lawyerlistsearchCtrl",function($http,$scope,$state,$rootScope,$ionicLoading){
+	angular.element('.search').trigger('focus');
 
 	var page = 1; //页数
 	var size = 5; // 每页的数量
@@ -3520,7 +3518,6 @@ lvtuanApp.controller("questionsCtrl",function($scope,$http,$rootScope,$timeout,$
 
     //提交问题
 	$scope.submit = function(){
-
 		var param = layer.getParams("#questions_form");
 		if($scope.key.length < 1){
 			layer.show("请选择咨询类别！");
@@ -3536,7 +3533,6 @@ lvtuanApp.controller("questionsCtrl",function($scope,$http,$rootScope,$timeout,$
 				console.info(data);
 				var post_id = data.data.data.post_id;
 				localStorage.setItem("post_id", JSON.stringify(post_id));
-
 				if(currentUser == null){
 					$scope.post_id_status = false;
 					localStorage.setItem("post_id_status", JSON.stringify($scope.post_id_status));
@@ -3706,12 +3702,13 @@ lvtuanApp.controller("questionslistCtrl",function($http,$scope,$state,$rootScope
 
 	//根据参数向后台拉取数据
 	function geturl(param){
+		var timestamp=Math.round(new Date().getTime()/1000);
 		$scope.nodata = true;
 		var url;
 		if(param != ""){
-	  		url = 'http://'+$rootScope.hostPath+'/question?type=question&'+param+'&size='+size+'&page='+page;
+	  		url = 'http://'+$rootScope.hostPath+'/question?type=question&'+param+'&size='+size+'&page='+page+'&ts='+timestamp;
 	    }else{
-	    	url = 'http://'+$rootScope.hostPath+'/question?type=question&size='+size+'&page='+page;
+	    	url = 'http://'+$rootScope.hostPath+'/question?type=question&size='+size+'&page='+page+'&ts='+timestamp;
 	    }
 	    $ionicLoading.show();
 		$http.get(url)
@@ -3760,7 +3757,7 @@ lvtuanApp.controller("questionslistCtrl",function($http,$scope,$state,$rootScope
 
 //问律师搜索
 lvtuanApp.controller("questionslistsearchCtrl",function($http,$scope,$state,$rootScope,$ionicLoading){
-	
+	angular.element('.search').trigger('focus');
 	var page = 1; //页数
 	var size = 5; // 每页的数量
 	if ($scope.size) {
@@ -3791,9 +3788,10 @@ lvtuanApp.controller("questionslistsearchCtrl",function($http,$scope,$state,$roo
 	$scope.loadMore = function() {
 		//获取推荐的律师 ?is_recommended=1&page=1&rows_per_page=10
 		var params = layer.getParams("#searchForm");
+		var timestamp=Math.round(new Date().getTime()/1000);
 		var url = "";
 		if(params.q != ""){
-			url = 'http://'+$rootScope.hostPath+'/question?type=question&q='+params.q+'&size='+size+'&page='+page;
+			url = 'http://'+$rootScope.hostPath+'/question?type=question&q='+params.q+'&size='+size+'&page='+page+'&ts='+timestamp;
 			$ionicLoading.show();
 			$http.get(url)
 				.success(function(data) {
@@ -5225,6 +5223,7 @@ lvtuanApp.controller("documentlistCtrl",function($http,$scope,$state,$rootScope,
 })
 //法律文书 - 搜索
 lvtuanApp.controller("documentlistsearchCtrl",function($http,$scope,$state,$rootScope,$ionicLoading){
+	angular.element('.search').trigger('focus');
 	var page = 1; //页数
 	var rows_per_page = 5; // 每页的数量
 	if ($scope.rows_per_page) {
