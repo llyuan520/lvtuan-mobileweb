@@ -1,16 +1,39 @@
-<ion-view hide-tabs="true">
+<style type="text/css">
+/*4-4s*/
+@media only screen and (min-device-width: 320px) and (min-device-height :480px){ 
+    .view-heard {height: 143px;}
+}
+/*5-5s*/
+@media only screen and (min-device-width: 320px) and (min-device-height :568px){ 
+    .view-heard {height: 160px;}
+}
+/*6*/
+@media only screen and (min-device-width: 375px) and (min-device-height :557px){ 
+	.view-heard {height: 180px;}
+}
+/*6 plus*/
+@media only screen and (min-device-width: 414px) and (min-device-height :736px){ 
+  	.view-heard {height: 200px;}
+}
+
+/*6 plus*/
+@media only screen and (min-device-width: 414px) and (min-device-height :736px){
+	.view-heard {height: 220px;}
+}
+
+.private_follow{    margin-top: 12px;
+    width: 100%;
+    height: 37px;
+    line-height: 37px;
+    background-color: #ededed;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    text-align: center;    display: inline-block;}
+</style>
+<ion-view hide-tabs="true" ng-init="bool=true">
 		<ion-pane  class="web-body">
 			<ion-content class="has-tabs">
 				<div class="list view-heard" style="background:url( {{items.bg_img}} );background-size:100% 100%;">
-					<div class="concern-lawyer">
-						<!-- ng-if="items.is_following == false" -->
-				      	<span  ng-click="follow(items.id)">
-				      		<i class="following"></i>
-			      		</span>
-				      	<span ng-if="items.is_following == true" ng-click="follow_del(items.id)">
-				      		<i class="following_s"></i>
-				      	</span>
-				    </div>
 				    <div class="lawyer-content-top">
 				    	<h2>{{items.realname}}</h2>
 			    		<ul class="lawyer-work_scope">
@@ -46,9 +69,16 @@
 					<div class="item item-text-wrap">
 					  	<h2 class="mb10">关于律师</h2>
 					  	<div class="contents">
-					  		<p style="text-indent: 10px;margin-bottom: 10px;">{{ items.introduce == '' || items.introduce == null ? '未填写' : items.introduce }}</p>
-					    	<p style="text-indent: 10px;margin-bottom: 10px;">{{ items.experience == '' || items.experience == null ? '未填写' : items.experience }}</p>
-					    	<p style="text-indent: 10px;margin-bottom: 10px;">{{ items.signature == '' || items.signature == null ? '未填写' : items.signature }}</p>
+
+					  		<p style="text-indent: 10px;margin-bottom: 10px;">
+					  			<span>{{ context_min100 }}</span>
+					  			<span class="context" style="display: none;">{{ context_all }}</span>
+					  			<!-- <span ng-show="context" >{{ context_all }}</span> -->
+					  		</p>
+					    	<p class="more" style="border-top:1px solid #ededed;text-align: right;">
+					    		<span ng-click="toggle()" style="display: inline-block;background-color: #ededed;padding: 6px 15px;border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;color: #fff;">更多</span>
+					    	<!-- 	<span ng-click="context = !context" style="display: inline-block;background-color: #ededed;padding: 6px 15px;border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;color: #fff;">更多</span> -->
+					    	</p>
 					    </div>
 					</div>
 				</div>
@@ -56,7 +86,7 @@
 					<div class="item item-text-wrap" style="border-width: 0px;">
 						<h3 style="margin-bottom: 20px;">
 							用户评价
-							<a ng-href="#/all-evaluate" class="item-note" style="color: #48b4ff;">>></a>
+							<a ng-href="#/lawyer-all-evaluate" class="item-note" style="color: #48b4ff;">>></a>
 						</h3>
 						<div class="hr mb10"></div>
 						<p>
@@ -77,11 +107,10 @@
 					<div class="item item-text-wrap" style="border-width: 0px;">
 						<h3 style="margin-bottom: 20px;">
 							发表文章
-							<a ng-href="#/all-evaluate" class="item-note" style="color: #48b4ff;">>></a>
+							<a ng-href="#/lawyer/article" class="item-note" style="color: #48b4ff;">>></a>
 						</h3>
 						<p>
-							<span class="subdued cb5b5b5 font12">弹性盒子模型可以很容易设置列纵向对齐。纵向对齐包含顶部，中间部分，底部，可以应用到每一行的列，或者指定的某列。
-实例中，最后一列设置了最高的内容用于更好的演示纵向对齐网格。</span>
+							<span class="subdued cb5b5b5 font12">弹性盒子模型可以很容易设置列纵向对齐。纵向对齐包含顶部，中间部分，底部，可以应用到每一行的列，或者指定的某列。</span>
 						</p>
 					</div>
 				</div>
@@ -89,8 +118,21 @@
 			</ion-content>	
 
 			<div class="tabs" style="background-color:#fff;height: 59px;">
-				<div class="row" style="padding: 5px 10px;">
-					<button class="button button-block button-positive" style="border-radius: 10px;" ng-click="jumpGoQuestions()">立即预约</button>
+				<div class="row row-center row-no-padding">
+					<div class="col col-20 col-center row-no-padding concern-lawyer" style="padding-left: 10px;">
+						<div class="private_follow" style="height: 37px;line-height: 37px;width: 100%;">
+							<span ng-if="items.is_following == false" ng-click="follow(items.id)" >
+					      		<i class="private_following" style="margin-top: 2px;background-size: 80%;"></i>
+				      		</span>
+					      	<span ng-if="items.is_following == true" ng-click="follow_del(items.id)">
+					      		<i class="private_following_s" style="margin-top: 2px;background-size: 80%;"></i>
+					      	</span>
+						</div>
+					</div>
+					<div class="col col-80 col-center row-no-padding"  style="padding: 5px 10px 10px 0px;">
+						<button class="button button-block button-positive" style="border-bottom-right-radius: 10px;border-bottom-left-radius: 0;border-top-left-radius: 0;border-top-right-radius: 10px;" ng-click="jumpGoQuestions()">立即预约</button>
+					</div>
+					
 				</div>
 			</div>
 

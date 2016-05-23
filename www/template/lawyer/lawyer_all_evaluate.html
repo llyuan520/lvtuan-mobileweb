@@ -26,7 +26,7 @@
 					<label>暂无数据！</label>
 				</div>
 
-				<div class="card" style="border-radius: 10px;" ng-repeat="item in items">
+				<div class="card" style="border-radius: 10px;box-shadow: none;" ng-repeat="item in items">
 					<div class="item item-text-wrap" style="border-width: 0px;">
 						<div class="row row-no-padding mb10">
 				       		<div class="col col-center row-no-padding">
@@ -43,19 +43,6 @@
 						<p class="mt10">
 							<label class="label" ng-repeat="tag in item.tags">{{tag}}</label>
 						</p>
-						<div class="hr" style="margin: 11px 0 1px 0;"></div>
-						<div class="item item-avatar" style="border-color:#fff;border-style: none;border-width:0;padding-bottom: 11px;padding-left: 55px;">
-							<img ng-src="{{item.lawyer_avatar}}" style="left: 0px;">
-							<div>
-							  <h2 class="c48b4ff" style="margin-bottom: 5px;">
-							  	{{item.lawyer_realname}}律师
-							  	<a ng-href="#/lawyer/view/{{item.lawyer_user_id}}" class="item-note" style="color: #48b4ff;">>></a>
-							  </h2>
-							  <p class="cb5b5b5">
-							  	执业3-5年 
-							  </p>
-							</div>
-				        </div>
 					</div>
 				</div>
 				<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>

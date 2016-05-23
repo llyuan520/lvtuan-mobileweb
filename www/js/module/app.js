@@ -579,11 +579,18 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
       controller: 'lawyerOneQuestionsCtrl'
     })
 
-    .state('all-evaluate', { //律师的所有评价
+    .state('all-evaluate', { //律师对咨询的所有评价
       url: '/all-evaluate',
       cache: 'true',
       templateUrl: 'template/lawyer/all_evaluate.html',
       controller: 'lawyerAllEvaluateCtrl'
+    })
+
+    .state('lawyer-all-evaluate', { //用户对某一个律师的所有评价
+      url: '/lawyer-all-evaluate',
+      cache: 'true',
+      templateUrl: 'template/lawyer/lawyer_all_evaluate.html',
+      controller: 'lawyerOneAllEvaluateCtrl'
     })
 
     .state('lawyer/list', { //找律师列表
@@ -594,7 +601,7 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
     })
 
     .state('lawyer-list/search', { //找律师列表
-      url: '/lawyer-list/search',
+      url: '/lawyer-list/search/:type',
       cache: 'true',
       templateUrl: 'template/lawyer/lawyer_list_search.html'
     })
@@ -612,6 +619,33 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
       templateUrl: 'template/lawyer/graphic.html',
       authn: true
     })
+
+     //律师 - 个人主页 - 发表文章
+  .state('lawyer/article', { //律师 - 发表文章
+      url: '/lawyer/article',
+      templateUrl: 'template/lawyer/article.html',
+      authn: true
+  })
+  .state('lawyer/article.like', { //发表文章 - 点赞最多
+      url: '/like',
+      views: {
+          'article-like-most': {
+              templateUrl: 'template/lawyer/article_like_most.html',
+              controller: 'lawyerArticleLikeMostCtrl'
+          }
+      },
+      authn: true
+  })
+  .state('lawyer/article.lately', { //发表文章 - 最近发布
+      url: '/lately',
+      views: {
+          'article-lately-editing': {
+              templateUrl: 'template/lawyer/article_lately_editing.html',
+              controller: 'lawyerArticleLatelyEditingCtrl'
+          }
+      },
+      authn: true
+  })
     
 /********************************** 问律师 **********************************/
     .state('questions', { //问律师
@@ -727,9 +761,6 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
       },
       authn: true
   })
-
-
-
 
 
 

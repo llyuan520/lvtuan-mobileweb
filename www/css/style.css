@@ -277,6 +277,14 @@ a, a:link, a:visited, a:active, a:hover{
     -webkit-box-orient: vertical;
     white-space:normal;
 }
+.item p.content_txt8,.content_txt8{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 8;
+    -webkit-box-orient: vertical;
+    white-space:normal;
+}
 .contents, .item p.contents,.item p.contents p,.ngbindhtml .item p{
     color: #7f7f7f;
     overflow: hidden;
@@ -285,6 +293,30 @@ a, a:link, a:visited, a:active, a:hover{
     -webkit-box-orient: vertical;
     white-space:normal;
 }
+.animate-show {
+  line-height: 20px;
+  opacity: 1;
+  padding: 10px;
+  border: 1px solid black;
+  background: white;
+}
+
+.animate-show.ng-hide-add, .animate-show.ng-hide-remove {
+  transition: all linear 0.5s;
+}
+
+.animate-show.ng-hide {
+  line-height: 0;
+  opacity: 0;
+  padding: 0 10px;
+}
+
+.check-element {
+  padding: 10px;
+  border: 1px solid black;
+  background: white;
+}
+
 .ngbindhtml .item p{
     line-height: 30px;
     margin-bottom: 10px;
@@ -877,7 +909,7 @@ input, select {
 .item-input-wrapper input {
     width: 100%;
 }
-.scroll .view-heard {
+.view-heard {
     width: 100%;
     height: 143px;
     border-top: 0px;
@@ -1121,11 +1153,6 @@ input, select {
     height: 11px;
     margin-right: 3%;
     line-height: 14px;
-}
-.concern-lawyer {
-    position: absolute;
-    right: 0;
-    top:20px;
 }
 .border1{
     width: 1px;
@@ -1753,7 +1780,9 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
 .collect_s{background: url("../img/collect_s.png") no-repeat scroll center center transparent;}
 .following{background: url("../img/following.png") no-repeat scroll center center transparent;}
 .following_s{background: url("../img/following_s.png") no-repeat scroll center center transparent;}
-.comment, .comment_s, .collect, .collect_s, .hederpading span, .following, .following_s, .concern-lawyer span{display: inline-block;width: 48px;height: 33px;background-size: 70%;}
+.private_following{background: url("../img/private_following.png") no-repeat scroll center center transparent;}
+.private_following_s{background: url("../img/private_following_s.png") no-repeat scroll center center transparent;}
+.comment, .comment_s, .collect, .collect_s, .hederpading span, .following, .following_s, .concern-lawyer span, .private_following, .private_following_s{display: inline-block;width: 48px;height: 33px;background-size: 70%;}
 .like{background: url("../img/like.png") no-repeat scroll center top transparent;}
 .like_s{background: url("../img/like_s.png") no-repeat scroll center top transparent;}
 /*.gift{background: url("../img/gift.png") no-repeat scroll center top transparent;}*/
@@ -1768,13 +1797,12 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
 .card .item-avatar .item-image img{max-width: 40px;max-height: 40px;width: 100%;height: 100%;border-radius: 50%;}
 
 /*律师主页*/
-.lawyer-content-top{    position: absolute;width: 100%;bottom: -20px;z-index: 6;text-align: center;}
+.lawyer-content-top{position: absolute;width: 100%;bottom: -20px;z-index: 6;text-align: center;}
 .lawyer-content-top h2{color: #fff;text-shadow: 2px 2px 2px #000, 0px 0px 10px #000, 0px 0px 20px #ccc;font-weight: bold;}
 .lawyer-content-top ul{width: 80%;background-color: #fff;display: inline-block;padding: 10px;border-radius: 20px;color: #ff2f5f;box-shadow: 0 5px 5px rgba(229,229,229,.7);}
 .lawyer-content-top ul li{float: left;width: 33%;height: 15px;line-height: 15px;border-right: 1px solid #ff2f5f;}
 .lawyer-content-top ul li:last-child{border-right:none;}
-.lawyer-content-center{background-color: #fff;}
+.lawyer-content-center{border-top: 1px solid #ebebeb;background-color: #fff;}
 .lawyer-zgd{padding-bottom: 20px;}
 .lawyer-company-name{height: 70px;line-height: 88px;text-align: center;font-size: 16px;width: 90%;margin: 0 auto}
 .lawyer-zgd img{width: 70%;vertical-align: middle;}
-
