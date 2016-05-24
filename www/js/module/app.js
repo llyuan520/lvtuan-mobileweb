@@ -61,7 +61,6 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
         if (toState.authn) {
             // 如果用户没有登录
             if (!authService.isAuthed()) {
-                sessionStorage.setItem("goback", $location.absUrl());
                 $rootScope.$broadcast('unauthenticated');
                 event.preventDefault(); 
             } else {
@@ -130,6 +129,7 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
           }, 
           function(reason) {
             $rootScope.$broadcast('unauthenticated');
+            localStorage.clear();
           }
         );
       } else {
@@ -623,8 +623,7 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
      //律师 - 个人主页 - 发表文章
   .state('lawyer/article', { //律师 - 发表文章
       url: '/lawyer/article',
-      templateUrl: 'template/lawyer/article.html',
-      authn: true
+      templateUrl: 'template/lawyer/article.html'
   })
   .state('lawyer/article.like', { //发表文章 - 点赞最多
       url: '/like',
@@ -633,8 +632,7 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
               templateUrl: 'template/lawyer/article_like_most.html',
               controller: 'lawyerArticleLikeMostCtrl'
           }
-      },
-      authn: true
+      }
   })
   .state('lawyer/article.lately', { //发表文章 - 最近发布
       url: '/lately',
@@ -643,8 +641,7 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
               templateUrl: 'template/lawyer/article_lately_editing.html',
               controller: 'lawyerArticleLatelyEditingCtrl'
           }
-      },
-      authn: true
+      }
   })
     
 /********************************** 问律师 **********************************/
@@ -655,7 +652,6 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
       authn: false
     })
     .state('questionslist', { //问律师列表
-      cache: 'true', 
       url: '/questionslist',
       templateUrl: 'template/questions/questions_list.html',
       controller: 'questionslistCtrl',
@@ -664,7 +660,8 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
     .state('question/list/search', { //问律师列表
       cache: 'true', 
       url: '/question/list/search',
-      templateUrl: 'template/questions/questions_list_search.html'
+      templateUrl: 'template/questions/questions_list_search.html',
+      authn: false
     })
     
     .state('questionsview', { //问律师详情

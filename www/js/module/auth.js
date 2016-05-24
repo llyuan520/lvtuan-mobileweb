@@ -151,11 +151,12 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
 	});
   }
 
-  self.loginWithWx = function(code, state) {
+  self.loginWithWx = function(code, state, post_id) {
   	$ionicLoading.show();
   	return $http.post('http://' + HOST + '/loginWithWx', {
       code: code,
-      state: state
+      state: state,
+      post_id:post_id
     }).then(
     	function (res) {
 	    	var user = res.data ? res.data.data : null;
@@ -181,12 +182,14 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
 			if(goback == null || goback=="" || goback=="undefined"){
 				location.href='#/index';
 			}else{
-				if(user.status == 1 || user.status == 2){
+				alert('微信登录');
+				location.href= goback;
+				/*if(user.status == 1 || user.status == 2){
 					location.href='#/index';
 					alert('微信登录');
     			}else{
     				location.href= goback;
-    			}
+    			}*/
 			}
 			sessionStorage.removeItem(goback);
     	}

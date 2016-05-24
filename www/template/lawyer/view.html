@@ -20,15 +20,7 @@
 @media only screen and (min-device-width: 414px) and (min-device-height :736px){
 	.view-heard {height: 220px;}
 }
-
-.private_follow{    margin-top: 12px;
-    width: 100%;
-    height: 37px;
-    line-height: 37px;
-    background-color: #ededed;
-    border-bottom-left-radius: 10px;
-    border-top-left-radius: 10px;
-    text-align: center;    display: inline-block;}
+.private_follow{margin-top: 15px;width: 100%;height: 37px;line-height: 37px;background-color: #ededed;border-bottom-left-radius: 10px;border-top-left-radius: 10px;text-align: center; display: inline-block;}
 </style>
 <ion-view hide-tabs="true" ng-init="bool=true">
 		<ion-pane  class="web-body">
@@ -36,9 +28,11 @@
 				<div class="list view-heard" style="background:url( {{items.bg_img}} );background-size:100% 100%;">
 				    <div class="lawyer-content-top">
 				    	<h2>{{items.realname}}</h2>
-			    		<ul class="lawyer-work_scope">
-			    			<li ng-repeat="item in items.work_scope">{{item.value}}</li>
-			    		</ul>
+			    		<div class="row row-no-padding lawyer-work_scope">
+							<div class="col col-center" ng-repeat="item in items.work_scope">
+								{{item.value}}
+							</div>
+						</div>
 				    </div>
 				</div>
 				<div class="lawyer-content-center">
@@ -48,19 +42,19 @@
 							<img src="../img/recommend.png">
 						</div>
 						<div class="col col-center" style="text-align: left;">
-							<font color="f7861b">20</font> 人咨询
+							<font color="f7861b">{{items.task_count}}</font> 人咨询
 						</div>
 						<div class="col col-10 col-center" style="text-align: right;">
 							<img src="../img/follow.png">
 						</div>
 						<div class="col col-center" style="text-align: left;">
-							<font color="f7861b">20</font> 人关注
+							<font color="f7861b">{{items.follower_count}}</font> 人关注
 						</div>
 						<div class="col col-10 col-center" style="text-align: right;">
-							<img src="../img/areward.png">
+							<img src="../img/areward.png" style="width: 56%;">
 						</div>
 						<div class="col col-center" style="text-align: left;">
-							<font color="f7861b">20</font> 人打赏
+							<font color="f7861b">{{items.reward_count}}</font> 人打赏
 						</div>
 					</div>
 				</div>
@@ -71,8 +65,7 @@
 					  	<div class="contents">
 
 					  		<p style="text-indent: 10px;margin-bottom: 10px;">
-					  			<span>{{ context_min100 }}</span>
-					  			<span class="context" style="display: none;">{{ context_all }}</span>
+					  			<span>{{ context_min100 }}</span><span ng-show="context">{{dian}}</span><span class="context" style="display: none;">{{ context_all }}</span>
 					  			<!-- <span ng-show="context" >{{ context_all }}</span> -->
 					  		</p>
 					    	<p class="more" style="border-top:1px solid #ededed;text-align: right;">
@@ -91,7 +84,6 @@
 						<div class="hr mb10"></div>
 						<p>
 							<span class="subdued cb5b5b5 font12">评价数：<font color="f7861e">500</font></span>
-				  			
 						</p>
 						<p>
 							<span class="subdued cb5b5b5 font12">好评：<font color="f7861e">500</font>人</span>
@@ -121,7 +113,7 @@
 				<div class="row row-center row-no-padding">
 					<div class="col col-20 col-center row-no-padding concern-lawyer" style="padding-left: 10px;">
 						<div class="private_follow" style="height: 37px;line-height: 37px;width: 100%;">
-							<span ng-if="items.is_following == false" ng-click="follow(items.id)" >
+							<span ng-if="items.is_following == false || items.is_following == null" ng-click="follow(items.id)" >
 					      		<i class="private_following" style="margin-top: 2px;background-size: 80%;"></i>
 				      		</span>
 					      	<span ng-if="items.is_following == true" ng-click="follow_del(items.id)">

@@ -1,3 +1,15 @@
+<style type="text/css">
+	.textareacss.active{
+		position: fixed;
+		z-index: 9999;
+		top: 50px;
+	}
+	.textareacss.inactive{
+		position: static;
+		top: auto;
+	}
+	
+</style>
 <ion-view hide-Tabs="true" cache-view="false" view-title="发布提问">
 		<ion-pane>
 			<ion-content>
@@ -22,12 +34,18 @@
 						  <input ng-model="title" name="title" type="text" ng-minlength="2" ng-maxlength="30" placeholder="咨询标题：(2-30字)" required>
 						</label>
 						<label class="item-input mb10">
-				          <textarea ng-model="content" name="content" rows="8" placeholder="详情描述：(10-300字)" ng-minlength="10" ng-maxlength="300" required></textarea>
+				          <!-- <textarea class="textareacss" ng-model="content" name="content" rows="10" placeholder="详情描述：(10-300字)" ng-minlength="10" ng-maxlength="300" required ></textarea> -->
+				          <textarea class="textareacss" ng-class="{true: 'active', false: 'inactive'}[isActive]" ng-model="content" name="content" rows="10" placeholder="详情描述：(10-300字)" ng-minlength="10" ng-maxlength="300" required ng-focus="textfocus()" ng-blur="textblur()" ></textarea>
 				        </label>
+
 					</div>
+					
 					<div style="background-color: #fff;padding:5px 10px;margin-top:50px;">
-						<button class="button button-block button-positive" type="submit" ng-disabled="myForm.$invalid" ng-click="submit()" >提交</button>
+						<button class="button button-block button-positive" style="border-radius: 10px;" ng-disabled="myForm.$invalid" ng-click="question_Submit()">提交</button>
 					</div>
+					<!-- <div style="background-color: #fff;padding:5px 10px;margin-top:50px;">
+						<button class="button button-block button-positive" type="submit" ng-disabled="myForm.$invalid" ng-click="question_Submit()" >提交</button>
+					</div> -->
 				</form>
 			</ion-content>
 			

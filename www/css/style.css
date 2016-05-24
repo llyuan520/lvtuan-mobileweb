@@ -14,6 +14,7 @@ body, html, .pane, .ionic-body,h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, 
     color: #3b3b3b;
 }
 input{-webkit-user-modify: read-write-plaintext-only;}
+
 .scroll-content {
     background-color: #f0f1f3;
 }
@@ -1762,7 +1763,7 @@ button.button{border-radius: 10px;}
 input.readonly[readonly]{  
     background-color: #fff;  
 } 
-textarea {height: auto; }
+textarea {height: auto; box-shadow:0px 0px 0px rgba(0,0,0,0);-webkit-appearance:none;}
 /*input[placeholder], [placeholder], *[placeholder] { 
     color:#b5b5b5 !important; 
 } */
@@ -1785,7 +1786,7 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
 .comment, .comment_s, .collect, .collect_s, .hederpading span, .following, .following_s, .concern-lawyer span, .private_following, .private_following_s{display: inline-block;width: 48px;height: 33px;background-size: 70%;}
 .like{background: url("../img/like.png") no-repeat scroll center top transparent;}
 .like_s{background: url("../img/like_s.png") no-repeat scroll center top transparent;}
-/*.gift{background: url("../img/gift.png") no-repeat scroll center top transparent;}*/
+.gift{background: url("../img/gift.png") no-repeat scroll center top transparent;}
 .gift_s{background: url("../img/gift_s.png") no-repeat scroll center top transparent;}
 .like, .like_s{display: inline-block;width: 48px;height: 19px;background-size: 40%;}
 .gift, .gift_s{display: inline-block;width: 48px;height: 19px;background-size: 50%;}
@@ -1799,10 +1800,10 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
 /*律师主页*/
 .lawyer-content-top{position: absolute;width: 100%;bottom: -20px;z-index: 6;text-align: center;}
 .lawyer-content-top h2{color: #fff;text-shadow: 2px 2px 2px #000, 0px 0px 10px #000, 0px 0px 20px #ccc;font-weight: bold;}
-.lawyer-content-top ul{width: 80%;background-color: #fff;display: inline-block;padding: 10px;border-radius: 20px;color: #ff2f5f;box-shadow: 0 5px 5px rgba(229,229,229,.7);}
-.lawyer-content-top ul li{float: left;width: 33%;height: 15px;line-height: 15px;border-right: 1px solid #ff2f5f;}
-.lawyer-content-top ul li:last-child{border-right:none;}
+.lawyer-work_scope{width: 80%;background-color: #fff;margin: 0 auto;padding: 10px;border-radius: 20px;color: #ff2f5f;box-shadow: 0 5px 5px rgba(229,229,229,.7);}
+.lawyer-work_scope>div{height: 15px;line-height: 15px;border-right: 1px solid #ff2f5f;}
+.lawyer-work_scope>div:last-child{border-right:none;}
 .lawyer-content-center{border-top: 1px solid #ebebeb;background-color: #fff;}
 .lawyer-zgd{padding-bottom: 20px;}
 .lawyer-company-name{height: 70px;line-height: 88px;text-align: center;font-size: 16px;width: 90%;margin: 0 auto}
-.lawyer-zgd img{width: 70%;vertical-align: middle;}
+.lawyer-zgd img{width: 65%;vertical-align: top;}

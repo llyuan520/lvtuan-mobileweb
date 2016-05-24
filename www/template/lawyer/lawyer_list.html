@@ -10,9 +10,9 @@
 					</div>
 
 					<div class="row row-center row-no-padding" style="background-color: #fff;text-align: center;height: 45px;line-height: 45px;color:#7f7f7f;padding-bottom: 1px;box-shadow: 0 1px 3px rgba(0,0,0,.3);">
-						<div class="col drop-down-arrow" style="border-right:1px solid #e5e5e5;text-align: center;" ng-click="district_toggle()">
-							<label ng-if="!district_key">{{district_name}}</label>
-							<label ng-if="district_key" class="c48b4ff">{{district_name}}</label>
+						<div class="col drop-down-arrow" style="border-right:1px solid #e5e5e5;text-align: center;" ng-click="city_toggle()">
+							<label ng-if="!city_key">{{city_name}}</label>
+							<label ng-if="city_key" class="c48b4ff">{{city_name}}</label>
 						</div>
 						<div class="col drop-down-arrow" style="border-right:1px solid #e5e5e5;text-align: center;" ng-click="workscope_toggle()">
 							<label ng-if="!workscope_key">{{workscope_name}}</label>
@@ -46,7 +46,7 @@
 					       				<label class="font12 cb5b5b5">分</label>
 					       			</h3>
 					       		</div>
-							  	<div class="col col-30 col-center row-no-padding">
+							  	<div class="col col-30 col-center row-no-padding" style="text-align: right;">
 							  		<b class="cff4670" ng-show=" type == 'pay_text' ">{{item.text_reply_fee}}</b> 
 							  		<b class="cff4670" ng-show=" type == 'pay_phone' ">{{item.phone_reply_fee}}</b>
 							  		<label class="font12">元/次</label></div>
@@ -54,7 +54,7 @@
 							<p style="margin: 10px 0 13px;font-size: 13px;">
 								<span style="display: block;">{{item.practice_period}}执业经验</span>
 								<span>{{item.province}} {{item.city}}</span>
-								<span class="item-note cb5b5b5" style="font-size: 13px;"> {{item.question_count}}人咨询</span>
+								<span class="item-note cb5b5b5" style="font-size: 13px;"> {{item.pay_reply_count}}人咨询</span>
 							</p>
 							<p>
 								<label ng-repeat="item in item.work_scope" class="radius10">{{item.value}}</label>
@@ -71,10 +71,10 @@
 
 <!-- 一个ion-view控制器里面不能放多个ion-content -->
 <div ng-hide="masklayer" style="background-color: rgba(0,0,0,.1);position: fixed;top: 100px;left: 0;z-index: 10;width: 100%;height: 100%;"></div>
-<ion-content class="scroll-content ionic-scroll baclass" ng-hide="district_cont" style="top:100px;">
+<ion-content class="scroll-content ionic-scroll baclass" ng-hide="city_cont" style="top:100px;">
 	<div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
 		<ul>
-	  		<li ng-repeat="district in districts"  ng-class="{ 'active':inDistrict(district.key) }" ng-click="getDistrictVal(district.key,district.value)">{{district.value}}</li>
+	  		<li ng-repeat="city in citys"  ng-class="{ 'active':inCity(city.city_code) }" ng-click="getCitytVal(city.city_code,city.city_name)">{{city.city_name}}</li>
 	  	</ul>
     </div>
 </ion-content>

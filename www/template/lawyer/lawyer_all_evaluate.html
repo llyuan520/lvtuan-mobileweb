@@ -8,13 +8,13 @@
 				    			<span class="labels" ng-class="{ 'active':inEvaluate('all') }" ng-click="click_evaluate('all')">全部</span>
 				    		</div>
 				    		<div class="col col-center row-no-padding">
-				    			<span class="labels" ng-class="{ 'active':inEvaluate('high') }" ng-click="click_evaluate('high')">好评 480</span>
+				    			<span class="labels" ng-class="{ 'active':inEvaluate('high') }" ng-click="click_evaluate('high')">好评 {{extras.high}}</span>
 				    		</div>
 				    		<div class="col col-center row-no-padding" style="text-align: right;">
-				    			<span class="labels" ng-class="{ 'active':inEvaluate('intermediate') }" ng-click="click_evaluate('intermediate')">中评 18</span>
+				    			<span class="labels" ng-class="{ 'active':inEvaluate('intermediate') }" ng-click="click_evaluate('intermediate')">中评 {{extras.intermediate}}</span>
 				    		</div>
 				    		<div class="col col-center row-no-padding" style="text-align: right;">
-				    			<span class="labels" ng-class="{ 'active':inEvaluate('low') }" ng-click="click_evaluate('low')">差评 2</span>
+				    			<span class="labels" ng-class="{ 'active':inEvaluate('low') }" ng-click="click_evaluate('low')">差评 {{extras.low}}</span>
 				    		</div>
 				    	</div>
 				    </div>

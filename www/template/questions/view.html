@@ -19,12 +19,8 @@
 				    	{{items.content}}
 				    </p>
 				  	<p class="mt10">
-				  		<span class="subdued cb5b5b5">回答</span>
-				  		<font class="cf7861e">{{items.post_extra.comments_count}}</font>
-				  		<font class="cb5b5b5">·</font>
-					  	<span class="subdued cb5b5b5">收藏</span>
-					  	<font class="cf7861e">{{items.post_extra.collects_count}}</font>
-					  	<span class="item-note cb5b5b5">{{items.created_at}}</span>
+				  		<span class="subdued cb5b5b5" style="padding-right:10px;">{{items.creator_realname}}</span>
+					  	<span class="cb5b5b5">{{items.created_at}}</span>
 				  	</p>
 				</div>
 			</div>
@@ -52,7 +48,7 @@
 						  <div class="col txt-align-c font14 cb5b5b5">
 							  	<!-- 未打赏  -->
 								<span ng-click="areward(comment.creator_id)">
-									<i class="gift_s"></i>
+									<i class="gift"></i>
 								</span>
 								<br>
 								打赏
