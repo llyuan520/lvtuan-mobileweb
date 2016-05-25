@@ -30,7 +30,8 @@
 					<div class="item item-text-wrap" style="border-width: 0px;">
 						<div class="row row-no-padding mb10">
 				       		<div class="col col-center row-no-padding">
-			       				<label class="cb5b5b5">{{item.realname}}</label><br>
+			       				<label class="cb5b5b5" ng-if="item.realname == null || item.realname == ''">匿名用户</label>
+			       				<label class="cb5b5b5" ng-if="item.realname != null">{{item.realname}}</label><br>
 			       				<label class="font12 cb5b5b5">{{item.difference_date}}</label>
 				       		</div>
 						  	<div class="col col-center row-no-padding textright">
@@ -48,7 +49,7 @@
 							<img ng-src="{{item.lawyer_avatar}}" style="left: 0px;">
 							<div>
 							  <h2 class="c48b4ff" style="margin-bottom: 5px;">
-							  	{{item.lawyer_realname}}律师
+							  	<span>{{item.lawyer_realname}}律师</span>
 							  	<a ng-href="#/lawyer/view/{{item.lawyer_user_id}}" class="item-note" style="color: #48b4ff;">>></a>
 							  </h2>
 							  <p class="cb5b5b5">

@@ -128,8 +128,8 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
             return token;
           }, 
           function(reason) {
-            $rootScope.$broadcast('unauthenticated');
             localStorage.clear();
+            $rootScope.$broadcast('unauthenticated');
           }
         );
       } else {
@@ -587,7 +587,7 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
     })
 
     .state('lawyer-all-evaluate', { //用户对某一个律师的所有评价
-      url: '/lawyer-all-evaluate',
+      url: '/lawyer-all-evaluate/:id',
       cache: 'true',
       templateUrl: 'template/lawyer/lawyer_all_evaluate.html',
       controller: 'lawyerOneAllEvaluateCtrl'
@@ -610,7 +610,7 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
       url: '/lawyer/view/:id',
       cache: 'true',
       templateUrl: 'template/lawyer/view.html',
-      controller: 'viewCtrl'
+      controller: 'lawyerViewCtrl'
     })
 
     .state('graphic', { //图文咨询
@@ -731,6 +731,13 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
       authn: true
   })
 
+  //用户 - 我的 - 订单管理
+  .state('user/order/list', { //用户 - 订单管理
+      url: '/user/order/list',
+      templateUrl: 'template/mylvtuan/user/order_list.html',
+      controller: 'userOrderListCtrl',
+      authn: true
+  })
 
   //律师 - 我的 - 咨询管理
   .state('lawyer/question', { //律师 - 咨询管理
@@ -756,6 +763,13 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
               controller: 'lawyerQuestionAlreadyCtrl'
           }
       },
+      authn: true
+  })
+  //用户 - 我的 - 订单管理
+  .state('lawyer/order/list', { //用户 - 订单管理
+      url: '/lawyer/order/list',
+      templateUrl: 'template/mylvtuan/lawyer/order_list.html',
+      controller: 'lawyerOrderListCtrl',
       authn: true
   })
 

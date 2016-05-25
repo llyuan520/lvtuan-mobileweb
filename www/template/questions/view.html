@@ -19,7 +19,10 @@
 				    	{{items.content}}
 				    </p>
 				  	<p class="mt10">
-				  		<span class="subdued cb5b5b5" style="padding-right:10px;">{{items.creator_realname}}</span>
+				  		<span class="subdued cb5b5b5" style="padding-right:10px;">
+				  			<label ng-if="items.creator_realname != null">{{items.creator_realname}}</label>
+				  			<label ng-if="items.creator_realname == null || items.creator_realname == ''">匿名用户</label>
+				  		</span>
 					  	<span class="cb5b5b5">{{items.created_at}}</span>
 				  	</p>
 				</div>

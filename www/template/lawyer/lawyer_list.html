@@ -41,7 +41,8 @@
 				            <div class="row row-no-padding">
 					       		<div class="col col-70 col-center row-no-padding">
 					       			<h3>
-					       				<b>{{item.realname}}</b>
+					       				<b ng-if="item.realname == null || item.realname == ''">匿名用户</b>
+					       				<b ng-if="item.realname != null">{{item.realname}}</b>
 					       				<label class="cf7861e">{{item.average_evaluate_score}}</label>
 					       				<label class="font12 cb5b5b5">分</label>
 					       			</h3>

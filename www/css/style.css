@@ -912,7 +912,7 @@ input, select {
 }
 .view-heard {
     width: 100%;
-    height: 143px;
+    height: 103px;
     border-top: 0px;
     padding: 0px;
     margin: 0;
@@ -1781,7 +1781,7 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
 .collect_s{background: url("../img/collect_s.png") no-repeat scroll center center transparent;}
 .following{background: url("../img/following.png") no-repeat scroll center center transparent;}
 .following_s{background: url("../img/following_s.png") no-repeat scroll center center transparent;}
-.private_following{background: url("../img/private_following.png") no-repeat scroll center center transparent;}
+.private_following{background: url("../img/private_following.png") no-repeat scroll center 0px transparent;}
 .private_following_s{background: url("../img/private_following_s.png") no-repeat scroll center center transparent;}
 .comment, .comment_s, .collect, .collect_s, .hederpading span, .following, .following_s, .concern-lawyer span, .private_following, .private_following_s{display: inline-block;width: 48px;height: 33px;background-size: 70%;}
 .like{background: url("../img/like.png") no-repeat scroll center top transparent;}
@@ -1796,6 +1796,8 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
 .label-list span.labels{font-size: 12px;background-color: #f0f1f3;display: inline-block;padding: 5px 10px;border-radius: 10px;border: 1px solid #f0f1f3;color: #7f7f7f;min-width: 66px;max-width: 100%;text-align: center;}
 .label-list span.labels.active{background-color: #48b4ff;color: #fff;border: 1px solid #48b4ff;}
 .card .item-avatar .item-image img{max-width: 40px;max-height: 40px;width: 100%;height: 100%;border-radius: 50%;}
+.card .item-avatar .item-image.left0{left: 0;}
+.card .item-avatar.left56{padding-left: 56px;padding-right: 0;}
 
 /*律师主页*/
 .lawyer-content-top{position: absolute;width: 100%;bottom: -20px;z-index: 6;text-align: center;}

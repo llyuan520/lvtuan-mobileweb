@@ -30,7 +30,8 @@
 					<div class="item item-text-wrap" style="border-width: 0px;">
 						<div class="row row-no-padding mb10">
 				       		<div class="col col-center row-no-padding">
-			       				<label class="cb5b5b5">{{item.realname}}</label><br>
+			       				<label class="cb5b5b5" ng-if="item.realname == null || item.realname == ''">匿名用户</label>
+			       				<label class="cb5b5b5" ng-if="item.realname != null">{{item.realname}}</label><br>
 			       				<label class="font12 cb5b5b5">{{item.difference_date}}</label>
 				       		</div>
 						  	<div class="col col-center row-no-padding textright">

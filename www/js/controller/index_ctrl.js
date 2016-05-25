@@ -3092,6 +3092,7 @@ lvtuanApp.controller("lawyerOneQuestionsCtrl",function($http,$scope,$state,$root
 //律师的全部评价
 lvtuanApp.controller("lawyerAllEvaluateCtrl",function($http,$scope,$state,$rootScope,$ionicLoading){
 	console.info('律师的全部评价');
+
 	$scope.evaluate_key = 'all';
 	$scope.inEvaluate = function(key) {
 		var value = false;
@@ -3171,7 +3172,7 @@ lvtuanApp.controller("lawyerAllEvaluateCtrl",function($http,$scope,$state,$rootS
 	        	if(data && data.data.list && data.data.list.length){
 					$scope.items = $scope.items.concat(data.data.list);
 					console.info($scope.items);
-					if (data.data.length < size) {
+					if (data.data.list.length < size) {
 						$scope.moredata = false;
 					} else {
 						$scope.moredata = true;
@@ -3192,7 +3193,7 @@ lvtuanApp.controller("lawyerAllEvaluateCtrl",function($http,$scope,$state,$rootS
 })
 
 //律师的全部评价
-lvtuanApp.controller("lawyerOneAllEvaluateCtrl",function($http,$scope,$state,$rootScope,$ionicLoading){
+lvtuanApp.controller("lawyerOneAllEvaluateCtrl",function($http,$scope,$state,$rootScope,$ionicLoading,$stateParams){
 	console.info('律师的全部评价');
 	$scope.evaluate_key = 'all';
 	$scope.inEvaluate = function(key) {
@@ -3224,7 +3225,6 @@ lvtuanApp.controller("lawyerOneAllEvaluateCtrl",function($http,$scope,$state,$ro
 		var param = []; //声明一个数组 判断如果有值就push进来
 		switch(key) {
 			case "all":
-				param.push('type=' + key);
 				break;
 			case "high":
 				param.push('type=score');
@@ -3238,9 +3238,8 @@ lvtuanApp.controller("lawyerOneAllEvaluateCtrl",function($http,$scope,$state,$ro
 				param.push('type=score');
 				param.push('score=' + key);
 				break;
-			default:
-				param.push('type=all');
 		}
+
 		
 	  	param = param.join('&');  //通过join('&') 把所有的参数都拼接起来
 	  	console.info(param)
@@ -3267,13 +3266,19 @@ lvtuanApp.controller("lawyerOneAllEvaluateCtrl",function($http,$scope,$state,$ro
 		$scope.nodata = true;
 		var timestamp=Math.round(new Date().getTime()/1000);
 	    $ionicLoading.show();
-		$http.get('http://'+$rootScope.hostPath+'/evaluate?'+param+'&size='+size+'&page='+page+'&ts='+timestamp)
+	    var url;
+		if(param != ""){
+	  		url = 'http://'+$rootScope.hostPath+'/evaluate/'+$stateParams.id+'?'+param+'&size='+size+'&page='+page+'&ts='+timestamp
+	    }else{
+	    	url = 'http://'+$rootScope.hostPath+'/evaluate/'+$stateParams.id+'?size='+size+'&page='+page+'&ts='+timestamp
+	    }
+		$http.get(url)
 			.success(function(data) {
 				$scope.extras = data.data.extras;
 	        	if(data && data.data.list && data.data.list.length){
 					$scope.items = $scope.items.concat(data.data.list);
 					console.info($scope.items);
-					if (data.data.length < size) {
+					if (data.data.list.length < size) {
 						$scope.moredata = false;
 					} else {
 						$scope.moredata = true;
@@ -3368,9 +3373,9 @@ lvtuanApp.controller("lawyerlistsearchCtrl",function($http,$scope,$state,$rootSc
 })
 
 //律师个人主页 - 个人介绍
-lvtuanApp.controller("viewCtrl",function($scope,$http,$rootScope,$stateParams,httpWrapper,authService,$ionicLoading){
+lvtuanApp.controller("lawyerViewCtrl",function($scope,$http,$rootScope,$stateParams,$ionicLoading,httpWrapper,authService){
 
-   
+   var timestamp=Math.round(new Date().getTime()/1000);
     $scope.context_min100 = '';
     $scope.context_all = '';
     $scope.dian = '...';
@@ -3380,10 +3385,20 @@ lvtuanApp.controller("viewCtrl",function($scope,$http,$rootScope,$stateParams,ht
 		$scope.info = $scope.items.introduce + $scope.items.experience + $scope.items.signature;
 		$scope.context_min100 = $scope.info.substr(0, 90);
 		$scope.context_all = $scope.info.substr(90);
-		
+
+		sessionStorage.setItem("lawyer_id", JSON.stringify($scope.items.id));
 		console.info($scope.items);
 		$ionicLoading.hide();
 	});
+
+	$http.get('http://'+$rootScope.hostName+'/lawyer/'+$stateParams.id+'/articles?order=latest&rows_per_page=1&ts='+timestamp).success(function(data) {
+        	$scope.articles = data.data[0];
+		})
+
+	$http.get('http://'+$rootScope.hostPath+'/evaluate/'+$stateParams.id+'?size=1&ts='+timestamp).success(function(data) {
+        	$scope.extras = data.data.extras;
+		})
+
 
 	//显示隐藏
 	$scope.context = true;
@@ -3445,19 +3460,39 @@ lvtuanApp.controller("viewCtrl",function($scope,$http,$rootScope,$stateParams,ht
            layer.show("取消成功！");
         });
 	}
+
+	 //提交问题
+	$scope.submit = function(){
+		var param = [];
+		if($stateParams.id){
+			param['lawyer_id'] = $stateParams.id;
+		}
+		console.info(param); 
+        $ionicLoading.show();
+		httpWrapper.request('http://'+$rootScope.hostName+'/center/question/create/'+$scope.type,'post',param,
+			function(data){
+				layer.show("提交成功！");
+        		//location.href='#/pay/'+data.data.data+'?type=order';
+				$ionicLoading.hide()
+			},function(data){
+				console.info(data);
+			}
+		);
+	}
 	
 })
-
 
 //律师个人主页 - 发表文章 -点赞最多
 lvtuanApp.controller("lawyerArticleLikeMostCtrl",function($scope,$http,$rootScope,$stateParams,listHelper){
 	//点赞最多
-	listHelper.bootstrap('/lawyer/'+$stateParams.id+'/articles', $scope);
+	var id = JSON.parse(sessionStorage.getItem("lawyer_id"));
+	listHelper.bootstrap('/lawyer/'+id+'/articles?order=like', $scope);
 })
 //律师个人主页 - 发表文章 -最近发布
 lvtuanApp.controller("lawyerArticleLatelyEditingCtrl",function($scope,$http,$rootScope,$stateParams,listHelper){
 	//最近发布
-	listHelper.bootstrap('/lawyer/'+$stateParams.id+'/articles', $scope);
+	var id = JSON.parse(sessionStorage.getItem("lawyer_id"));
+	listHelper.bootstrap('/lawyer/'+id+'/articles?order=latest', $scope);
 })
 
 
@@ -4491,9 +4526,13 @@ lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$
 
 /*———————————————————————————— 用户 - 我的 - 咨询管理 ————————————————————————————*/
 //用户 - 咨询管理
-lvtuanApp.controller("userQuestionListCtrl",function($scope,$rootScope,$ionicLoading,listHelper_hostPath,httpWrapper){
+lvtuanApp.controller("userQuestionListCtrl",function($scope,$rootScope,$ionicLoading,listHelper_hostPath){
 
 	listHelper_hostPath.bootstrap('/user/question?type=creator', $scope);
+})
+//用户 - 订单管理
+lvtuanApp.controller("userOrderListCtrl",function($scope,$rootScope,$ionicLoading,listHelper,listHelper_hostPath,httpWrapper){
+	listHelper.bootstrap('/center/question/list?type=pay_text&status=new', $scope);
 })
 
 
@@ -4510,6 +4549,11 @@ lvtuanApp.controller("lawyerQuestionNotCtrl",function($scope,$rootScope,$ionicLo
 lvtuanApp.controller("lawyerQuestionAlreadyCtrl",function($scope,$rootScope,$ionicLoading,listHelper_hostPath,httpWrapper){
 	console.info('已参与');
 	listHelper_hostPath.bootstrap('/user/question?type=reply', $scope);
+})
+
+// 律师 - 订单管理
+lvtuanApp.controller("lawyerOrderListCtrl",function($scope,$rootScope,$ionicLoading,listHelper,listHelper_hostPath,httpWrapper){
+	listHelper.bootstrap('/center/question/list?type=pay_text&status=complete', $scope);
 })
 
 
