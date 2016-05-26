@@ -87,14 +87,8 @@
 </style>
 <ion-view hide-tabs="true" cache-view="false">
 	<ion-pane>
-		<ion-header-bar align-title="center" class="bar bar-header bar-light">
-			<button class="button button-clear button-positive" ng-click="jumpGoBack()">  
-                <i class="icon icon-left ion-ios-arrow-back"></i>  
-            </button>
-			<h1 class="title">评价</h1>
-		</ion-header-bar>
-		<ion-content class="web-body">
-			<form name="myForm" role="form" novalidate ng-controller="confirmCompletionCtrl">
+		<form name="myForm" role="form" novalidate ng-controller="confirmCompletionCtrl">
+			<ion-content class="has-tabs">
 				<div class="item" style="padding: 10px 0;font-size: 12px;">
 					<div class="row row-no-padding row-center" style="text-align: center;">
 						<div class="col col-center" ng-repeat="evaluate in evaluates">
@@ -120,14 +114,15 @@
 				        </label>
 				        <p ng-if="myForm.evaluate_comment.$error.maxlength" style="color:red;">字符的长度不能超过50个</p>
 			        </ion-item>
-			        <div class="item row" style="border-color:#fff;margin-top: 10px;">
-					  <div class="col">
-					  	<button class="button button-block button-positive" ng-disabled="myForm.$invalid" ng-click="submit(user)">发表评价</button>
-					  </div>
-					</div>
-		         </ion-list>
+		        </ion-list>
+		    </ion-content>
+		    <div class="tabs" style="background-color:#fff;height: 59px;">
+				<!-- 发表评价 -->
+				<div class="row" style="padding: 5px 10px;">
+					<button class="button button-block button-positive" ng-disabled="myForm.$invalid" ng-click="submit(user)" style="border-radius: 10px;">发表评价</button>
+				</div>
 
-	     	</form>
-	    </ion-content>
+			</div>
+		</form>
 	</ion-pane>
 </ion-view>

@@ -1,73 +1,49 @@
 <ion-view hide-tabs="true" cache-view="false" view-title="订单详情">
 	<ion-pane>
-		<ion-content class="web-body">
-			<ion-list>
+		<ion-content class="has-tabs">
 
-				<ion-item class="item" style="margin-bottom: 10px;border-color: #fff;color: #666;font-size: 14px;">
-					<div class="row row-no-padding padding_bottom16">
-		    		  	<div class="col">订单编号：</div> 
-		     		  	<div class="col col-70">{{items.created_at}}</div>
-		    		</div>
-					<div class="row row-no-padding padding_bottom16">
-		    		  	<div class="col">创建时间：</div> 
-		     		  	<div class="col col-70">{{items.created_at}}</div>
-		    		</div>
-		    		<div class="row row-no-padding padding_bottom16">
-		    		  	<div class="col">订单金额：</div>
-		    		  	<div class="col col-70">
-		    		  		<p class="contents">{{items.title}}</p>
-		    		  	</div>
-		    		</div>
-		    		<div class="row row-no-padding" style="border-color: #fff;">
-		    		  	<div class="col">订单信息：</div>
-		     		  	<div class="col col-70">
-		     		  		<p class="contents">{{items.content}}</p>
-		     		  	</div>
-		    		</div>
-				</ion-item>
-				<ion-item class="item" style="border-color: #fff;margin-bottom: 10px;" ng-if="items.attachments.length > 0">
-		        	<p class="padding_bottom5">咨询附件</p>
-					<div class="row row-no-padding">
-		    		  	<div class="col col-20" ng-repeat="item in items.attachments"  ng-click="lookImg()" style="margin-right: 10px;">
-		    		  		<img src="{{item.url}}" width="60" height="60">
-		    		  	</div>
-		    		</div>
-		        </ion-item>
-		        <div ng-if=" items.transitions.length > 0 ">
-			        <ion-item class="item" style="margin-top: 10px;margin-bottom: 10px;border-color: #fff;" ng-if="currentUser.status == 1 || currentUser.status == 2">
-						<p ng-if="items.status == 'new'"> 
-							<button class="button button-block button-positive" ng-click="to_cancel(items.transitions[0].to_cancel)">取消</button>
-						</p>
-						<p ng-if="items.status == 'replied'"> 
-							<button class="button button-block button-positive" ng-click="to_complete(items.transitions[1].to_complete)">确认</button>
-		  					<button class="button button-block button-positive" ng-click="to_ask(items.id)">联系律师</button>
-						</p>
-						<p ng-if="items.status == 'wait_for_evaluation'"> 
-		  					<button class="button button-block button-positive" ng-click="to_evaluate(items.id,items.type)">评价</button>
-						</p>
-						<p ng-if="items.status == 'complete'"> 
-							<a ng-if="currentUser.status == 1 || currentUser.status == 2" class="button button-block button-positive" ng-href="#/questionsview/{{items.id}}">回复详情</a>
-		  					<button class="button button-block button-positive" ng-click="to_remove(items.transitions[0].to_remove)">删除</button>
-						</p>
-						<p ng-if="items.status == 'cancelled'"> 
-							<button class="button button-block button-positive" ng-click="to_remove(items.transitions[0].to_remove)">删除</button>
-						</p>
-					</ion-item>
-
-					<ion-item class="item" style="margin-top: 10px;margin-bottom: 10px;border-color: #fff;" ng-if="currentUser.status == 3">
-						<p ng-if="items.status == 'new'"> 
-							<button class="button button-block button-positive" ng-click="to_refuse(items.transitions[1].to_refuse)">拒绝</button>
-		  					<button class="button button-block button-positive" ng-click="to_accept(items.transitions[0].to_accept)">受理</button>
-						</p>
-						<p ng-if="items.status == 'replied'"> 
-							<button class="button button-block button-positive" ng-click="to_ask(items.id)">联系用户</button>
-						</p>
-						<p ng-if=" items.status == 'complete' || items.status == 'cancelled' "> 
-		  					<button class="button button-block button-positive" ng-click="to_remove(items.transitions[0].to_remove)">删除</button>
-						</p>
-					</ion-item>
+			<div class="card" style="border-radius: 10px;box-shadow:none;">
+				<div class="item item-text-wrap">
+					<p>订单编号：{{items.order_no}}</p>
+					<p>创建时间：{{items.created_at}}</p>
+					<p>订单金额：199元</p>
+					<p>订单信息：{{items.type_name}}</p>
 				</div>
-	         </ion-list>
+			</div>
+			<div class="card" style="border-radius: 10px;box-shadow:none;">
+				<div class="item item-text-wrap">
+					<h3 class="c7f7f7f" style="margin-bottom: 13px;">订单详情</h3>
+					<div class="hr mb10"></div>
+					<p class="contents" style="padding: 0 10px;">{{items.content}}</p>
+				</div>
+			</div>
+
 	    </ion-content>
+
+	    <div class="tabs" style="background-color:#fff;height: 59px;">
+
+			<!-- 待确认 -->
+			<!-- <div class="row row-center row-no-padding" style="padding: 5px 10px;">
+				<div class="col col-center" style="margin-right: 10px;">
+					<button class="button button-block button-positive" style="border-radius: 10px;" ng-click="to_complete(items.transitions[1].to_complete)">确认完成</button>
+				</div>
+				<div class="col col-center">
+					<button class="button button-block button-positive" style="border-radius: 10px;" ng-click="to_ask(items.id)">联系律师</button>
+				</div>
+			</div> -->
+
+			<!-- 待评价 -->
+			<div class="row" style="padding: 5px 10px;">
+				<button class="button button-block button-positive" style="border-radius: 10px;" ng-click="to_evaluate(items.id,items.type)">服务评价</button>
+			</div>
+
+			<!-- 已结束 -->
+			<!-- <div class="row" style="padding: 5px 10px;">
+				<button class="button button-block button-positive" style="border-radius: 10px;">聊天记录</button>
+			</div> -->
+
+		</div>
+
+
 	</ion-pane>
 </ion-view>

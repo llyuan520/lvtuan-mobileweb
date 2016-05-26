@@ -80,8 +80,9 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
     });
 
     $rootScope.$on('unauthorized', function() {
-      console.info('unauthorized');
-      sessionStorage.setItem("goback", $location.absUrl());
+        console.info('unauthorized');
+        sessionStorage.setItem("goback", $location.absUrl());
+        localStorage.clear();
         layer.show('您没有权限访问这个链接！');
         $location.path('/login');
         $state.transitionTo("login");
@@ -90,8 +91,9 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
     });
 
     $rootScope.$on('unauthenticated', function() {
-      console.info('unauthenticated');
-      sessionStorage.setItem("goback", $location.absUrl());
+        console.info('unauthenticated');
+        sessionStorage.setItem("goback", $location.absUrl());
+        localStorage.clear();
         layer.show('请先登录！');
         // $location.path('/login');
         $state.transitionTo("login");
@@ -128,7 +130,6 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
             return token;
           }, 
           function(reason) {
-            localStorage.clear();
             $rootScope.$broadcast('unauthenticated');
           }
         );
@@ -744,6 +745,12 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
       controller: 'userOrderViewCtrl',
       authn: true
   })
+  //用户 - 我的 - 用户的评价
+   .state('confirmCompletion', { 
+      url: '/confirmCompletion/:id',
+      templateUrl: 'template/mylvtuan/user/confirm-completion.html',
+      authn: true
+  })
 
   //律师 - 我的 - 咨询管理
   .state('lawyer/question', { //律师 - 咨询管理
@@ -982,12 +989,6 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
       url: '/commodity',
       templateUrl: 'template/mylvtuan/commodity/commodity.html',
       controller: 'commodityListCtrl',
-      authn: true
-  })
-
-  .state('confirmCompletion', { //首页 - 我的律团 - 用户的评价
-      url: '/confirmCompletion/:id',
-      templateUrl: 'template/mylvtuan/question/confirm-completion.html',
       authn: true
   })
 

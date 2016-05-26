@@ -4511,49 +4511,17 @@ lvtuanApp.controller("userOrderViewCtrl",function($scope,$rootScope,$ionicLoadin
 		$ionicLoading.hide();
 	});
 
-	//取消
-	$scope.to_cancel = function(url){
-		httpWrapper.request(url,'post',null,
-			function(data){
-				layer.show("取消成功！");
-			},function(data){
-				console.info(data);
-			}
-		);
-	}
-
-	//拒绝
-	$scope.to_refuse = function(url){
-		httpWrapper.request(url,'post',null,
-			function(data){
-				layer.show("拒绝成功！");
-			},function(data){
-				console.info(data);
-			}
-		);
-	}
-
-	//受理
-	$scope.to_accept = function(url){
-		httpWrapper.request(url,'post',null,
-			function(data){
-				layer.show("受理成功！");
-				location.href='#/question/paytext/waitforconfirmation';
-			},function(data){
-				console.info(data);
-			}
-		);
-	}
-
-	//确认
+	//确认完成
 	$scope.to_complete = function(url){
 		var confirmPopup = $ionicPopup.confirm({
-	           title: '律师已经解答您的问题？',
+			   template: '<p style="text-align: center;">律师已经解答您的问题？</p>', // String (可选)。放在弹窗body内的html模板。
 	           cancelText: '取消',
+	           cancelType: 'button-light',
 	           okText: '确认',
+	           okType: 'button-positive'
 	        });
 			confirmPopup.then(function(res) {
-               if(res) {
+               /*if(res) {
                     httpWrapper.request(url,'post',null,
 						function(data){
 							layer.show("确认成功！");
@@ -4564,50 +4532,142 @@ lvtuanApp.controller("userOrderViewCtrl",function($scope,$rootScope,$ionicLoadin
 					);
                }else{
                  return false;
-               }
+               }*/
             });
 	}
 
-	//联系用户
-	$scope.to_ask = function(id){
-		location.href='#/easemobmain/'+id;
-	}
-
-	//评价
+	//服务评价
 	$scope.to_evaluate = function(id){
 		location.href='#/confirmCompletion/'+id;
 	}
 
-	//删除
-	$scope.to_remove = function(url){
-		httpWrapper.request(url,'post',null,
-			function(data){
-				layer.show("删除成功！");
-			},function(data){
-				console.info(data);
-			}
-		);
+	//联系律师
+	$scope.to_ask = function(id){
+		location.href='#/easemobmain/'+id;
 	}
 
-	//调用微信查看图片的接口
-	$scope.lookImg = function(){
-		console.info($scope.arry[0]);
-		/*wx.ready(function () {
-		    // 在这里调用 API
-		});*/
-		if (window.WeixinJSBridge) {  
-            if($scope.items.attachments.length > 0){  
-                WeixinJSBridge.invoke('imagePreview', {
-	                	'current':$scope.items.attachments[0], // 当前显示图片的http链接
-	                	'urls': $scope.items.attachments // 需要预览的图片http链接列表
-                });  
-                return;  
-            }  
-
-        }  
-          
-	}
 })
+
+//用户的工作 - 咨询 － 评价
+lvtuanApp.controller("confirmCompletionCtrl",['$scope','$http','$rootScope','$stateParams','$ionicLoading','httpWrapper',
+  function($scope,$http,$rootScope,$stateParams,$ionicLoading,httpWrapper){
+    //数组删除的方法
+    Array.prototype.remove = function(index){
+        if(isNaN(index) || index > this.length){
+              return false;
+        }
+        for(var i=0,n=0;i<this.length;i++){
+              if(this[i] != this[index]){
+                  this[n++] = this[i];
+              }
+        }
+        this.length -= 1;
+    }
+
+    $scope.type = JSON.parse(localStorage.getItem('type'));
+
+    $ionicLoading.show();
+    httpWrapper.get('http://'+$rootScope.hostName+'/evaluate/tags', function(data){
+      $scope.items = data.data;
+      console.info($scope.items);
+      $ionicLoading.hide();
+    });
+
+    $scope.evaluates = [
+              {
+                title:'差',
+                value:1
+              },{
+                title:'一般',
+                value:2
+              },{
+                title:'满意',
+                value:3
+              },{
+                title:'很满意',
+                value:4
+              },{
+                title:'推荐',
+                value:5
+              }
+            ]
+
+    //anglarjs 想要input双向绑定，必须先把值初始化一次; 页面input不能清空就是这个问题
+    $scope.user = {
+      evaluate_score  : 5,
+      evaluate_comment : ""
+    }
+    $scope.active = 5;
+
+    $scope.evaluate_click = function(val){
+      $scope.active = false;
+      $scope.active = val;
+    } 
+
+    $scope.inShowtags = function(key){
+      var value = false;
+      for(var i=0; i<$scope.tag_arry.length; i++){
+        if($scope.tag_arry[i] == key){
+          value = true;
+        }
+      }
+      return value;
+    }
+
+    $scope.tag_arry = [];
+    $scope.click_tag = function(key,val){
+      if($scope.tag_arry.length < 1){
+        $scope.tag_arry.push(key);
+      }else{
+        for(var i=0; i<$scope.tag_arry.length; i++){
+          if($scope.tag_arry[i] == key){
+            $scope.tag_arry.remove(i);
+            console.info('01',$scope.tag_arry);
+            return false;
+          }
+          continue;
+        }
+
+        $scope.tag_arry.push(key);
+        console.info('1',$scope.tag_arry);
+        return false;
+
+      }
+    }
+
+      //提交
+      $scope.submit = function(user){
+      if($scope.tag_arry.length > 1){
+        user['evaluate_tags'] = $scope.tag_arry;
+      }
+        httpWrapper.request('http://'+$rootScope.hostName+'/center/question/'+$stateParams.id+'/evaluate','post',user,
+      function(data){
+        layer.show("评价成功！");
+        $scope.user = {
+            evaluate_score  : 5,
+            evaluate_comment : ""
+          }
+        switch($scope.type) {
+          case "pay_text":
+            location.href='#/question/paytext/complete';
+            break;
+          case "pay_phone":
+            location.href='#/question/payphone/complete';
+            break;
+          case "pay_company":
+            location.href='#/question/paycompany/complete';
+            break;
+          default:
+            window.history.back();
+            window.location.reload()
+        }
+
+      },function(data){
+        console.info(data);
+      })
+      }
+
+}])
 
 
 
@@ -5281,126 +5341,6 @@ lvtuanApp.controller("questionPaycompanyViewCtrl",function($scope,$rootScope,$io
 })
 
 
-//用户的工作 - 咨询 － 评价
-lvtuanApp.controller("confirmCompletionCtrl",['$scope','$http','$rootScope','$stateParams','$ionicLoading','httpWrapper',
-	function($scope,$http,$rootScope,$stateParams,$ionicLoading,httpWrapper){
-		//数组删除的方法
-		Array.prototype.remove = function(index){
-		    if(isNaN(index) || index > this.length){
-		          return false;
-		    }
-		    for(var i=0,n=0;i<this.length;i++){
-		          if(this[i] != this[index]){
-		              this[n++] = this[i];
-		          }
-		    }
-		    this.length -= 1;
-		}
-
-		$scope.type = JSON.parse(localStorage.getItem('type'));
-
-		$ionicLoading.show();
-		httpWrapper.get('http://'+$rootScope.hostName+'/evaluate/tags', function(data){
-			$scope.items = data.data;
-			console.info($scope.items);
-			$ionicLoading.hide();
-		});
-
-		$scope.evaluates = [
-							{
-								title:'差',
-								value:1
-							},{
-								title:'一般',
-								value:2
-							},{
-								title:'满意',
-								value:3
-							},{
-								title:'很满意',
-								value:4
-							},{
-								title:'推荐',
-								value:5
-							}
-						]
-
-		//anglarjs 想要input双向绑定，必须先把值初始化一次; 页面input不能清空就是这个问题
-		$scope.user = {
-			evaluate_score	: 5,
-			evaluate_comment : ""
-		}
-		$scope.active = 5;
-
-		$scope.evaluate_click = function(val){
-			$scope.active = false;
-			$scope.active = val;
-		}	
-
-		$scope.inShowtags = function(key){
-			var value = false;
-			for(var i=0; i<$scope.tag_arry.length; i++){
-				if($scope.tag_arry[i] == key){
-					value = true;
-				}
-			}
-			return value;
-		}
-
-		$scope.tag_arry = [];
-		$scope.click_tag = function(key,val){
-			if($scope.tag_arry.length < 1){
-				$scope.tag_arry.push(key);
-			}else{
-				for(var i=0; i<$scope.tag_arry.length; i++){
-					if($scope.tag_arry[i] == key){
-						$scope.tag_arry.remove(i);
-						console.info('01',$scope.tag_arry);
-						return false;
-					}
-					continue;
-				}
-
-				$scope.tag_arry.push(key);
-				console.info('1',$scope.tag_arry);
-				return false;
-
-			}
-		}
-
-		  //提交
-		  $scope.submit = function(user){
-			if($scope.tag_arry.length > 1){
-				user['evaluate_tags'] = $scope.tag_arry;
-			}
-		  	httpWrapper.request('http://'+$rootScope.hostName+'/center/question/'+$stateParams.id+'/evaluate','post',user,
-			function(data){
-				layer.show("评价成功！");
-				$scope.user = {
-				  	evaluate_score	: 5,
-				  	evaluate_comment : ""
-				  }
-				switch($scope.type) {
-					case "pay_text":
-						location.href='#/question/paytext/complete';
-						break;
-					case "pay_phone":
-						location.href='#/question/payphone/complete';
-						break;
-					case "pay_company":
-						location.href='#/question/paycompany/complete';
-						break;
-					default:
-						window.history.back();
-						window.location.reload()
-				}
-
-			},function(data){
-				console.info(data);
-			})
-		  }
-
-}])
 
 //我的商品 - 列表
 lvtuanApp.controller("commodityListCtrl",function($scope,$rootScope,listHelper,httpWrapper){
