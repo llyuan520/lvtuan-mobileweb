@@ -27,6 +27,11 @@
 				  	</p>
 				</div>
 			</div>
+			<div ng-if="items.comments.length < 1" class="nodate20">
+				<i class="questions-iocn"></i><br>
+				<label>问题暂时还得不到回答</label><br>
+				<label>试试一对一咨询吧，更快得到回复哦</label>
+			</div>
 			<div class="card" style="border-radius: 10px;box-shadow:none;" ng-repeat="comment in items.comments">
 				<div class="item item-avatar" style="border-color:#fff;border-style: none;border-width:0;padding-bottom: 11px;">
 					<a class="item-image" ng-href="#/lawyer/view/{{comment.creator_id}}"><img ng-src="{{comment.creator_avatar}}"></a>

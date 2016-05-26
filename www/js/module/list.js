@@ -52,7 +52,7 @@ listModule.factory('listHelper', function($http, $rootScope, httpWrapper) {
 						}
 					}else{
 						if (page == 1) {
-							$  = false;
+							$scope.moredata = false;
 							$scope.nodata = false;
 							//layer.show('暂无数据！');
 						}
