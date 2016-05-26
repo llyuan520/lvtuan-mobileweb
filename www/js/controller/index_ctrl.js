@@ -77,6 +77,21 @@ lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $loca
 			$iframe.off('load').remove();      
 		}, 0);    
 	}).appendTo($body);
+
+
+	// .container 设置了 overflow 属性, 导致 Android 手机下输入框获取焦点时, 输入法挡住输入框的 bug
+	// 解决方法:
+	// 0. .container 去掉 overflow 属性, 但此 demo 下会引发别的问题
+	//    Android 手机下, input 或 textarea 元素聚焦时, 主动滚一把
+	if (/Android/gi.test(navigator.userAgent)) {
+	    window.addEventListener('resize', function () {
+	        if (document.activeElement.tagName == 'INPUT' || document.activeElement.tagName == 'TEXTAREA') {
+	            window.setTimeout(function () {
+	                document.activeElement.scrollIntoViewIfNeeded();
+	            }, 0);
+	        }
+	    })
+	}
 })
 
 /****************************************************** 引导页 ******************************************************/
@@ -3373,7 +3388,7 @@ lvtuanApp.controller("lawyerlistsearchCtrl",function($http,$scope,$state,$rootSc
 })
 
 //律师个人主页 - 个人介绍
-lvtuanApp.controller("lawyerViewCtrl",function($scope,$http,$rootScope,$stateParams,$ionicLoading,httpWrapper,authService){
+lvtuanApp.controller("lawyerViewCtrl",function($scope,$http,$rootScope,$stateParams,$ionicLoading,$ionicPopup,httpWrapper){
 
    var timestamp=Math.round(new Date().getTime()/1000);
     $scope.context_min100 = '';
@@ -3406,24 +3421,6 @@ lvtuanApp.controller("lawyerViewCtrl",function($scope,$http,$rootScope,$statePar
 		$scope.context = !$scope.context;
 		$(".context").slideToggle(1500); 
 	}
-
-   $scope.graphic5 = function(id,type){
-   	sessionStorage.setItem("lawyerId", id);
-   	/*sessionStorage.setItem("type", type);*/
-
-   	var currentUser = authService.getUser();
-   	if(currentUser == null){
-   		location.href='#/login';
-   		return false;
-   	}
-	if(currentUser.status == 1 || currentUser.status == 2){
-		//普通用户个人信息
-		location.href='#/graphic/'+type;
-	}else{
-		layer.show("您是律师用户，无此服务!");
-	}
-	
-   }
 
 	//关注
 	$scope.follow = function(id){
@@ -3461,25 +3458,83 @@ lvtuanApp.controller("lawyerViewCtrl",function($scope,$http,$rootScope,$statePar
         });
 	}
 
-	 //提交问题
-	$scope.submit = function(){
-		var param = [];
-		if($stateParams.id){
-			param['lawyer_id'] = $stateParams.id;
-		}
-		console.info(param); 
-        $ionicLoading.show();
-		httpWrapper.request('http://'+$rootScope.hostName+'/center/question/create/'+$scope.type,'post',param,
-			function(data){
-				layer.show("提交成功！");
-        		//location.href='#/pay/'+data.data.data+'?type=order';
-				$ionicLoading.hide()
-			},function(data){
-				console.info(data);
-			}
-		);
+	//立即预约
+	$scope.active = true;
+	$scope.question_type = 'pay_text';
+	$scope.toggle = function(val){
+		$scope.active = !$scope.active;
+		$scope.question_type = val;
 	}
-	
+	$scope.showIonicPopup = function(type,id){
+		// 自定义弹窗
+        var myPopup = $ionicPopup.show({
+       	 templateUrl: 'my-reservationNow.html',
+         scope: $scope,
+         buttons: [
+           { text: '取消',
+           	 type:'button-light'
+       		},
+           {
+             text: '确认',
+             type: 'button-cff2f5f',
+             onTap: function(e) {
+             	location.href='#/graphic/'+type+'?id='+id;
+             	myPopup.close(); 
+             }
+           },
+         ]
+       });
+       myPopup.then(function(res) {
+         
+       });
+        
+	}
+})
+
+//找律师-图文咨询
+lvtuanApp.controller("graphicCtrl",function($scope,$http,$rootScope,$timeout,$stateParams,$ionicLoading,listHelper,httpWrapper,authService){
+
+    $scope.type = $stateParams.type;
+    $scope.id = $stateParams.id;
+
+    $scope.content; //假设这是你textarea上的绑定
+	var limit_content = 300; // 假设文本长度为 300
+	$scope.$watch('content', function(newVal, oldVal) {
+	    if (newVal && newVal != oldVal) {
+	        if (newVal.length >= limit_content) {
+	            $scope.content = newVal.substr(0, limit_content); // 这里截取有效的300个字符
+	        }
+	    }
+	})
+
+
+    //提交问题
+	$scope.submit = function(){
+		var currentUser = authService.getUser();
+		if(currentUser.status == 1 || currentUser.status == 2){
+			var param = {};
+			if($scope.id){
+				param['lawyer_id'] = $scope.id;
+			}
+			if($scope.content){
+				param['content'] = $scope.content;
+			}
+			console.info(param);
+	        $ionicLoading.show();
+			httpWrapper.request('http://'+$rootScope.hostName+'/center/question/create/'+$scope.type,'post',param,
+				function(data){
+					layer.show("提交成功！");
+					$ionicLoading.hide()
+				},function(data){
+					console.info(data);
+				}
+			);
+		}else{
+			layer.show("您是律师用户，无此服务!");
+		}
+
+	}
+
 })
 
 //律师个人主页 - 发表文章 -点赞最多
@@ -3494,6 +3549,9 @@ lvtuanApp.controller("lawyerArticleLatelyEditingCtrl",function($scope,$http,$roo
 	var id = JSON.parse(sessionStorage.getItem("lawyer_id"));
 	listHelper.bootstrap('/lawyer/'+id+'/articles?order=latest', $scope);
 })
+
+
+
 
 
 
@@ -3533,99 +3591,7 @@ lvtuanApp.controller("viewteleviseCtrl",function($scope,$http,$rootScope,listHel
 	}
 })
 
-//找律师-图文咨询
-lvtuanApp.controller("graphicCtrl",function($scope,$http,$rootScope,$timeout,$stateParams,$ionicLoading,listHelper,httpWrapper,Upload){
 
-	//选择类型
-   $ionicLoading.show(); 
-	$http.get('http://'+$rootScope.hostName+'/lawyer/workscopes')
-		.success(function(data) {
-	      if(data.data){
-	        $scope.workscopes = data.data;
-	      }else{
-	      	layer.show("暂无数据！");
-	      }
-          $ionicLoading.hide();
-	    });
-
-	//用来存储上传的值
-	$scope.file = [];
-    $scope.uploadFiles = function(files, errFiles) {
-        if(files && files.length > 2){
-	        	layer.show("最多只能上传2个文件或者图片！");
-	        	return false;
-	        }else{
-	        	$ionicLoading.show();
-	        	$scope.files = files;
-        		$scope.errFiles = errFiles;
-
-        		for(var i=0; i<$scope.errFiles.length; i++){
-		        	if($scope.errFiles[i].$error == 'maxSize'){
-	        			layer.show("图片大小不能超过6MB!");
-	        			return false;
-	        		}
-		        }
-
-		        angular.forEach(files, function(file) {
-		            file.upload = Upload.upload({
-		            	headers: {
-				            'Content-Type': 'application/json'
-			       		},
-			       		url: 'http://'+$rootScope.hostName+'/question/upfiles',
-		                data: {files: file}
-		            });
-
-		            file.upload.then(function (response) {
-		            	var file_path = response.data.data.file_path;
-			 			$scope.file.push(file_path);
-						$scope.file = $scope.file;
-		                $timeout(function () {
-		                    file.result = response.data;
-		                });
-		                $ionicLoading.hide();
-		            }, function (response) {
-		            	var status = response.status
-		                if (response.status > 0)
-		                    $scope.errorMsg = response.status + ': ' + response.data;
-		            }, function (evt) {
-		                file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
-		                $scope.progress = file.progress;
-		            });
-
-		        });
-		}
-    }
-    $scope.type = $stateParams.type;
-    localStorage.setItem("type", JSON.stringify($scope.type));
-    var lawyerId = sessionStorage.getItem("lawyerId");
-    $scope.user = {};
-    //提交问题
-	$scope.submit = function(user){
-		$scope.user = user;
-		if($scope.file.length > 0){
-			$scope.user['file_paths'] = $scope.file;
-		}
-		if(lawyerId){
-			$scope.user['lawyer_id'] = lawyerId;
-		}
-
-		console.info($scope.user);
-        $ionicLoading.show();
-		httpWrapper.request('http://'+$rootScope.hostName+'/center/question/create/'+$scope.type,'post',$scope.user,
-			function(data){
-				layer.show("提交成功！");
-				$scope.user = {};
-				$scope.files = {};
-        		$scope.errFiles = {};
-        		location.href='#/pay/'+data.data.data+'?type=order';
-				$ionicLoading.hide()
-			},function(data){
-				console.info(data);
-			}
-		);
-	}
-
-})
 
 /****************************************************** 问律师 ******************************************************/
 
@@ -4533,6 +4499,114 @@ lvtuanApp.controller("userQuestionListCtrl",function($scope,$rootScope,$ionicLoa
 //用户 - 订单管理
 lvtuanApp.controller("userOrderListCtrl",function($scope,$rootScope,$ionicLoading,listHelper,listHelper_hostPath,httpWrapper){
 	listHelper.bootstrap('/center/question/list?type=pay_text&status=new', $scope);
+})
+//用户 - 订单管理
+lvtuanApp.controller("userOrderViewCtrl",function($scope,$rootScope,$ionicLoading,$stateParams,$ionicPopup,httpWrapper){
+	console.info("咨询详情");
+
+	$ionicLoading.show();
+	httpWrapper.get('http://'+$rootScope.hostName+'/center/question/'+$stateParams.id+'/view', function(data){
+		$scope.items = data.data;
+		console.info($scope.items);
+		$ionicLoading.hide();
+	});
+
+	//取消
+	$scope.to_cancel = function(url){
+		httpWrapper.request(url,'post',null,
+			function(data){
+				layer.show("取消成功！");
+			},function(data){
+				console.info(data);
+			}
+		);
+	}
+
+	//拒绝
+	$scope.to_refuse = function(url){
+		httpWrapper.request(url,'post',null,
+			function(data){
+				layer.show("拒绝成功！");
+			},function(data){
+				console.info(data);
+			}
+		);
+	}
+
+	//受理
+	$scope.to_accept = function(url){
+		httpWrapper.request(url,'post',null,
+			function(data){
+				layer.show("受理成功！");
+				location.href='#/question/paytext/waitforconfirmation';
+			},function(data){
+				console.info(data);
+			}
+		);
+	}
+
+	//确认
+	$scope.to_complete = function(url){
+		var confirmPopup = $ionicPopup.confirm({
+	           title: '律师已经解答您的问题？',
+	           cancelText: '取消',
+	           okText: '确认',
+	        });
+			confirmPopup.then(function(res) {
+               if(res) {
+                    httpWrapper.request(url,'post',null,
+						function(data){
+							layer.show("确认成功！");
+							location.href='#/question/paytext/waitforevaluation';
+						},function(data){
+							console.info(data);
+						}
+					);
+               }else{
+                 return false;
+               }
+            });
+	}
+
+	//联系用户
+	$scope.to_ask = function(id){
+		location.href='#/easemobmain/'+id;
+	}
+
+	//评价
+	$scope.to_evaluate = function(id){
+		location.href='#/confirmCompletion/'+id;
+	}
+
+	//删除
+	$scope.to_remove = function(url){
+		httpWrapper.request(url,'post',null,
+			function(data){
+				layer.show("删除成功！");
+			},function(data){
+				console.info(data);
+			}
+		);
+	}
+
+	//调用微信查看图片的接口
+	$scope.lookImg = function(){
+		console.info($scope.arry[0]);
+		/*wx.ready(function () {
+		    // 在这里调用 API
+		});*/
+		if (window.WeixinJSBridge) {  
+            if($scope.items.attachments.length > 0){  
+                WeixinJSBridge.invoke('imagePreview', {
+	                	'current':$scope.items.attachments[0], // 当前显示图片的http链接
+	                	'urls': $scope.items.attachments // 需要预览的图片http链接列表
+                });  
+                return;  
+            }  
+
+        }  
+          
+	}
 })
 
 
