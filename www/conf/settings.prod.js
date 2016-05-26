@@ -1,5 +1,6 @@
 AppSettings = {
   baseApiUrl: 'www.elvtuan.com',
+  baseNewApiUrl: 'api.elvtuan.com',
   baseMobileUrl: 'm.elvtuan.com',
   // 律团服务号
   appId: 'wxf2c36d3bee50e935',

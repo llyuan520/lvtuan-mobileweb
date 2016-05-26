@@ -39,7 +39,7 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
   localStorage.setItem("hostName", JSON.stringify(hostName));
   $rootScope.hostName = JSON.parse(localStorage.getItem('hostName'));
 
-  var hostPath = 'apitest.elvtuan.com';
+  var hostPath = AppSettings.baseNewApiUrl;
   localStorage.setItem("hostPath", JSON.stringify(hostPath));
   $rootScope.hostPath = JSON.parse(localStorage.getItem('hostPath'));
 
