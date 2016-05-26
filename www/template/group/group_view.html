@@ -25,8 +25,12 @@
 				        <div id="rightTop" style="height: 3.5rem;"></div>
 				        <!-- 聊天页面 -->
 				        <div class="chatRight group-cen">
-				            <div id="chat01" class="word-height">
-				                <div id="{{curUserId}}-group--{{curChatUserId}}" class="chat01_content"></div>
+				            <div id="chat01" class="chats">
+				                <!-- <div id="{{curUserId}}-group--{{curChatUserId}}" class="chat01_content"></div> -->
+				                <div id="{{curUserId}}-group--{{curChatUserId}}" class="chat01_content" classname="chat00_content" style="padding-top: 47px;">
+                                    <div style="text-align: center;padding-left:0;"><a href="javascript:void(0)" id="comments-list" style="text-align: center" ng-click="loadMore()">查看更多</a></div>
+                                    <div id="page" class="loading" style="display: none">加载中...</div>
+                                </div>
 				            </div>
 				            <div class="chat02">
 				                <div class="chat02_title">

@@ -36,8 +36,7 @@ function authService($window) {
 		var token = self.getToken();
 		var user = self.getUser();
 		if(token && user) {
-			var params = self.parseJwt(token);
-			return Math.round(new Date().getTime() / 1000) <= params.exp;
+			return true;
 		} else {
 			return false;
 		}
@@ -54,12 +53,13 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
   var self = this;
 
   // add authentication methods here
-  self.register = function(username, password, phonecode, account_type) {
+  self.register = function(username, password, phonecode, account_type, post_id) {
   	return $http.post('http://' + HOST + '/register', {
 		username: username,
 		password: password,
 		phonecode: phonecode,
-		account_type: account_type
+		account_type: account_type,
+      	post_id: post_id
     }).then(
     	function (res) {
        		layer.show("注册成功！");
@@ -79,7 +79,18 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
 	    		console.log('token:', token);
         	}
 
-	    	location.href='#/index';
+        	var goback = sessionStorage.getItem("goback");
+			if(goback == null || goback=="" || goback=="undefined"){
+				location.href='#/index';
+			}else{
+				/*if(user.status == 1 || user.status == 2){
+					location.href='#/index';
+    			}else{*/
+    				location.href= goback;
+    			//}
+			}
+			sessionStorage.removeItem("goback");
+	    	//location.href='#/index';
 			// window.location.reload();
     	}
     ).catch(function(response) {
@@ -91,11 +102,12 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
 	});
   }
 
-  self.login = function(username, password) {
+  self.login = function(username, password,post_id) {
   	$ionicLoading.show();
   	return $http.post('http://' + HOST + '/login', {
       username: username,
-      password: password
+      password: password,
+      post_id:post_id
     }).then(
     	function (res) {
 	    	var user = res.data ? res.data.data : null;
@@ -120,7 +132,7 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
         	//window.history.back();
 	//		window.location.reload();
         	var goback = sessionStorage.getItem("goback");
-			if(goback == null){
+			if(goback == null || goback=="" || goback=="undefined"){
 				location.href='#/index';
 			}else{
 				/*if(user.status == 1 || user.status == 2){
@@ -139,11 +151,12 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
 	});
   }
 
-  self.loginWithWx = function(code, state) {
+  self.loginWithWx = function(code, state, post_id) {
   	$ionicLoading.show();
   	return $http.post('http://' + HOST + '/loginWithWx', {
       code: code,
-      state: state
+      state: state,
+      post_id:post_id
     }).then(
     	function (res) {
 	    	var user = res.data ? res.data.data : null;
@@ -166,15 +179,17 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
 
 			// window.location.reload();
 			var goback = sessionStorage.getItem("goback");
-			if(goback == null){
+			if(goback == null || goback=="" || goback=="undefined"){
 				location.href='#/index';
 			}else{
-				if(user.status == 1 || user.status == 2){
+				alert('微信登录');
+				location.href= goback;
+				/*if(user.status == 1 || user.status == 2){
 					location.href='#/index';
 					alert('微信登录');
     			}else{
     				location.href= goback;
-    			}
+    			}*/
 			}
 			sessionStorage.removeItem(goback);
     	}

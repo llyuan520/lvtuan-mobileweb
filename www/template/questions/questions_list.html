@@ -1,38 +1,67 @@
-<ion-view hide-Tabs="true" cache-view="false">
+<ion-view hide-Tabs="true" cache-view="false" view-title="问律师">
 		<ion-pane>
-			<ion-header-bar align-title="center" class="bar bar-header bar-light">
-				<button class="button button-clear button-positive pull-left" ng-click="jumpGo('#/index')">  
-	                <i class="icon icon-left ion-ios-arrow-back"></i>  
-	            </button>
-	            <button class="button button-clear pull-right" ng-click="jumpGo('#/question/list/search')">  
-	                <i class="icon ion-ios-search-strong" style="color: #fff;"></i>
-	            </button>
-				<h1 class="title">问律师</h1>
-			</ion-header-bar>
 			<ion-content class="has-tabs">	
+				<div class="item-input-inset" style="border-radius: 10px;">
+				  <label class="item-input-wrapper">
+				  	<i class="icon ion-ios-search placeholder-icon"></i>
+				    <input type="search" placeholder="输入您要咨询的问题，搜索现有的答案" ng-click="jumpGo('#/question/list/search')">
+				  </label>
+				</div>
+
+				<div class="row row-center row-no-padding" style="background-color: #fff;text-align: center;height: 45px;line-height: 45px;color:#7f7f7f;padding-bottom: 1px;box-shadow: 0 1px 3px rgba(0,0,0,.3);">
+					<div class="col drop-down-arrow" style="border-right:1px solid #e5e5e5;text-align: center;" ng-click="toggle()">
+						<label ng-if="!scopes_key">{{workscope}}</label>
+						<label ng-if="scopes_key" class="c48b4ff">{{workscope}}</label>
+					</div>
+					<div class="col drop-down-arrow" style="text-align: center;" ng-click="toggle1()">
+						<label ng-if="!orders_key">{{order}}</label>
+						<label ng-if="orders_key" class="c48b4ff">{{order}}</label>
+					</div>
+				</div>
+
 				<div ng-if="nodata == false" class="nodate">
 					<i class="nodate-iocn"></i><br>
 					<label>暂无数据！</label>
 				</div>
-		
-				<!--评论-->
+
 				<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
-				<div class="list">
-					<a class="item" ng-repeat="item in items" ng-href="#/questionsview/{{item.id}}">
-						<span>{{item.title}}</span>
-						<span class="item-note">{{item.post_category}}</span>
-						<br>
-						<span style="color: #aaa;font-size: 14px;">{{item.lawyer.realname}} 律师</span>
-						<span class="item-note">{{item.created_at}}</span>
-					</a>
+				<div class="card" ng-repeat="item in items" style="border-radius: 10px;">
+				  <div class="item item-text-wrap">
+				  	<h2><a ng-href="#/questionsview/{{item.id}}">{{item.title}}</a></h2>
+				  	<p class="mt10">
+				  		<span class="subdued cb5b5b5">回答</span>
+				  		<label class="cf7861e">{{item.comments_count}}</label>
+				  		<label class="cb5b5b5">·</label>
+					  	<span class="subdued cb5b5b5">收藏</span>
+					  	<label class="cf7861e">{{item.collects_count}}</label>
+					  	<span class="cb5b5b5">{{item.created_at}}</span>
+				  	</p>
+				  </div>
 				</div>
 				<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
 			</ion-content>
+
 			<div class="tabs" style="background-color:#fff;height: 59px;">
-				<div class="row" style="padding: 5px 5%;">
-					<button class="button button-block button-positive" style="margin-top:-2px;margin-bottom:0;" ng-click="questions_btn()"><b>我要问律师</b></button>
+				<div class="row" style="padding: 5px 10px;">
+					<button class="button button-block button-positive" style="border-radius: 10px;" ng-click="jumpGoQuestions()">+<b>发布提问</b></button>
 				</div>
 			</div>
 		</ion-pane>
-
 </ion-view>
+
+<!-- 一个ion-view控制器里面不能放多个ion-content -->
+<div ng-hide="masklayer" style="background-color: rgba(0,0,0,.1);position: fixed;top: 100px;left: 0;z-index: 10;width: 100%;height: 100%;"></div>
+<ion-content class="scroll-content ionic-scroll baclass" ng-hide="visible" style="top:100px;">
+	<div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
+		<ul>
+	  		<li ng-repeat="workscope in workscopes" ng-class="{ 'active':inShowscopes(workscope.key) }" ng-click="getWorkscopeVal(workscope.key,workscope.value)">{{workscope.value}}</li>
+	  	</ul>
+    </div>
+</ion-content>
+<ion-content class="scroll-content ionic-scroll baclass" ng-hide="visible1" style="top:100px;">
+	<div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
+		<ul>
+	  		<li  ng-repeat="order in orders" ng-class="{ 'active':inorders(order.key) }" ng-click="getOrderVal(order.key,order.value)">{{order.value}}</li>
+	  	</ul>
+    </div>
+</ion-content>

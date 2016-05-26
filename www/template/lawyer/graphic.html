@@ -1,54 +1,14 @@
 <ion-view hide-tabs="true">
 		<ion-pane>
-			<ion-header-bar align-title="center" class="bar bar-header bar-light">
-				<button class="button button-clear button-positive" ng-click="jumpGoBack()">  
-	                <i class="icon icon-left ion-ios-arrow-back"></i>  
-	            </button>
-				<h1 class="title">购买服务</h1>
-				<!--<a class="button icon-right ion-chevron-right button-clear button-small"></a>-->
-			</ion-header-bar>
-			
 			<ion-content>
-
-				<form id="questions_form" name="myForm" novalidate ng-controller="graphicCtrl">
-					<div class="item ist-case-searchtype questions-type">	
-						<div class="select-cnt arrow1 ion-chevron-down border-bottom-colorf2f2">
-							<select required ng-model="user.cat_id" ng-options="value.key as value.value for value in workscopes">
-								<option value="">请选择案例类型</option>
-						    </select>
-						</div>
-						<label class="item-input border-bottom-colorf2f2">
-						  <input ng-model="user.title" name="title" type="text" ng-minlength="1" ng-maxlength="15" placeholder="请输入咨询标题" required>
-						</label>
-						<p ng-cloak class="log-but error ng-cloak" ng-if="myForm.title.$error.maxlength">字符不能大于15个字符</p>
-						<label class="item-input">
-				          <textarea ng-model="user.content" name="content" rows="6" placeholder="请详细描述您要咨询的问题" ng-minlength="1" ng-maxlength="300" required></textarea>
+				<form id="myForm" name="myForm" novalidate ng-controller="graphicCtrl">
+					<div class="main">
+						  <label class="item-input mb10">
+				          <textarea class="textareacss" ng-model="content" name="content" rows="10" placeholder="详情描述：(10-300字)" ng-minlength="10" ng-maxlength="300" required ></textarea>
 				        </label>
-						<p ng-cloak class="log-but error ng-cloak" ng-if="myForm.content.$error.maxlength">字符不能大于300个字符</p>
 					</div>
-					<div class="item questions-site">
-						<label class="name" style="line-height: 50px;">请上传附件：</label>
-						<div class="rig">
-							<div ng-disabled="booleans" ng-model="file_paths"  accept="image/*"  gf-pattern="'image/*'" ngf-max-size="2MB" ngf-select="uploadFiles($files, $invalidFiles)" class="icon-right" multiple><i class="icon ion-ios-plus-outline" style="font-size: 48px;"></i></div>
-							<input type="hidden" name="file_paths" value="{{file}}" />
-						</div>
-
-						  <ul style="margin-top: 10px;display: inline-block;float: left;width: 100%;">
-						    <li class="contents" ng-repeat="f in files" style="font:smaller;width: 100%;">
-						    	{{f.name}}
-						    	{{f.$errorParam}}
-							    <!-- <span class="progress" ng-show="f.progress >= 0">
-							        <div style="width:{{f.progress}}%" ng-bind="f.progress + '%'"></div>
-							    </span> -->
-						    </li>
-						    <li class="contents" ng-repeat="f in errFiles" style="font:smaller;width: 100%;">{{f.name}} {{f.$errorParam}}</li> 
-						  </ul>
-						<!-- <label class="rig">
-							<img ng-src="{{file}}" ngf-thumbnail="upload_file || '{{group.group_avatar}}'" width="52" height="50">
-						</label> -->
-					</div>
-					<div class="padding">
-						<button class="button button-block button-positive" type="submit" ng-disabled="myForm.$invalid" ng-click="submit(user)" >提交</button>
+					<div style="background-color: #fff;padding:5px 10px;margin-top:50px;">
+						<button class="button button-block button-positive" style="border-radius: 10px;" ng-disabled="myForm.$invalid" ng-click="submit()">提交</button>
 					</div>
 				</form>
 			</ion-content>

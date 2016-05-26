@@ -1,4 +1,4 @@
-angular.module('lvtuanApp', ['ionic', 'app', 'templates'])
+angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -17,7 +17,6 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates'])
 
 //声明全局的方法和变量
 .run(['$rootScope','$timeout','$location','$ionicLoading',function($rootScope,$timeout,$location,$ionicLoading,$ionicHistory,$window){
-  
  /*$timeout(function() {
       localStorage.removeItem('is_lawyer');
   }, 600);*/
@@ -35,31 +34,37 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates'])
   };
 
   //localStorage.removeItem('is_lawyer');
+
   var hostName = AppSettings.baseApiUrl;
   localStorage.setItem("hostName", JSON.stringify(hostName));
   $rootScope.hostName = JSON.parse(localStorage.getItem('hostName'));
+
+  var hostPath = AppSettings.baseNewApiUrl;
+  localStorage.setItem("hostPath", JSON.stringify(hostPath));
+  $rootScope.hostPath = JSON.parse(localStorage.getItem('hostPath'));
 
   //回到首页
   $rootScope.goHome = function(){
     layer.goHome();
   }
 
+/*  $rootScope.$on('$ionicView.beforeEnter', function() {  
+    sessionStorage.setItem("goback", $location.absUrl());
+  })*/
+
 }])
 
 .run(function($rootScope, $location, $state, authService, locationService) {
 
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
-
         // 如果这个state需要登录才可以访问
         if (toState.authn) {
             // 如果用户没有登录
             if (!authService.isAuthed()) {
-                sessionStorage.setItem("goback", $location.absUrl());
                 $rootScope.$broadcast('unauthenticated');
                 event.preventDefault(); 
             } else {
                 // 如果用户没有权限访问
-                sessionStorage.setItem("goback", $location.absUrl());
                 currentUser = authService.getUser();
                 if (toState.authz && toState.authz == 'lawyer' && !currentUser.is_verified_lawyer) {
                     $rootScope.$broadcast('unauthorized');
@@ -75,6 +80,8 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates'])
     });
 
     $rootScope.$on('unauthorized', function() {
+      console.info('unauthorized');
+      sessionStorage.setItem("goback", $location.absUrl());
         layer.show('您没有权限访问这个链接！');
         $location.path('/login');
         $state.transitionTo("login");
@@ -83,6 +90,8 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates'])
     });
 
     $rootScope.$on('unauthenticated', function() {
+      console.info('unauthenticated');
+      sessionStorage.setItem("goback", $location.absUrl());
         layer.show('请先登录！');
         // $location.path('/login');
         $state.transitionTo("login");
@@ -92,10 +101,47 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates'])
     
 })
 
-.config(function($httpProvider) {
+.config(function($httpProvider, jwtInterceptorProvider) {
+  jwtInterceptorProvider.tokenGetter = ['jwtHelper', 'authService', '$http', 'config', '$rootScope', function(jwtHelper, authService, $http, config, $rootScope) {
+    // Skip authentication for any requests ending in .html
+    if (config.url.substr(config.url.length - 5) == '.html') {
+      return null;
+    }
+
+    var token = authService.getToken();
+    if (token) {
+      if (jwtHelper.isTokenExpired(token)) {
+        console.info("refreshing the token : " + token);
+        // This is a promise of a JWT token
+        return $http({
+          url: 'http://' + AppSettings.baseApiUrl + '/refresh_token',
+          skipAuthorization: true,
+          method: 'POST',
+          headers: {
+            'Authorization': 'bearer ' + token
+          }
+        }).then(
+          function(response) {
+            console.info('2 response: ', response);
+            var token = response.data.data.token;
+            authService.saveToken(token);
+            return token;
+          }, 
+          function(reason) {
+            localStorage.clear();
+            $rootScope.$broadcast('unauthenticated');
+          }
+        );
+      } else {
+        console.info("returning the token : " + token);
+        return token;
+      }
+    }
+  }];
+
+  $httpProvider.interceptors.push('jwtInterceptor');
   $httpProvider.interceptors.push('APIInterceptor');
 })
-
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 
@@ -526,35 +572,85 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates'])
     })
 
 /********************************** 找律师 **********************************/
-    .state('lawyerlist', { //找律师列表
-      url: '/lawyerlist',
+    .state('one-questions', { //一对一咨询
+      url: '/one-questions',
       cache: 'true',
-      templateUrl: 'template/lawyer/lawyer_list.html'
+      templateUrl: 'template/lawyer/one_questions.html',
+      controller: 'lawyerOneQuestionsCtrl'
     })
-    .state('lawyer', { //律师个人主页
-      url: '/lawyer/:id',
+
+    .state('all-evaluate', { //律师对咨询的所有评价
+      url: '/all-evaluate',
+      cache: 'true',
+      templateUrl: 'template/lawyer/all_evaluate.html',
+      controller: 'lawyerAllEvaluateCtrl'
+    })
+
+    .state('lawyer-all-evaluate', { //用户对某一个律师的所有评价
+      url: '/lawyer-all-evaluate/:id',
+      cache: 'true',
+      templateUrl: 'template/lawyer/lawyer_all_evaluate.html',
+      controller: 'lawyerOneAllEvaluateCtrl'
+    })
+
+    .state('lawyer/list', { //找律师列表
+      url: '/lawyer/list/:type',
+      cache: 'true',
+      templateUrl: 'template/lawyer/lawyer_list.html',
+      controller: 'lawyerlistCtrl'
+    })
+
+    .state('lawyer-list/search', { //找律师列表
+      url: '/lawyer-list/search/:type',
+      cache: 'true',
+      templateUrl: 'template/lawyer/lawyer_list_search.html'
+    })
+    
+    .state('lawyer/view', { //律师个人主页
+      url: '/lawyer/view/:id',
       cache: 'true',
       templateUrl: 'template/lawyer/view.html',
-      controller: 'viewCtrl'
+      controller: 'lawyerViewCtrl'
     })
 
     .state('graphic', { //图文咨询
-      url: '/graphic/:type',
+      url: '/graphic/:type?id',
       cache: 'true',
-      templateUrl: 'template/lawyer/graphic.html',
-      authn: true
+      templateUrl: 'template/lawyer/graphic.html'
     })
+
+     //律师 - 个人主页 - 发表文章
+  .state('lawyer/article', { //律师 - 发表文章
+      url: '/lawyer/article',
+      templateUrl: 'template/lawyer/article.html'
+  })
+  .state('lawyer/article.like', { //发表文章 - 点赞最多
+      url: '/like',
+      views: {
+          'article-like-most': {
+              templateUrl: 'template/lawyer/article_like_most.html',
+              controller: 'lawyerArticleLikeMostCtrl'
+          }
+      }
+  })
+  .state('lawyer/article.lately', { //发表文章 - 最近发布
+      url: '/lately',
+      views: {
+          'article-lately-editing': {
+              templateUrl: 'template/lawyer/article_lately_editing.html',
+              controller: 'lawyerArticleLatelyEditingCtrl'
+          }
+      }
+  })
     
 /********************************** 问律师 **********************************/
     .state('questions', { //问律师
       url: '/questions',
-      cache: 'true', 
+      cache: 'false', 
       templateUrl: 'template/questions/questions.html',
-      controller: 'questionsCtrl',
-      authn: true
+      authn: false
     })
     .state('questionslist', { //问律师列表
-      cache: 'true', 
       url: '/questionslist',
       templateUrl: 'template/questions/questions_list.html',
       controller: 'questionslistCtrl',
@@ -563,7 +659,8 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates'])
     .state('question/list/search', { //问律师列表
       cache: 'true', 
       url: '/question/list/search',
-      templateUrl: 'template/questions/questions_list_search.html'
+      templateUrl: 'template/questions/questions_list_search.html',
+      authn: false
     })
     
     .state('questionsview', { //问律师详情
@@ -573,10 +670,25 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates'])
       controller: 'questionsviewsCtrl',
       authn: false
     })
-    .state('questions/help', { //咨询帮助
+
+    .state('questions/comment', { //问律师评价
       cache: 'true', 
-      url: '/questions/help',
-      templateUrl: 'template/questions/questions_help.html',
+      url: '/questions/comment/:id',
+      templateUrl: 'template/questions/comment.html',
+      authn: false
+    })
+
+    .state('questions/areward', { //问律师评价
+      url: '/questions/areward/:id',
+      templateUrl: 'template/questions/areward.html',
+      controller: 'questionsArewardCtrl',
+      authn: true
+    })
+
+    .state('questions/order/pay', { //订单支付
+      url: '/questions/order/pay/:id',
+      templateUrl: 'template/questions/order_pay.html',
+      controller: 'questionsOrderPpayCtrl',
       authn: true
     })
 
@@ -610,75 +722,64 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates'])
       authn: true
   })
 
+  //用户 - 我的 - 咨询管理
+  .state('user/question/list', { //用户 - 咨询管理
+      url: '/user/question/list',
+      templateUrl: 'template/mylvtuan/user/question_list.html',
+      controller: 'userQuestionListCtrl',
+      authn: true
+  })
 
-  //首页 - 我的 - 免费咨询
-  .state('question/gratis', { //首页 - 我的 - 免费咨询
-      url: '/question/gratis',
-      templateUrl: 'template/mylvtuan/question/gratis/question.html',
+  //用户 - 我的 - 订单管理
+  .state('user/order/list', { //用户 - 订单管理
+      url: '/user/order/list',
+      templateUrl: 'template/mylvtuan/user/order_list.html',
+      controller: 'userOrderListCtrl',
       authn: true
   })
-  .state('question/gratis.new', { //免费咨询 - 待受理
-      url: '/new',
+  //用户 - 我的 - 订单详情
+  .state('user/order/view', { //用户 - 订单详情
+      url: '/user/order/view/:id',
+      templateUrl: 'template/mylvtuan/user/order_view.html',
+      controller: 'userOrderViewCtrl',
+      authn: true
+  })
+
+  //律师 - 我的 - 咨询管理
+  .state('lawyer/question', { //律师 - 咨询管理
+      url: '/lawyer/question',
+      templateUrl: 'template/mylvtuan/lawyer/question.html',
+      authn: true
+  })
+  .state('lawyer/question.not', { //咨询管理 - 未参与
+      url: '/not',
       views: {
-          'question-gratis-new': {
-              templateUrl: 'template/mylvtuan/question/gratis/new.html',
-              controller: 'questionGratisNewCtrl'
+          'lawyer-question-not': {
+              templateUrl: 'template/mylvtuan/lawyer/not.html',
+              controller: 'lawyerQuestionNotCtrl'
           }
       },
       authn: true
   })
-  .state('question/gratis.waitforconfirmation', { //免费咨询 - 待确认
-      url: '/waitforconfirmation',
+  .state('lawyer/question.already', { //咨询管理 - 已参与
+      url: '/already',
       views: {
-          'question-gratis-waitforconfirmation': {
-              templateUrl: 'template/mylvtuan/question/gratis/waitforconfirmation.html',
-              controller: 'questionGratisWaitforconfirmationCtrl'
+          'lawyer-question-already': {
+              templateUrl: 'template/mylvtuan/lawyer/already.html',
+              controller: 'lawyerQuestionAlreadyCtrl'
           }
       },
       authn: true
   })
-  .state('question/gratis.waitforevaluation', { //免费咨询 - 待评价
-      url: '/waitforevaluation',
-      views: {
-          'question-gratis-waitforevaluation': {
-              templateUrl: 'template/mylvtuan/question/gratis/waitforevaluation.html',
-              controller: 'questionGratisWaitforevaluationCtrl'
-          }
-      },
+  //律师 - 我的 - 订单管理
+  .state('lawyer/order/list', { //用户 - 订单管理
+      url: '/lawyer/order/list',
+      templateUrl: 'template/mylvtuan/lawyer/order_list.html',
+      controller: 'lawyerOrderListCtrl',
       authn: true
-    })
-   .state('question/gratis.complete', { //免费咨询 - 已完成
-      url: '/complete',
-      views: {
-          'question-gratis-complete': {
-              templateUrl: 'template/mylvtuan/question/gratis/complete.html',
-              controller: 'questionGratisCompleteCtrl'
-          }
-      },
-      authn: true
-    })
+  })
   
-  .state('question/gratis.cancelled', { //免费咨询 - 已取消
-      url: '/cancelled',
-      views: {
-          'question-gratis-cancelled': {
-              templateUrl: 'template/mylvtuan/question/gratis/cancelled.html',
-              controller: 'questionGratisCancelledCtrl'
-          }
-      },
-      authn: true
-  })
-  .state('question/question/view', { //免费咨询 - 咨询详情
-      url: '/question/question/view/:id',
-      templateUrl: 'template/mylvtuan/question/gratis/view.html',
-      controller: 'questionGratisViewCtrl',
-      authn: true
-  })
-  .state('question/gratis/send/mind', { //免费咨询 - 咨询详情 - 送心意
-      url: '/send/mind/:id',
-      templateUrl: 'template/mylvtuan/question/gratis/send-mind.html',
-      authn: true
-    })
+
 
 
   //首页 - 我的 - 图文咨询

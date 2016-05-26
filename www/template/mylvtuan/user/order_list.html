@@ -1,0 +1,35 @@
+<ion-view hide-tabs="true" cache-view="false" view-title="订单管理">
+    <ion-content>
+    	<div ng-if="nodata == false" class="nodate">
+			<i class="nodate-iocn"></i><br>
+			<label>暂无数据！</label>
+		</div>
+		
+    	<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+    		<div class="card" ng-repeat="item in items" style="border-radius: 10px;">
+				<div class="item item-text-wrap" style="border-width: 0px;">
+					<h3 style="margin-bottom: 20px;color: #48b4ff;">
+						{{item.status_name}}
+						<a ng-href="#/user/order/view/{{item.id}}" class="item-note" style="color: #48b4ff;">>></a>
+					</h3>
+					<div class="hr mb10"></div>
+					<div class="item item-avatar left56" style="border-color:#fff;border-style: none;border-width:0;padding-bottom: 11px;">
+						<a class="item-image left0" ng-href="#/lawyer/view/{{item.creator_id}}"><img ng-src="{{item.creator_avatar}}"></a>
+						<p>
+							订单编号：12345678912345612
+						</p>
+						<p>
+							创建时间：{{item.created_at}}
+						</p>
+						<p>
+							订单金额：199元
+						</p>
+						<p>
+							订单信息：{{item.type_name}}
+						</p>
+			        </div>
+				</div>
+			</div>
+		<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
+    </ion-content>
+</ion-view>

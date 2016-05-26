@@ -25,6 +25,32 @@ var layer = (function(){
     }  
   } 
   
+  //提示
+  //弹出层
+/*  this.popup = function(divId) {
+    var height = $(window).height();
+    var warp = "width: 90%;height:"+(height-80)+"px;background:#fff;color:#32A4E6;position:fixed;z-index:9999;top:0;" +
+    "margin-left:5%;margin-right:5%;margin-top: 40px;border-radius:7px;overflow:scroll;";
+    $("#"+divId).attr('style',warp).fadeIn('slow');
+    
+    var canel = $("<div id='embs_canel' style='font-size:20px;background:#ccc;color:#fff;border-radius:50%;width:30px;height:30px;line-height:30px;text-align:center;position:fixed;z-index:10000;top:20px;left:88%;'>X</div>");
+    //遮罩层
+    var shade = $("<div id='embs_shade' style='width:100%;height:"+height+"px;background:#000;position:fixed;opacity:0.3;z-index:9998;top:0;left:0;'></div>");
+    shade.appendTo($('.pane'));
+    canel.appendTo($('.pane'));
+    $("#embs_canel").bind('click',function(){
+      canel.remove();
+      shade.remove();
+      $('#'+divId).fadeOut('slow');
+    });
+  }
+  //关闭弹出层
+  this.closePopup = function(divId) {
+    $("#embs_shade").remove();  //删除遮罩层
+    $("#embs_canel").remove();  //删除弹出层
+    $('#'+divId).fadeOut('slow');
+  }*/
+
   //获取url中的参数
   this.getUrlParam = function(name) {
       var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
@@ -242,3 +268,5 @@ this.stopDefault = function(e)
         }
     })
 }*/
+
+

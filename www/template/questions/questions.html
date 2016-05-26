@@ -1,59 +1,53 @@
-<ion-view hide-Tabs="true">
+<style type="text/css">
+	.textareacss.active{
+		position: fixed;
+		z-index: 9999;
+		top: 50px;
+	}
+	.textareacss.inactive{
+		position: static;
+		top: auto;
+	}
+	
+</style>
+<ion-view hide-Tabs="true" cache-view="false" view-title="发布提问">
 		<ion-pane>
-			<ion-header-bar align-title="center" class="bar bar-header bar-light">
-				<button class="button button-clear button-positive pull-left" ng-click="jumpGo('#/questionslist')">  
-                    <i class="icon ion-ios-arrow-back"></i>  
-                </button>
-				<h1 class="title">添加咨询</h1>
-				<button class="button button-clear pull-right" ng-click="jumpGo('#/questions/help')">  
-	                <i class="icon ion-ios-help-outline positive"></i>
-	            </button>
-			</ion-header-bar>
 			<ion-content>
-				<form id="questions_form" name="myForm" novalidate>
-					<div class="item ist-case-searchtype questions-type">	
-						<div class="select-cnt arrow1 ion-chevron-down border-bottom-colorf2f2">
-							<select required ng-model="user.cat_id" ng-options="value.key as value.value for value in workscopes">
-								<option value="">请选择案例类型</option>
-						    </select>
+				<form id="questions_form" name="myForm" novalidate ng-controller="questionsCtrl">
+					<div class="row row-center row-no-padding" style="background-color: #fff;text-align: center;height: 45px;line-height: 45px;color:#7f7f7f;padding-bottom: 1px;box-shadow: 0 1px 3px rgba(0,0,0,.3);">
+						<div class="col drop-down-arrow" style="border-right:1px solid #e5e5e5;text-align: center;" ng-click="toggle()">
+							<label ng-if="!key">{{name}}</label>
+							<label ng-if="key" class="c48b4ff">{{name}}</label>
 						</div>
-						<label class="item-input border-bottom-colorf2f2">
-						  <input ng-model="user.title" name="title" type="text" ng-minlength="1" ng-maxlength="15" placeholder="请输入咨询标题" required>
+					</div>
+					<div ng-hide="rgba" style="background-color: rgba(0,0,0,.1);position: fixed;top: 44px;left: 0;z-index: 10;width: 100%;height: 100%;"></div>
+					
+			        <ion-content class="scroll-content ionic-scroll baclass" ng-hide="visible" style="top:44px;">
+			        	<div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
+							<ul>
+						  		<li ng-repeat="workscope in workscopes" ng-class="{ 'active':inShowscopes(workscope.key) }" ng-click="getval(workscope.key,workscope.value)">{{workscope.value}}</li>
+						  	</ul>
+				        </div>
+				    </ion-content>
+				    <div class="main">
+					    <label class="item-input mb10">
+						  <input ng-model="title" name="title" type="text" ng-minlength="2" ng-maxlength="30" placeholder="咨询标题：(2-30字)" required>
 						</label>
-						<p ng-cloak class="log-but error ng-cloak" ng-if="myForm.title.$error.maxlength">字符不能大于15个字符</p>
-						<label class="item-input">
-				          <textarea ng-model="user.content" name="content" rows="6" placeholder="请详细描述您要咨询的问题" ng-minlength="1" ng-maxlength="300" required></textarea>
+						
+						  	<label class="item-input mb10">
+				          <!-- <textarea class="textareacss" ng-model="content" name="content" rows="10" placeholder="详情描述：(10-300字)" ng-minlength="10" ng-maxlength="300" required ></textarea> -->
+				          <textarea class="keyboard-open textareacss" ng-class="{true: 'active', false: 'inactive'}[isActive]" ng-model="content" name="content" rows="10" placeholder="详情描述：(10-300字)" ng-minlength="10" ng-maxlength="300" required ng-focus="textfocus()" ng-blur="textblur()" ></textarea>
 				        </label>
-						<p ng-cloak class="log-but error ng-cloak" ng-if="myForm.content.$error.maxlength">字符不能大于300个字符</p>
-					</div>
-					<div class="item questions-site">
-						<label class="name" style="line-height: 50px;">请上传附件：</label>
-						<div class="rig">
-							<div ng-disabled="booleans" ng-model="file_paths"  accept="image/*"  gf-pattern="'image/*'" ngf-max-size="2MB" ngf-select="uploadFiles($files, $invalidFiles)" class="icon-right" multiple><i class="icon ion-ios-plus-outline" style="font-size: 48px;"></i></div>
-							<input type="hidden" name="file_paths" value="{{file}}" />
-						</div>
+						
 
-						  <ul style="margin-top: 10px;display: inline-block;float: left;width: 100%;">
-						    <li class="contents" ng-repeat="f in files" style="font:smaller;width: 100%;">
-						    	{{f.name}}
-						    	{{f.$errorParam}}
-						     <!--  <span class="progress" ng-show="f.progress >= 0">
-						        <div style="width:{{f.progress}}%"  
-						            ng-bind="f.progress + '%'"></div>
-						      </span> -->
-						    </li>
-						    <li class="contents" ng-repeat="f in errFiles" style="font:smaller;width: 100%;">
-						    	 <!-- {{f.name}} {{f.$error}} {{f.$errorParam}} -->
-						    	{{f.name}} {{f.$errorParam}}
-						    </li> 
-						  </ul>
-						<!-- <label class="rig">
-							<img ng-src="{{file}}" ngf-thumbnail="upload_file || '{{group.group_avatar}}'" width="52" height="50">
-						</label> -->
 					</div>
-					<div class="padding">
-						<button class="button button-block button-positive" type="submit" ng-disabled="myForm.$invalid" ng-click="submit(user)" >提交</button>
+					
+					<div style="background-color: #fff;padding:5px 10px;margin-top:50px;">
+						<button class="button button-block button-positive" style="border-radius: 10px;" ng-disabled="myForm.$invalid" ng-click="question_Submit()">提交</button>
 					</div>
+					<!-- <div style="background-color: #fff;padding:5px 10px;margin-top:50px;">
+						<button class="button button-block button-positive" type="submit" ng-disabled="myForm.$invalid" ng-click="question_Submit()" >提交</button>
+					</div> -->
 				</form>
 			</ion-content>
 			

@@ -1,53 +1,73 @@
-<style type="text/css">
-	.chathost .item p.contents{border-color: #fff;border: 1px solid #999;border-radius: 6px;padding: 5px;}
-	.chathost .item.item-avatar-right{border-color: #fff;}
-	.chathost .item h2.right{text-align: right;}
-	.chathost .item p.con_left{display: inline-block;}
-	.chathost .item p.con_right{display: inline-block;float: right;}
-	.item h2.title{width: 80%;display: inline-block;float: left;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 1;-webkit-box-orient: vertical;white-space: normal;}
-</style>
-<ion-view hide-Tabs="true">
-		<ion-pane>
-		<ion-header-bar align-title="center" class="bar bar-header bar-light">
-			<button class="button button-clear button-positive" ng-click="jumpGoBack()">  
-                <i class="icon icon-left ion-ios-arrow-back"></i>  
-            </button>
-			<h1 class="title">咨询详情</h1>
-		</ion-header-bar>
+<ion-view hide-Tabs="true" cache-view="false" view-title="咨询参考">
+	<ion-pane>
 		<ion-content>
-			<div class="item" style="border-color: #fff;">
-    			  	<!-- 未收藏  -->
-				  	<span ng-if="items.is_collect == false" ng-click="collects(items.id)"  class="item-note" style="font-size: 2rem;margin-top: -5px;"><i class="icon ion-ios-star-outline"></i></span>
-				  	<!-- 收藏 -->
-				  	<span ng-if="items.is_collect == true" ng-click="collects_del(items.id)"  class="item-note" style="font-size: 2rem;margin-top: -5px;"><i class="icon ion-star positive"></i></span>
-			  	<h2 class="title">{{items.title}}</h2>
-		  	</div>
-			<div class="item item-avatar" style="border-color: #fff;">
-				<img ng-src="{{items.creator_avatar}}">
-			  	<span class="item-note">{{items.created_at}}</span>
-			  	<h2>普通用户</h2>
-			    <p class="contents">
-			    	{{items.content}}
-			    </p>
-			</div>
-			<div class="item item-divider" style="border-color: #fff;">
-			   律师回复
-			</div>
+			<div class="hederpading">
+				<!-- 未评价  -->
+				<span ng-if="items.can_reply == false" ng-click="isUser(items.id)"><i class="comment"></i></span>
+				<!-- 评价 -->
+				<span ng-if="items.can_reply == true" ng-click="isUser(items.id)"><i class="comment_s"></i></span>
 
-			<div class="chathost" ng-repeat="comment in items.comments">
-				<div ng-if="comment.from_creator == false" class="item item-avatar item-borderless">
-					<img ng-src="{{comment.owner.avatar}}">
-				  	<h2>{{comment.owner.realname}}</h2>
-				    <p class="contents con_left">{{comment.content}}</p>
+				<!-- 未收藏  -->
+				<span ng-if="items.is_collect == false"  ng-click="collects(items.id)" ><i class="collect"></i></span>
+				<!-- 收藏 -->
+				<span ng-if="items.is_collect == true"  ng-click="collects_del(items.id)" ><i class="collect_s"></i></span>
+			</div>
+			<div class="card" style="border-radius: 10px;box-shadow:none;">
+				  <div class="item item-text-wrap">
+				  	<h2 class="mb10">{{items.title}}</h2>
+				  	<p class="contents">
+				    	{{items.content}}
+				    </p>
+				  	<p class="mt10">
+				  		<span class="subdued cb5b5b5" style="padding-right:10px;">
+				  			<label ng-if="items.creator_realname != null">{{items.creator_realname}}</label>
+				  			<label ng-if="items.creator_realname == null || items.creator_realname == ''">匿名用户</label>
+				  		</span>
+					  	<span class="cb5b5b5">{{items.created_at}}</span>
+				  	</p>
 				</div>
-
-				<div ng-if="comment.from_creator == true" class="item item-avatar-right item-borderless">
-					<img ng-src="{{comment.owner.avatar}}">
-				  	<h2 class="right">{{comment.owner.realname}}</h2>
-				    <p class="contents con_right">{{comment.content}}</p>
-				</div>
+			</div>
+			<div class="card" style="border-radius: 10px;box-shadow:none;" ng-repeat="comment in items.comments">
+				<div class="item item-avatar" style="border-color:#fff;border-style: none;border-width:0;padding-bottom: 11px;">
+					<a class="item-image" ng-href="#/lawyer/view/{{comment.creator_id}}"><img ng-src="{{comment.creator_avatar}}"></a>
+					<div style="width: 50%;float: left;">
+						<h2 class="c48b4ff" style="margin-bottom: 5px;"><a ng-href="#/lawyer/view/{{comment.creator_id}}">{{comment.creator_name}}律师</a></h2>
+					  <p class="cb5b5b5">执业{{comment.creator_practice_period}}</p>
+					</div>
+					<div style="float: right;">
+						<div class="row row-no-padding">
+						  <div class="col txt-align-c font14 cb5b5b5">
+							  	<!-- 未点赞  -->
+								<span ng-if="comment.is_liked == false"  ng-click="likes(comment.id,$index)" >
+									<i class="like"></i>
+								</span>
+								<!-- 点赞 -->
+								<span ng-if="comment.is_liked == true"  ng-click="likes_del()" >
+									<i class="like_s"></i>
+								</span>
+								<br>
+								{{comment.like_count}}
+						  </div>
+						  <div class="col txt-align-c font14 cb5b5b5">
+							  	<!-- 未打赏  -->
+								<span ng-click="areward(comment.creator_id)">
+									<i class="gift"></i>
+								</span>
+								<br>
+								打赏
+						  </div>
+						</div>
+					</div>
+		        </div>
+		        <div class="carditem">
+			        <p class="contents">
+				    	{{comment.content}}
+				    </p>
+				  	<p class="mt10">
+					  	<span class="cb5b5b5">{{comment.created_at}}</span>
+				  	</p>
+		        </div>
 			</div>
 		</ion-content>
-			
 	</ion-pane>
 </ion-view>

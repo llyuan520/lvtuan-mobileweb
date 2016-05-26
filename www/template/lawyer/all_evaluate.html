@@ -1,0 +1,65 @@
+<ion-view hide-tabs="true" view-title="全部评价">
+		<ion-pane>
+			<ion-content>
+				<div style="display: inline-block;width: 100%;background-color: #fff;">
+					<div class="radiuscf label-list">
+						<div class="row row-no-padding">
+				    		<div class="col col-center row-no-padding">
+				    			<span class="labels" ng-class="{ 'active':inEvaluate('all') }" ng-click="click_evaluate('all')">全部</span>
+				    		</div>
+				    		<div class="col col-center row-no-padding">
+				    			<span class="labels" ng-class="{ 'active':inEvaluate('high') }" ng-click="click_evaluate('high')">好评 {{extras.high}}</span>
+				    		</div>
+				    		<div class="col col-center row-no-padding" style="text-align: right;">
+				    			<span class="labels" ng-class="{ 'active':inEvaluate('intermediate') }" ng-click="click_evaluate('intermediate')">中评 {{extras.intermediate}}</span>
+				    		</div>
+				    		<div class="col col-center row-no-padding" style="text-align: right;">
+				    			<span class="labels" ng-class="{ 'active':inEvaluate('low') }" ng-click="click_evaluate('low')">差评 {{extras.low}}</span>
+				    		</div>
+				    	</div>
+				    </div>
+				</div>
+
+				<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+				<div ng-if="nodata == false" class="nodate">
+					<i class="nodate-iocn"></i><br>
+					<label>暂无数据！</label>
+				</div>
+
+				<div class="card" style="border-radius: 10px;" ng-repeat="item in items">
+					<div class="item item-text-wrap" style="border-width: 0px;">
+						<div class="row row-no-padding mb10">
+				       		<div class="col col-center row-no-padding">
+			       				<label class="cb5b5b5" ng-if="item.realname == null || item.realname == ''">匿名用户</label>
+			       				<label class="cb5b5b5" ng-if="item.realname != null">{{item.realname}}</label><br>
+			       				<label class="font12 cb5b5b5">{{item.difference_date}}</label>
+				       		</div>
+						  	<div class="col col-center row-no-padding textright">
+						  		<b class="cff4670" style="font-size: 26px;">{{item.score}}</b> <label class="font12">分</label>
+						  	</div>
+						</div>
+						<p>
+							{{item.comment}}
+						</p>
+						<p class="mt10">
+							<label class="label" ng-repeat="tag in item.tags">{{tag}}</label>
+						</p>
+						<div class="hr" style="margin: 11px 0 1px 0;"></div>
+						<div class="item item-avatar" style="border-color:#fff;border-style: none;border-width:0;padding-bottom: 11px;padding-left: 55px;">
+							<img ng-src="{{item.lawyer_avatar}}" style="left: 0px;">
+							<div>
+							  <h2 class="c48b4ff" style="margin-bottom: 5px;">
+							  	<span>{{item.lawyer_realname}}律师</span>
+							  	<a ng-href="#/lawyer/view/{{item.lawyer_user_id}}" class="item-note" style="color: #48b4ff;">>></a>
+							  </h2>
+							  <p class="cb5b5b5">
+							  	执业3-5年 
+							  </p>
+							</div>
+				        </div>
+					</div>
+				</div>
+				<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
+			</ion-content>
+		</ion-pane>
+</ion-view>>
