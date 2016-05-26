@@ -614,10 +614,9 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
     })
 
     .state('graphic', { //图文咨询
-      url: '/graphic/:type',
+      url: '/graphic/:type?id',
       cache: 'true',
-      templateUrl: 'template/lawyer/graphic.html',
-      authn: true
+      templateUrl: 'template/lawyer/graphic.html'
     })
 
      //律师 - 个人主页 - 发表文章
@@ -738,6 +737,13 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
       controller: 'userOrderListCtrl',
       authn: true
   })
+  //用户 - 我的 - 订单详情
+  .state('user/order/view', { //用户 - 订单详情
+      url: '/user/order/view/:id',
+      templateUrl: 'template/mylvtuan/user/order_view.html',
+      controller: 'userOrderViewCtrl',
+      authn: true
+  })
 
   //律师 - 我的 - 咨询管理
   .state('lawyer/question', { //律师 - 咨询管理
@@ -765,13 +771,14 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
       },
       authn: true
   })
-  //用户 - 我的 - 订单管理
+  //律师 - 我的 - 订单管理
   .state('lawyer/order/list', { //用户 - 订单管理
       url: '/lawyer/order/list',
       templateUrl: 'template/mylvtuan/lawyer/order_list.html',
       controller: 'lawyerOrderListCtrl',
       authn: true
   })
+  
 
 
 

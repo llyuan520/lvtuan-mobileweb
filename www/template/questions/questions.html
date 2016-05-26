@@ -33,10 +33,12 @@
 					    <label class="item-input mb10">
 						  <input ng-model="title" name="title" type="text" ng-minlength="2" ng-maxlength="30" placeholder="咨询标题：(2-30字)" required>
 						</label>
-						<label class="item-input mb10">
+						
+						  	<label class="item-input mb10">
 				          <!-- <textarea class="textareacss" ng-model="content" name="content" rows="10" placeholder="详情描述：(10-300字)" ng-minlength="10" ng-maxlength="300" required ></textarea> -->
-				          <textarea class="textareacss" ng-class="{true: 'active', false: 'inactive'}[isActive]" ng-model="content" name="content" rows="10" placeholder="详情描述：(10-300字)" ng-minlength="10" ng-maxlength="300" required ng-focus="textfocus()" ng-blur="textblur()" ></textarea>
+				          <textarea class="keyboard-open textareacss" ng-class="{true: 'active', false: 'inactive'}[isActive]" ng-model="content" name="content" rows="10" placeholder="详情描述：(10-300字)" ng-minlength="10" ng-maxlength="300" required ng-focus="textfocus()" ng-blur="textblur()" ></textarea>
 				        </label>
+						
 
 					</div>
 					

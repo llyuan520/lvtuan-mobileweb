@@ -1718,6 +1718,13 @@ a,button,input{
 .button.button-cff2f5f:hover {color: #fff;text-decoration: none; }
 .button.button-cff2f5f.active, .button.button-cff2f5f.activated {border-color: #ff2f5f;background-color: #ff2f5f;}
 .button.button-cff2f5f.button-clear {color: #fff; }
+
+.button.button-cebebeb {border-color: #ebebeb;background-color: #ebebeb;color: #48b4ff; }
+.button.button-cebebeb:hover {color: #48b4ff;text-decoration: none; }
+.button.button-cebebeb.active, .button.button-cebebeb.activated {border-color: #ebebeb;background-color: #ebebeb;box-shadow: none;}
+.button.button-cebebeb.button-clear {color: #48b4ff; }
+.button.button-light.active, .button.button-light.activated {border-color: #fff;background-color: #fafafa;box-shadow: none }
+
 .button-small {padding: 2px 16px 1px;min-width: 28px;min-height: 30px;font-size: 12px;line-height: 26px; }
 .button-clear.button-clear{color: #fff;}
 .item-complex .item-content, .item-radio .item-content{padding: 8px 8px 16px 106px;}
@@ -1809,3 +1816,11 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
 .lawyer-zgd{padding-bottom: 20px;}
 .lawyer-company-name{height: 70px;line-height: 88px;text-align: center;font-size: 16px;width: 90%;margin: 0 auto}
 .lawyer-zgd img{width: 65%;vertical-align: top;}
+
+/*律师主页-弹出框*/
+.popup-head {padding: 10px;border-bottom: none;text-align: center;}
+.popup .popup-buttons button.button, .popup-buttons .button{height: 35px;line-height: 35px;border-radius:10px;padding: 0;min-height:35px;font-size: 14px;}
+.isPopup{padding-bottom: 5px;}
+.isPopup .button.button{border-radius: 50px;}
+.popup-container .popup{background-color: rgba(255, 255, 255, 1);}
+

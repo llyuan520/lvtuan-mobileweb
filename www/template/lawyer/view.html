@@ -123,11 +123,18 @@
 						</div>
 					</div>
 					<div class="col col-80 col-center row-no-padding"  style="padding: 5px 10px 10px 0px;">
-						<button class="button button-block button-positive" style="border-bottom-right-radius: 10px;border-bottom-left-radius: 0;border-top-left-radius: 0;border-top-right-radius: 10px;" ng-click="submit()">立即预约</button>
+						<button class="button button-block button-positive" style="border-bottom-right-radius: 10px;border-bottom-left-radius: 0;border-top-left-radius: 0;border-top-right-radius: 10px;" ng-click="showIonicPopup(question_type,items.id)">立即预约</button>
 					</div>
 					
 				</div>
 			</div>
-
 		</ion-pane>
 </ion-view>
+
+<!-- 律师个人主页 - 立即预约 -->
+<script id="my-reservationNow.html" type="text/ng-template">
+	<div class="isPopup">
+		<button class="button button-block"  ng-class="{true: 'button-cebebeb', false: 'button-light'}[active]" style="font-size: 14px;font-weight: normal;" ng-click="toggle('pay_text')">图文咨询：{{items.text_reply_fee}}元/次</button>
+		<button class="button button-block" ng-class="{true: 'button-cebebeb', false: 'button-light'}[!active]" style="font-size: 14px;margin-top: 10px;font-weight: normal;" ng-click="toggle('pay_phone')">电话咨询：{{items.phone_reply_fee}}元/次</button>
+	</div>
+</script>
