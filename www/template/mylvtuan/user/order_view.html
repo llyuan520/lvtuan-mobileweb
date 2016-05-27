@@ -1,3 +1,15 @@
+<style type="text/css">
+.popup-head {
+position: relative;
+}
+.popup-head1 {
+padding: 10px;border-bottom: none;background-color: #48b4ff;color: #fff;text-align: center;border-top-left-radius: 4px;border-top-right-radius: 4px;color: #fff;
+position: absolute;
+width: 100%;
+left: 0;
+top: 0;
+}
+</style>
 <ion-view hide-tabs="true" cache-view="false" view-title="订单详情">
 	<ion-pane>
 		<ion-content class="has-tabs">
@@ -18,32 +30,37 @@
 				</div>
 			</div>
 
+
 	    </ion-content>
 
 	    <div class="tabs" style="background-color:#fff;height: 59px;">
 
 			<!-- 待确认 -->
-			<!-- <div class="row row-center row-no-padding" style="padding: 5px 10px;">
-				<div class="col col-center" style="margin-right: 10px;">
+			<!-- <div class="row row-center row-no-padding" style="padding: 5px 10px;"> -->
+				<!-- <div class="col col-center" style="margin-right: 10px;">
 					<button class="button button-block button-positive" style="border-radius: 10px;" ng-click="to_complete(items.transitions[1].to_complete)">确认完成</button>
-				</div>
-				<div class="col col-center">
+				</div> -->
+				<!-- 图文咨询 -->
+				<!-- <div class="col col-center">
 					<button class="button button-block button-positive" style="border-radius: 10px;" ng-click="to_ask(items.id)">联系律师</button>
-				</div>
-			</div> -->
+				</div> -->
+				<!-- 电话咨询 -->
+				<!-- <div class="col col-center">
+					<button class="button button-block button-positive" style="border-radius: 10px;" ng-click="to_lawyer()">联系律师</button>
+				</div> -->
+			<!-- </div> -->
 
 			<!-- 待评价 -->
-			<div class="row" style="padding: 5px 10px;">
-				<button class="button button-block button-positive" style="border-radius: 10px;" ng-click="to_evaluate(items.id,items.type)">服务评价</button>
-			</div>
-
-			<!-- 已结束 -->
 			<!-- <div class="row" style="padding: 5px 10px;">
-				<button class="button button-block button-positive" style="border-radius: 10px;">聊天记录</button>
+				<button class="button button-block button-positive" style="border-radius: 10px;" ng-click="to_evaluate(items.id,items.type)">服务评价</button>
 			</div> -->
 
-		</div>
+			<!-- 已结束 -->
+			<div class="row" style="padding: 5px 10px;">
+				<a class="button button-block button-positive" style="border-radius: 10px;" ng-href="#/easemob/view/{{items.id}}">聊天记录</a>
+			</div>
 
+		</div>
 
 	</ion-pane>
 </ion-view>

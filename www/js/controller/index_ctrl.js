@@ -3391,16 +3391,24 @@ lvtuanApp.controller("lawyerlistsearchCtrl",function($http,$scope,$state,$rootSc
 lvtuanApp.controller("lawyerViewCtrl",function($scope,$http,$rootScope,$stateParams,$ionicLoading,$ionicPopup,httpWrapper){
 
    var timestamp=Math.round(new Date().getTime()/1000);
+   	$scope.isshow = false;
     $scope.context_min100 = '';
     $scope.context_all = '';
-    $scope.dian = '...';
  	$ionicLoading.show();
 	httpWrapper.get('http://'+$rootScope.hostName+'/lawyer/'+$stateParams.id, function(data){
 		$scope.items = data.data;
 		$scope.info = $scope.items.introduce + $scope.items.experience + $scope.items.signature;
-		$scope.context_min100 = $scope.info.substr(0, 90);
-		$scope.context_all = $scope.info.substr(90);
-
+		$scope.dian = '...';
+		if($scope.info == "null"){
+			$scope.isshow = false;
+			$scope.context = false;
+		}else if($scope.info != 0){
+			$scope.context_min100 = $scope.info.substr(0, 90);
+			$scope.context_all = $scope.info.substr(90);
+			$scope.isshow = true;
+		}else{
+			$scope.context = false;
+		}
 		sessionStorage.setItem("lawyer_id", JSON.stringify($scope.items.id));
 		console.info($scope.items);
 		$ionicLoading.hide();
@@ -3417,7 +3425,7 @@ lvtuanApp.controller("lawyerViewCtrl",function($scope,$http,$rootScope,$statePar
 
 	//显示隐藏
 	$scope.context = true;
-	$scope.toggle = function(){
+	$scope.context_toggle = function(){
 		$scope.context = !$scope.context;
 		$(".context").slideToggle(1500); 
 	}
@@ -4370,10 +4378,10 @@ lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$
 		}
 	})
 
-    $scope.visible = true;
+   /* $scope.visible = true;
     $scope.toggle = function(){
     	$scope.visible = !$scope.visible;
-    }
+    }*/
 
     $scope.arry = [];
     var page = 1;
@@ -4536,6 +4544,19 @@ lvtuanApp.controller("userOrderViewCtrl",function($scope,$rootScope,$ionicLoadin
             });
 	}
 
+	// 联系律师
+   $scope.to_lawyer = function() {
+     var alertPopup = $ionicPopup.alert({
+     	title: '<div class="popup-head1">正在与您连接律师，请稍后...</div>',
+       template: '<div style="text-align: center;padding-top:20px;"><img ng-src="../img/phone.gif" style="width: 80%;"></div>',
+       okText: '返回',
+	   okType: 'button-cff2f5f'
+     });
+     alertPopup.then(function(res) {
+       
+     });
+   };
+
 	//服务评价
 	$scope.to_evaluate = function(id){
 		location.href='#/confirmCompletion/'+id;
@@ -4575,20 +4596,15 @@ lvtuanApp.controller("confirmCompletionCtrl",['$scope','$http','$rootScope','$st
 
     $scope.evaluates = [
               {
-                title:'差',
-                value:1
+                value:'1.0'
               },{
-                title:'一般',
-                value:2
+                value:'2.0'
               },{
-                title:'满意',
-                value:3
+                value:'3.0'
               },{
-                title:'很满意',
-                value:4
+                value:'4.0'
               },{
-                title:'推荐',
-                value:5
+                value:'5.0'
               }
             ]
 
@@ -4669,7 +4685,21 @@ lvtuanApp.controller("confirmCompletionCtrl",['$scope','$http','$rootScope','$st
 
 }])
 
+//用户的工作 - 咨询 － 聊天记录
+lvtuanApp.controller("userEasemobViewCtrl",function($http,$scope,$rootScope,$ionicLoading,$stateParams,listHelper_hostPath,httpWrapper){
+	console.info('聊天记录');
+	$scope.id = $stateParams.id;
 
+	//获取律师的个人信息
+	var timestamp=Math.round(new Date().getTime()/1000);
+	$ionicLoading.show();
+	$http.get('http://'+$rootScope.hostName+'/question/'+$scope.id+'?ts='+timestamp)
+		.success(function(data) {
+        	console.info(data.data);
+        	$scope.items = data.data;
+        	$ionicLoading.hide();
+		})
+})
 
 /*———————————————————————————— 律师 - 我的 - 咨询管理 ————————————————————————————*/
 

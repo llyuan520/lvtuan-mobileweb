@@ -66,11 +66,11 @@
 					  	<div class="contents">
 
 					  		<p style="text-indent: 10px;margin-bottom: 10px;">
-					  			<span>{{ context_min100 }}</span><span ng-show="context">{{dian}}</span><span class="context" style="display: none;">{{ context_all }}</span>
+					  			<span>{{ context_min100 }}</span><span ng-if="context">{{dian}}</span><span class="context" style="display: none;">{{ context_all }}</span>
 					  			<!-- <span ng-show="context" >{{ context_all }}</span> -->
 					  		</p>
-					    	<p class="more" style="border-top:1px solid #ededed;text-align: right;">
-					    		<span ng-click="toggle()" style="display: inline-block;background-color: #ededed;padding: 6px 15px;border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;color: #fff;">更多</span>
+					    	<p ng-if="isshow == true" class="more" style="border-top:1px solid #ededed;text-align: right;">
+					    		<span ng-click="context_toggle()" style="display: inline-block;background-color: #ededed;padding: 6px 15px;border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;color: #fff;">更多</span>
 					    	<!-- 	<span ng-click="context = !context" style="display: inline-block;background-color: #ededed;padding: 6px 15px;border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;color: #fff;">更多</span> -->
 					    	</p>
 					    </div>

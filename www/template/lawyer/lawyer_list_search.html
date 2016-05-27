@@ -18,33 +18,32 @@
 				</div>
 
 				<div class="card" ng-repeat="item in items" style="border-radius: 10px;">
-						<a class="item item-avatar" ng-href="#/lawyer/view/{{item.id}}">
-				            <img ng-src="{{item.avatar}}">
-				            <div class="row row-no-padding">
-					       		<div class="col col-70 col-center row-no-padding">
-					       			<h3>
-					       				<b>{{item.realname}}</b>
-					       				<label class="cf7861e">{{item.average_evaluate_score}}</label>
-					       				<label class="font12 cb5b5b5">分</label>
-					       			</h3>
-					       		</div>
-							  	<div class="col col-30 col-center row-no-padding" style="text-align: right;">
-							  		<b class="cff4670" ng-show=" type == 'pay_text' ">{{item.text_reply_fee}}</b> 
-							  		<b class="cff4670" ng-show=" type == 'pay_phone' ">{{item.phone_reply_fee}}</b>
-							  		<label class="font12">元/次</label></div>
-							  	</div>
-							</div>
-							<p style="margin: 10px 0 13px;font-size: 13px;">
-								<span style="display: block;">{{item.practice_period}}执业经验</span>
-								<span>{{item.province}} {{item.city}}</span>
-								<span class="item-note cb5b5b5" style="font-size: 13px;"> {{item.question_count}}人咨询</span>
-							</p>
-							<p>
-								<label ng-repeat="item in item.work_scope" class="radius10">{{item.value}}</label>
-							</p>
-				          
-				        </a>
-					</div>
+					<a class="item item-avatar" ng-href="#/lawyer/view/{{item.id}}">
+			            <img ng-src="{{item.avatar}}">
+			            <div class="row row-no-padding">
+				       		<div class="col col-70 col-center row-no-padding">
+				       			<h3>
+				       				<b>{{item.realname}}</b>
+				       				<label class="cf7861e">{{item.average_evaluate_score}}</label>
+				       				<label class="font12 cb5b5b5">分</label>
+				       			</h3>
+				       		</div>
+						  	<div class="col col-30 col-center row-no-padding" style="text-align: right;">
+						  		<b class="cff4670" ng-show=" type == 'pay_text' ">{{item.text_reply_fee}}</b> 
+						  		<b class="cff4670" ng-show=" type == 'pay_phone' ">{{item.phone_reply_fee}}</b>
+						  		<label class="font12">元/次</label>
+						  	</div>
+						</div>
+						<p style="margin: 10px 0 13px;font-size: 13px;">
+							<span style="display: block;">{{item.practice_period}}执业经验</span>
+							<span>{{item.province}} {{item.city}}</span>
+							<span class="item-note cb5b5b5" style="font-size: 13px;"> {{item.question_count}}人咨询</span>
+						</p>
+						<p>
+							<label ng-repeat="item in item.work_scope" class="radius10">{{item.value}}</label>
+						</p>
+			        </a>
+				</div>
 				<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
 			</form>
 		</ion-content>

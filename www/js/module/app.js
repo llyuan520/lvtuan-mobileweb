@@ -82,7 +82,6 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
     $rootScope.$on('unauthorized', function() {
         console.info('unauthorized');
         sessionStorage.setItem("goback", $location.absUrl());
-        localStorage.clear();
         layer.show('您没有权限访问这个链接！');
         $location.path('/login');
         $state.transitionTo("login");
@@ -93,10 +92,12 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
     $rootScope.$on('unauthenticated', function() {
         console.info('unauthenticated');
         sessionStorage.setItem("goback", $location.absUrl());
-        localStorage.clear();
         layer.show('请先登录！');
         // $location.path('/login');
         $state.transitionTo("login");
+        localStorage.removeItem('currentUser');
+        
+        //localStorage.clear();
         /*$window.location.href = '/login';*/
         //window.location.reload();
     });
@@ -745,8 +746,15 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
       controller: 'userOrderViewCtrl',
       authn: true
   })
+  //用户 - 我的 - 聊天记录
+   .state('easemob/view', { 
+      url: '/easemob/view/:id',
+      templateUrl: 'template/mylvtuan/user/easemob_view.html',
+      controller: 'userEasemobViewCtrl',
+      authn: true
+  })
   //用户 - 我的 - 用户的评价
-   .state('confirmCompletion', { 
+  .state('confirmCompletion', { 
       url: '/confirmCompletion/:id',
       templateUrl: 'template/mylvtuan/user/confirm-completion.html',
       authn: true

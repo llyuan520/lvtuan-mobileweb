@@ -1783,12 +1783,16 @@ input.readonly[readonly]{
     background-color: #fff;  
 } 
 textarea {height: auto; box-shadow:0px 0px 0px rgba(0,0,0,0);-webkit-appearance:none;}
-/*input[placeholder], [placeholder], *[placeholder] { 
-    color:#b5b5b5 !important; 
-} */
+input[placeholder], [placeholder], *[placeholder], textarea[placeholder], [placeholder], *[placeholder]{ 
+    color:#b5b5b5 ; 
+}
 textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"]
 {
-    color: #3d3d3d;
+    color: #3d3d3d !important;
+}
+textarea.cfff, input.cfff[type="text"], input.cfff[type="password"], input.cfff[type="datetime"], input.cfff[type="datetime-local"], input.cfff[type="date"], input.cfff[type="month"], input.cfff[type="time"], input.cfff[type="week"], input.cfff[type="number"], input.cfff[type="email"], input.cfff[type="url"], input.cfff[type="search"], input.cfff[type="tel"], input.cfff[type="color"]
+{
+    color: #fff !important;
 }
 
 
@@ -1830,7 +1834,7 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
 .lawyer-zgd img{width: 65%;vertical-align: top;}
 
 /*律师主页-弹出框*/
-.popup-head {padding: 10px;border-bottom: none;text-align: center;}
+.popup-head {border-bottom: none;text-align: center;}
 .popup .popup-buttons button.button, .popup-buttons .button{height: 35px;line-height: 35px;border-radius:10px;padding: 0;min-height:35px;font-size: 14px;}
 .isPopup{padding-bottom: 5px;}
 .isPopup .button.button{border-radius: 50px;}

@@ -1,10 +1,9 @@
 <style type="text/css">
 	.infobg{background: #ffffff;position: absolute;top: 10px;max-width: 54px;max-height: 54px;width: 100%;height:100%;border-radius: 50%;}
 </style>
-<ion-view hide-tabs="false" view-title="我的">
+<ion-view hide-tabs="false" cache-view="false" view-title="我的">
 		<ion-pane>
 			<ion-content class="has-tabs">
-
 				<div style="background:url(../img/usercenter-bg.png);background-size:100% 100%;color: #fff;height: 90px;">
 
 					<div class="row" style="height: 75px;">
@@ -40,7 +39,7 @@
 
 				<!-- <div class="height10"></div> -->
 				
-				<div ng-if="!currentUser.is_verified_lawyer" class="list center-list">
+				<div ng-if="currentUser.is_verified_lawyer == false" class="center-list">
 
 					<div class="my-consultation">
 						<a class="item" ng-href="#/user/question/list">
@@ -118,7 +117,7 @@
 					</div>
 				</div>
 
-				<div ng-if="currentUser.is_verified_lawyer" class="list center-list">
+				<div ng-if="currentUser.is_verified_lawyer == true" class="center-list">
 					<div class="my-consultation">
 						<a class="item" ng-href="#/lawyer/question">
 						    免费咨询

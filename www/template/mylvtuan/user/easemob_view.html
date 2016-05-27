@@ -1,0 +1,84 @@
+<style type="text/css">
+.chathost{background-color: #fff;padding-bottom: 16px;}
+.chathost .item p.contents{border-color: #fff;padding: 8px;}
+.chathost .item.item-avatar-right{border-color: #fff;}
+.chathost .item .right, .chathost .item .left{color: #b5b5b5;font-size: 12px;}
+.chathost .item .right{text-align: right;}
+.chathost .item p.con_left{float: left;}
+.chathost .item p.con_right{float: right;}
+
+.arrowleft{background:#a0d4fd;}
+.arrowright{background:#ecedf1;float: right;}
+.arrowleft, .arrowright{border-radius:5px;display: inline-block;position: relative;}
+.chathost .item .arrow-left:before, .chathost .item  .arrow-left:after,.chathost .item .arrow-right:before, .chathost .item  .arrow-right:after{border: 8px solid transparent;content: "";position: absolute;}
+.chathost .item .arrow-left:after, .chathost .item .arrow-right:after{z-index: 1;}
+.chathost .item .arrow-left:before {border-right-color: #a0d4fd;border-left-width: 0;left: -8px;top: 6px;}
+.chathost .item .arrow-left:after{border-right-color: #a0d4fd;border-left-width: 0;left: -8px;top: 6px;}
+.chathost .item .arrow-right:before {border-left-color: #ecedf1;border-right-width: 0;right: -8px;top: 6px;}
+.chathost .item .arrow-right:after{border-left-color: #ecedf1;border-right-width: 0;right: -8px;top: 6px;}
+
+</style>
+<ion-view hide-Tabs="true" view-title="聊天记录">
+	<ion-pane>
+		<ion-content>
+			<!-- <div class="chathost" ng-repeat="comment in items.comments">
+				<div ng-if="comment.from_creator == false" class="item item-avatar item-borderless">
+					<img ng-src="{{comment.owner.avatar}}">
+				  	<h2>{{comment.owner.realname}}</h2>
+				    <p class="contents con_left">{{comment.content}}</p>
+				</div>
+
+				<div ng-if="comment.from_creator == true" class="item item-avatar-right item-borderless">
+					<img ng-src="{{comment.owner.avatar}}">
+				  	<h2 class="right">{{comment.owner.realname}}</h2>
+				    <p class="contents con_right">{{comment.content}}</p>
+				</div>
+			</div> 
+	<i class='arrow arrow_out' style='margin-top: 0px;'></i>
+            		<i class='arrow arrow_in' style='margin-top: 0px;'></i>
+		-->
+			<div class="chathost">
+				<div class="item item-avatar item-borderless" style="padding-bottom: 0;padding-right: 72px;">
+					<img ng-src="{{comment.owner.avatar}}">
+				  	<div class="left">2016-5-13 15:40</div>
+				  	<div class="arrowleft arrow-left">
+					    <p class="contents con_left" style="color: #3d3d3d;">
+					    	聊天记录聊天记录聊天记录
+					    </p>
+					</div>	
+				</div>
+
+				<div class="item item-avatar-right item-borderless" style="padding-bottom: 0;padding-left: 72px;">
+					<img ng-src="{{comment.owner.avatar}}">
+				  	<div class="right">2016-5-13 15:40</div>
+				  	<div class="arrowright arrow-right">
+					    <p class="contents con_right" style="color: #3d3d3d;">
+					    	聊天记录聊天记录聊天记录
+					    </p>
+					</div>
+				</div>
+
+				<div class="item item-avatar item-borderless" style="padding-bottom: 0;padding-right: 72px;">
+					<img ng-src="{{comment.owner.avatar}}">
+				  	<div class="left">2016-5-13 15:40</div>
+				  	<div class="arrowleft arrow-left">
+					    <p class="contents con_left" style="color: #3d3d3d;">
+					    	聊天记录聊天记录聊天记录聊天记录聊天记录聊天记录
+					    </p>
+					</div>	
+				</div>
+
+				<div class="item item-avatar-right item-borderless" style="padding-bottom: 0;padding-left: 72px;">
+					<img ng-src="{{comment.owner.avatar}}">
+				  	<div class="right">2016-5-13 15:40</div>
+				  	<div class="arrowright arrow-right">
+					    <p class="contents con_right" style="color: #3d3d3d;">
+					    	聊天记录聊天记录聊天记录聊天记录聊天记录聊天记录聊天记录聊天记录聊天记录聊天记录聊天记录聊天记录
+					    </p>
+					</div>
+				</div>
+			</div>
+		</ion-content>
+			
+	</ion-pane>
+</ion-view>
