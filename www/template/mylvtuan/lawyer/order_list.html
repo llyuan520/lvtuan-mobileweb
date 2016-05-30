@@ -6,10 +6,10 @@
 				<label>暂无数据，请稍后再试</label>
 			</div>
     		<div class="card" ng-repeat="item in items" style="border-radius: 10px;">
-				<div class="item item-text-wrap" style="border-width: 0px;">
-					<h3 style="margin-bottom: 20px;color: #48b4ff;">
+				<a class="item item-text-wrap" style="border-width: 0px;" ng-href="#/lawyer/order/view/{{item.id}}">
+					<h3 style="margin-bottom: 12px;color: #48b4ff;">
 						{{item.status_name}}
-						<a ng-href="#/question/pay_text/view/{{item.id}}" class="item-note" style="color: #48b4ff;">>></a>
+						<i class="icon ion-chevron-right" style="color: #7f7f7f;margin-top:2px;"></i>
 					</h3>
 					<div class="hr mb10"></div>
 					<p>
@@ -24,7 +24,7 @@
 					<p>
 						订单信息：{{item.type_name}}
 					</p>
-				</div>
+				</a>
 			</div>
 		<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
     </ion-content>

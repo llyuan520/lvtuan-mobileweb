@@ -471,26 +471,41 @@ img.avatar{
 
 /*星星的显示*/
 .rating {
-  color: #a9a9a9;
+  color: #b5b5b5;
   margin: 0;
   padding: 0;
   font-size: 1.5em;
+  text-indent:-999em
 }
 ul.rating {
   display: inline-block;
+   width: 100%;
 }
-.rating li {
+.rating li{
   list-style-type: none;
   display: inline-block;
   padding: 1px;
   text-align: center;
   font-weight: bold;
   cursor: pointer;
+  float: left;
+  width: 20%;
+  height: 55px;
 }
-.rating .filled {
-  color: #ffee33;
+.rating li .img{
+  display: inherit;
+  height: 55px;
 }
-
+.rating li .img{
+    background:url('../img/star_d.png') center center no-repeat;
+    background-size: 70%;
+}
+.rating li.filled .img {
+  color: #f4c600;
+  background:url('../img/star_s.png') center center no-repeat;
+  background-size: 70%;
+  text-indent:-999em;
+}
 .itemdata .row{
     padding: 0;
 }
@@ -1756,7 +1771,7 @@ a,button,input{
 .c7f7f7f{color: #7f7f7f;}
 .cf7861b{color: #f7861b;}
 .mt10{margin-top: 10px;}
-.mb10,.card .item h2{margin-bottom:10px;}
+.mb10,.card .item h2,.item p.mb10{margin-bottom:10px;}
 .hr{border-bottom: 1px solid #ededed;height: 1px;}
 
 .card, .list-inset, .radiuscf{margin: 14px 10px;}

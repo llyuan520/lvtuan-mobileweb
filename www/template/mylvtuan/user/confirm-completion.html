@@ -1,51 +1,4 @@
 <style type="text/css">
-	.evaluateImg.img1 {background:url('../img/icon/1.png');}
-	.evaluateImg.img2 {background:url('../img/icon/2.png');}
-	.evaluateImg.img3 {background:url('../img/icon/3.png');}
-	.evaluateImg.img4 {background:url('../img/icon/4.png');}
-	.evaluateImg.img5 {background:url('../img/icon/5.png');}
-
-	.evaluateImg.img1.active{background:url('../img/icon/1_1.png');background-size: contain;}
-	.evaluateImg.img2.active{background:url('../img/icon/2_2.png');background-size: contain;}
-	.evaluateImg.img3.active{background:url('../img/icon/3_3.png');background-size: contain;}
-	.evaluateImg.img4.active{background:url('../img/icon/4_4.png');background-size: contain;}
-	.evaluateImg.img5.active{background:url('../img/icon/5_5.png');background-size: contain;}
-
-	.evaluateImg.evaluateImg{background-size: contain;}
-	.col .checkbox input, .checkbox-icon{
-		position: relative;
-	    width: 28px;
-	    height: 28px;
-	    display: block;
-	    border: 0;
-	    background: transparent;
-	    cursor: pointer;
-	    -webkit-appearance: none
-	}
-	.col .checkbox input:checked:before, input:checked + .checkbox-icon:before {
- 		 border-width: 0; 
- 	}
- 	.checkbox input:checked:before, .checkbox input:checked + .checkbox-icon:before {
-	    background: #004799;
-	    border-color: #004799; 
-	}
-	.col .checkbox input:before, .checkbox-icon:before {
-	    display: table;
-	    width: 100%;
-	    height: 100%;
-	    border-width: 0;
-	    border-style: none;
-	    border-radius: 28px;
-	    background: transparent;
-	    content: ' ';
-	    -webkit-transition: background-color 20ms ease-in-out;
-	    transition: background-color 20ms ease-in-out;
-	}
-	.col .checkbox input:checked:after, input:checked + .checkbox-icon:after {
-	    opacity: 0;
-	}
-
-
 	.workscope{
 		text-align: left;margin-bottom: 10px;
 	}
@@ -82,6 +35,9 @@
 	.workscope span.active_tag label{
 		color:#fff;
 	}
+
+
+
 </style>
 <ion-view hide-tabs="true" cache-view="false">
 	<ion-pane>
@@ -89,20 +45,24 @@
 			<ion-content class="has-tabs">
 
 				<div class="card" style="border-radius: 10px;padding: 20px 10px;">
+					
+					
 					<div class="row row-no-padding row-center" style="text-align: center;">
-						<div class="col col-center" ng-repeat="evaluate in evaluates">
+						<div class="col col-center">
 					  		<div style="width:100%;height:5px;clear:both;"></div>
-					  		<label class="checkbox evaluateImg img{{evaluate.value}}" ng-class="{active: active == {{evaluate.value}} }" ng-click="evaluate_click(user.evaluate_score)">
-                                <input ng-model="user.evaluate_score" name="evaluate_score" type="radio" value="{{evaluate.value}}">
-                            </label>
+					  		<div star rating-value="ratingVal" max="max" on-hover="onHover" on-leave="onLeave" readonly="{{readonly}}" ng-click="onChange(ratingVal)"></div>
 					  	</div>
-					  	{{evaluate.value}}
+					</div>
+					<div class="row row-no-padding row-center" style="text-align: center;margin-top:20px;">
+						<div class="col col-center">
+							<font color="f7861b" size="5"><b>{{ratingVal}}.0</b></font>分
+						</div>
 					</div>
 				</div>
 				<div class="card" style="border-radius: 10px;padding: 20px 10px;">
 					<div class="list workscope">
-						<span ng-repeat="item in items" ng-class="{active_tag: inShowtags(item.key)}" ng-click="click_tag(item.key,item.value)" > 
-							<label>{{item.value}}</label>
+						<span ng-repeat="evaluate in evaluates" ng-class="{active_tag: inShowtags(evaluate)}" ng-click="click_tag(evaluate)" > 
+							<label>{{evaluate}}</label>
 						</span>
 					</div>
 					<label class="item item-input" style="border-color:#fff;border: 1px solid #f0f1f3;border-radius: 10px;">
