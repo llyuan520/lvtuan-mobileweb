@@ -12,7 +12,8 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
       StatusBar.styleDefault();
     }
   });
-  
+    
+
 })
 
 //声明全局的方法和变量
@@ -394,8 +395,7 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
       url: '/center',
       cache: 'true',
       templateUrl: 'template/center/center.html',
-      controller: 'centerCtrl',
-      authn: true
+      controller: 'centerCtrl'
     })
     .state('info', { //用户-个人资料
       url: '/info/:id',
@@ -520,13 +520,6 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
       controller: 'siteCtrl',
       authn: true
     })
-    .state('listscores', { //我的积分
-      url: '/listscores',
-      cache: 'true',
-      templateUrl: 'template/center/list_scores.html',
-      controller: 'listscoresCtrl',
-      authn: true
-    })
     .state('collect', { //我的收藏
       url: '/collect',
       cache: 'true',
@@ -616,7 +609,7 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
     })
 
     .state('graphic', { //图文咨询
-      url: '/graphic/:type?id&money',
+      url: '/graphic/:type?id',
       cache: 'true',
       templateUrl: 'template/lawyer/graphic.html'
     })
@@ -693,6 +686,14 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
       controller: 'questionsOrderPpayCtrl',
       authn: true
     })
+    .state('questions/areward/pay', { //订单支付
+      url: '/questions/areward/pay/:id?lawyer_id',
+      templateUrl: 'template/questions/areward_pay.html',
+      controller: 'questionsArewardPayCtrl',
+      authn: true
+    })
+
+    
 
 /*———————————————————————————— 我的律团- 我的订单 -公用 ————————————————————————————*/
 

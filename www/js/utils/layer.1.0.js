@@ -270,3 +270,12 @@ this.stopDefault = function(e)
 }*/
 
 
+
+/*window.addEventListener('native.keyboardshow',eventHandler);
+function eventHandler(){
+  alert("0");
+    document.body.scrollTop=0;
+    document.documentElement.scrollTop = 0;//兼容不同版本的浏览器
+    window.pageYOffset = 0;
+}*/
+
