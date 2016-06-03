@@ -12,9 +12,9 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
       StatusBar.styleDefault();
     }
   });
-    
 
 })
+
 
 //声明全局的方法和变量
 .run(['$rootScope','$timeout','$location','$ionicLoading',function($rootScope,$timeout,$location,$ionicLoading,$ionicHistory,$window){

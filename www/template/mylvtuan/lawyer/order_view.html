@@ -12,50 +12,52 @@ top: 0;
 </style>
 <ion-view hide-tabs="true" cache-view="false" view-title="订单详情">
 	<ion-pane>
-		<ion-content class="has-tabs">
-
+		<ion-content ng-class="isHastabs">
 			<div class="card" style="border-radius: 10px;box-shadow:none;">
 				<div class="item item-text-wrap">
 					<h3 class="c7f7f7f" style="margin-bottom: 13px;">订单详情</h3>
-					<div class="hr mb10"></div>
-					<p class="contents" style="padding: 0 10px;">{{items.content}}</p>
+					<div class="card" style="border-radius: 10px;box-shadow:none;border: 1px solid #ededed;margin:0;">
+						<p class="contents" style="padding:10px;">{{items.content}}</p>
+					</div>
 				</div>
 			</div>
 			<div class="card" style="border-radius: 10px;box-shadow:none;">
 				<div class="item item-text-wrap">
 					<p class="mb10">订单编号：<span class="c7f7f7f">{{items.order_no}}</span></p>
+					<div class="hr mb10"></div>
 					<p class="mb10">创建时间：<span class="c7f7f7f">{{items.created_at}}</span></p>
-					<p class="mb10">订单金额：<span class="c7f7f7f">199元</span></p>
+					<div class="hr mb10"></div>
+					<p class="mb10">订单金额：<span class="c7f7f7f">{{items.price}}元</span></p>
+					<div class="hr mb10"></div>
 					<p class="mb10">订单信息：<span class="c7f7f7f">{{items.type_name}}</span></p>
-					<p class="mb10">订单状态：<span class="c7f7f7f">待受理</span></p>
+					<div class="hr mb10"></div>
+					<p class="mb10">订单状态：<span class="c7f7f7f">{{items.status_name}}</span></p>
 				</div>
 			</div>
-
-
 	    </ion-content>
 
-	    <div class="tabs" style="background-color:#fff;height: 59px;">
 
+	    <div ng-if="items.status == 'new'" class="tabs" style="background-color:#fff;height: 59px;">
 			<!-- 待受理 -->
-			<div class="row row-center row-no-padding" style="padding: 5px 10px;">
-				<div class="col col-center" style="margin-right: 10px;">
-					<button class="button button-block button-positive" style="border-radius: 10px;" ng-click="to_complete(items.transitions[1].to_complete)">受理</button>
-				</div>
-				<!-- 图文咨询 -->
-				<div class="col col-center">
-					<button class="button button-block button-positive" style="border-radius: 10px;" ng-click="to_ask(items.creator_id)">联系用户</button>
-				</div>
-				<!-- 电话咨询 -->
-				<!-- <div class="col col-center">
-					<button class="button button-block button-positive" style="border-radius: 10px;" ng-click="to_lawyer()">联系用户</button>
-				</div> -->
+			<div class="row" style="padding: 5px 10px;">
+				<button class="button button-block button-positive" style="border-radius: 10px;" ng-click="to_accept(items.transitions[0].to_accept)">受理</button>
 			</div>
+		</div>
 
+		<div ng-if="items.status == 'replied'" class="tabs" style="background-color:#fff;height: 59px;">
+			<div class="row" style="padding: 5px 10px;">
+				<!-- 图文咨询 -->
+				<button ng-if="items.type == 'pay_text'" class="button button-block button-positive" style="border-radius: 10px;" ng-click="to_ask(items.creator_id)">联系用户</button>
+				<!-- 电话咨询 -->
+				<button ng-if="items.type == 'pay_phone'" class="button button-block button-positive" style="border-radius: 10px;" ng-click="to_lawyer()">联系用户</button>
+			</div>
+		</div>
+
+		<div ng-if="items.status == 'complete'" class="tabs" style="background-color:#fff;height: 59px;">
 			<!-- 查看评价 -->
-			<!-- <div class="row" style="padding: 5px 10px;">
-				<button class="button button-block button-positive" style="border-radius: 10px;" ng-click="to_evaluate(items.id,items.type)">查看评价</button>
-			</div> -->
-
+			<div class="row" style="padding: 5px 10px;">
+				<button class="button button-block button-positive" style="border-radius: 10px;" ng-click="to_evaluate(items.id)">查看评价</button>
+			</div>
 		</div>
 
 	</ion-pane>

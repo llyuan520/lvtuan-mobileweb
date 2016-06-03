@@ -41,7 +41,7 @@
 </style>
 <ion-view hide-tabs="true" cache-view="false">
 	<ion-pane>
-		<form name="myForm" role="form" novalidate ng-controller="confirmCompletionCtrl">
+		<form name="myForm" id="myForm"  novalidate ng-controller="confirmCompletionCtrl">
 			<ion-content class="has-tabs">
 
 				<div class="card" style="border-radius: 10px;padding: 20px 10px;">
@@ -49,11 +49,10 @@
 					
 					<div class="row row-no-padding row-center" style="text-align: center;">
 						<div class="col col-center">
-					  		<div style="width:100%;height:5px;clear:both;"></div>
 					  		<div star rating-value="ratingVal" max="max" on-hover="onHover" on-leave="onLeave" readonly="{{readonly}}" ng-click="onChange(ratingVal)"></div>
 					  	</div>
 					</div>
-					<div class="row row-no-padding row-center" style="text-align: center;margin-top:20px;">
+					<div class="row row-no-padding row-center" style="text-align: center;margin-top:10px;">
 						<div class="col col-center">
 							<font color="f7861b" size="5"><b>{{ratingVal}}.0</b></font>分
 						</div>
@@ -66,42 +65,14 @@
 						</span>
 					</div>
 					<label class="item item-input" style="border-color:#fff;border: 1px solid #f0f1f3;border-radius: 10px;">
-			          <textarea ng-model="user.evaluate_comment" name="evaluate_comment" rows="10" cols="70" class="itxtarea" placeholder="亲，留下点什么吧(至少两个字)" ng-minlength="0" ng-maxlength="50"></textarea>
+			          <textarea ng-model="evaluate_comment" rows="10" cols="70" class="evaluate_comment itxtarea" placeholder="亲，留下点什么吧(至少两个字)" ng-minlength="2" required></textarea>
 			        </label>
-
 				</div>
-				<!-- <div class="item" style="padding: 10px 0;font-size: 12px;">
-					<div class="row row-no-padding row-center" style="text-align: center;">
-						<div class="col col-center" ng-repeat="evaluate in evaluates">
-					  		{{evaluate.title}}
-					  		<div style="width:100%;height:5px;clear:both;"></div>
-					  		<label class="checkbox evaluateImg img{{evaluate.value}}" ng-class="{active: active == {{evaluate.value}} }" ng-click="evaluate_click(user.evaluate_score)">
-                                <input ng-model="user.evaluate_score" name="evaluate_score" type="radio" value="{{evaluate.value}}">
-                            </label>
-					  	</div>
-					</div>
-				</div> -->
-
-
-				<!-- <div class="list workscope" style="background-color: #fff;margin-bottom: 0px;">
-					<span ng-repeat="item in items" ng-class="{active_tag: inShowtags(item.key)}" ng-click="click_tag(item.key,item.value)" > 
-						<label>{{item.value}}</label>
-					</span>
-				</div>
-
-				<ion-list>
-			        <ion-item class="item item-text-wrap" style="border-color:#fff;margin-top: 10px;">
-			          	<label class="item item-input" style="border-color:#fff">
-				          <textarea ng-model="user.evaluate_comment" name="evaluate_comment" rows="10" cols="70" class="itxtarea" placeholder="请写下对律师的感受吧，对他人的帮助很大哦..." ng-minlength="0" ng-maxlength="50"></textarea>
-				        </label>
-				        <p ng-if="myForm.evaluate_comment.$error.maxlength" style="color:red;">字符的长度不能超过50个</p>
-			        </ion-item>
-		        </ion-list> -->
 		    </ion-content>
 		    <div class="tabs" style="background-color:#fff;height: 59px;">
 				<!-- 发表评价 -->
 				<div class="row" style="padding: 5px 10px;">
-					<button class="button button-block button-positive" ng-disabled="myForm.$invalid" ng-click="submit(user)" style="border-radius: 10px;">发表评价</button>
+					<button class="button button-block button-positive" ng-disabled="myForm.$invalid" ng-click="submit()" style="border-radius: 10px;">发表评价</button>
 				</div>
 
 			</div>
