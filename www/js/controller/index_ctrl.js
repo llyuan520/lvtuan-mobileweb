@@ -3688,7 +3688,7 @@ document.activeElement.blur();
 
     //用户输入框字数限制
 	$scope.title; //假设这是你input上的绑定
-	var limit_title = 30; // 假设文本长度为 30
+	var limit_title = 100; // 假设文本长度为 100
 	$scope.$watch('title', function(newVal, oldVal) {
 	    if (newVal && newVal != oldVal) {
 	        if (newVal.length >= limit_title) {
@@ -3698,7 +3698,7 @@ document.activeElement.blur();
 	})
 
 	$scope.content; //假设这是你textarea上的绑定
-	var limit_content = 300; // 假设文本长度为 300
+	var limit_content = 1000; // 假设文本长度为 1000
 	$scope.$watch('content', function(newVal, oldVal) {
 	    if (newVal && newVal != oldVal) {
 	        if (newVal.length >= limit_content) {
@@ -4040,11 +4040,16 @@ lvtuanApp.controller("questionsviewsCtrl",function($http,$scope,$rootScope,$stat
 
 	var currentUser = authService.getUser();
 	$scope.isUser = function(id){
-		if(currentUser.status == 1 || currentUser.status == 2){
-			layer.show('普通用户无法回答问题');
+		if(currentUser == null){
+			$rootScope.$broadcast('unauthenticated');
 		}else{
-			location.href = '#/questions/comment/'+id;
+			if(currentUser.status == 1 || currentUser.status == 2){
+				layer.show('普通用户无法回答问题');
+			}else{
+				location.href = '#/questions/comment/'+id;
+			}
 		}
+		
 	}
 
 
@@ -4141,8 +4146,8 @@ lvtuanApp.controller("questionsCommentCtrl",function($http,$scope,$rootScope,$st
 		}).success(function(data) {
 	    	console.info(data);
 	    	location.href = '#/questionsview/'+$stateParams.id;
-	       layer.show("评论成功！");
-	       $ionicLoading.hide();
+	        layer.show("回答成功！");
+	        $ionicLoading.hide();
 	    });
 	}
 	
@@ -4457,28 +4462,6 @@ lvtuanApp.controller("talentviewCtrl",function($http,$scope,$state,$rootScope,$s
 
 /*———————————————————————————— 我的律团 - 律师的律团 ————————————————————————————*/
 
-//律师订单 - 评价详情
-lvtuanApp.controller("commentlawyerCtrl",function($http,$scope,$stateParams,$rootScope,httpWrapper){
-
-	$scope.max = 5;
-	$scope.ratingVal = 5;
-	$scope.readonly = true;
-	$scope.onHover = function(val){
-		$scope.hoverVal = val;
-	};
-	$scope.onLeave = function(){
-		$scope.hoverVal = null;
-	}
-
-	httpWrapper.get('http://'+$rootScope.hostName+'/center/lawyer/question/'+$stateParams.id+'/evaluate/view', function(data){
-		$scope.item = data.data;
-		console.info($scope.item);
-		$scope.ratingVal = $scope.item.evaluate_score;
-	});
-
-});
-
-
 //咨询和订单的一对一咨询 - 即时通讯
 lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$stateParams,$timeout,$ionicLoading,easemobService,httpWrapper,authService){
 	$scope.$on('$locationChangeSuccess', function(newState,oldState) {  
@@ -4764,7 +4747,6 @@ lvtuanApp.controller("confirmCompletionCtrl",['$scope','$http','$rootScope','$st
 	  $scope.onChange = function(val){
 	  	console.info(val);
 	    $scope.ratingVal = val;
-	    debugger
 	    if(val == 1 || val == 2){
 	    	$scope.evaluates = $scope.tags.tags_1_2;
 	    }else if(val == 3){
@@ -4831,6 +4813,7 @@ lvtuanApp.controller("confirmCompletionCtrl",['$scope','$http','$rootScope','$st
         layer.show("评价成功！");
         $scope.tag_arry = [];
         $scope.evaluates = $scope.tags.tags_4_5;
+        location.href='#/user/order/list';
         window.location.reload();
       },function(data){
         console.info(data);
@@ -4840,21 +4823,53 @@ lvtuanApp.controller("confirmCompletionCtrl",['$scope','$http','$rootScope','$st
 }])
 
 //用户的工作 - 咨询 － 聊天记录
-lvtuanApp.controller("userEasemobViewCtrl",function($http,$scope,$rootScope,$ionicLoading,$stateParams,listHelper_hostPath,httpWrapper){
+lvtuanApp.controller("userEasemobViewCtrl",function($http,$scope,$rootScope,$ionicLoading,$stateParams,listHelper_hostPath,httpWrapper,authService){
 	console.info('聊天记录');
-	$scope.id = $stateParams.id;
 
-	//获取律师的个人信息
 	var timestamp=Math.round(new Date().getTime()/1000);
-	$ionicLoading.show();
-	//'http://'+$rootScope.hostName+'/question/'+$stateParams.id+'/comment_list?page='+page+'&rows_per_page='+rows_per_page
-	//$http.get('http://'+$rootScope.hostName+'/question/'+$scope.id+'?ts='+timestamp)
-	$http.get('http://'+$rootScope.hostName+'/question/'+$stateParams.id+'/comment_list?ts='+timestamp)
-		.success(function(data) {
-        	console.info(data.data);
-        	$scope.items = data.data;
-        	$ionicLoading.hide();
-		})
+	$scope.currentUser = authService.getUser();
+	var page = 1; //页数
+	var rows_per_page = 10; // 每页的数量
+	if ($scope.rows_per_page) {
+		rows_per_page = $scope.rows_per_page;
+	}
+    $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
+    $scope.items = [];	//创建一个数组接收后台的数据
+
+	//下拉刷新
+	$scope.doRefresh = function() {
+		page = 1;
+		$scope.items = [];
+        $scope.loadMore();
+        $scope.$broadcast('scroll.refreshComplete');
+    };
+
+    //上拉加载
+	$scope.loadMore = function() {
+			$ionicLoading.show();
+			$http.get('http://'+$rootScope.hostName+'/question/'+$stateParams.id+'/comment_list?page='+page+'&rows_per_page='+rows_per_page+'&ts='+timestamp)
+				.success(function(data) {
+					if(data && data.data.comments && data.data.comments.length){
+						$scope.items = $scope.items.concat(data.data.comments);
+						console.info($scope.items);
+						if (data.data.length < rows_per_page) {
+							$scope.moredata = false;
+						} else {
+							$scope.moredata = true;
+						}
+					}else{
+						if (page == 1) {
+							$scope.moredata = false;
+							$scope.nodata = false;
+						}
+						$scope.moredata = false;
+					}
+					page++;
+					$scope.$broadcast('scroll.infiniteScrollComplete');
+					$ionicLoading.hide();
+				})
+		
+	};
 })
 
 /*———————————————————————————— 律师 - 我的 - 咨询管理 ————————————————————————————*/
@@ -4905,7 +4920,7 @@ lvtuanApp.controller("lawyerOrderViewCtrl",function($scope,$rootScope,$ionicLoad
 
 	//服务评价
 	$scope.to_evaluate = function(id){
-		location.href='#/confirmCompletion/'+id;
+		location.href='#/lawyer/comment/'+id;
 	}
 
 	//联系用户
@@ -4913,6 +4928,31 @@ lvtuanApp.controller("lawyerOrderViewCtrl",function($scope,$rootScope,$ionicLoad
 		location.href='#/easemobmain/'+id;
 	}
 })
+
+
+//律师订单 - 评价详情
+lvtuanApp.controller("lawyerCommentCtrl",function($http,$scope,$stateParams,$rootScope,httpWrapper){
+
+	$scope.max = 5;
+	$scope.ratingVal = 5;
+	$scope.readonly = true;
+	$scope.onHover = function(val){
+		$scope.hoverVal = val;
+	};
+	$scope.onLeave = function(){
+		$scope.hoverVal = null;
+	}
+
+	httpWrapper.get('http://'+$rootScope.hostName+'/center/lawyer/question/'+$stateParams.id+'/evaluate/view', function(data){
+		$scope.items = data.data;
+		console.info($scope.items);
+		$scope.tag_arry = $scope.items.tags.split(',');
+		console.info($scope.tag_arry);
+	});
+
+});
+
+
 
 
 

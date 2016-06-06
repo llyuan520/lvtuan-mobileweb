@@ -1,0 +1,25 @@
+<ion-view hide-tabs="true" title-view="评价详情">
+	<ion-pane>
+		<ion-content>
+				<div class="card" style="border-radius: 10px;box-shadow: none;">
+					<div class="item item-text-wrap" style="border-width: 0px;">
+						<div class="row row-no-padding mb10">
+				       		<div class="col col-center row-no-padding">
+			       				<label class="cb5b5b5">{{items.realname}}</label><br>
+			       				<label class="font12 cb5b5b5">{{items.created_at}}</label>
+				       		</div>
+						  	<div class="col col-center row-no-padding textright">
+						  		<b class="cff4670" style="font-size: 26px;">{{items.evaluate_score}}</b> <label class="font12 cb5b5b5">分</label>
+						  	</div>
+						</div>
+						<p>
+							{{items.content}}
+						</p>
+						<p class="mt10">
+							<label class="label" ng-repeat="tag in tag_arry">{{tag}}</label>
+						</p>
+					</div>
+				</div>
+	    </ion-content>
+	</ion-pane>
+</ion-view>

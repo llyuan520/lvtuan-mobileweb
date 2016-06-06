@@ -666,14 +666,14 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
       authn: false
     })
 
-    .state('questions/comment', { //问律师评价
+    .state('questions/comment', { //发布回答
       cache: 'true', 
       url: '/questions/comment/:id',
       templateUrl: 'template/questions/comment.html',
       authn: false
     })
 
-    .state('questions/areward', { //问律师评价
+    .state('questions/areward', { //打赏
       url: '/questions/areward/:id',
       templateUrl: 'template/questions/areward.html',
       controller: 'questionsArewardCtrl',
@@ -696,14 +696,6 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
     
 
 /*———————————————————————————— 我的律团- 我的订单 -公用 ————————————————————————————*/
-
-  .state('/lawyer/comment/', { //我的订单 - 评价详情
-    url: '/lawyer/comment/:id',
-    templateUrl: 'template/lawyer/comment.html',
-    controller: 'commentlawyerCtrl',
-    authn: true
-  })
-
   .state('easemobmain', { //咨询和订单的一对一咨询 - 即时通讯
       url: '/easemobmain/:id',
       templateUrl: 'template/mylvtuan/easemobmain.html',
@@ -801,7 +793,13 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
       controller: 'lawyerOrderViewCtrl',
       authn: true
   })
-  
+  //律师 - 我的 - 评价详情
+  .state('/lawyer/comment/', { //我的订单 - 评价详情
+    url: '/lawyer/comment/:id',
+    templateUrl: 'template/mylvtuan/lawyer/comment.html',
+    controller: 'lawyerCommentCtrl',
+    authn: true
+  })
 
 
 

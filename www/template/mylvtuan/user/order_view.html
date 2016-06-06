@@ -67,7 +67,7 @@ top: 0;
 			</div>
 		</div>
 
-		<div ng-if="items.status == 'complete'" class="tabs" style="background-color:#fff;height: 59px;">
+		<div ng-if="items.status == 'complete' && items.type == 'pay_text'" class="tabs" style="background-color:#fff;height: 59px;">
 			<!-- 查看评价 -->
 			<div class="row" style="padding: 5px 10px;">
 				<a class="button button-block button-positive" style="border-radius: 10px;width: 100%;" ng-href="#/easemob/view/{{items.id}}">聊天记录</a>

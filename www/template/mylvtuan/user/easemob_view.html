@@ -7,58 +7,49 @@
 .chathost .item p.con_left{float: left;}
 .chathost .item p.con_right{float: right;}
 
-.arrowleft{background:#a0d4fd;}
-.arrowright{background:#ecedf1;float: right;}
+.arrowleft{background:#ecedf1;}
+.arrowright{background:#a0d4fd;float: right;}
 .arrowleft, .arrowright{border-radius:5px;display: inline-block;position: relative;}
 .chathost .item .arrow-left:before, .chathost .item  .arrow-left:after,.chathost .item .arrow-right:before, .chathost .item  .arrow-right:after{border: 8px solid transparent;content: "";position: absolute;}
 .chathost .item .arrow-left:after, .chathost .item .arrow-right:after{z-index: 1;}
-.chathost .item .arrow-left:before {border-right-color: #a0d4fd;border-left-width: 0;left: -8px;top: 6px;}
-.chathost .item .arrow-left:after{border-right-color: #a0d4fd;border-left-width: 0;left: -8px;top: 6px;}
-.chathost .item .arrow-right:before {border-left-color: #ecedf1;border-right-width: 0;right: -8px;top: 6px;}
-.chathost .item .arrow-right:after{border-left-color: #ecedf1;border-right-width: 0;right: -8px;top: 6px;}
+.chathost .item .arrow-left:before {border-right-color: #ecedf1;border-left-width: 0;left: -8px;top: 9px;}
+.chathost .item .arrow-left:after{border-right-color: #ecedf1;border-left-width: 0;left: -8px;top: 9px;}
+.chathost .item .arrow-right:before {border-left-color: #a0d4fd;border-right-width: 0;right: -8px;top: 9px;}
+.chathost .item .arrow-right:after{border-left-color: #a0d4fd;border-right-width: 0;right: -8px;top: 9px;}
 
 </style>
 <ion-view hide-Tabs="true" view-title="聊天记录">
 	<ion-pane>
 		<ion-content>
-			<!-- <div class="chathost" ng-repeat="comment in items.comments">
-				<div ng-if="comment.from_creator == false" class="item item-avatar item-borderless">
-					<img ng-src="{{comment.owner.avatar}}">
-				  	<h2>{{comment.owner.realname}}</h2>
-				    <p class="contents con_left">{{comment.content}}</p>
+			<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+				
+				<div ng-if="nodata == false" class="nodate">
+					<i class="nodate-iocn"></i><br>
+					<label>暂无数据，请稍后再试</label>
 				</div>
 
-				<div ng-if="comment.from_creator == true" class="item item-avatar-right item-borderless">
-					<img ng-src="{{comment.owner.avatar}}">
-				  	<h2 class="right">{{comment.owner.realname}}</h2>
-				    <p class="contents con_right">{{comment.content}}</p>
-				</div>
-			</div> 
-	<i class='arrow arrow_out' style='margin-top: 0px;'></i>
-            		<i class='arrow arrow_in' style='margin-top: 0px;'></i>
-		-->
-			<div class="chathost" ng-repeat="comment in items.comments">
-				<div ng-if="comment.from_creator == false" class="item item-avatar item-borderless" style="padding-bottom: 0;padding-right: 72px;">
-					<img ng-src="{{comment.owner.avatar}}">
-				  	<div class="left">{{comment.owner.created_at}}</div>
-				  	<div class="arrowleft arrow-left">
-					    <p class="contents con_left" style="color: #3d3d3d;">
-					    	{{comment.content}}
-					    </p>
-					</div>	
-				</div>
+				<div class="chathost" ng-repeat="item in items">
+					<div ng-if="item.creator_id != currentUser.id" class="item item-avatar item-borderless" style="padding-bottom: 0;padding-right: 72px;">
+						<img ng-src="{{item.creator_avatar}}">
+					  	<div class="left">{{item.created_at}}</div>
+					  	<div class="arrowleft arrow-left">
+						    <p class="contents con_left" style="color: #3d3d3d;">
+						    	{{item.content}}
+						    </p>
+						</div>	
+					</div>
 
-				<div ng-if="comment.from_creator == true" class="item item-avatar-right item-borderless" style="padding-bottom: 0;padding-left: 72px;">
-					<img ng-src="{{comment.owner.avatar}}">
-				  	<div class="right">{{comment.owner.created_at}}</div>
-				  	<div class="arrowright arrow-right">
-					    <p class="contents con_right" style="color: #3d3d3d;">
-					    	{{comment.content}}
-					    </p>
+					<div ng-if="item.creator_id == currentUser.id" class="item item-avatar-right item-borderless" style="padding-bottom: 0;padding-left: 72px;">
+						<img ng-src="{{item.creator_avatar}}">
+					  	<div class="right">{{item.created_at}}</div>
+					  	<div class="arrowright arrow-right">
+						    <p class="contents con_right" style="color: #3d3d3d;">
+						    	{{item.content}}
+						    </p>
+						</div>
 					</div>
 				</div>
-			</div>
+			<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
 		</ion-content>
-			
 	</ion-pane>
 </ion-view>

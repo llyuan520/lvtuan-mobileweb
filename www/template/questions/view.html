@@ -3,9 +3,7 @@
 		<ion-content>
 			<div class="hederpading">
 				<!-- 未评价  -->
-				<span ng-if="items.can_reply == false" ng-click="isUser(items.id)"><i class="comment"></i></span>
-				<!-- 评价 -->
-				<span ng-if="items.can_reply == true" ng-click="isUser(items.id)"><i class="comment_s"></i></span>
+				<span ng-click="isUser(items.id)"><i class="comment"></i></span>
 
 				<!-- 未收藏  -->
 				<span ng-if="items.is_collect == false"  ng-click="collects(items.id)" ><i class="collect"></i></span>
