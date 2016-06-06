@@ -278,4 +278,3 @@ function eventHandler(){
     document.documentElement.scrollTop = 0;//兼容不同版本的浏览器
     window.pageYOffset = 0;
 }*/
-

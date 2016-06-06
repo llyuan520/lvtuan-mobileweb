@@ -69,21 +69,20 @@ lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $loca
 		//window.location.reload();
 	}
 
-	var $body = $('body');    
+	// hack在微信等webview中无法修改document.title的情况
+	/*var $body = $('body');    
 	document.title = '律团';    
-	// hack在微信等webview中无法修改document.title的情况    
 	var $iframe = $('<iframe src="/favicon.ico"></iframe>').on('load', function() {      
 		setTimeout(function() {        
 			$iframe.off('load').remove();      
 		}, 0);    
-	}).appendTo($body);
-
-	/*console.info($location);
-	debugger*/
+	}).appendTo($body);*/
 
 
 	//所有浏览器点击返回按钮的时候如果返回的上一级是支付页面的话就跳转到首页
 	/*if (window.history && window.history.pushState) {
+		var hashLocation = location.hash;
+
 	    $(window).on('popstate', function () {
 	        var hashLocation = location.hash;
 
@@ -102,7 +101,7 @@ lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $loca
 	        
 	    });
 	    window.history.pushState('forward', null, './#forward');
-	}*/
+*/
 
 })
 
@@ -228,8 +227,8 @@ lvtuanApp.controller("indexCtrl",function($scope,$location,listHelper,locationSe
 //用户登陆
 lvtuanApp.controller("loginCtrl",function($state,$scope,$rootScope,$http,userService){
 
-	var format_email = /^(([0-9a-zA-Z]+)|([0-9a-zA-Z]+[_.0-9a-zA-Z-]*[0-9a-zA-Z]+))@([a-zA-Z0-9-]+[.])+([a-zA-Z]{2} |net|NET|com|COM|gov|GOV|mil|MIL|org|ORG|edu|EDU|int|INT|cn|CN)$/;
-	var format_mobile = /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/; 
+	var format_email = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+	var format_mobile = /^[1][0-9]{10}$/; 
 	var format_number=/^[0-9]*$/;
 
 	$scope.submit = function(user){
@@ -4168,6 +4167,7 @@ lvtuanApp.controller("questionsArewardCtrl",function($scope,$http,$rootScope,$st
 
 	//去打赏
 	$scope.rewardsPlay = function(){
+		$ionicLoading.show();
 		$scope.freeQuestion = 'areward';
 		localStorage.setItem("lawyer_id", JSON.stringify($stateParams.id));
 		localStorage.setItem("freeQuestion", JSON.stringify($scope.freeQuestion));
@@ -4177,7 +4177,7 @@ lvtuanApp.controller("questionsArewardCtrl",function($scope,$http,$rootScope,$st
 			lawyer_id : $stateParams.id,
 			money 	: $scope.money
 		}).success(function(data) {
-	    	location.href = '#/questions/areward/pay/'+data.data.order_id+'?lawyer_id='+$stateParams.id;
+			location.href = '#/questions/areward/pay/'+data.data.order_id+'?lawyer_id='+$stateParams.id;
 	       $ionicLoading.hide();
 	    });
 	}
@@ -4799,8 +4799,11 @@ lvtuanApp.controller("confirmCompletionCtrl",['$scope','$http','$rootScope','$st
 		if($scope.ratingVal){
 			params["evaluate_score"] = $scope.ratingVal;
 		}
-		if(evaluate_comment){
+		if(evaluate_comment.length > 0){
 			params["evaluate_comment"] = evaluate_comment;
+		}else{
+			layer.show("请评价律师的服务！");
+			return false;
 		}
 		if($scope.tag_arry.length > 0){
 			params["evaluate_tags"] = $scope.tag_arry;
@@ -4809,15 +4812,15 @@ lvtuanApp.controller("confirmCompletionCtrl",['$scope','$http','$rootScope','$st
 			return false;
 		}
         httpWrapper.request('http://'+$rootScope.hostName+'/center/question/'+$stateParams.id+'/evaluate','post',params,
-      function(data){
-        layer.show("评价成功！");
-        $scope.tag_arry = [];
-        $scope.evaluates = $scope.tags.tags_4_5;
-        location.href='#/user/order/list';
-        window.location.reload();
-      },function(data){
-        console.info(data);
-      })
+	      function(data){
+	        layer.show("评价成功！");
+	        $scope.tag_arry = [];
+	        $scope.evaluates = $scope.tags.tags_4_5;
+	        location.href='#/user/order/list';
+	        window.location.reload();
+	      },function(data){
+	        console.info(data);
+	      })
       }
 
 }])
