@@ -21,7 +21,7 @@
 				  			<label ng-if="items.creator_realname != null">{{items.creator_realname}}</label>
 				  			<label ng-if="items.creator_realname == null || items.creator_realname == ''">匿名用户</label>
 				  		</span>
-					  	<span class="cb5b5b5">{{items.created_at}}</span>
+					  	<span class="cb5b5b5">{{items.difference_date}}</span>
 				  	</p>
 				</div>
 			</div>
@@ -67,7 +67,7 @@
 				    	{{comment.content}}
 				    </p>
 				  	<p class="mt10">
-					  	<span class="cb5b5b5">{{comment.created_at}}</span>
+					  	<span class="cb5b5b5">{{comment.difference_date}}</span>
 				  	</p>
 		        </div>
 			</div>

@@ -1811,7 +1811,9 @@ textarea.cfff, input.cfff[type="text"], input.cfff[type="password"], input.cfff[
 {
     color: #fff !important;
 }
-
+textarea.form-control {
+        resize: vertical;
+}
 
 /*咨询参考*/
 .hederpading{width: 100%;text-align: right;padding: 16px 10px 0;height: 49px;}

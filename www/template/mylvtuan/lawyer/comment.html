@@ -6,17 +6,17 @@
 						<div class="row row-no-padding mb10">
 				       		<div class="col col-center row-no-padding">
 			       				<label class="cb5b5b5">{{items.realname}}</label><br>
-			       				<label class="font12 cb5b5b5">{{items.created_at}}</label>
+			       				<label class="font12 cb5b5b5">{{items.difference_date}}</label>
 				       		</div>
 						  	<div class="col col-center row-no-padding textright">
-						  		<b class="cff4670" style="font-size: 26px;">{{items.evaluate_score}}</b> <label class="font12 cb5b5b5">分</label>
+						  		<b class="cff4670" style="font-size: 26px;">{{items.score}}.0</b> <label class="font12 cb5b5b5">分</label>
 						  	</div>
 						</div>
 						<p>
 							{{items.content}}
 						</p>
 						<p class="mt10">
-							<label class="label" ng-repeat="tag in tag_arry">{{tag}}</label>
+							<label class="label" ng-repeat="tag in items.tags">{{tag}}</label>
 						</p>
 					</div>
 				</div>
