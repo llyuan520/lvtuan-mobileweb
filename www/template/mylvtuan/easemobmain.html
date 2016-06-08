@@ -11,15 +11,15 @@
 <ion-view hide-tabs="true">
     <ion-pane class="web-body">
         <div hide-Tabs class="web-body web-top10 group-content">
-            <ion-header-bar align-title="center" class="bar bar-header bar-light item-icon-right">
-                <a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-click="jumpGoBack_rel()"></a>
+           <ion-header-bar align-title="center" class="bar bar-header bar-light item-icon-right">
+                <!-- <a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-click="jumpGoBack_rel()"></a> -->
                 <h1 class="title">咨询详情</h1>
                 <button ng-click="toggle()" class="button button-clear button-positive icon-right" style="text-align: right;" type="button">
                     <img src="../img/zx.png" style="width: 52%;margin-top: 4px;">
                 </button>
             </ion-header-bar>
                 <div class="webin" style="height: 100%;">
-                    <div class="zxDatile" ng-hide="visible">
+                   <div class="zxDatile" ng-hide="visible">
                         <ion-item class="item" style="margin-bottom: 10px;color: #666;font-size: 14px;border: 1px solid rgba(0,0,0,.12);border-radius: 3px;z-index: 999;border-top: none;box-shadow: 0 -1px 5px 0 #ddd;">
                             <div class="row row-no-padding padding_bottom16">
                                 <div class="col"><label style="color: #999;">咨询标题</label></div>
@@ -88,7 +88,7 @@
                                 </div>
                                 <form id="chatform" style="margin:0;">
                                     <div id="input_content" class="chat02_content">
-                                        <textarea contenteditable="true" name="comment" id="talkInputId" style="resize: none;"></textarea>
+                                        <textarea  name="comment" id="talkInputId" style="resize: none;"></textarea>
                                        <!-- <textarea name="comment" id="talkInputId" style="resize: none;" ng-keydown="textKeyDown($event)" ng-click="textClick()" ng-blur="textBlur()"></textarea> -->
 
                                     </div>

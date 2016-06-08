@@ -1,0 +1,81 @@
+<style type="text/css">
+	.workscope{
+		text-align: left;margin-bottom: 10px;
+	}
+	.workscope span{
+		background-color: #f0f1f3;
+	    border-radius: 10%;
+	    padding: 3px 11px 7px 12px;;
+	    margin: 5px;
+	    display: inline-block;
+	}
+	.bg_positive span{
+		border: 1px solid #004799;
+		background-color: #004799;
+	    border-radius: 10%;
+	    padding: 5px 7px;
+	    margin: 5px;
+	    display: inline-block;
+	    color: #fff;
+	}
+	.bg_positive .errer{
+		color: #ccc;
+		 padding: 5px 7px;
+    	margin: 5px;
+	}
+
+	.workscope span.active_tag{
+		background-color: #f7851e;
+	}
+
+	.workscope span label{
+		color: #7f7f7f;
+		font-size: 12px;
+	}
+	.workscope span.active_tag label{
+		color:#fff;
+	}
+
+
+
+</style>
+<ion-view hide-tabs="true" cache-view="false">
+	<ion-pane>
+		<form name="myForm" id="myForm"  novalidate ng-controller="confirmCompletionCtrl">
+			<ion-content class="has-tabs">
+
+				<div class="card" style="border-radius: 10px;padding: 20px 10px;">
+					
+					
+					<div class="row row-no-padding row-center" style="text-align: center;">
+						<div class="col col-center">
+					  		<div star rating-value="ratingVal" max="max" on-hover="onHover" on-leave="onLeave" readonly="{{readonly}}" ng-click="onChange(ratingVal)"></div>
+					  	</div>
+					</div>
+					<div class="row row-no-padding row-center" style="text-align: center;margin-top:10px;">
+						<div class="col col-center">
+							<font color="f7861b" size="5"><b>{{ratingVal}}.0</b></font>分
+						</div>
+					</div>
+				</div>
+				<div class="card" style="border-radius: 10px;padding: 20px 10px;">
+					<div class="list workscope">
+						<span ng-repeat="evaluate in evaluates" ng-class="{active_tag: inShowtags(evaluate)}" ng-click="click_tag(evaluate)" > 
+							<label>{{evaluate}}</label>
+						</span>
+					</div>
+					<label class="item item-input" style="border-color:#fff;border: 1px solid #f0f1f3;border-radius: 10px;">
+			          <textarea ng-model="evaluate_comment" rows="10" cols="70" class="evaluate_comment itxtarea" placeholder="亲，留下点什么吧(至少两个字)" ng-minlength="2" required></textarea>
+			        </label>
+				</div>
+		    </ion-content>
+		    <div class="tabs" style="background-color:#fff;height: 59px;">
+				<!-- 发表评价 -->
+				<div class="row" style="padding: 5px 10px;">
+					<button class="button button-block button-positive" ng-disabled="myForm.$invalid" ng-click="submit()" style="border-radius: 10px;">发表评价</button>
+				</div>
+
+			</div>
+		</form>
+	</ion-pane>
+</ion-view>

@@ -114,7 +114,6 @@ httpModule.factory('APIInterceptor', ['$log', '$q', '$rootScope', 'authService',
 	   	console.info(response);
 		    switch(response.status) {
 		    	case 0:
-	        		$rootScope.$broadcast('unauthenticated');
 	        		break;
 		      	case 401:
 		      		$rootScope.$broadcast('unauthenticated');
@@ -123,7 +122,7 @@ httpModule.factory('APIInterceptor', ['$log', '$q', '$rootScope', 'authService',
 	        		$rootScope.$broadcast('unauthorized');
 	        		break;
 	        	case 400:
-	        		/*if (angular.isArray(response.data.error_messages)) {*/
+	        		if(typeof response.data.error_messages =="object"){
 	        			angular.forEach(response.data.error_messages,function(val,key){
 							if (angular.isArray(val)) {
 								layer.show(val.join(', '));
@@ -131,9 +130,9 @@ httpModule.factory('APIInterceptor', ['$log', '$q', '$rootScope', 'authService',
 								layer.show(val);
 							}
 						});
-	        		/*}else{
+	        		}else{
 	        			layer.show(response.data.error_messages);
-	        		}*/
+	        		}
 	        		break;
 	        	case 405:
 	        		layer.show("提交数据的方法错误");

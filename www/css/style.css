@@ -471,26 +471,41 @@ img.avatar{
 
 /*星星的显示*/
 .rating {
-  color: #a9a9a9;
+  color: #b5b5b5;
   margin: 0;
   padding: 0;
   font-size: 1.5em;
+  text-indent:-999em
 }
 ul.rating {
   display: inline-block;
+   width: 100%;
 }
-.rating li {
+.rating li{
   list-style-type: none;
   display: inline-block;
   padding: 1px;
   text-align: center;
   font-weight: bold;
   cursor: pointer;
+  float: left;
+  width: 20%;
+  height: 55px;
 }
-.rating .filled {
-  color: #ffee33;
+.rating li .img{
+  display: inherit;
+  height: 55px;
 }
-
+.rating li .img{
+    background:url('../img/star_d.png') center center no-repeat;
+    background-size: 70%;
+}
+.rating li.filled .img {
+  color: #f4c600;
+  background:url('../img/star_s.png') center center no-repeat;
+  background-size: 70%;
+  text-indent:-999em;
+}
 .itemdata .row{
     padding: 0;
 }
@@ -1207,11 +1222,9 @@ input, select {
 
 
 /*个人中心图标*/
-.center-list {
-    background-color: #fff;
-}
+
 .center-list .item {
-    color: #b5b5b5666;
+    color: #666;
     padding-left: 0;
     margin: 0;
     border-width: 0 0 1px 0;
@@ -1220,52 +1233,56 @@ input, select {
 .border-bottom-colorf2f2{
     border-bottom: 1px #f2f2f2 solid;
 }
-.center-list div {
+.center-list .palef14{
     padding-left: 14%;
 }
-.center-list .my-order {
-    background: url("../img/my-order.png") 3% center no-repeat;
-    background-size: 7%;
+.center-list .my-free {
+    background:#fff url("../img/icon/my-free.png") 3% center no-repeat;
+    background-size: 9%;
 }
-.center-list .my-consultation {
-    background: url("../img/my-consultation.png") 3% center no-repeat;
-    background-size: 7%;
+.center-list .my-order {
+    background:#fff url("../img/icon/my-order.png") 3% center no-repeat;
+    background-size: 9%;
+}
+.center-list .my-commodity {
+    background:#fff url("../img/icon/my-commodity.png") 3% center no-repeat;
+    background-size: 9%;
 }
 .center-list .my-wallet {
-    background: url("../img/my-wallet.png") 3% center no-repeat;
-    background-size: 7%;
+    background:#fff url("../img/icon/my-wallet.png") 3% center no-repeat;
+    background-size: 9%;
 }
-.center-list .become-lawyer {
-    background: url("../img/become-lawyer.png") 3% center no-repeat;
-    background-size: 7%;
+.center-list .my-become {
+    background:#fff url("../img/icon/my-become.png") 3% center no-repeat;
+    background-size: 9%;
 }
 .center-list .my-integral {
-    background: url("../img/my-integral.png") 3% center no-repeat;
-    background-size: 7%;
+    background:#fff url("../img/icon/my-integral.png") 3% center no-repeat;
+    background-size: 9%;
 }
 .center-list .my-collection {
-    background: url("../img/my-collection.png") 3% center no-repeat;
-    background-size: 7%;
+    background:#fff url("../img/icon/my-collection.png") 3% center no-repeat;
+    background-size: 9%;
 }
 .center-list .my-comment {
-    background: url("../img/my-comment.png") 3% center no-repeat;
-    background-size: 7%;
+    background:#fff url("../img/icon/my-comment.png") 3% center no-repeat;
+    background-size: 9%;
 }
 .center-list .my-follow {
-    background: url("../img/my-follow.png") 3% center no-repeat;
-    background-size: 7%;
+    background:#fff url("../img/icon/my-follow.png") 3% center no-repeat;
+    background-size: 9%;
 }
 .center-list .my-about {
-    background: url("../img/my-about.png") 3% center no-repeat;
-    background-size: 7%;
+    background:#fff url("../img/icon/my-about.png") 3% center no-repeat;
+    background-size: 9%;
 }
-.center-list .my-set {
-    background: url("../img/my-set.png") 3% center no-repeat;
-    background-size: 7%;
+.center-list .my-site {
+    background:#fff url("../img/icon/my-site.png") 3% center no-repeat;
+    background-size: 9%;
 }
 .center-list .my-article {
-    background: url("../img/my-article.png") 3% center no-repeat;
-    background-size: 7%;
+    background:#fff url("../img/icon/my-article.png") 3% center no-repeat;
+    background-size: 9%;
 }
 .header-information a label {
     color: #48b4ff;
@@ -1684,15 +1701,27 @@ a,button,input{
     margin: 30% auto;
     text-align: center;
 }
+.nodate20{
+    margin: 20% auto;
+    text-align: center;
+}
 .nodate-iocn{
     background-image: url(../img/nodate-iocn.png);
     background-repeat: no-repeat;
     display: inline-block;
-    width: 80px;
-    height: 39px;
-
+    width: 200px;
+    height: 140px;
+    margin-bottom: 10px;
 }
-.nodate label{
+.questions-iocn{
+    background-image: url(../img/questions-iocn.png);
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 200px;
+    height: 132px;
+    margin-bottom: 10px;
+}
+.nodate label, .nodate20 label{
     color: #999;
     height: 25px;
     line-height: 25px;
@@ -1744,7 +1773,7 @@ a,button,input{
 .c7f7f7f{color: #7f7f7f;}
 .cf7861b{color: #f7861b;}
 .mt10{margin-top: 10px;}
-.mb10,.card .item h2{margin-bottom:10px;}
+.mb10,.card .item h2,.item p.mb10{margin-bottom:10px;}
 .hr{border-bottom: 1px solid #ededed;height: 1px;}
 
 .card, .list-inset, .radiuscf{margin: 14px 10px;}
@@ -1771,14 +1800,20 @@ input.readonly[readonly]{
     background-color: #fff;  
 } 
 textarea {height: auto; box-shadow:0px 0px 0px rgba(0,0,0,0);-webkit-appearance:none;}
-/*input[placeholder], [placeholder], *[placeholder] { 
-    color:#b5b5b5 !important; 
-} */
+input[placeholder], [placeholder], *[placeholder], textarea[placeholder], [placeholder], *[placeholder]{ 
+    color:#b5b5b5 ; 
+}
 textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"]
 {
-    color: #3d3d3d;
+    color: #3d3d3d !important;
 }
-
+textarea.cfff, input.cfff[type="text"], input.cfff[type="password"], input.cfff[type="datetime"], input.cfff[type="datetime-local"], input.cfff[type="date"], input.cfff[type="month"], input.cfff[type="time"], input.cfff[type="week"], input.cfff[type="number"], input.cfff[type="email"], input.cfff[type="url"], input.cfff[type="search"], input.cfff[type="tel"], input.cfff[type="color"]
+{
+    color: #fff !important;
+}
+textarea.form-control {
+        resize: vertical;
+}
 
 /*咨询参考*/
 .hederpading{width: 100%;text-align: right;padding: 16px 10px 0;height: 49px;}
@@ -1798,7 +1833,7 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
 .like, .like_s{display: inline-block;width: 48px;height: 19px;background-size: 40%;}
 .gift, .gift_s{display: inline-block;width: 48px;height: 19px;background-size: 50%;}
 .card .carditem{padding: 10px 10px 0;border: 1px solid #ebebeb;margin: 1px 16px 16px;border-radius: 10px;}
-.item p label.label{text-align: center;padding: 3px 6px;font-size: 12px;background-color: #f5f5f5;margin: 0 8px 8px 0;border-radius: 10px;display: inline-block;}
+.item p label.label{color: #999;text-align: center;padding: 3px 6px;font-size: 12px;background-color: #f5f5f5;margin: 0 8px 8px 0;border-radius: 10px;display: inline-block;}
 
 .label-list span.labels{font-size: 12px;background-color: #f0f1f3;display: inline-block;padding: 5px 10px;border-radius: 10px;border: 1px solid #f0f1f3;color: #7f7f7f;min-width: 66px;max-width: 100%;text-align: center;}
 .label-list span.labels.active{background-color: #48b4ff;color: #fff;border: 1px solid #48b4ff;}
@@ -1818,7 +1853,7 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
 .lawyer-zgd img{width: 65%;vertical-align: top;}
 
 /*律师主页-弹出框*/
-.popup-head {padding: 10px;border-bottom: none;text-align: center;}
+.popup-head {border-bottom: none;text-align: center;}
 .popup .popup-buttons button.button, .popup-buttons .button{height: 35px;line-height: 35px;border-radius:10px;padding: 0;min-height:35px;font-size: 14px;}
 .isPopup{padding-bottom: 5px;}
 .isPopup .button.button{border-radius: 50px;}

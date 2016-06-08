@@ -10,11 +10,14 @@
 				  </label>
 				</div>
 
+				
+				<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+				
 				<div ng-if="nodata == false" class="nodate">
 					<i class="nodate-iocn"></i><br>
-					<label>暂无数据！</label>
+					<label>暂无数据，请稍后再试</label>
 				</div>
-				<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+				
 				<div class="card" ng-repeat="item in items" style="border-radius: 10px;">
 				  <div class="item item-text-wrap">
 				  	<h2><a ng-href="#/questionsview/{{item.id}}">{{item.title}}</a></h2>

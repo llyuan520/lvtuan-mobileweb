@@ -12,7 +12,7 @@
 </style>
 <ion-view hide-Tabs="true" cache-view="false" view-title="发布提问">
 		<ion-pane>
-			<ion-content>
+			<ion-content style="height":"100%">
 				<form id="questions_form" name="myForm" novalidate ng-controller="questionsCtrl">
 					<div class="row row-center row-no-padding" style="background-color: #fff;text-align: center;height: 45px;line-height: 45px;color:#7f7f7f;padding-bottom: 1px;box-shadow: 0 1px 3px rgba(0,0,0,.3);">
 						<div class="col drop-down-arrow" style="border-right:1px solid #e5e5e5;text-align: center;" ng-click="toggle()">
@@ -31,12 +31,12 @@
 				    </ion-content>
 				    <div class="main">
 					    <label class="item-input mb10">
-						  <input ng-model="title" name="title" type="text" ng-minlength="2" ng-maxlength="30" placeholder="咨询标题：(2-30字)" required>
+						  <input  ng-model="title" name="title" type="text" ng-minlength="2" ng-maxlength="100" placeholder="咨询标题：(2-100字)" required>
 						</label>
 						
 						  	<label class="item-input mb10">
-				          <!-- <textarea class="textareacss" ng-model="content" name="content" rows="10" placeholder="详情描述：(10-300字)" ng-minlength="10" ng-maxlength="300" required ></textarea> -->
-				          <textarea class="keyboard-open textareacss" ng-class="{true: 'active', false: 'inactive'}[isActive]" ng-model="content" name="content" rows="10" placeholder="详情描述：(10-300字)" ng-minlength="10" ng-maxlength="300" required ng-focus="textfocus()" ng-blur="textblur()" ></textarea>
+				          <!-- <textarea class="hide-on-keyboard-open textareacss" ng-model="content" name="content" rows="10" placeholder="详情描述：(10-300字)" ng-minlength="10" ng-maxlength="300" required ></textarea> -->
+				          <textarea  class="textareacss" ng-class="{true: 'active', false: 'inactive'}[isActive]" ng-model="content" name="content" rows="10" placeholder="详情描述：(10-1000字)" ng-minlength="10" ng-maxlength="1000" required ng-focus="textfocus()" ng-blur="textblur()" ></textarea>
 				        </label>
 						
 

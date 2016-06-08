@@ -19,24 +19,27 @@
 					</div>
 				</div>
 
-				<div ng-if="nodata == false" class="nodate">
-					<i class="nodate-iocn"></i><br>
-					<label>暂无数据！</label>
-				</div>
+				
 
 				<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+				
+				<div ng-if="nodata == false" class="nodate">
+					<i class="nodate-iocn"></i><br>
+					<label>暂无数据，请稍后再试</label>
+				</div>
+
 				<div class="card" ng-repeat="item in items" style="border-radius: 10px;">
-				  <div class="item item-text-wrap">
-				  	<h2><a ng-href="#/questionsview/{{item.id}}">{{item.title}}</a></h2>
+				  <a class="item item-text-wrap" ng-href="#/questionsview/{{item.id}}">
+				  	<h2>{{item.title}}</h2>
 				  	<p class="mt10">
 				  		<span class="subdued cb5b5b5">回答</span>
 				  		<label class="cf7861e">{{item.comments_count}}</label>
 				  		<label class="cb5b5b5">·</label>
 					  	<span class="subdued cb5b5b5">收藏</span>
 					  	<label class="cf7861e">{{item.collects_count}}</label>
-					  	<span class="cb5b5b5">{{item.created_at}}</span>
+					  	<span class="cb5b5b5">{{item.difference_date}}</span>
 				  	</p>
-				  </div>
+				  </a>
 				</div>
 				<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
 			</ion-content>

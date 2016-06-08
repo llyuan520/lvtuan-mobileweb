@@ -3,9 +3,7 @@
 		<ion-content>
 			<div class="hederpading">
 				<!-- 未评价  -->
-				<span ng-if="items.can_reply == false" ng-click="isUser(items.id)"><i class="comment"></i></span>
-				<!-- 评价 -->
-				<span ng-if="items.can_reply == true" ng-click="isUser(items.id)"><i class="comment_s"></i></span>
+				<span ng-click="isUser(items.id)"><i class="comment"></i></span>
 
 				<!-- 未收藏  -->
 				<span ng-if="items.is_collect == false"  ng-click="collects(items.id)" ><i class="collect"></i></span>
@@ -23,9 +21,14 @@
 				  			<label ng-if="items.creator_realname != null">{{items.creator_realname}}</label>
 				  			<label ng-if="items.creator_realname == null || items.creator_realname == ''">匿名用户</label>
 				  		</span>
-					  	<span class="cb5b5b5">{{items.created_at}}</span>
+					  	<span class="cb5b5b5">{{items.difference_date}}</span>
 				  	</p>
 				</div>
+			</div>
+			<div ng-if="items.comments.length < 1" class="nodate20">
+				<i class="questions-iocn"></i><br>
+				<label>问题暂时还得不到回答</label><br>
+				<label>试试一对一咨询吧，更快得到回复哦</label>
 			</div>
 			<div class="card" style="border-radius: 10px;box-shadow:none;" ng-repeat="comment in items.comments">
 				<div class="item item-avatar" style="border-color:#fff;border-style: none;border-width:0;padding-bottom: 11px;">
@@ -64,7 +67,7 @@
 				    	{{comment.content}}
 				    </p>
 				  	<p class="mt10">
-					  	<span class="cb5b5b5">{{comment.created_at}}</span>
+					  	<span class="cb5b5b5">{{comment.difference_date}}</span>
 				  	</p>
 		        </div>
 			</div>

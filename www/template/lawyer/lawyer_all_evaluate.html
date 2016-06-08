@@ -4,16 +4,16 @@
 				<div style="display: inline-block;width: 100%;background-color: #fff;">
 					<div class="radiuscf label-list">
 						<div class="row row-no-padding">
-				    		<div class="col col-center row-no-padding">
+				    		<div class="col col-center row-no-padding" style="text-align:center">
 				    			<span class="labels" ng-class="{ 'active':inEvaluate('all') }" ng-click="click_evaluate('all')">全部</span>
 				    		</div>
-				    		<div class="col col-center row-no-padding">
+				    		<div class="col col-center row-no-padding" style="text-align:center">
 				    			<span class="labels" ng-class="{ 'active':inEvaluate('high') }" ng-click="click_evaluate('high')">好评 {{extras.high}}</span>
 				    		</div>
-				    		<div class="col col-center row-no-padding" style="text-align: right;">
+				    		<div class="col col-center row-no-padding" style="text-align:center">
 				    			<span class="labels" ng-class="{ 'active':inEvaluate('intermediate') }" ng-click="click_evaluate('intermediate')">中评 {{extras.intermediate}}</span>
 				    		</div>
-				    		<div class="col col-center row-no-padding" style="text-align: right;">
+				    		<div class="col col-center row-no-padding" style="text-align:center">
 				    			<span class="labels" ng-class="{ 'active':inEvaluate('low') }" ng-click="click_evaluate('low')">差评 {{extras.low}}</span>
 				    		</div>
 				    	</div>
@@ -23,7 +23,7 @@
 				<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
 				<div ng-if="nodata == false" class="nodate">
 					<i class="nodate-iocn"></i><br>
-					<label>暂无数据！</label>
+					<label>暂无数据，请稍后再试</label>
 				</div>
 
 				<div class="card" style="border-radius: 10px;box-shadow: none;" ng-repeat="item in items">
