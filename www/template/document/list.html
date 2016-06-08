@@ -1,125 +1,65 @@
-<style type="text/css">
-.main{
-	width:30%;
-	float:left;
-	height: 100%;
-	margin-top: 44px;
-	padding-bottom: 44px; 
-}
-.wsfb{
-	overflow: hidden;
-	text-align: center;
-	padding: 10px 0;
-	height: 118px;
-}
-.scroll1{
-	float:left;height: 100%;overflow-x: scroll;
-	overflow-x: hidden;
-	overflow-y: scroll;
-	resize:both;
-	-webkit-overflow-scrolling: touch;
-	
-}
-::-webkit-scrollbar {
-    width: 0px;
-    display:none;
-}
-.scroll2{
-	width: 70%;
-}
-.scroll2.scroll-content{
-	left: 30%;
-}
-.scroll1 ul{
-	width: 100%;
-	margin-bottom:118px;
-}
-.scroll1 ul li{
-	width: 80%;
-	margin: 0 10%;
-	height: 40px;
-    line-height: 40px;
-    display: inline-block;
-    text-align: center;
-    border-top: 1px solid #f2f2f2;
-    position: relative;
-}
-.textright{
-	font-size: 12px;
-	text-align:right;
-}
-.border-bottom{
-	border-bottom: 1px solid #f2f2f2;
-	margin: 10px;
-	padding-bottom: 10px;
-}
-.border-bottom .row {
-	padding: 5px 0;
-}
-.border-bottom .row .col{
-	padding: 0;
-}
-/*箭头向左*/
-.scroll1 ul li.active i{
-    display: inline-block;
-    width: 0;
-    height: 0;
-    border-width: 12px;
-    border-style: dashed;
-    border-color: transparent;
-    border-left-width: 0;
-    border-right-color: #eee;
-    border-right-style: solid;
-    top:8px;
-    right: -15%;
-    position: absolute;
-}
+<ion-view hide-Tabs="true" cache-view="false" view-title="法律文书">
+		<ion-pane>
+			<ion-content>	
+				<div class="item-input-inset" style="border-radius: 10px;">
+				  <label class="item-input-wrapper">
+				  	<i class="icon ion-ios-search placeholder-icon"></i>
+				    <input type="search" placeholder="请输入文书的部分名称或关键字" ng-click="jumpGo('#/document/list/search')">
+				  </label>
+				</div>
 
-</style>
-<ion-view hide-tabs="true">
-		<ion-pane  class="web-body">
-			<ion-header-bar align-title="center" class="bar bar-header bar-light">
-				<button class="button button-clear button-positive pull-left" ng-click="jumpGo('#/index')">  
-	                <i class="icon icon-left ion-ios-arrow-back"></i>  
-	            </button>
-	            <button class="button button-clear pull-right" ng-click="jumpGo('#/document/list/search')">  
-	                <i class="icon ion-ios-search-strong positive"></i>
-	            </button>
-				<h1 class="title">法律文书</h1>
-			</ion-header-bar>
+				<div class="row row-center row-no-padding" style="background-color: #fff;text-align: center;height: 45px;line-height: 45px;color:#7f7f7f;padding-bottom: 1px;box-shadow: 0 1px 3px rgba(0,0,0,.3);">
+					<div class="col drop-down-arrow" style="border-right:1px solid #e5e5e5;text-align: center;" ng-click="toggle()">
+						<label ng-if="!scopes_key">{{workscope}}</label>
+						<label ng-if="scopes_key" class="c48b4ff">{{workscope}}</label>
+					</div>
+					<div class="col drop-down-arrow" style="text-align: center;" ng-click="toggle1()">
+						<label ng-if="!orders_key">{{order}}</label>
+						<label ng-if="orders_key" class="c48b4ff">{{order}}</label>
+					</div>
+				</div>
+
 				
-			<div class="main">
-				<div class="wsfb">
-					<img ng-src="../img/wsfb.png" width="48" height="58">
-					<h5>文书范本</h5>
-				</div>
-				<div class="scroll1">
-					<ul>
-						<li ng-repeat="workscope in workscopes" ng-class="{ 'active':inShowscopes(workscope.key) }" ng-click="ngClick_list(workscope.key)">
-							{{workscope.value}}
-							<i></i>
-						</li>
-					</ul>
-				</div>
-			</div>
-
-			<ion-content  class="scroll2">	
-				<div ng-if="nodata == false" class="nodate">
-					<i class="nodate-iocn"></i><br>
-					<label>暂无数据！</label>
-				</div>
 
 				<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
-				<div class="border-bottom" ng-repeat="item in items">
-					<div class="row">
-						<div class="col col-60 content_txt1 txt-c-66"><a ng-href="#/document/download_list/{{item.id}}">{{item.title}}</a></div>
-					  <div class="col textright txt-c-99">下载:{{item.downs}}次</div>
-					</div>
-					<div class="row">
-						<div class="col content_txt2 txt-c-99">{{item.info}}</div>
-					</div>
+				
+				<div ng-if="nodata == false" class="nodate">
+					<i class="nodate-iocn"></i><br>
+					<label>暂无数据，请稍后再试</label>
+				</div>
+
+				<div class="card" ng-repeat="item in items" style="border-radius: 10px;">
+				  <a class="item item-text-wrap" ng-href="#/document/download_list/{{item.id}}">
+				  	<h2>{{item.title}}</h2>
+				  	<p class="content">{{item.info}}</p>
+				  	<p class="mt10">
+				  		<span class="subdued cb5b5b5">浏览</span>
+				  		<label class="cf7861e">{{item.views_count}}</label>
+				  		<label class="cb5b5b5">·</label>
+					  	<span class="subdued cb5b5b5">下载</span>
+					  	<label class="cf7861e">{{item.downs}}</label>
+					  	<span class="cb5b5b5">{{item.difference_date}}</span>
+				  	</p>
+				  </a>
 				</div>
 				<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
 			</ion-content>
 		</ion-pane>
 </ion-view>
+
+<!-- 一个ion-view控制器里面不能放多个ion-content -->
+<div ng-hide="masklayer" style="background-color: rgba(0,0,0,.1);position: fixed;top: 100px;left: 0;z-index: 10;width: 100%;height: 100%;"></div>
+<ion-content class="scroll-content ionic-scroll baclass" ng-hide="visible" style="top:100px;">
+	<div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
+		<ul>
+	  		<li ng-repeat="workscope in workscopes" ng-class="{ 'active':inShowscopes(workscope.key) }" ng-click="getWorkscopeVal(workscope.key,workscope.value)">{{workscope.value}}</li>
+	  	</ul>
+    </div>
+</ion-content>
+<ion-content class="scroll-content ionic-scroll baclass" ng-hide="visible1" style="top:100px;">
+	<div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
+		<ul>
+	  		<li  ng-repeat="order in orders" ng-class="{ 'active':inorders(order.key) }" ng-click="getOrderVal(order.key,order.value)">{{order.value}}</li>
+	  	</ul>
+    </div>
+</ion-content>

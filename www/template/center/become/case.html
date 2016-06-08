@@ -1,12 +1,6 @@
-<ion-view hide-tabs="true">
+<ion-view hide-tabs="true" view-title="经历案例">
 	<form name="caseForm" class="css-form" id="caseForm" ng-controller="caseCtrl">
 		<ion-pane  class="web-body">
-			<ion-header-bar align-title="center" class="bar bar-header bar-light headers">
-				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-href="#/becomenav"></a>
-				<h1 class="title">经历案例</h1>
-				<button ng-click="submit()" class="button button-clear button-positive" type="submit">保存</button>
-			</ion-header-bar>
-
 			<ion-content style="margin-bottom: 0;">
 				<!-- <div class="basekong20"></div> -->
 				<div class="list">
@@ -50,6 +44,11 @@
 							</textarea>
 						  </div>
 						</div>
+					</div>
+				</div>
+				<div style="background-color:#fff;height: 59px;margin-top: 50px;">
+					<div class="row" style="padding: 5px 10px;">
+						<button ng-click="submit()" class="button button-block button-positive" type="button" style="border-radius: 10px;">保存</button>
 					</div>
 				</div>
 			</ion-content>

@@ -1,34 +1,23 @@
-<ion-view hide-tabs="true">
-		<ion-pane  class="web-body">
-			<ion-header-bar align-title="center" class="bar bar-header bar-light">
-				<button class="button button-clear button-positive" ng-click="jumpGoBack()">  
-	                <i class="icon icon-left ion-ios-arrow-back"></i>  
-	            </button>
-				<h1 class="title">文书详情</h1>
-			</ion-header-bar>
+<ion-view hide-Tabs="true" cache-view="false" view-title="文书详情">
+	<ion-pane>
+		<ion-content class="has-tabs">
 			
-			<ion-content class="bg-c-white download-content">	
-					<div class="item download-name">
-						<span>{{itmes.title}}</span>
-					</div>
-					<div class="list">
-						<div class="item">
-							<!-- <i class="icon ion-chevron-down" ng-click="isclose = !isclose"></i> -->
-							<span>使用说明</span>
-							<p class="contents text-indent">{{itmes.info}}</p>
-						</div>
-						<div class="item">
-							<div class="row">
-							    <div class="col">
-                                    <img ng-src="{{itmes.img}}">
-                                </div>
-							    <div class="col">
-                                    <img ng-src="{{itmes.img}}">
-                                </div>
-							</div>
-							<a class="button button-block button-positive web-wid8c web-top10" href="{{itmes.file_path}}">下载</a>
-						</div>
-					</div>
-			</ion-content>
-		</ion-pane>
+			<div class="card" style="border-radius: 10px;box-shadow:none;" >
+				<div class="item" style="border-color:#fff;border-style: none;border-width:0;padding-bottom: 11px;">
+					<h2  style="margin-bottom: 5px;">{{itmes.title}}</h2>
+		        </div>
+		        <div class="carditem">
+			        <p class="contents">
+				    	使用说明：
+				    </p>
+				  	<p class="mt10" style="color: #7f7f7f;" ng-bind-html="itmes.content"></p>
+		        </div>
+		    </div>
+		</ion-content>
+		<div class="tabs" style="background-color:#fff;height: 59px;">
+			<div class="row" style="padding: 5px 10px;">
+				<a class="button button-block button-positive" type="button" style="border-radius: 10px;width:100%;" href="{{itmes.file_path}}">下载</a>
+			</div>
+		</div>
+	</ion-pane>
 </ion-view>
