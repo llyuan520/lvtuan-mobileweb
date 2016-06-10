@@ -5190,37 +5190,127 @@ lvtuanApp.controller("commodityListCtrl",function($scope,$rootScope,listHelper,h
 //法律文书
 lvtuanApp.controller("documentlistCtrl",function($http,$scope,$state,$rootScope,$ionicLoading,locationService){
 
-	//选择类型
-	$ionicLoading.show();
-	$http.get('http://'+$rootScope.hostName+'/knowledge/document/categories')
-		.success(function(data) {
-	      if(data.data.length > 0){
-	        $scope.workscopes = data.data;
-	        console.info($scope.workscopes)
-	        sessionStorage.setItem("key", JSON.stringify($scope.workscopes[0].key));
-	        get_Param($scope.workscopes[0].key);
-	        $ionicLoading.hide();
-	      }else{
-	      	layer.show("暂无数据！");
-	      }
-	    })
+	$scope.orders = [
+						{
+							"key"	:"",
+							"value" : "筛选"
+						},
+						{
+							"key"	:"downs",
+							"value" : "下载最多"
+						},
+						{
+							"key"	:"views",
+							"value" : "浏览最多"
+						}
+					];
 
+
+	getWorkscopes();
+	//获取法律专长
+
+	function getWorkscopes(){
+		$ionicLoading.show();
+		$http.get('http://'+$rootScope.hostName+'/knowledge/document/categories')
+			.success(function(data) {
+				$scope.workscopes = data.data;
+				if($scope.workscopes.length > 0){
+			        $scope.addArry = [
+											{	
+												"key"		:"",
+												"value" 	: "文书类别"
+											}
+										]
+			        
+					$scope.workscopes = $scope.addArry.concat($scope.workscopes);
+					$scope.workscope = $scope.workscopes[0].value;	
+				}
+				$ionicLoading.hide();
+			})
+	}
+
+	//声明变量并赋值
+	$scope.visible = true;  	//咨询类别下拉列表
+	$scope.visible1 = true;		//筛选下拉列表
+	$scope.masklayer = true; 	//遮罩层
+	$scope.order = $scope.orders[0].value;
+	$scope.scopes_key = "";
+	$scope.orders_key = "";
+
+	//显示隐藏层
+    $scope.toggle = function () {
+        $scope.visible = !$scope.visible;
+        $scope.masklayer = !$scope.masklayer;
+    }
+
+    $scope.toggle1 = function () {
+        $scope.visible1 = !$scope.visible1;
+        $scope.masklayer = !$scope.masklayer;
+    }
+
+    //给弹出层选中的项加上背景颜色
 	$scope.inShowscopes = function(key) {
 		var value = false;
-		$scope.key = JSON.parse(sessionStorage.getItem('key'));
+		$scope.key = $scope.scopes_key;
 		if (key == $scope.key) {
 			value = true;
 		}
 		return value;
 	}
+	$scope.inorders = function(key) {
+		var value = false;
+		$scope.key = $scope.orders_key;
+		if (key == $scope.key) {
+			value = true;
+		}
+		return value;
+	}
+	
+	//获取咨询类别选中的值
+	$scope.getWorkscopeVal = function(key,val){
+    	$scope.visible = !$scope.visible;
+    	$scope.masklayer = !$scope.masklayer;
+		$scope.workscope = val;
+		$scope.scopes_key = key;
+		page = 1;
+		$scope.items = [];
+		get_Param();
+    }
+    //获取筛选选中的值
+    $scope.getOrderVal = function(key,val){
+		$scope.visible1 = !$scope.visible1;
+		$scope.masklayer = !$scope.masklayer;
+		$scope.order = val;
+		$scope.orders_key = key;
+		page = 1;
+		$scope.items = [];
+		get_Param();
+    }
 
-	var page = 1; //页数
+
+    var page = 1; //页数
 	var rows_per_page = 5; // 每页的数量
 	if ($scope.rows_per_page) {
 		rows_per_page = $scope.rows_per_page;
 	}
     $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
     $scope.items = [];	//创建一个数组接收后台的数据
+    var timestamp=Math.round(new Date().getTime()/1000);
+
+	//获取参数
+	function get_Param(){
+		var param = []; //声明一个数组 判断如果有值就push进来
+		if($scope.scopes_key){
+	  		param.push('cat_id=' + $scope.scopes_key);
+	  	}
+	  	if($scope.orders_key){
+	  		param.push('order=' + $scope.orders_key);
+	  	}
+	  	param = param.join('&');  //通过join('&') 把所有的参数都拼接起来
+	  	console.info(param)
+	  	geturl(param);
+	}
+
     //下拉刷新
 	$scope.doRefresh = function() {
 		page = 1;
@@ -5231,32 +5321,25 @@ lvtuanApp.controller("documentlistCtrl",function($http,$scope,$state,$rootScope,
 
     //上拉加载
 	$scope.loadMore = function() {
-		$scope.key = JSON.parse(sessionStorage.getItem('key'));
-		if($scope.key != null){
-			get_Param($scope.key);
-		}else{
-			$scope.moredata = false;
-		}
-		
+		//获取推荐的律师 ?is_recommended=1&page=1&size=10
+		get_Param();
 	};
 
-	$scope.ngClick_list = function(key){
-		page = 1;
-		$scope.items = [];
-		sessionStorage.setItem("key", JSON.stringify(key));
-		get_Param(key);
-		
-	}
+	//根据参数向后台拉取数据
+	function geturl(param){
+		$scope.nodata = true;
+		var url;
 	
-	function get_Param(key){
-		$ionicLoading.show();
-		var url = 'http://'+$rootScope.hostName+'/knowledge/document/list_documents?cat_id='+key+'&rows_per_page='+rows_per_page+'&page='+page;
+		if(param != ""){
+	  		url = 'http://'+$rootScope.hostName+'/knowledge/document/list_documents?'+param+'&rows_per_page='+rows_per_page+'&page='+page+'&ts='+timestamp;
+	    }else{
+	    	url = 'http://'+$rootScope.hostName+'/knowledge/document/list_documents?rows_per_page='+rows_per_page+'&page='+page;+'&ts='+timestamp;
+	    }
+	    $ionicLoading.show();
 		$http.get(url)
 			.success(function(data) {
-	        	console.info(data.data)
 	        	if(data && data.data && data.data.length){
 					$scope.items = $scope.items.concat(data.data);
-					sessionStorage.removeItem('key');
 					console.info($scope.items);
 					if (data.data.length < rows_per_page) {
 						$scope.moredata = false;
@@ -5267,7 +5350,6 @@ lvtuanApp.controller("documentlistCtrl",function($http,$scope,$state,$rootScope,
 					if (page == 1) {
 						$scope.moredata = false;
 						$scope.nodata = false;
-						//layer.show('暂无数据！');
 					}
 					$scope.moredata = false;
 				}
@@ -5280,6 +5362,7 @@ lvtuanApp.controller("documentlistCtrl",function($http,$scope,$state,$rootScope,
 })
 //法律文书 - 搜索
 lvtuanApp.controller("documentlistsearchCtrl",function($http,$scope,$state,$rootScope,$ionicLoading){
+
 	angular.element('.search').trigger('focus');
 	var page = 1; //页数
 	var rows_per_page = 5; // 每页的数量
@@ -5309,6 +5392,7 @@ lvtuanApp.controller("documentlistsearchCtrl",function($http,$scope,$state,$root
 
     //上拉加载
 	$scope.loadMore = function() {
+		$ionicLoading.show();
 		var params = layer.getParams("#searchForm");
 		var url = "";
 		if(params.q != ""){
@@ -5319,7 +5403,8 @@ lvtuanApp.controller("documentlistsearchCtrl",function($http,$scope,$state,$root
 					if(data && data.data && data.data.length){
 						$scope.items = $scope.items.concat(data.data);
 						console.info($scope.items);
-						if (data.data.length < rows_per_page) {
+						$ionicLoading.hide();
+						if (data.data.length <= rows_per_page) {
 							$scope.moredata = false;
 						} else {
 							$scope.moredata = true;
@@ -5349,11 +5434,13 @@ lvtuanApp.controller("documentlistsearchCtrl",function($http,$scope,$state,$root
 })
 
 //法律文书 - 详情 - 下载
-lvtuanApp.controller("documentownloadlistCtrl",function($http,$scope,$state,$rootScope,$stateParams){
+lvtuanApp.controller("documentownloadlistCtrl",function($http,$scope,$state,$rootScope,$stateParams,$ionicLoading){
+	$ionicLoading.show();
 	$http.get('http://'+$rootScope.hostName+'/knowledge/document/'+$stateParams.id+'/view')
 	.success(function(data) {
     	console.info('法律文书详情',data.data)
     	$scope.itmes = data.data;
+    	$ionicLoading.hide();
 	})
 })
 
@@ -5890,127 +5977,6 @@ lvtuanApp.controller("userwithdrawCtrl",function($scope,$http,$rootScope,listHel
 lvtuanApp.controller("userpayallCtrl",function($scope,$http,$rootScope,$ionicLoading,listHelper){
 	listHelper.bootstrap('/wallet/record', $scope);
 })
-
-//用户律师 - 微信支付
-lvtuanApp.controller("payCtrl",function($scope,$http,$rootScope,$stateParams,$ionicPopup,$location,$ionicLoading,authService,wxService,listHelper,httpWrapper){
-
-	$scope.type = JSON.parse(localStorage.getItem('type'));
-	$scope.user = {
-		radioval : 'wx_pub'
-	};
-    $ionicLoading.show();
-    $http.get('http://'+$rootScope.hostName+'/center/pay/question/'+$stateParams.id+'/view')
-    .success(function(data) {
-            $ionicLoading.hide();
-            if(data && data.data){
-                    $scope.item = data.data;
-                    console.info($scope.item);
-                    return true;
-            }else{
-                    layer.show('暂无数据！');
-                    return false;
-            }
-    })
-
-        //微信支付
-    $scope.wap_pay = function(user){
-            if (user.radioval == 'qianbao') {
-					var confirmPopup = $ionicPopup.confirm({
-						title: '是否立即付款？',
-						cancelText: '取消',
-						okText: '确认',
-	        		});
-             		confirmPopup.then(function(res) {
-		               if(res) { 
-		               		$ionicLoading.show();
-			               	httpWrapper.request('http://'+$rootScope.hostName+'/center/question/'+$stateParams.id+'/pay/wallet','post',null,
-								function(data){
-			                        $scope.items = data.data;
-			                        layer.show("付款成功！");
-			                        switch($scope.type) {
-										case "pay_text":
-											location.href='#/question/paytext/new';
-											$ionicLoading.hide();
-											break;
-										case "pay_phone":
-											location.href='#/question/payphone/new';
-											$ionicLoading.hide();
-											break;
-										case "pay_company":
-											location.href='#/question/paycompany/new';
-											$ionicLoading.hide();
-											break;
-									}
-			                        
-								},function(data){
-									console.info(data);
-								}
-							);
-
-		               }else{
-		                 return false;
-		               }
-             		});
-            } else {
-
-				if (!wxService.getOpenId()) {
-					window.location.replace(wxService.getWxAuthUrl('/wxauthpayment'));
-					main(wxService.getOpenId());
-				} else {
-					main(wxService.getOpenId());
-				}
-
-			}
-
-		function main(openid){
-	    	var currentUser = authService.getUser();
-	    	var param = {};
-	    		param.order_no = $scope.item.order_no;
-				param.device = 'wechat';
-				param.channel = user.radioval;
-				param.amount = $scope.item.price * 100;
-				param.subject = $scope.item.type;
-				param.body = $scope.item.title;
-				param.open_id = openid;
-				param.current_user_id = currentUser.id;
-				param.metadata = {};
-				param.metadata.pay_type = $stateParams.type;
-				if($stateParams.type != null){
-	        		if($stateParams.type == 'order' ){
-	        			param.metadata.question_id = $scope.item.post_id;
-	        		}
-	        		if($stateParams.type == 'wallet_recharge' ){
-	        			param.metadata.user_id = currentUser.id;
-	        		}
-	        	}
-	        	console.info(param);
-	        $ionicLoading.show();
-	    	$http.post('http://'+$rootScope.hostName+'/payment_gateway/charge',param)
-			.success(function(data) {
-	        	console.log(data);
-
-	        	pingpp.createPayment(data, function(result, error){
-				    if (result == "success") {
-				        // 只有微信公众账号 wx_pub 支付成功的结果会在这里返回，其他的 wap 支付结果都是在 extra 中对应的 URL 跳转。
-	                    location.href='#/question/gratis/new';
-	                    $ionicLoading.hide();
-				    } else if (result == "fail") {
-				        // charge 不正确或者微信公众账号支付失败时会在此处返回
-				        layer.show("支付失败，请稍候再试。");
-				        $ionicLoading.hide();
-				    } else if (result == "cancel") {
-				        // 微信公众账号支付取消支付
-				        layer.show("您已取消支付。");
-				        $ionicLoading.hide();
-				    }
-				});
-
-	        });
-	    }
-    }
-
-})
-
 
 
 lvtuanApp.controller("citypickerCtrl",function($http,$location,$scope,$rootScope,$anchorScroll,$ionicHistory,$stateParams,$ionicLoading,$ionicScrollDelegate,locationService){

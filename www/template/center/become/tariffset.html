@@ -1,12 +1,6 @@
-<ion-view hide-tabs="true">
+<ion-view hide-tabs="true" view-title="资费设置">
 	<ion-pane  class="web-body tariffset">
 		<form name="tariffsetForm" class="css-form" id="tariffsetForm" novalidate ng-controller="tariffsetCtrl">
-			<ion-header-bar align-title="center" class="bar bar-header bar-light headers">
-				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-href="#/becomenav"></a>
-				<h1 class="title">资费设置</h1>
-				<button ng-click="submit()" class="button button-clear button-positive" type="submit" ng-disabled="tariffsetForm.$invalid">保存</button>
-			</ion-header-bar>
-
 			<ion-content>
 				<!-- <div class="basekong20"></div> -->
 				<div class="tariffset-list">
@@ -31,6 +25,11 @@
 						  </div>
 						  <div class="col col-14 col-center">元/次</div>
 						</div>
+					</div>
+				</div>
+				<div style="background-color:#fff;height: 59px;margin-top: 50px;">
+					<div class="row" style="padding: 5px 10px;">
+						<button ng-click="submit()" class="button button-block button-positive" type="button" ng-disabled="tariffsetForm.$invalid" style="border-radius: 10px;">保存</button>
 					</div>
 				</div>
 			</ion-content>

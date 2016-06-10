@@ -3,7 +3,7 @@
     overflow: auto;
     background-color: #eee;
      position: absolute;
-    top: 44px;
+    top: 0px;
     right: 0;
     bottom: 0;
     left: 0;
@@ -49,13 +49,13 @@ html.no-overflowscrolling .scrollArea {
 }
 
 </style>
-<ion-view hide-tabs="true">
+<ion-view hide-tabs="true" view-title="选择地址">
 		<ion-pane  class="web-body">
-			<ion-header-bar align-title="center" class="bar bar-header bar-light">
+			<!-- <ion-header-bar align-title="center" class="bar bar-header bar-light">
 				<i class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back"  ng-click="jump_citypicke_GoBack()"></i>
 				<h1 class="title">选择地址</h1>
-				<!-- <button ng-click="createSubmit()" class="button button-clear button-positive" type="button">保存</button> -->
-			</ion-header-bar>
+				<button ng-click="createSubmit()" class="button button-clear button-positive" type="button">保存</button>
+			</ion-header-bar> -->
 			
 			<!-- bug 如果是页面用了ionic的<ion-content> 这个代码，那么页面的点击事件执行后，滚动条就会失效 -->
 			<div class="scrollArea scroll-bar-indicator">

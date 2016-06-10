@@ -35,13 +35,13 @@
 		<div class="slide1">
 			<ion-slide-box active-slide="myActiveSlide1" does-continue="true" show-pager="true" slide-interval="3000" auto-play="true"  active-slide="index">
 		        <ion-slide>
-		            <img ng-src="../img/banner1-01.png">
+		        	<a ng-href="#/one-questions"><img ng-src="../img/banner1-01.png"></a>
 		        </ion-slide>
 		        <ion-slide>
-		            <img ng-src="../img/banner1-02.png">
+		            <a ng-href="#/questionslist"><img ng-src="../img/banner1-02.png"></a>
 		        </ion-slide>
 		        <ion-slide>
-		            <img ng-src="../img/banner1-03.png">
+		            <a ng-href="#/corporate"><img ng-src="../img/banner1-03.png"></a>
 		        </ion-slide>
 			</ion-slide-box>
 		</div>
@@ -54,7 +54,7 @@
 				<div class="col col-center" style="text-align: left;line-height: 22px;">
 					<b style="font-size:18px;color:#ff2f5f;">免费咨询</b><br>
 					<font style="font-size:12px;color:#666;">24小时有问必答</font><br>
-					<a class="button button-small" ng-href="#/questionslist" style="border-color:#004799;background-color:#004799;color:#fff;min-height: 22px;line-height: 22px;margin-bottom: 0;margin-top:0;border-radius:0;margin-top:10px;padding: 2px 8px 1px;">
+					<a class="button button-small" ng-href="#/questionslist" style="border-color:#48b4ff;background-color:#48b4ff;color:#fff;min-height: 22px;line-height: 22px;margin-bottom: 0;margin-top:0;border-radius:0;margin-top:10px;padding: 2px 8px 1px;">
 					  立即咨询
 					</a>
 				</div>
@@ -104,7 +104,7 @@
 					<h2>{{item.realname}}</h2>
 					<p>执业{{item.practice_period}}/{{item.city}}</p>
 					<p>
-						<label ng-repeat="item in item.work_scope">{{item.value}}</label>
+						<label ng-repeat="item in item.work_scope" style="margin-right:10px;">{{item.value}}</label>
 					</p>
 		        </ion-item>
 	         </ion-list>

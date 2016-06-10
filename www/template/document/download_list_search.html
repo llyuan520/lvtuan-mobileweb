@@ -1,54 +1,40 @@
-<style type="text/css">
-.textright{
-	font-size: 12px;
-	text-align:right;
-}
-.border-bottom{
-	border-bottom: 1px solid #f2f2f2;
-	margin: 10px;
-	padding-bottom: 10px;
-}
-.border-bottom .row {
-	padding: 5px 0;
-}
-.border-bottom .row .col{
-	padding: 0;
-}
-</style>
-<ion-view hide-tabs="true">
-	<form id="searchForm" name="searchForm" ng-controller="documentlistsearchCtrl">
-		<ion-pane>
-			<ion-header-bar align-title="center" class="bar bar-header bar-light">
+<ion-view hide-tabs="true" view-title="文书搜索">
+	<ion-pane>
+		<ion-content>	
+			<form id="searchForm" name="searchForm" ng-controller="documentlistsearchCtrl">
 				<!--搜索你想要的内容  -->
-				<div class="item item-input-inset" style="border-radius: 4px;margin-left: 1%;"> 
-					<label class="item-input-wrapper">
-						<i class="icon ion-ios-search placeholder-icon" style="font-size: 1.8rem;"></i>
-				    	<input ng-model="q" type="search" name="q" placeholder="搜索" class="search" ng-model-options="{debounce:2000}" >
-					</label>
+			  	<div class="item-input-inset" style="border-radius: 10px;">
+				  <label class="item-input-wrapper">
+				  	<i class="icon ion-ios-search placeholder-icon"></i>
+				    <input ng-model="q" type="search" name="q" placeholder="搜索" class="search" ng-model-options="{debounce:2000}" required >
+				  </label>
 				</div>
-				<button class="button button-clear pull-right" ng-click="jumpGo('#/document/list')">  
-					<span class="positive">取消</span>
-				</button>
-			</ion-header-bar>
-			
-			<ion-content class="bg-fff">	
+
+				
+				<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+				
 				<div ng-if="nodata == false" class="nodate">
 					<i class="nodate-iocn"></i><br>
 					<label>暂无数据！</label>
 				</div>
-		
-				<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
-				<div class="border-bottom" ng-repeat="item in items">
-					<div class="row">
-						<div class="col col-60 content_txt1 txt-c-66"><a ng-href="#/document/download_list/{{item.id}}">{{item.title}}</a></div>
-					  <div class="col textright txt-c-99">下载:{{item.downs}}次</div>
-					</div>
-					<div class="row">
-						<div class="col content_txt2 txt-c-99">{{item.info}}</div>
-					</div>
+				
+				<div class="card" ng-repeat="item in items" style="border-radius: 10px;">
+				  <a class="item item-text-wrap" ng-href="#/document/download_list/{{item.id}}">
+				  	<h2>{{item.title}}</h2>
+				  	<p class="content">{{item.info}}</p>
+				  	<p class="mt10">
+				  		<span class="subdued cb5b5b5">浏览</span>
+				  		<label class="cf7861e">{{item.views_count}}</label>
+				  		<label class="cb5b5b5">·</label>
+					  	<span class="subdued cb5b5b5">下载</span>
+					  	<label class="cf7861e">{{item.downs}}</label>
+					  	<span class="cb5b5b5">{{item.difference_date}}</span>
+				  	</p>
+				  </a>
 				</div>
 				<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
-			</ion-content>
-		</ion-pane>
-	</form>
-</ion-view>>
+
+			</form>
+		</ion-content>
+	</ion-pane>
+</ion-view>

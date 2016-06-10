@@ -1,18 +1,19 @@
-<ion-view hide-tabs="false">
+<style type="text/css">
+	.tabs-top > .tabs, .tabs.tabs-top{top: 44px;}
+	.has-tabs-top {top: 93px;}
+</style>
+<ion-view hide-tabs="false" view-title="律圈">
 		<ion-pane  class="web-body">
-			<ion-header-bar align-title="center" class="bar bar-header bar-light headers">
+			<ion-header-bar align-title="center" class="bar bar-header bar-light" style="top: 0;">
 				<h1 class="title">律圈</h1>
-
 				<a class="button icon-right button-clear button-positive button-small" ng-href="{{url}}">
 					<i ng-if=" url == '#/groupcreate' " class="icon ion-android-add"></i>
 					<i ng-if=" url == '#/group/attention/search' " class="icon ion-ios-search-strong"></i>
 					<i ng-if=" url == '#/televisecreate' " class="icon ion-android-add"></i>
 				</a>
-
-				
 			</ion-header-bar>
 			
-			<ion-tabs class="tabs-top">
+			<ion-tabs class="tabs-top  headers">
 			    <ion-tab title="律圈" href="#/group/list">
 			        <ion-nav-view name="group-list">律圈</ion-nav-view>
 			    </ion-tab>

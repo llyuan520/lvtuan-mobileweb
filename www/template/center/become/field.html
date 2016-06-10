@@ -28,14 +28,8 @@
 	    color: #fff;
 	}
 </style>
-<ion-view hide-tabs="true">
+<ion-view hide-tabs="true" view-title="擅长领域">
 	<ion-pane  class="web-body">
-		<ion-header-bar align-title="center" class="bar bar-header bar-light headers">
-			<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-href="#/becomenav"></a>
-			<h1 class="title">擅长领域</h1>
-			<button ng-click="submit()" class="button button-clear button-positive" type="submit">保存</button>
-		</ion-header-bar>
-
 		<ion-content class="field-content">
 			<!-- <h4 class="title web-title web-fc666">资格认证 <span class="web-ftcred" style="font-size:14px;">(审核通过后，不可修改)</span></h4> -->
 			<!-- <div class="basekong20"></div> -->
@@ -51,6 +45,11 @@
 				<span ng-repeat="workscope in workscopes" ng-class="{ 'active':inShowscopes(workscope, showscopes) }"> 
 					<label ng-click="click_workscope(workscope.key,workscope.value)" >{{workscope.value}}</label>
 				</span>
+			</div>
+			<div style="background-color:#fff;height: 59px;margin-top: 50px;">
+				<div class="row" style="padding: 5px 10px;">
+					<button ng-click="submit()" class="button button-block button-positive" type="button" style="border-radius: 10px;">保存</button>
+				</div>
 			</div>
 		</ion-content>
 	</ion-pane>

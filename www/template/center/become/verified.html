@@ -1,12 +1,6 @@
-<ion-view hide-tabs="true">
+<ion-view hide-tabs="true" view-title="实名认证">
 		<ion-pane  class="web-body verified">
 			<form name="verifiedForm" class="css-form" id="verifiedForm" novalidate ng-controller="verifiedCtrl">
-				<ion-header-bar align-title="center" class="bar bar-header bar-light headers">
-					<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-href="#/becomenav"></a>
-					<h1 class="title">实名认证</h1>
-					<button ng-if="!currentUser.is_verified_lawyer" ng-click="submit()" class="button button-clear button-positive" type="submit" ng-disabled="verifiedForm.$invalid">保存</button>
-				</ion-header-bar>
-
 				<ion-content>
 					<!-- <div class="basekong20"></div> -->
 					<div class="verified-list">
@@ -35,6 +29,11 @@
 				                	</span>
 							  	</div>
 							</div>
+						</div>
+					</div>
+					<div style="background-color:#fff;height: 59px;margin-top: 50px;">
+						<div class="row" style="padding: 5px 10px;">
+							<button ng-if="!currentUser.is_verified_lawyer" ng-click="submit()" class="button button-block button-positive" type="button" ng-disabled="verifiedForm.$invalid" style="border-radius: 10px;">保存</button>
 						</div>
 					</div>
 				</ion-content>
