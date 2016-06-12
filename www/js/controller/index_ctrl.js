@@ -262,20 +262,6 @@ lvtuanApp.controller("loginCtrl",function($state,$scope,$rootScope,$http,userSer
 //用户注册
 lvtuanApp.controller("registerCtrl",function($scope,$rootScope,$http,$interval,$ionicLoading,$location,userService,authService){
 
-	//获取验证码
-	$scope.phone_disabled = true;
-	$scope.phonecode = function(phone){
-		$ionicLoading.show();
-		var param = 'phone='+phone;
-		$scope.phone_disabled = false;
-		$http.post('http://'+$rootScope.hostName+'/send-code?'+param
-		).success(function(data) {
-			runTiming();
-            layer.show("验证码已发送到您的手机！");
-            $ionicLoading.hide();
-        });
-	}
-
 	//第一次获取验证码后要60秒以后才能在次获取
 	var t, timePromise;
 	$scope.t = 60;  
@@ -290,6 +276,23 @@ lvtuanApp.controller("registerCtrl",function($scope,$rootScope,$http,$interval,$
 			}
 	  }, 1000, 60);
 	  return timePromise;
+	}
+
+	//获取验证码
+	$scope.phone_disabled = true;
+	$scope.phonecode = function(phone){
+		$ionicLoading.show();
+		$scope.t = 60;
+		$interval.cancel(timePromise);
+	  	timePromise = undefined;
+		var param = 'phone='+phone;
+		$scope.phone_disabled = false;
+		$http.post('http://'+$rootScope.hostName+'/send-code?'+param
+		).success(function(data) {
+			runTiming();
+            layer.show("验证码已发送到您的手机！");
+            $ionicLoading.hide();
+        });
 	}
 
     //提交注册
@@ -1948,17 +1951,6 @@ lvtuanApp.controller("valphoneCtrl",function($scope,$http,$rootScope,$ionicLoadi
 			phone:$scope.userinfo.phone 
 		};
 
-	//获取验证码
-	$scope.phone_disabled = true;
-	$scope.phonecode = function(phone){
-		var param = 'phone='+phone;
-		$scope.phone_disabled = false;
-		$http.post('http://'+$rootScope.hostName+'/send-code?'+param
-		).success(function(data) {
-			runTiming();
-            layer.show("验证码已发送到您的手机！");
-        });
-	}
 
 	//第一次获取验证码后要60秒以后才能在次获取
 	var t, timePromise;
@@ -1975,7 +1967,22 @@ lvtuanApp.controller("valphoneCtrl",function($scope,$http,$rootScope,$ionicLoadi
 	  }, 1000, 60);
 	  return timePromise;
 	}
-	
+
+	//获取验证码
+	$scope.phone_disabled = true;
+	$scope.phonecode = function(phone){
+		$scope.t = 60;
+		$interval.cancel(timePromise);
+	  	timePromise = undefined;
+		var param = 'phone='+phone;
+		$scope.phone_disabled = false;
+		$http.post('http://'+$rootScope.hostName+'/send-code?'+param
+		).success(function(data) {
+			runTiming();
+            layer.show("验证码已发送到您的手机！");
+        });
+	}
+
 	//提交用户的信息
     $scope.submit = function(){
     	$ionicLoading.show();
@@ -2001,18 +2008,6 @@ lvtuanApp.controller("valemailCtrl",function($scope,$http,$rootScope,$ionicLoadi
 			email:$scope.userinfo.email 
 		};
 
-	//获取验证码
-	$scope.phone_disabled = true;
-	$scope.phonecode = function(phone){
-		var param = 'phone='+phone;
-		$scope.phone_disabled = false;
-		$http.post('http://'+$rootScope.hostName+'/send-code?'+param
-		).success(function(data) {
-			runTiming();
-            layer.show("验证码已发送到您的邮箱！");
-        });
-	}
-
 	//第一次获取验证码后要60秒以后才能在次获取
 	var t, timePromise;
 	$scope.t = 60;  
@@ -2028,7 +2023,22 @@ lvtuanApp.controller("valemailCtrl",function($scope,$http,$rootScope,$ionicLoadi
 	  }, 1000, 60);
 	  return timePromise;
 	}
-	
+
+	//获取验证码
+	$scope.phone_disabled = true;
+	$scope.phonecode = function(phone){
+		var param = 'phone='+phone;
+		$scope.t = 60;  
+		$interval.cancel(timePromise);
+	  	timePromise = undefined;
+		$scope.phone_disabled = false;
+		$http.post('http://'+$rootScope.hostName+'/send-code?'+param
+		).success(function(data) {
+			runTiming();
+            layer.show("验证码已发送到您的邮箱！");
+        });
+	}
+
 	//提交用户的信息
     $scope.submit = function(){
     	$ionicLoading.show();
