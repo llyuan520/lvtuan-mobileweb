@@ -266,6 +266,9 @@ lvtuanApp.controller("registerCtrl",function($scope,$rootScope,$http,$interval,$
 	$scope.phone_disabled = true;
 	$scope.phonecode = function(phone){
 		$ionicLoading.show();
+		$scope.t = 60;
+		$interval.cancel(timePromise);
+	  	timePromise = undefined;
 		var param = 'phone='+phone;
 		$scope.phone_disabled = false;
 		$http.post('http://'+$rootScope.hostName+'/send-code?'+param
@@ -1951,6 +1954,9 @@ lvtuanApp.controller("valphoneCtrl",function($scope,$http,$rootScope,$ionicLoadi
 	//获取验证码
 	$scope.phone_disabled = true;
 	$scope.phonecode = function(phone){
+		$scope.t = 60;
+		$interval.cancel(timePromise);
+	  	timePromise = undefined;
 		var param = 'phone='+phone;
 		$scope.phone_disabled = false;
 		$http.post('http://'+$rootScope.hostName+'/send-code?'+param
