@@ -118,6 +118,19 @@ httpModule.factory('APIInterceptor', ['$log', '$q', '$rootScope', 'authService',
 		      	case 401:
 		      		$rootScope.$broadcast('unauthenticated');
 	        		break;
+	        	case 402:
+		      		if(response.data.data.length > 0){
+	        			angular.forEach(response.data.data,function(val,key){
+							if (angular.isArray(val)) {
+								layer.show(val.join(', '));
+							} else {
+								layer.show(val);
+							}
+						});
+	        		}else{
+	        			layer.show(response.data.info);
+	        		}
+	        		break;
 		      	case 403:
 	        		$rootScope.$broadcast('unauthorized');
 	        		break;
@@ -142,8 +155,8 @@ httpModule.factory('APIInterceptor', ['$log', '$q', '$rootScope', 'authService',
 	        		layer.show("暂时无法处理您的请求，请稍后再试。");
 	        		break;
 	        }
-		    // console.info(response);
 
+		    // console.info(response);
 			$rootScope.hide();
 			// do something on error
 			return $q.reject(response);

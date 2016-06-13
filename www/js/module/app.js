@@ -240,18 +240,7 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
       authn: true,
       authz: 'lawyer'
     })
-   .state('group.televise', { //律圈 - 广播
-      url: '/televise',
-      cache: 'true',
-      views: {
-          'group-televise': {
-              templateUrl: 'template/group/group-televise.html',
-              controller: 'groupTeleviseCtrl'
-          }
-      },
-      authn: true,
-      authz: 'lawyer'
-    })
+
     .state('group.attention', { //律圈 - 关注
       url: '/attention',
       cache: 'true',
@@ -286,13 +275,6 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
       authn: true,
       authz: 'lawyer'
     })
-    .state('broadcast/view', { //广播详情
-      url: '/broadcast/view/:id',
-      templateUrl: 'template/group/broadcast_view.html',
-      controller: 'broadcastviewCtrl',
-      authn: true,
-      authz: 'lawyer'
-    })
 
     .state('groupcreate', { //创建律圈
       url: '/groupcreate',
@@ -302,14 +284,6 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
       authz: 'lawyer'
     })
 
-    .state('televisecreate', { //创建广播
-      url: '/televisecreate',
-      templateUrl: 'template/group/televisecreate.html',
-      controller: 'televisecreateCtrl',
-      authn: true,
-      authz: 'lawyer'
-    })
-    
     .state('group/site', { //律圈设置
       url: '/group/site/:id',
       templateUrl: 'template/group/group-site.html',
@@ -320,6 +294,7 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
     .state('group/add', { //律圈添加成员
       url: '/group/add/:id',
       templateUrl: 'template/group/group-add.html',
+      controller: 'groupaddCtrl',
       authn: true,
       authz: 'lawyer'
     })

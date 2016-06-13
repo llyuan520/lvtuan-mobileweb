@@ -1,17 +1,6 @@
-<ion-view hide-tabs="true">
+<ion-view hide-tabs="true" view-title="创建律圈">
 	<ion-pane  class="web-body">
-		<ion-header-bar class="bar bar-header bar-light" style="top: 0;">
-			<button align-title="center" class="button button-clear button-positive" ng-click="jumpGoBack()">  
-                <i class="icon icon-left ion-ios-arrow-back"></i>  
-            </button>
-			<h1 class="title">创建律圈</h1>
-			<button ng-click="createSubmit()" class="button button-clear button-positive" type="button">
-				确定<label ng-if="selIds.length > 0">({{selIds.length}})</label>
-			</button>
-		</ion-header-bar>
-
-
-		<ion-content style="margin-bottom: 0px;">
+		<ion-content class="has-tabs">
 				<form novalidate name="Form" id="createGroup_form"  ng-cloak class="ng-cloak">
 					<div class="list login">
 						<div class="item item-input" style="padding: 10px">
@@ -32,10 +21,10 @@
 							  <div class="col col-30 col-center">
 							  	<label class="txt-c-99">律圈头像</label>
 							  </div>
-							  <div class="col col-60 col-center">
+							  <div class="col col-70 col-center">
 							  	<div ng-disabled="booleans" ng-model="group_avatar" accept="image/*" ngf-pattern="'image/*'" ngf-max-size="2MB" ngf-min-height="100" ngf-select="uploadFiles($file,$invalidFiles)" class="icon-right" width="52" height="52px" style="color:#ccc;float:right;text-align: right;">
 							  			<div style="width:52px; height:52px;overflow: hidden;">
-							  				<img ng-src="{{file}}" ngf-thumbnail="group_avatar || ' '" width="52" height="52">
+							  				<img ng-src="{{file}}" ngf-thumbnail="group_avatar || '../img/add_avatar.png'" width="52" height="52">
 									  	</div>
 										
 									</div>
@@ -45,31 +34,15 @@
 								    </span> -->
 									<input type="hidden" name="group_avatar" value="{{group_path}}" />
 							  </div>
-							  <div class="col clo-10 col-center">
-							  	<i class="icon ion-chevron-right" style="font-size: 20px;"></i>
-							  </div>
 							</div>
 						</div>
 					</div>	
 				</form>	
-
-				
-				<div ng-if="nodata == false" class="nodate">
-					<i class="nodate-iocn"></i><br>
-					<label>暂无数据！</label>
-				</div>
-				<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
-				<ul class="list">
-			        <li class="item item-avatar" ng-repeat="item in items">
-			        	<img ng-src="{{item.avatar}}" style="left:6px;border-radius:50px;" width="40px" height="40px">
-			          	<h2 style="line-height: 40px;float: left;">{{item.realname}} 律师</h2>
-			          	<label class="checkbox" style="float: right;">
-			          		<input type="checkbox" value="{{item.follow_id}}" name="name{{$index+1}}" ng-model="isCheck[$index]" ng-true-value="{{item.follow_id}}"  ng-false-value="false"  ng-change="checkItem(isCheck[$index],{{item.follow_id}})" >
-			          	</label>
-			        </li>
-			    </ul>
-				<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
-			
 		</ion-content>
+		<div class="tabs" style="background-color:#fff;height: 59px;">
+			<div class="row" style="padding: 5px 10px;">
+				<button class="button button-block button-positive" type="button" style="border-radius: 10px;" ng-click="createSubmit()">下一步</button>
+			</div>
+		</div>
 	</ion-pane>
 </ion-view>
