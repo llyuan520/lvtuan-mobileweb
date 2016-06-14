@@ -7,23 +7,17 @@
     max-height: 60px;
 }
 </style>
-<ion-view hide-tabs="true">
-	<form novalidate id="searchForm" name="searchForm" ng-controller="groupAttentionSearchCtrl">
-		<ion-pane>
-			<ion-header-bar align-title="center" align-title="left" class="bar bar-header bar-light" style="top: 0;">
+<ion-view hide-tabs="true" view-title="搜索律群">
+	<ion-pane>
+		<ion-content class="customize">
+			<form id="searchForm" name="searchForm" ng-controller="groupAttentionSearchCtrl">
 				<!--搜索你想要的内容  -->
-				<div class="item item-input-inset" style="border-radius: 4px;margin-left: 1%;"> 
-					<label class="item-input-wrapper">
-						<i class="icon ion-ios-search placeholder-icon" style="font-size: 1.8rem;"></i>
-				    	<input ng-model="q" type="search" name="q" placeholder="搜索" class="search" ng-model-options="{debounce:2000}" required >
-					</label>
+			  	<div class="item-input-inset" style="border-radius: 10px;">
+				  <label class="item-input-wrapper">
+				  	<i class="icon ion-ios-search placeholder-icon"></i>
+				    <input ng-model="q" type="search" name="q" placeholder="搜索律群名称" class="search" ng-model-options="{debounce:2000}" required >
+				  </label>
 				</div>
-				<button class="button button-clear pull-right" ng-click="jumpGo('#/group/attention')">  
-					<span class="button-clear">取消</span>
-				</button>
-			</ion-header-bar>
-			
-			<ion-content class="customize">
 
 				<div class="list">
 			  		<div ng-if="nodata == false" class="nodate">
@@ -51,7 +45,7 @@
 			         </ion-list>
 				    <ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%" > </ion-infinite-scroll>
 				</div>
-			</ion-content>
-		</ion-pane>
-	</form>
+			</form>
+		</ion-content>
+	</ion-pane>
 </ion-view>

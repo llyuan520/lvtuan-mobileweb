@@ -8,17 +8,17 @@
     font-family: "Microsoft YaHei","Microsoft JhengHei",STHeiti,MingLiu;
   }
 </style>
-<ion-view hide-tabs="true">
+<ion-view hide-tabs="true" view-title="{{group_name}}">
 	<ion-pane class="web-body">
 	  	<div hide-Tabs class="web-body web-top10 group-content">
-  			<ion-header-bar align-title="center" class="bar bar-header bar-light item-icon-right" style="top: 0;">
+  			<!-- <ion-header-bar align-title="center" class="bar bar-header bar-light item-icon-right" style="top: 0;">
 				<a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-click="jumpGo('#/group/list')"></a>
 				<h1 class="title">
 					{{group_name}}
 					<i ng-show="items.member_cnt">({{items.member_cnt}})</i>
 				</h1>
 				<i ng-click="site(items.id)" class="icon ion-ios-person-outline"></i>
-			</ion-header-bar>
+			</ion-header-bar> -->
 
 				<div class="webin" style="height: 100%;">
 				    <div class="chat_content" id="content">
@@ -27,13 +27,13 @@
 				        <div class="chatRight group-cen">
 				            <div id="chat01" class="chats">
 				                <!-- <div id="{{curUserId}}-group--{{curChatUserId}}" class="chat01_content"></div> -->
-				                <div id="{{curUserId}}-group--{{curChatUserId}}" class="chat01_content" classname="chat00_content" style="padding-top: 47px;">
+				                <div id="{{curUserId}}-group--{{curChatUserId}}" class="chat01_content" classname="chat00_content" style="padding-top: 10px;">
                                     <div style="text-align: center;padding-left:0;"><a href="javascript:void(0)" id="comments-list" style="text-align: center" ng-click="loadMore()">查看更多</a></div>
                                     <div id="page" class="loading" style="display: none">加载中...</div>
                                 </div>
 				            </div>
 				            <div class="chat02">
-				                <div class="chat02_title">
+				                <!-- <div class="chat02_title">
 				                    <a class="chat02_title_btn ctb01" onclick="showEmotionDialog()"
 				                        title="选择表情"></a> <a class="chat02_title_btn ctb03" title="选择图片"
 				                        onclick="showSendPic()" href="#"> </a> <a
@@ -55,8 +55,11 @@
 				                        </div>
 				                        <div class="wlf_icon"></div>
 				                    </div>
+				                </div> -->
+				                <div style="float: left;width: 10%;height: 4rem;padding: 10px 0 4px 4px;text-align: center;font-size: 36px;">
+				                	<img ng-click="site(items.id)" ng-src="../img/site.png" width="32" height="32">
 				                </div>
-				                <div id="input_content" class="chat02_content">
+				                <div id="input_content" class="chat02_content" style="width: 64%;">
 				                    <textarea contenteditable="true" id="talkInputId" style="resize: none;" ></textarea>
 				                </div>
 				                <div class="chat02_bar">

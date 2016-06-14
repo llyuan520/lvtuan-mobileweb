@@ -811,6 +811,8 @@ lvtuanApp.controller("groupsiteCtrl",function($scope,$http,$state,$rootScope,$st
 				
 				$scope.group_name = $scope.items.group_name;
 				$scope.is_mine = $scope.items.is_mine;
+
+				$scope.view_title = $scope.is_mine == true ? '律圈设置' : '律圈设置';
 				$scope.file = $scope.items.group_avatar;
 			}
 			$ionicLoading.hide();
@@ -1090,12 +1092,6 @@ lvtuanApp.controller("groupaddCtrl",function($scope,$http,$location,$ionicLoadin
 	  	}
 	  	if($scope.period_key){
 	  		param.push('experience=' + $scope.period_key);
-	  	}
-	  	if($scope.orders_key){
-	  		param.push('order_by=' + $scope.orders_key);
-	  	}
-	  	if($stateParams.type){
-	  		param.push('type=' + $stateParams.type);
 	  	}
 	  	param = param.join('&');  //通过join('&') 把所有的参数都拼接起来
 	  	console.info($scope.param)
@@ -2474,12 +2470,11 @@ lvtuanApp.controller("tariffsetCtrl",function($scope,$http,$rootScope,$statePara
 	$http.get('http://'+$rootScope.hostName+'/center/becomelawyer/fee?ts='+timestamp)
 	.success(function(data) {
 		if(data && data.data){
-			//用于连接两个或多个数组并返回一个新的数组
-			$scope.items = data.data;
-			$scope.textreplyfee = $scope.items.text_reply_fee;
-   			$scope.phonereplyfee = $scope.items.phone_reply_fee;
-		}
-		$ionicLoading.hide();
+    		$scope.items = data.data;
+			$scope.textreplyfee = parseInt($scope.items.text_reply_fee);
+   			$scope.phonereplyfee = parseInt($scope.items.phone_reply_fee);
+    	}
+    	$ionicLoading.hide();
 	})
 
 
@@ -4459,10 +4454,10 @@ lvtuanApp.controller("easemobmainCtrl",function($scope,$http,$state,$rootScope,$
 		}
 	})
 
-    $scope.visible = true;
+    /*$scope.visible = true;
     $scope.toggle = function(){
     	$scope.visible = !$scope.visible;
-    }
+    }*/
 
     $scope.arry = [];
     var page = 1;
@@ -4677,7 +4672,9 @@ lvtuanApp.controller("userOrderViewCtrl",function($scope,$rootScope,$ionicLoadin
         });
 		httpWrapper.request('http://'+$rootScope.hostPath+'/callback/'+$stateParams.id,'get',null,
 			function(data){
-			 	alertPopup.close();
+				$timeout(function(){
+					alertPopup.close();
+				}, 3000);
 			},function(data){
 				alertPopup.close(); 
 			}
@@ -4934,7 +4931,9 @@ lvtuanApp.controller("lawyerOrderViewCtrl",function($scope,$rootScope,$ionicLoad
         });
         httpWrapper.request('http://'+$rootScope.hostPath+'/callback/'+$stateParams.id,'get',null,
 			function(data){
-			 	alertPopup.close();
+			 	$timeout(function(){
+					alertPopup.close();
+				}, 3000);
 			},function(data){
 				alertPopup.close(); 
 			}

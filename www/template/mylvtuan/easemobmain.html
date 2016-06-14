@@ -8,18 +8,18 @@
     font-family: "Microsoft YaHei","Microsoft JhengHei",STHeiti,MingLiu;
   }
 </style>
-<ion-view hide-tabs="true">
+<ion-view hide-tabs="true" view-title="咨询详情">
     <ion-pane class="web-body">
         <div hide-Tabs class="web-body web-top10 group-content">
-           <ion-header-bar align-title="center" class="bar bar-header bar-light item-icon-right">
-                <!-- <a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-click="jumpGoBack_rel()"></a> -->
+           <!-- <ion-header-bar align-title="center" class="bar bar-header bar-light item-icon-right">
+                <a class="button icon-left ion-chevron-left button-clear button-positive button-small ion-ios-arrow-back" ng-click="jumpGoBack_rel()"></a>
                 <h1 class="title">咨询详情</h1>
                 <button ng-click="toggle()" class="button button-clear button-positive icon-right" style="text-align: right;" type="button">
                     <img src="../img/zx.png" style="width: 52%;margin-top: 4px;">
                 </button>
-            </ion-header-bar>
+            </ion-header-bar> -->
                 <div class="webin" style="height: 100%;">
-                   <div class="zxDatile" ng-hide="visible">
+                   <!-- <div class="zxDatile" ng-hide="visible">
                         <ion-item class="item" style="margin-bottom: 10px;color: #666;font-size: 14px;border: 1px solid rgba(0,0,0,.12);border-radius: 3px;z-index: 999;border-top: none;box-shadow: 0 -1px 5px 0 #ddd;">
                             <div class="row row-no-padding padding_bottom16">
                                 <div class="col"><label style="color: #999;">咨询标题</label></div>
@@ -34,7 +34,7 @@
                                 </div>
                             </div>
                         </ion-item>
-                    </div>
+                    </div> -->
                     <div class="chat_content" id="content">
                         <div id="rightTop" style="height: 3.5rem;"></div>
                         <!-- 聊天页面 -->
@@ -45,7 +45,7 @@
                                     <a href="javascript:window.close()"><div id="recycle"></div></a>
                                 </div>
                                 <!-- <div id="null-nouser" class="chat01_content"></div> -->
-                                <div id="{{curUserId}}-{{curChatUserId}}" class="chat00_content" classname="chat00_content" style="padding-top: 47px;">
+                                <div id="{{curUserId}}-{{curChatUserId}}" class="chat00_content" classname="chat00_content" style="padding-top: 10px;">
 
                                     <div style="text-align: center"><a href="javascript:void(0)" id="comments-list" style="text-align: center" ng-click="loadMore()">查看更多</a></div>
                                     <div id="page" class="loading" style="display: none">加载中...</div>
@@ -68,7 +68,7 @@
                             </div>
 
                             <div class="chat02">
-                                <div class="chat02_title">
+                                <!-- <div class="chat02_title">
                                     <div id="wl_faces_box" class="wl_faces_box">
                                         <div class="wl_faces_content">
                                             <div class="title">
@@ -85,7 +85,7 @@
                                         </div>
                                         <div class="wlf_icon"></div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <form id="chatform" style="margin:0;">
                                     <div id="input_content" class="chat02_content">
                                         <textarea  name="comment" id="talkInputId" style="resize: none;"></textarea>

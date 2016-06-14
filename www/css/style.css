@@ -522,6 +522,7 @@ ul.rating {
     text-align: center;
     position: relative;
     height: 84px;
+    margin-bottom: 5px;
 }
 .group-site a p{
     text-align:center;
@@ -744,6 +745,8 @@ input, select {
 .index .list .row,.index .list .row .col{
     padding: 0;
 }
+.group_create_transparent{border: 0; padding: 10px 10px 5px 10px; position: absolute;z-index: 99999;bottom: 70px;right: 10px;background: transparent;}
+.group_create_transparent img{width: 35px;height: 35px;}
 
 /*4-4s*/
 @media only screen and (min-device-width: 320px) and (min-device-height :480px){ 
@@ -821,6 +824,7 @@ input, select {
     .login .weixin,.login .qq{background-size: 50px;}
     .log-content{padding-top: 8%;}
     .login-img,.login-img2{padding-top: 20px;}
+    .group_create_transparent img{width: 38px;height: 38px;}
 }
 /*6*/
 @media only screen and (min-device-width: 375px) and (min-device-height :557px){ 
@@ -871,6 +875,7 @@ input, select {
     .login-img,.login-img2{
         padding-top: 20px;
     }
+    .group_create_transparent img{width: 40px;height: 40px;}
 }
 /*6 plus*/
 @media only screen and (min-device-width: 414px) and (min-device-height :736px){ 
@@ -918,7 +923,58 @@ input, select {
     .login-img,.login-img2{
         padding-top: 20px;
     }
+    .group_create_transparent img{width: 40px;height: 40px;}
 }
+/*6 plus*/
+@media only screen and (min-device-width: 414px) and (min-device-height :736px){
+    .grade-a .nav-set {
+        height: 56px;
+        padding-top: 0;
+    }
+    .grade-a .nav-set a {
+        height: 56px;
+    }
+    .navs {
+        height: 3.6rem;
+    }
+    .tab-item .home, .nav-set a.active i.home, .tab-item .group, .nav-set a.active i.group, .tab-item .knowledge, .nav-set a.active i.knowledge, .tab-item .center, .nav-set a.active i.center {
+        width: 39px;
+    }
+    .tab-item .home {
+        background: url("../img/index.png") center center no-repeat;
+        background-size: 75%;
+    }
+    .nav-set a.active i.home {
+        background: url("../img/indexs.png") center center no-repeat;
+        background-size: 75%;
+    }
+    .tab-item .group {
+        background: url("../img/circle.png") center center no-repeat;
+        background-size: 75%;
+    }
+    .nav-set a.active i.group {
+        background: url("../img/circles.png") center center no-repeat;
+        background-size: 75%;
+    }
+    .tab-item .knowledge {
+        background: url("../img/knowledge.png") center center no-repeat;
+        background-size: 75%;
+    }
+    .nav-set a.active i.knowledge {
+        background: url("../img/knowledges.png") center center no-repeat;
+        background-size: 75%;
+    }
+    .tab-item .center {
+        background: url("../img/my.png") center center no-repeat;
+        background-size: 75%;
+    }
+    .nav-set a.active i.center {
+        background: url("../img/mys.png") center center no-repeat;
+        background-size: 75%;
+    }
+    .group_create_transparent img{width: 48px;height: 48px;}
+}
+
 .item-input-wrapper{
     background-color: #fff;
 }
@@ -995,55 +1051,6 @@ input, select {
     background: url("../img/mys.png") center center no-repeat;
     background-size: 75%;
 }
-/*6 plus*/
-@media only screen and (min-device-width: 414px) and (min-device-height :736px){
-    .grade-a .nav-set {
-        height: 56px;
-        padding-top: 0;
-    }
-    .grade-a .nav-set a {
-        height: 56px;
-    }
-    .navs {
-        height: 3.6rem;
-    }
-    .tab-item .home, .nav-set a.active i.home, .tab-item .group, .nav-set a.active i.group, .tab-item .knowledge, .nav-set a.active i.knowledge, .tab-item .center, .nav-set a.active i.center {
-        width: 39px;
-    }
-    .tab-item .home {
-        background: url("../img/index.png") center center no-repeat;
-        background-size: 75%;
-    }
-    .nav-set a.active i.home {
-        background: url("../img/indexs.png") center center no-repeat;
-        background-size: 75%;
-    }
-    .tab-item .group {
-        background: url("../img/circle.png") center center no-repeat;
-        background-size: 75%;
-    }
-    .nav-set a.active i.group {
-        background: url("../img/circles.png") center center no-repeat;
-        background-size: 75%;
-    }
-    .tab-item .knowledge {
-        background: url("../img/knowledge.png") center center no-repeat;
-        background-size: 75%;
-    }
-    .nav-set a.active i.knowledge {
-        background: url("../img/knowledges.png") center center no-repeat;
-        background-size: 75%;
-    }
-    .tab-item .center {
-        background: url("../img/my.png") center center no-repeat;
-        background-size: 75%;
-    }
-    .nav-set a.active i.center {
-        background: url("../img/mys.png") center center no-repeat;
-        background-size: 75%;
-    }
-}
-
 .nav-set .nav-home.active, .nav-set .nav-circle.active, .nav-set .nav-knowledge.active, .nav-set .nav-my.active {
     color: #48b4ff;
 }

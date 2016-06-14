@@ -1,13 +1,13 @@
-<ion-view hide-tabs="true" cache-view="false">
+<ion-view hide-tabs="true" cache-view="false" view-title="{{view_title}}">
 	<ion-pane  class="web-body">
-		<ion-header-bar align-title="center" class="bar bar-header bar-light" style="top: 0;">
+		<!-- <ion-header-bar align-title="center" class="bar bar-header bar-light" style="top: 0;">
 			<button class="button button-clear button-positive" ng-click="jumpGoBack()">  
                 <i class="icon icon-left ion-ios-arrow-back"></i>  
             </button>
 			<h1 ng-if="is_mine == true" class="title">律圈设置</h1>
 			<h1 ng-if="is_mine == false" class="title">律圈详情</h1>
 			<button ng-click="edit()" class="button button-clear button-positive" type="button">保存</button>
-		</ion-header-bar>
+		</ion-header-bar> -->
 
 
 		<ion-content style="margin-bottom: 0px;">
@@ -68,9 +68,10 @@
 				</div>	
 			</form>
 			
-			<div class="item group-site">
-				<button ng-if="is_mine == true" class="button button-full button-positive web-wid8c web-top30" ng-click="logoutGroup()">删除并退出</button>
-				<button ng-if="is_mine == false" class="button button-full button-positive web-wid8c web-top30" ng-click="quitGroup()">退出</button>
+			<div class="item group-site" style=" padding: 20px 10px;">
+				<button ng-if="is_mine == true" class="button button-block button-positive" ng-click="logoutGroup()">删除并退出</button>
+				<button ng-if="is_mine == false" class="button button-block button-positive" ng-click="quitGroup()">退出</button>
+				<button class="button button-block button-cff2f5f" ng-click="edit()" style="margin-top:10px;">保存</button>
 			</div>
 				
 		</ion-content>
