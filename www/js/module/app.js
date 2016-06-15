@@ -132,6 +132,7 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
             return token;
           }, 
           function(reason) {
+            sessionStorage.setItem("goback", $location.absUrl());
             $rootScope.$broadcast('unauthenticated');
           }
         );
@@ -301,6 +302,7 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
     .state('group/del', { //律圈删除成员
       url: '/group/del/:id',
       templateUrl: 'template/group/group-del.html',
+      controller:'groupdelCtrl',
       authn: true,
       authz: 'lawyer'
     })

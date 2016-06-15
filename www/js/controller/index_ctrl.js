@@ -618,10 +618,13 @@ lvtuanApp.controller("groupAttentionSearchCtrl",function($http,$scope,$state,$ro
 	//搜索问题
 	$scope.q = '';
 	$scope.$watch('q', function(newVal, oldVal) {
-		if(newVal !== oldVal){
+		if (newVal && newVal !== oldVal) {
 			page = 1;
 			$scope.items = [];
 	        $scope.loadMore();
+	    }else{
+	    	page = 1;
+			$scope.items = [];
 	    }
 	});
 
@@ -934,6 +937,18 @@ lvtuanApp.controller("groupsiteCtrl",function($scope,$http,$state,$rootScope,$st
 //添加成员 
 lvtuanApp.controller("groupaddCtrl",function($scope,$http,$location,$ionicLoading,$timeout,$stateParams,$rootScope,authService){
 
+	//搜索条件和分页
+	var timestamp=Math.round(new Date().getTime()/1000);
+	var currentUser = authService.getUser();
+		$scope.currentUser = currentUser;
+    var page = 1; //页数
+	var rows_per_page = 5; // 每页的数量
+	if ($scope.rows_per_page) {
+		rows_per_page = $scope.rows_per_page;
+	}
+    $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
+    $scope.items = [];	//创建一个数组接收后台的数据
+
 	$scope.masklayer = true;
 
 	getDistrict();
@@ -962,7 +977,7 @@ lvtuanApp.controller("groupaddCtrl",function($scope,$http,$location,$ionicLoadin
 		$scope.city_key = key;
 		page = 1;
 		$scope.items = [];
-		get_Param();
+		$scope.loadMore();
     }
 
 	function getDistrict(){
@@ -1006,7 +1021,7 @@ lvtuanApp.controller("groupaddCtrl",function($scope,$http,$location,$ionicLoadin
 		$scope.workscope_key = key;
 		page = 1;
 		$scope.items = [];
-		get_Param();
+		$scope.loadMore();
     }
 
 	function getWorkscopes(){
@@ -1049,7 +1064,7 @@ lvtuanApp.controller("groupaddCtrl",function($scope,$http,$location,$ionicLoadin
 		$scope.period_key = key;
 		page = 1;
 		$scope.items = [];
-		get_Param();
+		$scope.loadMore();
     }
 
 	function getPractisePeriods(){
@@ -1070,20 +1085,27 @@ lvtuanApp.controller("groupaddCtrl",function($scope,$http,$location,$ionicLoadin
 	}
 
 
-	//搜索条件和分页
-	var currentUser = authService.getUser();
-		$scope.currentUser = currentUser;
-    var page = 1; //页数
-	var rows_per_page = 5; // 每页的数量
-	if ($scope.rows_per_page) {
-		rows_per_page = $scope.rows_per_page;
-	}
-    $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
-    $scope.items = [];	//创建一个数组接收后台的数据
+    //搜索问题
+    var timeoutHandler = null;
+	$('#search').bind('input propertychange', function() {  
+		if(timeoutHandler){
+	         clearTimeout(timeoutHandler);
+	     }
+	     timeoutHandler = setTimeout(function(){
+	     	page = 1;
+			$scope.items = [];
+	        get_Param();
+     	},2000);
+		
+	});
 
 	//获取参数
 	function get_Param(){
+		var search = $('#search').val();
 		var param = []; //声明一个数组 判断如果有值就push进来
+		if(search){
+	  		param.push('q=' + search);
+	  	}
 		if($scope.city_key){
 	  		param.push('city_id=' + $scope.city_key);
 	  	}
@@ -1094,8 +1116,9 @@ lvtuanApp.controller("groupaddCtrl",function($scope,$http,$location,$ionicLoadin
 	  		param.push('experience=' + $scope.period_key);
 	  	}
 	  	param = param.join('&');  //通过join('&') 把所有的参数都拼接起来
-	  	console.info($scope.param)
+	  	console.info(param);
 	  	geturl(param);
+
 	}
 
     //下拉刷新
@@ -1117,16 +1140,17 @@ lvtuanApp.controller("groupaddCtrl",function($scope,$http,$location,$ionicLoadin
 		$scope.nodata = true;
 		var url;
 		if(param != ""){
-	  		url = 'http://'+$rootScope.hostName+'/group/create?'+param+'&rows_per_page='+rows_per_page+'&page='+page;
+	  		url = 'http://'+$rootScope.hostName+'/group/create?'+param+'&rows_per_page='+rows_per_page+'&page='+page+'&ts='+timestamp;
 	    }else{
-	    	url = 'http://'+$rootScope.hostName+'/group/create?rows_per_page='+rows_per_page+'&page='+page;
+	    	url = 'http://'+$rootScope.hostName+'/group/create?rows_per_page='+rows_per_page+'&page='+page+'&ts='+timestamp;
 	    }
 	    console.info(url);
 	    $ionicLoading.show();
 		$http.get(url)
 			.success(function(data) {
+				console.info(data);
 	        	if(data && data.data && data.data.length){
-					$scope.items = $scope.items.concat(data.data);
+			      　$scope.items = $scope.items.concat(data.data);
 					console.info($scope.items);
 					if (data.data.length < rows_per_page) {
 						$scope.moredata = false;
@@ -1146,85 +1170,6 @@ lvtuanApp.controller("groupaddCtrl",function($scope,$http,$location,$ionicLoadin
 			})
 	}
 
-	/*
-	var timestamp=Math.round(new Date().getTime()/1000);
-	var page = 1; //页数
-	var rows_per_page = 5; // 每页的数量
-	if ($scope.rows_per_page) {
-		rows_per_page = $scope.rows_per_page;
-	}
-    $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
-    $scope.items = [];	//创建一个数组接收后台的数据
-
-        //搜索问题
-    $('#search').bind('input propertychange', function() {  
-		//进行相关操作 
-		console.info($(this).val());
-		$timeout(function () {
-            page = 1;
-			$scope.items = [];
-			 get_Param();
-        },2000);
-		
-	});
-
-	//获取参数，处理被收藏书签的情况
-	function get_Param(){
-		var params = layer.getParams("#groupAddform");
-	  	var param = [];
-	  	if(params.q){
-	  		param.push('q=' + params.q);
-	  	}
-	  	console.info(param)
-	  	geturl(param);
-	}
-
-    //下拉刷新
-	$scope.doRefresh = function() {
-		page = 1;
-		$scope.items = [];
-        $scope.loadMore();
-        $scope.$broadcast('scroll.refreshComplete');
-    };
-
-    //上拉加载
-	$scope.loadMore = function() {
-		get_Param();
-	};
-
-	function geturl(param){
-		var url;
-		if(param != ""){
-	  		url = 'http://'+$rootScope.hostName+'/group/create?'+param+'&rows_per_page='+rows_per_page+'&page='+page+'&ts='+timestamp;
-	    }else{
-	    	url = 'http://'+$rootScope.hostName+'/group/create?rows_per_page='+rows_per_page+'&page='+page+'&ts='+timestamp;
-	    }
-	    $ionicLoading.show();
-		$http.get(url)
-			.success(function(data) {
-	        	console.info(data.data)
-	        	if(data && data.data && data.data.length){
-					$scope.items = $scope.items.concat(data.data);
-					if (data.data.length < rows_per_page) {
-						$scope.moredata = false;
-					} else {
-						$scope.moredata = true;
-					}
-				}else{
-					if (page == 1) {
-						$scope.moredata = false;
-						$scope.nodata = false;
-						//layer.show('暂无数据！');
-					}
-					$scope.moredata = false;
-				}
-				page++;
-				$scope.$broadcast('scroll.infiniteScrollComplete');
-				$ionicLoading.hide();
-			})
-	}
-
-    
 	//判断用户是否选中
 	$scope.selIds = [];
 	$scope.checkItem = function(obj,id){
@@ -1243,16 +1188,19 @@ lvtuanApp.controller("groupaddCtrl",function($scope,$http,$location,$ionicLoadin
     	return $.inArray(id, selIds) >= 0;
 	}
 
-	//添加
+	//确定添加成员
 	$scope.createSubmit = function(){
+		$ionicLoading.show();
 		$http.post('http://'+$rootScope.hostName+'/group/'+$stateParams.id+'/addmember',{
   				'members'	: $scope.selIds
 		    }).success(function(data) {
+		    	console.info(data);
 		    	layer.show(data.data);
 		    	location.href='#/group/site/'+$stateParams.id;
 		    	window.location.reload();
+		    	$ionicLoading.hide();
 		    });
-	}*/
+	}
 
 	//取消
 	/*$scope.clearGoBack = function(){
@@ -1261,6 +1209,8 @@ lvtuanApp.controller("groupaddCtrl",function($scope,$http,$location,$ionicLoadin
 	}*/
 	
 })
+
+
 
 //删除成员
 lvtuanApp.controller("groupdelCtrl",function($scope,$http,$location,$ionicLoading,$timeout,$stateParams,$ionicPopup,$rootScope,$timeout,authService){ 
@@ -1292,24 +1242,26 @@ lvtuanApp.controller("groupdelCtrl",function($scope,$http,$location,$ionicLoadin
     $scope.moredata = true; //ng-if的值为false时，就禁止执行on-infinite
     $scope.items = [];	//创建一个数组接收后台的数据
 
-        //搜索问题
-    $('#search').bind('input propertychange', function() {  
-		//进行相关操作 
-		console.info($(this).val());
-		$timeout(function () {
-            page = 1;
+   
+	var timeoutHandler = null;
+	$('#search').bind('input propertychange', function() {  
+		if(timeoutHandler){
+	         clearTimeout(timeoutHandler);
+	     }
+	     timeoutHandler = setTimeout(function(){
+	     	page = 1;
 			$scope.items = [];
-			 get_Param();
-        },2000);
+			get_Param();
+     	},2000);
 		
 	});
 
 	//获取参数，处理被收藏书签的情况
 	function get_Param(){
-		var params = layer.getParams("#form");
+		var search = $('#search').val();
 	  	var param = [];
-	  	if(params.q){
-	  		param.push('q=' + params.q);
+	  	if(search){
+	  		param.push('q=' + search);
 	  	}
 	  	console.info(param)
 	  	geturl(param);
@@ -1389,7 +1341,7 @@ lvtuanApp.controller("groupdelCtrl",function($scope,$http,$location,$ionicLoadin
              });
              confirmPopup.then(function(res) {
                if(res) {
-
+               	 $ionicLoading.show();
                  $http.post('http://'+$rootScope.hostName+'/group/'+$stateParams.id+'/removemembers',{
 		  				'members'	: selIds
 				    }).success(function(data) {
@@ -1410,6 +1362,7 @@ lvtuanApp.controller("groupdelCtrl",function($scope,$http,$location,$ionicLoadin
 						layer.show(data.data);
 						location.href='#/group/site/'+$stateParams.id;
 						window.location.reload();
+						$ionicLoading.hide();
 				   
 				    });
                }else{
@@ -1418,11 +1371,11 @@ lvtuanApp.controller("groupdelCtrl",function($scope,$http,$location,$ionicLoadin
              });
 	}
 
-	//取消
+	/*//取消
 	$scope.clearGoBack = function(){
 		$scope.selIds = [];
 		window.history.back();
-	}
+	}*/
 	
 })
 
@@ -1450,7 +1403,7 @@ lvtuanApp.controller("groupcreateCtrl",function($scope,$http,$state,$rootScope,$
 	           $scope.file = {};
 	           $(':input','#questions_form').not('textarea :submit, :reset, :hidden').val('');
 	           //$location.path('/group/list');
-	           $location.path('/group/add/'+currentUser.id);
+	           $location.path('/group/add/'+data.data.id);
 	           $ionicLoading.hide();
 	        });
             return true;
@@ -3258,10 +3211,13 @@ lvtuanApp.controller("lawyerlistsearchCtrl",function($http,$scope,$state,$rootSc
 	//搜索问题
 	$scope.q = '';
 	$scope.$watch('q', function(newVal, oldVal) {
-		if(newVal !== oldVal){
+		if (newVal && newVal != oldVal) {
 			page = 1;
 			$scope.items = [];
 	        $scope.loadMore();
+	    }else{
+	    	page = 1;
+			$scope.items = [];
 	    }
 	});
 
@@ -3921,10 +3877,13 @@ lvtuanApp.controller("questionslistsearchCtrl",function($http,$scope,$state,$roo
 	//搜索问题
 	$scope.q = '';
 	$scope.$watch('q', function(newVal, oldVal) {
-		if(newVal !== oldVal){
+		if (newVal && newVal !== oldVal) {
 			page = 1;
 			$scope.items = [];
 	        $scope.loadMore();
+	    }else{
+	    	page = 1;
+			$scope.items = [];
 	    }
 	});
 
@@ -4674,7 +4633,7 @@ lvtuanApp.controller("userOrderViewCtrl",function($scope,$rootScope,$ionicLoadin
 			function(data){
 				$timeout(function(){
 					alertPopup.close();
-				}, 3000);
+				}, 5000);
 			},function(data){
 				alertPopup.close(); 
 			}
@@ -4933,7 +4892,7 @@ lvtuanApp.controller("lawyerOrderViewCtrl",function($scope,$rootScope,$ionicLoad
 			function(data){
 			 	$timeout(function(){
 					alertPopup.close();
-				}, 3000);
+				}, 5000);
 			},function(data){
 				alertPopup.close(); 
 			}
@@ -5373,10 +5332,13 @@ lvtuanApp.controller("documentlistsearchCtrl",function($http,$scope,$state,$root
 	//搜索问题
 	$scope.q = '';
 	$scope.$watch('q', function(newVal, oldVal) {
-		if(newVal !== oldVal){
+		if (newVal && newVal !== oldVal) {
 			page = 1;
 			$scope.items = [];
 	        $scope.loadMore();
+	    }else{
+	    	page = 1;
+			$scope.items = [];
 	    }
 	});
 
