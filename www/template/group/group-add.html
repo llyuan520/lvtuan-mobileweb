@@ -33,11 +33,11 @@
 					</div>
 
 					<ul class="list">
-				        <li class="item item-avatar" ng-repeat="item in items" ng-hide="currentUser.id == item.follow_id">
+				        <li class="item item-avatar" ng-repeat="item in items" > <!-- ng-hide="currentUser.id == item.user_id" -->
 				        	<img ng-src="{{item.avatar}}" style="left:6px;border-radius:50px;" width="40px" height="40px">
 				          	<h2 style="line-height: 40px;float: left;">{{item.realname}} 律师</h2>
 				          	<label class="checkbox" style="float: right;">
-				          		<input type="checkbox" value="{{item.follow_id}}" name="name{{$index+1}}" ng-model="isCheck[$index]" ng-change="checkItem(isCheck[$index],{{item.follow_id}})" ng-checked="ischecked(item.follow_id,selIds)">
+				          		<input type="checkbox" value="{{item.user_id}}" name="name{{$index+1}}" ng-model="isCheck[$index]" ng-change="checkItem(isCheck[$index],{{item.user_id}})" ng-checked="ischecked(item.user_id,selIds)">
 				          	</label>
 				        </li>
 				    </ul>

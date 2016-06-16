@@ -14,8 +14,8 @@
 						<label ng-if="scopes_key" class="c48b4ff">{{workscope}}</label>
 					</div>
 					<div class="col drop-down-arrow" style="text-align: center;" ng-click="toggle1()">
-						<label ng-if="!orders_key">{{order}}</label>
-						<label ng-if="orders_key" class="c48b4ff">{{order}}</label>
+						<label ng-if="orders_key == orders[0].key">{{order}}</label>
+						<label ng-if="orders_key != orders[0].key" class="c48b4ff">{{order}}</label>
 					</div>
 				</div>
 

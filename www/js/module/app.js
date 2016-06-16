@@ -384,7 +384,7 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
     
     .state('becomenav', { //用户-认证为律师
       url: '/becomenav',
-      cache: 'true',
+      cache: 'false',
       templateUrl: 'template/center/become/become_nav.html',
       controller: 'becomenavCtrl',
       authn: true

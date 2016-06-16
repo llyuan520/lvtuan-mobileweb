@@ -41,7 +41,7 @@
 
 			            <div ng-if="!currentUser.is_verified_lawyer" class="uploapoto" ng-model="license_file" ngf-pattern="'image/*'"  accept="image/*" ngf-max-size="2MB" ngf-min-height="100" ngf-select="uploadFiles($file, $invalidFiles)" ></div>
 
-						<input ng-if="!currentUser.is_verified_lawyer" type="hidden" name="license_file" value="{{file_path}}" />
+						<input type="hidden" name="license_file" value="{{file_path}}" />
 						<!-- <span class="progress" ng-show="progress > 0">
 		                  <div style="width:{{progress}}%" ng-bind="progress + '%'"></div>
 		                </span> -->
