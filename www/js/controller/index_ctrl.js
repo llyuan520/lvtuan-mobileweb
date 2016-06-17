@@ -824,7 +824,7 @@ lvtuanApp.controller("groupsiteCtrl",function($scope,$http,$state,$rootScope,$st
 				$scope.group_name = $scope.items.group_name;
 				$scope.is_mine = $scope.items.is_mine;
 
-				$scope.view_title = $scope.is_mine == true ? '律圈设置' : '律圈设置';
+				//$scope.view_title = $scope.is_mine == true ? '律圈设置' : '律圈设置';
 				$scope.file = $scope.items.group_avatar;
 			}
 			$ionicLoading.hide();
@@ -1823,7 +1823,8 @@ lvtuanApp.controller("infoCtrl",function($scope,$http,$rootScope,$timeout,$ionic
 })
 
 //个人信息 - 修改姓名
-lvtuanApp.controller("valrealnameCtrl",function($scope,$http,$rootScope,$ionicLoading,$location, authService){
+lvtuanApp.controller("valrealnameCtrl",function($scope,$http,$rootScope,$ionicLoading,$location,$stateParams, authService){
+
 	//判断是否是律师
 	var currentUser = authService.getUser();
 	var timestamp=Math.round(new Date().getTime()/1000);
@@ -1838,6 +1839,7 @@ lvtuanApp.controller("valrealnameCtrl",function($scope,$http,$rootScope,$ionicLo
     $scope.submit = function(){
     	$ionicLoading.show();
     	var params = layer.getParams("#niknameForm");
+   
     	var url = null;
     	if(currentUser.status == 1 || currentUser.status == 2){
     		url = 'http://'+$rootScope.hostName+'/center/customer/info?ts='+timestamp;
@@ -1850,13 +1852,13 @@ lvtuanApp.controller("valrealnameCtrl",function($scope,$http,$rootScope,$ionicLo
 	            $scope.user = {
 					nikname: ""
 				};
-	            $location.path('/info');
+	            $location.path('/info/'+$stateParams.id);
 	            $ionicLoading.hide();
 	        });
     }
 })
 //个人信息 - 修改手机
-lvtuanApp.controller("valphoneCtrl",function($scope,$http,$rootScope,$ionicLoading,$interval,authService){
+lvtuanApp.controller("valphoneCtrl",function($scope,$http,$rootScope,$ionicLoading,$interval,$location,$stateParams,authService){
 	//判断是否是律师
 	var currentUser = authService.getUser();
 	$scope.userinfo = JSON.parse(localStorage.getItem('userinfo'));
@@ -1907,13 +1909,13 @@ lvtuanApp.controller("valphoneCtrl",function($scope,$http,$rootScope,$ionicLoadi
 						phone: "",
 						phonecode : ""
 					};
-	            location.href='#/info';
+	            $location.path('/info/'+$stateParams.id);
 	            $ionicLoading.hide();
 	        });
 	}
 })
 //个人信息 - 修改邮箱
-lvtuanApp.controller("valemailCtrl",function($scope,$http,$rootScope,$ionicLoading,$location, authService){
+lvtuanApp.controller("valemailCtrl",function($scope,$http,$rootScope,$ionicLoading,$location,$stateParams, authService){
 	//判断是否是律师
 	var currentUser = authService.getUser();
 	$scope.userinfo = JSON.parse(localStorage.getItem('userinfo'));
@@ -1963,7 +1965,7 @@ lvtuanApp.controller("valemailCtrl",function($scope,$http,$rootScope,$ionicLoadi
 							email: "",
 							phonecode : ""
 						};
-	            $location.path('/info');
+	            $location.path('/info/'+$stateParams.id);
 	            $ionicLoading.hide();
 	        });
 	}

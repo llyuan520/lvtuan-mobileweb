@@ -428,21 +428,21 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
       authn: true
     })
     .state('valrealname', { //个人信息 - 修改姓名
-      url: '/valrealname',
+      url: '/valrealname/:id',
       cache: 'true',
       templateUrl: 'template/center/become/valrealname.html',
       controller: 'valrealnameCtrl',
       authn: true
     })
     .state('valphone', { //个人信息 - 修改手机
-      url: '/valphone',
+      url: '/valphone/:id',
       cache: 'true',
       templateUrl: 'template/center/become/valphone.html',
       controller: 'valphoneCtrl',
       authn: true
     })
     .state('valemail', { //个人信息 - 修改邮箱
-      url: '/valemail',
+      url: '/valemail/:id',
       cache: 'true',
       templateUrl: 'template/center/become/valemail.html',
       controller: 'valemailCtrl',
