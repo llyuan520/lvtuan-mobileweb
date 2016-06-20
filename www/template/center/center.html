@@ -38,8 +38,8 @@
 					  <div class="col col-center">
 					  	<a style="color:#fff;" ng-href="#/info/{{items.id}}">
 			      			<label ng-if="!currentUser.is_verified_lawyer" style="font-size:16px;">
-			      				<span ng-if="items.realname != null">{{items.realname}}</span>
-			      				<span ng-if="items.realname == null">匿名用户</span>
+			      				<span ng-if="items.nikname != null">{{items.nikname}}</span>
+			      				<span ng-if="items.nikname == null">匿名用户</span>
 			      			</label>
 			      			<label ng-if="currentUser.is_verified_lawyer">
 			      				<span ng-if="items.realname != null">{{items.realname}}<span class="web-font14">律师</span></span>

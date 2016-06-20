@@ -1,42 +1,76 @@
-<ion-view hide-tabs="true" cache-view="false">
-	<form id="groupAddform" name="groupAddform" ng-controller="groupaddCtrl">
-		<ion-pane  class="web-body">
-			<ion-header-bar align-title="center" class="bar bar-header bar-light" style="top: 0;">
-				<button class="button button-clear button-positive" ng-click="clearGoBack()">  
-	                取消
-	            </button>
-				<h1 class="title">添加成员</h1>
-				<button ng-click="createSubmit()" class="button button-clear button-positive" type="button">
-					确定<label ng-if="selIds.length > 0">({{selIds.length}})</label>
-				</button>
-			</ion-header-bar>
+<ion-view hide-tabs="true" cache-view="false" view-title="添加成员">
+		<ion-pane>
+			<ion-content class="has-tabs">
 
-
-			<ion-content style="margin-bottom: 0px;">
 				<!--搜索你想要的内容  -->
-				<div class="item-input-inset web-body"> 
-					<div class="item-input-wrapper">
-						<i class="icon ion-ios-search placeholder-icon" style="font-size: 1.8rem;"></i>
-				    	<input id="search" ng-model="q" type="search" name="q" placeholder="通过姓名搜索" class="search" ng-model-options="{debounce:2000}" >
+			  	<div class="item-input-inset" style="border-radius: 10px;">
+				  <label class="item-input-wrapper">
+				  	<i class="icon ion-ios-search placeholder-icon"></i>
+				    <input ng-model="q" type="search" id="search" name="q" placeholder="通过姓名搜索" class="search" ng-model-options="{debounce:2000}" required>
+				  </label>
+				</div>
+
+				<div class="row row-center row-no-padding" style="background-color: #fff;text-align: center;height: 45px;line-height: 45px;color:#7f7f7f;padding-bottom: 1px;box-shadow: 0 1px 3px rgba(0,0,0,.3);">
+					<div class="col drop-down-arrow" style="border-right:1px solid #e5e5e5;text-align: center;" ng-click="city_toggle()">
+						<label ng-if="!city_key">{{city_name}}</label>
+						<label ng-if="city_key" class="c48b4ff">{{city_name}}</label>
+					</div>
+					<div class="col drop-down-arrow" style="border-right:1px solid #e5e5e5;text-align: center;" ng-click="workscope_toggle()">
+						<label ng-if="!workscope_key">{{workscope_name}}</label>
+						<label ng-if="workscope_key" class="c48b4ff">{{workscope_name}}</label>
+					</div>
+					<div class="col drop-down-arrow" style="border-right:1px solid #e5e5e5;text-align: center;" ng-click="period_toggle()">
+						<label ng-if="!period_key">{{period_name}}</label>
+						<label ng-if="period_key" class="c48b4ff">{{period_name}}</label>
 					</div>
 				</div>
 
-				<div ng-if="nodata == false" class="nodate">
-					<i class="nodate-iocn"></i><br>
-					<label>暂无数据！</label>
-				</div>
 				<ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
-				<ul class="list">
-			        <li class="item item-avatar" ng-repeat="item in items" ng-hide="currentUser.id == item.follow_id">
-			        	<img ng-src="{{item.avatar}}" style="left:6px;border-radius:50px;" width="40px" height="40px">
-			          	<h2 style="line-height: 40px;float: left;">{{item.realname}} 律师</h2>
-			          	<label class="checkbox" style="float: right;">
-			          		<input type="checkbox" value="{{item.follow_id}}" name="name{{$index+1}}" ng-model="isCheck[$index]" ng-change="checkItem(isCheck[$index],{{item.follow_id}})" ng-checked="ischecked(item.follow_id,selIds)">
-			          	</label>
-			        </li>
-			    </ul>
+
+					<div ng-if="nodata == false" class="nodate">
+						<i class="nodate-iocn"></i><br>
+						<label>暂无数据！</label>
+					</div>
+
+					<ul class="list">
+				        <li class="item item-avatar" ng-repeat="item in items" > <!-- ng-hide="currentUser.id == item.user_id" -->
+				        	<img ng-src="{{item.avatar}}" style="left:6px;border-radius:50px;" width="40px" height="40px">
+				          	<h2 style="line-height: 40px;float: left;">{{item.realname}} 律师</h2>
+				          	<label class="checkbox" style="float: right;">
+				          		<input type="checkbox" value="{{item.user_id}}" name="name{{$index+1}}" ng-model="isCheck[$index]" ng-change="checkItem(isCheck[$index],{{item.user_id}})" ng-checked="ischecked(item.user_id,selIds)">
+				          	</label>
+				        </li>
+				    </ul>
 				<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
 			</ion-content>
+			<div class="tabs" style="background-color:#fff;height: 59px;">
+				<div class="row" style="padding: 5px 10px;">
+					<button class="button button-block button-positive" type="button" style="border-radius: 10px;" ng-click="createSubmit()">确定</button>
+				</div>
+			</div>
 		</ion-pane>
-	</form>
 </ion-view>
+
+<!-- 一个ion-view控制器里面不能放多个ion-content -->
+<div ng-hide="masklayer" style="background-color: rgba(0,0,0,.1);position: fixed;top: 100px;left: 0;z-index: 10;width: 100%;height: 100%;"></div>
+<ion-content class="scroll-content ionic-scroll baclass" ng-hide="city_cont" style="top:100px;">
+	<div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
+		<ul>
+	  		<li ng-repeat="city in citys"  ng-class="{ 'active':inCity(city.city_code) }" ng-click="getCitytVal(city.city_code,city.city_name)">{{city.city_name}}</li>
+	  	</ul>
+    </div>
+</ion-content>
+<ion-content class="scroll-content ionic-scroll baclass" ng-hide="workscope_cont" style="top:100px;">
+	<div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
+		<ul>
+	  		<li ng-repeat="workscope in workscopes" ng-class="{ 'active':inWorkscope(workscope.key) }" ng-click="getWorkscopeVal(workscope.key,workscope.value)">{{workscope.value}}</li>
+	  	</ul>
+    </div>
+</ion-content>
+<ion-content class="scroll-content ionic-scroll baclass" ng-hide="period_cont" style="top:100px;">
+	<div class="scroll" style="transform: translate3d(0px, 0px, 0px) scale(1);">
+		<ul>
+	  		<li  ng-repeat="period in periods" ng-class="{ 'active':inPeriods(period.key) }" ng-click="getPeriodsVal(period.key,period.value)">{{period.value}}</li>
+	  	</ul>
+    </div>
+</ion-content>

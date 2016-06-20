@@ -31,9 +31,9 @@
 							</div>
 						</div>
 					</div>
-					<div style="background-color:#fff;height: 59px;margin-top: 50px;">
+					<div style="background-color:#fff;height: 59px;margin-top: 50px;" ng-if="!currentUser.is_verified_lawyer">
 						<div class="row" style="padding: 5px 10px;">
-							<button ng-if="!currentUser.is_verified_lawyer" ng-click="submit()" class="button button-block button-positive" type="button" ng-disabled="verifiedForm.$invalid" style="border-radius: 10px;">保存</button>
+							<button ng-click="submit()" class="button button-block button-positive" type="button" ng-disabled="verifiedForm.$invalid" style="border-radius: 10px;">保存</button>
 						</div>
 					</div>
 				</ion-content>

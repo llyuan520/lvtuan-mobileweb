@@ -1,25 +1,13 @@
-<ion-view hide-tabs="true" cache-view="false">
-	<ion-pane  class="web-body">
-		<form id="form" name="form" ng-controller="groupdelCtrl">
-			<ion-header-bar align-title="center" class="bar bar-header bar-light" style="top: 0;">
-				<button class="button button-clear button-positive" ng-click="clearGoBack()">  
-	                取消
-	            </button>
-				<h1 class="title">删除成员</h1>
-				<button ng-click="delSubmit(items,selIds)" class="button button-clear button-positive" type="button">
-						确定<label ng-if="selIds.length > 0">({{selIds.length}})</label>
-				</button>
-			</ion-header-bar>
-
-
-			<ion-content style="margin-bottom: 0px;">
+<ion-view hide-tabs="true" cache-view="false" view-title="删除成员">
+	<ion-pane>
+			<ion-content class="has-tabs">
 			
 				<!--搜索你想要的内容  -->
-				<div class="item-input-inset web-body"> 
-					<div class="item-input-wrapper">
-						<i class="icon ion-ios-search placeholder-icon" style="font-size: 1.8rem;"></i>
-				    	<input id="search" ng-model="q" type="search" name="q" placeholder="通过姓名搜索" class="search" ng-model-options="{debounce:2000}" >
-					</div>
+			  	<div class="item-input-inset" style="border-radius: 10px;">
+				  <label class="item-input-wrapper">
+				  	<i class="icon ion-ios-search placeholder-icon"></i>
+				    <input ng-model="q" type="search" id="search" name="q" placeholder="通过姓名搜索" class="search" ng-model-options="{debounce:2000}" required>
+				  </label>
 				</div>
 				
 				<div ng-if="nodata == false" class="nodate">
@@ -38,6 +26,10 @@
 			    </ul>
 				<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>
 			</ion-content>
-		</form>
+			<div class="tabs" style="background-color:#fff;height: 59px;">
+				<div class="row" style="padding: 5px 10px;">
+					<button class="button button-block button-positive" type="button" style="border-radius: 10px;" ng-click="delSubmit(items,selIds)">确定</button>
+				</div>
+			</div>
 	</ion-pane>
 </ion-view>

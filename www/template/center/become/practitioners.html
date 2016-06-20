@@ -4,19 +4,19 @@
 			<ion-content style="margin-bottom: 0;">
 				<!-- <div class="basekong20"></div> -->
 				<div class="practitioners-list">
-					<div class="item item-input">
+					<div class="item item-input" style="padding: 10px 0;">
 						<div class="input-label">
 			              执业证号
 			            </div>
 						<input ng-disabled="currentUser.is_verified_lawyer && items.license" placeholder="请输入执业证号"  ng-model="license" name="license" type="text" required>
 					</div>
-					<div class="item item-input">
+					<div class="item item-input" style="padding: 10px 0;">
 						<div class="input-label">
 			              执业机构
 			            </div>
 						<input placeholder="请输入执业机构"  ng-model="company_name" name="company_name" type="text" required>
 					</div>
-					<div class="item item-input item-select">
+					<div class="item item-input item-select" style="padding: 10px 0;">
 						<div class="input-label">
 			              执业年限
 			            </div>
@@ -24,7 +24,7 @@
 								<option value="">--执业年限--</option>
 					    </select>
 					</div>
-					<div class="item item-input">
+					<div class="item item-input" style="padding: 10px 0;">
 						<div class="input-label">
 			              执业地址
 			            </div>
@@ -33,7 +33,7 @@
 			            <input type="hidden" ng-model="city" name="city" value="{{city}}" /> 
 			            <input type="hidden" ng-model="district" name="district" value="{{city}}" /> 
 					</div>
-					<div class="item item-input">
+					<div class="item item-input" style="padding: 10px 0;">
 						<div class="input-label">
 			              执业证书
 			            </div>
@@ -41,7 +41,7 @@
 
 			            <div ng-if="!currentUser.is_verified_lawyer" class="uploapoto" ng-model="license_file" ngf-pattern="'image/*'"  accept="image/*" ngf-max-size="2MB" ngf-min-height="100" ngf-select="uploadFiles($file, $invalidFiles)" ></div>
 
-						<input ng-if="!currentUser.is_verified_lawyer" type="hidden" name="license_file" value="{{file_path}}" />
+						<input type="hidden" name="license_file" value="{{file_path}}" />
 						<!-- <span class="progress" ng-show="progress > 0">
 		                  <div style="width:{{progress}}%" ng-bind="progress + '%'"></div>
 		                </span> -->

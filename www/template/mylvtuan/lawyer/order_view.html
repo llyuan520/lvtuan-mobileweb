@@ -25,7 +25,7 @@ top: 0;
 				<div class="item item-text-wrap">
 					<p class="mb10">订单编号：<span class="c7f7f7f">{{items.order_no}}</span></p>
 					<div class="hr mb10"></div>
-					<p class="mb10">创建时间：<span class="c7f7f7f">{{items.difference_date}}</span></p>
+					<p class="mb10">创建时间：<span class="c7f7f7f">{{items.created_at}}</span></p>
 					<div class="hr mb10"></div>
 					<p class="mb10">订单金额：<span class="c7f7f7f">{{items.price}}元</span></p>
 					<div class="hr mb10"></div>
@@ -49,7 +49,7 @@ top: 0;
 				<!-- 图文咨询 -->
 				<button ng-if="items.type == 'pay_text'" class="button button-block button-positive" style="border-radius: 10px;" ng-click="to_ask(items.creator_id)">联系用户</button>
 				<!-- 电话咨询 -->
-				<button ng-if="items.type == 'pay_phone'" class="button button-block button-positive" style="border-radius: 10px;" ng-click="to_lawyer()">联系用户</button>
+				<button ng-if="items.type == 'pay_phone'" class="button button-block button-positive" style="border-radius: 10px;" ng-click="to_user()">联系用户</button>
 			</div>
 		</div>
 
