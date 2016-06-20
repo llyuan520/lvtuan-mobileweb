@@ -83,15 +83,9 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
 			if(goback == null || goback=="" || goback=="undefined"){
 				location.href='#/index';
 			}else{
-				/*if(user.status == 1 || user.status == 2){
-					location.href='#/index';
-    			}else{*/
-    				location.href= goback;
-    			//}
+    			location.href= goback;
 			}
 			sessionStorage.removeItem("goback");
-	    	//location.href='#/index';
-			// window.location.reload();
     	}
     ).catch(function(response) {
 		if (response.status === 400) {
@@ -129,20 +123,13 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
         		location.href='#/center';
         	}*/
         	$ionicLoading.hide();
-        	//window.history.back();
-	//		window.location.reload();
         	var goback = sessionStorage.getItem("goback");
 			if(goback == null || goback=="" || goback=="undefined"){
 				location.href='#/index';
 			}else{
-				/*if(user.status == 1 || user.status == 2){
-					location.href='#/index';
-    			}else{*/
-    				location.href= goback;
-    			//}
+    			location.href= goback;
 			}
 			sessionStorage.removeItem("goback");
-			// window.location.reload();
     	}
     ).catch(function(response) {
 	  if (response.status === 400) {
@@ -177,19 +164,11 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
         	}
   			$ionicLoading.hide();
 
-			// window.location.reload();
 			var goback = sessionStorage.getItem("goback");
 			if(goback == null || goback=="" || goback=="undefined"){
-				location.href='#/index';
+				window.location.href='#/index';
 			}else{
-				alert('微信登录');
-				location.href= goback;
-				/*if(user.status == 1 || user.status == 2){
-					location.href='#/index';
-					alert('微信登录');
-    			}else{
-    				location.href= goback;
-    			}*/
+				window.location.href= goback;
 			}
 			sessionStorage.removeItem(goback);
     	}

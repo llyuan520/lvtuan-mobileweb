@@ -90,9 +90,10 @@ lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $loca
 		       		window.location.replace('#/center');
 		        }else if(current_State.states == 'areward'){
 		       		window.location.replace('#/questionslist');
-		        }else{
+		        }
+		        /*else{
 		        	return false;
-	        	}
+	        	}*/
        		}
 	    });
 	    //window.history.pushState('forward', null, './#forward');
@@ -486,18 +487,20 @@ lvtuanApp.controller("boundphoneCtrl",function($scope,$http,$rootScope,$ionicLoa
 
 /****************************************************** 微信 ******************************************************/
 lvtuanApp.controller("wxAuthCtrl",function($scope,$stateParams,wxService,userService){
+	var code = parseInt($stateParams.code);
 	// 获取code和state，通过后端进行登录
 	$scope.post_id = JSON.parse(localStorage.getItem('post_id'));
 	if($scope.post_id != null){
 		$scope.post_id_status = true;
 		localStorage.setItem("post_id_status", JSON.stringify($scope.post_id_status));
 	}
-	userService.loginWithWx($stateParams.code,$stateParams.state, $scope.post_id);
+	userService.loginWithWx(code,$stateParams.state, $scope.post_id);
 })
 
 //自动跳转到微信授权登录页面
 lvtuanApp.controller("wxLoginCtrl",function($scope,$http,$rootScope,wxService){
-	window.location.replace(wxService.getWxAuthUrl('/wxauth'));
+	window.location.href = wxService.getWxAuthUrl('/wxauth');
+	//window.location.replace(wxService.getWxAuthUrl('/wxauth'));
 })
 
 /****************************************************** 律圈 ******************************************************/
