@@ -194,7 +194,7 @@ lvtuanApp.constant("$ionicLoadingConfig",{
 lvtuanApp.controller("ionicNavBarDelegateCtrl",function($state,$timeout,$http,$location){
 	//$ionicNavBarDelegate.showBar(false); //是否显示返回按钮
 	$timeout(function(){ //2秒钟后跳转到index页面
-		$location.path('/index');
+		location.href='#/index';
 	}, 3000);
 })
 
@@ -209,12 +209,7 @@ lvtuanApp.controller("indexCtrl",function($scope,$location,listHelper,locationSe
 	} else {
 		listHelper.bootstrap('/lawyer/list_lawyers?is_recommended=1', $scope);
 	}
-    
-	$scope.mylvteam = function(){
-		$location.path('/mylvteam');
-	}
-
-
+ 
 })
 
 
@@ -377,7 +372,7 @@ lvtuanApp.controller("resetpwdCtrl",function($scope,$http,$rootScope,$ionicLoadi
   			).success(function(data) {
 	           layer.show("修改成功！");
 	           $scope.user = {}; //清空数据
-	           $location.path('/login');
+	           location.href='#/login';
 	           $ionicLoading.hide();
 	        });
 		}
@@ -443,7 +438,7 @@ lvtuanApp.controller("upwdCtrl",function($scope,$http,$rootScope,$ionicLoading,$
 	           layer.show("修改成功！");
 	           sessionStorage.removeItem("uid");
 	           $scope.user = {}; //清空数据
-	           $location.path('/login');
+	           location.href='#/login';
 	           $ionicLoading.hide();
 	        });
 		}
@@ -511,24 +506,12 @@ lvtuanApp.controller("groupCtrl",function($scope,$http,$state,$rootScope,$locati
 	//跳转到登陆页面
 	$scope.jumplogin = function(){
 		console.info($rootScope.is_lawyer);
-    	$location.path('/login');
+    	location.href='#/login';
 	}
-
-	//  alert（警告） 对话框
-	$scope.showAlert = function() {
-	 var alertPopup = $ionicPopup.alert({
-	   title: '提示',
-	   template: '研发中...'
-	 });
-	 alertPopup.then(function(res) {
-	   //console.log('Thank you for not eating my delicious ice cream cone');
-	 });
-	};
 
 })
 //律圈 - 列表
 lvtuanApp.controller("groupListCtrl",function($http,$scope,$rootScope,$ionicLoading,$filter,listHelper){
-	$rootScope.url = '#/groupcreate'
 	listHelper.bootstrap('/group/list/mine', $scope);
 })
 
@@ -574,7 +557,6 @@ lvtuanApp.filter("formatdate", function() {
 
 //律圈 - 推荐关注
 lvtuanApp.controller("groupAttentionCtrl",function($scope,$http,$state,$rootScope,$ionicLoading,listHelper){
-	$rootScope.url = '#/group/attention/search'
 
 	listHelper.bootstrap('/group/recommend', $scope);
 
@@ -5167,7 +5149,7 @@ lvtuanApp.controller("commodityListCtrl",function($scope,$rootScope,listHelper,h
 /*———————————————————————————— 首页 - 法律文书 ————————————————————————————*/
 //首页 - 法律文书
 //法律文书
-lvtuanApp.controller("documentlistCtrl",function($http,$scope,$state,$rootScope,$ionicLoading,locationService){
+lvtuanApp.controller("documentlistCtrl",function($http,$scope,$state,$rootScope,$ionicLoading){
 
 	$scope.orders = [
 						{

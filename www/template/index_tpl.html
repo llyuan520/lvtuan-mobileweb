@@ -1,12 +1,12 @@
 <ion-view hide-tabs="false">
 	
 	<ion-header-bar align-title="center" class="bar bar-header bar-light" style="top: 0;">
-		<button class="button button-clear button-positive" >  
+		<div>  
             <i class="logo"></i>  
-        </button>
-		<h1 class="title" style="text-indent: -9999px;"></h1>
-		<div class="buttons button-clear">
-			<a ng-href="#/citypicker/index" class="button-clear" style="line-height: 34px;color:#fff;">
+        </div>
+		<!-- <h1 class="title" style="text-indent: -9999px;"></h1> -->
+		<div style="position: absolute;right: 10px;">
+			<a ng-href="#/citypicker/index" style="line-height: 34px;color:#fff;">
 				{{currentLocation.city_name}} &nbsp;<i class="icon ion-arrow-down-b"></i>
 			</a>
 		</div>
