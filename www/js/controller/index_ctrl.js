@@ -205,7 +205,7 @@ lvtuanApp.controller("indexCtrl",function($scope,$location,listHelper,locationSe
 
 	if (locationService.getLocation()) {
 		$scope.locations = locationService.getLocation();
-		$scope.city = $scope.locations.city_id;
+		$scope.city = parseInt($scope.locations.city_id);
 		listHelper.bootstrap('/lawyer/list_lawyers?is_recommended=1&city_id='+$scope.city, $scope);
 	} else {
 		listHelper.bootstrap('/lawyer/list_lawyers?is_recommended=1', $scope);
