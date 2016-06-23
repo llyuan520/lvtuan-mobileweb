@@ -97,6 +97,7 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
         // $location.path('/login');
         $state.transitionTo("login");
         localStorage.removeItem('currentUser');
+        localStorage.removeItem('wx_openid');
         
         //localStorage.clear();
         /*$window.location.href = '/login';*/
@@ -206,6 +207,12 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
       controller: 'wxCheckOpenIdCtrl'
     })
 
+    .state('wxobtainopenid', {
+      url: '/wxobtainopenid',
+      cache: 'true',
+      controller: 'wxObtainOpenIdCtrl'
+    })
+
     .state('wxauthpayment', {
       url: '/wxauthpayment?code&state',
       cache: 'true',
@@ -216,6 +223,12 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
       url: '/wxlogin',
       cache: 'true',
       controller: 'wxLoginCtrl'
+    })
+
+    .state('bindopenid', {
+      url: '/bindopenid?code&state',
+      cache: 'true',
+      controller: 'bindOpenIdWithUserCtrl'
     })
 
 /********************************** 律圈 **********************************/

@@ -23,6 +23,10 @@ function wxService() {
 	self.getOpenId = function() {
 		return localStorage.getItem('wx_openid');
 	}
+
+	self.removeOpenId = function() {
+		localStorage.removeItem('wx_openid');
+	}
 }
 					
 wxModule.service('wxService', wxService);

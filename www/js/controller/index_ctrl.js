@@ -2677,6 +2677,7 @@ lvtuanApp.controller("siteCtrl",function($scope,$http,$rootScope,$location,authS
 		authService.logout();
 		localStorage.removeItem('post_id_status');
 		localStorage.removeItem('post_id');
+		localStorage.removeItem('wx_openid');
 		localStorage.clear();
 		$location.path('/login');
 	}
@@ -3560,6 +3561,7 @@ document.activeElement.blur();
 	         location.href='#/questionslist';
 	         localStorage.removeItem('post_id_status');
 	         localStorage.removeItem('post_id');
+	         localStorage.removeItem('wx_openid');
      	},2000);
 		
 	}
@@ -5776,12 +5778,37 @@ lvtuanApp.controller("userwalletCtrl",function($scope,$http,$rootScope,$ionicLoa
 lvtuanApp.controller("wxCheckOpenIdCtrl",function($scope,$http,$rootScope,$stateParams,$ionicHistory,authService,wxService){
 	$scope.$on('$ionicView.beforeEnter', function() {
 		if (!wxService.getOpenId()) {
-			window.location.replace(wxService.getWxAuthUrl('/wxauthpayment'));
+			// if ($stateParams.path) {
+				localStorage.setItem('goto', '/');
+				window.location.replace(wxService.getWxAuthUrl('/wxobtainopenid'));
+			// } else {
+				// window.location.replace(wxService.getWxAuthUrl('/wxauthpayment'));
+			// }
 		} /*else {
 			location.href = "#/user/moneyin";
 			location.href = $ionicHistory.goBack();;
 		}*/
 	})
+})
+
+//获取openid以供支付使用 
+lvtuanApp.controller("wxObtainOpenIdCtrl",function($scope,$http,$rootScope,$stateParams,authService,wxService,$ionicLoading){
+	var code = $stateParams.code;
+	var state = $stateParams.state;
+
+	$ionicLoading.show();
+  	$http.get('http://' + AppSettings.baseApiUrl + '/openid?code='+code+'&state='+state).then(
+    	function (res) {
+	    	var authData = res.data ? res.data.data : null;
+			wxService.saveOpenId(authData.openid);
+			$ionicLoading.hide();
+			location.href = localStorage.getItem('goto');;	
+    	}
+    ).catch(function(response) {
+	  	console.error('Gists error', response.status, response.data);
+	  	if (response.status === 400) {
+	  	}
+	});
 })
 
 //获取openid以供支付使用 
