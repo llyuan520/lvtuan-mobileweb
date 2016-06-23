@@ -2,7 +2,7 @@ AppSettings = {
   //baseApiUrl: 'dev.wdlst.lvtuan-pc-new',
   baseApiUrl: 'test.elvtuan.com',
   baseNewApiUrl: 'apitest.elvtuan.com',
-  baseMobileUrl: 'mobiledev.wdlst.lvtuan-pc-new',
+  baseMobileUrl: 'testm.elvtuan.com',
 
   // 律团服务号
   // appId: 'wxf2c36d3bee50e935',
