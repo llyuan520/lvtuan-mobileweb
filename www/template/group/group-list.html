@@ -24,12 +24,12 @@
 		<ion-list>
         	<ion-item class="item item-thumbnail-left" ng-repeat="item in items " ng-href="#/group/view/{{item.group_id}}">
         		<img ng-src="{{item.group_avatar}}" style="left:6px;border-radius:5px;">
-        		<span class="badges badge-assertive" style="top: 3px;left: 54px;right:none;">{{item.member_cnt}}</span>
+        		<span class="badges badge-assertive" style="top: 3px;left: 54px;right:none;" ng-if="item.unread_msg_count != 0">{{item.unread_msg_count}}</span>
 				<h2 style="line-height:30px;">
 					<span class="item-note"> {{item.updated_at | formatdate}}</span>{{item.group_name}}
 				</h2>
 				<p>
-					{{item.group_intro}}
+					{{item.last_msg}}
 				</p>
 	        </ion-item> 
          </ion-list>
