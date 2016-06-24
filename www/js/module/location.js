@@ -5,7 +5,6 @@ function locationService($http) {
 
 	self.fetchLocation = function($scope) {
 	    $scope.currentLocation = self.getDefaultLocation();
-		self.saveLocation($scope.currentLocation);
 
 	    var locations = {};
 
@@ -29,7 +28,6 @@ function locationService($http) {
 						}
 						locations.latitude = res.latitude;
 						locations.longitude = res.longitude;
-						self.saveLocation(locations);
 						$scope.currentLocation = locations;
 					});
 
@@ -44,6 +42,13 @@ function locationService($http) {
 
 	self.saveLocation = function(location) {
 		localStorage.setItem('currentLocation', JSON.stringify(location));
+	}
+
+	self.sameLocation = function(location) {
+		var currentLocation = self.getLocation();
+		return (location.city_id == currentLocation.city_id 
+			&& location.district_id == currentLocation.district_id 
+			&& location.province_id == currentLocation.province_id);
 	}
 
 	self.getLocation = function() {
