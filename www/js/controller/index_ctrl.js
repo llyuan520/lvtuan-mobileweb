@@ -4228,13 +4228,13 @@ lvtuanApp.controller("questionsOrderPpayCtrl",function($scope,$http,$rootScope,$
 	$scope.wap_pay = function(user){
 		alert('0',JSON.stringify(user));
             if(user.radioval == 'qianbao') {
-					/*var confirmPopup = $ionicPopup.confirm({
+					var confirmPopup = $ionicPopup.confirm({
 						title: '是否立即付款？',
 						cancelText: '取消',
 						okText: '确认',
 	        		});
              		confirmPopup.then(function(res) {
-		               if(res) { */
+		               if(res) { 
 		               		$ionicLoading.show();
 			               	httpWrapper.request('http://'+$rootScope.hostName+'/center/question/'+$stateParams.id+'/pay/wallet','post',null,
 								function(data){
@@ -4250,12 +4250,11 @@ lvtuanApp.controller("questionsOrderPpayCtrl",function($scope,$http,$rootScope,$
 								}
 							);
 
-		               /*}else{
+		               }else{
 		                 return false;
 		               }
-             		});*/
+             		});
             } else {
-            	debugger
 				if (!wxService.getOpenId()) {
 		    		localStorage.setItem("goto", "#/user/moneyin");
 					window.location.replace(wxService.getWxAuthUrl('/wxcheckopenid'));
@@ -4291,7 +4290,7 @@ lvtuanApp.controller("questionsOrderPpayCtrl",function($scope,$http,$rootScope,$
 	    	$http.post('http://'+$rootScope.hostName+'/payment_gateway/charge',param)
 			.success(function(data) {
 	        	console.log(data);
-	        	/*pingpp.createPayment(data, function(result, error){
+	        	pingpp.createPayment(data, function(result, error){
 				    if (result == "success") {
 				        // 只有微信公众账号 wx_pub 支付成功的结果会在这里返回，其他的 wap 支付结果都是在 extra 中对应的 URL 跳转。
 	                    location.href = '#/user/order/list';
@@ -4307,7 +4306,7 @@ lvtuanApp.controller("questionsOrderPpayCtrl",function($scope,$http,$rootScope,$
 				        $ionicLoading.hide();
 				    }
 				});
-*/
+
 	        });
 	    }
     }
