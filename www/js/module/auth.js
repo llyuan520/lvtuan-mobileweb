@@ -147,7 +147,7 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
     }).then(
     	function (res) {
 	    	var user = res.data ? res.data.data : null;
-	    	alert('wx_openid',user.wx_openid);
+	    	//alert('wx_openid',user.wx_openid);
 
 	    	wxService.saveOpenId(user.wx_openid);
 
@@ -168,11 +168,11 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
 			if(goback == null || goback=="" || goback=="undefined"){
 				window.location.href='#/index';
 				window.location.reload();
-				alert('1');
+				//alert('1');
 			}else{
 				window.location.href= goback;
 				window.location.reload();
-				alert('2');
+				//alert('2');
 			}
 			sessionStorage.removeItem(goback);
     	}

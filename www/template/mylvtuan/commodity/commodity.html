@@ -34,10 +34,10 @@
 						<p class="mb10">
 							订单状态：<label ng-if="item.state == 1">待付款</label>
 						</p>
-						<p style="text-align: right;">
+						<div style="text-align: right;">
 		  					<button class="button button-small button-light" style="min-height: 28px;line-height: 28px;" ng-click="to_cancel(item.id,item)">取消订单</button>
 		  					<button class="button button-small button-positive" style="min-height: 28px;line-height: 28px;" ng-click="to_payorder(item.id,item.type)">支付订单</button>
-		  				</p>
+		  				</div>
 					</div>
 				</div>
 			<ion-infinite-scroll pulling-text="上拉加载" ng-if="moredata" on-infinite="loadMore()" distance="1%"> </ion-infinite-scroll>

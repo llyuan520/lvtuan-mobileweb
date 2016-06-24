@@ -4165,8 +4165,6 @@ lvtuanApp.controller("questionsArewardPayCtrl",function($scope,$http,$rootScope,
 
 			}
 
-
-
 		function main(openid,money){
 	    	var currentUser = authService.getUser();
 	    	var param = {};
@@ -4271,19 +4269,19 @@ lvtuanApp.controller("questionsOrderPpayCtrl",function($scope,$http,$rootScope,$
 		function main(openid){
 	    	var currentUser = authService.getUser();
 	    	var param = {};
-	    		param.order_no = $scope.item.order_no;
+	    		param.order_no = $scope.items.order_no;
 				param.device = 'wechat';
 				param.channel = user.radioval;
-				param.amount = $scope.item.price * 100;
-				param.subject = $scope.item.type;
-				param.body = $scope.item.title;
+				param.amount = $scope.items.price * 100;
+				param.subject = $scope.items.type;
+				param.body = $scope.items.title;
 				param.open_id = openid;
 				param.current_user_id = currentUser.id;
 				param.metadata = {};
 				param.metadata.pay_type = $stateParams.type;
 				if($stateParams.type != null){
 	        		if($stateParams.type == 'order' ){
-	        			param.metadata.question_id = $scope.item.post_id;
+	        			param.metadata.question_id = $scope.items.post_id;
 	        		}
 	        		if($stateParams.type == 'wallet_recharge' ){
 	        			param.metadata.user_id = currentUser.id;
@@ -4573,6 +4571,13 @@ lvtuanApp.controller("userOrderViewCtrl",function($scope,$rootScope,$ionicLoadin
 	$ionicLoading.show();
 	httpWrapper.get('http://'+$rootScope.hostName+'/center/question/'+$stateParams.id+'/view', function(data){
 		$scope.items = data.data;
+		if($scope.items.transitions.length > 0){
+			$scope.isHastabs = 'has-tabs';
+		}else{
+			$scope.isHastabs = 'not';
+		}
+		console.info($scope.items);
+		$ionicLoading.hide();
 		console.info($scope.items);
 		$ionicLoading.hide();
 	});
