@@ -498,8 +498,8 @@ lvtuanApp.controller("wxAuthCtrl",function($scope,$stateParams,wxService,userSer
 
 //自动跳转到微信授权登录页面
 lvtuanApp.controller("wxLoginCtrl",function($scope,$http,$rootScope,wxService){
-	//window.location.href = wxService.getWxAuthUrl('/wxauth');
-	window.location.replace(wxService.getWxAuthUrl('/wxauth'));
+	window.location.href = wxService.getWxAuthUrl('/wxauth');
+	//window.location.replace(wxService.getWxAuthUrl('/wxauth'));
 })
 
 /****************************************************** 律圈 ******************************************************/
