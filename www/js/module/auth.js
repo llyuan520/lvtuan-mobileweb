@@ -167,12 +167,8 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
 			var goback = sessionStorage.getItem("goback");
 			if(goback == null || goback=="" || goback=="undefined"){
 				window.location.href='#/index';
-				window.location.reload();
-				//alert('1');
 			}else{
 				window.location.href= goback;
-				window.location.reload();
-				//alert('2');
 			}
 			sessionStorage.removeItem(goback);
     	}

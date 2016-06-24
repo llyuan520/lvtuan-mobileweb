@@ -4256,15 +4256,13 @@ lvtuanApp.controller("questionsOrderPpayCtrl",function($scope,$http,$rootScope,$
 		               }
              		});*/
             } else {
-
-            	alert("00000000");
-				/*if (!wxService.getOpenId()) {
+				if (!wxService.getOpenId()) {
 		    		localStorage.setItem("goto", "#/user/moneyin");
 					window.location.replace(wxService.getWxAuthUrl('/wxcheckopenid'));
 					main(wxService.getOpenId());
 				} else {
 					main(wxService.getOpenId());
-				}*/
+				}
 
 			}
 
@@ -4288,7 +4286,6 @@ lvtuanApp.controller("questionsOrderPpayCtrl",function($scope,$http,$rootScope,$
 	        		}
 	        	}
 	        	console.log(param);
-	        	alert(JSON.stringify(param));
 	        $ionicLoading.show();
 	    	$http.post('http://'+$rootScope.hostName+'/payment_gateway/charge',param)
 			.success(function(data) {
