@@ -4229,6 +4229,7 @@ lvtuanApp.controller("questionsOrderPpayCtrl",function($scope,$http,$rootScope,$
 	
 	//微信支付
 	$scope.wap_pay = function(user){
+		alert("0");
             if (user.radioval == 'qianbao') {
 					/*var confirmPopup = $ionicPopup.confirm({
 						title: '是否立即付款？',
@@ -4257,7 +4258,7 @@ lvtuanApp.controller("questionsOrderPpayCtrl",function($scope,$http,$rootScope,$
 		               }
              		});*/
             } else {
-
+            	alert("wx_pub");
 				if (!wxService.getOpenId()) {
 		    		localStorage.setItem("goto", "#/user/moneyin");
 					window.location.replace(wxService.getWxAuthUrl('/wxcheckopenid'));
@@ -4289,14 +4290,11 @@ lvtuanApp.controller("questionsOrderPpayCtrl",function($scope,$http,$rootScope,$
 	        	}
 	        	console.log(param);
 	        	alert(JSON.stringify(param));
-
-	        	debugger
 	        $ionicLoading.show();
 	    	$http.post('http://'+$rootScope.hostName+'/payment_gateway/charge',param)
 			.success(function(data) {
 	        	console.log(data);
-	        	debugger
-	        	/*pingpp.createPayment(data, function(result, error){
+	        	pingpp.createPayment(data, function(result, error){
 				    if (result == "success") {
 				        // 只有微信公众账号 wx_pub 支付成功的结果会在这里返回，其他的 wap 支付结果都是在 extra 中对应的 URL 跳转。
 	                    location.href = '#/user/order/list';
@@ -4311,7 +4309,7 @@ lvtuanApp.controller("questionsOrderPpayCtrl",function($scope,$http,$rootScope,$
 				        layer.show("您已取消支付。");
 				        $ionicLoading.hide();
 				    }
-				});*/
+				});
 
 	        });
 	    }
