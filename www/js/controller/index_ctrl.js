@@ -4288,12 +4288,15 @@ lvtuanApp.controller("questionsOrderPpayCtrl",function($scope,$http,$rootScope,$
 	        		}
 	        	}
 	        	console.log(param);
+	        	alert(JSON.stringify(param));
+
+	        	debugger
 	        $ionicLoading.show();
 	    	$http.post('http://'+$rootScope.hostName+'/payment_gateway/charge',param)
 			.success(function(data) {
 	        	console.log(data);
-
-	        	pingpp.createPayment(data, function(result, error){
+	        	debugger
+	        	/*pingpp.createPayment(data, function(result, error){
 				    if (result == "success") {
 				        // 只有微信公众账号 wx_pub 支付成功的结果会在这里返回，其他的 wap 支付结果都是在 extra 中对应的 URL 跳转。
 	                    location.href = '#/user/order/list';
@@ -4308,7 +4311,7 @@ lvtuanApp.controller("questionsOrderPpayCtrl",function($scope,$http,$rootScope,$
 				        layer.show("您已取消支付。");
 				        $ionicLoading.hide();
 				    }
-				});
+				});*/
 
 	        });
 	    }
