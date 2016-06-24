@@ -4111,7 +4111,7 @@ lvtuanApp.controller("questionsArewardCtrl",function($scope,$http,$rootScope,$st
 
 
 
-//订单支付
+//送心意
 lvtuanApp.controller("questionsArewardPayCtrl",function($scope,$http,$rootScope,$stateParams,$location,$ionicLoading,authService,wxService){
 	console.info($stateParams.id);
 
@@ -4210,6 +4210,7 @@ lvtuanApp.controller("questionsArewardPayCtrl",function($scope,$http,$rootScope,
     }
 })
 
+//订单支付
 lvtuanApp.controller("questionsOrderPpayCtrl",function($scope,$http,$rootScope,$stateParams,$ionicPopup,$location,$ionicLoading,authService,wxService,listHelper,httpWrapper){
 	console.info($stateParams.id);
 	$scope.user = {
@@ -4227,7 +4228,7 @@ lvtuanApp.controller("questionsOrderPpayCtrl",function($scope,$http,$rootScope,$
 	
 	//微信支付
 	$scope.wap_pay = function(user){
-            if (user.radioval == 'qianbao') {
+            if(user.radioval == 'qianbao') {
 					/*var confirmPopup = $ionicPopup.confirm({
 						title: '是否立即付款？',
 						cancelText: '取消',
@@ -4256,18 +4257,20 @@ lvtuanApp.controller("questionsOrderPpayCtrl",function($scope,$http,$rootScope,$
              		});*/
             } else {
 
-				if (!wxService.getOpenId()) {
+            	alert("00000000");
+				/*if (!wxService.getOpenId()) {
 		    		localStorage.setItem("goto", "#/user/moneyin");
 					window.location.replace(wxService.getWxAuthUrl('/wxcheckopenid'));
 					main(wxService.getOpenId());
 				} else {
 					main(wxService.getOpenId());
-				}
+				}*/
 
 			}
 
 		function main(openid){
 	    	var currentUser = authService.getUser();
+	    	var type = 'order';
 	    	var param = {};
 	    		param.order_no = $scope.items.order_no;
 				param.device = 'wechat';
@@ -4278,21 +4281,18 @@ lvtuanApp.controller("questionsOrderPpayCtrl",function($scope,$http,$rootScope,$
 				param.open_id = openid;
 				param.current_user_id = currentUser.id;
 				param.metadata = {};
-				param.metadata.pay_type = $stateParams.type;
-				if($stateParams.type != null){
-	        		if($stateParams.type == 'order' ){
+				param.metadata.pay_type = type;
+				if(type != null){
+	        		if(type == 'order' ){
 	        			param.metadata.question_id = $scope.items.post_id;
 	        		}
-	        		if($stateParams.type == 'wallet_recharge' ){
-	        			param.metadata.user_id = currentUser.id;
-	        		}
 	        	}
-	        	console.info(param);
+	        	console.log(param);
+	        	alert(JSON.stringify(param));
 	        $ionicLoading.show();
 	    	$http.post('http://'+$rootScope.hostName+'/payment_gateway/charge',param)
 			.success(function(data) {
 	        	console.log(data);
-
 	        	pingpp.createPayment(data, function(result, error){
 				    if (result == "success") {
 				        // 只有微信公众账号 wx_pub 支付成功的结果会在这里返回，其他的 wap 支付结果都是在 extra 中对应的 URL 跳转。

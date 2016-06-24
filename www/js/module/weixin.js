@@ -13,7 +13,6 @@ function wxService() {
 		str += "scope=snsapi_base&";
 		str += "state=1";
 		str += "#wechat_redirect";
-		alert('str',str);
 		return str;
 	}
 
