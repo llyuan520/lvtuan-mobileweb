@@ -32,16 +32,12 @@ lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $loca
 		return authService.isAuthed ? authService.isAuthed() : false
 	}
 
-	$scope.$on('$ionicView.beforeEnter', function() {
-	    $scope.currentUser = authService.getUser();
-
-	    currentLocation = locationService.getLocation();
-	    if (!currentLocation || !currentLocation.city_name) {
-	    	locationService.fetchLocation($scope);
-	    } else {
-	        $scope.currentLocation = currentLocation;
-	    }
-	})
+	// 通过微信接口获取当前的地理位置，这会设置
+	locationService.fetchLocation($scope);
+	if (!locationService.sameLocation($scope.currentLocation)) {
+		locationService.saveLocation($scope.currentLocation);
+	}
+	$scope.currentUser = authService.getUser();
 
     //返回跳转页面
 	$scope.jump = function(url,id){
