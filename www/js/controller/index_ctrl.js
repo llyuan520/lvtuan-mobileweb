@@ -31,7 +31,6 @@ lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $loca
 	self.isAuthed = function() {
 		return authService.isAuthed ? authService.isAuthed() : false
 	}
-<<<<<<< Updated upstream
 
 	// 通过微信接口获取当前的地理位置，这会设置
 	locationService.fetchLocation($scope);
@@ -39,19 +38,7 @@ lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $loca
 		locationService.saveLocation($scope.currentLocation);
 	}
 	$scope.currentUser = authService.getUser();
-=======
-	
-	$scope.$on('$ionicView.beforeEnter', function() {
-	    $scope.currentUser = authService.getUser();
 
-	    currentLocation = locationService.getLocation();
-	    if (!currentLocation || !currentLocation.city_name) {
-	    	locationService.fetchLocation($scope);
-	    } else {
-	        $scope.currentLocation = currentLocation;
-	    }
-	})
->>>>>>> Stashed changes
 
     //返回跳转页面
 	$scope.jump = function(url,id){
