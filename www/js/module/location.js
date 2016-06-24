@@ -46,6 +46,10 @@ function locationService($http) {
 
 	self.sameLocation = function(location) {
 		var currentLocation = self.getLocation();
+		if (!currentLocation) {
+			return false;
+		}
+
 		return (location.city_id == currentLocation.city_id 
 			&& location.district_id == currentLocation.district_id 
 			&& location.province_id == currentLocation.province_id);
