@@ -5799,7 +5799,7 @@ lvtuanApp.controller("wxObtainOpenIdCtrl",function($scope,$http,$rootScope,$stat
 	    	var authData = res.data ? res.data.data : null;
 			wxService.saveOpenId(authData.openid);
 			$ionicLoading.hide();
-			location.href = localStorage.getItem('goto');;	
+			location.href = localStorage.getItem('goto');	
     	}
     ).catch(function(response) {
 	  	console.error('Gists error', response.status, response.data);
