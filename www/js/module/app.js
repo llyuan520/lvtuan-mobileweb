@@ -208,16 +208,16 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
     })
 
     .state('wxobtainopenid', {
-      url: '/wxobtainopenid',
+      url: '/wxobtainopenid?code&state',
       cache: 'true',
       controller: 'wxObtainOpenIdCtrl'
     })
 
-    .state('wxauthpayment', {
-      url: '/wxauthpayment?code&state',
-      cache: 'true',
-      controller: 'wxAuthPaymentCtrl'
-    })
+    // .state('wxauthpayment', {
+    //   url: '/wxauthpayment?code&state',
+    //   cache: 'true',
+    //   controller: 'wxAuthPaymentCtrl'
+    // })
 
     .state('wxlogin', {
       url: '/wxlogin',
