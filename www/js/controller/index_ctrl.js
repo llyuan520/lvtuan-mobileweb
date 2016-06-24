@@ -4223,14 +4223,12 @@ lvtuanApp.controller("questionsOrderPpayCtrl",function($scope,$http,$rootScope,$
     .success(function(data) {
         $scope.items = data.data;
         console.info($scope.items);
-        debugger
         $ionicLoading.hide();  
     })
 	
 	//微信支付
 	$scope.wap_pay = function(user){
-		alert("0");
-            if (user.radioval == 'qianbao') {
+            if(user.radioval == 'qianbao') {
 					/*var confirmPopup = $ionicPopup.confirm({
 						title: '是否立即付款？',
 						cancelText: '取消',
@@ -4258,14 +4256,15 @@ lvtuanApp.controller("questionsOrderPpayCtrl",function($scope,$http,$rootScope,$
 		               }
              		});*/
             } else {
-            	alert("wx_pub");
-				if (!wxService.getOpenId()) {
+
+            	alert("00000000");
+				/*if (!wxService.getOpenId()) {
 		    		localStorage.setItem("goto", "#/user/moneyin");
 					window.location.replace(wxService.getWxAuthUrl('/wxcheckopenid'));
 					main(wxService.getOpenId());
 				} else {
 					main(wxService.getOpenId());
-				}
+				}*/
 
 			}
 
