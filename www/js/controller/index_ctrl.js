@@ -39,6 +39,7 @@ lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $loca
 	}
 	$scope.currentUser = authService.getUser();
 
+
     //返回跳转页面
 	$scope.jump = function(url,id){
 		if(id){
@@ -4215,6 +4216,7 @@ lvtuanApp.controller("questionsOrderPpayCtrl",function($scope,$http,$rootScope,$
 
 	$ionicLoading.show();
 	var timestamp=Math.round(new Date().getTime()/1000);
+	$scope.items = {};
     $http.get('http://'+$rootScope.hostName+'/center/pay/question/'+$stateParams.id+'/view?ts='+timestamp)
     .success(function(data) {
         $scope.items = data.data;
@@ -4224,14 +4226,15 @@ lvtuanApp.controller("questionsOrderPpayCtrl",function($scope,$http,$rootScope,$
 	
 	//微信支付
 	$scope.wap_pay = function(user){
+		alert('0',JSON.stringify(user));
             if(user.radioval == 'qianbao') {
-					/*var confirmPopup = $ionicPopup.confirm({
+					var confirmPopup = $ionicPopup.confirm({
 						title: '是否立即付款？',
 						cancelText: '取消',
 						okText: '确认',
 	        		});
              		confirmPopup.then(function(res) {
-		               if(res) { */
+		               if(res) { 
 		               		$ionicLoading.show();
 			               	httpWrapper.request('http://'+$rootScope.hostName+'/center/question/'+$stateParams.id+'/pay/wallet','post',null,
 								function(data){
@@ -4247,10 +4250,10 @@ lvtuanApp.controller("questionsOrderPpayCtrl",function($scope,$http,$rootScope,$
 								}
 							);
 
-		               /*}else{
+		               }else{
 		                 return false;
 		               }
-             		});*/
+             		});
             } else {
 				if (!wxService.getOpenId()) {
 		    		localStorage.setItem("goto", "#/user/moneyin");
@@ -4282,6 +4285,7 @@ lvtuanApp.controller("questionsOrderPpayCtrl",function($scope,$http,$rootScope,$
 	        		}
 	        	}
 	        	console.log(param);
+	        	alert('1',JSON.stringify(param));
 	        $ionicLoading.show();
 	    	$http.post('http://'+$rootScope.hostName+'/payment_gateway/charge',param)
 			.success(function(data) {
