@@ -2674,7 +2674,6 @@ lvtuanApp.controller("siteCtrl",function($scope,$http,$rootScope,$location,authS
 		authService.logout();
 		localStorage.removeItem('post_id_status');
 		localStorage.removeItem('post_id');
-		localStorage.removeItem('wx_openid');
 		localStorage.clear();
 		$location.path('/login');
 	}
@@ -3558,7 +3557,6 @@ document.activeElement.blur();
 	         location.href='#/questionslist';
 	         localStorage.removeItem('post_id_status');
 	         localStorage.removeItem('post_id');
-	         localStorage.removeItem('wx_openid');
      	},2000);
 		
 	}

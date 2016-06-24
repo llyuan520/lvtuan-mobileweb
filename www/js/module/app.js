@@ -97,7 +97,6 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
         // $location.path('/login');
         $state.transitionTo("login");
         localStorage.removeItem('currentUser');
-        localStorage.removeItem('wx_openid');
         
         //localStorage.clear();
         /*$window.location.href = '/login';*/
