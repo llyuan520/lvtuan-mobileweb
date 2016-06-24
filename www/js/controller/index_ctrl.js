@@ -5807,24 +5807,24 @@ lvtuanApp.controller("wxObtainOpenIdCtrl",function($scope,$http,$rootScope,$stat
 })
 
 //获取openid以供支付使用 
-// lvtuanApp.controller("wxAuthPaymentCtrl",function($scope,$http,$rootScope,$stateParams,authService,wxService,$ionicLoading){
-// 	var code = $stateParams.code;
-// 	var state = $stateParams.state;
+lvtuanApp.controller("wxAuthPaymentCtrl",function($scope,$http,$rootScope,$stateParams,authService,wxService,$ionicLoading){
+	var code = $stateParams.code;
+	var state = $stateParams.state;
 
-// 	$ionicLoading.show();
-//   	$http.get('http://' + AppSettings.baseApiUrl + '/openid?code='+code+'&state='+state).then(
-//     	function (res) {
-// 	    	var authData = res.data ? res.data.data : null;
-// 			wxService.saveOpenId(authData.openid);
-// 			$ionicLoading.hide();
-// 			location.href = "#/user/moneyin";	
-//     	}
-//     ).catch(function(response) {
-// 	  	console.error('Gists error', response.status, response.data);
-// 	  	if (response.status === 400) {
-// 	  	}
-// 	});
-// })
+	$ionicLoading.show();
+  	$http.get('http://' + AppSettings.baseApiUrl + '/openid?code='+code+'&state='+state).then(
+    	function (res) {
+	    	var authData = res.data ? res.data.data : null;
+			wxService.saveOpenId(authData.openid);
+			$ionicLoading.hide();
+			location.href = "#/user/moneyin";	
+    	}
+    ).catch(function(response) {
+	  	console.error('Gists error', response.status, response.data);
+	  	if (response.status === 400) {
+	  	}
+	});
+})
 
 //用户律师 - 钱包充值
 lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$stateParams,$ionicPopup,$location,$ionicLoading,authService,wxService){
