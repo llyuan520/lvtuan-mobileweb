@@ -107,7 +107,7 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
 })
 
 .config(function($httpProvider, jwtInterceptorProvider) {
-  jwtInterceptorProvider.tokenGetter = ['jwtHelper', 'authService', '$http', 'config', '$rootScope', function(jwtHelper, authService, $http, config, $rootScope) {
+  jwtInterceptorProvider.tokenGetter = ['jwtHelper', 'authService', '$http', 'config', '$rootScope','$location', function(jwtHelper, authService, $http, config, $rootScope, $location) {
     // Skip authentication for any requests ending in .html
     if (config.url.substr(config.url.length - 5) == '.html') {
       return null;
