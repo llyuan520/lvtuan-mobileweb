@@ -4228,7 +4228,6 @@ lvtuanApp.controller("questionsOrderPpayCtrl",function($scope,$http,$rootScope,$
 	
 	//微信支付
 	$scope.wap_pay = function(user){
-		alert("111");
             if(user.radioval == 'qianbao') {
 					/*var confirmPopup = $ionicPopup.confirm({
 						title: '是否立即付款？',
@@ -4257,15 +4256,13 @@ lvtuanApp.controller("questionsOrderPpayCtrl",function($scope,$http,$rootScope,$
 		               }
              		});*/
             } else {
-
-            	alert("00000000");
-				/*if (!wxService.getOpenId()) {
+				if (!wxService.getOpenId()) {
 		    		localStorage.setItem("goto", "#/user/moneyin");
 					window.location.replace(wxService.getWxAuthUrl('/wxcheckopenid'));
 					main(wxService.getOpenId());
 				} else {
 					main(wxService.getOpenId());
-				}*/
+				}
 
 			}
 
@@ -4289,7 +4286,6 @@ lvtuanApp.controller("questionsOrderPpayCtrl",function($scope,$http,$rootScope,$
 	        		}
 	        	}
 	        	console.log(param);
-	        	alert(JSON.stringify(param));
 	        $ionicLoading.show();
 	    	$http.post('http://'+$rootScope.hostName+'/payment_gateway/charge',param)
 			.success(function(data) {
