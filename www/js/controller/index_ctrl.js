@@ -341,7 +341,6 @@ lvtuanApp.controller("registerCtrl",function($scope,$rootScope,$http,$interval,$
 			if(goback == null || goback=="" || goback=="undefined"){
 				location.href='#/index';
 			}else{
-				
     			location.href= goback;
 			}
 			sessionStorage.removeItem("goback");

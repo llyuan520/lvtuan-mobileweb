@@ -34,7 +34,7 @@ function locationService($http) {
 
 	      		},
 		        cancel: function (res) {
-		        	lawyer.show('用户拒绝授权获取地理位置');
+		        	layer.show('用户拒绝授权获取地理位置');
 		        }
 	    	});
     	});
