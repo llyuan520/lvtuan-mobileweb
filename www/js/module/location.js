@@ -28,13 +28,13 @@ function locationService($http) {
 						}
 						locations.latitude = res.latitude;
 						locations.longitude = res.longitude;
-						$scope.currentLocation = locations;
+						$scope.currentLocation = locations.data;
 					});
 
 
 	      		},
 		        cancel: function (res) {
-		        	lawyer.show('用户拒绝授权获取地理位置');
+		        	layer.show('用户拒绝授权获取地理位置');
 		        }
 	    	});
     	});
