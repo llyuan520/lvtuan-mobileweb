@@ -28,7 +28,7 @@ function locationService($http) {
 						}
 						locations.latitude = res.latitude;
 						locations.longitude = res.longitude;
-						$scope.currentLocation = locations;
+						$scope.currentLocation = locations.data;
 					});
 
 
