@@ -82,6 +82,7 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
         	var goback = sessionStorage.getItem("goback");
 			if(goback == null || goback=="" || goback=="undefined"){
 				location.href='#/index';
+				window.location.reload();
 			}else{
     			location.href= goback;
 			}
@@ -147,8 +148,8 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
     }).then(
     	function (res) {
 	    	var user = res.data ? res.data.data : null;
-	    	//alert('wx_openid',user.wx_openid);
-
+	    	/*alert('wx_openid',user.wx_openid);
+	    	alert(JSON.stringify(user.wx_openid));*/
 	    	wxService.saveOpenId(user.wx_openid);
 
 	    	if(user) {
@@ -167,6 +168,7 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
 			var goback = sessionStorage.getItem("goback");
 			if(goback == null || goback=="" || goback=="undefined"){
 				window.location.href='#/index';
+				window.location.reload();
 			}else{
 				window.location.href= goback;
 			}
