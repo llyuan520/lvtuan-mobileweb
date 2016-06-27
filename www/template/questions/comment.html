@@ -1,14 +1,16 @@
 <ion-view hide-Tabs="true" cache-view="false" view-title="发布回答">
 	<ion-pane>
 		<ion-content>
-			<form id="myForm" name="myForm" novalidate ng-controller="questionsCommentCtrl" ng-if="currentUser.status == 3">
-				<div class="main">
-					<label class="item-input">
-	                  <textarea ng-model="comment" rows="15" cols="70"  placeholder="请认真填写您的回答" ng-minlength="1" required></textarea>
-	                </label>	
-	            </div>
-	            <div style="background-color: #fff;padding:5px 10px;margin-top:50px;">
-					<button class="button button-block button-positive" type="button" ng-disabled="myForm.$invalid" ng-click="submit()" >提交</button>
+			<form id="myForm" name="myForm" novalidate ng-controller="questionsCommentCtrl">
+				<div ng-if="currentUser.status == '3'">
+					<div class="main">
+						<label class="item-input">
+		                  <textarea ng-model="comment" rows="15" cols="70"  placeholder="请认真填写您的回答" ng-minlength="1" required></textarea>
+		                </label>	
+		            </div>
+		            <div style="background-color: #fff;padding:5px 10px;margin-top:50px;">
+						<button class="button button-block button-positive" type="button" ng-disabled="myForm.$invalid" ng-click="submit()" >提交</button>
+					</div>
 				</div>
 			</form>
 		</ion-content>

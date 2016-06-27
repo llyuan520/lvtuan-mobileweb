@@ -4056,6 +4056,7 @@ lvtuanApp.controller("questionsviewsCtrl",function($http,$scope,$rootScope,$stat
 lvtuanApp.controller("questionsCommentCtrl",function($http,$scope,$rootScope,$stateParams,$ionicLoading,authService){
 	console.info($stateParams.id);
 	$scope.currentUser = authService.getUser();
+
 	$scope.submit = function(){
 		console.info($scope.comment);
 		$ionicLoading.show();
