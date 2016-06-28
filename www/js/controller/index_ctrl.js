@@ -253,7 +253,7 @@ lvtuanApp.controller("loginCtrl",function($state,$scope,$rootScope,$http,userSer
 })
 
 //用户注册
-lvtuanApp.controller("registerCtrl",function($scope,$rootScope,$http,$interval,$ionicLoading,$location,userService,authService){
+lvtuanApp.controller("registerCtrl",function($scope,$rootScope,$http,$interval,$ionicLoading,$location,userService,authService,wxService){
 
 	//第一次获取验证码后要60秒以后才能在次获取
 	var t, timePromise;
@@ -314,6 +314,7 @@ lvtuanApp.controller("registerCtrl",function($scope,$rootScope,$http,$interval,$
 			$scope.post_id_status = true;
 			localStorage.setItem("post_id_status", JSON.stringify($scope.post_id_status));
 		} 
+		var openid = wxService.getOpenId();
 
 		$http.post('http://'+$rootScope.hostName+'/register',
 		{
@@ -321,6 +322,7 @@ lvtuanApp.controller("registerCtrl",function($scope,$rootScope,$http,$interval,$
 			password  		: $scope.params.password,
 			phonecode 		: $scope.params.phonecode,
 			account_type	: "phone",
+			openid          : openid,
 			post_id 		: $scope.post_id
         }).success(function(data) {
            layer.show("注册成功！");
@@ -489,7 +491,8 @@ lvtuanApp.controller("wxAuthCtrl",function($scope,$stateParams,wxService,userSer
 		$scope.post_id_status = true;
 		localStorage.setItem("post_id_status", JSON.stringify($scope.post_id_status));
 	}
-	userService.loginWithWx($stateParams.code,$stateParams.state, $scope.post_id);
+	var openid = wxService.getOpenId();
+	userService.loginWithWx(openid, $scope.post_id);
 })
 
 //自动跳转到微信授权登录页面

@@ -53,12 +53,13 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
   var self = this;
 
   // add authentication methods here
-  self.register = function(username, password, phonecode, account_type, post_id) {
+  self.register = function(username, password, phonecode, account_type, openid, post_id) {
   	return $http.post('http://' + HOST + '/register', {
 		username: username,
 		password: password,
 		phonecode: phonecode,
 		account_type: account_type,
+		openid: openid,
       	post_id: post_id
     }).then(
     	function (res) {
@@ -140,18 +141,17 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
 	});
   }
 
-  self.loginWithWx = function(code, state, post_id) {
+  self.loginWithWx = function(openid, post_id) {
   	$ionicLoading.show();
   	return $http.post('http://' + HOST + '/loginWithWx', {
-      code: code,
-      state: state,
+      openid: openid,
       post_id:post_id
     }).then(
     	function (res) {
 	    	var user = res.data ? res.data.data : null;
 	    	/*alert('wx_openid',user.wx_openid);
 	    	alert(JSON.stringify(user.wx_openid));*/
-	    	wxService.saveOpenId(user.wx_openid);
+	    	// wxService.saveOpenId(user.wx_openid);
 
 	    	if(user) {
 	    		authService.saveUser(user);
