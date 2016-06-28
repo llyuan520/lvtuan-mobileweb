@@ -97,11 +97,12 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
 	});
   }
 
-  self.login = function(username, password,post_id) {
+  self.login = function(username, password, openid, post_id) {
   	$ionicLoading.show();
   	return $http.post('http://' + HOST + '/login', {
       username: username,
       password: password,
+      openid: openid,
       post_id:post_id
     }).then(
     	function (res) {

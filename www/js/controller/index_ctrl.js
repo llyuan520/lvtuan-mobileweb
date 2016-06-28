@@ -213,7 +213,7 @@ lvtuanApp.controller("indexCtrl",function($scope,$location,listHelper,locationSe
 
 
 //用户登陆
-lvtuanApp.controller("loginCtrl",function($state,$scope,$rootScope,$http,userService){
+lvtuanApp.controller("loginCtrl",function($state,$scope,$rootScope,$http,userService,wxService){
 
 	var format_email = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
 	var format_mobile = /^[1][0-9]{10}$/; 
@@ -224,10 +224,10 @@ lvtuanApp.controller("loginCtrl",function($state,$scope,$rootScope,$http,userSer
 		if($scope.post_id_status == false){
 			$scope.post_id_status = true;
 			localStorage.setItem("post_id_status", JSON.stringify($scope.post_id_status));
-		} 
+		}
   		if(checkvaldata(user)){
-  			userService.login(user.username, user.password, $scope.post_id);
-  			
+  			var openid = wxService.getOpenId();
+  			userService.login(user.username, user.password, openid, $scope.post_id);
   		}
 	}
 
