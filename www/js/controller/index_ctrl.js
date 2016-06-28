@@ -2673,7 +2673,6 @@ lvtuanApp.controller("siteCtrl",function($scope,$http,$rootScope,$location,authS
 		authService.logout();
 		localStorage.removeItem('post_id_status');
 		localStorage.removeItem('post_id');
-		localStorage.clear();
 		$location.path('/login');
 	}
 
