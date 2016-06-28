@@ -1,7 +1,7 @@
 <ion-view hide-tabs="true" view-title="实名认证">
 		<ion-pane  class="web-body verified">
 			<form name="verifiedForm" class="css-form" id="verifiedForm" novalidate ng-controller="verifiedCtrl">
-				<ion-content>
+				<ion-content class="has-tabs">
 					<!-- <div class="basekong20"></div> -->
 					<div class="verified-list">
 						<div class="item item-input">
@@ -31,12 +31,12 @@
 							</div>
 						</div>
 					</div>
-					<div style="background-color:#fff;height: 59px;margin-top: 50px;" ng-if="!currentUser.is_verified_lawyer">
-						<div class="row" style="padding: 5px 10px;">
-							<button ng-click="submit()" class="button button-block button-positive" type="button" ng-disabled="verifiedForm.$invalid" style="border-radius: 10px;">保存</button>
-						</div>
-					</div>
 				</ion-content>
+				<div class="tabs" style="background-color:#fff;padding-top: 0;">
+					<div class="row" style="padding: 0 10px;">
+						<button ng-click="submit()" class="button button-block button-positive" type="button" ng-disabled="verifiedForm.$invalid" style="border-radius: 10px;">保存</button>
+					</div>
+				</div>
 			</form>
 	</ion-pane>
 </ion-view>

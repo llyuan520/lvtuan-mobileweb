@@ -30,7 +30,7 @@
 </style>
 <ion-view hide-tabs="true" view-title="擅长领域">
 	<ion-pane  class="web-body">
-		<ion-content class="field-content">
+		<ion-content class="field-content has-tabs">
 			<!-- <h4 class="title web-title web-fc666">资格认证 <span class="web-ftcred" style="font-size:14px;">(审核通过后，不可修改)</span></h4> -->
 			<!-- <div class="basekong20"></div> -->
 			<div class="list" style="margin-bottom:0;">
@@ -46,11 +46,11 @@
 					<label ng-click="click_workscope(workscope.key,workscope.value)" >{{workscope.value}}</label>
 				</span>
 			</div>
-			<div style="background-color:#fff;height: 59px;margin-top: 50px;">
-				<div class="row" style="padding: 5px 10px;">
-					<button ng-click="submit()" class="button button-block button-positive" type="button" style="border-radius: 10px;">保存</button>
-				</div>
-			</div>
 		</ion-content>
+		<div class="tabs" style="background-color:#fff;padding-top: 0;">
+			<div class="row" style="padding: 0 10px;">
+				<button ng-click="submit()" class="button button-block button-positive" type="button" style="border-radius: 10px;">保存</button>
+			</div>
+		</div>
 	</ion-pane>
 </ion-view>

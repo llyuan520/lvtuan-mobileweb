@@ -1,7 +1,7 @@
 <ion-view hide-tabs="true" view-title="邮箱修改">
 	<ion-pane  class="web-body">
-		<ion-content class="web-body web-top10">
-			<form name="emailForm" class="css-form" id="emailForm">
+		<form name="emailForm" class="css-form" id="emailForm">
+			<ion-content class="has-tabs">
 				<div class="list">
 					<div class="item item-input">
 						<div class="row">
@@ -25,12 +25,12 @@
 						</div>
 					</div>
 				</div>
-				<div style="background-color:#fff;height: 59px;margin-top: 50px;">
-					<div class="row" style="padding: 5px 10px;">
-						<button ng-click="submit()" class="button button-block button-positive" type="submit" style="border-radius: 10px;" ng-disabled="emailForm.$invalid">保存</button>
-					</div>
+			</ion-content>
+			<div class="tabs" style="background-color:#fff;padding-top: 0;">
+				<div class="row" style="padding: 0 10px;">
+					<button ng-click="submit()" class="button button-block button-positive" type="submit" style="border-radius: 10px;" ng-disabled="emailForm.$invalid">保存</button>
 				</div>
-			</form>
-		</ion-content>
+			</div>
+		</form>
 	</ion-pane>
 </ion-view>
