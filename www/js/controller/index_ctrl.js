@@ -4152,14 +4152,7 @@ lvtuanApp.controller("questionsArewardPayCtrl",function($scope,$http,$rootScope,
 
             } else {
 
-				if (!wxService.getOpenId()) {
-		    		localStorage.setItem("goto", "#/user/moneyin");
-					window.location.replace(wxService.getWxAuthUrl('/wxcheckopenid'));
-					main(wxService.getOpenId(),$scope.lawyer_order_moeny);
-				} else {
-					main(wxService.getOpenId(),$scope.lawyer_order_moeny);
-				}
-
+				main(wxService.getOpenId(),$scope.lawyer_order_moeny);
 			}
 
 		function main(openid,money){
@@ -4255,14 +4248,7 @@ lvtuanApp.controller("questionsOrderPpayCtrl",function($scope,$http,$rootScope,$
 		               }
              		});
             } else {
-				if (!wxService.getOpenId()) {
-		    		localStorage.setItem("goto", "#/user/moneyin");
-					window.location.replace(wxService.getWxAuthUrl('/wxcheckopenid'));
-					main(wxService.getOpenId());
-				} else {
-					main(wxService.getOpenId());
-				}
-
+				main(wxService.getOpenId());
 			}
 
 		function main(openid){
@@ -5843,13 +5829,7 @@ lvtuanApp.controller("usermoneyinCtrl",function($scope,$http,$rootScope,$statePa
 
 	//微信支付
     $scope.wap_pay = function(user){
-    	if (!wxService.getOpenId()) {
-    		localStorage.setItem("goto", "#/user/moneyin");
-			window.location.replace(wxService.getWxAuthUrl('/wxcheckopenid'));
-			main(wxService.getOpenId(),user.money);
-		} else {
-			main(wxService.getOpenId(),user.money);
-		}
+		main(wxService.getOpenId(),user.money);
 
 		function main(openid,money){
 	    	var currentUser = authService.getUser();
