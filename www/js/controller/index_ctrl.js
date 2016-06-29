@@ -218,6 +218,9 @@ lvtuanApp.controller("loginCtrl",function($state,$scope,$rootScope,$http,userSer
 	var format_email = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
 	var format_mobile = /^[1][0-9]{10}$/; 
 	var format_number=/^[0-9]*$/;
+	var format_passwod = /^[\@A-Za-z0-9\!\#\$\%\^\&\*\.\~]{6,20}$/;
+	$scope.user = {};
+
 	$scope.submit = function(user){
 		$scope.post_id = JSON.parse(localStorage.getItem('post_id'));
 		$scope.post_id_status = JSON.parse(localStorage.getItem('post_id_status'));
@@ -247,6 +250,16 @@ lvtuanApp.controller("loginCtrl",function($state,$scope,$rootScope,$http,userSer
 				}
 			}
   		}
+
+  		if(user.password == ""){
+  			layer.show("请输入密码！");
+  			return false;
+  		}else{
+  			if(user.password.match(format_passwod) == null){
+  				layer.show("请输入正确的密码!");
+				return false;
+  			}
+  		}
         return true;   
 	}
 })
@@ -254,6 +267,11 @@ lvtuanApp.controller("loginCtrl",function($state,$scope,$rootScope,$http,userSer
 //用户注册
 lvtuanApp.controller("registerCtrl",function($scope,$rootScope,$http,$interval,$ionicLoading,$location,userService,authService,wxService){
 
+	var format_mobile = /^[1][0-9]{10}$/; 
+	var format_number=/^[0-9]*$/;
+	var format_passwod = /^[\@A-Za-z0-9\!\#\$\%\^\&\*\.\~]{6,20}$/;
+
+	$scope.user = {};
 	//第一次获取验证码后要60秒以后才能在次获取
 	var t, timePromise;
 	$scope.t = 60;  
@@ -273,98 +291,137 @@ lvtuanApp.controller("registerCtrl",function($scope,$rootScope,$http,$interval,$
 	//获取验证码
 	$scope.phone_disabled = true;
 	$scope.phonecode = function(phone){
-		$ionicLoading.show();
-		$scope.t = 60;
-		$interval.cancel(timePromise);
-	  	timePromise = undefined;
-		var param = 'phone='+phone;
-		$scope.phone_disabled = false;
-		$http.post('http://'+$rootScope.hostName+'/send-code?'+param
-		).success(function(data) {
-			runTiming();
-            layer.show("验证码已发送到您的手机！");
-            $ionicLoading.hide();
-        });
+		if(phone == undefined){
+			layer.show("请输入手机号码！");
+  			return false;
+		}else{
+			if(user.username.match(format_mobile) == null){
+				layer.show("请输入正确的手机号码!");
+				return false;
+			}else{
+				$ionicLoading.show();
+				$scope.t = 60;
+				$interval.cancel(timePromise);
+			  	timePromise = undefined;
+				var param = 'phone='+phone;
+				$scope.phone_disabled = false;
+				$http.post('http://'+$rootScope.hostName+'/send-code?'+param
+				).success(function(data) {
+					runTiming();
+		            layer.show("验证码已发送到您的手机！");
+		            $ionicLoading.hide();
+		        });
+			}
+		}
 	}
 
     //提交注册
 	$scope.submit = function(user){
-		$scope.params = {};
-		if(user.username){
-			$scope.params["username"] = user.username;
-		}
-		if(user.phonecode){
-			$scope.params["phonecode"] = user.phonecode;
-		}
-		if(user.password){
-			$scope.params["password"] = user.password;
-		}
+		if(checkvaldata(user)){
 
-		// userService.register(
-		// 	$scope.params.username, 
-		// 	$scope.params.password,
-		// 	$scope.params.phonecode,
-		// 	"phone"
-		// )
-		$ionicLoading.show();
-		$scope.post_id = JSON.parse(localStorage.getItem('post_id'));
-		$scope.post_id_status = JSON.parse(localStorage.getItem('post_id_status'));
-		if($scope.post_id_status == false){
-			$scope.post_id_status = true;
-			localStorage.setItem("post_id_status", JSON.stringify($scope.post_id_status));
-		} 
-		var openid = wxService.getOpenId();
-
-		$http.post('http://'+$rootScope.hostName+'/register',
-		{
-			username  		: $scope.params.username,
-			password  		: $scope.params.password,
-			phonecode 		: $scope.params.phonecode,
-			account_type	: "phone",
-			openid          : openid,
-			post_id 		: $scope.post_id
-        }).success(function(data) {
-           layer.show("注册成功！");
-           $scope.user = {};
-           $scope.params = {};
-	       var user_data = data ? data.data : null;
-	    	if(user_data) {
-	    		authService.saveUser(user_data);
-	    		console.log('user:', user_data);
-	    	}
-	    	var token = data ? data.token : null;
-	    	if(token) { 
-	    		authService.saveToken(token);
-	    		console.log('JWT:', token); 
-	    	}
-
-	    	var goback = sessionStorage.getItem("goback");
-			if(goback == null || goback=="" || goback=="undefined"){
-				location.href='#/index';
-			}else{
-    			location.href= goback;
+			$scope.params = {};
+			if(user.username){
+				$scope.params["username"] = user.username;
 			}
-			sessionStorage.removeItem("goback");
-            $ionicLoading.hide();
-        });
-     
+			if(user.phonecode){
+				$scope.params["phonecode"] = user.phonecode;
+			}
+			if(user.password){
+				$scope.params["password"] = user.password;
+			}
+
+			// userService.register(
+			// 	$scope.params.username, 
+			// 	$scope.params.password,
+			// 	$scope.params.phonecode,
+			// 	"phone"
+			// )
+			$ionicLoading.show();
+			$scope.post_id = JSON.parse(localStorage.getItem('post_id'));
+			$scope.post_id_status = JSON.parse(localStorage.getItem('post_id_status'));
+			if($scope.post_id_status == false){
+				$scope.post_id_status = true;
+				localStorage.setItem("post_id_status", JSON.stringify($scope.post_id_status));
+			} 
+			var openid = wxService.getOpenId();
+
+			$http.post('http://'+$rootScope.hostName+'/register',
+			{
+				username  		: $scope.params.username,
+				password  		: $scope.params.password,
+				phonecode 		: $scope.params.phonecode,
+				account_type	: "phone",
+				openid          : openid,
+				post_id 		: $scope.post_id
+	        }).success(function(data) {
+	           layer.show("注册成功！");
+	           $scope.user = {};
+	           $scope.params = {};
+		       var user_data = data ? data.data : null;
+		    	if(user_data) {
+		    		authService.saveUser(user_data);
+		    		console.log('user:', user_data);
+		    	}
+		    	var token = data ? data.token : null;
+		    	if(token) { 
+		    		authService.saveToken(token);
+		    		console.log('JWT:', token); 
+		    	}
+
+		    	var goback = sessionStorage.getItem("goback");
+				if(goback == null || goback=="" || goback=="undefined"){
+					location.href='#/index';
+				}else{
+	    			location.href= goback;
+				}
+				sessionStorage.removeItem("goback");
+	            $ionicLoading.hide();
+	        });
+     	}
+	}
+
+	//检查输入是否正确
+	function checkvaldata(user){
+		if(user.username == ""){
+  			layer.show("请输入手机号码或者邮箱！");
+  			return false;
+  		}else{
+			if(user.username.match(format_mobile) == null){
+				layer.show("请输入正确的手机号码!");
+				return false;
+			}
+  		}
+
+  		if(user.phonecode == ""){
+  			layer.show("请输入验证码！");
+  			return false;
+  		}else{
+  			if(user.phonecode.match(format_number) == null){
+  				layer.show("请输入正确的验证码!");
+				return false;
+  			}
+  		}
+
+  		if(user.password == ""){
+  			layer.show("请输入密码！");
+  			return false;
+  		}else{
+  			if(user.password.match(format_passwod) == null){
+  				layer.show("请输入正确的密码!");
+				return false;
+  			}
+  		}
+
+        return true;   
 	}
 })
 
 //修改密码
 lvtuanApp.controller("resetpwdCtrl",function($scope,$http,$rootScope,$ionicLoading,$location){
+	var format_passwod = /^[\@A-Za-z0-9\!\#\$\%\^\&\*\.\~]{6,20}$/;
 	$scope.user = {};
 	$scope.save = function(user){
-		if(user.old_password == user.new_password && user.old_password == user.new_password_retype && user.new_password == user.new_password_retype){
-			layer.show("修改密码不能和初始密码一样！");
-			return false;
-		}else if(user.new_password.length != user.new_password_retype.length){
-			layer.show("重置密码的长度不一致！");
-			return false;
-		}else if(user.new_password != user.new_password_retype){
-			layer.show("两次输入的密码不一致！");
-			return false;
-		}else{
+		if(checkvaldata(user)){
 			$ionicLoading.show();
 			$http.post('http://'+$rootScope.hostName+'/center/reset_pass', $scope.user
   			).success(function(data) {
@@ -374,65 +431,142 @@ lvtuanApp.controller("resetpwdCtrl",function($scope,$http,$rootScope,$ionicLoadi
 	           $ionicLoading.hide();
 	        });
 		}
+	}
 
+	function checkvaldata(user){
+		if(user.old_password == ""){
+			layer.show("请输入旧密码！");
+			return false;
+		}else if(user.new_password == ""){
+			layer.show("请输入新密码！");
+			return false;
+		}else if(user.new_password_retype == ""){
+			layer.show("请输入新密码！");
+			return false;
+		}else{
+			if(user.old_password.match(format_passwod) == null || user.new_password.match(format_passwod) == null || user.new_password_retype.match(format_passwod) == null){
+				layer.show("请输入正确的密码!");
+				return false;
+			}else{
+				if(user.old_password == user.new_password && user.old_password == user.new_password_retype && user.new_password == user.new_password_retype){
+					layer.show("修改密码不能和初始密码一样！");
+					return false;
+				}else if(user.new_password.length != user.new_password_retype.length){
+					layer.show("重置密码的长度不一致！");
+					return false;
+				}else if(user.new_password != user.new_password_retype){
+					layer.show("两次输入的密码不一致！");
+					return false;
+				}
+			}
+		}
+	    return true;   
 	}
 })
 
 //忘记密码
-lvtuanApp.controller("forgotpwdCtrl",function($scope,$http,$rootScope,$ionicLoading){
+lvtuanApp.controller("forgotpwdCtrl",function($scope,$http,$rootScope,$ionicLoading,$interval){
+
+	var format_mobile = /^[1][0-9]{10}$/; 
+	var format_number=/^[0-9]*$/;
+
 	$scope.user = {};
+	//第一次获取验证码后要60秒以后才能在次获取
+	var t, timePromise;
+	$scope.t = 60;  
+	var runTiming = function(){
+	  timePromise = $interval(function(){
+			$scope.t -= 1;
+			//console.info($scope.t);
+			if($scope.t == 0){
+				$scope.phone_disabled = true;
+	  			$interval.cancel(timePromise);
+	  			timePromise = undefined;
+			}
+	  }, 1000, 60);
+	  return timePromise;
+	}
+
 	//获取验证码
+	$scope.phone_disabled = true;
 	$scope.phonecode = function(phone){
-		console.info(phone);
 		if(phone == undefined){
-			layer.show("请输入手机号！");
-			return false;
+			layer.show("请输入手机号码！");
+  			return false;
 		}else{
-			$ionicLoading.show();
-			var param = 'phone='+phone;
-			$http.post('http://'+$rootScope.hostName+'/send-code?'+param
-			).success(function(data) {
-				console.info(data)
-	           layer.show("验证码已发送到您的手机！");
-	           $ionicLoading.hide();
-	        });
-	        return true;
+			if(phone.match(format_mobile) == null){
+				layer.show("请输入正确的手机号码!");
+				return false;
+			}else{
+				$ionicLoading.show();
+				$scope.t = 60;
+				$interval.cancel(timePromise);
+			  	timePromise = undefined;
+				var param = 'phone='+phone;
+				$scope.phone_disabled = false;
+				$http.post('http://'+$rootScope.hostName+'/send-code?'+param
+				).success(function(data) {
+					runTiming();
+		            layer.show("验证码已发送到您的手机！");
+		            $ionicLoading.hide();
+		        });
+			}
 		}
 	}
+
 	//用户可以通过手机或者邮箱找回密码
 	$scope.submit = function(user){
-		console.info(user);
-		$scope.user = user;
-		$ionicLoading.show();
-		$http.post('http://'+$rootScope.hostName+'/forgotpwd', $scope.user
-			).success(function(data) {
-           $scope.user = {}; //清空数据
-           $scope.uid = data.data.uid;
-           sessionStorage.setItem("uid", JSON.stringify($scope.uid));
-           $("#forgotForm").hide();
-           $("#upwdForm").show();
-           $ionicLoading.hide();
-        });
+		if(checkvaldata(user)){
+			console.info(user);
+			$scope.user = user;
+			$ionicLoading.show();
+			$http.post('http://'+$rootScope.hostName+'/forgotpwd', $scope.user
+				).success(function(data) {
+	           $scope.user = {}; //清空数据
+	           $scope.uid = data.data.uid;
+	           sessionStorage.setItem("uid", JSON.stringify($scope.uid));
+	           $ionicLoading.hide();
+	           location.href='#/sitepwd';
+	        });
+		}
+	}
+
+	//检查输入是否正确
+	function checkvaldata(user){
+		if(user.username == ""){
+  			layer.show("请输入手机号码或者邮箱！");
+  			return false;
+  		}else{
+			if(user.username.match(format_mobile) == null){
+				layer.show("请输入正确的手机号码!");
+				return false;
+			}
+  		}
+
+  		if(user.phonecode == ""){
+  			layer.show("请输入验证码！");
+  			return false;
+  		}else{
+  			if(user.phonecode.match(format_number) == null){
+  				layer.show("请输入正确的验证码!");
+				return false;
+  			}
+  		}
+
+        return true;   
 	}
 })
 
 //找回密码
-lvtuanApp.controller("upwdCtrl",function($scope,$http,$rootScope,$ionicLoading,$location){
-
+lvtuanApp.controller("upwdCtrl",function($scope,$http,$rootScope,$ionicLoading){
+	var format_passwod = /^[\@A-Za-z0-9\!\#\$\%\^\&\*\.\~]{6,20}$/;
 	$scope.user = {};
 	$scope.submit = function(user){
-		$scope.uid = JSON.parse(sessionStorage.getItem('uid'));
-		$scope.user = user;
-		if($scope.user.password_1.length != $scope.user.password_2.length){
-			layer.show("重置密码的长度不一致！");
-			return false;
-		}else if($scope.user.password_1 != $scope.user.password_2){
-			layer.show("两次输入的密码不一致！");
-			return false;
-		}else{
+		if(checkvaldata(user)){
+			$scope.uid = JSON.parse(sessionStorage.getItem('uid'));
 			$ionicLoading.show();
-			$http.post('http://'+$rootScope.hostName+'/forgotpwd/resetpwd/'+$scope.uid, $scope.user
-  			).success(function(data) {
+			$http.post('http://'+$rootScope.hostName+'/forgotpwd/resetpwd/'+$scope.uid, user
+				).success(function(data) {
 	           layer.show("修改成功！");
 	           sessionStorage.removeItem("uid");
 	           $scope.user = {}; //清空数据
@@ -440,31 +574,80 @@ lvtuanApp.controller("upwdCtrl",function($scope,$http,$rootScope,$ionicLoading,$
 	           $ionicLoading.hide();
 	        });
 		}
-
 	}
+
+	//检查输入是否正确
+	function checkvaldata(user){	
+  		if(user.password_1 == "" || user.password_2 == ""){
+  			layer.show("请输入密码！");
+  			return false;
+  		}else{
+  			if(user.password_1.match(format_passwod) == null || user.password_2.match(format_passwod) == null){
+  				layer.show("请输入正确的密码!");
+				return false;
+  			}else{
+  				if($scope.user.password_1.length != $scope.user.password_2.length){
+					layer.show("重置密码的长度不一致！");
+					return false;
+				}else if($scope.user.password_1 != $scope.user.password_2){
+					layer.show("两次输入的密码不一致！");
+					return false;
+				}
+  			}
+  		}
+        return true;   
+	}
+
 })
 
 //绑定手机
-lvtuanApp.controller("boundphoneCtrl",function($scope,$http,$rootScope,$ionicLoading){
+lvtuanApp.controller("boundphoneCtrl",function($scope,$http,$rootScope,$ionicLoading,$interval){
+	var format_mobile = /^[1][0-9]{10}$/; 
 	$scope.user = {};
+	//第一次获取验证码后要60秒以后才能在次获取
+	var t, timePromise;
+	$scope.t = 60;  
+	var runTiming = function(){
+	  timePromise = $interval(function(){
+			$scope.t -= 1;
+			//console.info($scope.t);
+			if($scope.t == 0){
+				$scope.phone_disabled = true;
+	  			$interval.cancel(timePromise);
+	  			timePromise = undefined;
+			}
+	  }, 1000, 60);
+	  return timePromise;
+	}
+
+
 	//获取验证码
+	$scope.phone_disabled = true;
 	$scope.phonecode = function(phone){
-		console.info(phone);
 		if(phone == undefined){
-			layer.show("请输入手机号！");
-			return false;
+			layer.show("请输入手机号码！");
+  			return false;
 		}else{
-			$ionicLoading.show();
-			var param = 'phone='+phone;
-			$http.post('http://'+$rootScope.hostName+'/send-code?'+param
-			).success(function(data) {
-				console.info(data)
-	           layer.show("验证码已发送到您的手机！");
-	           $ionicLoading.hide();
-	        });
-	        return true;
+			if(phone.match(format_mobile) == null){
+				layer.show("请输入正确的手机号码!");
+				return false;
+			}else{
+				$ionicLoading.show();
+				$scope.t = 60;
+				$interval.cancel(timePromise);
+			  	timePromise = undefined;
+				var param = 'phone='+phone;
+				$scope.phone_disabled = false;
+				$http.post('http://'+$rootScope.hostName+'/send-code?'+param
+				).success(function(data) {
+					runTiming();
+		            layer.show("验证码已发送到您的手机！");
+		            $ionicLoading.hide();
+		        });
+			}
 		}
 	}
+
 	//用户必须绑定手机号才能回到主页
 	$scope.submit = function(user){
 		console.info(user);
@@ -1840,13 +2023,14 @@ lvtuanApp.controller("valrealnameCtrl",function($scope,$http,$rootScope,$ionicLo
 })
 //个人信息 - 修改手机
 lvtuanApp.controller("valphoneCtrl",function($scope,$http,$rootScope,$ionicLoading,$interval,$location,$stateParams,authService){
+	var format_mobile = /^[1][0-9]{10}$/; 
+
 	//判断是否是律师
 	var currentUser = authService.getUser();
 	$scope.userinfo = JSON.parse(localStorage.getItem('userinfo'));
 	$scope.user = {
 			phone:$scope.userinfo.phone 
 		};
-
 
 	//第一次获取验证码后要60秒以后才能在次获取
 	var t, timePromise;
@@ -1867,16 +2051,28 @@ lvtuanApp.controller("valphoneCtrl",function($scope,$http,$rootScope,$ionicLoadi
 	//获取验证码
 	$scope.phone_disabled = true;
 	$scope.phonecode = function(phone){
-		$scope.t = 60;
-		$interval.cancel(timePromise);
-	  	timePromise = undefined;
-		var param = 'phone='+phone;
-		$scope.phone_disabled = false;
-		$http.post('http://'+$rootScope.hostName+'/send-code?'+param
-		).success(function(data) {
-			runTiming();
-            layer.show("验证码已发送到您的手机！");
-        });
+		if(phone == undefined){
+			layer.show("请输入手机号码！");
+  			return false;
+		}else{
+			if(user.username.match(format_mobile) == null){
+				layer.show("请输入正确的手机号码!");
+				return false;
+			}else{
+				$ionicLoading.show();
+				$scope.t = 60;
+				$interval.cancel(timePromise);
+			  	timePromise = undefined;
+				var param = 'phone='+phone;
+				$scope.phone_disabled = false;
+				$http.post('http://'+$rootScope.hostName+'/send-code?'+param
+				).success(function(data) {
+					runTiming();
+		            layer.show("验证码已发送到您的手机！");
+		            $ionicLoading.hide();
+		        });
+			}
+		}
 	}
 
 	//提交用户的信息
@@ -1897,6 +2093,8 @@ lvtuanApp.controller("valphoneCtrl",function($scope,$http,$rootScope,$ionicLoadi
 })
 //个人信息 - 修改邮箱
 lvtuanApp.controller("valemailCtrl",function($scope,$http,$rootScope,$ionicLoading,$location,$stateParams, authService){
+	var format_passwod = /^[\@A-Za-z0-9\!\#\$\%\^\&\*\.\~]{6,20}$/;
+
 	//判断是否是律师
 	var currentUser = authService.getUser();
 	$scope.userinfo = JSON.parse(localStorage.getItem('userinfo'));
@@ -1923,16 +2121,28 @@ lvtuanApp.controller("valemailCtrl",function($scope,$http,$rootScope,$ionicLoadi
 	//获取验证码
 	$scope.phone_disabled = true;
 	$scope.phonecode = function(phone){
-		var param = 'phone='+phone;
-		$scope.t = 60;  
-		$interval.cancel(timePromise);
-	  	timePromise = undefined;
-		$scope.phone_disabled = false;
-		$http.post('http://'+$rootScope.hostName+'/send-code?'+param
-		).success(function(data) {
-			runTiming();
-            layer.show("验证码已发送到您的邮箱！");
-        });
+		if(phone == undefined){
+			layer.show("请输入邮箱号！");
+  			return false;
+		}else{
+			if(user.username.match(format_passwod) == null){
+				layer.show("请输入正确的邮箱号!");
+				return false;
+			}else{
+				$ionicLoading.show();
+				$scope.t = 60;
+				$interval.cancel(timePromise);
+			  	timePromise = undefined;
+				var param = 'phone='+phone;
+				$scope.phone_disabled = false;
+				$http.post('http://'+$rootScope.hostName+'/send-code?'+param
+				).success(function(data) {
+					runTiming();
+		            layer.show("验证码已发送到您的手机！");
+		            $ionicLoading.hide();
+		        });
+			}
+		}
 	}
 
 	//提交用户的信息
@@ -2966,24 +3176,9 @@ lvtuanApp.controller("lawyerOneQuestionsCtrl",function($http,$scope,$state,$root
 			console.info($scope.items);
 		})
 
-	$scope.visible = true;
-	$scope.one_question_val = null;
+	$scope.visible = "pay_text";
 	$scope.toggle = function(val){
-		$scope.one_question_val = val;
-		if(val == 'pay_text'){
-			$scope.visible = true;
-		}else{
-			$scope.visible = false;
-		}
-	}
-
-	$scope.jumpGoQuestionsList = function(){
-		if($scope.one_question_val == null){
-			$scope.one_question_val = 'pay_text';
-		}else{
-			$scope.one_question_val = $scope.one_question_val;
-		}
-		location.href='#/lawyer/list/'+$scope.one_question_val;
+		$scope.visible = val;
 	}
 
 })
@@ -5396,312 +5591,24 @@ lvtuanApp.controller("documentownloadlistCtrl",function($http,$scope,$state,$roo
 
 //法律顾问
 lvtuanApp.controller("corporateservicesCtrl",function($http,$scope,$state,$rootScope,$stateParams){
-
-	$scope.counsels = [
-					{	
-						"img"		:'01.png',
-						"title"		:"防范合同风险",
-						"content" 	: "商务合同、法律文书一审再审，专业填坑我最强"
-					},
-					{	
-						"img"		:'02.png',
-						"title"		:"避免劳资纠纷",
-						"content" 	: "从员工入职到离职，全流程风险预警与控制，有效避免劳资纠纷"
-					},
-					{	
-						"img"		:'03.png',
-						"title"		:"维护企业权益",
-						"content" 	: "一旦企业权益受损，务必全力维权，将损失降至最低"
-					},
-					{	
-						"img"		:'04.png',
-						"title"		:"法律风险评估",
-						"content" 	: "定期进行专业的企业法律风险评估，并提供靠谱的整改意见"
-					},
-					{	
-						"img"		:'05.png',
-						"title"		:"节约时间成本",
-						"content" 	: "专业的事交给专业的律师来做，您可以专心管理和经营企业"
-					},
-					{	
-						"img"		:'06.png',
-						"title"		:"案件委托优惠",
-						"content" 	: "个案委托八五折起，您可以省下大笔律师费，用于企业发展"
-					}
-				];
-
+	$scope.visible = "silver";
+	$scope.toggle = function(val){
+		$scope.visible = val;
+	}
+	//调用微信查看图片的接口
+	/*	$scope.lookImg = function(){
+		console.info($scope.arry[0]);
+		if (window.WeixinJSBridge) {  
+            if($scope.items.attachments.length > 0){  
+                WeixinJSBridge.invoke('imagePreview', {
+	                	'current':$scope.items.attachments[0], // 当前显示图片的http链接
+	                	'urls': $scope.items.attachments // 需要预览的图片http链接列表
+                });  
+                return;  
+            }  
+        }     
+	}*/
 })
-
-//法律顾问
-lvtuanApp.controller("corporatelistCtrl",function($scope,$state,$http,$rootScope,$stateParams,$ionicPopup,$ionicLoading,authService){
-
-	var currentUser = authService.getUser();
-	$scope.buynow_btn = function(id){
-		if(currentUser.status == 1 || currentUser.status == 2){
-			//普通用户个人信息
-			location.href='#/corporate/buynow/'+id;
-		}else{
-			layer.show("您是律师用户，无此服务!");
-		}
-	}
-
-	$scope.counsels = {
-		"counsels_8800"	:{
-			"id":'1',
-			"title": "企业法律顾问银卡提供的服务",
-            "money": "8800元/年(两年起签)",                         
-            "banner_img": "banner_1.png", 
-			"counsels_arry" :[
-				{	
-					"title"		:'电话咨询',
-					"content" 	: "不限次，无论您遇到什么问题，一个电话随时连线律师。找律师，从未如此简单。"
-				},
-				{	
-					"title"		:"风险诊断",
-					"content" 	: "不限次，企业经营、决策过程中有任何不确定的风险、困惑，我们负责帮您诊断。"
-				},
-				{	
-					"title"		:"文件下载",
-					"content" 	: "不限次，由专业律师团队精心整理、审阅过的海量实用文书，您可免费任意下载。"
-				},
-				{	
-					"title"		:"免费律师函",
-					"content" 	: "2份，一旦企业权益受损，我们将帮您发出律师函，以及时制止不法的侵权行为。"
-				},
-				{	
-					"title"		:"法律文书制作、修改",
-					"content" 	: "5份，企业经营过程中涉及的各类法律文书的制作、修改及审核，包您高枕无忧。"
-				},
-				{	
-					"title"		:"企业管理制度全面规划化",
-					"content" 	: "1次，对企业的管理规章制度进行全方位的合法性审查，并给出专业的规划建议。"
-				},
-				{	
-					"title"		:'律师在所会面',
-					"content" 	: "2次，在律团的办公场所为您面对面地提供直接、高效的法律服务。服务内容任选。"
-				},
-				{	
-					"title"		:"网上法律实务培训",
-					"content" 	: "2次，我们将在网上为您公司的全体员工进行法律实务的专业培训，包括训后咨询。"
-				},
-				{	
-					"title"		:"企业风险评估及整改意见",
-					"content" 	: "1份，对您的企业进行专业、全面的法律风险评估，并且提供靠谱的整改意见。"
-				},
-				{	
-					"title"		:"年终企业法律顾问服务总结报告",
-					"content" 	: "1份，我们将给出服务期内（一年）法律顾问服务的总结性报告，以供分析、参考。"
-				},
-				{	
-					"title"		:"个案委托",
-					"content" 	: "八五折，在法律顾问服务期间，您公司的案件委托一律八五折，不限案件性质及范围。"
-				}
-			]
-		},
-		"counsels_18800"	:{
-			"id":'2',
-			"title": "企业法律顾问金卡提供的服务",
-            "money": "18800元/年(一年起签)",                         
-            "banner_img": "banner_2.png", 
-			"counsels_arry" :[
-				{   
-                    "title"     :'电话咨询',
-                    "content"   :'不限次，无论您遇到什么问题，一个电话随时连线律师。找律师，从未如此简单。',
-                },
-                {   
-                    "title"     :'风险诊断',
-                    "content"   :'不限次，企业经营、决策过程中有任何不确定的风险、困惑，我们负责帮您诊断。',
-
-                },
-                {   
-                    "title"     :'免费律师函',
-                    "content"   :'4份，一旦企业权益受损，我们将帮您发出律师函，以及时制止不法的侵权行为。',
-
-                },
-                {   
-                    "title"     :'法律文书制作、修改',
-                    "content"   :'10份，企业经营过程中涉及的各类法律文书的制作、修改及审核，包您高枕无忧。',
-
-                },
-                {   
-                    "title"     :'企业管理制度全面规划化',
-                    "content"   :'1次，对企业的管理规章制度进行全方位的合法性审查，并给出专业的规划建议。',
-
-                },
-                {   
-                    "title"     :'律师在所会面',
-                    "content"   :'4次，在律团的办公场所为您面对面地提供直接、高效的法律服务。服务内容任选。',
-
-                },
-                {   
-                    "title"     :'上门法律实务培训',
-                    "content"   :'1次，我们将拜访您的公司并为全体员工进行法律实务的专业培训，包括训后咨询。',
-
-                },
-                {   
-                    "title"     :'企业风险评估及整改意见',
-                    "content"   :'1份，对您的企业进行专业、全面的法律风险评估，并且提供靠谱的整改意见。',
-
-                },
-                {   
-                    "title"     :'年终企业法律顾问服务总结报告',
-                    "content"   :'1份，我们将给出服务期内（一年）法律顾问服务的总结性报告，以供分析、参考。',
-
-                },
-                {   
-                    "title"     :'个案委托',
-                    "content"   :'八五折，在法律顾问服务期间，您公司的案件委托一律八五折，不限案件性质及范围。',
-                }
-			]
-		},
-		"counsels_28800"	:{
-			"id":'3',
-			"title": "企业法律顾问金卡提供的服务",
-            "money": "28800元/年(一年起签)",                         
-            "banner_img": "banner_3.png", 
-			"counsels_arry" :[
-				{   
-                    "title"     :'电话咨',
-                    "content"   :'不限次，无论您遇到什么问题，一个电话随时连线律师。找律师，从未如此简单。',
-                },
-                {   
-                    "title"     :'风险诊断',
-                    "content"   :'不限次，企业经营、决策过程中有任何不确定的风险、困惑，我们负责帮您诊断。',
-
-                },
-                {   
-                    "title"     :'免费律师函',
-                    "content"   :'8份，一旦企业权益受损，我们将帮您发出律师函，以及时制止不法的侵权行为。',
-
-                },
-                {   
-                    "title"     :'法律文书制作、修改',
-                    "content"   :'15份，企业经营过程中涉及的各类法律文书的制作、修改及审核，包您高枕无忧。',
-
-                },
-                {   
-                    "title"     :'企业管理制度全面规划化',
-                    "content"   :'1次，对企业的管理规章制度进行全方位的合法性审查，并给出专业的规划建议。',
-
-                },
-                {   
-                    "title"     :'律师在所会面',
-                    "content"   :'6次，在律团的办公场所为您面对面地提供直接、高效的法律服务。服务内容任选。',
-
-                },
-                {   
-                    "title"     :'上门法律实务培训',
-                    "content"   :'2次，我们将拜访您的公司并为全体员工进行法律实务的专业培训，包括训后咨询。',
-
-                },
-                {   
-                    "title"     :'企业风险评估及整改意见',
-                    "content"   :'1份，对您的企业进行专业、全面的法律风险评估，并且提供靠谱的整改意见。',
-
-                },
-                {   
-                    "title"     :'年终企业法律顾问服务总结报告',
-                    "content"   :'1份，我们将给出服务期内（一年）法律顾问服务的总结性报告，以供分析、参考。',
-
-                },
-                {   
-                    "title"     :'个案委托',
-                    "content"   :'八五折，在法律顾问服务期间，您公司的案件委托一律八五折，不限案件性质及范围。',
-                }
-			]
-		}
-	}
-	
-	$scope.items = null;
-	switch($stateParams.id) {
-      	case "1":
-      		$scope.items = $scope.counsels.counsels_8800;
-    		break;
-      	case "2":
-    		$scope.items = $scope.counsels.counsels_18800;
-    		break;
-    	case "3":
-    		$scope.items = $scope.counsels.counsels_28800;
-    		break;
-    }
-
-})
-
-//立即购买
-lvtuanApp.controller("corporatebuynowCtrl",function($scope,$http,$rootScope,$timeout,$stateParams,$ionicLoading,$localStorage,$location){
-
-	delete $localStorage.addres;
-
-	$scope.address = "";
-	$scope.addres_param = {};
-	$scope.addres = $localStorage.addres || "";
-	$scope.$watch('addres', function(newVal, oldVal) {
-		// 监听变化，并获取参数的最新值
-	    console.log('newVal: ', newVal);   
-	    $localStorage.addres = $scope.addres;
-	    $scope.addres_param = $localStorage.addres;
-	    if($scope.addres_param){
-	    	$scope.address = $scope.addres_param.province.value +" "+ $scope.addres_param.city.value +" "+ $scope.addres_param.district.value;
-	   	 	console.info('address',$scope.address);
-	    }else{
-	    	$scope.address = "";
-	    }
-	});
-	$scope.$watch(function() {
-	    return angular.toJson($localStorage);
-	}, function() {
-	    $scope.addres = $localStorage.addres;
-	    console.info($scope.addres);
-	});
-		
-
-	//获取省市区
-	$scope.getAddress = function(){
-		delete $localStorage.addres;
-		localStorage.setItem("citypicke_goback", $location.path());
-		location.href='#/citypicke/all';
-	}
-	
-	console.log($stateParams.id);
-
-	$scope.submit = function(){
-		$ionicLoading.show();
-		var param = layer.getParams("#buynowForm");
-		var province =  $scope.addres_param.province.key;
-		var city =  $scope.addres_param.city.key;
-		var district =  $scope.addres_param.district.key;
-		if(province){
-			param['province'] = province;
-		}
-		if(city){
-			param['city'] = city;
-		}
-		if(district){
-			param['district'] = district;
-		}
-
-		if($scope.invoice == true){
-			param['invoice'] = 'Y';
-		}else{
-			param['invoice'] = 'N';
-		}
-
-		if($stateParams.id){
-			param['product_id'] = $stateParams.id;
-		}
-		console.info(param);
-		$ionicLoading.show();
-		$http.post('http://'+$rootScope.hostName+'/center/question/create/pay_company',param)
-			.success(function(data) {
-				$ionicLoading.hide();
-	        	console.log(data.data);
-	        	localStorage.setItem("type", JSON.stringify('pay_company'));
-				location.href='#/pay/'+data.data+'?type=order';
-	        });
-		
-	}
-})
-
 
 //用户律师 - 钱包
 lvtuanApp.controller("userwalletCtrl",function($scope,$http,$rootScope,$ionicLoading,authService,listHelper){

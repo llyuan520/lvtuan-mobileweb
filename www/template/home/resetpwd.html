@@ -1,35 +1,41 @@
 <ion-view hide-tabs="true" view-title="修改密码">
 	<ion-pane>
-		<ion-content class="web-body">
+		<ion-content>
 			<form name="myForm" novalidate ng-submit="save(user)" ngCloak ng-controller="resetpwdCtrl" ng-cloak class="ng-cloak">
-				<div class="list resetpwd-list">
-					<label class="item item-input web-item-botb0">
-						<span class="ion-ios-unlocked-outline web-wid15"></span>
-						<input class="cfff" required ng-model="user.old_password" name="old_password" ng-minlength="6" ng-maxlength="18" type="password" class="input_text" placeholder="请输入旧密码" ng-model-options="{debounce:2000}">
-					</label>
-					<label class="item item-input web-item-topb0">
-						<span class="ion-ios-locked-outline web-wid20"></span>
-						<input class="cfff" required ng-model="user.new_password" name="new_password" ng-minlength="6" ng-maxlength="18" type="password" class="input_text" placeholder="请输入新密码(6-18位字符)" ng-model-options="{debounce:2000}">
-					</label>
-					<label class="item item-input web-item-topb0">
-						<span class="ion-ios-locked-outline web-wid20"></span>
-						<input class="cfff" required ng-model="user.new_password_retype" name="new_password_retype" ng-minlength="6" ng-maxlength="18"  type="password" class="input_text" placeholder="请再次输入新密码(6-18位字符)" ng-model-options="{debounce:2000}">
-					</label>
 
-					<p style="background-color: #fff;padding: 16px 0 16px 16px;" ng-if="myForm.old_password.$error.minlength || myForm.new_password.$error.minlength || myForm.new_password_retype.$error.minlength">
-						<span class="fc-red">字符不能小于6个字符</span>
-					</p>
-					<p style="background-color: #fff;padding: 16px 0 16px 16px;" ng-if="myForm.old_password.$error.maxlength || myForm.new_password.$error.maxlength || myForm.new_password_retype.$error.maxlength">
-						<span class="fc-red">字符的长度不能超过18个</span>
-					</p>
-					<p style="background-color: #fff;padding: 16px 0 16px 16px;" ng-if="myForm.old_password.$required || myForm.new_password.$required || myForm.new_password_retype.$required">
-						<span class="fc-red">密码不能为空</span>
-					</p>
-				</div>
-				<div style="background-color: #fff;padding:5px 10px;margin-top:50px;">
+				<div class="card" style="margin:0; box-shadow: none;">
+					<div class="row">
+			    		<div class="col col-10 col-center  txt-align-c" style="padding: 0;">
+			    			<span class="ion-ios-unlocked-outline" style="font-size: 20px;"></span>
+			    		</div>
+			    		<div class="col col-90 col-center">
+			    			<input required ng-model="user.old_password" name="old_password" ng-minlength="6" ng-maxlength="18" type="password"placeholder="请输入旧密码">
+			    		</div>
+			    	</div>
+			    	<div style="border-top: 1px solid #ebebeb;height:1px;"></div>
+			    	<div class="row">
+			    		<div class="col col-10 col-center  txt-align-c" style="padding: 0;">
+			    			<span class="ion-ios-unlocked-outline" style="font-size: 20px;"></span>
+			    		</div>
+			    		<div class="col col-90 col-center">
+			    			<input required ng-model="user.new_password" name="new_password" ng-minlength="6" ng-maxlength="18" type="password" placeholder="请输入新密码(6-18位字符)">
+			    		</div>
+			    	</div>
+			    	<div style="border-top: 1px solid #ebebeb;height:1px;"></div>
+			    	<div class="row">
+			    		<div class="col col-10 col-center  txt-align-c" style="padding: 0;">
+			    			<span class="ion-ios-unlocked-outline" style="font-size: 20px;"></span>
+			    		</div>
+			    		<div class="col col-90 col-center">
+			    			<input required ng-model="user.new_password_retype" name="new_password_retype" ng-minlength="6" ng-maxlength="18"  type="password" placeholder="请再次输入新密码(6-18位字符)">
+			    		</div>
+			    	</div>
+			    </div>
+
+			    <div style="background-color: #fff;padding:5px 10px;margin-top:50px;">
 					<button class="button button-block button-positive" type="submit" ng-disabled="myForm.$invalid">保存</button>
 				</div>
-				
+    			
             </form>
 		</ion-content>
 	</ion-pane>

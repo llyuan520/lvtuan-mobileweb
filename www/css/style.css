@@ -148,6 +148,11 @@ a, a:link, a:visited, a:active, a:hover{
     clear:both;
 }
 
+h1.welcome_lvtuan{
+    margin: 4rem 0;
+    color: #48b4ff;
+    text-align: center;
+}
 .nav-bar-block .headers {
     background-color: #48b4ff;
 }
@@ -594,16 +599,7 @@ input::-webkit-outer-spin-button {
 
 
 /*登录 - 注册*/
-.bg_div{
-    position:fixed;
-    top:0; 
-    left:0; 
-    bottom:0; 
-    right:0; 
-    z-index:-1; 
-    background: url(../img/loginbg.png);
-    background-size: cover;
-}
+/*
 .log-header{
     text-align: center;
     padding-top: 15%;
@@ -632,35 +628,8 @@ input::-webkit-outer-spin-button {
 .log-but.top8{
     margin-top: 8%;
 }
-.login .ion-wap input,.ion-row2 button {
-    background-color: rgba(225,225,225,0); color: #fff;width: 100%;
-    border-color: #fff;
-    box-shadow: inset 0 1px 4px rgba(225,225,225,.1);
-    margin-top:3px;
-}
-.login .ion-wap input::-webkit-input-placeholder {
-    color:#fff;
-}
-.login .ion-wap input:-moz-placeholder {
-    color:#fff;
-}
-.login .ion-wap input::-moz-placeholder{
-    color:#fff;
-}
-.login .ion-wap input:-ms-input-placeholder{
-    color:#fff;
-}
-.ion-wap {
-    background-color: #fff;
-    background-color: rgba(225,225,225,0.3);
-    height: 50px;
-    border-bottom: 1px solid #599ad2;
-    float: left;
-    padding: 2% 4%;
-}
-.line-height{
-    line-height:37px;
-}
+
+
 .log-but .item {
     background-color: #fff;
     background-color: rgba(225,225,225,0);
@@ -720,7 +689,7 @@ input::-webkit-outer-spin-button {
 .login .weixin{
     background: url(../img/weixin.png) center center no-repeat;
     background-size: 40%;
-}
+}*/
 .login-img label{
     display: inline-block;
 }
@@ -1309,7 +1278,6 @@ input, select {
     width: 15%;
     height: 2.3rem;
     background-size: 90%;
-    color: #fff;
     line-height: 3rem;
     z-index: 2;
 }

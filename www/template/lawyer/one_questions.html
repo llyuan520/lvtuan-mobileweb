@@ -1,31 +1,31 @@
 <ion-view hide-tabs="true" view-title="一对一咨询">
 		<ion-pane>
 			<ion-content class="has-tabs">
-				<div class="one_div" style="min-height: 191px;">
-					<img ng-if="visible" ng-src="../img/questionstext.png" style="height:100%;width:100%;display: inherit;" />
-					<img ng-if="!visible" ng-src="../img/questionsphone.png" style="height:100%;width:100%;display: inherit;" />
+				<div class="one_div" style="min-height: 191px;" ng-switch="visible">
+					<img ng-switch-when="pay_text"  ng-src="../img/one/questionstext.png" style="height:100%;width:100%;display: inherit;" />
+					<img ng-switch-when="pay_phone" ng-src="../img/one/questionsphone.png" style="height:100%;width:100%;display: inherit;" />
 				</div> 
 				<div class="list" style="margin-bottom: 10px;">
 					<div class="item" style="border-width: 0px;border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;">
 						<h2><b>一对一咨询</b></h2>
 						<p class="cb5b5b5 font12">选择专业律师为您解答法律问题</p>
-						<div class="hr" style="margin: 15px 0;"></div>
+						<div style="border-top: 1px solid #ebebeb;height:1px;margin: 15px 0;"></div>
 						<h3 style="margin-bottom:20px;"><b class="cff4670" style="font-size: 16px;">19元</b> <font color="b5b5b5">起</font> </h3>
 						<div class="row row-no-padding">
    				    		<div class="col col-40 col-center row-no-padding" style="margin-right: 2%;">
-   				    			<button class="button button-block"  ng-class="{true: 'button-cff2f5f', false: 'button-light'}[visible]" style="border-radius: 10px;min-height: 30px;line-height:30px;font-size: 12px;" ng-click="toggle('pay_text')">图文咨询</button>
+   				    			<button class="button button-block"  ng-class="{true: 'button-cff2f5f', false: 'button-light'}[visible == 'pay_text']" style="border-radius: 10px;min-height: 30px;line-height:30px;font-size: 12px;" ng-click="toggle('pay_text')">图文咨询</button>
    				    		</div>
    				    		<div class="col col-40 col-center row-no-padding" style="margin-left: 2%;">
-   				    			<button class="button button-block" ng-class="{true: 'button-cff2f5f', false: 'button-light'}[!visible]" style="border-radius: 10px;min-height: 30px;line-height:30px;font-size: 12px;" ng-click="toggle('pay_phone')">电话咨询</button>
+   				    			<button class="button button-block" ng-class="{true: 'button-cff2f5f', false: 'button-light'}[visible == 'pay_phone']" style="border-radius: 10px;min-height: 30px;line-height:30px;font-size: 12px;" ng-click="toggle('pay_phone')">电话咨询</button>
    				    		</div>
    				    		<div class="col col-center row-no-padding" style="margin-left: 2%;">
    				    		</div>
    				    	</div>
 					</div>
 				</div>
-				<div class="card" style="border-radius: 10px; box-shadow: none;">
-					<img ng-if="visible" ng-src="../img/one/paytext.png" style="height:100%;width:100%;display: inherit;" />
-					<img ng-if="!visible" ng-src="../img/one/payphone.png" style="height:100%;width:100%;display: inherit;" />
+				<div class="card" style="border-radius: 10px; box-shadow: none;" ng-switch="visible">
+					<img ng-switch-when="pay_text" ng-src="../img/one/paytext.png" style="height:100%;width:100%;display: inherit;" />
+					<img ng-switch-when="pay_phone" ng-src="../img/one/payphone.png" style="height:100%;width:100%;display: inherit;" />
 				</div>
 				<div class="card" style="border-radius: 10px; box-shadow: none;">
 					<img ng-src="../img/one/fwlc.png" style="height:100%;width:100%;display: inherit;" />
@@ -58,7 +58,7 @@
 			</ion-content>
 			<div class="tabs" style="background-color:#fff;padding-top: 0;">
 				<div class="row" style="padding: 0 10px;">
-					<button class="button button-block button-positive" style="border-radius: 10px;" ng-click="jumpGoQuestionsList()">选择律师</button>
+					<a href="#/lawyer/list/{{visible}}"  class="button button-block button-positive" style="border-radius: 10px;width: 100%;">选择律师</a>
 				</div>
 			</div>
 		</ion-pane>

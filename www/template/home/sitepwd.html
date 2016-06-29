@@ -1,0 +1,20 @@
+<ion-view hide-tabs="true" view-title="设置密码">
+    <ion-pane>
+    	<ion-content style="background-color:#fff;">
+	    	<form novalidate name="upwdForm" id="upwdForm" ng-controller="upwdCtrl" ng-cloak class="ng-cloak">
+	    		<div class="card" style="margin: 20% 10% 0 10%;;border-radius: 5px; box-shadow: none;border: 1px solid #ebebeb;">
+	    			<div class="row">
+			    		<input type="password" ng-model="user.password_1" name="password_1" placeholder="输入新密码(6-18位字符)" ng-minlength="6" ng-maxlength="18" required>
+			    	</div>
+	    			<div style="border-top: 1px solid #ebebeb;height:1px;"></div>
+	    			<div class="row">
+			    		<input type="password" ng-model="user.password_2" name="password_2" placeholder="再次输入新密码" ng-minlength="6" ng-maxlength="18" required>
+			    	</div>
+	    		</div>
+    			<div class="row" style="margin: 6% auto 0 auto;">
+					<button ng-disabled="upwdForm.$invalid" ng-click="submit(user)" class="button button-block button-positive" style="border-radius: 10px;width: 88%;margin:0 auto;padding: 5px;">提交</button>
+				</div>
+	    	</form>
+    	</ion-content>
+	</ion-pane>
+</ion-view>

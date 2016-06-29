@@ -1,50 +1,75 @@
 <ion-view hide-tabs="true" view-title="法律顾问">
-		<ion-pane  class="web-body page-background">
-			<ion-content class="has-tabs">
-				<ion-list>
-					<div>
-						<img ng-src="img/counsel/xwqf-banner.jpg" style="width: 100%;max-width: 720px;max-height: 375px;">
-					</div>
-					<ion-item class="item-borderless">
-						<h2 class="txt-c-66" style="font-size: 18px;"><b>律团 - </b></h2>
-						<h2 class="txt-c-66" style="font-size: 18px;"><b>中小企业法律顾问</b></h2>
-						<div class="height10"></div>
-						<p class="contents text-indent">专为中小企业打造的一款全能型、贴身管家式的法律服务产品，解决企业在日常经营过程中遇到的各种法律问题。</p>
-					</ion-item>
-				</ion-list>
-				<div class="height10"></div>
-				<ion-list>
-					<ion-item class="item-borderless row-no-padding">
-						<div class="height10"></div>
-						<div class="height10"></div>
-						<h2 class="txt-align-c" style="font-size: 18px;">法律顾问带来的好处</h2>
-					  	<div class="item item-avatar item-borderless" ng-repeat="counsel in counsels">
-				          <img ng-src="img/counsel/{{counsel.img}}">
-				          <h2>{{counsel.title}}</h2>
-				          <p class="contents txt-c-66">{{counsel.content}}</p>
-				        </div>
-					</ion-item>
-				</ion-list>
-				<ion-list>
-					<div>
-						<img ng-src="img/counsel/flgw-banner2.jpg" style="width: 100%;">
-					</div>
-				</ion-list>
-			</ion-content>
-			<div class="tabs tabs-color-positive positive-bg" style="line-height: 23px;">
-			  <p class="tab-item" style="color:#fff;border-right: 1px solid #fff;" ng-click="jumpGo('#/corporate/list/1')">
-			  	<b>银卡</b><br>
-			  	<span style="font-size:0.8rem">8800元/年</span>
-			  </p>
-			  <p class="tab-item" style="color:#fff;border-right: 1px solid #fff;" ng-click="jumpGo('#/corporate/list/2')">
-			  	<b>金卡</b><br>
-			  	<span style="font-size:0.8rem">18800元/年</span>
-			  </p>
-			  <p class="tab-item" style="color:#fff" ng-click="jumpGo('#/corporate/list/3')">
-			  	<b>白金卡</b><br>
-			  	<span style="font-size:0.8rem">28800元/年</span>
-			  </p>
+	<ion-pane>
+		<ion-content class="has-tabs">
+			<div class="one_div" style="min-height: 191px;" ng-switch="visible">
+				<img ng-switch-when="silver" ng-src="../img/flgw/silver_banner.png" style="height:100%;width:100%;display: inherit;" />
+				<img ng-switch-when="gold" ng-src="../img/flgw/gold_banner.png" style="height:100%;width:100%;display: inherit;" />
+				<img ng-switch-when="platinum" ng-src="../img/flgw/platinum_banner.png" style="height:100%;width:100%;display: inherit;" />
+			</div> 
+			<div class="list" style="margin-bottom: 10px;">
+				<div class="item" style="border-width: 0px;border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;">
+					<h2><b>法律顾问</b></h2>
+					<p class="cb5b5b5 font12 contents">专为中小企业打造的一款全能型、贴身管家式的法律服务产品，解决企业在日常经营过程中遇到的各种法律问题。</p>
+					<div style="border-top: 1px solid #ebebeb;height:1px;margin: 15px 0;"></div>
+					<h3 style="margin-bottom:20px;" ng-switch="visible">
+						<b ng-switch-when="silver" class="cff4670" style="font-size: 16px;">8800元</b> 
+						<b ng-switch-when="gold" class="cff4670" style="font-size: 16px;">18800元</b>
+						<b ng-switch-when="platinum" class="cff4670" style="font-size: 16px;">28800元</b>
+						<font color="b5b5b5">起</font> </h3>
+					<div class="row row-no-padding">
+			    		<div class="col col-40 col-center row-no-padding" style="margin-right: 2%;">
+			    			<button class="button button-block"  ng-class="{true: 'button-cff2f5f', false: 'button-light'}[visible == 'silver']" style="border-radius: 10px;min-height: 30px;line-height:30px;font-size: 12px;" ng-click="toggle('silver')">法律顾问银卡</button>
+			    		</div>
+			    		<div class="col col-40 col-center row-no-padding" style="margin-left: 2%;">
+			    			<button class="button button-block" ng-class="{true: 'button-cff2f5f', false: 'button-light'}[visible == 'gold']" style="border-radius: 10px;min-height: 30px;line-height:30px;font-size: 12px;" ng-click="toggle('gold')">法律顾问金卡</button>
+			    		</div>
+			    	</div>
+			    	<div class="height5"></div>
+			    	<div class="row row-no-padding">
+			    		<div class="col col-40 col-center row-no-padding" style="margin-right: 2%;">
+			    			<button class="button button-block"  ng-class="{true: 'button-cff2f5f', false: 'button-light'}[visible == 'platinum']" style="border-radius: 10px;min-height: 30px;line-height:30px;font-size: 12px;" ng-click="toggle('platinum')">法律顾问白金卡</button>
+			    		</div>
+			    	</div>
+				</div>
 			</div>
-		</ion-pane>
-</ion-view>
+			<div class="card" style="border-radius: 10px; box-shadow: none;" ng-switch="visible">
+				<img ng-switch-when="silver" ng-src="../img/flgw/silver_content.png" style="height:100%;width:100%;display: inherit;" />
+				<img ng-switch-when="gold" ng-src="../img/flgw/gold_content.png" style="height:100%;width:100%;display: inherit;" />
+				<img ng-switch-when="platinum" ng-src="../img/flgw/platinum_content.png" style="height:100%;width:100%;display: inherit;" />
+			</div>
+			<div class="card" style="border-radius: 10px; box-shadow: none;">
+				<img ng-src="../img/flgw/benefit.png" style="height:100%;width:100%;display: inherit;" />
+			</div>
+			<div class="card" style="border-radius: 10px; box-shadow: none;">
+				<img ng-src="../img/flgw/service.png" style="height:100%;width:96%;display: inherit;" />
+			</div>
+			<div class="card" style="border-radius: 10px;">
+				<div class="item item-text-wrap" style="border-width: 0px;">
+					<h3 style="margin-bottom: 20px;">
+						用户评价
+						<a ng-href="#/all-evaluate" class="item-note" style="color: #48b4ff;">>></a>
+					</h3>
+					<div class="hr mb10"></div>
+					<p>
+						<span class="subdued cb5b5b5 font12">评价数：<font color="f7861e">{{items.total_count}}</font></span>
+			  			
+					</p>
+					<p>
+						<span class="subdued cb5b5b5 font12">好评：<font color="f7861e">{{items.high}}</font>人</span>
+			  			&nbsp;&nbsp;
+			  			<span class="subdued cb5b5b5 font12">中评：<font color="f7861e">{{items.intermediate}}</font>人</span>
+			  			&nbsp;&nbsp;
+			  			<span class="subdued cb5b5b5 font12">差评：<font color="f7861e">{{items.low}}</font>人</span>
+			  			&nbsp;&nbsp;
+					</p>
+				</div>
+			</div>
 
+		</ion-content>
+		<div class="tabs" style="background-color:#fff;padding-top: 0;">
+			<div class="row" style="padding: 0 10px;">
+				<a href="#/lawyer/list/{{visible}}" class="button button-block button-positive" style="border-radius: 10px;width: 100%;">选择律师</a>
+			</div>
+		</div>
+	</ion-pane>
+</ion-view>

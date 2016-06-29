@@ -188,6 +188,12 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
       templateUrl: 'template/home/forgotpwd.html'
     })
 
+    .state('sitepwd', { //设置密码
+      url: '/sitepwd',
+      cache: 'true',
+      templateUrl: 'template/home/sitepwd.html'
+    })
+
     .state('boundphone', { //绑定手机
       url: '/boundphone',
       cache: 'true',
@@ -938,22 +944,13 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
     })
     
 
-/********************************** 小微企服 **********************************/
-    .state('corporate', { //首页-小微企服
+/********************************** 法律顾问 **********************************/
+    .state('corporate', { //首页-法律顾问
       url: '/corporate',
       templateUrl: 'template/corporate/corporateservices.html',
       controller: 'corporateservicesCtrl'
     })
-    .state('corporate/list', { //首页 - 小微企服
-      url: '/corporate/list/:id',
-      templateUrl: 'template/corporate/list.html',
-      controller: 'corporatelistCtrl'
-    })
-    .state('corporate/buynow', { //首页 - 小微企服 - 立即购买
-      url: '/corporate/buynow/:id',
-      templateUrl: 'template/corporate/buynow.html',
-      authn: true
-    })
+    
     .state('pay', { //首页 - 微信支付
       url: '/pay/:id?type',
       templateUrl: 'template/pay.html',
