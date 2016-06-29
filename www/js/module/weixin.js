@@ -10,7 +10,7 @@ function wxService() {
 		str += "appid=" + AppSettings.appId + "&";
 		str += "redirect_uri=" + encodeURIComponent(redirect_uri) + "&";
 		str += "response_type=code&";
-		str += "scope=snsapi_base&";
+		str += "scope=snsapi_userinfo&";
 		str += "state=1";
 		str += "#wechat_redirect";
 		return str;
