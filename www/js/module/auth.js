@@ -53,13 +53,16 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
   var self = this;
 
   // add authentication methods here
-  self.register = function(username, password, phonecode, account_type, openid, post_id) {
+  self.register = function(username, password, phonecode, account_type, post_id) {
+	var openid = wxService.getOpenId();
+	var unionid = wxService.getUnionId();
   	return $http.post('http://' + HOST + '/register', {
 		username: username,
 		password: password,
 		phonecode: phonecode,
 		account_type: account_type,
 		openid: openid,
+		unionid: unionid,
       	post_id: post_id
     }).then(
     	function (res) {
@@ -98,12 +101,15 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
 	});
   }
 
-  self.login = function(username, password, openid, post_id) {
+  self.login = function(username, password, post_id) {
   	$ionicLoading.show();
+	var openid = wxService.getOpenId();
+	var unionid = wxService.getUnionId();
   	return $http.post('http://' + HOST + '/login', {
       username: username,
       password: password,
       openid: openid,
+      unionid: unionid,
       post_id:post_id
     }).then(
     	function (res) {
@@ -143,8 +149,11 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
 
   self.loginWithWx = function(openid, post_id) {
   	$ionicLoading.show();
+	var openid = wxService.getOpenId();
+	var unionid = wxService.getUnionId();
   	return $http.post('http://' + HOST + '/loginWithWx', {
       openid: openid,
+      unionid: unionid,
       post_id:post_id
     }).then(
     	function (res) {

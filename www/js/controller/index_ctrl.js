@@ -226,8 +226,7 @@ lvtuanApp.controller("loginCtrl",function($state,$scope,$rootScope,$http,userSer
 			localStorage.setItem("post_id_status", JSON.stringify($scope.post_id_status));
 		}
   		if(checkvaldata(user)){
-  			var openid = wxService.getOpenId();
-  			userService.login(user.username, user.password, openid, $scope.post_id);
+  			userService.login(user.username, user.password, $scope.post_id);
   		}
 	}
 
@@ -491,8 +490,7 @@ lvtuanApp.controller("wxAuthCtrl",function($scope,$stateParams,wxService,userSer
 		$scope.post_id_status = true;
 		localStorage.setItem("post_id_status", JSON.stringify($scope.post_id_status));
 	}
-	var openid = wxService.getOpenId();
-	userService.loginWithWx(openid, $scope.post_id);
+	userService.loginWithWx($scope.post_id);
 })
 
 //自动跳转到微信授权登录页面
@@ -5784,6 +5782,7 @@ lvtuanApp.controller("wxObtainOpenIdCtrl",function($scope,$http,$rootScope,$stat
     	function (res) {
 	    	var authData = res.data ? res.data.data : null;
 			wxService.saveOpenId(authData.openid);
+			wxService.saveUnionId(authData.unionid);
 			$ionicLoading.hide();
 			location.href = localStorage.getItem('goto');	
     	}

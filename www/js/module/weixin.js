@@ -27,6 +27,18 @@ function wxService() {
 	self.removeOpenId = function() {
 		localStorage.removeItem('wx_openid');
 	}
+
+	self.saveUnionId = function(unionid) {
+		localStorage.setItem('wx_unionid', unionid);
+	}
+
+	self.getUnionId = function() {
+		return localStorage.getItem('wx_unionid');
+	}
+
+	self.removeUnionId = function() {
+		localStorage.removeItem('wx_unionid');
+	}
 }
 					
 wxModule.service('wxService', wxService);
