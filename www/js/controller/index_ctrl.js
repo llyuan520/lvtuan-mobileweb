@@ -4219,7 +4219,6 @@ lvtuanApp.controller("questionsOrderPpayCtrl",function($scope,$http,$rootScope,$
 	
 	//微信支付
 	$scope.wap_pay = function(user){
-		alert('0',JSON.stringify(user));
             if(user.radioval == 'qianbao') {
 					var confirmPopup = $ionicPopup.confirm({
 						title: '是否立即付款？',
@@ -4271,7 +4270,6 @@ lvtuanApp.controller("questionsOrderPpayCtrl",function($scope,$http,$rootScope,$
 	        		}
 	        	}
 	        	console.log(param);
-	        	alert('1',JSON.stringify(param));
 	        $ionicLoading.show();
 	    	$http.post('http://'+$rootScope.hostName+'/payment_gateway/charge',param)
 			.success(function(data) {
