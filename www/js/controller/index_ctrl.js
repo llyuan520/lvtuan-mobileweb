@@ -5649,21 +5649,19 @@ lvtuanApp.controller("userwalletCtrl",function($scope,$http,$rootScope,$ionicLoa
 
 lvtuanApp.controller("wxCheckOpenIdCtrl",function($scope,$http,$rootScope,$stateParams,$ionicHistory,authService,wxService){
 	$scope.$on('$ionicView.beforeEnter', function() {
-		alert(JSON.stringify($stateParams));
 		var goto = $stateParams.goto;
 		if (goto) {
 			localStorage.setItem("goto", "#/" + goto);
 		} else {
         	localStorage.setItem("goto", "/");
         }
-		window.location.href = localStorage.getItem('goto');
 
-		// if (!wxService.getOpenId()) {
-		// 	window.location.href = wxService.getWxAuthUrl('/wxobtainopenid');
-		// 	//window.location.replace(wxService.getWxAuthUrl('/wxobtainopenid'));
-		// } else {
-  //           window.location.href = localStorage.getItem("goto");
-  //       }
+		if (!wxService.getOpenId()) {
+			window.location.href = wxService.getWxAuthUrl('/wxobtainopenid');
+			//window.location.replace(wxService.getWxAuthUrl('/wxobtainopenid'));
+		} else {
+            window.location.href = localStorage.getItem("goto");
+        }
 	})
 })
 
