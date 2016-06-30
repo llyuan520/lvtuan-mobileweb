@@ -53,19 +53,6 @@ lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $loca
 		location.href=url;
 	}
 
-	//返回跳转上一次操作的页面
-	$scope.jumpGoBack = function(){
-		//$ionicHistory.goBack();
-		window.history.back();
-	}
-
-	$scope.jumpGoBack_rel = function(){
-		//$ionicHistory.goBack();
-		 window.history.go(-1);
-		//window.history.back();
-		//window.location.reload();
-	}
-
 	// hack在微信等webview中无法修改document.title的情况
 	/*var $body = $('body');    
 	document.title = '律团';    
@@ -685,6 +672,27 @@ lvtuanApp.controller("wxAuthCtrl",function($scope,$stateParams,wxService,userSer
 		localStorage.setItem("post_id_status", JSON.stringify($scope.post_id_status));
 	}
 	userService.loginWithWx($scope.post_id);
+	
+	/*alert('1');
+	var unionid = wxService.getUnionId();
+	alert(JSON.stringify(unionid));
+	alert('2');
+	$ionicLoading.show();
+	$http.post('http://' + HOST + '/check/user',{
+				'union_id'	: unionid
+        },
+        {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).success(function(data) {
+    	$ionicLoading.hide();
+    	alert('3')
+    	var items = data.data;
+    	alert(JSON.stringify(items));
+
+    });*/
+
 })
 
 //自动跳转到微信授权登录页面
@@ -707,46 +715,6 @@ lvtuanApp.controller("groupCtrl",function($scope,$http,$state,$rootScope,$locati
 lvtuanApp.controller("groupListCtrl",function($http,$scope,$rootScope,$ionicLoading,$filter,listHelper){
 	listHelper.bootstrap('/group/list/mine', $scope);
 })
-
-//格式化时间显示方式 - 过滤器
-lvtuanApp.filter("formatdate", function() {
-    var filterDate = function(thisdate) {
-        var date = new Date(),
-			syear = date.getFullYear().toString(), //年
-			smonth = ((date.getMonth())+1).toString(), //月
-			sday = date.getDate().toString(); //日
-			if(smonth.length == 1){
-				smonth = '0'+((date.getMonth())+1).toString();
-			}
-			if(sday.length == 1){
-				sday = '0'+date.getDate().toString();
-			}
-
-			var str = thisdate;
-			var arr = new Array();
-				arr = str.split("-"),
-				year = arr[0],
-				month = arr[1],
-				day = arr[2].substring(0, 2);
-				time = arr[2].substring(3, 8);
-			var reset = '';
-				if(syear == year && smonth == month && sday == day){
-					reset = '今天 '+time;
-				}else{
-					if((month.substring(0, 1)).toString() == '0'){
-						month = month.substring(1);
-					}
-					if((day.substring(0, 1)).toString() == '0'){
-						day = day.substring(1);
-					}
-					reset = month +'月'+ day +'日 '+ time;
-				}
-
-			return reset;
-    };
-    return filterDate;
-});
-
 
 //律圈 - 推荐关注
 lvtuanApp.controller("groupAttentionCtrl",function($scope,$http,$state,$rootScope,$ionicLoading,listHelper){

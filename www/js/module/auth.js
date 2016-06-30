@@ -126,11 +126,6 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
 	    		console.log('token:', token);
         	}
 
-        	/*if(!user.is_verified_lawyer){
-        		location.href='#/index';
-        	}else{
-        		location.href='#/center';
-        	}*/
         	$ionicLoading.hide();
         	var goback = sessionStorage.getItem("goback");
 			if(goback == null || goback=="" || goback=="undefined"){
@@ -175,7 +170,7 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
         	}
   			$ionicLoading.hide();
 
-			var goback = sessionStorage.getItem("goback");
+		    var goback = sessionStorage.getItem("goback");
 			if(goback == null || goback=="" || goback=="undefined"){
 				window.location.href='#/index';
 				window.location.reload();
@@ -183,6 +178,8 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
 				window.location.href= goback;
 			}
 			sessionStorage.removeItem(goback);
+
+			
     	}
     ).catch(function(response) {
 	  console.error('Gists error', response.status, response.data);
