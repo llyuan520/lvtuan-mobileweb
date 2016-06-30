@@ -96,6 +96,17 @@ lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $loca
 	    //window.history.pushState('forward', null, './#forward');
 	}
 
+
+	//js判断是否在微信浏览器中打开
+	/*function is_weixn(){
+	    var ua = navigator.userAgent.toLowerCase();
+	    if(ua.match(/MicroMessenger/i)=="micromessenger") {
+	        return true;
+	    } else {
+		    return false;
+	    }
+	}*/
+	
 })
 
 /****************************************************** 引导页 ******************************************************/
@@ -5672,7 +5683,8 @@ lvtuanApp.controller("wxCheckOpenIdCtrl",function($scope,$http,$rootScope,$state
 	$scope.$on('$ionicView.beforeEnter', function() {
         localStorage.setItem("goto", "/");
 		if (!wxService.getOpenId()) {
-			window.location.replace(wxService.getWxAuthUrl('/wxobtainopenid'));
+			window.location.href = wxService.getWxAuthUrl('/wxobtainopenid');
+			//window.location.replace(wxService.getWxAuthUrl('/wxobtainopenid'));
 		} else {
             location.href = localStorage.getItem("goto");
         }
