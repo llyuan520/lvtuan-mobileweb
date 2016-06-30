@@ -146,7 +146,6 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
   	$ionicLoading.show();
 	var openid = wxService.getOpenId();
 	var unionid = wxService.getUnionId();
-	alert(JSON.stringify(unionid));
   	return $http.post('http://' + HOST + '/loginWithWx', {
       openid: openid,
       unionid: unionid,

@@ -13,8 +13,6 @@ function wxService() {
 		str += "scope=snsapi_userinfo&";
 		str += "state=1";
 		str += "#wechat_redirect";
-
-		alert(JSON.stringify(str));
 		return str;
 	}
 
