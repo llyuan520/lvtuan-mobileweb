@@ -126,11 +126,6 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
 	    		console.log('token:', token);
         	}
 
-        	/*if(!user.is_verified_lawyer){
-        		location.href='#/index';
-        	}else{
-        		location.href='#/center';
-        	}*/
         	$ionicLoading.hide();
         	var goback = sessionStorage.getItem("goback");
 			if(goback == null || goback=="" || goback=="undefined"){
