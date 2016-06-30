@@ -685,6 +685,21 @@ lvtuanApp.controller("wxAuthCtrl",function($scope,$stateParams,wxService,userSer
 		localStorage.setItem("post_id_status", JSON.stringify($scope.post_id_status));
 	}
 	userService.loginWithWx($scope.post_id);
+	var unionid = wxService.getUnionId();
+	$ionicLoading.show();
+	$http.post('http://'+$rootScope.hostName+'/group/'+$stateParams.id+'/edit',{
+				'union_id'	: unionid
+        },
+        {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).success(function(data) {
+    	var items = data.data;
+    	alert(JSON.stringify(items));
+       	$ionicLoading.hide();
+    });
+
 })
 
 //自动跳转到微信授权登录页面
