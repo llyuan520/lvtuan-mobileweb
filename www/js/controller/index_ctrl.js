@@ -686,6 +686,25 @@ lvtuanApp.controller("wxAuthCtrl",function($scope,$stateParams,wxService,userSer
 	}
 	userService.loginWithWx($scope.post_id);
 	
+	/*alert('1');
+	var unionid = wxService.getUnionId();
+	alert(JSON.stringify(unionid));
+	alert('2');
+	$ionicLoading.show();
+	$http.post('http://' + HOST + '/check/user',{
+				'union_id'	: unionid
+        },
+        {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).success(function(data) {
+    	$ionicLoading.hide();
+    	alert('3')
+    	var items = data.data;
+    	alert(JSON.stringify(items));
+
+    });*/
 
 })
 
