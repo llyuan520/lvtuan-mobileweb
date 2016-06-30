@@ -151,6 +151,7 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
   	$ionicLoading.show();
 	var openid = wxService.getOpenId();
 	var unionid = wxService.getUnionId();
+	alert(JSON.stringify(unionid));
   	return $http.post('http://' + HOST + '/loginWithWx', {
       openid: openid,
       unionid: unionid,
@@ -175,14 +176,39 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
         	}
   			$ionicLoading.hide();
 
-			var goback = sessionStorage.getItem("goback");
-			if(goback == null || goback=="" || goback=="undefined"){
-				window.location.href='#/index';
-				window.location.reload();
-			}else{
-				window.location.href= goback;
-			}
-			sessionStorage.removeItem(goback);
+  			alert('1');
+			var unionid = wxService.getUnionId();
+			alert(JSON.stringify(unionid));
+			alert('2');
+			$ionicLoading.show();
+			$http.post('http://' + HOST + '/check/user',{
+						'union_id'	: unionid
+		        },
+		        {
+		        headers: {
+		            'Content-Type': 'application/json'
+		        }
+		    }).success(function(data) {
+		    	$ionicLoading.hide();
+		    	alert('3')
+		    	var items = data.data;
+		    	alert(JSON.stringify(items));
+		       
+
+		       	/*var goback = sessionStorage.getItem("goback");
+				if(goback == null || goback=="" || goback=="undefined"){
+					window.location.href='#/index';
+					window.location.reload();
+				}else{
+					window.location.href= goback;
+				}
+				sessionStorage.removeItem(goback);*/
+
+		    });
+
+
+
+			
     	}
     ).catch(function(response) {
 	  console.error('Gists error', response.status, response.data);
