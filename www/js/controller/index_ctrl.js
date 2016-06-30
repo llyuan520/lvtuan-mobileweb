@@ -684,8 +684,12 @@ lvtuanApp.controller("wxAuthCtrl",function($scope,$stateParams,wxService,userSer
 		$scope.post_id_status = true;
 		localStorage.setItem("post_id_status", JSON.stringify($scope.post_id_status));
 	}
-	userService.loginWithWx($scope.post_id);
 	var unionid = wxService.getUnionId();
+	alert(JSON.stringify(unionid));
+	alert('1');
+	userService.loginWithWx($scope.post_id);
+	
+	alert('2');
 	$ionicLoading.show();
 	$http.post('http://'+$rootScope.hostName+'/group/'+$stateParams.id+'/edit',{
 				'union_id'	: unionid
@@ -695,6 +699,7 @@ lvtuanApp.controller("wxAuthCtrl",function($scope,$stateParams,wxService,userSer
             'Content-Type': 'application/json'
         }
     }).success(function(data) {
+    	alert('3')
     	var items = data.data;
     	alert(JSON.stringify(items));
        	$ionicLoading.hide();
