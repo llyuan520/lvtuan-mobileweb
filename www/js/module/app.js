@@ -207,7 +207,7 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
     })
 
     .state('wxcheckopenid', {
-      url: '/wxcheckopenid',
+      url: '/wxcheckopenid?goto',
       cache: 'true',
       controller: 'wxCheckOpenIdCtrl'
     })

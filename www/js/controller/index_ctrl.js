@@ -5681,13 +5681,21 @@ lvtuanApp.controller("userwalletCtrl",function($scope,$http,$rootScope,$ionicLoa
 
 lvtuanApp.controller("wxCheckOpenIdCtrl",function($scope,$http,$rootScope,$stateParams,$ionicHistory,authService,wxService){
 	$scope.$on('$ionicView.beforeEnter', function() {
-        localStorage.setItem("goto", "/");
-		if (!wxService.getOpenId()) {
-			window.location.href = wxService.getWxAuthUrl('/wxobtainopenid');
-			//window.location.replace(wxService.getWxAuthUrl('/wxobtainopenid'));
+		alert(JSON.stringify($stateParams));
+		var goto = $stateParams.goto;
+		if (goto) {
+			localStorage.setItem("goto", "#/" + goto);
 		} else {
-            location.href = localStorage.getItem("goto");
+        	localStorage.setItem("goto", "/");
         }
+		window.location.href = localStorage.getItem('goto');
+
+		// if (!wxService.getOpenId()) {
+		// 	window.location.href = wxService.getWxAuthUrl('/wxobtainopenid');
+		// 	//window.location.replace(wxService.getWxAuthUrl('/wxobtainopenid'));
+		// } else {
+  //           window.location.href = localStorage.getItem("goto");
+  //       }
 	})
 })
 
@@ -5703,7 +5711,7 @@ lvtuanApp.controller("wxObtainOpenIdCtrl",function($scope,$http,$rootScope,$stat
 			wxService.saveOpenId(authData.openid);
 			wxService.saveUnionId(authData.unionid);
 			$ionicLoading.hide();
-			location.href = localStorage.getItem('goto');	
+			window.location.href = localStorage.getItem('goto');	
     	}
     ).catch(function(response) {
 	  	console.error('Gists error', response.status, response.data);
