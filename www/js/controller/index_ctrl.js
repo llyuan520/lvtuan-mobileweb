@@ -214,7 +214,7 @@ lvtuanApp.controller("indexCtrl",function($scope,$location,listHelper,locationSe
 
 
 //用户登陆
-lvtuanApp.controller("loginCtrl",function($state,$scope,$rootScope,$http,userService,wxService){
+lvtuanApp.controller("loginCtrl",function($state,$scope,$rootScope,$http,$ionicLoading,userService,wxService){
 
 	var format_email = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
 	var format_mobile = /^[1][0-9]{10}$/; 
@@ -262,6 +262,30 @@ lvtuanApp.controller("loginCtrl",function($state,$scope,$rootScope,$http,userSer
   			}
   		}
         return true;   
+	}
+
+	$scope.wx_login = function(){
+		alert('1');
+		var unionid = wxService.getUnionId();
+		alert(JSON.stringify(unionid));
+
+		$ionicLoading.show();
+		$http.post('http://'+$rootScope.hostName+'/check/user',
+			{
+				'union_id'	: unionid
+			}
+		)
+		.success(function(data) {
+           $ionicLoading.hide();
+	    	alert('3')
+	    	var items = data.data;
+	    	alert(JSON.stringify(items));
+		})
+		.error(function(data) {
+            alert(JSON.stringify(data));
+            window.location.href='#/boundphone';
+		})
+
 	}
 })
 
@@ -675,31 +699,11 @@ lvtuanApp.controller("wxAuthCtrl",function($scope,$stateParams,wxService,userSer
 		localStorage.setItem("post_id_status", JSON.stringify($scope.post_id_status));
 	}
 	userService.loginWithWx($scope.post_id);
-	
-	/*alert('1');
-	var unionid = wxService.getUnionId();
-	alert(JSON.stringify(unionid));
-	alert('2');
-	$ionicLoading.show();
-	$http.post('http://' + HOST + '/check/user',{
-				'union_id'	: unionid
-        },
-        {
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    }).success(function(data) {
-    	$ionicLoading.hide();
-    	alert('3')
-    	var items = data.data;
-    	alert(JSON.stringify(items));
-
-    });*/
-
 })
 
 //自动跳转到微信授权登录页面
 lvtuanApp.controller("wxLoginCtrl",function($scope,$http,$rootScope,wxService){
+
 	window.location.href = wxService.getWxAuthUrl('/wxauth');
 	//window.location.replace(wxService.getWxAuthUrl('/wxauth'));
 })
