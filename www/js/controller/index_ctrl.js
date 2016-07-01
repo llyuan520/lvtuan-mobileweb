@@ -262,6 +262,7 @@ lvtuanApp.controller("loginCtrl",function($state,$scope,$rootScope,$http,$ionicL
 	}
 
 	$scope.wx_login = function(){
+		alert('1');
 		var unionid = wxService.getUnionId();
 		alert(JSON.stringify(unionid));
 
