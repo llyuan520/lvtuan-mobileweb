@@ -283,9 +283,7 @@ lvtuanApp.controller("loginCtrl",function($state,$scope,$rootScope,$http,$ionicL
 			}
 			sessionStorage.removeItem(goback);
 		}).error(function(data) {
-            var ermsg = JSON.stringify(data);
-            alert(JSON.stringify(ermsg));
-            if(ermsg.status_code == 400){
+            if(data.status_code == 400){
             	window.location.href='#/boundphone';
             }
 		})
