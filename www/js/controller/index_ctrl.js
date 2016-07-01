@@ -272,16 +272,9 @@ lvtuanApp.controller("loginCtrl",function($state,$scope,$rootScope,$http,$ionicL
 			}
 		).success(function(data) {
             $ionicLoading.hide();
-	    	var items = data.data;
-	    	var goback = sessionStorage.getItem("goback");
-			if(goback == null || goback=="" || goback=="undefined"){
-				window.location.href='#/index';
-				window.location.reload();
-			}else{
-				window.location.href= goback;
-			}
-			sessionStorage.removeItem(goback);
+			window.location.href='#/index';
 		}).error(function(data) {
+			$ionicLoading.hide();
             if(data.status_code == 400){
             	window.location.href='#/boundphone';
             }
