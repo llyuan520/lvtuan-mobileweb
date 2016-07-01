@@ -62,7 +62,7 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
 		phonecode: phonecode,
 		account_type: account_type,
 		openid: openid,
-		unionid: unionid,
+		union_id: unionid,
       	post_id: post_id
     }).then(
     	function (res) {
@@ -109,7 +109,7 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
       username: username,
       password: password,
       openid: openid,
-      unionid: unionid,
+      union_id: unionid,
       post_id:post_id
     }).then(
     	function (res) {
