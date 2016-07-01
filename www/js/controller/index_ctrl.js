@@ -273,7 +273,6 @@ lvtuanApp.controller("loginCtrl",function($state,$scope,$rootScope,$http,$ionicL
 		).success(function(data) {
             $ionicLoading.hide();
 	    	var items = data.data;
-	    	alert(JSON.stringify(items));
 	    	var goback = sessionStorage.getItem("goback");
 			if(goback == null || goback=="" || goback=="undefined"){
 				window.location.href='#/index';
@@ -676,7 +675,6 @@ lvtuanApp.controller("boundphoneCtrl",function($scope,$http,$rootScope,$ionicLoa
 	}
 
 	var unionid = wxService.getUnionId();
-	alert(JSON.stringify(unionid));
 	//用户必须绑定手机号才能回到主页
 	$scope.submit = function(user){
 		$scope.user = user;
