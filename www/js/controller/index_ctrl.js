@@ -199,15 +199,16 @@ lvtuanApp.controller("ionicNavBarDelegateCtrl",function($state,$timeout,$http,$l
 
 //首页
 lvtuanApp.controller("indexCtrl",function($scope,$location,listHelper,locationService){
-
-	if (locationService.getLocation()) {
-		$scope.locations = locationService.getLocation();
-		$scope.city = parseInt($scope.locations.city_id);
-		listHelper.bootstrap('/lawyer/list_lawyers?is_recommended=1&city_id='+$scope.city, $scope);
-	} else {
-		listHelper.bootstrap('/lawyer/list_lawyers?is_recommended=1', $scope);
-	}
- 
+	$scope.$on('$ionicView.beforeEnter', function() {  
+		if (locationService.getLocation()) {
+			$scope.locations = locationService.getLocation();
+			$scope.currentLocation.city_name = $scope.locations.city_name;
+			$scope.city = parseInt($scope.locations.city_id);
+			listHelper.bootstrap('/lawyer/list_lawyers?is_recommended=1&city_id='+$scope.city, $scope);
+		} else {
+			listHelper.bootstrap('/lawyer/list_lawyers?is_recommended=1', $scope);
+		}
+	});
 })
 
 
@@ -263,6 +264,7 @@ lvtuanApp.controller("loginCtrl",function($state,$scope,$rootScope,$http,$ionicL
         return true;   
 	}
 
+	//微信登录
 	$scope.wx_login = function(){
 		var unionid = wxService.getUnionId();
 		$ionicLoading.show();
@@ -272,11 +274,8 @@ lvtuanApp.controller("loginCtrl",function($state,$scope,$rootScope,$http,$ionicL
 			}
 		).success(function(data) {
             $ionicLoading.hide();
-            alert("成功");
-            alert(JSON.stringify(data));
 			window.location.href='#/index';
 		}).error(function(data) {
-			alert(JSON.stringify(data));
 			$ionicLoading.hide();
             if(data.status_code == 400){
             	window.location.href='#/boundphone';
