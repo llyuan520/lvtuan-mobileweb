@@ -37,7 +37,10 @@ lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $loca
 	if (!locationService.sameLocation($scope.currentLocation)) {
 		locationService.saveLocation($scope.currentLocation);
 	}
-	$scope.currentUser = authService.getUser();
+
+	$scope.$on('$ionicView.beforeEnter', function() {  
+		$scope.currentUser = authService.getUser();
+	});
 
 
     //返回跳转页面
