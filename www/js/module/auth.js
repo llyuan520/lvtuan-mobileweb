@@ -146,29 +146,7 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
   	$ionicLoading.show();
 	var openid = wxService.getOpenId();
 	var unionid = wxService.getUnionId();
-
-	$http.post('http://' + HOST + '/check/user',{
-				'union_id'	: unionid
-        },
-        {
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    }).success(function(data) {
-    	$ionicLoading.hide();
-    	alert('3')
-    	var items = data.data;
-    	alert(JSON.stringify(items));
-    	window.location.href='#/boundphone';
-
-    }).error(function(data){
-    	var items = data.data;
-    	if(items == 400){
-    		window.location.href='#/boundphone';
-    	}
-    });
-
-
+	
   	return $http.post('http://' + HOST + '/loginWithWx', {
       openid: openid,
       unionid: unionid,
