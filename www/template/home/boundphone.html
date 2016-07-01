@@ -1,26 +1,36 @@
 <ion-view hide-tabs view-title="绑定手机">
+	<ion-pane>
 		<ion-content  style="margin-bottom: 0;">
-			<form novalidate name="Form" id="Form" ng-controller="boundphoneCtrl" ng-cloak class="ng-cloak">
-				<div class="practitioners-list">
-					<div class="item item-input">
-						<div class="input-label" style="text-align: center;width: 15%;">
-			              <i class="ion-android-phone-portrait" style="font-size: 1.74rem;"></i>
-			            </div>
-						<input class="cfff" type="text" name="username" ng-model="user.username" required ng-pattern="/^[1][0-9]{10}$/" placeholder="请输入手机号码" ng-model-options="{debounce:2000}">
-						<p ng-cloak class="log-but ion-wap ng-cloak line-height" ng-show="forgotForm.username.$invalid && !forgotForm.username.$pristine">请输入合法的手机号码</p>
-					</div>
-					<div class="item item-input">
-						<div class="input-label" style="text-align: center;width: 15%;">
-			              <i class="ion-email" style="font-size: 1.74rem;"></i>
-			            </div>
-						<input class="cfff" type="text" ng-model="user.code" name="code" placeholder="请输入验证码" required ng-model-options="{debounce:2000}">
-						<button ng-click="phonecode(user.username)" style="border: none;background-color: #fff;color: #666;width: 50%;height: 30px;border-left: 1px solid #f1f1f1;">获取验证码</button>
-					</div>
-				</div>
+			<form novalidate name="myForm" id="myForm" ng-controller="boundphoneCtrl" ng-cloak class="ng-cloak">
 
-				<div>
-					<button ng-disabled="Form.$invalid" class="button button-block button-positive" type="submit" ng-click="submit(user)" style="width: 95%;
-    margin: 20px auto;">绑 定</button>
+				<div class="card" style="margin:0; box-shadow: none;">
+			    	<div style="border-top: 1px solid #ebebeb;height:1px;"></div>
+			    	<div class="row">
+			    		<div class="col col-10 col-center  txt-align-c" style="padding: 0;">
+			    			<i class="ion-android-phone-portrait" style="font-size: 1.74rem;"></i>
+			    		</div>
+			    		<div class="col col-90 col-center">
+			    			<input type="text" name="username" ng-model="user.username" required placeholder="请输入手机号码">
+			    		</div>
+			    	</div>
+			    	<div style="border-top: 1px solid #ebebeb;height:1px;"></div>
+			    	<div class="row">
+			    		<div class="col col-10 col-center  txt-align-c">
+			    			<i class="ion-email" style="font-size: 1.74rem;"></i>
+			    		</div>
+			    		<div class="col col-60 col-center">
+			    			<input type="text" ng-model="user.phonecode" name="phonecode" required placeholder="请输验证码">
+			    		</div>
+			    		<div class="col col-30 col-center txt-align-c" style="padding: 0;border-left: 1px solid #ebebeb;">
+			    			<a style="color: #48b4ff;" ng-if="phone_disabled == true" ng-disabled="!user.username" ng-click="phonecode(user.username)">获取验证码</a>
+							<a style="color: #48b4ff;" ng-if="phone_disabled == false">{{ t }}秒重新获取</a>
+			    		</div>
+
+			    	</div>
+			    </div>
+
+			    <div style="background-color: #fff;padding:5px 10px;margin-top:50px;">
+					<button class="button button-block button-positive" type="submit" ng-click="submit(user)" ng-disabled="myForm.$invalid">绑 定</button>
 				</div>
 			</form>
 		</ion-content>

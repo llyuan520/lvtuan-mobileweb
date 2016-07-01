@@ -42,7 +42,6 @@ lvtuanApp.controller("MainController",function($rootScope, $scope, $state, $loca
 		$scope.currentUser = authService.getUser();
 	});
 
-
     //返回跳转页面
 	$scope.jump = function(url,id){
 		if(id){
@@ -265,23 +264,27 @@ lvtuanApp.controller("loginCtrl",function($state,$scope,$rootScope,$http,$ionicL
 	}
 
 	$scope.wx_login = function(){
-		alert('1');
 		var unionid = wxService.getUnionId();
 		alert(JSON.stringify(unionid));
-
 		$ionicLoading.show();
 		$http.post('http://'+$rootScope.hostName+'/check/user',
 			{
 				'union_id'	: unionid
 			}
-		)
-		.success(function(data) {
+		).success(function(data) {
            $ionicLoading.hide();
 	    	alert('3')
 	    	var items = data.data;
 	    	alert(JSON.stringify(items));
-		})
-		.error(function(data) {
+	    	var goback = sessionStorage.getItem("goback");
+			if(goback == null || goback=="" || goback=="undefined"){
+				window.location.href='#/index';
+				window.location.reload();
+			}else{
+				window.location.href= goback;
+			}
+			sessionStorage.removeItem(goback);
+		}).error(function(data) {
             alert(JSON.stringify(data));
             window.location.href='#/boundphone';
 		})
@@ -626,7 +629,7 @@ lvtuanApp.controller("upwdCtrl",function($scope,$http,$rootScope,$ionicLoading){
 })
 
 //绑定手机
-lvtuanApp.controller("boundphoneCtrl",function($scope,$http,$rootScope,$ionicLoading,$interval){
+lvtuanApp.controller("boundphoneCtrl",function($scope,$http,$rootScope,$ionicLoading,$interval,wxService){
 	var format_mobile = /^[1][0-9]{10}$/; 
 	$scope.user = {};
 	//第一次获取验证码后要60秒以后才能在次获取
@@ -673,20 +676,22 @@ lvtuanApp.controller("boundphoneCtrl",function($scope,$http,$rootScope,$ionicLoa
 		}
 	}
 
+	var unionid = wxService.getUnionId();
+	alert(JSON.stringify(unionid));
 	//用户必须绑定手机号才能回到主页
 	$scope.submit = function(user){
-		console.info(user);
-		/*$scope.user = user;
+		$scope.user = user;
+		if(unionid){
+			$scope.user["union_id"] = unionid;
+		}
 		$ionicLoading.show();
-		$http.post('http://'+$rootScope.hostName+'/forgotpwd', $scope.user
+		$http.post('http://'+$rootScope.hostName+'/bind/phone', $scope.user
 			).success(function(data) {
-           $scope.user = {}; //清空数据
-           $scope.uid = data.data.uid;
-           sessionStorage.setItem("uid", JSON.stringify($scope.uid));
-           $("#forgotForm").hide();
-           $("#upwdForm").show();
-           $ionicLoading.hide();
-        });*/
+	           $scope.user = {}; //清空数据
+	           $ionicLoading.hide();
+	           layer.show("手机号绑定成功！");
+	           window.location.href='#/index';
+        });
 	}
 })
 
