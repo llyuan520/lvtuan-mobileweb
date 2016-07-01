@@ -265,15 +265,13 @@ lvtuanApp.controller("loginCtrl",function($state,$scope,$rootScope,$http,$ionicL
 
 	$scope.wx_login = function(){
 		var unionid = wxService.getUnionId();
-		alert(JSON.stringify(unionid));
 		$ionicLoading.show();
 		$http.post('http://'+$rootScope.hostName+'/check/user',
 			{
 				'union_id'	: unionid
 			}
 		).success(function(data) {
-           $ionicLoading.hide();
-	    	alert('3')
+            $ionicLoading.hide();
 	    	var items = data.data;
 	    	alert(JSON.stringify(items));
 	    	var goback = sessionStorage.getItem("goback");
@@ -285,6 +283,8 @@ lvtuanApp.controller("loginCtrl",function($state,$scope,$rootScope,$http,$ionicL
 			}
 			sessionStorage.removeItem(goback);
 		}).error(function(data) {
+			alert(JSON.stringify(data));
+			
             var ermsg = data.data;
             if(ermsg.status_code == 400){
             	window.location.href='#/boundphone';
