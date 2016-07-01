@@ -272,6 +272,8 @@ lvtuanApp.controller("loginCtrl",function($state,$scope,$rootScope,$http,$ionicL
 			}
 		).success(function(data) {
             $ionicLoading.hide();
+            alert("成功");
+            alert(JSON.stringify(data));
 			window.location.href='#/index';
 		}).error(function(data) {
 			$ionicLoading.hide();
