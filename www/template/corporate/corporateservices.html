@@ -15,7 +15,9 @@
 						<b ng-switch-when="silver" class="cff4670" style="font-size: 16px;">8800元</b> 
 						<b ng-switch-when="gold" class="cff4670" style="font-size: 16px;">18800元</b>
 						<b ng-switch-when="platinum" class="cff4670" style="font-size: 16px;">28800元</b>
-						<font color="b5b5b5">起</font> </h3>
+						<font color="b5b5b5">起</font> 
+						<font ng-switch-when="silver" color="b5b5b5" style="font-size: 12px">(两年起签)</font> 
+					</h3>
 					<div class="row row-no-padding">
 			    		<div class="col col-40 col-center row-no-padding" style="margin-right: 2%;">
 			    			<button class="button button-block"  ng-class="{true: 'button-cff2f5f', false: 'button-light'}[visible == 'silver']" style="border-radius: 10px;min-height: 30px;line-height:30px;font-size: 12px;" ng-click="toggle('silver')">法律顾问银卡</button>

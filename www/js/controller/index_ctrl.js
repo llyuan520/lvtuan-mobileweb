@@ -2880,7 +2880,7 @@ lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$l
 	$scope.type = $stateParams.type;
 	switch($scope.type) {
 		case "silver":
-			$scope.company = '8800';
+			$scope.company = '17600';
 			break;
 		case "gold":
 			$scope.company = '18800';
@@ -3394,7 +3394,7 @@ lvtuanApp.controller("lawyerlistsearchCtrl",function($http,$scope,$state,$rootSc
 	$scope.type = $stateParams.type;
 	switch($scope.type) {
 		case "silver":
-			$scope.company = '8800';
+			$scope.company = '17600';
 			break;
 		case "gold":
 			$scope.company = '18800';
