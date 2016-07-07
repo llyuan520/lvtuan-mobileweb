@@ -3153,7 +3153,7 @@ lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$l
 //一对一咨询
 lvtuanApp.controller("lawyerOneQuestionsCtrl",function($http,$scope,$state,$rootScope,$ionicLoading){
 
-	$http.get('http://'+$rootScope.hostPath+'/evaluate?type=all')
+	$http.get('http://'+$rootScope.hostPath+'/evaluate?type=all&post_type=pay_company')
 		.success(function(data) {
 			$scope.items = data.data.extras;
 			console.info($scope.items);
@@ -3167,9 +3167,8 @@ lvtuanApp.controller("lawyerOneQuestionsCtrl",function($http,$scope,$state,$root
 })
 
 //律师的全部评价
-lvtuanApp.controller("lawyerAllEvaluateCtrl",function($http,$scope,$state,$rootScope,$ionicLoading){
-	console.info('律师的全部评价');
-
+lvtuanApp.controller("lawyerAllEvaluateCtrl",function($http,$scope,$state,$rootScope,$stateParams,$ionicLoading){
+	
 	$scope.evaluate_key = 'all';
 	$scope.inEvaluate = function(key) {
 		var value = false;
@@ -3200,24 +3199,26 @@ lvtuanApp.controller("lawyerAllEvaluateCtrl",function($http,$scope,$state,$rootS
 		var param = []; //声明一个数组 判断如果有值就push进来
 		switch(key) {
 			case "all":
-				param.push('type=' + key);
+				param.push('type='+key);
 				break;
 			case "high":
 				param.push('type=score');
-				param.push('score=' + key);
+				param.push('score='+key);
 				break;
 			case "intermediate":
 				param.push('type=score');
-				param.push('score=' + key);
+				param.push('score='+key);
 				break;
 			case "low":
 				param.push('type=score');
-				param.push('score=' + key);
+				param.push('score='+key);
 				break;
 			default:
 				param.push('type=all');
 		}
-		
+		if($stateParams.post_type){
+			param.push('post_type='+$stateParams.post_type);
+		}
 	  	param = param.join('&');  //通过join('&') 把所有的参数都拼接起来
 	  	console.info(param)
 	  	geturl(param);
@@ -5577,6 +5578,14 @@ lvtuanApp.controller("corporateservicesCtrl",function($http,$scope,$state,$rootS
 	$scope.toggle = function(val){
 		$scope.visible = val;
 	}
+
+	$http.get('http://'+$rootScope.hostPath+'/evaluate?type=all&post_type=pay_company')
+		.success(function(data) {
+			console.info(data);
+			$scope.items = data.data.extras;
+			
+		})
+
 	//调用微信查看图片的接口
 	/*	$scope.lookImg = function(){
 		console.info($scope.arry[0]);

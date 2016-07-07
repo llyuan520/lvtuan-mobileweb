@@ -570,7 +570,7 @@ angular.module('lvtuanApp', ['ionic', 'app', 'templates', 'angular-jwt'])
     })
 
     .state('all-evaluate', { //律师对咨询的所有评价
-      url: '/all-evaluate',
+      url: '/all-evaluate/:post_type',
       cache: 'true',
       templateUrl: 'template/lawyer/all_evaluate.html',
       controller: 'lawyerAllEvaluateCtrl'
