@@ -3567,7 +3567,7 @@ lvtuanApp.controller("lawyerViewCtrl",function($scope,$http,$rootScope,$statePar
 	         ]
 	       });
 	       myPopup.then(function(res) {
-	         
+	         $scope.active = false;
 	       });
 		}
 	}
