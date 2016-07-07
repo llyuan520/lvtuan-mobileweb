@@ -5,11 +5,11 @@
 				<div ng-if="currentUser.status == '3'">
 					<div class="main">
 						<label class="item-input">
-		                  <textarea ng-model="comment" rows="15" cols="70"  placeholder="请认真填写您的回答" ng-minlength="1" required></textarea>
+		                  <textarea ng-model="user.comment" rows="15" cols="70"  placeholder="请认真填写您的回答" ng-minlength="1" required></textarea>
 		                </label>	
 		            </div>
 		            <div style="background-color: #fff;padding:5px 10px;margin-top:50px;">
-						<button class="button button-block button-positive" type="button" ng-disabled="myForm.$invalid" ng-click="submit()" >提交</button>
+						<button class="button button-block button-positive" type="button" ng-disabled="myForm.$invalid" ng-click="submit(user)" >提交</button>
 					</div>
 				</div>
 			</form>

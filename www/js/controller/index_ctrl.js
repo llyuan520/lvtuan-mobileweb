@@ -3782,7 +3782,7 @@ document.activeElement.blur();
     }
 
     //用户输入框字数限制
-	$scope.title; //假设这是你input上的绑定
+	$scope.title = null; //假设这是你input上的绑定
 	var limit_title = 100; // 假设文本长度为 100
 	$scope.$watch('title', function(newVal, oldVal) {
 	    if (newVal && newVal != oldVal) {
@@ -3792,7 +3792,7 @@ document.activeElement.blur();
 	    }
 	})
 
-	$scope.content; //假设这是你textarea上的绑定
+	$scope.content = null;  //假设这是你textarea上的绑定
 	var limit_content = 1000; // 假设文本长度为 1000
 	$scope.$watch('content', function(newVal, oldVal) {
 	    if (newVal && newVal != oldVal) {
@@ -4234,12 +4234,11 @@ lvtuanApp.controller("questionsCommentCtrl",function($http,$scope,$rootScope,$st
 	console.info($stateParams.id);
 	$scope.currentUser = authService.getUser();
 
-	$scope.submit = function(){
-		console.info($scope.comment);
+	$scope.submit = function(user){
 		$ionicLoading.show();
 		$http.post('http://'+$rootScope.hostName+'/question/'+$stateParams.id+'/comment',
 		{
-			comment 	: $scope.comment,
+			comment 	: user.comment,
 			creator_id	: $scope.currentUser.id
 		}).success(function(data) {
 	    	console.info(data);
