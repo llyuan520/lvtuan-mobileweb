@@ -21,14 +21,14 @@
 					<a class="item item-avatar" ng-href="#/lawyer/view/{{item.id}}">
 			            <img ng-src="{{item.avatar}}">
 			            <div class="row row-no-padding">
-				       		<div class="col col-70 col-center row-no-padding">
+				       		<div class="col col-60 col-center row-no-padding">
 				       			<h3>
 				       				<b>{{item.realname}}</b>
 				       				<label class="cf7861e">{{item.average_evaluate_score}}</label>
 				       				<label class="font12 cb5b5b5">分</label>
 				       			</h3>
 				       		</div>
-						  	<div class="col col-30 col-center row-no-padding" style="text-align: right;">
+						  	<div class="col col-40 col-center row-no-padding" style="text-align: right;">
 						  		<b class="cff4670" ng-show=" type == 'pay_text' ">{{item.text_reply_fee}}</b> 
 						  		<b class="cff4670" ng-show=" type == 'pay_phone' ">{{item.phone_reply_fee}}</b>
 						  		<b class="cff4670" ng-show=" type != 'pay_text' || type != 'pay_phone' ">8888</b>

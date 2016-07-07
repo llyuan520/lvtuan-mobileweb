@@ -2878,6 +2878,17 @@ lvtuanApp.controller("siteCtrl",function($scope,$http,$rootScope,$location,authS
 lvtuanApp.controller("lawyerlistCtrl",function($scope,$state,$http,$rootScope,$location,$stateParams,$ionicLoading,locationService,listHelper){
 	console.info($stateParams.type);
 	$scope.type = $stateParams.type;
+	switch($scope.type) {
+		case "silver":
+			$scope.company = '8800';
+			break;
+		case "gold":
+			$scope.company = '18800';
+			break;
+		case "platinum":
+			$scope.company = '28800';
+			break;
+	}
 
 	$scope.masklayer = true;
 
@@ -3168,7 +3179,7 @@ lvtuanApp.controller("lawyerOneQuestionsCtrl",function($http,$scope,$state,$root
 
 //律师的全部评价
 lvtuanApp.controller("lawyerAllEvaluateCtrl",function($http,$scope,$state,$rootScope,$stateParams,$ionicLoading){
-	
+
 	$scope.evaluate_key = 'all';
 	$scope.inEvaluate = function(key) {
 		var value = false;
@@ -3381,6 +3392,18 @@ lvtuanApp.controller("lawyerOneAllEvaluateCtrl",function($http,$scope,$state,$ro
 lvtuanApp.controller("lawyerlistsearchCtrl",function($http,$scope,$state,$rootScope,$stateParams,$ionicLoading){
 	angular.element('.search').trigger('focus');
 	$scope.type = $stateParams.type;
+	switch($scope.type) {
+		case "silver":
+			$scope.company = '8800';
+			break;
+		case "gold":
+			$scope.company = '18800';
+			break;
+		case "platinum":
+			$scope.company = '28800';
+			break;
+	}
+
 	var page = 1; //页数
 	var size = 5; // 每页的数量
 	if ($scope.size) {
@@ -3456,25 +3479,12 @@ lvtuanApp.controller("lawyerlistsearchCtrl",function($http,$scope,$state,$rootSc
 //律师个人主页 - 个人介绍
 lvtuanApp.controller("lawyerViewCtrl",function($scope,$http,$rootScope,$stateParams,$ionicLoading,$ionicPopup,httpWrapper,authService){
 
-   var timestamp=Math.round(new Date().getTime()/1000);
-   	$scope.isshow = false;
-    $scope.context_min100 = '';
-    $scope.context_all = '';
+    var timestamp=Math.round(new Date().getTime()/1000);
+    $scope.infoShow = false;
  	$ionicLoading.show();
 	httpWrapper.get('http://'+$rootScope.hostName+'/lawyer/'+$stateParams.id, function(data){
 		$scope.items = data.data;
 		$scope.info = $scope.items.introduce + $scope.items.experience + $scope.items.signature;
-		$scope.dian = '...';
-		if($scope.info == "null"){
-			$scope.isshow = false;
-			$scope.context = false;
-		}else if($scope.info != 0){
-			$scope.context_min100 = $scope.info.substr(0, 90);
-			$scope.context_all = $scope.info.substr(90);
-			$scope.isshow = true;
-		}else{
-			$scope.context = false;
-		}
 		sessionStorage.setItem("lawyer_id", JSON.stringify($scope.items.id));
 		console.info($scope.items);
 		$ionicLoading.hide();
@@ -3487,14 +3497,6 @@ lvtuanApp.controller("lawyerViewCtrl",function($scope,$http,$rootScope,$statePar
 	$http.get('http://'+$rootScope.hostPath+'/evaluate/'+$stateParams.id+'?size=1&ts='+timestamp).success(function(data) {
         	$scope.extras = data.data.extras;
 		})
-
-
-	//显示隐藏
-	$scope.context = true;
-	$scope.context_toggle = function(){
-		$scope.context = !$scope.context;
-		$(".context").slideToggle(1500); 
-	}
 
 	//关注
 	$scope.follow = function(id){
@@ -3533,17 +3535,13 @@ lvtuanApp.controller("lawyerViewCtrl",function($scope,$http,$rootScope,$statePar
 	}
 
 	//立即预约
-	$scope.active = true;
 	$scope.question_type = 'pay_text';
+	$scope.visible = "pay_text";
 	$scope.toggle = function(val){
-		if(val == 'pay_text'){
-			$scope.active = true;
-		}else{
-			$scope.active = false;
-		}
-		//$scope.active = !$scope.active;
+		$scope.active = val;
 		$scope.question_type = val;
 	}
+
 	$scope.showIonicPopup = function(){
 		var currentUser = authService.getUser();
 		console.info(currentUser);
@@ -3578,7 +3576,7 @@ lvtuanApp.controller("lawyerViewCtrl",function($scope,$http,$rootScope,$statePar
 //找律师-图文咨询
 lvtuanApp.controller("graphicCtrl",function($scope,$http,$rootScope,$timeout,$stateParams,$ionicLoading,listHelper,httpWrapper,authService){
 
-    $scope.type = $stateParams.type;
+    $scope.type_id = $stateParams.type;
     $scope.id = $stateParams.id;
 
     $scope.content; //假设这是你textarea上的绑定
@@ -3594,14 +3592,21 @@ lvtuanApp.controller("graphicCtrl",function($scope,$http,$rootScope,$timeout,$st
     //提交问题
 	$scope.submit = function(){
 		var currentUser = authService.getUser();
+		if($scope.type_id != 'pay_text' && $scope.type_id != 'pay_phone'){
+			$scope.type = 'pay_company';
+		}
 		if(currentUser.status == 1 || currentUser.status == 2){
 			var param = {};
 			if($scope.id){
 				param['lawyer_id'] = $scope.id;
 			}
+			if($scope.type_id){
+				param['product_id'] = $scope.type_id;
+			}
 			if($scope.content){
 				param['content'] = $scope.content;
 			}
+			
 			console.info(param);
 	        $ionicLoading.show();
 			httpWrapper.request('http://'+$rootScope.hostName+'/center/question/create/'+$scope.type,'post',param,
@@ -4733,8 +4738,6 @@ lvtuanApp.controller("userOrderViewCtrl",function($scope,$rootScope,$ionicLoadin
 		}else{
 			$scope.isHastabs = 'not';
 		}
-		console.info($scope.items);
-		$ionicLoading.hide();
 		console.info($scope.items);
 		$ionicLoading.hide();
 	});

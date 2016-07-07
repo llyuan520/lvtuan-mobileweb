@@ -275,6 +275,14 @@ h1.welcome_lvtuan{
     -webkit-box-orient: vertical;
     white-space:normal;
 }
+.item p.content,.content_txt3{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    white-space:normal;
+}
 .item p.content_txt1,.content_txt1{
     overflow: hidden;
     text-overflow: ellipsis;
