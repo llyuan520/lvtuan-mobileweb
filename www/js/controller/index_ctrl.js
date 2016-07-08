@@ -214,7 +214,7 @@ lvtuanApp.controller("indexCtrl",function($scope,$location,listHelper,locationSe
 
 
 //用户登陆
-lvtuanApp.controller("loginCtrl",function($state,$scope,$rootScope,$http,$ionicLoading,userService,wxService){
+lvtuanApp.controller("loginCtrl",function($state,$scope,$rootScope,$http,$ionicLoading,userService,authService,wxService){
 
 	var format_email = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
 	var format_mobile = /^[1][0-9]{10}$/; 
@@ -274,13 +274,23 @@ lvtuanApp.controller("loginCtrl",function($state,$scope,$rootScope,$http,$ionicL
 				'platform'	: 'wx'
 			}
 		).success(function(data) {
-			alert(JSON.stringify(data));
-
             $ionicLoading.hide();
             if(data.status_code == 400){
             	window.location.href='#/boundphone';
             }else{
-            	var goback = sessionStorage.getItem("goback");
+
+            	var user_data = data ? data.data : null;
+		    	if(user_data) {
+		    		authService.saveUser(user_data);
+		    		console.log('user:', user_data);
+		    	}
+		    	var token = data ? data.token : null;
+		    	if(token) { 
+		    		authService.saveToken(token);
+		    		console.log('JWT:', token); 
+		    	}
+
+		    	var goback = sessionStorage.getItem("goback");
 				if(goback == null || goback=="" || goback=="undefined"){
 					location.href='#/index';
 				}else{
