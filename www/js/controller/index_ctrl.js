@@ -1831,16 +1831,18 @@ lvtuanApp.controller("centerCtrl",function($scope,$http,$rootScope,$ionicPopup,$
 	
 	$scope.$on('$ionicView.beforeEnter', function() {  
 		alert('centerCtrl2');
+		alert(JSON.stringify(authService.getUser()));
 		var currentUser = authService.getUser();
+		alert(JSON.stringify(currentUser));
 		$scope.currentUser = currentUser;
-		alert(JSON.stringify($scope.currentUser));
+
 		var timestamp=Math.round(new Date().getTime()/1000);
 		var url = null;
 		
-		
-		if(currentUser != null){
+
+		if($scope.currentUser != null){
 			alert('centerCtrl3');
-			if(!currentUser.is_verified_lawyer){
+			if(!$scope.currentUser.is_verified_lawyer){
 				alert('centerCtrl4');
 				//普通用户个人信息
 				url = 'http://'+$rootScope.hostName+'/center/customer/info?ts='+timestamp;
