@@ -1828,7 +1828,7 @@ lvtuanApp.controller("commentsViewCtrl",function($scope,$http,$rootScope,$stateP
 /*———————————————————————————— 用户的个人中心 ————————————————————————————*/
 //普通用户-我的
 lvtuanApp.controller("centerCtrl",function($scope,$http,$rootScope,$ionicPopup,$timeout,$ionicLoading,authService){
-	alert('centerCtrl1');
+	
 	$scope.$on('$ionicView.beforeEnter', function() {  
 		alert('centerCtrl2');
 		var currentUser = authService.getUser();
@@ -1839,7 +1839,9 @@ lvtuanApp.controller("centerCtrl",function($scope,$http,$rootScope,$ionicPopup,$
 		
 
 		if(currentUser != null){
+			alert('centerCtrl3');
 			if(!currentUser.is_verified_lawyer){
+				alert('centerCtrl4');
 				//普通用户个人信息
 				url = 'http://'+$rootScope.hostName+'/center/customer/info?ts='+timestamp;
 			}else{
@@ -1849,11 +1851,12 @@ lvtuanApp.controller("centerCtrl",function($scope,$http,$rootScope,$ionicPopup,$
 			$ionicLoading.show();
 			$http.get(url)
 			.success(function(data) {
+				alert(JSON.stringify(data));
 				if(data && data.data){
 					//用于连接两个或多个数组并返回一个新的数组
 					$scope.items = data.data; 
 					console.info($scope.items);
-					alert(JSON.stringify($scope.items));
+					
 				}else{
 					layer.show('暂无数据！');
 					return false;
