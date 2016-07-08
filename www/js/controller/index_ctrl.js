@@ -688,7 +688,7 @@ lvtuanApp.controller("boundphoneCtrl",function($scope,$http,$rootScope,$ionicLoa
 	}
 
 	var unionid = wxService.getUnionId();
-
+	alert(JSON.stringify(unionid));
 	//用户必须绑定手机号才能回到主页
 	$scope.submit = function(user){
 		$scope.user = user;
