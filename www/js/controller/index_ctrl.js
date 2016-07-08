@@ -1828,8 +1828,9 @@ lvtuanApp.controller("commentsViewCtrl",function($scope,$http,$rootScope,$stateP
 /*———————————————————————————— 用户的个人中心 ————————————————————————————*/
 //普通用户-我的
 lvtuanApp.controller("centerCtrl",function($scope,$http,$rootScope,$ionicPopup,$timeout,$ionicLoading,authService){
-
+	alert('centerCtrl1');
 	$scope.$on('$ionicView.beforeEnter', function() {  
+		alert('centerCtrl2');
 		var currentUser = authService.getUser();
 		$scope.currentUser = currentUser;
 
