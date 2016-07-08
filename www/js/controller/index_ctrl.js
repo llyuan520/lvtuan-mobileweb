@@ -275,11 +275,10 @@ lvtuanApp.controller("loginCtrl",function($state,$scope,$rootScope,$http,$ionicL
 			}
 		).success(function(data) {
             $ionicLoading.hide();
-			window.location.href='#/index';
-		}).error(function(data) {
-			$ionicLoading.hide();
             if(data.status_code == 400){
             	window.location.href='#/boundphone';
+            }else{
+            	window.location.href='#/index';
             }
 		})
 
