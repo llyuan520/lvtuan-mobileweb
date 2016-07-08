@@ -670,6 +670,7 @@ lvtuanApp.controller("boundphoneCtrl",function($scope,$http,$rootScope,$ionicLoa
 	}
 
 	var unionid = wxService.getUnionId();
+	alert('union_id',unionid);
 	//用户必须绑定手机号才能回到主页
 	$scope.submit = function(user){
 		$scope.user = user;
@@ -677,8 +678,10 @@ lvtuanApp.controller("boundphoneCtrl",function($scope,$http,$rootScope,$ionicLoa
 			$scope.user["union_id"] = unionid;
 		}
 		$ionicLoading.show();
+		alert('user',JSON.stringify($scope.user));
 		$http.post('http://'+$rootScope.hostName+'/bind/phone', $scope.user
 			).success(function(data) {
+				alert('data',JSON.stringify(data));
 	           $scope.user = {}; //清空数据
 	           $ionicLoading.hide();
 	           layer.show("手机号绑定成功！");
