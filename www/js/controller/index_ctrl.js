@@ -1852,6 +1852,7 @@ lvtuanApp.controller("centerCtrl",function($scope,$http,$rootScope,$ionicPopup,$
 					//用于连接两个或多个数组并返回一个新的数组
 					$scope.items = data.data; 
 					console.info($scope.items);
+					alert(JSON.stringify($scope.items));
 				}else{
 					layer.show('暂无数据！');
 					return false;
