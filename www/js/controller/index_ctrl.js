@@ -640,7 +640,7 @@ lvtuanApp.controller("upwdCtrl",function($scope,$http,$rootScope,$ionicLoading){
 })
 
 //绑定手机
-lvtuanApp.controller("boundphoneCtrl",function($scope,$http,$rootScope,$ionicLoading,$interval,wxService){
+lvtuanApp.controller("boundphoneCtrl",function($scope,$http,$rootScope,$ionicLoading,$interval,userService,authService,wxService){
 	var format_mobile = /^[1][0-9]{10}$/; 
 	$scope.user = {};
 	//第一次获取验证码后要60秒以后才能在次获取
@@ -700,8 +700,27 @@ lvtuanApp.controller("boundphoneCtrl",function($scope,$http,$rootScope,$ionicLoa
 		$http.post('http://'+$rootScope.hostName+'/bind/phone', $scope.user
 			).success(function(data) {
 	           $scope.user = {}; //清空数据
-	           $ionicLoading.hide();
 	           layer.show("手机号绑定成功！");
+	           var user_data = data ? data.data : null;
+		    	if(user_data) {
+		    		authService.saveUser(user_data);
+		    		console.log('user:', user_data);
+		    	}
+		    	var token = data ? data.token : null;
+		    	if(token) { 
+		    		authService.saveToken(token);
+		    		console.log('JWT:', token); 
+		    	}
+
+		    	var goback = sessionStorage.getItem("goback");
+				if(goback == null || goback=="" || goback=="undefined"){
+					location.href='#/index';
+				}else{
+	    			location.href= goback;
+				}
+				sessionStorage.removeItem("goback");			
+	            $ionicLoading.hide();
+	           
         });
 	}
 })
