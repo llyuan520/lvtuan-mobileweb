@@ -277,6 +277,14 @@ lvtuanApp.controller("loginCtrl",function($state,$scope,$rootScope,$http,$ionicL
             $ionicLoading.hide();
             if(data.status_code == 400){
             	window.location.href='#/boundphone';
+            }else{
+            	var goback = sessionStorage.getItem("goback");
+				if(goback == null || goback=="" || goback=="undefined"){
+					location.href='#/index';
+				}else{
+	    			location.href= goback;
+				}
+				sessionStorage.removeItem("goback");
             }
 		})
 
