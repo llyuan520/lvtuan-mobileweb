@@ -697,6 +697,7 @@ lvtuanApp.controller("boundphoneCtrl",function($scope,$http,$rootScope,$ionicLoa
 		}
 		$scope.user["platform"] = 'wx';
 		$ionicLoading.show();
+		alert(JSON.stringify($scope.user));
 		$http.post('http://'+$rootScope.hostName+'/bind/phone', $scope.user
 			).success(function(data) {
 	           $scope.user = {}; //清空数据
