@@ -1833,11 +1833,11 @@ lvtuanApp.controller("centerCtrl",function($scope,$http,$rootScope,$ionicPopup,$
 		alert('centerCtrl2');
 		var currentUser = authService.getUser();
 		$scope.currentUser = currentUser;
-
+		alert(JSON.stringify($scope.currentUser));
 		var timestamp=Math.round(new Date().getTime()/1000);
 		var url = null;
 		
-
+		
 		if(currentUser != null){
 			alert('centerCtrl3');
 			if(!currentUser.is_verified_lawyer){
