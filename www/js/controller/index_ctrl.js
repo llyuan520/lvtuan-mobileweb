@@ -274,9 +274,8 @@ lvtuanApp.controller("loginCtrl",function($state,$scope,$rootScope,$http,$ionicL
 				'platform'	: 'wx'
 			}
 		).success(function(data) {
-
 			alert(JSON.stringify(data));
-			
+
             $ionicLoading.hide();
             if(data.status_code == 400){
             	window.location.href='#/boundphone';
@@ -1833,8 +1832,6 @@ lvtuanApp.controller("commentsViewCtrl",function($scope,$http,$rootScope,$stateP
 lvtuanApp.controller("centerCtrl",function($scope,$http,$rootScope,$ionicPopup,$timeout,$ionicLoading,authService){
 	
 	$scope.$on('$ionicView.beforeEnter', function() {  
-		alert('centerCtrl2');
-		alert(JSON.stringify(authService.getUser()));
 		var currentUser = authService.getUser();
 		$scope.currentUser = currentUser;
 
@@ -1853,7 +1850,6 @@ lvtuanApp.controller("centerCtrl",function($scope,$http,$rootScope,$ionicPopup,$
 			$ionicLoading.show();
 			$http.get(url)
 			.success(function(data) {
-				alert(JSON.stringify(data));
 				if(data && data.data){
 					//用于连接两个或多个数组并返回一个新的数组
 					$scope.items = data.data; 
