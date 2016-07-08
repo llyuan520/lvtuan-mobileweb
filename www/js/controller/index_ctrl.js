@@ -277,8 +277,6 @@ lvtuanApp.controller("loginCtrl",function($state,$scope,$rootScope,$http,$ionicL
             $ionicLoading.hide();
             if(data.status_code == 400){
             	window.location.href='#/boundphone';
-            }else{
-            	window.location.href='#/index';
             }
 		})
 
@@ -684,7 +682,6 @@ lvtuanApp.controller("boundphoneCtrl",function($scope,$http,$rootScope,$ionicLoa
 	           $scope.user = {}; //清空数据
 	           $ionicLoading.hide();
 	           layer.show("手机号绑定成功！");
-	           window.location.href='#/index';
         });
 	}
 })
