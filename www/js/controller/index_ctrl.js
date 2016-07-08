@@ -274,6 +274,9 @@ lvtuanApp.controller("loginCtrl",function($state,$scope,$rootScope,$http,$ionicL
 				'platform'	: 'wx'
 			}
 		).success(function(data) {
+
+			alert(JSON.stringify(data));
+			
             $ionicLoading.hide();
             if(data.status_code == 400){
             	window.location.href='#/boundphone';
@@ -1833,7 +1836,6 @@ lvtuanApp.controller("centerCtrl",function($scope,$http,$rootScope,$ionicPopup,$
 		alert('centerCtrl2');
 		alert(JSON.stringify(authService.getUser()));
 		var currentUser = authService.getUser();
-		alert(JSON.stringify(currentUser));
 		$scope.currentUser = currentUser;
 
 		var timestamp=Math.round(new Date().getTime()/1000);
@@ -1841,9 +1843,7 @@ lvtuanApp.controller("centerCtrl",function($scope,$http,$rootScope,$ionicPopup,$
 		
 
 		if($scope.currentUser != null){
-			alert('centerCtrl3');
 			if(!$scope.currentUser.is_verified_lawyer){
-				alert('centerCtrl4');
 				//普通用户个人信息
 				url = 'http://'+$rootScope.hostName+'/center/customer/info?ts='+timestamp;
 			}else{
