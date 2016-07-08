@@ -678,7 +678,7 @@ lvtuanApp.controller("boundphoneCtrl",function($scope,$http,$rootScope,$ionicLoa
 			$scope.user["union_id"] = unionid;
 		}
 		$scope.user["platform"] = 'wx';
-		
+		alert(JSON.stringify($scope.user))
 		$ionicLoading.show();
 		$http.post('http://'+$rootScope.hostName+'/bind/phone', $scope.user
 			).success(function(data) {
