@@ -267,7 +267,6 @@ lvtuanApp.controller("loginCtrl",function($state,$scope,$rootScope,$http,$ionicL
 	//微信登录
 	$scope.wx_login = function(){
 		var unionid = wxService.getUnionId();
-		alert(JSON.stringify(unionid));
 		$ionicLoading.show();
 		$http.post('http://'+$rootScope.hostName+'/check/user',
 			{
@@ -275,7 +274,6 @@ lvtuanApp.controller("loginCtrl",function($state,$scope,$rootScope,$http,$ionicL
 				'platform'	: 'wx'
 			}
 		).success(function(data) {
-			alert(JSON.stringify(data));
             $ionicLoading.hide();
 			window.location.href='#/index';
 		}).error(function(data) {
