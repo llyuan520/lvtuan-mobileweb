@@ -157,7 +157,7 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
 	    	/*alert('wx_openid',user.wx_openid);
 	    	alert(JSON.stringify(user.wx_openid));*/
 	    	// wxService.saveOpenId(user.wx_openid);
-
+	    	alert(JSON.stringify(user));
 	    	if(user) {
 	    		authService.saveUser(user);
 	    		console.log('user:', user);
