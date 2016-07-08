@@ -279,7 +279,6 @@ lvtuanApp.controller("loginCtrl",function($state,$scope,$rootScope,$http,$ionicL
             $ionicLoading.hide();
 			window.location.href='#/index';
 		}).error(function(data) {
-			alert(JSON.stringify(data));
 			$ionicLoading.hide();
             if(data.status_code == 400){
             	window.location.href='#/boundphone';
