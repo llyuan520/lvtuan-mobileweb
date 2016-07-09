@@ -266,10 +266,12 @@ lvtuanApp.controller("loginCtrl",function($state,$scope,$rootScope,$http,$ionicL
 
 	//微信登录
 	$scope.wx_login = function(){
+		var openid = wxService.getOpenId();
 		var unionid = wxService.getUnionId();
 		$ionicLoading.show();
 		$http.post('http://'+$rootScope.hostName+'/check/user',
 			{
+				'wx_openid'	: openid,
 				'union_id'	: unionid,
 				'platform'	: 'wx'
 			}
@@ -687,10 +689,14 @@ lvtuanApp.controller("boundphoneCtrl",function($scope,$http,$rootScope,$ionicLoa
 		}
 	}
 
+	var openid = wxService.getOpenId();
 	var unionid = wxService.getUnionId();
 	//用户必须绑定手机号才能回到主页
 	$scope.submit = function(user){
 		$scope.user = user;
+		if(openid){
+			$scope.user["wx_openid"] = openid;
+		}
 		if(unionid){
 			$scope.user["union_id"] = unionid;
 		}
