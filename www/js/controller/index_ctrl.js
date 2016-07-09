@@ -267,7 +267,6 @@ lvtuanApp.controller("loginCtrl",function($state,$scope,$rootScope,$http,$ionicL
 	//微信登录
 	$scope.wx_login = function(){
 		var openid = wxService.getOpenId();
-		alert(JSON.stringify(openid));
 		var unionid = wxService.getUnionId();
 		$ionicLoading.show();
 		$http.post('http://'+$rootScope.hostName+'/check/user',
@@ -5729,16 +5728,11 @@ lvtuanApp.controller("wxCheckOpenIdCtrl",function($scope,$http,$rootScope,$state
 lvtuanApp.controller("wxObtainOpenIdCtrl",function($scope,$http,$rootScope,$stateParams,authService,wxService,$ionicLoading){
 	var code = $stateParams.code;
 	var state = $stateParams.state;
-
-	alert(JSON.stringify(code));
-	alert(JSON.stringify(state));
-	
 	$ionicLoading.show();
   	$http.get('http://' + AppSettings.baseApiUrl + '/openid?code='+code+'&state='+state).then(
     	function (res) {
 	    	var authData = res.data ? res.data.data : null;
-	    	alert(JSON.stringify(authData));
-			wxService.saveOpenId(authData.openid);
+			wxService.saveOpenId(authData.wx_openid);
 			wxService.saveUnionId(authData.unionid);
 			$ionicLoading.hide();
 			window.location.href = localStorage.getItem('goto');	
@@ -5759,7 +5753,7 @@ lvtuanApp.controller("wxAuthPaymentCtrl",function($scope,$http,$rootScope,$state
   	$http.get('http://' + AppSettings.baseApiUrl + '/openid?code='+code+'&state='+state).then(
     	function (res) {
 	    	var authData = res.data ? res.data.data : null;
-			wxService.saveOpenId(authData.openid);
+			wxService.saveOpenId(authData.wx_openid);
 			$ionicLoading.hide();
 			location.href = "#/user/moneyin";	
     	}
