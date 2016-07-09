@@ -5734,7 +5734,7 @@ lvtuanApp.controller("wxObtainOpenIdCtrl",function($scope,$http,$rootScope,$stat
   	$http.get('http://' + AppSettings.baseApiUrl + '/openid?code='+code+'&state='+state).then(
     	function (res) {
 	    	var authData = res.data ? res.data.data : null;
-	    	alert(JSON.stringify(authData));
+	    	alert('1',JSON.stringify(authData));
 			wxService.saveOpenId(authData.openid);
 			wxService.saveUnionId(authData.unionid);
 			$ionicLoading.hide();
@@ -5756,7 +5756,7 @@ lvtuanApp.controller("wxAuthPaymentCtrl",function($scope,$http,$rootScope,$state
   	$http.get('http://' + AppSettings.baseApiUrl + '/openid?code='+code+'&state='+state).then(
     	function (res) {
 	    	var authData = res.data ? res.data.data : null;
-	    	alert(JSON.stringify(authData));
+	    	alert('2',JSON.stringify(authData));
 			wxService.saveOpenId(authData.openid);
 			$ionicLoading.hide();
 			location.href = "#/user/moneyin";	
