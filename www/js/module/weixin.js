@@ -17,7 +17,6 @@ function wxService() {
 	}
 
 	self.saveOpenId = function(openid) {
-		alert(JSON.stringify(openid));
 		localStorage.setItem('wx_openid', openid);
 	}
 
