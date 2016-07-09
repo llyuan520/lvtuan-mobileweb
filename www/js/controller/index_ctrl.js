@@ -392,7 +392,7 @@ lvtuanApp.controller("registerCtrl",function($scope,$rootScope,$http,$interval,$
 				password  		: $scope.params.password,
 				phonecode 		: $scope.params.phonecode,
 				account_type	: "phone",
-				openid          : openid,
+				wx_openid          : openid,
 				post_id 		: $scope.post_id
 	        }).success(function(data) {
 	           layer.show("注册成功！");

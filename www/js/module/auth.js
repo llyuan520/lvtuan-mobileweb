@@ -61,7 +61,7 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
 		password: password,
 		phonecode: phonecode,
 		account_type: account_type,
-		openid: openid,
+		wx_openid: openid,
 		union_id: unionid,
       	post_id: post_id
     }).then(
@@ -108,7 +108,7 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
   	return $http.post('http://' + HOST + '/login', {
       username: username,
       password: password,
-      openid: openid,
+      wx_openid: openid,
       union_id: unionid,
       post_id:post_id
     }).then(
@@ -148,7 +148,7 @@ function userService($http, HOST, authService, wxService, $ionicLoading) {
 	var unionid = wxService.getUnionId();
 	
   	return $http.post('http://' + HOST + '/loginWithWx', {
-      openid: openid,
+      wx_openid: openid,
       unionid: unionid,
       post_id:post_id
     }).then(
